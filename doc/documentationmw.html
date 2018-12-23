@@ -1,0 +1,819 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class documentation_mw</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class documentation_mw in "documentation_mw.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This widget is the main-window of the GUI-frontend of the description class TMyClass.
+It contains a comboBox to select the current class, a tree-widget, that displays the properties, a text-edit to display and edit the description, a tree-widget to display the super classes and two check-boxes to switch between (a) associated functions and property-descriptions and (b) class- and property-descriptions.
+It saves and reads singe description files (*.data), a whole directory at once, saves and "saves as" descriptions as well as reads a C++-header file ("import").
+An update-function is included, importing a new version of the current class (see <a href="docupdatedialog.html"> doc_update_dialog</a>).
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qmainwindow.html">QMainWindow</A>
+<DT>Constructor
+<LI><A HREF="#c2"><vtype></vtype> documentation_mw</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = WType_TopLevel) 
+<LI><A HREF="#c3"><vtype></vtype> documentation_mw</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> fl = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual <A HREF="nametypedoc.html">nameTypeDoc*</A> <A HREF="#f9">getProperty</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<LI><A HREF="#f10"><vtype>bool</vtype> checkWithProperty</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it, <A HREF="functionnametypedoc.html">functionNameTypeDoc*</A> prp) 
+<LI>virtual <A HREF="nametypedoc.html">nameTypeDoc*</A> <A HREF="#f11">getProperty</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<LI><A HREF="#f12"><vtype>bool</vtype> checkWithProperty</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it, <A HREF="functionnametypedoc.html">functionNameTypeDoc*</A> prp) 
+<LI>virtual <A HREF="#f13"><vtype>vector&lt;functionNameTypeDoc&gt;</vtype> associatedFunctions</A>(const <vtype>string&</vtype> classname) 
+<LI><A HREF="#f14"><vtype>int</vtype> classNumByName</A>(const <vtype>string&</vtype> nme) const
+<LI><A HREF="#f15"><vtype>int</vtype> classNumByName</A>(const <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString&</A> nme) const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI>virtual <A HREF="#l2"><vtype>void</vtype> OnFileOpen</A>() 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> OnFileImport</A>() 
+<LI>virtual <A HREF="#l4"><vtype>void</vtype> OnFileSaveAs</A>() 
+<LI>virtual <A HREF="#l5"><vtype>void</vtype> OnFileSave</A>() 
+<LI>virtual <A HREF="#l6"><vtype>void</vtype> OnFileExit</A>() 
+<LI>virtual <A HREF="#l7"><vtype>void</vtype> OnFileClose</A>() 
+<LI>virtual <A HREF="#l8"><vtype>void</vtype> OnFileOpenDirectory</A>() 
+<LI>virtual <A HREF="#l9"><vtype>void</vtype> OnClassClick</A>() 
+<LI>virtual <A HREF="#l10"><vtype>void</vtype> OnEditUpdate</A>() 
+<LI>virtual <A HREF="#l11"><vtype>void</vtype> OnRemoveItem</A>() 
+<LI>virtual <A HREF="#l12"><vtype>void</vtype> OnEditHTML</A>() 
+<LI>virtual <A HREF="#l13"><vtype>void</vtype> OnEditHTMLAll</A>() 
+<LI>virtual <A HREF="#l14"><vtype>void</vtype> OnDependencies</A>() 
+<LI>virtual <A HREF="#l15"><vtype>void</vtype> OnEditNextItem</A>() 
+<LI>virtual <A HREF="#l16"><vtype>void</vtype> OnApplyButtonClick</A>() 
+<LI>virtual <A HREF="#l17"><vtype>void</vtype> OnClassDescriptionCheck</A>() 
+<LI>virtual <A HREF="#l18"><vtype>void</vtype> OnClassShow</A>() 
+<LI>virtual <A HREF="#l19"><vtype>void</vtype> addParameterToListView</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it, <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> var) 
+<LI>virtual <A HREF="#l20"><vtype>void</vtype> OnPropertyRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<LI>virtual <A HREF="#l21"><vtype>void</vtype> OnPropertyClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<LI>virtual <A HREF="#l22"><vtype>void</vtype> OnSuperClassClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<LI>virtual <A HREF="#l23"><vtype>void</vtype> OnSuperClassRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<LI>virtual <A HREF="#l24"><vtype>void</vtype> setItemOn</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<LI>virtual <A HREF="#l25"><vtype>void</vtype> addParameterToListView</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it, <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> var) 
+<LI>virtual <A HREF="#l26"><vtype>void</vtype> OnPropertyRightClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<LI>virtual <A HREF="#l27"><vtype>void</vtype> OnPropertyClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<LI>virtual <A HREF="#l28"><vtype>void</vtype> OnSuperClassClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<LI>virtual <A HREF="#l29"><vtype>void</vtype> OnSuperClassRightClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<LI>virtual <A HREF="#l30"><vtype>void</vtype> setItemOn</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<LI>virtual <A HREF="#l31"><vtype>void</vtype> OnHelpKnownClasses</A>() 
+<LI>virtual <A HREF="#l32"><vtype>void</vtype> OnHTMLitalic</A>() 
+<LI>virtual <A HREF="#l33"><vtype>void</vtype> OnHTMLbold</A>() 
+<LI>virtual <A HREF="#l34"><vtype>void</vtype> OnHTMLvar</A>() 
+<LI>virtual <A HREF="#l35"><vtype>void</vtype> OnHTMLsuper</A>() 
+<LI>virtual <A HREF="#l36"><vtype>void</vtype> OnHTMLsub</A>() 
+<LI>virtual <A HREF="#l37"><vtype>void</vtype> OnQt3Des</A>() 
+<LI>virtual <A HREF="#l38"><vtype>void</vtype> OnQt4Des</A>() 
+<LI>virtual <A HREF="#l39"><vtype>void</vtype> OnKnownFunctionsClick</A>() 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Public Variables
+<DD><vtype>QMenuBar*</vtype> <A HREF="#v2">MenuBar</A>
+<DD><vtype>QPopupMenu*</vtype> <A HREF="#v3">fileMenu</A>
+<DD><vtype>QPopupMenu*</vtype> <A HREF="#v4">Edit</A>
+<DD><vtype>QPopupMenu*</vtype> <A HREF="#v5">Help</A>
+<DD><vtype>QPopupMenu*</vtype> <A HREF="#v6">HTML</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v7">fileNewAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v8">fileOpenAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v9">fileSaveAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v10">fileSaveAsAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v11">filePrintAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v12">fileExitAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v13">editUndoAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v14">editRedoAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v15">editCutAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v16">editCopyAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v17">editPasteAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v18">editFindAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v19">Action</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v20">editHTMLAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v21">editUpdateAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v22">fileCloseAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v23">fileOpen_DirectoryAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v24">editDependenciesAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v25">editHTML_allAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v26">helpKnown_ClassesAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v27">htmlboldAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v28">htmlitalicAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v29">htmlvarAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v30">htmlsuperscriptAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v31">htmlsubscriptAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v32">editApply_descriptionAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v33">editNext_itemAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v34">editRemove_itemAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v35">editShowClassAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v36">editInsertQt3DesAction</A>
+<DD><vtype>QAction*</vtype> <A HREF="#v37">editInsertQt4DesAction</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit*</A> <A HREF="#v38">classShow</A>
+<DD><vtype>QGridLayout*</vtype> <A HREF="#v39">flayout</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v40">textLabel2</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v41">textLabel3</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit*</A> <A HREF="#v42">textEdit1</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A HREF="#v43">pushButton1</A>
+<DD><vtype>QCheckBox*</vtype> <A HREF="#v44">checkBox1</A>
+<DD><vtype>QComboBox*</vtype> <A HREF="#v45">comboBox2</A>
+<DD><vtype>QCheckBox*</vtype> <A HREF="#v46">checkBox8</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qlistview.html">QListView*</A> <A HREF="#v47">listView2</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qlistview.html">QListView*</A> <A HREF="#v48">listView1</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qtreewidget.html">QTreeWidget*</A> <A HREF="#v49">listView2</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qtreewidget.html">QTreeWidget*</A> <A HREF="#v50">listView1</A>
+<DT>Protected Variables
+<DD><vtype>vector&lt;TMyClass&gt;</vtype> <A HREF="#v51">classes</A>
+<DD><vtype>vector&lt;string&gt;</vtype> <A HREF="#v52">files</A>
+<DD><vtype>vector&lt;QWidget*&gt;</vtype> <A HREF="#v53">displayers</A>
+<DD><A HREF="mydocclasses.html">my_doc_classes*</A> <A HREF="#v54">knowncls</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2"><vtype></vtype> documentation_mw::documentation_mw</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = WType_TopLevel) 
+<BR/><deff>
+Constructor. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3"><vtype></vtype> documentation_mw::documentation_mw</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">QMenuBar* MenuBar</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">QPopupMenu* fileMenu</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">QPopupMenu* Edit</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">QPopupMenu* Help</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v6">QPopupMenu* HTML</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v7">QAction* fileNewAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v8">QAction* fileOpenAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v9">QAction* fileSaveAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v10">QAction* fileSaveAsAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v11">QAction* filePrintAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v12">QAction* fileExitAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v13">QAction* editUndoAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v14">QAction* editRedoAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v15">QAction* editCutAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v16">QAction* editCopyAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v17">QAction* editPasteAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v18">QAction* editFindAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v19">QAction* Action</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v20">QAction* editHTMLAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v21">QAction* editUpdateAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v22">QAction* fileCloseAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v23">QAction* fileOpen_DirectoryAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v24">QAction* editDependenciesAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v25">QAction* editHTML_allAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v26">QAction* helpKnown_ClassesAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v27">QAction* htmlboldAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v28">QAction* htmlitalicAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v29">QAction* htmlvarAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v30">QAction* htmlsuperscriptAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v31">QAction* htmlsubscriptAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v32">QAction* editApply_descriptionAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v33">QAction* editNext_itemAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v34">QAction* editRemove_itemAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v35">QAction* editShowClassAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v36">QAction* editInsertQt3DesAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v37">QAction* editInsertQt4DesAction</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v38">QTextEdit* classShow</A>
+<BR/><deff>
+displays "reconstructed" class header
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v39">QGridLayout* flayout</A>
+<BR/><deff>
+layout
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v40">QLabel* textLabel2</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v41">QLabel* textLabel3</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v42">QTextEdit* textEdit1</A>
+<BR/><deff>
+displays and edits description
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v43">QPushButton* pushButton1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v44">QCheckBox* checkBox1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v45">QComboBox* comboBox2</A>
+<BR/><deff>
+current class selector
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v46">QCheckBox* checkBox8</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v47">QListView* listView2</A>
+<BR/><deff>
+displays super-classes, Qt3-mode; non-visible in Qt4-mode
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v48">QListView* listView1</A>
+<BR/><deff>
+displays class properties, Qt3-mode; non-visible in Qt4-mode
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v49">QTreeWidget* listView2</A>
+<BR/><deff>
+displays super-classes, Qt4-mode; non-visible in Qt3-mode
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v50">QTreeWidget* listView1</A>
+<BR/><deff>
+displays class properties, Qt4-mode; non-visible in Qt3-mode
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v51">vector<TMyClass> classes</A>
+<BR/><deff>
+class descriptions
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v52">vector<string> files</A>
+<BR/><deff>
+file-names of the description files of the classes
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v53">vector<QWidget*> displayers</A>
+<BR/><deff>
+HTML-descriptions of the classes
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v54">my_doc_classes* knowncls</A>
+<BR/><deff>
+widget to dislpay known classes
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> documentation_mw::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> documentation_mw::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">documentation_mw::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">documentation_mw::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> documentation_mw::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> documentation_mw::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> documentation_mw::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="nametypedoc.html">nameTypeDoc*</A> <A NAME="f9">documentation_mw::getProperty</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<BR/><deff>
+Returns a property of the current class that fits <var>it</var> or NULL if nothing fits. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>bool</vtype> documentation_mw::checkWithProperty</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it, <A HREF="functionnametypedoc.html">functionNameTypeDoc*</A> prp) 
+<BR/><deff>
+Returns true if <var>it</var> describes function <var>prp</var> (check includes name, return-type and types of parameter-list as children). Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="nametypedoc.html">nameTypeDoc*</A> <A NAME="f11">documentation_mw::getProperty</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<BR/><deff>
+Returns a property of the current class that fits <var>it</var> or NULL if nothing fits. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>bool</vtype> documentation_mw::checkWithProperty</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it, <A HREF="functionnametypedoc.html">functionNameTypeDoc*</A> prp) 
+<BR/><deff>
+Returns true if <var>it</var> describes function <var>prp</var> (check includes name, return-type and types of parameter-list as children). Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>vector&lt;functionNameTypeDoc&gt;</vtype> documentation_mw::associatedFunctions</A>(const <vtype>string&</vtype> classname) 
+<BR/><deff>
+Returns the functions that contain class <var>classname</var> eighter in the return type or the parameter-list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>int</vtype> documentation_mw::classNumByName</A>(const <vtype>string&</vtype> nme) const
+<BR/><deff>
+Returns the position of the class-description of class <var>nme</var> in the description list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>int</vtype> documentation_mw::classNumByName</A>(const <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString&</A> nme) const
+<BR/><deff>
+Returns the position of the class-description of class <var>nme</var> in the description list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> documentation_mw::OnFileOpen</A>() 
+<BR/><deff>
+Opens a class-description file and adds the class description to the list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> documentation_mw::OnFileImport</A>() 
+<BR/><deff>
+Opens a C++-header file and parses for class definitions. Note that C++-comments of the type "/**/" do not work at the moment add a "//" just before them.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> documentation_mw::OnFileSaveAs</A>() 
+<BR/><deff>
+Asks for a filename and saves current class-description.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> documentation_mw::OnFileSave</A>() 
+<BR/><deff>
+Saves the current class description. Asks for a file-name if not already defined.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> documentation_mw::OnFileExit</A>() 
+<BR/><deff>
+Closes the application.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> documentation_mw::OnFileClose</A>() 
+<BR/><deff>
+Removes the current file from the list. Asks for saving first.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> documentation_mw::OnFileOpenDirectory</A>() 
+<BR/><deff>
+Opens a complete directory and adds all found class-descriptions to the list of classes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l9"><vtype>void</vtype> documentation_mw::OnClassClick</A>() 
+<BR/><deff>
+Clears the tree-widgets and adds the super-classes and properties of the current class.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l10"><vtype>void</vtype> documentation_mw::OnEditUpdate</A>() 
+<BR/><deff>
+Updates the current class importing a new version of the current class (see <a href="docupdatedialog.html"> doc_update_dialog</a>).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l11"><vtype>void</vtype> documentation_mw::OnRemoveItem</A>() 
+<BR/><deff>
+Removes an item from the class-description.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l12"><vtype>void</vtype> documentation_mw::OnEditHTML</A>() 
+<BR/><deff>
+Does a HTML-documentation of the current class. Asks for a filename if not already provided.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l13"><vtype>void</vtype> documentation_mw::OnEditHTMLAll</A>() 
+<BR/><deff>
+Opens a <a href="docselectedclassesdialog.html"> doc_selectedClassesDialog</a> and does a HTML-documentation for all selected classes asking for filenames for the documentation if not already provided.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l14"><vtype>void</vtype> documentation_mw::OnDependencies</A>() 
+<BR/><deff>
+Checks the dependencies of the documentation of the documented classes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l15"><vtype>void</vtype> documentation_mw::OnEditNextItem</A>() 
+<BR/><deff>
+Save apply current description and switch to the next property in the property widget. If it reaches bottom of list it restarts at top.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l16"><vtype>void</vtype> documentation_mw::OnApplyButtonClick</A>() 
+<BR/><deff>
+Apply the description in the text-edit to the current object (eighter class or property of current class).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l17"><vtype>void</vtype> documentation_mw::OnClassDescriptionCheck</A>() 
+<BR/><deff>
+Displays the description of the current class if the class-description-check-box is checked, else it displays the description of the current property of the current class.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l18"><vtype>void</vtype> documentation_mw::OnClassShow</A>() 
+<BR/><deff>
+Shows the text-edit containing the "reconstructed" header file of the current class.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l19"><vtype>void</vtype> documentation_mw::addParameterToListView</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it, <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> var) 
+<BR/><deff>
+Creates for any item in the parameter-list of function <var>var</var> a child for <var>it</var> displaying name and type. Qt3-mode; non-visible in Qt4-mode
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l20"><vtype>void</vtype> documentation_mw::OnPropertyRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<BR/><deff>
+Shows some properties about the property <var>it</var> like name, return type, specifier and the ID for the HTML-documentation. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l21"><vtype>void</vtype> documentation_mw::OnPropertyClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<BR/><deff>
+Displays the description of the property <var>it</var> in the text-edit. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l22"><vtype>void</vtype> documentation_mw::OnSuperClassClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<BR/><deff>
+Shows some information on the super-class of item <var>it</var>. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l23"><vtype>void</vtype> documentation_mw::OnSuperClassRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<BR/><deff>
+Asks for the URL where the super-class described in <var>it</var> is documented. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l24"><vtype>void</vtype> documentation_mw::setItemOn</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<BR/><deff>
+Sets item <var>it</var> as current item in the tree-widget and ensures that it is open and all children visible. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l25"><vtype>void</vtype> documentation_mw::addParameterToListView</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it, <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> var) 
+<BR/><deff>
+Creates for any item in the parameter-list of function <var>var</var> a child for <var>it</var> displaying name and type. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l26"><vtype>void</vtype> documentation_mw::OnPropertyRightClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<BR/><deff>
+Shows some properties about the property <var>it</var> like name, return type, specifier and the ID for the HTML-documentation. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l27"><vtype>void</vtype> documentation_mw::OnPropertyClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<BR/><deff>
+Displays the description of the property <var>it</var> in the text-edit. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l28"><vtype>void</vtype> documentation_mw::OnSuperClassClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<BR/><deff>
+Shows some information on the super-class of item <var>it</var>. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l29"><vtype>void</vtype> documentation_mw::OnSuperClassRightClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<BR/><deff>
+Asks for the URL where the super-class described in <var>it</var> is documented. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l30"><vtype>void</vtype> documentation_mw::setItemOn</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<BR/><deff>
+Sets item <var>it</var> as current item in the tree-widget and ensures that it is open and all children visible. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l31"><vtype>void</vtype> documentation_mw::OnHelpKnownClasses</A>() 
+<BR/><deff>
+Opens a widget of type <a href="mydocclasses.html"> my_doc_classes</a> displaying all defined classes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l32"><vtype>void</vtype> documentation_mw::OnHTMLitalic</A>() 
+<BR/><deff>
+Adds the strings "<i>" and "</i>" to the text-edit. Any selection is inbetween as well as cursor position afterwards.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l33"><vtype>void</vtype> documentation_mw::OnHTMLbold</A>() 
+<BR/><deff>
+Adds the strings "<b>" and "</b>" to the text-edit. Any selection is inbetween as well as cursor position afterwards.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l34"><vtype>void</vtype> documentation_mw::OnHTMLvar</A>() 
+<BR/><deff>
+Adds the strings "<var>" and "</var>" to the text-edit. Any selection is inbetween as well as cursor position afterwards.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l35"><vtype>void</vtype> documentation_mw::OnHTMLsuper</A>() 
+<BR/><deff>
+Adds the strings "<sup>" and "</sup>" to the text-edit. Any selection is inbetween as well as cursor position afterwards.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l36"><vtype>void</vtype> documentation_mw::OnHTMLsub</A>() 
+<BR/><deff>
+Adds the strings "<sub>" and "</sub>" to the text-edit. Any selection is inbetween as well as cursor position afterwards.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l37"><vtype>void</vtype> documentation_mw::OnQt3Des</A>() 
+<BR/><deff>
+Adds the string "Qt3-mode; non-visible in Qt4-mode" to the text-edit.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l38"><vtype>void</vtype> documentation_mw::OnQt4Des</A>() 
+<BR/><deff>
+Adds the string "Qt4-mode; non-visible in Qt3-mode" to the text-edit.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l39"><vtype>void</vtype> documentation_mw::OnKnownFunctionsClick</A>() 
+<BR/><deff>
+Opens a widget of type <a href="mydocclasses.html"> my_doc_classes</a> displaying all defined classes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l40"><vtype>void</vtype> documentation_mw::languageChange</A>() 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

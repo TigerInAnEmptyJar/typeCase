@@ -1,0 +1,337 @@
+RbaseReaction
+rbasereaction.html
+/users/data12/pion/ehrhardt/tofPack2/include/RbaseReaction.h
+CRbaseReaction
+-1 RbaseReaction
+O#c2
+PkinFitIn
+-1 AFitAlgorithm*
+=
+PnTracks
+0 int
+V2
+=
+PnInits
+0 int
+V2
+=
+DConstructor. Sets the number of outgoing tracks, the number of ingoing particles and a kinfit-algorithm pointer. 
+=
+CRbaseReaction
+-1 RbaseReaction
+O#c3
+PrIn
+-1 RbaseReaction&
+Sconst
+=
+DCopy constructor. 
+=
+vnumberOfInitParticles
+0 int
+Sconst
+O#v2
+D
+=
+vinitParticles
+20 momentum4D*
+O#v3
+Dinitial particles of the reaction
+=
+vnumberOfTracks
+0 int
+Sconst
+O#v4
+D
+=
+vtracks
+102 TTrack**
+O#v5
+D
+=
+vnumberOfParticles
+0 int
+O#v6
+Dnumber of outgoing particles
+=
+vparticles
+20 momentum4D*
+O#v7
+Doutgoing particles
+=
+vcm
+20 momentum4D
+O#v8
+Dthe center of momentum of the reaction.
+=
+vparticleIDs
+0 int*
+O#v9
+DGeant-IDs of the particles.
+=
+vexcessEnergy
+1 float
+O#v10
+Dexcess energy of the reaction
+=
+vcmparticles
+20 momentum4D*
+O#v11
+Dparticle momenta in center of mass
+=
+vfkinFit
+-1 AFitAlgorithm*
+O#v12
+Dpointer to a kinfit-algorithm
+=
+vchiLimit
+1 float
+O#v13
+Dlimit to chi-squared
+=
+vchi2
+1 float
+O#v14
+Dchi-squared value of a performed fit
+=
+F~RbaseReaction
+-1 virtual
+O#f2
+DDestructor
+=
+FgetNumberOfTracks
+0 int
+O#f3
+Lconst
+DReturns the number of outgoing particles. 
+=
+FgetNumberOfPrimaries
+0 int
+Svirtual
+O#f4
+Lconst
+DReturns the number of ingoing particles. 
+=
+FgetNumberOfSecondaries
+0 int
+Svirtual
+O#f5
+Lconst
+DReturns the number of outgoing tracks. 
+=
+FgetParticle
+20 momentum4D
+Svirtual
+O#f6
+Lconst
+Pnum
+0 int
+=
+DReturns the 4-momentum of the <var>num<sup>th</sup></var> outgoing particle of the reaction. 
+=
+FgetParticleID
+0 int
+O#f7
+Lconst
+Pnum
+0 int
+=
+DReturns the Geant ID of the <var>num<sup>th</sup></var> outgoing particle of the reaction. 
+=
+FsetTrack
+7 void
+Svirtual
+O#f8
+Pnum
+0 int
+=
+Ptrack
+102 TTrack*
+=
+DSets the track pointer of the <var>num<sup>th</sup></var> particle of the reaction. 
+=
+FgetTrack
+102 TTrack*
+O#f9
+Pnum
+0 int
+=
+DReturns the track corresponding to the <var>num<sup>th</sup></var> outgoing particle of this reaction or NULL if <var>num</var> is non valid. 
+=
+Fcheck
+1 float
+Svirtual
+O#f10
+Ptracks_nd
+102 TTrack**
+=
+Pnum_nd
+0 int
+=
+Ptracks_1s
+102 TTrack**
+=
+Pnum_1s
+0 int
+=
+Ptracks_2s
+102 TTrack**
+=
+Pnum_2s
+0 int
+=
+DDoes a reaction recognition with the <var>num</var> input tracks <var>tracks</var>. If the chi squared value is below the limit, the track-pointers and the particle 4-momenta are set. 
+=
+FjustCheck
+1 float
+Svirtual
+O#f11
+Ptracks_nd
+102 TTrack**
+=
+Pnum_nd
+0 int
+=
+Ptracks_1s
+102 TTrack**
+=
+Pnum_1s
+0 int
+=
+Ptracks_2s
+102 TTrack**
+=
+Pnum_2s
+0 int
+=
+Pindexes
+0 int*
+VNULL
+=
+Presults
+20 momentum4D*
+VNULL
+=
+DDoes a reaction recognition with the <var>num</var> input tracks <var>tracks</var> and returns the chi squared value of that check. 
+=
+FcheckNew
+-1 RbaseReaction*
+Svirtual
+O#f12
+Ptracks_nd
+102 TTrack**
+=
+Pnum_nd
+0 int
+=
+Ptracks_1s
+102 TTrack**
+=
+Pnum_1s
+0 int
+=
+Ptracks_2s
+102 TTrack**
+=
+Pnum_2s
+0 int
+=
+DDoes a reaction recognition with the <var>num</var> input tracks <var>tracks</var>. If the chi squared value is below the limit, it returns a new reaction of that type. 
+DPlease take care that you delete this reaction correctly after use (potential memory leak). 
+=
+FsetChiLimit
+7 void
+O#f13
+Pchi
+1 float
+=
+DSet the chi squared limit for reaction recognition.  
+DNote, that the chi squared value does not need to come from a kinfit, it may also correspond to the missing mass of the outgoing tracks or else.  
+=
+FgetChiLimit
+1 float
+O#f14
+Lconst
+DReturn the limit for the chi squared value in reaction recognition check.  
+DNote, that the chi squared value does not need to come from a kinfit, it may also correspond to the missing mass of the outgoing tracks or else.  
+=
+FgetChiSquared
+1 float
+O#f15
+Lconst
+DReturns the chi squared value of the particle recognition check.  
+=
+FsetInitParticles
+7 void
+Svirtual
+O#f16
+Pnum
+0 int
+=
+Pp
+20 momentum4D*
+=
+DSets the initial particles. Its number is set to <var>num</var>. Take care, that the array <var>p</var> is at least <var>num</var> indexes long. 
+=
+FgetInitParticle
+20 momentum4D
+O#f17
+Lconst
+Pnum
+0 int
+V0
+=
+DReturn the 4-momentum of the <var>num<sup>th</sup></var> initial particle. 
+=
+FgetExcessEnergy
+1 float
+O#f18
+Lconst
+DReturn the excess energy of the reaction. If it is zero or smaller than that, the reaction cannot take place. 
+=
+FgetCenterOfMass
+20 momentum4D
+O#f19
+Lconst
+DReturn 4-momentum of the center of mass 
+=
+FgetCMParticle
+20 momentum4D
+O#f20
+Lconst
+Pnum
+0 int
+=
+DReturn the <var>num<sup>th</sup></var> particle in the center-of-mass. 
+=
+FgetKinFit
+-1 AFitAlgorithm*
+O#f21
+Lconst
+DReturns the pointer to the kinfit algorithm that may be used.  
+DNote, that this may be NULL. 
+=
+FgetClone
+-1 RbaseReaction*
+Svirtual
+O#f22
+DCreates a new reaction with the same properties. Take care that the reaction is deleted properly after use (potential memory leak). 
+=
+Fcalculate
+7 void
+Svirtual
+O#f23
+PjustGeometry
+0 int
+V1
+=
+DDo calculate the reaction properties. 
+=
+fcalculateCM
+7 void
+O#f24
+DCalculate the Center-of-Mass properties of all paricipating particles. 
+=
+S0 1 TBase
+tbase.html
+TBase
+=

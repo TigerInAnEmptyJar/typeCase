@@ -1,0 +1,401 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class Q3DInput</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class Q3DInput in "q3Dinput.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This class is an extension to the Qt-QLineEdit and is the front end to a 3D-point or -vector.
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget</A>
+<DT>Constructor
+<LI><A HREF="#c2">Q3DInput</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> f = Qt::WStyle_NoBorder) 
+<LI><A HREF="#c3">Q3DInput</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual const <A HREF="#f9"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f10"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f13"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f14"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f15"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI><A HREF="#f16"><vtype>virtual</vtype> ~Q3DInput</A>() 
+<LI><A HREF="#f17"><vtype>float</vtype> getX</A>() const
+<LI><A HREF="#f18"><vtype>float</vtype> getY</A>() const
+<LI><A HREF="#f19"><vtype>float</vtype> getZ</A>() const
+<LI>virtual <A HREF="#f20"><vtype>bool</vtype> hasFocus</A>() const
+<LI><A HREF="#f21"><vtype>QSize</vtype> sizeHint</A>() const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f11">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f12">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI><A HREF="#l2"><vtype>void</vtype> setValues</A>(<vtype>float</vtype> X, <vtype>float</vtype> Y, <vtype>float</vtype> Z) 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> valueChanged</A>() 
+<LI>virtual <A HREF="#l4"><vtype>void</vtype> resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<LI>virtual <A HREF="#l5"><vtype>void</vtype> resize</A>(const <vtype>QSize&</vtype> tmpqsize-1) 
+<LI>virtual <A HREF="#l6"><vtype>void</vtype> setGeometry</A>(<vtype>int</vtype> x, <vtype>int</vtype> y, <vtype>int</vtype> w, <vtype>int</vtype> h) 
+<LI>virtual <A HREF="#l7"><vtype>void</vtype> setGeometry</A>(const <vtype>QRect&</vtype> tmpqrect-1) 
+<LI>virtual <A HREF="#l8"><vtype>void</vtype> setEnabled</A>(<vtype>bool</vtype> e) 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Signals
+<DD>new public<ul>
+<LI><A HREF="#s2"><vtype>void</vtype> clicked</A>() 
+<LI><A HREF="#s3"><vtype>void</vtype> clicked</A>(const <vtype>QPoint&</vtype> p, <vtype>int</vtype> button) 
+<LI><A HREF="#s4"><vtype>void</vtype> doubleClicked</A>() 
+<LI><A HREF="#s5"><vtype>void</vtype> valueChanged</A>(<vtype>float</vtype> X, <vtype>float</vtype> Y, <vtype>float</vtype> Z) 
+</UL>
+<DT>Protected Variables
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v2">edX</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit**</A> <A HREF="#v3">*edY</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit**</A> <A HREF="#v4">*edZ</A>
+<DD>* edZ <vtype>QGridLayout*</vtype> <A HREF="#v5">layout</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">Q3DInput::Q3DInput</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> f = Qt::WStyle_NoBorder) 
+<BR/><deff>
+Constructor. See <a href="http://www.trolltech.com/qwidget.html"> QWidget</a> for details.
+This is the Qt-3 version of the Constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">Q3DInput::Q3DInput</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<BR/><deff>
+Constructor. See <a href="http://www.trolltech.com/qwidget.html"> QWidget</a> for details.
+This is the Qt-4 version of the Constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">QLineEdit* edX</A>
+<BR/><deff>
+line-edit for the x-component
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">QLineEdit** *edY</A>
+<BR/><deff>
+line-edit for the y-component
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">QLineEdit** *edZ</A>
+<BR/><deff>
+line-edit for the z-component
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">* edZ QGridLayout* layout</A>
+<BR/><deff>
+layout that handles shriking and stretching
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> Q3DInput::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> Q3DInput::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">Q3DInput::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">Q3DInput::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> Q3DInput::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> Q3DInput::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> Q3DInput::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>char*</vtype> Q3DInput::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>bool</vtype> Q3DInput::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f11">Q3DInput::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f12">Q3DInput::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>bool</vtype> Q3DInput::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>QVariant</vtype> Q3DInput::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>QMetaObject*</vtype> Q3DInput::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>virtual</vtype> Q3DInput::~Q3DInput</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>float</vtype> Q3DInput::getX</A>() const
+<BR/><deff>
+Returns the floating point value retrieved from the x-component-line-edit.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>float</vtype> Q3DInput::getY</A>() const
+<BR/><deff>
+Returns the floating point value retrieved from the y-component-line-edit.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>float</vtype> Q3DInput::getZ</A>() const
+<BR/><deff>
+Returns the floating point value retrieved from the z-component-line-edit.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>bool</vtype> Q3DInput::hasFocus</A>() const
+<BR/><deff>
+Returns true if one of the widgets line-edit has focus.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>QSize</vtype> Q3DInput::sizeHint</A>() const
+<BR/><deff>
+Returns a hint for the prefered size of the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>void</vtype> Q3DInput::mousePressEvent</A>(<vtype>QMouseEvent*</vtype> tmpqmouseevent0) 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>void</vtype> Q3DInput::mouseReleaseEvent</A>(<vtype>QMouseEvent*</vtype> tmpqmouseevent0) 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>void</vtype> Q3DInput::mouseDoubleClickEvent</A>(<vtype>QMouseEvent*</vtype> tmpqmouseevent0) 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f25"><vtype>void</vtype> Q3DInput::mouseMoveEvent</A>(<vtype>QMouseEvent*</vtype> tmpqmouseevent0) 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f26"><vtype>void</vtype> Q3DInput::keyPressEvent</A>(<vtype>QKeyEvent*</vtype> tmpqkeyevent0) 
+<BR/><deff>
+key-press-event. checks for bad input.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f27"><vtype>void</vtype> Q3DInput::keyReleaseEvent</A>(<vtype>QKeyEvent*</vtype> tmpqkeyevent0) 
+<BR/><deff>
+key-release-event, checks for bad input
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f28"><vtype>void</vtype> Q3DInput::paintEvent</A>(<vtype>QPaintEvent*</vtype> tmpqpaintevent0) 
+<BR/><deff>
+Paint event.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f29"><vtype>void</vtype> Q3DInput::resizeEvent</A>(<vtype>QResizeEvent*</vtype> tmpqresizeevent0) 
+<BR/><deff>
+Resize event handler. This method is obsolete since layout is used.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> Q3DInput::setValues</A>(<vtype>float</vtype> X, <vtype>float</vtype> Y, <vtype>float</vtype> Z) 
+<BR/><deff>
+Set the values of the three line-edits.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> Q3DInput::valueChanged</A>() 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> Q3DInput::resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<BR/><deff>
+Resize widget. This method is obsolete since a layout is used.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> Q3DInput::resize</A>(const <vtype>QSize&</vtype> tmpqsize-1) 
+<BR/><deff>
+Resize widget. This method is obsolete since a layout is used.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> Q3DInput::setGeometry</A>(<vtype>int</vtype> x, <vtype>int</vtype> y, <vtype>int</vtype> w, <vtype>int</vtype> h) 
+<BR/><deff>
+Sets size and position of the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> Q3DInput::setGeometry</A>(const <vtype>QRect&</vtype> tmpqrect-1) 
+<BR/><deff>
+Sets size and position of the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> Q3DInput::setEnabled</A>(<vtype>bool</vtype> e) 
+<BR/><deff>
+Set all three-line-edits enabled property.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l9"><vtype>void</vtype> Q3DInput::setValues</A>() 
+<BR/><deff>
+Re-set the values of the three line-edits.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s2"><vtype>void</vtype> Q3DInput::clicked</A>() 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s3"><vtype>void</vtype> Q3DInput::clicked</A>(const <vtype>QPoint&</vtype> p, <vtype>int</vtype> button) 
+<BR/><deff>
+This signal is emitted, when a click is performed on the widget, providing the position and the <var>button</var> that was clicked.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s4"><vtype>void</vtype> Q3DInput::doubleClicked</A>() 
+<BR/><deff>
+Signal is emitted when a double-click was performed on the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s5"><vtype>void</vtype> Q3DInput::valueChanged</A>(<vtype>float</vtype> X, <vtype>float</vtype> Y, <vtype>float</vtype> Z) 
+<BR/><deff>
+If a value of one of the three line-edits is changed, this signal is emitted.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

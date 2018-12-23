@@ -1,0 +1,176 @@
+TCluster
+tcluster.html
+/users/data12/pion/ehrhardt/tofPack2/include/cluster.h
+CTCluster
+104 TCluster
+O#c2
+PmaxElements
+0 int
+V50
+=
+DConstructor. Sets the maximum number of pixels to be stored for this cluster (default = 50).  
+=
+gnumElem
+0 int
+Sconst
+O#v2
+D
+=
+gaccElem
+0 int
+O#v3
+D
+=
+gpix
+-1 TRefArray
+O#v4
+D
+=
+gcpoint
+16 point3D
+O#v5
+Tpoint3d.html
+D
+=
+gid
+0 int
+O#v6
+D
+=
+gradius
+1 float
+O#v7
+D
+=
+gdefined
+6 bool
+O#v8
+D
+=
+F~TCluster
+-1 ~TCluster
+O#f2
+DDestructor  
+=
+FgetNumberOfPixels
+0 int
+O#f3
+Lconst
+DReturns the number of pixels stored for this cluster.  
+=
+FgetMaxNumberOfPixels
+0 int
+O#f4
+Lconst
+DReturns the maximum number of pixels to be stored for this cluster.  
+=
+FgetCenter
+16 point3D
+O#f5
+Tpoint3d.html
+Lconst
+DReturns the center point of the cluster.  
+=
+FgetPixel
+103 TPixel
+O#f6
+Ttpixel.html
+Lconst
+Pnum
+0 int
+=
+DReturns a copy of the <var>num<sup>th</sup></var> pixel. May be buggy and cause crashs. Use <a href="#f11">getPixelr()</a> instead.  
+=
+FsetCenter
+7 void
+O#f7
+Pp
+16 point3D
+Tpoint3d.html
+=
+DSets the center point of the cluster.  
+=
+FaddPixel
+7 void
+O#f8
+Pp
+103 TPixel&
+Ttpixel.html
+=
+DAdds a pixel to the list of pixels. Take care, that no copy but a pointer to this pixel is stored, after use you will have to see that it is deleted properly.  
+=
+FresetPixel
+7 void
+O#f9
+DSets the number of pixels to zero.  
+=
+FgetCenterr
+16 point3D&
+O#f10
+Tpoint3d.html
+DReturns a reference to the centerpoint of the cluster.  
+=
+FgetPixelr
+103 TPixel&
+O#f11
+Ttpixel.html
+Pnum
+0 int
+=
+DReturns a reference to the <var>num<sup>th</sup></var> pixel stored for this cluster. Returns a "new" TPixel if <var>num</var> is non-valid, that has to be taken care of (potential memory leak).  
+=
+FsetID
+7 void
+O#f12
+PIDin
+0 int
+=
+DSets the cluster ID.  
+=
+FgetID
+0 int
+O#f13
+Lconst
+DReturns the cluster ID.  
+=
+FID
+0 int
+O#f14
+Lconst
+DReturns the cluster ID.  
+=
+FisDefined
+6 bool
+O#f15
+DReturns true if the cluster has been modified since creation.  
+=
+FgetClusterRadius
+17 vector3D
+O#f16
+Tvector3d.html
+Lconst
+DReturns the radius within which there are pixels to be found.  
+=
+FsetClusterRadius
+7 void
+O#f17
+Pvalue
+1 float
+=
+DSets the cluster radius. If you don't want to calculate it yourself, a simple version is used in calculateClusterRadius().  
+=
+FcalculateClusterRadius
+7 void
+O#f18
+DCalculates the cluster radius. For every pixel the distance of its center to the cluster center is calculated; the maximum here is taken. This maximum is increased by the first pixels shapes circumscribed radius.  
+=
+Freset
+7 void
+O#f19
+DResets the cluster. The number of pixels is set to zero, also the radius and the center point is set to an undefined point.  
+=
+DThis is the class defining a cluster of pixels. It contains an array for storing the pixels it is made up, an ID, a center point and a radius, that defines in what circle the pixels are located. 
+S0 1 TBase
+tbase.html
+TBase
+=

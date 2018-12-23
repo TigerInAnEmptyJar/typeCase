@@ -1,0 +1,35 @@
+projector
+projector.html
+/users/data12/pion/ehrhardt/tofPack2/include/geometry.h
+gfplane
+23 plane3D
+Sstatic
+O#v2
+Tplane3d.html
+D
+=
+gfeye
+16 point3D
+Sstatic
+O#v3
+Tpoint3d.html
+D
+=
+gfopticalAxis
+17 vector3D
+Sstatic
+O#v4
+Tvector3d.html
+D
+=
+gfmode
+0 int
+Sstatic
+O#v5
+D
+=
+DStatic class to do projections from 3D to 2D. Used for drawing the more complicated shapes.
+S0 1 geomObject
+geomobj.html
+geomObject
+=

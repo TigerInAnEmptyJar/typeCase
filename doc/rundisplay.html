@@ -1,0 +1,526 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class RunDisplay</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class RunDisplay in "rundisplay.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<table><tr><td>
+The run-display shows the properties of a single <a href="runparameter.html">run_parameter</a>. This includes the name, the parenting beam-time, the type, the run-number, a description, the begin and the stop of recording, a setup-file (and a switch to set the own setup on/off), calibration files (with a switch to use the parenting ones) and the input files.</td><td><img src="pictures/run.jpg" width=250></td></tr></table>
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget</A>
+<DT>Constructor
+<LI><A HREF="#c2">RunDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<LI><A HREF="#c3">RunDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual <A HREF="#f9"><vtype>bool</vtype> readOnly</A>() const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI>virtual <A HREF="#l2"><vtype>void</vtype> resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> resize</A>(const <vtype>QSize&</vtype> s) 
+<LI>virtual <A HREF="#l4"><vtype>void</vtype> resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<LI>virtual <A HREF="#l5"><vtype>void</vtype> setRun</A>(<A HREF="runparameter.html">run_parameter&</A> run) 
+<LI>virtual <A HREF="#l6"><vtype>void</vtype> onBrowseClick</A>() 
+<LI>virtual <A HREF="#l7"><vtype>void</vtype> onDescriptionChange</A>() 
+<LI>virtual <A HREF="#l8"><vtype>void</vtype> onCalibrationAdd</A>() 
+<LI>virtual <A HREF="#l9"><vtype>void</vtype> setReadOnly</A>(<vtype>bool</vtype> value) 
+<LI>virtual <A HREF="#l10"><vtype>void</vtype> onPropertyChange</A>() 
+<LI>virtual <A HREF="#l11"><vtype>void</vtype> onSetupChange</A>() 
+<LI>virtual <A HREF="#l12"><vtype>void</vtype> onCalibrationChange</A>() 
+<LI>virtual <A HREF="#l13"><vtype>void</vtype> onCalibrationRemove</A>(<vtype>int</vtype> id) 
+<LI>virtual <A HREF="#l14"><vtype>void</vtype> onCalibrationChange</A>(<vtype>int</vtype> id) 
+<LI>virtual <A HREF="#l15"><vtype>void</vtype> onCalibrationRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistboxitem.html">QListBoxItem*</A> it, const <vtype>QPoint&</vtype> p) 
+<LI>virtual <A HREF="#l16"><vtype>void</vtype> onFilesRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it, const <vtype>QPoint&</vtype> p) 
+<LI>virtual <A HREF="#l17"><vtype>void</vtype> onCalibrationRightClick</A>(const <vtype>QPoint&</vtype> p) 
+<LI>virtual <A HREF="#l18"><vtype>void</vtype> onFilesRightClick</A>(const <vtype>QPoint&</vtype> p) 
+<LI>virtual <A HREF="#l19"><vtype>void</vtype> onCalibration</A>(<vtype>QAction*</vtype> it) 
+<LI>virtual <A HREF="#l20"><vtype>void</vtype> onFileAdd</A>() 
+<LI>virtual <A HREF="#l21"><vtype>void</vtype> onFileTypeChange</A>() 
+<LI>virtual <A HREF="#l22"><vtype>void</vtype> onFileNameChange</A>() 
+<LI>virtual <A HREF="#l23"><vtype>void</vtype> onFileRemove</A>() 
+<LI>virtual <A HREF="#l24"><vtype>void</vtype> setBeamtimes</A>(<vtype>vector&lt;string&gt;</vtype> btIn) 
+<LI>virtual <A HREF="#l25"><vtype>void</vtype> setRunTypes</A>(<vtype>vector&lt;string&gt;</vtype> rtIn) 
+<LI>virtual <A HREF="#l26"><vtype>void</vtype> onBTChange</A>() 
+<LI>virtual <A HREF="#l27"><vtype>void</vtype> onTPChange</A>() 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Signals
+<DD>new public<ul>
+<LI><A HREF="#s2"><vtype>void</vtype> changed</A>() 
+</UL>
+<DT>Public Variables
+<DD><vtype>QLabel*</vtype> <A HREF="#v2">nameLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v3">beamtimeLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v4">typeLabel</A>
+<DD><vtype>QCheckBox*</vtype> <A HREF="#v5">setupLabel</A>
+<DD><vtype>QCheckBox*</vtype> <A HREF="#v6">calibrationLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v7">descrLabel</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v8">nameInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A HREF="#v9">beamtimeInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A HREF="#v10">typeInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v11">setupInput</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qlistbox.html">QListBox*</A> <A HREF="#v12">calInput</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qlistview.html">QListView*</A> <A HREF="#v13">filesInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlistwidget.html">QListWidget*</A> <A HREF="#v14">calInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qtreewidget.html">QTreeWidget*</A> <A HREF="#v15">filesInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit*</A> <A HREF="#v16">descrInput</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A HREF="#v17">browseButton</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v18">startLabel</A>
+<DD><vtype>QDateTimeEdit*</vtype> <A HREF="#v19">startInput</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v20">stopLabel</A>
+<DD><vtype>QDateTimeEdit*</vtype> <A HREF="#v21">stopInput</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v22">runNumberLabel</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v23">runNumberInput</A>
+<DT>Protected Variables
+<DD><A HREF="runparameter.html">run_parameter*</A> <A HREF="#v24">sp</A>
+<DD><A HREF="runparameter.html">run_parameter</A> <A HREF="#v25">copy</A>
+<DD><vtype>vector&lt;string&gt;</vtype> <A HREF="#v26">runtypes</A>
+<DD><vtype>vector&lt;string&gt;</vtype> <A HREF="#v27">beamtimes</A>
+<DD><vtype>bool</vtype> <A HREF="#v28">ReadOnly</A>
+<DD><vtype>QGridLayout*</vtype> <A HREF="#v29">layout</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">RunDisplay::RunDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt3-version, non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">RunDisplay::RunDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<BR/><deff>
+Constructor. Qt4-version, non-visible in Qt3.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">QLabel* nameLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">QLabel* beamtimeLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">QLabel* typeLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">QCheckBox* setupLabel</A>
+<BR/><deff>
+switch for using own setup
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v6">QCheckBox* calibrationLabel</A>
+<BR/><deff>
+switch for using own calibration
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v7">QLabel* descrLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v8">nameInput</A>
+<BR/><deff>
+line-edit for run-name
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A NAME="#v9">beamtimeInput</A>
+<BR/><deff>
+beam-time
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A NAME="#v10">typeInput</A>
+<BR/><deff>
+run type
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v11">setupInput</A>
+<BR/><deff>
+line-edit for setup-file
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qlistbox.html">QListBox*</A> <A NAME="#v12">calInput</A>
+<BR/><deff>
+calibration files of run; Qt3-variable, non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qlistview.html">QListView*</A> <A NAME="#v13">filesInput</A>
+<BR/><deff>
+data-files of run. Qt3-variable, non-visible in Qt4
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlistwidget.html">QListWidget*</A> <A NAME="#v14">calInput</A>
+<BR/><deff>
+calibration files of run, Qt4-variable, non-visible in Qt3-mde
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qtreewidget.html">QTreeWidget*</A> <A NAME="#v15">filesInput</A>
+<BR/><deff>
+files of run, Qt4-variable, non-visible in Qt3-mode
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit*</A> <A NAME="#v16">descrInput</A>
+<BR/><deff>
+text-edit for description of run
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A NAME="#v17">browseButton</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v18">QLabel* startLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v19">QDateTimeEdit* startInput</A>
+<BR/><deff>
+time and date of the begin of recording
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v20">QLabel* stopLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v21">QDateTimeEdit* stopInput</A>
+<BR/><deff>
+time and date of the stop of recording
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v22">QLabel* runNumberLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v23">runNumberInput</A>
+<BR/><deff>
+line-edit for the run-number
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="runparameter.html">run_parameter*</A> <A NAME="#v24">sp</A>
+<BR/><deff>
+pointer to the current run_parameter
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="runparameter.html">run_parameter</A> <A NAME="#v25">copy</A>
+<BR/><deff>
+copy of the current run_parameter
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v26">vector<string> runtypes</A>
+<BR/><deff>
+available run-type-names
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v27">vector<string> beamtimes</A>
+<BR/><deff>
+available beam-time-names
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v28">bool ReadOnly</A>
+<BR/><deff>
+read-only-property. If set the currently displayed run won't be modified if the displays inputs are.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v29">QGridLayout* layout</A>
+<BR/><deff>
+layout
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> RunDisplay::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> RunDisplay::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">RunDisplay::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">RunDisplay::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> RunDisplay::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> RunDisplay::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> RunDisplay::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>bool</vtype> RunDisplay::readOnly</A>() const
+<BR/><deff>
+Returns the read-only-property. If it is true, the original variable won't be modified if the content of the widgets input changes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> RunDisplay::resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<BR/><deff>
+resize event. obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> RunDisplay::resize</A>(const <vtype>QSize&</vtype> s) 
+<BR/><deff>
+resize widet. obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> RunDisplay::resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<BR/><deff>
+resize widget. obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> RunDisplay::setRun</A>(<A HREF="runparameter.html">run_parameter&</A> run) 
+<BR/><deff>
+Sets the run_parameter to be displayed by this widget. Take care, that the variable is at least as long valid as the widget is, for also in read-only-mode, the widget may want to reload properties.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> RunDisplay::onBrowseClick</A>() 
+<BR/><deff>
+If not in read-only-mode, browse for a new setup-file for the run_parameter.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> RunDisplay::onDescriptionChange</A>() 
+<BR/><deff>
+Update the description of the current run with the description of the display. Not done in read-only-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> RunDisplay::onCalibrationAdd</A>() 
+<BR/><deff>
+Add a calibration file to run.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l9"><vtype>void</vtype> RunDisplay::setReadOnly</A>(<vtype>bool</vtype> value) 
+<BR/><deff>
+Sets the read-only-property. If in read-only mode, modifications on the properties of the run won't be applied to the run-pointers variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l10"><vtype>void</vtype> RunDisplay::onPropertyChange</A>() 
+<BR/><deff>
+Update the run_parameters properties, if not in read-only-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l11"><vtype>void</vtype> RunDisplay::onSetupChange</A>() 
+<BR/><deff>
+Update the current run_parameters setup file, if not in read-only-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l12"><vtype>void</vtype> RunDisplay::onCalibrationChange</A>() 
+<BR/><deff>
+Update the current run_parameters calibration files if not in read-only-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l13"><vtype>void</vtype> RunDisplay::onCalibrationRemove</A>(<vtype>int</vtype> id) 
+<BR/><deff>
+remove the <var>id<sup>th></sup></var> calibration file.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l14"><vtype>void</vtype> RunDisplay::onCalibrationChange</A>(<vtype>int</vtype> id) 
+<BR/><deff>
+Change the <var>id<sup>th></sup></var> calibration file. You'll be asked about the new file name.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l15"><vtype>void</vtype> RunDisplay::onCalibrationRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistboxitem.html">QListBoxItem*</A> it, const <vtype>QPoint&</vtype> p) 
+<BR/><deff>
+Opens a popup-menu on the calibraton-file-input. Qt3-version, non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l16"><vtype>void</vtype> RunDisplay::onFilesRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it, const <vtype>QPoint&</vtype> p) 
+<BR/><deff>
+Opens a popup-menu on the files input. Qt3-version, non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l17"><vtype>void</vtype> RunDisplay::onCalibrationRightClick</A>(const <vtype>QPoint&</vtype> p) 
+<BR/><deff>
+opens a popup-menu on the calibration-file-input. Qt4-version, non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l18"><vtype>void</vtype> RunDisplay::onFilesRightClick</A>(const <vtype>QPoint&</vtype> p) 
+<BR/><deff>
+Opens a popup-menu on the files input. Qt4-version, non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l19"><vtype>void</vtype> RunDisplay::onCalibration</A>(<vtype>QAction*</vtype> it) 
+<BR/><deff>
+Slot called when some action in the popup-menu for the calibration files is activated. Respective functions are called. Qt4-version, non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l20"><vtype>void</vtype> RunDisplay::onFileAdd</A>() 
+<BR/><deff>
+Add a file to the run. You are asked about a filename and its type.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l21"><vtype>void</vtype> RunDisplay::onFileTypeChange</A>() 
+<BR/><deff>
+Change type of current input file.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l22"><vtype>void</vtype> RunDisplay::onFileNameChange</A>() 
+<BR/><deff>
+Change name of current input file.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l23"><vtype>void</vtype> RunDisplay::onFileRemove</A>() 
+<BR/><deff>
+Remove current file from list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l24"><vtype>void</vtype> RunDisplay::setBeamtimes</A>(<vtype>vector&lt;string&gt;</vtype> btIn) 
+<BR/><deff>
+Set the names of the available beam-times.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l25"><vtype>void</vtype> RunDisplay::setRunTypes</A>(<vtype>vector&lt;string&gt;</vtype> rtIn) 
+<BR/><deff>
+Set the possible run type names.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l26"><vtype>void</vtype> RunDisplay::onBTChange</A>() 
+<BR/><deff>
+Sets the run_parameters beamTime to the selected one.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l27"><vtype>void</vtype> RunDisplay::onTPChange</A>() 
+<BR/><deff>
+Sets the run_parameters type to the selected one.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l28"><vtype>void</vtype> RunDisplay::languageChange</A>() 
+<BR/><deff>
+Sets the labels texts.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s2"><vtype>void</vtype> RunDisplay::changed</A>() 
+<BR/><deff>
+Not in read-only-mode, this signal is emitted, when one of the properties of the run_parameter changed.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

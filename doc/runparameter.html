@@ -1,0 +1,407 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class run_parameter</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class run_parameter in "beamtimeparameter.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="beamtimeparameter.html">beamTime_parameter</A>
+<DT>Constructor
+<LI><A HREF="#c2">run_parameter</A>(<A HREF="beamtimeparameter.html">beamTime_parameter&</A> parent, <vtype>int</vtype> pn) 
+<LI><A HREF="#c3">run_parameter</A>(const <A HREF="runparameter.html">run_parameter&</A> r) 
+<LI><A HREF="#c4">run_parameter</A>(<vtype>string</vtype> n = string()) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~run_parameter</A>() 
+<LI><A HREF="#f3"><vtype>int</vtype> getType</A>() const
+<LI><A HREF="#f4"><vtype>void</vtype> setType</A>(<vtype>int</vtype> t) 
+<LI><A HREF="#f5"><vtype>int</vtype> getParentNumber</A>() const
+<LI><A HREF="#f6"><vtype>void</vtype> setParentNumber</A>(<vtype>int</vtype> p) 
+<LI><A HREF="beamtimeparameter.html">beamTime_parameter*</A> <A HREF="#f7">getParent</A>() const
+<LI><A HREF="#f8"><vtype>void</vtype> setParent</A>(<A HREF="beamtimeparameter.html">beamTime_parameter*</A> p) 
+<LI><A HREF="#f9"><vtype>bool</vtype> hasOwnSetup</A>() const
+<LI><A HREF="#f10"><vtype>void</vtype> setOwnSetup</A>(<vtype>bool</vtype> s = true) 
+<LI><A HREF="#f11"><vtype>bool</vtype> hasOwnCalibration</A>() const
+<LI><A HREF="#f12"><vtype>void</vtype> setOwnCalibration</A>(<vtype>bool</vtype> c = true) 
+<LI><A HREF="#f13"><vtype>bool</vtype> hasAdditionalCalibration</A>() const
+<LI><A HREF="#f14"><vtype>void</vtype> setAdditionalCalibration</A>(<vtype>bool</vtype> c = true) 
+<LI><A HREF="#f19"><vtype>bool</vtype> useOwn</A>(<vtype>int</vtype> d, <vtype>int</vtype> t) const
+<LI><A HREF="#f20"><vtype>void</vtype> setUseOwn</A>(<vtype>int</vtype> d, <vtype>int</vtype> t, <vtype>bool</vtype> us = true) 
+<LI><A HREF="#f21"><vtype>int</vtype> getRunNumber</A>() const
+<LI><A HREF="#f22"><vtype>void</vtype> setRunNumber</A>(<vtype>int</vtype> rn) 
+<LI><A HREF="#f23"><vtype>void</vtype> addFile</A>(<vtype>string</vtype> filename, <vtype>int</vtype> type, <vtype>long</vtype> fileEvents = -1) 
+<LI><A HREF="#f24"><vtype>void</vtype> clearFiles</A>() 
+<LI><A HREF="#f25"><vtype>int</vtype> getNumberOfFiles</A>() const
+<LI><A HREF="#f26"><vtype>string</vtype> getFile</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f27"><vtype>int</vtype> getFileType</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f28"><vtype>void</vtype> setFileType</A>(<vtype>int</vtype> num, <vtype>int</vtype> type) 
+<LI><A HREF="#f29"><vtype>long</vtype> getFileEvents</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f30"><vtype>void</vtype> setFileEvents</A>(<vtype>int</vtype> num, <vtype>long</vtype> fileEvents) 
+<LI><A HREF="#f31"><vtype>void</vtype> setStartTime</A>(<vtype>int</vtype> year, <vtype>int</vtype> month, <vtype>int</vtype> day, <vtype>int</vtype> hour, <vtype>int</vtype> minute, <vtype>int</vtype> second) 
+<LI><A HREF="#f32"><vtype>void</vtype> setStopTime</A>(<vtype>int</vtype> year, <vtype>int</vtype> month, <vtype>int</vtype> day, <vtype>int</vtype> hour, <vtype>int</vtype> minute, <vtype>int</vtype> second) 
+<LI><A HREF="#f33"><vtype>void</vtype> setStartTime</A>(const <vtype>QDateTime&</vtype> time) 
+<LI><A HREF="#f34"><vtype>void</vtype> setStopTime</A>(const <vtype>QDateTime&</vtype> time) 
+<LI><A HREF="#f35"><vtype>QDateTime</vtype> getStartTime</A>() const
+<LI><A HREF="#f36"><vtype>QDateTime</vtype> getStopTime</A>() const
+<LI><A HREF="#f37"><vtype>void</vtype> setStartTime</A>(const <vtype>tm&</vtype> time) 
+<LI><A HREF="#f38"><vtype>void</vtype> setStopTime</A>(const <vtype>tm&</vtype> time) 
+<LI><A HREF="#f39"><vtype>tm</vtype> getStartTime</A>() const
+<LI><A HREF="#f40"><vtype>tm</vtype> getStopTime</A>() const
+<LI><A HREF="#f41"><vtype>int</vtype> getTime</A>() const
+<LI><A HREF="#f42"><vtype>void</vtype> operator=</A>(const <A HREF="runparameter.html">run_parameter&</A> r) 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="#f15"><vtype>void</vtype> addDetectorCalibration</A>(<vtype>vector&lt;string&gt;</vtype> fn = vector<string>()) 
+<LI>virtual <A HREF="#f16"><vtype>void</vtype> popDetectorCalibration</A>() 
+<LI>virtual <A HREF="#f17"><vtype>void</vtype> addTypCalibration</A>(<vtype>vector&lt;string&gt;</vtype> fn = vector<string>()) 
+<LI>virtual <A HREF="#f18"><vtype>void</vtype> popTypCalibration</A>() 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="beamtimeparameter.html#f3"><vtype>string</vtype> beamTime_parameter::getFileName</A>() const
+<LI><A HREF="beamtimeparameter.html#f4"><vtype>void</vtype> beamTime_parameter::setFileName</A>(<vtype>string</vtype> fn) 
+<LI><A HREF="beamtimeparameter.html#f5"><vtype>string</vtype> beamTime_parameter::getSetupFile</A>() const
+<LI><A HREF="beamtimeparameter.html#f6"><vtype>void</vtype> beamTime_parameter::setSetupFile</A>(<vtype>string</vtype> fn) 
+<LI><A HREF="beamtimeparameter.html#f7"><vtype>string</vtype> beamTime_parameter::getCalibrationFile</A>(<vtype>int</vtype> num) const
+<LI><A HREF="beamtimeparameter.html#f8"><vtype>string</vtype> beamTime_parameter::getCalibrationFile</A>(<vtype>int</vtype> num, <vtype>int</vtype> d) const
+<LI><A HREF="beamtimeparameter.html#f9"><vtype>void</vtype> beamTime_parameter::setCalibrationFile</A>(<vtype>int</vtype> num, <vtype>string</vtype> filename) 
+<LI><A HREF="beamtimeparameter.html#f10"><vtype>int</vtype> beamTime_parameter::getNumberOfCalibrationFiles</A>() const
+<LI><A HREF="beamtimeparameter.html#f11"><vtype>void</vtype> beamTime_parameter::addCalibrationFile</A>(<vtype>string</vtype> filename) 
+<LI><A HREF="beamtimeparameter.html#f12"><vtype>void</vtype> beamTime_parameter::clearCalibrationFiles</A>() 
+<LI><A HREF="beamtimeparameter.html#f13"><vtype>void</vtype> beamTime_parameter::setCalibrationFile</A>(<vtype>int</vtype> det, <vtype>int</vtype> typ, <vtype>string</vtype> fn) 
+<LI><A HREF="beamtimeparameter.html#f18"><vtype>bool</vtype> beamTime_parameter::hasACalib</A>(<vtype>int</vtype> d, <vtype>int</vtype> t) const
+<LI><A HREF="beamtimeparameter.html#f19"><vtype>void</vtype> beamTime_parameter::setHasACalib</A>(<vtype>int</vtype> d, <vtype>int</vtype> t, <vtype>bool</vtype> us = true) 
+<LI><A HREF="beamtimeparameter.html#f20"><vtype>int</vtype> beamTime_parameter::getNumCalibDets</A>() const
+<LI><A HREF="beamtimeparameter.html#f21"><vtype>int</vtype> beamTime_parameter::getNumCalibTypes</A>() const
+<LI><A HREF="beamtimeparameter.html#f22"><vtype>int</vtype> beamTime_parameter::getNumberOfDetectors</A>() const
+<LI><A HREF="beamtimeparameter.html#f23"><vtype>void</vtype> beamTime_parameter::setNumberOfDetectors</A>(<vtype>int</vtype> num) 
+<LI><A HREF="beamtimeparameter.html#f24"><vtype>void</vtype> beamTime_parameter::setDetector</A>(<vtype>int</vtype> num, <vtype>bool</vtype> hasqdc, <vtype>bool</vtype> hastdc) 
+<LI><A HREF="beamtimeparameter.html#f25"><vtype>bool</vtype> beamTime_parameter::hasQDC</A>(<vtype>int</vtype> num) const
+<LI><A HREF="beamtimeparameter.html#f26"><vtype>bool</vtype> beamTime_parameter::hasTDC</A>(<vtype>int</vtype> num) const
+<LI><A HREF="beamtimeparameter.html#f27"><vtype>int</vtype> beamTime_parameter::getMonth</A>() const
+<LI><A HREF="beamtimeparameter.html#f28"><vtype>int</vtype> beamTime_parameter::getYear</A>() const
+<LI><A HREF="beamtimeparameter.html#f29"><vtype>void</vtype> beamTime_parameter::setData</A>(<vtype>int</vtype> m, <vtype>int</vtype> y) 
+<LI><A HREF="beamtimeparameter.html#f30"><vtype>void</vtype> beamTime_parameter::operator=</A>(const <A HREF="beamtimeparameter.html">beamTime_parameter&</A> b) 
+<LI><A HREF="baseparameter.html#f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="baseparameter.html#f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="baseparameter.html#f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="baseparameter.html#f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<LI><A HREF="baseparameter.html#f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="baseparameter.html#f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<LI><A HREF="baseparameter.html#f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">run_parameter::run_parameter</A>(<A HREF="beamtimeparameter.html">beamTime_parameter&</A> parent, <vtype>int</vtype> pn) 
+<BR/><deff>
+Constructor. Sets the parent beam-time and the beam-time number. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">run_parameter::run_parameter</A>(const <A HREF="runparameter.html">run_parameter&</A> r) 
+<BR/><deff>
+Copy constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">run_parameter::run_parameter</A>(<vtype>string</vtype> n = string()) 
+<BR/><deff>
+Default constructor. Sets the name of the run. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> run_parameter::~run_parameter</A>() 
+<BR/><deff>
+Destructor 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>int</vtype> run_parameter::getType</A>() const
+<BR/><deff>
+Returns the run type. A run can be a regular data run or a variety of calibration runs, or else. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> run_parameter::setType</A>(<vtype>int</vtype> t) 
+<BR/><deff>
+Sets the run type. A run can be a regular data run or a variety of calibration runs, or else. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>int</vtype> run_parameter::getParentNumber</A>() const
+<BR/><deff>
+Returns the parenting beam-times number. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>void</vtype> run_parameter::setParentNumber</A>(<vtype>int</vtype> p) 
+<BR/><deff>
+Sets the parenting beam-times number. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="beamtimeparameter.html">beamTime_parameter*</A> <A NAME="f7">run_parameter::getParent</A>() const
+<BR/><deff>
+Returns a pointer to the parenting beam-time. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> run_parameter::setParent</A>(<A HREF="beamtimeparameter.html">beamTime_parameter*</A> p) 
+<BR/><deff>
+Sets the pointer to the parenting beam-time. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>bool</vtype> run_parameter::hasOwnSetup</A>() const
+<BR/><deff>
+Returns true if there is an own detector setup file is defined for this run. Use the setup file of the parenting beam-time else. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> run_parameter::setOwnSetup</A>(<vtype>bool</vtype> s = true) 
+<BR/><deff>
+Sets if there is an own detector setup file defined for this run. Use the setup file of the parenting beam-time else. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>bool</vtype> run_parameter::hasOwnCalibration</A>() const
+<BR/><deff>
+Returns true if there are own calibration files used for this run. If it is false, use the calibration files of the parenting beamtime. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> run_parameter::setOwnCalibration</A>(<vtype>bool</vtype> c = true) 
+<BR/><deff>
+Sets if there is an own calibration defined for this run. Use the calibration of the parenting beamtime else. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>bool</vtype> run_parameter::hasAdditionalCalibration</A>() const
+<BR/><deff>
+Returns true if additionally to the parenting beam-times calibration file the own ones shall be used.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> run_parameter::setAdditionalCalibration</A>(<vtype>bool</vtype> c = true) 
+<BR/><deff>
+Set wether additionally to the calibration files the parenting beam-time provides, the own calibration files shall be used.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>void</vtype> run_parameter::addDetectorCalibration</A>(<vtype>vector&lt;string&gt;</vtype> fn = vector<string>()) 
+<BR/><deff>
+<i>obsolete</i> 
+Adds a detector for calibration along with the files. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>void</vtype> run_parameter::popDetectorCalibration</A>() 
+<BR/><deff>
+<i>obsolete</i> 
+Removes the last calibration detector. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> run_parameter::addTypCalibration</A>(<vtype>vector&lt;string&gt;</vtype> fn = vector<string>()) 
+<BR/><deff>
+<i>obsolete</i> 
+Adds a calibration type. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> run_parameter::popTypCalibration</A>() 
+<BR/><deff>
+<i>obsolete</i> 
+Removes the last calibration type. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>bool</vtype> run_parameter::useOwn</A>(<vtype>int</vtype> d, <vtype>int</vtype> t) const
+<BR/><deff>
+obsolete  
+Returns true if the calibration type <var>t</var> for detector <var>d</var> is defined separately for this run.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> run_parameter::setUseOwn</A>(<vtype>int</vtype> d, <vtype>int</vtype> t, <vtype>bool</vtype> us = true) 
+<BR/><deff>
+obsolete  
+Sets if the calibration type <var>t</var> for detector <var>d</var> is used separately for this run.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>int</vtype> run_parameter::getRunNumber</A>() const
+<BR/><deff>
+Returns the run number. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>void</vtype> run_parameter::setRunNumber</A>(<vtype>int</vtype> rn) 
+<BR/><deff>
+Sets the run number. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>void</vtype> run_parameter::addFile</A>(<vtype>string</vtype> filename, <vtype>int</vtype> type, <vtype>long</vtype> fileEvents = -1) 
+<BR/><deff>
+Adds a file of type <var>type</var> to the list of files.  
+As file types there are actually available:    
+0: for tade files.    
+2: for root files:     
+4: for hit files    
+8: for pixel files    
+16: for cluster files    
+32: for track files    
+64: for reaction files    
+You may add these bits if you have e.g. a root hit file you'll have file type 6.    
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>void</vtype> run_parameter::clearFiles</A>() 
+<BR/><deff>
+Empties the list of files. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f25"><vtype>int</vtype> run_parameter::getNumberOfFiles</A>() const
+<BR/><deff>
+Returns the number of files. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f26"><vtype>string</vtype> run_parameter::getFile</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> file or an empty string if <var>num</var> is non valid.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f27"><vtype>int</vtype> run_parameter::getFileType</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the file type of file <var>num</var>.  
+As file types there are actually available:   
+0: for tade files.   
+2: for root files:    
+4: for hit files   
+8: for pixel files   
+16: for cluster files   
+32: for track files   
+64: for reaction files   
+You may add these bits if you have e.g. a root hit file you'll have file type 6.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f28"><vtype>void</vtype> run_parameter::setFileType</A>(<vtype>int</vtype> num, <vtype>int</vtype> type) 
+<BR/><deff>
+Sets the file-type for file <var>num</var>. ?As file types there are actually available: ?0: for tade files. ?2: for root files:  
+4: for hit files 
+8: for pixel files 
+16: for cluster files 
+32: for track files 
+64: for reaction files 
+You may add these bits if you have e.g. a root hit file you'll have file type 6. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f29"><vtype>long</vtype> run_parameter::getFileEvents</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the number of events stored in the <var>num<sup>th</sup></var> file. This number might be incorrect, since there is no cross-check. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f30"><vtype>void</vtype> run_parameter::setFileEvents</A>(<vtype>int</vtype> num, <vtype>long</vtype> fileEvents) 
+<BR/><deff>
+Sets the number of events in file <var>num</var>. This number is not cross checked. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f31"><vtype>void</vtype> run_parameter::setStartTime</A>(<vtype>int</vtype> year, <vtype>int</vtype> month, <vtype>int</vtype> day, <vtype>int</vtype> hour, <vtype>int</vtype> minute, <vtype>int</vtype> second) 
+<BR/><deff>
+Sets the start time of the run.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f32"><vtype>void</vtype> run_parameter::setStopTime</A>(<vtype>int</vtype> year, <vtype>int</vtype> month, <vtype>int</vtype> day, <vtype>int</vtype> hour, <vtype>int</vtype> minute, <vtype>int</vtype> second) 
+<BR/><deff>
+Sets the stop time of the run.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f33"><vtype>void</vtype> run_parameter::setStartTime</A>(const <vtype>QDateTime&</vtype> time) 
+<BR/><deff>
+Sets the start time of the run.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f34"><vtype>void</vtype> run_parameter::setStopTime</A>(const <vtype>QDateTime&</vtype> time) 
+<BR/><deff>
+Sets the stop time of the run.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f35"><vtype>QDateTime</vtype> run_parameter::getStartTime</A>() const
+<BR/><deff>
+Returns the start time of the run (see standard header file "time.h").
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f36"><vtype>QDateTime</vtype> run_parameter::getStopTime</A>() const
+<BR/><deff>
+Returns the stop time of the run (see standard header file "time.h").
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f37"><vtype>void</vtype> run_parameter::setStartTime</A>(const <vtype>tm&</vtype> time) 
+<BR/><deff>
+Sets the start time of the run.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f38"><vtype>void</vtype> run_parameter::setStopTime</A>(const <vtype>tm&</vtype> time) 
+<BR/><deff>
+Sets the stop time of the run.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f39"><vtype>tm</vtype> run_parameter::getStartTime</A>() const
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f40"><vtype>tm</vtype> run_parameter::getStopTime</A>() const
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f41"><vtype>int</vtype> run_parameter::getTime</A>() const
+<BR/><deff>
+Returns the total time of the run in seconds.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f42"><vtype>void</vtype> run_parameter::operator=</A>(const <A HREF="runparameter.html">run_parameter&</A> r) 
+<BR/><deff>
+Copy operator. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

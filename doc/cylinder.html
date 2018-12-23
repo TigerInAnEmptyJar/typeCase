@@ -1,0 +1,293 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class cylinder</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class cylinder in "cylinder.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="volumeshape.html">volumeShape</A>
+<DT>Constructor
+<LI><A HREF="#c2">cylinder</A>(<A HREF="point3d.html">point3D</A> c = point3D(0,0,0), <A HREF="vector3d.html">vector3D</A> d = vector3D(0,1,0), <vtype>float</vtype> v = 5) 
+<LI><A HREF="#c3">cylinder</A>(const <A HREF="volumeshape.html">volumeShape&</A> s) 
+<LI><A HREF="#c4">cylinder</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~cylinder</A>() 
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f3">getDirection</A>(<vtype>int</vtype> num = 0) const
+<LI>virtual <A HREF="lline3d.html">lLine3D</A> <A HREF="#f4">getLine</A>() const
+<LI><A HREF="#f5"><vtype>float</vtype> getRadius</A>() const
+<LI><A HREF="#f6"><vtype>void</vtype> setLine</A>(const <A HREF="lline3d.html">lLine3D&</A> l) 
+<LI><A HREF="#f7"><vtype>void</vtype> setLine</A>(<A HREF="point3d.html">point3D</A> p, <A HREF="point3d.html">point3D</A> q) 
+<LI><A HREF="#f8"><vtype>void</vtype> setLine</A>(<A HREF="point3d.html">point3D</A> c, <A HREF="vector3d.html">vector3D</A> d) 
+<LI><A HREF="#f9"><vtype>void</vtype> setRadius</A>(<vtype>float</vtype> r) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f11">getEnvelope</A>(<vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="#f15"><vtype>void</vtype> operator=</A>(const <A HREF="volumeshape.html">volumeShape&</A> s) 
+<LI>virtual <A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#f23">description</A>() const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#f24">getDescription</A>() 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f16">getClone</A>() 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="#f17">HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="#f20">Hitting</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="#f18">HitParams</A>(const <A HREF="planeshape.html">planeShape&</A> shape, <A HREF="point3d.html">point3D</A> origin) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f10">getNext</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="point3d.html">point3D</A> <A HREF="#f19">entrance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f12">distance</A>(const <A HREF="sline3d.html">sLine3D&</A> l) 
+<LI>virtual <A HREF="sline3d.html">sLine3D</A> <A HREF="#f13">Normal</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="#f14"><vtype>bool</vtype> cut</A>(const <A HREF="fiber.html">fiber&</A> f) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="#f17">HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="#f21"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<LI>virtual <A HREF="#f22"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="volumeshape.html#f3"><vtype>float</vtype> volumeShape::getMaxDistance</A>() const
+<LI><A HREF="volumeshape.html#f4"><vtype>void</vtype> volumeShape::setMaxDistance</A>(<vtype>float</vtype> value) 
+<LI>virtual <A HREF="volumeshape.html#f5"><vtype>float</vtype> volumeShape::getFlightPathInShape</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="volumeshape.html#f11">volumeShape::getEnvelope</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="volumeshape.html#f12"><vtype>int</vtype> volumeShape::suspect</A>(const <A HREF="sline3d.html">sLine3D&</A> line, <vtype>int</vtype> stackType) 
+<LI><A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="baseshape.html#f2">base_shape::getName</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#f3">base_shape::getCenter</A>() const
+<LI><A HREF="baseshape.html#f4"><vtype>void</vtype> base_shape::setCenter</A>(<A HREF="point3d.html">point3D</A> c) 
+<LI><A HREF="baseparameter.html#f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="baseparameter.html#f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="baseparameter.html#f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="baseparameter.html#f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<LI><A HREF="baseparameter.html#f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="baseparameter.html#f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<LI><A HREF="baseparameter.html#f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+<DT>Protected Variables
+<DD><A HREF="vector3d.html">vector3D</A> <A HREF="#v2">direction</A>
+<DD><vtype>float</vtype> <A HREF="#v3">radius</A>
+<DT>Protected inherrited variables
+<DD><A HREF="vector3d.html">vector3D</A> <A HREF="volumeshape.html#v2">volumeShape::res</A>
+<DD><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#v2">base_shape::center</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">cylinder::cylinder</A>(<A HREF="point3d.html">point3D</A> c = point3D(0,0,0), <A HREF="vector3d.html">vector3D</A> d = vector3D(0,1,0), <vtype>float</vtype> v = 5) 
+<BR/><deff>
+Constructor. Creates a cylinder with center point <var>c</var>, direction vector <var>d</var> and radius <var>v</var>. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">cylinder::cylinder</A>(const <A HREF="volumeshape.html">volumeShape&</A> s) 
+<BR/><deff>
+Copy constructor. Works only if the shape <var>s</var> is a cylinder, spiral or wedge.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">cylinder::cylinder</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<BR/><deff>
+Constructor. Creates a cylinder as defined in the parameter.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="#v2">direction</A>
+<BR/><deff>
+Direction from the center point to one of the circle like end shapes. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">float radius</A>
+<BR/><deff>
+Radius of the cylinder. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> cylinder::~cylinder</A>() 
+<BR/><deff>
+Destructor 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f3">cylinder::getDirection</A>(<vtype>int</vtype> num = 0) const
+<BR/><deff>
+Returns the direction vector from the center to the middle of one of the circle-surfaces. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="lline3d.html">lLine3D</A> <A NAME="f4">cylinder::getLine</A>() const
+<BR/><deff>
+Returns the middle line of the cylinder. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>float</vtype> cylinder::getRadius</A>() const
+<BR/><deff>
+Returns the radius of the cylinder. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>void</vtype> cylinder::setLine</A>(const <A HREF="lline3d.html">lLine3D&</A> l) 
+<BR/><deff>
+Sets the middle line of the cylinder. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> cylinder::setLine</A>(<A HREF="point3d.html">point3D</A> p, <A HREF="point3d.html">point3D</A> q) 
+<BR/><deff>
+Sets the two end points of the cylinder. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> cylinder::setLine</A>(<A HREF="point3d.html">point3D</A> c, <A HREF="vector3d.html">vector3D</A> d) 
+<BR/><deff>
+Sets the center point and the direction of the middle line of the cylinder. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> cylinder::setRadius</A>(<vtype>float</vtype> r) 
+<BR/><deff>
+Sets the radius of the cylinder. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f10">cylinder::getNext</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<BR/><deff>
+Returns a new volume shape, that is shifted, rotated, shrunk, enlarged, or else modified according to the parameter <var>stackType</var>, generating the <var>times<sup>th</sup></var> element in the stack.   
+Take care, that you delete this shape correctly after use (potential memory leak).   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f11">cylinder::getEnvelope</A>(<vtype>int</vtype> stackType) 
+<BR/><deff>
+Returns a volume that envelopes all <var>n</var> shapes generated with stacking type <var>stackType</var>. Take care, that you delete this shape correctly after use (potential memory leak).   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f12">cylinder::distance</A>(const <A HREF="sline3d.html">sLine3D&</A> l) 
+<BR/><deff>
+Returns the distance vector from the straight line to the shape.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="sline3d.html">sLine3D</A> <A NAME="f13">cylinder::Normal</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the hit point of a straigt line with the shape and normal vector of the shape in that point. This is stored in the straight line return value with the Foot-property being the hit point and the Direction-property the normal vector.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>bool</vtype> cylinder::cut</A>(const <A HREF="fiber.html">fiber&</A> f) 
+<BR/><deff>
+Returns true, if the cylinder and the fiber occupy some space commonly.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>void</vtype> cylinder::operator=</A>(const <A HREF="volumeshape.html">volumeShape&</A> s) 
+<BR/><deff>
+Copy operator. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f16">cylinder::getClone</A>() 
+<BR/><deff>
+Creates a new instance of the same cylinder with the same properties. Take care, that you delete this shape correctly after use (potential memory leak).   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f17">cylinder::HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the parameters for a hit of a straight line with the shape. The pattern will be:     
+*  
+index of returndescription   
+0sigma value   
+1,2,3entrance point of line/point on line closest to the volume   
+4,5,6resolution vector   
+7,8,9point on volume closest to the line   
+10,11,12minimum distance of line to volume, points to volume   
+</table>     
+Returns the parameters for a hit of a straight line with the shape. The pattern will be:   
+<table> 
+<tr><th>index of return<th>description   
+<tr><td>0<td>sigma value   
+<tr><td>1,2,3<td>entrance point of line/point on line closest to the volume   
+<tr><td>4,5,6<td>resolution vector   
+<tr><td>7,8,9<td>point on volume closest to the line   
+<tr><td>10,11,12<td>minimum distance of line to volume, points to volume   
+</table>   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f18">cylinder::HitParams</A>(const <A HREF="planeshape.html">planeShape&</A> shape, <A HREF="point3d.html">point3D</A> origin) 
+<BR/><deff>
+Returns the parameters for a hit of a pyramid like shape with the tip at <var>origin</var> and the <var>shape</var> as base with the shape. The pattern will be:      
+<table> 
+<tr><th>index of return<th>description    
+<tr><td>0<td>sigma value    
+<tr><td>1,2,3<td>entrance point of line/point on line closest to the volume    
+<tr><td>4,5,6<td>resolution vector    
+<tr><td>7,8,9<td>point on volume closest to the line    
+<tr><td>10,11,12<td>minimum distance of line to volume, points to volume    
+</table>      
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f19">cylinder::entrance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the entrance point of the straight line into the shape. This point is undefined if the line does not hit the shape.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f20">cylinder::Hitting</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Calculates all characteristics of a hit of a straight line with the volume shape. The return values components will be:   
+<table> 
+<tr><th>index <th>value   
+<tr><td>0, 1, 2 <td>entrance point of line   
+<tr><td>3, 4, 5 <td>distance of line to volume, points to volume   
+<tr><td>6, 7, 8 <td>normal vector to volume in entrance point   
+<tr><td>9 <td>sigma value   
+</table>   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>void</vtype> cylinder::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<BR/><deff>
+This function is used for drawing a shape to a root-TCanvas.    
+It will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>. It is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.    
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>void</vtype> cylinder::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<BR/><deff>
+This function is used for drawing a shape to a root-TCanvas.    
+It will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>.    
+It is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.    
+The parameter <var>ident</var> will return a pointer to the drawn root-primitive to provide the distance-to-primitive functionality.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f23">cylinder::description</A>() const
+<BR/><deff>
+Returns a parameter describing this cylinder.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f24">cylinder::getDescription</A>() 
+<BR/><deff>
+Static method. Returns a parameter with all necessary default variables to create a cylinder. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

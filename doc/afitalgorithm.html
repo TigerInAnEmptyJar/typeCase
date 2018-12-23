@@ -1,0 +1,301 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class AFitAlgorithm</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class AFitAlgorithm in "fitAlgorithm.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="aalgorithm.html">AAlgorithm</A>
+<DT>Constructor
+<LI><A HREF="#c2">AFitAlgorithm</A>(const <vtype>string&</vtype> name = string()) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual const <A HREF="#f9"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f10"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f13"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f14"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f15"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI><A HREF="#f16"><vtype>virtual</vtype> ~AFitAlgorithm</A>() 
+<LI>virtual <A HREF="#f18"><vtype>void</vtype> add</A>(<A HREF="vector.html">Vector&</A> data) 
+<LI>virtual <A HREF="#f19"><vtype>void</vtype> clear</A>() 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="#f20">getResult</A>() 
+<LI>virtual <A HREF="afitalgorithm.html">AFitAlgorithm*</A> <A HREF="#f21">getClone</A>() 
+<LI>virtual <A HREF="#f22"><vtype>float</vtype> fit</A>() 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f11">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f12">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="#f17"><vtype>void*</vtype> process</A>(<vtype>void*</vtype> ptr) 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="aalgorithm.html#f2"><vtype>string</vtype> AAlgorithm::getName</A>() const
+<LI>virtual <A HREF="aalgorithm.html#f4"><vtype>vector&lt;string&gt;</vtype> AAlgorithm::histogramNames</A>() 
+<LI>virtual <A HREF="http://root.cern.ch/html524/src/TH1.html">TH1*</A> <A HREF="aalgorithm.html#f5">AAlgorithm::histogram</A>(<vtype>string</vtype> histoName) 
+<LI>virtual <A HREF="aalgorithm.html#f6"><vtype>vector&lt;string&gt;</vtype> AAlgorithm::treeNames</A>() 
+<LI>virtual <A HREF="http://root.cern.ch/html524/src/TTree.html">TTree*</A> <A HREF="aalgorithm.html#f7">AAlgorithm::tree</A>(<vtype>string</vtype> treename) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI>virtual <A HREF="#l2"><vtype>void</vtype> getAddPoint</A>(<A HREF="vector.html">Vector&</A> data) 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> getAddPoint</A>(<A HREF="vector.html">Vector&</A> data) 
+</UL>
+<DT>Signals
+<DD>new public<ul>
+<LI>virtual <A HREF="#s2"><vtype>void</vtype> fitted</A>(<vtype>float</vtype> chi, <A HREF="vector.html">Vector&</A> result) 
+<LI>virtual <A HREF="#s3"><vtype>void</vtype> fitted</A>(<vtype>float</vtype> chi, <A HREF="vector.html">Vector&</A> result) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">AFitAlgorithm::AFitAlgorithm</A>(const <vtype>string&</vtype> name = string()) 
+<BR/><deff>
+Constructor. Sets the name of the algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> AFitAlgorithm::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime,  
+without requiring native runtime type information (RTTI) support through the C++ compiler. 
+The className() function that returns the class name as a string at runtime,   
+without requiring native runtime type information (RTTI) support through the C++ compiler.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> AFitAlgorithm::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class  
+that inherits a specified class within the QObject inheritance tree.  
+the inherits() function that returns whether an object is an instance of a class   
+that inherits a specified class within the QObject inheritance tree.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">AFitAlgorithm::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no  
+appropriate translated version. The translation context is QObject with comment  
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have  
+a reimplementation of this function with the subclass name as context. 
+Warning: This method is reentrant only if all translators are installed before calling  
+this method. Installing or removing translators while performing translations is not  
+supported. Doing so will probably result in crashes or other undesirable behavior.  
+Returns a translated version of sourceText, or sourceText itself if there is no   
+appropriate translated version. The translation context is QObject with comment   
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have   
+a reimplementation of this function with the subclass name as context.  
+Warning: This method is reentrant only if all translators are installed before calling   
+this method. Installing or removing translators while performing translations is not   
+supported. Doing so will probably result in crashes or other undesirable behavior.   
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there   
+is no appropriate version. It is otherwise identical to tr(sourceText, comment).   
+Warning: This method is reentrant only if all translators are installed before calling   
+this method. Installing or removing translators while performing translations is not   
+supported. Doing so will probably result in crashes or other undesirable behavior.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">AFitAlgorithm::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there  
+is no appropriate version. It is otherwise identical to tr(sourceText, comment).  
+Warning: This method is reentrant only if all translators are installed before calling  
+this method. Installing or removing translators while performing translations is not  
+supported. Doing so will probably result in crashes or other undesirable behavior.  
+  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> AFitAlgorithm::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value. 
+Returns TRUE if the operation was successful; otherwise returns FALSE.  
+Information about all available properties is provided through the metaObject() 
+Sets the value of the object's name property to value.  
+Returns TRUE if the operation was successful; otherwise returns FALSE.   
+Information about all available properties is provided through the metaObject()  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> AFitAlgorithm::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property.  
+If no such property exists, the returned variant is invalid.  
+Information about all available properties are provided through the metaObject().  
+Returns the value of the object's name property.   
+If no such property exists, the returned variant is invalid.   
+Information about all available properties are provided through the metaObject().   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> AFitAlgorithm::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object.  
+A meta object contains information about a class that inherits QObject, e.g. class name, 
+superclass name, properties, signals and slots. Every class that contains the  
+Q_OBJECT macro will also have a meta object.  
+The meta object information is required by the signal/slot connection mechanism  
+and the property system. The functions isA() and inherits() also make use of the meta object.  
+Returns a pointer to the meta object of this object.   
+A meta object contains information about a class that inherits QObject, e.g. class name,  
+superclass name, properties, signals and slots. Every class that contains the   
+Q_OBJECT macro will also have a meta object.   
+The meta object information is required by the signal/slot connection mechanism   
+and the property system. The functions isA() and inherits() also make use of the meta object.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>char*</vtype> AFitAlgorithm::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>bool</vtype> AFitAlgorithm::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f11">AFitAlgorithm::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f12">AFitAlgorithm::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>bool</vtype> AFitAlgorithm::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>QVariant</vtype> AFitAlgorithm::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>QMetaObject*</vtype> AFitAlgorithm::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>virtual</vtype> AFitAlgorithm::~AFitAlgorithm</A>() 
+<BR/><deff>
+Destructor 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void*</vtype> AFitAlgorithm::process</A>(<vtype>void*</vtype> ptr) 
+<BR/><deff>
+Base functionality is defined here. In the analysis class, this method will be called once for every event, so plug in the functionality you want to provide with your algorithm here.   
+<br>For the fit algorithms, this method is not as important as for the other algorithms. But if you call in this method the <a href="#f15">fit</a>-method, you can also use it.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> AFitAlgorithm::add</A>(<A HREF="vector.html">Vector&</A> data) 
+<BR/><deff>
+Adds a new data-point to the fit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> AFitAlgorithm::clear</A>() 
+<BR/><deff>
+Clears the fit. To make a new fit make use of the <a href="#f11">add</a>() method.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f20">AFitAlgorithm::getResult</A>() 
+<BR/><deff>
+Returns a n-dimensional vector containing the result, where n is the number of parameters of the fit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="afitalgorithm.html">AFitAlgorithm*</A> <A NAME="f21">AFitAlgorithm::getClone</A>() 
+<BR/><deff>
+Returns a copy of the fit-algorithm. Note, that a new object is allocated. Take care, that you dispose it correctly after use (potential memory leak). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>float</vtype> AFitAlgorithm::fit</A>() 
+<BR/><deff>
+Main fitting procedure. Performs the fit and returns the chi² value of the fit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> AFitAlgorithm::getAddPoint</A>(<A HREF="vector.html">Vector&</A> data) 
+<BR/><deff>
+A slot defined to add data to the fit so you can make use of the signal-and-slot-mechanism of Qt. With this slot, the calling routine for the fit doesn't have to know the fitting class. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> AFitAlgorithm::getAddPoint</A>(<A HREF="vector.html">Vector&</A> data) 
+<BR/><deff>
+A slot defined to add data to the fit so you can make use of the signal-and-slot-mechanism of Qt. With this slot, the calling routine for the fit doesn't have to know the fitting class. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s2"><vtype>void</vtype> AFitAlgorithm::fitted</A>(<vtype>float</vtype> chi, <A HREF="vector.html">Vector&</A> result) 
+<BR/><deff>
+Signal emitted when a fit is done with the chi² value and the result of the fit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s3"><vtype>void</vtype> AFitAlgorithm::fitted</A>(<vtype>float</vtype> chi, <A HREF="vector.html">Vector&</A> result) 
+<BR/><deff>
+Signal emitted when a fit is done with the chi² value and the result of the fit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

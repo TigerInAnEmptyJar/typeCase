@@ -1,0 +1,434 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class CanvasPWidget</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class CanvasPWidget in "canvaspwidget.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This widget displays and edits the properties of a <a href="http://root.cern.ch/html524/TCanvas.html"> root-canvas</a>.
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget</A>
+<DT>Constructor
+<LI><A HREF="#c2">CanvasPWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<LI><A HREF="#c3">CanvasPWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI>virtual <A HREF="#l2"><vtype>void</vtype> resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> resize</A>(const <vtype>QSize&</vtype> s) 
+<LI>virtual <A HREF="#l4"><vtype>void</vtype> resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<LI>virtual <A HREF="#l5"><vtype>void</vtype> getCanvas</A>(<vtype>TCanvas*</vtype> canv) 
+<LI>virtual <A HREF="#l6"><vtype>void</vtype> OnUpdateClick</A>() 
+<LI>virtual <A HREF="#l7"><vtype>void</vtype> OnApplyClick</A>() 
+<LI>virtual <A HREF="#l8"><vtype>void</vtype> OnHelpClick</A>() 
+<LI>virtual <A HREF="#l9"><vtype>void</vtype> OnPadSelect</A>() 
+<LI>virtual <A HREF="#l10"><vtype>void</vtype> OnClearClick</A>() 
+<LI>virtual <A HREF="#l11"><vtype>void</vtype> OnDivideClick</A>() 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Signals
+<DD>new public<ul>
+<LI><A HREF="#s2"><vtype>void</vtype> helpAsked</A>(const <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString&</A> tmpqstring-1) 
+</UL>
+<DT>Public Variables
+<DD><vtype>QLabel*</vtype> <A HREF="#v2">textLabel1</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v3">textLabel2</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v4">textLabel3</A>
+<DD><vtype>QComboBox*</vtype> <A HREF="#v5">comboBox1</A>
+<DD><vtype>QGroupBox*</vtype> <A HREF="#v6">groupBox2</A>
+<DD><A HREF="attributewidget.html">AttributeWidget*</A> <A HREF="#v7">attributeWidget1</A>
+<DD><vtype>QGroupBox*</vtype> <A HREF="#v8">groupBox3</A>
+<DD><A HREF="attributewidget.html">AttributeWidget*</A> <A HREF="#v9">attributeWidget2</A>
+<DD><vtype>QGroupBox*</vtype> <A HREF="#v10">buttonGroup1</A>
+<DD><vtype>QButtonGroup*</vtype> <A HREF="#v11">buttonGroup1</A>
+<DD><vtype>QCheckBox*</vtype> <A HREF="#v12">checkBox2</A>
+<DD><vtype>QCheckBox*</vtype> <A HREF="#v13">checkBox3</A>
+<DD><vtype>QCheckBox*</vtype> <A HREF="#v14">checkBox1</A>
+<DD><vtype>QGroupBox*</vtype> <A HREF="#v15">groupBox1</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v16">textLabel6</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v17">textLabel7</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v18">lineEdit4</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v19">lineEdit5</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v20">lineEdit6</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v21">lineEdit3</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v22">textLabel4</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v23">textLabel5</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v24">lineEdit1</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v25">lineEdit2</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A HREF="#v26">pushButton2</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A HREF="#v27">pushButton4</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A HREF="#v28">pushButton3</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A HREF="#v29">pushButton1</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A HREF="#v30">pushButton5</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A HREF="#v31">pushButton6</A>
+<DT>Protected Variables
+<DD><vtype>TCanvas*</vtype> <A HREF="#v32">canvas</A>
+<DD><vtype>vector&lt;TPad*&gt;</vtype> <A HREF="#v33">subPads</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">CanvasPWidget::CanvasPWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">CanvasPWidget::CanvasPWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<BR/><deff>
+Constructor. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">QLabel* textLabel1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">QLabel* textLabel2</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">QLabel* textLabel3</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">QComboBox* comboBox1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v6">QGroupBox* groupBox2</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="attributewidget.html">AttributeWidget*</A> <A NAME="#v7">attributeWidget1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v8">QGroupBox* groupBox3</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="attributewidget.html">AttributeWidget*</A> <A NAME="#v9">attributeWidget2</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v10">QGroupBox* buttonGroup1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v11">QButtonGroup* buttonGroup1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v12">QCheckBox* checkBox2</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v13">QCheckBox* checkBox3</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v14">QCheckBox* checkBox1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v15">QGroupBox* groupBox1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v16">QLabel* textLabel6</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v17">QLabel* textLabel7</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v18">lineEdit4</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v19">lineEdit5</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v20">lineEdit6</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v21">lineEdit3</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v22">QLabel* textLabel4</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v23">QLabel* textLabel5</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v24">lineEdit1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v25">lineEdit2</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A NAME="#v26">pushButton2</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A NAME="#v27">pushButton4</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A NAME="#v28">pushButton3</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A NAME="#v29">pushButton1</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A NAME="#v30">pushButton5</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A NAME="#v31">pushButton6</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v32">TCanvas* canvas</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v33">vector<TPad*> subPads</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> CanvasPWidget::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> CanvasPWidget::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">CanvasPWidget::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">CanvasPWidget::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> CanvasPWidget::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> CanvasPWidget::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> CanvasPWidget::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> CanvasPWidget::resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<BR/><deff>
+Resize event, when the widget has been resized.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> CanvasPWidget::resize</A>(const <vtype>QSize&</vtype> s) 
+<BR/><deff>
+Resize the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> CanvasPWidget::resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<BR/><deff>
+Resize the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> CanvasPWidget::getCanvas</A>(<vtype>TCanvas*</vtype> canv) 
+<BR/><deff>
+Sets the current canvas and copies its properties to the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> CanvasPWidget::OnUpdateClick</A>() 
+<BR/><deff>
+Updates the properties.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> CanvasPWidget::OnApplyClick</A>() 
+<BR/><deff>
+Appies the changes made in the widget to the current canvas/pad.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> CanvasPWidget::OnHelpClick</A>() 
+<BR/><deff>
+Emits a <a href="#s2">helpAsked()</a> signal.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l9"><vtype>void</vtype> CanvasPWidget::OnPadSelect</A>() 
+<BR/><deff>
+Displays the properties of the selected pad.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l10"><vtype>void</vtype> CanvasPWidget::OnClearClick</A>() 
+<BR/><deff>
+Clears the canvas.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l11"><vtype>void</vtype> CanvasPWidget::OnDivideClick</A>() 
+<BR/><deff>
+Opens a <a href="dividedialog.html">DivideDialog</a> and divides the canvas according to the outcome of the dialog.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l12"><vtype>void</vtype> CanvasPWidget::languageChange</A>() 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s2"><vtype>void</vtype> CanvasPWidget::helpAsked</A>(const <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString&</A> tmpqstring-1) 
+<BR/><deff>
+Asks for a file <var>tmpsqstring-1</var> to be displayed by some help-widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

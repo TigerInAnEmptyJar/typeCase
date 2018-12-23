@@ -1,0 +1,33 @@
+#include "setup.h"
+#include "event.h"
+#include "algorithm.h"
+#include <TGenPhaseSpace.h>
+#include <TGraph.h>
+#include <TF1.h>
+#include "geometry.h"
+using namespace std;
+class AGenerateEvents:public AAlgorithm
+{
+ private:
+  momentum4D m1,m2;
+  vector3D betaCM;
+  int numberOfParticles;
+  int *particleIDs; //[numberOfParticles]
+  TTrack**tracks;//!
+  int&numberOfTracks;//!
+  int & eventNumber;//!
+  TGenPhaseSpace generator;
+  TGraph *graph;
+  TFormula *formula;
+  TF1 *function;
+  int *parameters;//[nParameters]
+  int nParameters;
+  double maxWeight;
+  bool useSAID;
+  bool& validIn;//!
+  float modifyWeight(momentum4D *parts);
+ public:
+  AGenerateEvents(TTrack **tracksIn, int &numberOfTracksIn, int &eventNumberIn, TSetup &setupIn, vector<int> IDs, string functionIn, vector<int> parameter, bool useSAIDIN,bool &validInIn);
+  virtual ~AGenerateEvents();
+  virtual void* process(void*);
+};

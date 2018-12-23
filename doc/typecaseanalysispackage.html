@@ -1,0 +1,57 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>The typeCase Analysis package</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">The typeCase analysis package</A></H1>
+<HR>
+<table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+<br>
+<table><tr><td>
+The typeCase analysis package is a versatile analysis tool for the use in
+nuclear physics. It can analyse all event based data from any detector-system.
+Its main features are
+<ol>
+<li>Flexibility both in detector-setup and analysis-method
+<li>Low divergency
+<li>Easy to use
+<li>Easy to adapt
+<li>Easy to extend
+</ol>
+To meet these points a simple frame-work was defined separating the data from
+the generation algorithms. The algorithms are allocated dynamically according
+to description passed to the main analysis tool. Also the detector-setup is
+defined just prior to the analysis by loading detector descriptions from
+file. Composed objects like pixel, cluster, tracks are generated using the
+algorithms. Data-IO is possible at any position/stage of the analysis. Event
+pattern can be separately written, reaction-recognition performed.
+</td><td><img src="pictures/geometry.jpg" width=300></td></tr></table>
+<br>
+To make the program very easy to use and even useful in some online analysis, a
+Graphical User Interface was designed helping the user to define the necessary
+parameters, like setup, shapes, materials, data-basis, calibration, algorithms,
+etc. 
+<br>
+Also extension of the current frame-work is made easy using the install-wizards
+for algorithms and shapes.
+<br>For the more advanced user there is also the possibility to use a version
+of the analysis-program in a command-line-version without any graphics poping up.
+<br>See the documentation of the <a href="classes.html">classes</a> of the
+frame-work and the description of the individual widgets for the <a href="typecasewidget.html">Graphical User
+Interface</a>. 
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

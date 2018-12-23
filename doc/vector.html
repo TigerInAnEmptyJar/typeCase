@@ -1,0 +1,190 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class Vector</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class Vector in "geometry.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="point.html">point</A>
+<DT>Constructor
+<LI><A HREF="#c2">Vector</A>(<vtype>int</vtype> dim = 0) 
+<LI><A HREF="#c3">Vector</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="#c4">Vector</A>(const <A HREF="point.html">point&</A> p) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual <A HREF="#f2"><vtype>void</vtype> normalize</A>() 
+<LI><A HREF="#f3"><vtype>void</vtype> transpose</A>() 
+<LI><A HREF="#f4"><vtype>int</vtype> isLine</A>() const
+<LI><A HREF="#f5"><vtype>int</vtype> isColumn</A>() const
+<LI>virtual <A HREF="#f6"><vtype>double</vtype> length</A>() const
+<LI><A HREF="#f8"><vtype>void</vtype> operator=</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f9">operator+</A>(const <A HREF="vector.html">Vector&</A> w) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f10">operator-</A>(const <A HREF="vector.html">Vector&</A> w) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f11">operator*</A>(<vtype>double</vtype> f) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f12">operator%</A>(const <A HREF="vector.html">Vector&</A> w) const
+<LI><A HREF="#f13"><vtype>double</vtype> operator*</A>(const <A HREF="vector.html">Vector&</A> w) const
+<LI><A HREF="#f14"><vtype>int</vtype> operator==</A>(const <A HREF="vector.html">Vector&</A> v) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f15">operator!</A>() 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI><A HREF="#f7"><vtype>void</vtype> operator=</A>(const <A HREF="point.html">point&</A> p) 
+<LI>virtual <A HREF="#f16"><vtype>string</vtype> toString</A>() const
+<LI>virtual <A HREF="#f17"><vtype>void</vtype> Undefined</A>() 
+<LI>virtual <A HREF="#f16"><vtype>string</vtype> toString</A>() const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="point.html#f3"><vtype>void</vtype> point::reDimension</A>(<vtype>int</vtype> newDim) 
+<LI><A HREF="point.html#f4"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> values[]) 
+<LI><A HREF="point.html#f5"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> f1 = 0, <vtype>double</vtype> f2 = 0, <vtype>double</vtype> f3 = 0, <vtype>double</vtype> f4 = 0, <vtype>double</vtype> f5 = 0, <vtype>double</vtype> f6 = 0, <vtype>double</vtype> f7 = 0, <vtype>double</vtype> f8 = 0, <vtype>double</vtype> f9 = 0, <vtype>double</vtype> f10 = 0, <vtype>double</vtype> f11 = 0, <vtype>double</vtype> f12 = 0, <vtype>double</vtype> f13 = 0, <vtype>double</vtype> f14 = 0, <vtype>double</vtype> f15 = 0, <vtype>double</vtype> f16 = 0, <vtype>double</vtype> f17 = 0, <vtype>double</vtype> f18 = 0, <vtype>double</vtype> f19 = 0, <vtype>double</vtype> f20 = 0) 
+<LI>virtual <A HREF="point.html#f6"><vtype>void</vtype> point::setValue</A>(<vtype>int</vtype> pos, <vtype>double</vtype> valueIn) 
+<LI>virtual <A HREF="point.html#f7"><vtype>void</vtype> point::Zero</A>() 
+<LI>virtual <A HREF="point.html#f8"><vtype>double</vtype> point::getValue</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="point.html#f9"><vtype>int</vtype> point::getDimension</A>() const
+<LI>virtual <A HREF="point.html#f10"><vtype>geomState</vtype> point::getState</A>() const
+<LI><A HREF="vector.html">Vector</A> <A HREF="point.html#f12">point::operator-</A>(const <A HREF="point.html">point&</A> q) 
+<LI><A HREF="point.html">point</A> <A HREF="point.html#f13">point::operator-</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="point.html">point</A> <A HREF="point.html#f14">point::operator+</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="point.html#f15"><vtype>int</vtype> point::operator==</A>(const <A HREF="point.html">point&</A> p) 
+<LI>virtual <A HREF="point.html#f16"><vtype>double</vtype> point::operator[]</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+</UL>
+<DT>Protected inherrited variables
+<DD><vtype>int</vtype> <A HREF="point.html#v2">point::dimension</A>
+<DD><vtype>int</vtype> <A HREF="point.html#v3">point::infinityPos</A>
+<DD><vtype>double</vtype> <A HREF="point.html#v4">point::v[20]</A>
+<DD><vtype>double*</vtype> <A HREF="point.html#v5">point::value</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">Vector::Vector</A>(<vtype>int</vtype> dim = 0) 
+<BR/><deff>
+Constructor. Sets the dimension of the vector (default =0).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">Vector::Vector</A>(const <A HREF="vector.html">Vector&</A> v) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">Vector::Vector</A>(const <A HREF="point.html">point&</A> p) 
+<BR/><deff>
+Copy constructor from point.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>void</vtype> Vector::normalize</A>() 
+<BR/><deff>
+Normalizes the vector. All components in cartesian representation are devided by the length of the vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>void</vtype> Vector::transpose</A>() 
+<BR/><deff>
+Transposes the vector. Converts a line vector into a column vector and vice versa.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>int</vtype> Vector::isLine</A>() const
+<BR/><deff>
+Returns true if this vector is a line vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>int</vtype> Vector::isColumn</A>() const
+<BR/><deff>
+Returns true if this vector is a column vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>double</vtype> Vector::length</A>() const
+<BR/><deff>
+Returns the length of the vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> Vector::operator=</A>(const <A HREF="point.html">point&</A> p) 
+<BR/><deff>
+Copy operator. Used is the point vector of the origin to point <var>p</var>. Works only if the dimensions of this vector and <var>p</var> are the same.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> Vector::operator=</A>(const <A HREF="vector.html">Vector&</A> v) 
+<BR/><deff>
+Copy operator. Works only if the dimensions of this vector and <var>v</var> are the same.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f9">Vector::operator+</A>(const <A HREF="vector.html">Vector&</A> w) const
+<BR/><deff>
+Addition operator. Returns the sum of this vector and vector <var>w</var>. Works only if the dimensions of this vector and <var>w</var> are the same.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f10">Vector::operator-</A>(const <A HREF="vector.html">Vector&</A> w) const
+<BR/><deff>
+Subtraction operator. Subtracts <var>w</var> from this vector and returns the result. This vector remains unchanged. Works only if the dimensions of this vector and <var>w</var> are the same.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f11">Vector::operator*</A>(<vtype>double</vtype> f) const
+<BR/><deff>
+Multiplication operator. Multiplies this vector with <var>f</var> and returns the result. This vector remains unchanged.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f12">Vector::operator%</A>(const <A HREF="vector.html">Vector&</A> w) const
+<BR/><deff>
+A multiplication operator. The cartesic component of the return vector at position <i>i</i> is the product of the component of this vector at position <i>i</i> and the one of vector <var>w</var> at position <i>i</i>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>double</vtype> Vector::operator*</A>(const <A HREF="vector.html">Vector&</A> w) const
+<BR/><deff>
+Multiplication operator. Returns the scalar product of vector <var>w</var> wit this vector. Works only if the dimensions of this vector and <var>w</var> are the same.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>int</vtype> Vector::operator==</A>(const <A HREF="vector.html">Vector&</A> v) const
+<BR/><deff>
+Comparison operator. Returns true if the dimension of this vector is the same as of vector <var>v</var> a if the components are the same.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f15">Vector::operator!</A>() 
+<BR/><deff>
+Transposition operator. Converts a line vector into a column vector and vice versa and returns the result. This vector remains unchanged.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>string</vtype> Vector::toString</A>() const
+<BR/><deff>
+Returns a string representation of the vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> Vector::Undefined</A>() 
+<BR/><deff>
+Sets the state of the object to _undefined_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

@@ -1,0 +1,2 @@
+#define USEQT
+//#define USEROOT

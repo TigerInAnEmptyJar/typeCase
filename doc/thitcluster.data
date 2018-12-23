@@ -1,0 +1,131 @@
+THitCluster
+thitcluster.html
+/users/data12/pion/ehrhardt/tofPack2/container/include/hitCluster.h
+CTHitCluster
+-1 THitCluster
+O#c2
+PmaxElements
+0 int
+V50
+=
+DDefault constructor. Sets the maximal number of hits for this cluster.
+=
+CTHitCluster
+-1 THitCluster
+O#c3
+Pcls
+-1 THitCluster&
+Sconst
+=
+DCopy constructor.
+=
+CTHitCluster
+-1 THitCluster
+O#c4
+Pinput
+101 TCalibHit&
+Ttcalibhit.html
+=
+PmaxElements
+0 int
+V50
+=
+DConstructor. Sets the maximum number of hits in this cluster and initializes the base hit.
+=
+gnumElem
+0 int
+Sconst
+O#v2
+D
+=
+gaccElem
+0 int
+O#v3
+D
+=
+ghits
+101 TCalibHit**
+O#v4
+Ttcalibhit.html
+D
+=
+F~THitCluster
+-1 virtual
+O#f2
+DDestructor
+=
+FgetNumberOfHits
+0 int
+O#f3
+Lconst
+DReturns the current number of hits in this hit-cluster.
+=
+FgetMaxNumberOfHits
+0 int
+O#f4
+Lconst
+DReturns the maximum number of hits for this hit-cluster.
+=
+FgetHit
+101 TCalibHit*
+O#f5
+Ttcalibhit.html
+Lconst
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> hit of the cluster (or NULL if <var>num</var> is invalid).
+=
+FaddHit
+7 void
+O#f6
+Ph
+101 TCalibHit*
+Ttcalibhit.html
+=
+DAdds a hit to the hit-cluster. If it is already contained in the hit-cluster, it is not added a second time.
+=
+FresetHits
+7 void
+O#f7
+DResets the hits in this hit cluster. But not the inherrited properties.
+=
+Freset
+7 void
+Svirtual
+O#f8
+DResets the hit-cluster.
+=
+Foperator=
+-1 THitCluster&
+O#f9
+Phc
+-1 THitCluster&
+Sconst
+=
+DCopy operator.
+=
+Foperator=
+-1 THitCluster&
+O#f10
+Phc
+101 TCalibHit&
+Sconst
+Ttcalibhit.html
+=
+DCopy operator. Copies the base properties of <var>hc</var>, the number of hits in this cluster is 1.
+=
+Foperator+=
+7 void
+O#f11
+Phc
+101 TCalibHit&
+Ttcalibhit.html
+=
+DAddition operator. Adds a hit to the hit-cluster. If this hit is already contained, it is not added a second time.
+=
+D
+S0 1 TCalibHit
+tcalibhit.html
+TCalibHit
+=

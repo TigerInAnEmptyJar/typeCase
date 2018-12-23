@@ -1,0 +1,227 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class sLine3D</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class sLine3D in "geometry.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This class describes a straight line in 3 dimensional space.
+<DL>
+<DT>Superclass
+<DD><A HREF="geomobj.html">geomObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">sLine3D</A>() 
+<LI><A HREF="#c3">sLine3D</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="point3d.html">point3D&</A> q) 
+<LI><A HREF="#c4">sLine3D</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="vector3d.html">vector3D&</A> v) 
+<LI><A HREF="#c5">sLine3D</A>(const <A HREF="sline3d.html">sLine3D&</A> l) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f2">Foot</A>() const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f3">Direction</A>() const
+<LI><A HREF="#f4"><vtype>void</vtype> shiftFoot</A>(<vtype>double</vtype> t) 
+<LI><A HREF="#f5"><vtype>void</vtype> newLine</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="vector3d.html">vector3D&</A> v) 
+<LI><A HREF="#f6"><vtype>int</vtype> isIn</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<LI><A HREF="#f7"><vtype>rep3D</vtype> getRep</A>() const
+<LI><A HREF="#f8"><vtype>void</vtype> setRep</A>(<vtype>rep3D</vtype> r) 
+<LI><A HREF="#f9"><vtype>int</vtype> isLine</A>() const
+<LI><A HREF="#f10"><vtype>int</vtype> isColumn</A>() const
+<LI><A HREF="#f11"><vtype>void</vtype> transpose</A>() 
+<LI><A HREF="#f12"><vtype>geomState</vtype> getState</A>() const
+<LI><A HREF="#f13"><vtype>int</vtype> getDimension</A>() const
+<LI><A HREF="#f14"><vtype>void</vtype> Zero</A>() 
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f15">operator-</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f16">operator&&</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<LI><A HREF="#f17"><vtype>double</vtype> operator&</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<LI><A HREF="lline3d.html">lLine3D</A> <A HREF="#f18">operator-</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<LI><A HREF="lline3d.html">lLine3D</A> <A HREF="#f19">operator-</A>(const <A HREF="lline3d.html">lLine3D&</A> l) const
+<LI><A HREF="#f20"><vtype>void</vtype> operator=</A>(const <A HREF="sline3d.html">sLine3D&</A> l) 
+<LI>virtual <A HREF="#f21"><vtype>string</vtype> toString</A>(<vtype>int</vtype> pt = -1) const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+<LI>virtual <A HREF="geomobj.html#f8"><vtype>string</vtype> geomObject::toString</A>() const
+</UL>
+<DD>new protected<ul>
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">sLine3D::sLine3D</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">sLine3D::sLine3D</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="point3d.html">point3D&</A> q) 
+<BR/><deff>
+Constructor. Sets the footing point to <var>p</var> and the direction to <var>p-q</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">sLine3D::sLine3D</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="vector3d.html">vector3D&</A> v) 
+<BR/><deff>
+Constructor. Sets the footing point and the direction of the line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">sLine3D::sLine3D</A>(const <A HREF="sline3d.html">sLine3D&</A> l) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f2">sLine3D::Foot</A>() const
+<BR/><deff>
+Returns the footing point of the line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f3">sLine3D::Direction</A>() const
+<BR/><deff>
+Returns the direction of the line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> sLine3D::shiftFoot</A>(<vtype>double</vtype> t) 
+<BR/><deff>
+Shifts the footing point along the line: f<sub>new</sub> = f<sub>old</sub> + <var>t</var>*v
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> sLine3D::newLine</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="vector3d.html">vector3D&</A> v) 
+<BR/><deff>
+Assign new properties to the line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> sLine3D::isIn</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<BR/><deff>
+Returns true if the distance of the point <var>p</var> to the line is smaller than __prec (1e-6).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>rep3D</vtype> sLine3D::getRep</A>() const
+<BR/><deff>
+Returns the line's representation.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> sLine3D::setRep</A>(<vtype>rep3D</vtype> r) 
+<BR/><deff>
+Set the representation of the line, this can be eigther _cartesic3_, _cylindric_ or _spheric_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>int</vtype> sLine3D::isLine</A>() const
+<BR/><deff>
+Returns true if the direction vector is a line vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>int</vtype> sLine3D::isColumn</A>() const
+<BR/><deff>
+Returns true if the direction vector is a column vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> sLine3D::transpose</A>() 
+<BR/><deff>
+Transposes the direction vector. A line vector will lead to a column vector, a column vector to a line vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>geomState</vtype> sLine3D::getState</A>() const
+<BR/><deff>
+Returns the state of the geometrical object. This can be _regular_, _undefined_, _infinite_ or _zero_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>int</vtype> sLine3D::getDimension</A>() const
+<BR/><deff>
+Returns the line's dimension which is 3.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> sLine3D::Zero</A>() 
+<BR/><deff>
+Sets the state of the object to _zero_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f15">sLine3D::operator-</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<BR/><deff>
+Returns the distance vector of <var>p</var> to this line. Vector points to line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f16">sLine3D::operator&&</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<BR/><deff>
+Returns the intersection point of this line with <<var>l</var>, if it exists.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>double</vtype> sLine3D::operator&</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<BR/><deff>
+Returns the minimal distance between this line and <var>l</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="lline3d.html">lLine3D</A> <A NAME="f18">sLine3D::operator-</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<BR/><deff>
+Returns the line of closest approach between this line and <var>l</var>. The first end point will lie on this line the second one on <var>l</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="lline3d.html">lLine3D</A> <A NAME="f19">sLine3D::operator-</A>(const <A HREF="lline3d.html">lLine3D&</A> l) const
+<BR/><deff>
+Returns the line of closest approach between this line and <var>l</var>. The first end point will lie on this line the second one on <var>l</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> sLine3D::operator=</A>(const <A HREF="sline3d.html">sLine3D&</A> l) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>string</vtype> sLine3D::toString</A>(<vtype>int</vtype> pt = -1) const
+<BR/><deff>
+Returns a string representation of the line. Depending on <var>pt</var> this can be eigther _cartesic3_, _cylindric_, _spheric_ or in the lines own representation (<var>pt</var>=-1, default). There are two representations possible: one for the vector and one for the point: <var>pt</var>=4*p<sub>point</sub>+p<sub>vector</sub>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>void</vtype> sLine3D::Infinite</A>() 
+<BR/><deff>
+Sets the state of the object to _infinite_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>void</vtype> sLine3D::Undefined</A>() 
+<BR/><deff>
+Sets the state of the object to _undefined_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>void</vtype> sLine3D::Regular</A>() 
+<BR/><deff>
+Sets the state of the object to _regular_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

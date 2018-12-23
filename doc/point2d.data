@@ -1,0 +1,274 @@
+point2D
+point2d.html
+/users/data12/pion/ehrhardt/tofPack2/include/geometry.h
+Cpoint2D
+14 point2D
+O#c2
+DDefault constructor.
+=
+Cpoint2D
+14 point2D
+O#c3
+Pp
+12 point&
+Sconst
+Tpoint.html
+=
+DCopy constructor. Works only if the dimension of point <var>p</var> is 2.
+=
+Cpoint2D
+14 point2D
+O#c4
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+DCopy constructor.
+=
+Cpoint2D
+14 point2D
+O#c5
+Px
+3 double
+=
+Py
+3 double
+=
+DConstructor. Defines a 2D-point with the cartesian coordinates <var>x</var> and <var>y</var>.
+=
+vf_phi
+3 double
+O#v2
+Dphi-coordinate.
+=
+vf_r
+3 double
+O#v3
+Dr-coordinate: distance to origin.
+=
+vvalue1
+3 double
+O#v4
+Dx-coordinate.
+=
+vvalue2
+3 double
+O#v5
+Dy-coordinate.
+=
+grepre
+-1 repTD
+O#v6
+D
+=
+FsetValues
+7 void
+Svirtual
+O#f2
+Px
+3 double
+=
+Py
+3 double
+=
+DSets the components in cartesic coordinates.
+=
+FsetValue
+7 void
+Svirtual
+O#f3
+Ppos
+0 int
+=
+PvalueIn
+3 double
+=
+DSetter sets the <var>pos<sup>th</sup></var> component in cartesic coordinates to <var>valueIn</var>
+=
+FX
+3 double
+Svirtual
+O#f4
+Lconst
+DReturns the x-component in cartesic coordinates.
+=
+FY
+3 double
+Svirtual
+O#f5
+Lconst
+DReturns the y-component in cartesic coordinates. 
+=
+FR
+3 double
+Svirtual
+O#f6
+Lconst
+DReturns the points distance to the origin.
+=
+FPhi
+3 double
+Svirtual
+O#f7
+Lconst
+DReturns the phi-component in polar coordinates.
+=
+Fx
+3 double
+Svirtual
+O#f8
+Lconst
+DReturns the x-component in cartesic coordinates.
+=
+Fy
+3 double
+Svirtual
+O#f9
+Lconst
+DReturns the y-component in cartesic coordinates.
+=
+Fr
+3 double
+Svirtual
+O#f10
+Lconst
+DReturns the distance of the point to the origin.
+=
+Fphi
+3 double
+Svirtual
+O#f11
+Lconst
+DReturn the phi-component in polar coordinates.
+=
+FisCartesic
+0 int
+Svirtual
+O#f12
+Lconst
+DReturns true if the points representation is _cartesic_.
+=
+FtoggleRep
+7 void
+Svirtual
+O#f13
+DSwitches the points representation fron _cartesic_ to _polar_, or vice versa.
+=
+FgetState
+-1 geomState
+Svirtual
+O#f14
+Lconst
+DReturns the state of the geometrical object. This can be _regular_, _undefined_, _infinite_ or _zero_. 
+=
+FgetDimension
+0 int
+Svirtual
+O#f15
+Lconst
+DReturns the dimension of the point which is 2.
+=
+FgetValue
+3 double
+Svirtual
+O#f16
+Lconst
+Ppos
+0 int
+=
+DReturns the <var>pos<sup>th</sup></var> component in cartesic coordinates.
+=
+Foperator=
+7 void
+O#f17
+Pp
+12 point&
+Sconst
+Tpoint.html
+=
+DCopy operator. Works only if <var>p</var> is two-dimensional.
+=
+Foperator=
+7 void
+O#f18
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+DCopy operator.
+=
+Foperator-
+15 vector2D
+O#f19
+Tvector2d.html
+Lconst
+Pq
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+DSubtraction operator. Returns the vector to come from point <var>q</var> to this point.
+=
+Foperator-
+14 point2D
+O#f20
+Tpoint2d.html
+Lconst
+Pv
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DSubtraction operator. Returns a point that is shifted by minus <var>v</var> from this point.
+=
+Foperator+
+14 point2D
+O#f21
+Tpoint2d.html
+Lconst
+Pv
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DAddition operator. Returns a point that is shifted by vector <var>v</var> from this point.
+=
+Foperator[]
+3 double
+Svirtual
+O#f22
+Lconst
+Ppos
+0 int
+=
+DAccess operator. Returns the <var>pos<sup>th</sup></var> component in cartesic coordinates.
+=
+Foperator==
+0 int
+O#f23
+Lconst
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+DComparison operator. Returns true if this point and <var>p</var> refer to the same point.
+=
+FtoString
+-1 string
+Svirtual
+O#f24
+Lconst
+Ppt
+0 int
+V-1
+=
+DReturns a string representation of the point. Depending on <var>pt</var> the representation is eigther in cartesic coordinates (_cartesic_) or in polar coordinates (_polar_). if <var>pt</var> is -1, the points own representation is used.
+=
+DPoint in 2 dimensional space.
+S0 1 point
+point.html
+point
+=

@@ -1,0 +1,214 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class CommonCalibrationParser</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class CommonCalibrationParser in "CommonCalibrationParser.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Constructor
+<LI><A HREF="#c2">CommonCalibrationParser</A>(<vtype>int</vtype> nE, <vtype>int</vtype> ID) 
+<LI><A HREF="#c3">CommonCalibrationParser</A>() 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~CommonCalibrationParser</A>() 
+<LI><A HREF="#f3"><vtype>bool</vtype> isValid</A>() const
+<LI><A HREF="#f4"><vtype>bool</vtype> getFromFile</A>(<vtype>ifstream&</vtype> input) 
+<LI><A HREF="#f5"><vtype>int</vtype> getNumParameters</A>() const
+<LI><A HREF="#f6"><vtype>int</vtype> getNumElements</A>() const
+<LI><A HREF="#f7"><vtype>int</vtype> getDetector</A>() const
+<LI><A HREF="#f8"><vtype>int</vtype> getParamID</A>() const
+<LI><A HREF="#f9"><vtype>int</vtype> getRange</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f10"><vtype>float</vtype> getParameter</A>(<vtype>int</vtype> element, <vtype>int</vtype> num) const
+<LI><A HREF="#f11"><vtype>void</vtype> setParameter</A>(<vtype>int</vtype> element, <vtype>int</vtype> num, <vtype>float</vtype> value) 
+<LI><A HREF="#f12"><vtype>void</vtype> setRange</A>(<vtype>int</vtype> num, <vtype>int</vtype> value) 
+<LI><A HREF="#f13"><vtype>void</vtype> setRanges</A>(<vtype>int</vtype> fromRun, <vtype>int</vtype> toRun, <vtype>int</vtype> fromEvent = 0, <vtype>int</vtype> toEvent = 9999999) 
+<LI><A HREF="#f14"><vtype>void</vtype> setParamID</A>(<vtype>int</vtype> value) 
+<LI><A HREF="#f15"><vtype>void</vtype> setNumParamsElements</A>(<vtype>int</vtype> elements, <vtype>int</vtype> params) 
+<LI><A HREF="#f16"><vtype>void</vtype> setDetID</A>(<vtype>int</vtype> value) 
+<LI><A HREF="#f17"><vtype>void</vtype> setValid</A>(<vtype>bool</vtype> value = true) 
+<LI><A HREF="#f18"><vtype>bool</vtype> operator==</A>(const <A HREF="commoncalibrationparser.html">CommonCalibrationParser&</A> pars) const
+<LI><A HREF="#f19"><vtype>void</vtype> write</A>(<vtype>ostream&</vtype> output, const <vtype>string&</vtype> author, const <vtype>string&</vtype> beamTime) 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="#f20"><vtype>int</vtype> getNumberOfCalibrationsInFile</A>(<vtype>string</vtype> filename) 
+<LI>static <A HREF="#f21"><vtype>int</vtype> getNumberOfCalibrationsInFile</A>(<vtype>string</vtype> filename, <vtype>int</vtype> detID) 
+<LI>static <A HREF="#f22"><vtype>int</vtype> getNumberOfCalibrationsInFile</A>(<vtype>string</vtype> filename, <vtype>int</vtype> detID, <vtype>int</vtype> pID) 
+<LI>static <A HREF="#f23"><vtype>int</vtype> getCalibrationTypesInFile</A>(<vtype>string</vtype> filename, <vtype>vector&lt;int&gt;&</vtype> pIDs, <vtype>int</vtype> detID) 
+<LI>static <A HREF="#f24"><vtype>int</vtype> getCalibrationTypesInFile</A>(<vtype>string</vtype> filename, <vtype>vector&lt;int&gt;&</vtype> pIDs, <vtype>vector&lt;int&gt;&</vtype> dets) 
+<LI>static <A HREF="#f25"><vtype>int</vtype> getFileContent</A>(<vtype>string</vtype> filename, <vtype>vector&lt;CommonCalibrationParser*&gt;&</vtype> content) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">CommonCalibrationParser::CommonCalibrationParser</A>(<vtype>int</vtype> nE, <vtype>int</vtype> ID) 
+<BR/><deff>
+Constructor. Sets the detector ID and the number of elements, the detector has.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">CommonCalibrationParser::CommonCalibrationParser</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">CommonCalibrationParser::~CommonCalibrationParser</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> CommonCalibrationParser::isValid</A>() const
+<BR/><deff>
+Returns true if the calibration is valid.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>bool</vtype> CommonCalibrationParser::getFromFile</A>(<vtype>ifstream&</vtype> input) 
+<BR/><deff>
+Reads a calibration from an input file stream and returns true if this operation was sucessful.
+This method is obsolete, use <a href="#f24">getFileContent()</a> instread.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>int</vtype> CommonCalibrationParser::getNumParameters</A>() const
+<BR/><deff>
+Returns the number of parameters defined for each element.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> CommonCalibrationParser::getNumElements</A>() const
+<BR/><deff>
+Returns the number of elements of the detector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>int</vtype> CommonCalibrationParser::getDetector</A>() const
+<BR/><deff>
+Returns the detector ID.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>int</vtype> CommonCalibrationParser::getParamID</A>() const
+<BR/><deff>
+Returns the ID of the calibration.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>int</vtype> CommonCalibrationParser::getRange</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the valid range of calibration. For <var>num</var> is 0 or 1, it is the beginning and ending event number, for <var>num</var> 2 or 3, it is the beginning and ending run number.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>float</vtype> CommonCalibrationParser::getParameter</A>(<vtype>int</vtype> element, <vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> parameter of some <var>element</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> CommonCalibrationParser::setParameter</A>(<vtype>int</vtype> element, <vtype>int</vtype> num, <vtype>float</vtype> value) 
+<BR/><deff>
+Set the <var>num<sup>th</sup></var> parameter for a specific <var>element</var> to <var>value</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> CommonCalibrationParser::setRange</A>(<vtype>int</vtype> num, <vtype>int</vtype> value) 
+<BR/><deff>
+Sets the valid range of calibration. For <var>num</var> is 0 or 1, it is the beginning and ending event number, for <var>num</var> 2 or 3, it is the beginning and ending run number.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> CommonCalibrationParser::setRanges</A>(<vtype>int</vtype> fromRun, <vtype>int</vtype> toRun, <vtype>int</vtype> fromEvent = 0, <vtype>int</vtype> toEvent = 9999999) 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> CommonCalibrationParser::setParamID</A>(<vtype>int</vtype> value) 
+<BR/><deff>
+Set the parameter id.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>void</vtype> CommonCalibrationParser::setNumParamsElements</A>(<vtype>int</vtype> elements, <vtype>int</vtype> params) 
+<BR/><deff>
+Set the number of elements in the detector and the number of parameters for each element.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>void</vtype> CommonCalibrationParser::setDetID</A>(<vtype>int</vtype> value) 
+<BR/><deff>
+Set the detector id.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> CommonCalibrationParser::setValid</A>(<vtype>bool</vtype> value = true) 
+<BR/><deff>
+Sets the calibration to valid.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>bool</vtype> CommonCalibrationParser::operator==</A>(const <A HREF="commoncalibrationparser.html">CommonCalibrationParser&</A> pars) const
+<BR/><deff>
+Comparison operator. Returns true the two calibrations describe the same detector with the same number of elements, the same number of parameters and if they have the same ranges.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> CommonCalibrationParser::write</A>(<vtype>ostream&</vtype> output, const <vtype>string&</vtype> author, const <vtype>string&</vtype> beamTime) 
+<BR/><deff>
+Writes the calibration data to an ostream in the common-calibration format. You can specify an author and a beamTime for that.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>int</vtype> CommonCalibrationParser::getNumberOfCalibrationsInFile</A>(<vtype>string</vtype> filename) 
+<BR/><deff>
+Static method. Returns the number of calibrations to be found in this file.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>int</vtype> CommonCalibrationParser::getNumberOfCalibrationsInFile</A>(<vtype>string</vtype> filename, <vtype>int</vtype> detID) 
+<BR/><deff>
+Static method. Returns the number of calibrations for detector <var>detID</var> in this file.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>int</vtype> CommonCalibrationParser::getNumberOfCalibrationsInFile</A>(<vtype>string</vtype> filename, <vtype>int</vtype> detID, <vtype>int</vtype> pID) 
+<BR/><deff>
+Static method. Returns the number of calibrations of ID <var>pID</var> for detector <var>detID</var> found in the file.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>int</vtype> CommonCalibrationParser::getCalibrationTypesInFile</A>(<vtype>string</vtype> filename, <vtype>vector&lt;int&gt;&</vtype> pIDs, <vtype>int</vtype> detID) 
+<BR/><deff>
+Static method. Reads an ascii file and returns the calibration IDs of the found calibrations for detector <var>detID</var>. The return value is the number of calibrations found.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>int</vtype> CommonCalibrationParser::getCalibrationTypesInFile</A>(<vtype>string</vtype> filename, <vtype>vector&lt;int&gt;&</vtype> pIDs, <vtype>vector&lt;int&gt;&</vtype> dets) 
+<BR/><deff>
+Static method. Reads an ascii file and returns the calibration and detector IDs of the found calibrations. The return value is the number of calibrations found.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f25"><vtype>int</vtype> CommonCalibrationParser::getFileContent</A>(<vtype>string</vtype> filename, <vtype>vector&lt;CommonCalibrationParser*&gt;&</vtype> content) 
+<BR/><deff>
+Static method. Reads an ascii file and returns the found calibrations in the vector <var>content</var>. The return value is the number of calibrations found.
+Take care, that you delete all entries in the vector correctly after use: potential memory leak.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

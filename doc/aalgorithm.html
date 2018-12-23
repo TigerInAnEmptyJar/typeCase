@@ -1,0 +1,96 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class AAlgorithm</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class AAlgorithm in "algorithm.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+Basic algorithm class. Any derived classes of AAlgorithm can be inserted into the typeCase- analyser.
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qobject.html">QObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">AAlgorithm</A>(<vtype>string</vtype> n) 
+<LI><A HREF="#c3">AAlgorithm</A>(const <A HREF="aalgorithm.html">AAlgorithm&</A> a) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>string</vtype> getName</A>() const
+<LI>virtual <A HREF="#f3"><vtype>void*</vtype> process</A>(<vtype>void*</vtype> ptr) 
+<LI>virtual <A HREF="#f4"><vtype>vector&lt;string&gt;</vtype> histogramNames</A>() 
+<LI>virtual <A HREF="http://root.cern.ch/html524/src/TH1.html">TH1*</A> <A HREF="#f5">histogram</A>(<vtype>string</vtype> histoName) 
+<LI>virtual <A HREF="#f6"><vtype>vector&lt;string&gt;</vtype> treeNames</A>() 
+<LI>virtual <A HREF="http://root.cern.ch/html524/src/TTree.html">TTree*</A> <A HREF="#f7">tree</A>(<vtype>string</vtype> treename) 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="algorithmparameter.html">algorithm_parameter</A> <A HREF="#f8">getDescription</A>() 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">AAlgorithm::AAlgorithm</A>(<vtype>string</vtype> n) 
+<BR/><deff>
+Constructor. Sets the name of the algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">AAlgorithm::AAlgorithm</A>(const <A HREF="aalgorithm.html">AAlgorithm&</A> a) 
+<BR/><deff>
+Copy-constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>string</vtype> AAlgorithm::getName</A>() const
+<BR/><deff>
+Returns the name of the algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>void*</vtype> AAlgorithm::process</A>(<vtype>void*</vtype> ptr) 
+<BR/><deff>
+Base functionality is defined here. In the analysis class, this method will be called once for every event, so plug in the functionality you want to provide with your algorithm here. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>vector&lt;string&gt;</vtype> AAlgorithm::histogramNames</A>() 
+<BR/><deff>
+Returns a vector with the names of the histograms defined for the algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://root.cern.ch/html524/src/TH1.html">TH1*</A> <A NAME="f5">AAlgorithm::histogram</A>(<vtype>string</vtype> histoName) 
+<BR/><deff>
+Returns a pointer to the histogram defined for this algorithm with name <var>histoName</var>. If there is no such histogram, NULL is returned. For the AAlgorithm class, NULL is always returned, it may be otherwise for derived classes. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>vector&lt;string&gt;</vtype> AAlgorithm::treeNames</A>() 
+<BR/><deff>
+Returns a vector with the names of the trees defined for the algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://root.cern.ch/html524/src/TTree.html">TTree*</A> <A NAME="f7">AAlgorithm::tree</A>(<vtype>string</vtype> treename) 
+<BR/><deff>
+Returns the pointer to a root-tree of name <var>treename</var>. If no such tree is found, NULL is returned. For AAlgorithm, always NULL is returned, it may be otherwise in derived classes. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="algorithmparameter.html">algorithm_parameter</A> <A NAME="f8">AAlgorithm::getDescription</A>() 
+<BR/><deff>
+Returns an algorithm_parameter containing a description and the necessary parameters for the algorithm to run. The content of these parameters is not necessarily sensible.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

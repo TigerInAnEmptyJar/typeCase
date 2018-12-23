@@ -1,0 +1,190 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class TSetup</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class TSetup in "setup.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="tbase.html">TBase</A>
+<DT>Constructor
+<LI><A HREF="#c2">TSetup</A>(<vtype>int</vtype> max = 100, <vtype>bool</vtype> col = false) 
+<LI><A HREF="#c3">TSetup</A>(const <A HREF="tsetup.html">TSetup&</A> s) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~TSetup</A>() 
+<LI><A HREF="tdetector.html">TDetector</A> <A HREF="#f3">getDetector</A>(<vtype>int</vtype> num) const
+<LI><A HREF="tdetector.html">TDetector&</A> <A HREF="#f4">getDetectorr</A>(<vtype>int</vtype> num) 
+<LI><A HREF="#f5"><vtype>void</vtype> addDetector</A>(const <A HREF="tdetector.html">TDetector&</A> det) 
+<LI><A HREF="#f6"><vtype>void</vtype> popDetector</A>() 
+<LI><A HREF="#f7"><vtype>int</vtype> getNumberOfDetectors</A>() const
+<LI><A HREF="#f8"><vtype>int&</vtype> getNumberOfDetectorsr</A>() 
+<LI><A HREF="#f9"><vtype>int</vtype> getMaxDetectors</A>() const
+<LI><A HREF="#f10"><vtype>int</vtype> getNumberOfBeams</A>() const
+<LI><A HREF="#f11"><vtype>void</vtype> setNumberOfBeams</A>(<vtype>int</vtype> b) 
+<LI><A HREF="#f12"><vtype>bool</vtype> hasTarget</A>() const
+<LI><A HREF="tbeam.html">TBeam</A> <A HREF="#f13">getBeam</A>(<vtype>int</vtype> num = 0) const
+<LI><A HREF="tbeam.html">TBeam&</A> <A HREF="#f14">getBeamr</A>(<vtype>int</vtype> num = 0) 
+<LI><A HREF="#f15"><vtype>void</vtype> setBeam</A>(<A HREF="tbeam.html">TBeam&</A> b, <vtype>int</vtype> num = 0) 
+<LI><A HREF="ttarget.html">TTarget</A> <A HREF="#f16">getTarget</A>() const
+<LI><A HREF="ttarget.html">TTarget&</A> <A HREF="#f17">getTargetr</A>() 
+<LI><A HREF="#f18"><vtype>void</vtype> setTarget</A>(<A HREF="ttarget.html">TTarget&</A> t) 
+<LI><A HREF="#f19"><vtype>int</vtype> getNumberOfMaterials</A>() const
+<LI><A HREF="tmaterial.html">TMaterial&</A> <A HREF="#f20">getMaterialr</A>(<vtype>int</vtype> num) 
+<LI><A HREF="#f21"><vtype>void</vtype> operator=</A>(const <A HREF="tsetup.html">TSetup&</A> s) 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="tbase.html#f3"><vtype>string</vtype> TBase::name</A>() const
+</UL>
+<DT>Protected inherrited variables
+<DD><vtype>string</vtype> <A HREF="tbase.html#v2">TBase::fname</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">TSetup::TSetup</A>(<vtype>int</vtype> max = 100, <vtype>bool</vtype> col = false) 
+<BR/><deff>
+Constructor. Sets the maximum number of detectors and materials to be stored (default =100) and weather it is a collider or a fixed target experiment (default = false = fixed target). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">TSetup::TSetup</A>(const <A HREF="tsetup.html">TSetup&</A> s) 
+<BR/><deff>
+Copy constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">TSetup::~TSetup</A>() 
+<BR/><deff>
+
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tdetector.html">TDetector</A> <A NAME="f3">TSetup::getDetector</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> detector of the setup. Returns an undefined detector if <var>num</var> is non-valid. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tdetector.html">TDetector&</A> <A NAME="f4">TSetup::getDetectorr</A>(<vtype>int</vtype> num) 
+<BR/><deff>
+Returns a reference to the <var>num<sup>th</sup></var> detector of the setup. Returns a reference to a "new" detector if <var>num</var> is non-valid, that has to be taken care of (possible memory leak). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> TSetup::addDetector</A>(const <A HREF="tdetector.html">TDetector&</A> det) 
+<BR/><deff>
+Adds a detector to the list of detectors. Take care, that the detector structure <var>det</var> persists in memory since only a pointer and no copy of <var>det</var> is stored. Has to be deleted after use or handled equivalently. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>void</vtype> TSetup::popDetector</A>() 
+<BR/><deff>
+Removes the last detector from the setup. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>int</vtype> TSetup::getNumberOfDetectors</A>() const
+<BR/><deff>
+Returns the number of detectors defined for this setup. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>int&</vtype> TSetup::getNumberOfDetectorsr</A>() 
+<BR/><deff>
+Returns a reference to the number of detectors defined for this setup. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>int</vtype> TSetup::getMaxDetectors</A>() const
+<BR/><deff>
+Returns the maximum number of detectors storable in this setup. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>int</vtype> TSetup::getNumberOfBeams</A>() const
+<BR/><deff>
+Returns the number of beams defined for this setup. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> TSetup::setNumberOfBeams</A>(<vtype>int</vtype> b) 
+<BR/><deff>
+Sets the number of beams. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>bool</vtype> TSetup::hasTarget</A>() const
+<BR/><deff>
+Returns true if a target and just one beam have been defined. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tbeam.html">TBeam</A> <A NAME="f13">TSetup::getBeam</A>(<vtype>int</vtype> num = 0) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> beam on the setup. <var>num</var> is 0 by default. If it is 1 and a target is defined, or it is larger than 1, rubbish is returned.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tbeam.html">TBeam&</A> <A NAME="f14">TSetup::getBeamr</A>(<vtype>int</vtype> num = 0) 
+<BR/><deff>
+Returns a reference to the <var>num<sup>th</sup></var> beam on the setup. <var>num</var> is 0 by default. If it is 1 and a target is defined, or it is larger than 1, a reference to a "new" beam is returned, that has to be taken care of (possible memory leak).  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>void</vtype> TSetup::setBeam</A>(<A HREF="tbeam.html">TBeam&</A> b, <vtype>int</vtype> num = 0) 
+<BR/><deff>
+Sets the beam of the setup. The parameter <var>num</var> corresponds to the beam number. This can be 0 (default) or 1. It it is 1, the number of beams is set to 2 and the target is undefined. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="ttarget.html">TTarget</A> <A NAME="f16">TSetup::getTarget</A>() const
+<BR/><deff>
+Returns the target defined in the setup. Returns an undefined target, if no target is defined for the setup. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="ttarget.html">TTarget&</A> <A NAME="f17">TSetup::getTargetr</A>() 
+<BR/><deff>
+Returns a reference to the target. Returns rubbish if no target is defined. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> TSetup::setTarget</A>(<A HREF="ttarget.html">TTarget&</A> t) 
+<BR/><deff>
+Sets the target of the experiment. The number of beams is set to 1. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>int</vtype> TSetup::getNumberOfMaterials</A>() const
+<BR/><deff>
+Returns the number of materials defined for the setup. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tmaterial.html">TMaterial&</A> <A NAME="f20">TSetup::getMaterialr</A>(<vtype>int</vtype> num) 
+<BR/><deff>
+Returns a reference to the <var>num<sup>th</sup></var> material defined for the setup. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>void</vtype> TSetup::operator=</A>(const <A HREF="tsetup.html">TSetup&</A> s) 
+<BR/><deff>
+Copy operator. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

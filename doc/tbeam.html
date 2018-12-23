@@ -1,0 +1,131 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class TBeam</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class TBeam in "setup.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This class is describing a particle beam made of particles with a definite 4-momentum. It has am emmitance parameter and a planar shape that describes the beam spot on the target. 
+<DL>
+<DT>Superclass
+<DD><A HREF="root.cern.ch/root/html/TObject.html">TObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">TBeam</A>() 
+<LI><A HREF="#c3">TBeam</A>(<A HREF="momentum4d.html">momentum4D</A> particle) 
+<LI><A HREF="#c4">TBeam</A>(const <A HREF="tbeam.html">TBeam&</A> b) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~TBeam</A>() 
+<LI><A HREF="momentum4d.html">momentum4D</A> <A HREF="#f3">getParticle</A>() const
+<LI><A HREF="momentum4d.html">momentum4D&</A> <A HREF="#f4">getParticler</A>() 
+<LI><A HREF="#f5"><vtype>void</vtype> setParticle</A>(const <A HREF="momentum4d.html">momentum4D&</A> p) 
+<LI><A HREF="planeshape.html">planeShape</A> <A HREF="#f6">getSpot</A>() const
+<LI><A HREF="planeshape.html">planeShape&</A> <A HREF="#f7">getSpotr</A>() 
+<LI><A HREF="#f8"><vtype>void</vtype> setSpot</A>(const <A HREF="planeshape.html">planeShape&</A> beamSpot) 
+<LI><A HREF="#f9"><vtype>float</vtype> getEmmitance</A>() const
+<LI><A HREF="#f10"><vtype>float&</vtype> getEmmitance</A>() 
+<LI><A HREF="#f11"><vtype>void</vtype> setEmmitance</A>(<vtype>float</vtype> emm) 
+<LI><A HREF="#f12"><vtype>void</vtype> operator=</A>(const <A HREF="tbeam.html">TBeam&</A> b) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">TBeam::TBeam</A>() 
+<BR/><deff>
+
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">TBeam::TBeam</A>(<A HREF="momentum4d.html">momentum4D</A> particle) 
+<BR/><deff>
+Constructor. Sets the beam particles 4-momentum. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">TBeam::TBeam</A>(const <A HREF="tbeam.html">TBeam&</A> b) 
+<BR/><deff>
+Copy constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">TBeam::~TBeam</A>() 
+<BR/><deff>
+
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D</A> <A NAME="f3">TBeam::getParticle</A>() const
+<BR/><deff>
+Returns the beam particles 4-momentum. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D&</A> <A NAME="f4">TBeam::getParticler</A>() 
+<BR/><deff>
+Returns a reference to the beam particles 4-momentum. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> TBeam::setParticle</A>(const <A HREF="momentum4d.html">momentum4D&</A> p) 
+<BR/><deff>
+Set the beam particles 4-momentum. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="planeshape.html">planeShape</A> <A NAME="f6">TBeam::getSpot</A>() const
+<BR/><deff>
+Returns the planar shape that defines the interaction area of the beam with another beam or target material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="planeshape.html">planeShape&</A> <A NAME="f7">TBeam::getSpotr</A>() 
+<BR/><deff>
+Returns a reference to the beam spot. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> TBeam::setSpot</A>(const <A HREF="planeshape.html">planeShape&</A> beamSpot) 
+<BR/><deff>
+Sets the planar shape defining the beam spot in the target or the interaction area of two beams. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>float</vtype> TBeam::getEmmitance</A>() const
+<BR/><deff>
+Returns a reference to the emmitance parameter. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>float&</vtype> TBeam::getEmmitance</A>() 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> TBeam::setEmmitance</A>(<vtype>float</vtype> emm) 
+<BR/><deff>
+Sets the emmitance parameter. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> TBeam::operator=</A>(const <A HREF="tbeam.html">TBeam&</A> b) 
+<BR/><deff>
+Copy operator. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

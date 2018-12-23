@@ -1,0 +1,169 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class TCluster</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class TCluster in "cluster.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This is the class defining a cluster of pixels. It contains an array for storing the pixels it is made up, an ID, a center point and a radius, that defines in what circle the pixels are located. 
+<DL>
+<DT>Superclass
+<DD><A HREF="tbase.html">TBase</A>
+<DT>Constructor
+<LI><A HREF="#c2">TCluster</A>(<vtype>int</vtype> maxElements = 50) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~TCluster</A>() 
+<LI><A HREF="#f3"><vtype>int</vtype> getNumberOfPixels</A>() const
+<LI><A HREF="#f4"><vtype>int</vtype> getMaxNumberOfPixels</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f5">getCenter</A>() const
+<LI><A HREF="tpixel.html">TPixel</A> <A HREF="#f6">getPixel</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f7"><vtype>void</vtype> setCenter</A>(<A HREF="point3d.html">point3D</A> p) 
+<LI><A HREF="#f8"><vtype>void</vtype> addPixel</A>(<A HREF="tpixel.html">TPixel&</A> p) 
+<LI><A HREF="#f9"><vtype>void</vtype> resetPixel</A>() 
+<LI><A HREF="point3d.html">point3D&</A> <A HREF="#f10">getCenterr</A>() 
+<LI><A HREF="tpixel.html">TPixel&</A> <A HREF="#f11">getPixelr</A>(<vtype>int</vtype> num) 
+<LI><A HREF="#f12"><vtype>void</vtype> setID</A>(<vtype>int</vtype> IDin) 
+<LI><A HREF="#f13"><vtype>int</vtype> getID</A>() const
+<LI><A HREF="#f14"><vtype>int</vtype> ID</A>() const
+<LI><A HREF="#f15"><vtype>bool</vtype> isDefined</A>() 
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f16">getClusterRadius</A>() const
+<LI><A HREF="#f17"><vtype>void</vtype> setClusterRadius</A>(<vtype>float</vtype> value) 
+<LI><A HREF="#f18"><vtype>void</vtype> calculateClusterRadius</A>() 
+<LI><A HREF="#f19"><vtype>void</vtype> reset</A>() 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="tbase.html#f3"><vtype>string</vtype> TBase::name</A>() const
+</UL>
+<DT>Protected inherrited variables
+<DD><vtype>string</vtype> <A HREF="tbase.html#v2">TBase::fname</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">TCluster::TCluster</A>(<vtype>int</vtype> maxElements = 50) 
+<BR/><deff>
+Constructor. Sets the maximum number of pixels to be stored for this cluster (default = 50).  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">TCluster::~TCluster</A>() 
+<BR/><deff>
+Destructor  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>int</vtype> TCluster::getNumberOfPixels</A>() const
+<BR/><deff>
+Returns the number of pixels stored for this cluster.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>int</vtype> TCluster::getMaxNumberOfPixels</A>() const
+<BR/><deff>
+Returns the maximum number of pixels to be stored for this cluster.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f5">TCluster::getCenter</A>() const
+<BR/><deff>
+Returns the center point of the cluster.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tpixel.html">TPixel</A> <A NAME="f6">TCluster::getPixel</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns a copy of the <var>num<sup>th</sup></var> pixel. May be buggy and cause crashs. Use <a href="#f11">getPixelr()</a> instead.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> TCluster::setCenter</A>(<A HREF="point3d.html">point3D</A> p) 
+<BR/><deff>
+Sets the center point of the cluster.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> TCluster::addPixel</A>(<A HREF="tpixel.html">TPixel&</A> p) 
+<BR/><deff>
+Adds a pixel to the list of pixels. Take care, that no copy but a pointer to this pixel is stored, after use you will have to see that it is deleted properly.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> TCluster::resetPixel</A>() 
+<BR/><deff>
+Sets the number of pixels to zero.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D&</A> <A NAME="f10">TCluster::getCenterr</A>() 
+<BR/><deff>
+Returns a reference to the centerpoint of the cluster.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tpixel.html">TPixel&</A> <A NAME="f11">TCluster::getPixelr</A>(<vtype>int</vtype> num) 
+<BR/><deff>
+Returns a reference to the <var>num<sup>th</sup></var> pixel stored for this cluster. Returns a "new" TPixel if <var>num</var> is non-valid, that has to be taken care of (potential memory leak).  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> TCluster::setID</A>(<vtype>int</vtype> IDin) 
+<BR/><deff>
+Sets the cluster ID.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>int</vtype> TCluster::getID</A>() const
+<BR/><deff>
+Returns the cluster ID.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>int</vtype> TCluster::ID</A>() const
+<BR/><deff>
+Returns the cluster ID.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>bool</vtype> TCluster::isDefined</A>() 
+<BR/><deff>
+Returns true if the cluster has been modified since creation.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f16">TCluster::getClusterRadius</A>() const
+<BR/><deff>
+Returns the radius within which there are pixels to be found.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> TCluster::setClusterRadius</A>(<vtype>float</vtype> value) 
+<BR/><deff>
+Sets the cluster radius. If you don't want to calculate it yourself, a simple version is used in calculateClusterRadius().  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> TCluster::calculateClusterRadius</A>() 
+<BR/><deff>
+Calculates the cluster radius. For every pixel the distance of its center to the cluster center is calculated; the maximum here is taken. This maximum is increased by the first pixels shapes circumscribed radius.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> TCluster::reset</A>() 
+<BR/><deff>
+Resets the cluster. The number of pixels is set to zero, also the radius and the center point is set to an undefined point.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

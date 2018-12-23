@@ -1,0 +1,177 @@
+TPixel
+tpixel.html
+/users/data12/pion/ehrhardt/tofPack2/include/pixel.h
+CTPixel
+103 TPixel
+O#c2
+PnumDetIn
+0 int
+V3
+=
+DConstructor. Sets the maximum number of elements this pixel consists of. This is 3 by default. 
+=
+gnumDet
+0 int
+Sconst
+O#v2
+=
+gp_shape
+152 planeShape*
+O#v3
+=
+gelements
+101 TCalibHit**
+O#v4
+=
+gemergencySave
+152 planeShape*
+O#v5
+=
+gaccNum
+0 int
+O#v6
+=
+gID
+0 int
+O#v7
+=
+gmaxChi
+1 float
+O#v8
+=
+gdefined
+6 bool
+O#v9
+=
+gvalid
+6 bool
+O#v10
+=
+F~TPixel
+-1 ~TPixel
+O#f2
+DDestructor. 
+=
+FgetShape
+152 planeShape*
+O#f3
+DReturns a pointer to the planar shape of the pixel. 
+=
+FgetElement
+101 TCalibHit
+O#f4
+Lconst
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> element of the pixel. 
+=
+FgetElementr
+101 TCalibHit&
+O#f5
+Pnum
+0 int
+=
+DReturns a reference tor the <var>num<sup>th</sup></var> element of the pixel.  
+DThis routine is prefered. 
+=
+FgetNumberOfElements
+0 int
+O#f6
+Lconst
+DReturns the maximum number of elements storable for this pixel. 
+=
+FgetNumberOfActualElements
+0 int
+O#f7
+Lconst
+DReturns the number of detector elements in this pixel. 
+=
+FsetShape
+7 void
+O#f8
+Psh
+152 planeShape*
+=
+DSets the planar shape of the pixel.  
+DWarning: Only the pointer is set; no memory of previously devlared shapes is freed. 
+=
+FaddElement
+7 void
+O#f9
+Phit
+101 TCalibHit&
+=
+DAdd a detector element to the pixel. Routine is skipped, if the number of elements exceeds the maximum. 
+=
+FresetElements
+7 void
+O#f10
+DSets the number of elements to zero. 
+=
+FgetID
+0 int
+O#f11
+Lconst
+DReturns the ID of the pixel. 
+=
+FsetID
+7 void
+O#f12
+PIDIn
+0 int
+=
+DSets the pixel ID. 
+=
+FgetMaxChiSquared
+1 float
+O#f13
+Lconst
+DRetruns a number usable as maximum chi squared in further analysis. <i>obsolete</i> 
+=
+FsetMaxChiSquared
+7 void
+O#f14
+Pvalue
+1 float
+=
+DSets the maximum chi squared value. 
+=
+FisDefined
+6 bool
+O#f15
+DReturns true if the pixel has been modified after creation or reset. 
+=
+Freset
+7 void
+O#f16
+DResets the pixel. The valid property is set to false, the number of elements is set to zero.  
+DWarning: No pointers are deleted!! This, the user of this class has to do himself. 
+=
+Foperator==
+6 bool
+O#f17
+Ptmptpixel0
+-1 TPixel&
+=
+DReturns true if this pixel and the other one consist of the same hits. 
+=
+FisValid
+6 bool
+O#f18
+Lconst
+DReturns the valid property.  
+=
+FsetValid
+7 void
+O#f19
+Pv
+6 bool
+Vtrue
+=
+DSets the valid property of the pixel. If used without parameter, the method sets it to true. 
+=
+S0 1 TBase
+tbase.html
+TBase
+=

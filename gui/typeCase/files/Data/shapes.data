@@ -1,0 +1,56 @@
+########## shape parameter ####### file version :1 #######
+7wedge
+P0 0 1000 center of front
+v180 180 1 normal vector
+v90 0 1 lower phi edge
+F10 inner radius
+F100 outer radius
+F0.1 angle between edges
+F1 thickness
+=
+wedge-cone
+P0 0 10 center of base
+v180 0 1 symmetry axis
+v90 0 1 lower phi
+F100 radius base
+F10 radius top
+F1000 length
+F0.1 angle between edges
+F1 thickness
+=
+spiral
+P0 0 1000 center of front
+v180 180 1 normal vector
+v90 -180 1 lower phi edge
+F10 inner radius
+F100 outer radius
+F0.1 angle between edges
+F1 thickness
+F100 bending
+=
+fiber
+P0 0 100 corner
+v90 90 100 direction1
+v90 180 2.0 direction2
+v0 0 1 direction3
+I1 number of halved Rows
+I48 halved at
+=
+ring
+P0 0 100 center of front
+v180 0 1 normal on front plane
+F1 inner radius
+F0.1 delta radius
+F1 thickness
+=
+cylinder
+P0 0 0 Center
+v0 0 1 Line
+F1 Radius
+=
+strawtube
+P0 0 0 Center
+v0 0 1 Line
+F1 Radius
+F1 Isocrone Radius
+=

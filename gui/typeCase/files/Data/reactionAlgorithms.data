@@ -1,0 +1,75 @@
+2 0 1 38 0 0 0 0 0 1 
+Names
+0 0 0 0 Reaction recognition
+3 This algorithm recogizes the pattern of
+several reactions defined by reaction algorithm
+parameters and stores them in the Event.
+
+3 2 0 1 0 0 0 0 0 3 0.500 Maximum deviation from Missing mass
+0.05 Angle difference from coplanarity
+0.2 assumed Gamma difference
+0 0 0 0 0 proton-proton-elastic
+3 This is the most basic reaction in
+proton-proton colisions. Quite useful
+for calibration purpurses.
+
+2 0 1 1 0 0 0 0 4 0.0200 Maximum deviation from Missing mass
+0.05 Angle difference from coplanarity
+1.25 Max angle between tracks
+0.6 Crossover Momentum
+0 0 0 0 0 deuteron-pi+
+5 Being a two body reaction, this reaction
+is the one of the most basic reaction in
+proton-proton colisions. Even better for 
+calibration purpurses, since the velocities 
+of the deuteron are smaller than in pp-elastic.
+
+2 0 0 10 0 0 0 0 1 0.109 Max angle between Lambda_rec and Lambda_meas
+0 0 0 0 0 Lambda-production
+6 This is a strangeness producing reaction,
+where a neutral strange baryon and a charged
+kaon are produced. Essential to recognize 
+this reaction is a neutral decay (of the
+Lambda particle) and two prompt tracks, both
+having velocities defined.
+
+
+
+
+
+
+
+
+
+2 0 0 38 0 0 0 0 0 1 __ppel_0.005___pp-pkl-pkppi_0.109_
+Names
+0 0 0 0 Reaction recognition
+3 This algorithm recogizes the pattern of 
+several reactions defined by the string 
+Names and stores them in the Event. 
+3 
+0 0 1 3 2 0 1 0 0 0 0 0 3 0.500 Maximum deviation from Missing mass
+0.05 Angle difference from coplanarity
+0.2 assumed Gamma difference
+0 0 0 0 0 proton-proton-elastic
+3 This is the most basic reaction in
+proton-proton colisions. Quite useful
+for calibration purpurses.
+2 0 1 1 0 0 0 0 4 0.0200 Maximum deviation from Missing mass
+0.05 Angle difference from coplanarity
+1.25 Max angle between tracks
+0.6 Crossover Momentum
+0 0 0 0 0 deuteron-pi+
+5 Being a two body reaction, this reaction
+is the one of the most basic reaction in
+proton-proton colisions. Even better for 
+calibration purpurses, since the velocities 
+of the deuteron are smaller than in pp-elastic.
+2 0 1 10 0 0 0 0 1 0.109 Max angle between Lambda_rec and Lambda_meas
+0 0 0 0 0 Lambda-production
+6 This is a strangeness producing reaction,
+where a neutral strange baryon and a charged
+kaon are produced. Essential to recognize 
+this reaction is a neutral decay (of the
+Lambda particle) and two prompt tracks, both
+having velocities defined.

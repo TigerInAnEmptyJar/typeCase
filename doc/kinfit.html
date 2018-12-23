@@ -1,0 +1,328 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class kinFit</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class kinFit in "fittingRoutines.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="geomobj.html">geomObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">kinFit</A>() 
+<LI><A HREF="#c3">kinFit</A>(const <A HREF="kinfit.html">kinFit&</A> inFit) 
+<LI><A HREF="#c4">kinFit</A>(<vtype>int</vtype> maxIterationIn, <vtype>int</vtype> maxParticlesIn, <vtype>float</vtype> epsilonIn) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~kinFit</A>() 
+<LI><A HREF="#f3"><vtype>float</vtype> Epsilon</A>() const
+<LI><A HREF="#f4"><vtype>void</vtype> setEpsilon</A>(<vtype>float</vtype> value) 
+<LI><A HREF="#f5"><vtype>int</vtype> NParticles</A>() const
+<LI><A HREF="#f6"><vtype>int</vtype> MaxIterations</A>() const
+<LI><A HREF="#f7"><vtype>int</vtype> MaxParticles</A>() const
+<LI><A HREF="#f8"><vtype>void</vtype> clear</A>() 
+<LI><A HREF="#f9"><vtype>void</vtype> add</A>(const <A HREF="vector.html">Vector&</A> data) 
+<LI><A HREF="#f10"><vtype>void</vtype> add</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> representation, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<LI><A HREF="#f11"><vtype>void</vtype> addMomentum</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<LI><A HREF="#f12"><vtype>void</vtype> addEnergyThetaPhi</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<LI><A HREF="#f13"><vtype>void</vtype> addBetaThetaPhi</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<LI><A HREF="#f14"><vtype>void</vtype> addMomentumThetaPhi</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<LI><A HREF="#f15"><vtype>void</vtype> addEnergyDxDy</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<LI><A HREF="#f16"><vtype>void</vtype> addBetaDxDy</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<LI><A HREF="#f17"><vtype>void</vtype> addMomentumDxDy</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f18">Errors</A>(<vtype>int</vtype> num) const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f19">NonFittedParticle</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f20"><vtype>float</vtype> Mass</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f21"><vtype>int</vtype> Constraint</A>(<vtype>int</vtype> numP, <vtype>int</vtype> numC) const
+<LI><A HREF="#f22"><vtype>int</vtype> Representation</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f25"><vtype>void</vtype> setConstraints</A>(<vtype>int</vtype> nCin, <A HREF="vector.html">Vector</A> masses) 
+<LI><A HREF="#f26"><vtype>float</vtype> InvariantMass</A>(<vtype>int</vtype> constraint) const
+<LI><A HREF="#f27"><vtype>int</vtype> Constraints</A>() const
+<LI><A HREF="#f28"><vtype>float</vtype> Chi2</A>() const
+<LI><A HREF="#f29"><vtype>int</vtype> OutInfo</A>() const
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f30">Result</A>() const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f31">FittedParticle</A>(<vtype>int</vtype> num) const
+<LI><A HREF="momentum4d.html">momentum4D</A> <A HREF="#f32">getMomentum</A>(<vtype>int</vtype> num, <A HREF="vector3d.html">vector3D</A> pm) 
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f34">FM_last</A>() const
+<LI><A HREF="#f35"><vtype>float</vtype> D_last</A>() const
+<LI><A HREF="#f36"><vtype>float</vtype> fit</A>() 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="#f23"><vtype>int</vtype> KnownRepresentations</A>(<vtype>int**</vtype> buffer = NULL) 
+<LI>static <A HREF="#f24"><vtype>int</vtype> KnownRepresentation</A>(<vtype>int</vtype> num) 
+<LI>static <A HREF="momentum4d.html">momentum4D</A> <A HREF="#f33">getMomentum</A>(<A HREF="vector3d.html">vector3D</A> pm, <vtype>int</vtype> rep, <vtype>float</vtype> mass) 
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+<LI>virtual <A HREF="geomobj.html#f8"><vtype>string</vtype> geomObject::toString</A>() const
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">kinFit::kinFit</A>() 
+<BR/><deff>
+Default constructor.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">kinFit::kinFit</A>(const <A HREF="kinfit.html">kinFit&</A> inFit) 
+<BR/><deff>
+Copy constructor.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">kinFit::kinFit</A>(<vtype>int</vtype> maxIterationIn, <vtype>int</vtype> maxParticlesIn, <vtype>float</vtype> epsilonIn) 
+<BR/><deff>
+Constructor. Sets the maximum number of iterations and particles and the maximum derivation of the kinematic variable from its restrictions.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> kinFit::~kinFit</A>() 
+<BR/><deff>
+Destructor 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>float</vtype> kinFit::Epsilon</A>() const
+<BR/><deff>
+Returns the maximal derivation of the kinematic variable to the conservation laws. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> kinFit::setEpsilon</A>(<vtype>float</vtype> value) 
+<BR/><deff>
+Sets the maximal derivation of the kinematic variable to the conservation laws. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>int</vtype> kinFit::NParticles</A>() const
+<BR/><deff>
+Returns the current number of particles. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> kinFit::MaxIterations</A>() const
+<BR/><deff>
+Returns the maximum number of iterations for the fit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>int</vtype> kinFit::MaxParticles</A>() const
+<BR/><deff>
+Returns the maximum number of particles. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> kinFit::clear</A>() 
+<BR/><deff>
+Clears the fits particles. For a new fit, add new particles. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> kinFit::add</A>(const <A HREF="vector.html">Vector&</A> data) 
+<BR/><deff>
+Adds a particle to the fit.   
+<table>   
+<tr><th>index/indices<th>description   
+<tr><td>0, 1, 2<td>particle values  
+<tr><td>3, 4, 5<td> value errors  
+<tr><td>6<td> mass  
+<tr><td>7, 8, 9<td> fixed/measured/unmeasured  
+<tr><td>10<td> representation  
+<tr><td>rest<td> contribute to additional constraint  
+</table>   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> kinFit::add</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> representation, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<BR/><deff>
+Add a particle to the fit with its <var>properties</var>, <var>errors</var>, its <var>mass</var>, the <var>representation</var> the values are given. The parameter <var>in_out_going</var> shall be 1 if the particle is an outgoing particle in the initial reaction, -1 if it is in-going and 0 if it doesn't take place in the initial reaction.    
+The parameter <var>doFit</var> sets the individual values to fixed (2), measured (1) or unmeasured (3).  
+The <var>additionalConstraints</var> is an array (-pointer) with its components being 0 (doesn't contribute) or 1 (contributes).   
+If the array is NULL (default), the particle doesn't contribute in any additional constraint.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> kinFit::addMomentum</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<BR/><deff>
+Add a particle in representation (Px,Py,Pz) see <a href=#f10>add()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> kinFit::addEnergyThetaPhi</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<BR/><deff>
+Add a particle in representation (E,theta,phi) see <a href=#f10>add()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> kinFit::addBetaThetaPhi</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<BR/><deff>
+Add a particle in representation (ß,theta,phi) see <a href=#f10>add()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> kinFit::addMomentumThetaPhi</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<BR/><deff>
+Add a particle in representation (P,theta,phi) see <a href=#f10>add()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>void</vtype> kinFit::addEnergyDxDy</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<BR/><deff>
+Add a particle in representation (E,dx,dy) see <a href=#f10>add()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>void</vtype> kinFit::addBetaDxDy</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<BR/><deff>
+Add a particle in representation (ß,dx,dy) see <a href=#f10>add()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> kinFit::addMomentumDxDy</A>(const <A HREF="vector3d.html">vector3D&</A> properties, const <A HREF="vector3d.html">vector3D&</A> errors, const <A HREF="vector3d.html">vector3D&</A> doFit, <vtype>float</vtype> mass, <vtype>int</vtype> in_out_going = 1, <vtype>int*</vtype> additionalConstraints = NULL) 
+<BR/><deff>
+Add a particle in representation (P,dx,dy) see <a href=#f10>add()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f18">kinFit::Errors</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the errors for values of particle <var>num</var> in current representation. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f19">kinFit::NonFittedParticle</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the values of the non-fitted particle <var>num</var> in current representation.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>float</vtype> kinFit::Mass</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the mass for the <var>num<sup>th</sup></var> particle in units of GeV.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>int</vtype> kinFit::Constraint</A>(<vtype>int</vtype> numP, <vtype>int</vtype> numC) const
+<BR/><deff>
+Returns the constraint value for particle <var>numP</var> in constraint <var>numC</var>. This should be 0 if the particle is not participating in the constraint, and 1 if it is. If <var>numP</var> or <var>numC</var> are non-valid, it returns 0.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>int</vtype> kinFit::Representation</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the representation of the <var>num<sup>th</sup></var> particle. Known representations are:    
+<table>    
+<tr><th>value<th>representation    
+<tr><td>1<td>px, py, pz    
+<tr><td>2<td>E, azimuthal-, polar angle    
+<tr><td>3<td>v, azimuthal-, polar angle    
+<tr><td>4<td>p, azimuthal-, polar angle    
+</table>    
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>int</vtype> kinFit::KnownRepresentations</A>(<vtype>int**</vtype> buffer = NULL) 
+<BR/><deff>
+Static method. Returns the number of known representations and the representation number if the <var>buffer</var> pointer is not NULL, then a new array of integer will be allocated and the values will be copied to it. Take care, that you dispose it correctly after use (potential memory leak).  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>int</vtype> kinFit::KnownRepresentation</A>(<vtype>int</vtype> num) 
+<BR/><deff>
+Static method. It returns the value of the <var>num<sup>th</sup></var> representation.  
+<i>obsolete</i> removed from class
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f25"><vtype>void</vtype> kinFit::setConstraints</A>(<vtype>int</vtype> nCin, <A HREF="vector.html">Vector</A> masses) 
+<BR/><deff>
+Sets the number of constraints and the invariant masses for each constraint. Take care that the vectors dimension is at least <var>nCin</var>, else it does nothing.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f26"><vtype>float</vtype> kinFit::InvariantMass</A>(<vtype>int</vtype> constraint) const
+<BR/><deff>
+Returns the invariant mass (units of GeV) for constraint <var>constraint</var>.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f27"><vtype>int</vtype> kinFit::Constraints</A>() const
+<BR/><deff>
+Returns the number of additional constraints.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f28"><vtype>float</vtype> kinFit::Chi2</A>() const
+<BR/><deff>
+Returns the chi² value of the fit.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f29"><vtype>int</vtype> kinFit::OutInfo</A>() const
+<BR/><deff>
+Returns the number of Iterations needed to come to an end. If the maximum number of iterations was exceeded, the return value is negative.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f30">kinFit::Result</A>() const
+<BR/><deff>
+Returns the result vector that is all the particles values in current representation stuffed into one vector of length nParticles*3, with the particle values together.     
+It might be easier to come to the result by <a href="#f24"> FittedParticle</a>.    
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f31">kinFit::FittedParticle</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the values of the <var>num<sup>th</sup></var> particle in current representation.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D</A> <A NAME="f32">kinFit::getMomentum</A>(<vtype>int</vtype> num, <A HREF="vector3d.html">vector3D</A> pm) 
+<BR/><deff>
+Calculates the 4-momentum of the <var>num<sup>th</sup></var> particle using its mass and the values in <var>pm</var> according to its representation.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D</A> <A NAME="f33">kinFit::getMomentum</A>(<A HREF="vector3d.html">vector3D</A> pm, <vtype>int</vtype> rep, <vtype>float</vtype> mass) 
+<BR/><deff>
+Satic method to calculate the 4-momentum of a particle using its <var>mass</var> and the values in <var>pm</var> according to its representation <var>rep</var>.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f34">kinFit::FM_last</A>() const
+<BR/><deff>
+Returns the last balance vector of the fit. The first four components are the components of the sum of all (initially participating, with sign for in-/out-going) particle 4-momenta.
+The rest components are the difference of the invariant masses to the invariant mass of the corresponding constraint.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f35"><vtype>float</vtype> kinFit::D_last</A>() const
+<BR/><deff>
+Returns the remaining length of the balance vector after the fit. See <a href="#">FM_last()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f36"><vtype>float</vtype> kinFit::fit</A>() 
+<BR/><deff>
+Main fitting routine performs the fit and returns the chi² value.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

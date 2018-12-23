@@ -1,0 +1,494 @@
+TTrack
+ttrack.html
+/users/data12/pion/ehrhardt/tofPack2/include/track.h
+CTTrack
+102 TTrack
+O#c2
+Pmax
+0 int
+V20
+=
+Pmdet
+0 int
+V50
+=
+DConstructor. Sets the maximum number of hits and pixels per ID (default = 20) and the maximum number of IDs (default = 50).     
+=
+gmaxhits
+0 int
+Sconst
+O#v2
+D
+=
+gmaxDets
+0 int
+Sconst
+O#v3
+D
+=
+gtotnum
+0 int
+O#v4
+D
+=
+gnumhits
+0 int*
+O#v5
+D
+=
+gpath
+21 sLine3D
+O#v6
+D
+=
+gcalibSrc
+101 TCalibHit***
+O#v7
+D
+=
+gpix
+103 TPixel**
+O#v8
+D
+=
+gpixsv
+103 TPixel**
+O#v9
+D
+=
+gnumPix
+0 int
+O#v10
+D
+=
+gparticle
+20 momentum4D
+O#v11
+D
+=
+gkineticEnergy
+1 float
+O#v12
+D
+=
+gspeed
+1 float
+O#v13
+D
+=
+gdefined
+6 bool
+O#v14
+D
+=
+gchiQ
+1 float
+O#v15
+D
+=
+gorder
+6 bool
+O#v16
+D
+=
+gprimary
+102 TTrack*
+O#v17
+D
+=
+gnumSec
+0 int
+O#v18
+D
+=
+gsecondary
+102 TTrack**
+O#v19
+D
+=
+gvalid
+6 bool
+O#v20
+D
+=
+gcharge
+0 int
+O#v21
+D
+=
+gerrors[4]
+1 float
+O#v22
+D
+=
+gpartID
+0 int
+O#v23
+D
+=
+F~TTrack
+-1 ~TTrack
+O#f2
+DDestructor
+=
+FgetPath
+21 sLine3D
+O#f3
+Lconst
+DReturns the path of the track. This is a straight line with the Foot-property corresponding to the vertex and the Direction-property to the initial direction.  
+=
+FgetCalibSrc
+101 TCalibHit
+O#f4
+Lconst
+Pdet
+0 int
+=
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> hit of detector <var>det</var>, that is stored for this track. Returns an undefined, non-valid hit, if such a hit is not stored or eighther <var>num</var> or <var>det</var> are non valid.  
+DThis method does not work properly and may cause crashs. Use <a href="#f17">getCalibSrcr()</a> instead.  
+=
+FgetParticle
+20 momentum4D
+O#f5
+Lconst
+DReturns the particles 4-momentum. 
+=
+FsetPath
+7 void
+O#f6
+PpathIn
+21 sLine3D
+=
+DSets the path of the track. This is a straight line with the Foot-property corresponding to the vertex and the Direction-property to the initial direction. 
+=
+FaddCalibSrc
+7 void
+O#f7
+PcalibIn
+101 TCalibHit*
+=
+DAdds a hit to the track. Note that the detector-property of the hit should be set (0 <= detector <= numberOfCalibHits(-2) ). 
+=
+FclearCalibSrc
+7 void
+O#f8
+DSets the number of hits for all detectors to zero. 
+=
+FremoveCalibSrc
+7 void
+O#f9
+PcalibIn
+101 TCalibHit*
+=
+DRemoves a hit from the track. 
+=
+FgetNumberOfCalibHits
+0 int
+O#f10
+Lconst
+Pnum
+0 int
+V-1
+=
+DReturns the number of hits stored in this track for the <var>num<sup>th</sup></var> detector. If <var>num</var> is -1 it returns the total number of hits stored in this track, if it is -2 it returns the maximum number of hits to be stored in this track. 
+=
+FsetParticle
+7 void
+O#f11
+PpartIn
+20 momentum4D
+=
+DSets the particles 4-momentum. 
+=
+FaddPixel
+7 void
+O#f12
+Ppix
+103 TPixel*
+=
+DAdds a pixel to the track. 
+=
+FclearPixel
+7 void
+O#f13
+DSets the number of pixels to zero. 
+=
+FgetNumberOfPixels
+0 int
+O#f14
+Lconst
+DReturns the number of pixels stored in this track. 
+=
+FgetPixel
+103 TPixel&
+O#f15
+Pdet
+0 int
+=
+Pnum
+0 int
+=
+DReturns a reference to the <var>num<sup>th</sup></var> pixel, that is saved for this track. The <var>det</var> parameter is ignored. 
+=
+FgetPathr
+21 sLine3D&
+O#f16
+DReturns a reference to the path of the track. This is a straight line with it's Foot-property corresponding to the vertex and the Direction-property to its initial direction.  
+=
+FgetCalibSrcr
+101 TCalibHit*
+O#f17
+Pdet
+0 int
+=
+Pnum
+0 int
+=
+DReturns a reference to the <var>num<sup>th</sup></var> hit in the <var>det<sup>th</sup></var> detector, that is saved for this track.   
+=
+FgetParticler
+20 momentum4D&
+O#f18
+DReturns a reference to the particles 4-momentum, this track represents. 
+=
+FgetRawSrcr
+100 TRawHit&
+O#f19
+Pdet
+0 int
+=
+Pnum
+0 int
+=
+DReturns a reference to the <var>num<sup>th</sup></var> raw hit in the <var>det<sup>th</sup></var> detector, that is saved for this track. 
+=
+FisDefined
+6 bool
+O#f20
+DReturns true, if the track had been modified since creation or last <a href="#f39">reset()</a>.  
+=
+FgetChiSquared
+1 float
+O#f21
+DReturns the chi squared property of the track. Use it for sorting or quality checks. 
+=
+FgetChiSquaredr
+1 float&
+O#f22
+DReturns a reference to the chi squared property of the track. Use it for sorting or quality checks. 
+=
+FsetChiSquared
+7 void
+O#f23
+Pchi
+1 float
+=
+DSet the chi squared property of the track. Use it for sorting or quality checks. 
+=
+Foperator=
+7 void
+O#f24
+Pt
+102 TTrack&
+=
+DCopy operator. 
+=
+FisValid
+6 bool
+O#f25
+Lconst
+DReturns the valid property. 
+=
+FsetValid
+7 void
+O#f26
+Pval
+6 bool
+Vtrue
+=
+DSets the valid property of the track to<var>val</var> (default = true). 
+=
+FgetKineticEnergy
+1 float
+O#f27
+Lconst
+DReturns the kinetic energy (GeV) of the particle. 
+=
+FsetKineticEnergy
+7 void
+O#f28
+Pval
+1 float
+=
+DSet the kinetic energy (GeV) of the particle. 
+=
+FgetSpeed
+1 float
+O#f29
+Lconst
+DReturns the speed of the particle. Note this can be larger than 1. 
+=
+FsetSpeed
+7 void
+O#f30
+Pval
+1 float
+=
+DSets the speed of the particle in units of the speed of light. Since this is a measured property with errors, this can be any number, also larger than 1 though this is forbidden by definition. 
+=
+FisSecondary
+6 bool
+O#f31
+Lconst
+DReturns true if the particle, this track represents did not origin in the primary reaction but deayed off another particle. 
+=
+FsetOrder
+7 void
+O#f32
+Pval
+6 bool
+Vtrue
+=
+DSets the isSecondary property of the track to <var>val</var> (default = true). If <var>val</var> is true, the track decayed off another track. 
+=
+FgetNumberOfSecondaryTracks
+0 int
+O#f33
+Lconst
+DReturns the number of secondary tracks. 
+=
+FgetSecondary
+102 TTrack*
+O#f34
+Ptmpint0
+-1 int
+=
+DReturns the <var>v<sup>th</sup></var> secondary track or NULL, if <var>v</var> is non-valid. 
+=
+FclearSecondary
+7 void
+O#f35
+DSets the number of secondary tracks to zero. 
+=
+FaddSecondary
+7 void
+O#f36
+Ptmpttrack0
+-1 TTrack*
+=
+DAdds a secondary track to the list of secondary tracks. 
+=
+FgetPrimary
+102 TTrack*
+O#f37
+DReturns the primary track if the particle, this track represents decayed, NULL else. 
+=
+FsetPrimary
+7 void
+O#f38
+Ptmpttrack0
+-1 TTrack*
+=
+DSets the primary track. This track is now a decay track, decaying of <var>v</var>. 
+=
+FsetParticleID
+7 void
+O#f39
+Pvalue
+0 int
+=
+DAssign a GEANT-particle-ID to this track.
+=
+FgetParticleID
+0 int
+O#f40
+Lconst
+DReturns the GEANT-particle ID assigned to this track.
+=
+Freset
+7 void
+O#f41
+DResets the track. Sets the track to a primary track (primary-track property not modified), the number of secondary tracks, kinetic energy and speed to zero, the valid property to false, as well as the number of hits per ID and the number of pixels. 
+=
+FgetCharge
+0 int
+O#f42
+Lconst
+DReturns the charge of the tracks particle. 
+=
+FgetCharger
+0 int&
+O#f43
+DReturns a reference to the charge of the tracks particle. 
+=
+FsetCharge
+7 void
+O#f44
+Pc
+0 int
+=
+DSets the charge of the tracks particle. 
+=
+FgetErrorPhi
+1 float
+O#f45
+Lconst
+DReturns the error variable for the property phi. 
+=
+FgetErrorTheta
+1 float
+O#f46
+Lconst
+DReturns the error variable for the property theta. 
+=
+FgetErrorSpeed
+1 float
+O#f47
+Lconst
+DReturns the error variable for the property speed. 
+=
+FgetErrorEnergy
+1 float
+O#f48
+Lconst
+DReturns the error variable for the property energy. 
+=
+FsetErrorPhi
+7 void
+O#f49
+Pv
+1 float
+=
+DSets the error variable for the property phi. 
+=
+FsetErrorTheta
+7 void
+O#f50
+Pv
+1 float
+=
+DSets the error variable for the property theta. 
+=
+FsetErrorSpeed
+7 void
+O#f51
+Pv
+1 float
+=
+DSets the error variable for the property speed. 
+=
+FsetErrorEnergy
+7 void
+O#f52
+Pv
+1 float
+=
+DSets the error variable for the property energy. 
+=
+S0 1 TBase
+tbase.html
+TBase
+=

@@ -1,0 +1,276 @@
+vector2D
+vector2d.html
+/users/data12/pion/ehrhardt/tofPack2/include/geometry.h
+Cvector2D
+15 vector2D
+O#c2
+DDefault constructor.
+=
+Cvector2D
+15 vector2D
+O#c3
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+DCopy constructor. Sets a point vector from the origin to point <var>p</var>.
+=
+Cvector2D
+15 vector2D
+O#c4
+Pv
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DCopy constructor.
+=
+Cvector2D
+15 vector2D
+O#c5
+Pp
+12 point&
+Sconst
+Tpoint.html
+=
+DCopy constructor. Sets a point vector from the origin to point <var>p</var>. Works only if <var>p</var> is 2-dimensional.
+=
+Cvector2D
+15 vector2D
+O#c6
+Pv
+13 Vector&
+Sconst
+Tvector.html
+=
+DCopy constructor. Works only if <var>v</var> is 2-dimensional.
+=
+Cvector2D
+15 vector2D
+O#c7
+Px
+3 double
+=
+Py
+3 double
+=
+DConstructor. Sets the cartesic coordinates.
+=
+FsetValues
+7 void
+Svirtual
+O#f2
+Px
+3 double
+=
+Py
+3 double
+=
+DSets the cartesic coordinates.
+=
+FsetValue
+7 void
+Svirtual
+O#f3
+Ppos
+0 int
+=
+PvalueIn
+3 double
+=
+DSetter sets the <var>pos<sup>th</sup></var> component in cartesic coordinates to <var>valueIn</var>.
+=
+Fnormalize
+7 void
+Svirtual
+O#f4
+DNormalizes the vector. Each component in cartesic coordinates is devided by the vectors length.
+=
+Flength
+3 double
+Svirtual
+O#f5
+Lconst
+DReturns the length of the vector.
+=
+FgetState
+-1 geomState
+Svirtual
+O#f6
+Lconst
+DReturns the state of the geometrical object. This can be _regular_, _undefined_, _infinite_ or _zero_. 
+=
+FgetValue
+3 double
+Svirtual
+O#f7
+Lconst
+Ppos
+0 int
+=
+DReturns the <var>pos<sup>th</sup></var> component in cartesic coordinates.
+=
+FgetDimension
+0 int
+Svirtual
+O#f8
+Lconst
+DReturns the dimension of the vector which is 2.
+=
+Foperator=
+7 void
+O#f9
+Pp
+12 point&
+Sconst
+Tpoint.html
+=
+DCopy operator. Sets the vector to a point-vector from the origin to point <var>p</var>. Works only if <var>p</var> is 2-dimensional.
+=
+Foperator=
+7 void
+O#f10
+Pv
+13 Vector&
+Sconst
+Tvector.html
+=
+DCopy operator. Works only if <var>v</var> is 2-dimensional.
+=
+Foperator=
+7 void
+O#f11
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+DCopy operator. Sets the vector to a point-vector from the origin to point <var>p</var>.
+=
+Foperator=
+7 void
+O#f12
+Pv
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DCopy operator.
+=
+Foperator+
+15 vector2D
+O#f13
+Tvector2d.html
+Lconst
+Pw
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DAddition operator. Return the sum of this vector and vector <var>w</var>.
+=
+Foperator-
+15 vector2D
+O#f14
+Tvector2d.html
+Lconst
+Pw
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DSubtraction operator. Returns the difference vector of this vector minus <var>w</var>.
+=
+Foperator*
+15 vector2D
+O#f15
+Tvector2d.html
+Lconst
+Pf
+3 double
+=
+DMultiplication operator. Returns a vector with <var>f</var> times the length of this vector.
+=
+Foperator*
+3 double
+O#f16
+Lconst
+Pw
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DMultiplication operator. Returns the scalar product of this vector with <var>w</var>.
+=
+Foperator==
+0 int
+O#f17
+Lconst
+Pv
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DComparison operator. Returns true if this vector and <var>v</var> are the same.
+=
+Foperator[]
+3 double
+Svirtual
+O#f18
+Lconst
+Ppos
+0 int
+=
+DAccess operator- Returns the <var>pos<sup>th</sup></var> component in cartesic coordinates.
+=
+Foperator!
+15 vector2D
+O#f19
+Tvector2d.html
+Lconst
+DTransposes the vector and returns the result. A line vector returns a column vector, a column vector a line vector. This vector remains unchanged.
+=
+FtoString
+-1 string
+Svirtual
+O#f20
+Lconst
+Ppt
+0 int
+V-1
+=
+DReturns a string representation of this vector. This is depending on <var>pt</var> eigther _cartesic_, _polar_ or the vectors own representation, when <var>pt</var> is -1 (default).
+=
+fZero
+7 void
+Svirtual
+O#f21
+DSets the state of the objet to _zero_. 
+=
+fInfinite
+7 void
+Svirtual
+O#f22
+DSets the state of the objet to _infinite_. 
+=
+fUndefined
+7 void
+Svirtual
+O#f23
+DSets the state of the objet to _undefined_. 
+=
+fRegular
+7 void
+Svirtual
+O#f24
+DSets the state of the objet to _regular_. 
+=
+DVector in 2-dimensional space.
+S0 1 point2D
+point2d.html
+point2D
+S0 1 Vector
+vector.html
+Vector
+=

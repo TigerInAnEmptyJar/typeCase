@@ -1,0 +1,147 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class TRawHit</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class TRawHit in "rawHit.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="tbase.html">TBase</A>
+<DT>Constructor
+<LI><A HREF="#c2">TRawHit</A>() 
+<LI><A HREF="#c3">TRawHit</A>(<vtype>int</vtype> detector, <vtype>int</vtype> element, <vtype>int</vtype> ADC, <vtype>int</vtype> TDC) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~TRawHit</A>() 
+<LI><A HREF="#f3"><vtype>int</vtype> getADC</A>() const
+<LI><A HREF="#f4"><vtype>int</vtype> getTDC</A>() const
+<LI><A HREF="#f5"><vtype>int</vtype> getDetector</A>() const
+<LI><A HREF="#f6"><vtype>int</vtype> getElement</A>() const
+<LI><A HREF="#f7"><vtype>void</vtype> setADC</A>(<vtype>int</vtype> adcIn) 
+<LI><A HREF="#f8"><vtype>void</vtype> setTDC</A>(<vtype>int</vtype> tdcIn) 
+<LI><A HREF="#f9"><vtype>void</vtype> setDetector</A>(<vtype>int</vtype> detIn) 
+<LI><A HREF="#f10"><vtype>void</vtype> setElement</A>(<vtype>int</vtype> elIn) 
+<LI><A HREF="#f11"><vtype>int&</vtype> getADCr</A>() 
+<LI><A HREF="#f12"><vtype>int&</vtype> getTDCr</A>() 
+<LI><A HREF="#f13"><vtype>int&</vtype> getDetectorr</A>() 
+<LI><A HREF="#f14"><vtype>int&</vtype> getElementr</A>() 
+<LI><A HREF="#f15"><vtype>bool</vtype> isDefined</A>() 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="tbase.html#f3"><vtype>string</vtype> TBase::name</A>() const
+</UL>
+<DT>Protected inherrited variables
+<DD><vtype>string</vtype> <A HREF="tbase.html#v2">TBase::fname</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">TRawHit::TRawHit</A>() 
+<BR/><deff>
+Default constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">TRawHit::TRawHit</A>(<vtype>int</vtype> detector, <vtype>int</vtype> element, <vtype>int</vtype> ADC, <vtype>int</vtype> TDC) 
+<BR/><deff>
+Constructor. Sets the properies.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">TRawHit::~TRawHit</A>() 
+<BR/><deff>
+Destructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>int</vtype> TRawHit::getADC</A>() const
+<BR/><deff>
+Retruns the ADC-value of the raw hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>int</vtype> TRawHit::getTDC</A>() const
+<BR/><deff>
+Returns the TDC-value of the raw hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>int</vtype> TRawHit::getDetector</A>() const
+<BR/><deff>
+Returns the detector ID of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> TRawHit::getElement</A>() const
+<BR/><deff>
+Returns the element number of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> TRawHit::setADC</A>(<vtype>int</vtype> adcIn) 
+<BR/><deff>
+Sets the ADC-value of the raw hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> TRawHit::setTDC</A>(<vtype>int</vtype> tdcIn) 
+<BR/><deff>
+Sets the TDC-value of the raw hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> TRawHit::setDetector</A>(<vtype>int</vtype> detIn) 
+<BR/><deff>
+Sets the detector ID of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> TRawHit::setElement</A>(<vtype>int</vtype> elIn) 
+<BR/><deff>
+Sets the element number of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>int&</vtype> TRawHit::getADCr</A>() 
+<BR/><deff>
+Retruns a reference to the ADC-value of the raw hit.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>int&</vtype> TRawHit::getTDCr</A>() 
+<BR/><deff>
+Returns a reference to the TDC-value of the raw hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>int&</vtype> TRawHit::getDetectorr</A>() 
+<BR/><deff>
+Returns a reference to the detector ID of the raw hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>int&</vtype> TRawHit::getElementr</A>() 
+<BR/><deff>
+Returns a reference to the element number of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>bool</vtype> TRawHit::isDefined</A>() 
+<BR/><deff>
+Returns true, if the hit was modified after creation.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

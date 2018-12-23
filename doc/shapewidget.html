@@ -1,0 +1,211 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class ShapeWidget</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class ShapeWidget in "shapewidget.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Constructor
+<LI><A HREF="#c2">ShapeWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<LI><A HREF="#c3">ShapeWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual <A HREF="#f9"><vtype>bool</vtype> readOnly</A>() 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Public Variables
+<DD><A HREF="http://doc.trolltech.com/3.3/qlistview.html">QListView*</A> <A HREF="#v2">listView</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qtreewidget.html">QTreeWidget*</A> <A HREF="#v3">listView</A>
+<DD><vtype>QFrame*</vtype> <A HREF="#v4">line</A>
+<DD><A HREF="shapedisplay.html">ShapeDisplay*</A> <A HREF="#v5">pdisplay</A>
+<DT>Protected Variables
+<DD><vtype>bool</vtype> <A HREF="#v6">ReadOnly</A>
+<DD><vtype>vector&lt;shape_parameter&gt;*</vtype> <A HREF="#v7">ap1</A>
+<DD><vtype>vector&lt;shape_parameter*&gt;*</vtype> <A HREF="#v8">ap2</A>
+<DD><vtype>float</vtype> <A HREF="#v9">fraction</A>
+<DD><vtype>int</vtype> <A HREF="#v10">mode</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">ShapeWidget::ShapeWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt3-version, non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">ShapeWidget::ShapeWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<BR/><deff>
+Constructor. Qt4-version, non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qlistview.html">QListView*</A> <A NAME="#v2">listView</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qtreewidget.html">QTreeWidget*</A> <A NAME="#v3">listView</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">QFrame* line</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">ShapeDisplay* pdisplay</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v6">bool ReadOnly</A>
+<BR/><deff>
+read-only-property. In read only mode, variables won't be modified if changes are made in the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v7">vector<shape_parameter>* ap1</A>
+<BR/><deff>
+stores the list of shapes
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v8">vector<shape_parameter*>* ap2</A>
+<BR/><deff>
+stores the list of shape-pointers
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v9">float fraction</A>
+<BR/><deff>
+fraction of widget width the list of shape shall have
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v10">int mode</A>
+<BR/><deff>
+stores how the current shape-vector has been provided.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> ShapeWidget::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> ShapeWidget::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">ShapeWidget::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">ShapeWidget::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> ShapeWidget::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> ShapeWidget::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> ShapeWidget::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>bool</vtype> ShapeWidget::readOnly</A>() 
+<BR/><deff>
+Returns the read-only-property. In read-only-mode, modifications made in this widget won't be applied to the given variables.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter*</A> <A NAME="f10">ShapeWidget::getParameterFromItem</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<BR/><deff>
+Returns a pointer to the shape, that is represented by the given list-view-item or NULL if none is found. Qt3-version, non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> <A NAME="f11">ShapeWidget::getItemFromParameter</A>(<A HREF="shapeparameter.html">shape_parameter*</A> al) 
+<BR/><deff>
+Returns the tree-widget-item, that represents the given shape-parameter or NULL if none is found.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter*</A> <A NAME="f12">ShapeWidget::getParameterFromItem</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<BR/><deff>
+Returns a pointer to the shape, that is represented by the given tree-widget-item or NULL if none is found. Qt4-version, non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> <A NAME="f13">ShapeWidget::getItemFromParameter</A>(<A HREF="shapeparameter.html">shape_parameter*</A> al) 
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

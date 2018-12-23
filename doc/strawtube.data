@@ -1,0 +1,342 @@
+strawTube
+strawtube.html
+/users/data12/pion/ehrhardt/tofPack2/shapes/include/strawTube.h
+CstrawTube
+-1 strawTube
+O#c2
+DDefault constructor.
+=
+CstrawTube
+-1 strawTube
+O#c3
+PcenterIn
+16 point3D
+Tpoint3d.html
+=
+PlineDirection
+17 vector3D
+Tvector3d.html
+=
+Prad
+1 float
+=
+PstackDirection
+17 vector3D
+Tvector3d.html
+=
+PshiftDirection
+17 vector3D
+Tvector3d.html
+=
+PisoChroneR
+1 float
+=
+Phalv
+0 int
+=
+PhalvAt
+0 int
+=
+DConstructor. Creates a straw tube. <var>centerIn</var> is the center of the tube, <var>line</var> the direction from the center to one end of the tube, <var>rad</var> is the radius of the tube. It has an additional radius-variable the iso-chrone-radius.
+DTo stack the tubes a stack-direction is necessary and, if they are stacked in more than one layer, the shift from one layer to the next has to be given. <var>hav</var> is the number of elements halved due to beam-tube and <var>halvAt</var> is the element-number of the first halved element.
+=
+CstrawTube
+-1 strawTube
+O#c4
+Pdescription
+129 shape_parameter&
+Sconst
+Tshapeparameter.html
+=
+DConstructor. Creates a straw-tube with the properties from the description.
+=
+CstrawTube
+-1 strawTube
+O#c5
+Ptube
+-1 strawTube&
+Sconst
+=
+DCopy constructor.
+=
+gstackingDirection
+17 vector3D
+O#v2
+Tvector3d.html
+D
+=
+gshift
+17 vector3D
+O#v3
+Tvector3d.html
+D
+=
+gisoChrone
+1 float
+O#v4
+D
+=
+ghalvedAt
+0 int
+O#v5
+D
+=
+gnHalvedElements
+0 int
+O#v6
+D
+=
+F~strawTube
+-1 virtual
+O#f2
+DDestructor
+=
+FgetIsoChroneRadius
+1 float
+Svirtual
+O#f3
+Lconst
+DReturns the Iso-Chrone-Radius.
+=
+FgetStackingDirection
+17 vector3D
+Svirtual
+O#f4
+Tvector3d.html
+Lconst
+DReturns the stacking direction of the strawTube-stack.
+=
+FgetShift
+17 vector3D
+Svirtual
+O#f5
+Tvector3d.html
+Lconst
+DReturns the shift-vector from the first layer to the second one.
+=
+FgetNumberOfHalvedElements
+0 int
+Svirtual
+O#f6
+Lconst
+DReturn the number of elements that are halved due to beam-tube.
+=
+FgetHalvedAt
+0 int
+Svirtual
+O#f7
+Lconst
+DReturns the element number of the element that is first halved due to beam-tube.
+=
+FsetIsoChroneRadius
+7 void
+Svirtual
+O#f8
+Pvalue
+1 float
+=
+DSets the Iso-Chrone-radius.
+=
+FsetStackingDirection
+7 void
+Svirtual
+O#f9
+Pvalue
+17 vector3D
+Tvector3d.html
+=
+DSets the direction in which the strawTubes shall be stacked.
+=
+FsetShift
+7 void
+Svirtual
+O#f10
+Pvalue
+17 vector3D
+Tvector3d.html
+=
+DSets the shift-vector, from the front layer to the second layer.
+=
+FsetNumberOfHalvedElements
+7 void
+Svirtual
+O#f11
+Pvalue
+0 int
+=
+DSets the number of elements in the stack that are halved due to beam-tube.
+=
+FsetHalvedAt
+7 void
+Svirtual
+O#f12
+Pvalue
+0 int
+=
+DSets the number of the element that is first halved due to beam-tube.
+=
+FgetFlightPathInShape
+1 float
+Svirtual
+O#f13
+Pline
+21 sLine3D&
+Sconst
+Tsline3d.html
+=
+DReturns the length of the path a <var>line</var> has in the shape.
+=
+FgetClone
+151 volumeShape*
+Svirtual
+O#f14
+Tvolumeshape.html
+DReturns a clone of the shape. Take care that you free the memory after use.
+=
+Foperator=
+7 void
+Svirtual
+O#f15
+Ps
+151 volumeShape&
+Sconst
+Tvolumeshape.html
+=
+DCopy operator. Works only if <var>s</var> is a strawTube or a <a href="cylinder.html">cylinder</a>.
+=
+FgetNext
+151 volumeShape*
+Svirtual
+O#f16
+Tvolumeshape.html
+Ptimes
+0 int
+=
+PstackType
+0 int
+=
+DAssuming a certain stackType, the shape of the elements <var>times</var> farther in the stack is generated and returned.
+=
+FgetEnvelope
+151 volumeShape*
+Svirtual
+O#f17
+Tvolumeshape.html
+Ptimes
+0 int
+=
+PstackType
+0 int
+=
+DReturns the enveloping shape of the stack of <var>times</var> strawTubes, stacked in type <var>stackType</var>.
+=
+Fsuspect
+0 int
+Svirtual
+O#f18
+Pline
+21 sLine3D&
+Sconst
+Tsline3d.html
+=
+PstackType
+0 int
+=
+DFor a stack of strawTubes with a certain <var>stackType</var>, the hit of the <var>line</var> with the overall shape of the stack is calculated computing the element number of the element that was most likely hit.
+=
+FDraw
+7 void
+Svirtual
+O#f19
+Lconst
+Peye
+16 point3D&
+Sconst
+Tpoint3d.html
+=
+Pplane
+23 plane3D&
+Sconst
+Tplane3d.html
+=
+PboundingBox
+19 vector4D*
+Tvector4d.html
+=
+PlColor
+0 int
+=
+PfColor
+0 int
+V8
+=
+PfStyle
+0 int
+V1001
+=
+DProjects and draws the quadrangle using the root-Draw functions to a root-TCanvas.
+DThe projection plane is <var>plane</var>, the eye-point is <var>eye</var>. You can provide line color, fill color and fill style. Supplying a suitable pointer for the bounding-box returns the size of the shape on the canvas. 
+=
+FDraw
+7 void
+Svirtual
+O#f20
+Lconst
+Peye
+16 point3D&
+Sconst
+Tpoint3d.html
+Vpoint3D(0,0,0)
+=
+Pplane
+23 plane3D&
+Sconst
+Tplane3d.html
+Vplane3D(point3D(0,0,1),vector3D(0,0,1))
+=
+PboundingBox
+19 vector4D*
+Tvector4d.html
+VNULL
+=
+Pident
+-1 TObject**
+Ttobject.html
+VNULL
+=
+PlColor
+0 int
+V1
+=
+PfColor
+0 int
+V8
+=
+PfStyle
+0 int
+V1001
+=
+DProjects and draws the quadrangle using the root-Draw functions to a root-TCanvas.
+DThe projection plane is <var>plane</var>, the eye-point is <var>eye</var>. You can provide line color, fill color and fill style. Supplying a suitable pointer for the bounding-box returns the size of the shape on the canvas. Ident can hold a pointer to the TPolyLine that was drawn to canvas.
+=
+Fdescription
+129 shape_parameter
+Svirtual
+O#f21
+Tshapeparameter.html
+Lconst
+DReturns a description of this strawTube.
+=
+FgetDescription
+129 shape_parameter
+Sstatic
+O#f22
+Tshapeparameter.html
+DStatic method. Returns a default description of a strawTube with all necessary variables declared.
+=
+DThis class implements a straw-tube as it is used in the COSY-TOF- and PANDA-experiment.
+DIt is derived of the shape <a href="cylinder.html">cylinder</a> giving it the properties of the base class. Additionally it has an iso-chrone-radius. This is the distance a particle passed the counter's central wire.
+S0 1 cylinder
+cylinder.html
+cylinder
+=

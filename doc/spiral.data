@@ -1,0 +1,487 @@
+spiral
+spiral.html
+/users/data12/pion/ehrhardt/tofPack2/include/spiral.h
+Cspiral
+-1 spiral
+O#c2
+Pi
+1 float
+V0
+=
+Pa
+1 float
+V1000
+=
+Pb
+1 float
+V1
+=
+Pd
+1 float
+V1
+=
+Pt
+1 float
+V1
+=
+Pc
+16 point3D
+Vpoint3D(0,0,0)
+=
+Pn
+17 vector3D
+Vvector3D(0,0,1)
+=
+Pl
+17 vector3D
+Vvector3D(1,0,0)
+=
+DConstructor. Sets the spirals properties: 
+D<table> 
+D<tr><th>parameter<th>description 
+D<tr><td>i<td>inner radius 
+D<tr><td>a<td>outer radius 
+D<tr><td>b<td>bending: d(phi) / d(rho) 
+D<tr><td>d<td>angular range 
+D<tr><td>t<td>thickness 
+D<tr><td>c<td>center point 
+D<tr><td>n<td>normal vector to the front plane 
+D<tr><td>l<td>starting direction for one of the edges 
+D</table> 
+DThe starting direction for the second edge (the higher-phi-edge) will be calculated by rotating the lower-phi-edge around the normal vector by the angular range. 
+=
+Cspiral
+-1 spiral
+O#c3
+Ps
+151 volumeShape&
+Sconst
+=
+DCopy constructor. Works if the shape is a spiral or a wedge. 
+=
+Cspiral
+-1 spiral
+O#c4
+Pdescription
+129 shape_parameter&
+Sconst
+=
+DConstructor. Creates a archimedian spiral out of the values in the description.
+=
+vinnerR
+1 float
+O#v2
+Dinner radius.  
+=
+vouterR
+1 float
+O#v3
+Douter radius.  
+=
+vbending
+1 float
+O#v4
+Dbending parameter : d(phi) / d(rho)  
+=
+vdphi
+1 float
+O#v5
+Dangular range.  
+=
+vthickness
+1 float
+O#v6
+Dthickness  
+=
+vnormal
+17 vector3D
+O#v7
+Dnormal vector.  
+=
+vlpe
+17 vector3D
+O#v8
+Ddirection vector for the lower-phi-edge.  
+=
+vhpe
+17 vector3D
+O#v9
+Ddirection vector for the higher-phi-edge.  
+=
+F~spiral
+-1 ~spiral
+O#f2
+DDestructor 
+=
+FgetInnerRadius
+1 float
+Svirtual
+O#f3
+Lconst
+DReturns the inner radius of the spiral. 
+=
+FgetOuterRadius
+1 float
+Svirtual
+O#f4
+Lconst
+DReturns the outer radius of the spiral. 
+=
+FgetBending
+1 float
+Svirtual
+O#f5
+Lconst
+DReturns the bending: d(phi) / d(rho) 
+=
+FgetPhiRange
+1 float
+Svirtual
+O#f6
+Lconst
+DReturns the angular range. 
+=
+FgetThickness
+1 float
+Svirtual
+O#f7
+Lconst
+DReturns the thickness of the spiral. 
+=
+FgetNormal
+17 vector3D
+Svirtual
+O#f8
+Lconst
+DReturns the normal vector to the front plane. 
+=
+FgetLowerPhiEdge
+17 vector3D
+Svirtual
+O#f9
+Lconst
+DReturns the starting direction of the lower-phi-edge. 
+=
+FsetInnerRadius
+7 void
+O#f10
+Pv
+1 float
+=
+DSets the inner radius of the spiral. 
+=
+FsetOuterRadius
+7 void
+O#f11
+Pv
+1 float
+=
+DSets the outer radius of the spiral. 
+=
+FsetBending
+7 void
+O#f12
+Pv
+1 float
+=
+DSets the bending: d(phi)/d(rho) of the spiral. 
+=
+FsetPhiRange
+7 void
+O#f13
+Pv
+1 float
+=
+DSets the angular range of the spiral. 
+=
+FsetThickness
+7 void
+O#f14
+Pt
+1 float
+=
+DSets the thickness of the spiral. 
+=
+FsetCenter
+7 void
+O#f15
+Pc
+16 point3D
+=
+DSets the center point of the shape.     
+=
+FsetNormal
+7 void
+O#f16
+Pv
+17 vector3D
+=
+DSets the normal vector. 
+=
+FsetLowerPhiEdge
+7 void
+O#f17
+Pv
+17 vector3D
+=
+DSets the starting direction for the lower phi edge. 
+=
+FgetNext
+151 volumeShape*
+Svirtual
+O#f18
+Ptimes
+0 int
+=
+PstackType
+0 int
+=
+DReturns a new volume shape, that is shifted, rotated, shrunk, enlarged, or else modified according to the parameter <var>stackType</var>, generating the <var>times<sup>th</sup></var> element in the stack.      
+DTake care, that you delete this shape correctly after use (potential memory leak).<br>  
+DThe following <var>stackType</var>s have been defined:  
+D<table>  
+D<tr><td>2<td>a clone of the shape is returned  
+D<tr><td>else<td>the new spiral is rotated <var>times</var> times around the normal vector by the angular range  
+D</table>  
+=
+FgetEnvelope
+151 volumeShape*
+Svirtual
+O#f19
+Ptimes
+0 int
+=
+PstackType
+0 int
+=
+DReturns a volume shape, that will be the envelope of <var>times</var> shapes, generated with the getNext-method in stack mode <var>stackType</var>.      
+DTake care, that you delete this shape correctly after use (potential memory leak). <br>The following <var>stackType</var>s have been defined: 
+D<table> 
+D<tr><td>2<td>a clone of the shape is returned 
+D<tr><td>else<td>the envelope is eighther a ring or a spiral, if the angular range * <var>times</var> is smaller than 2*Pi. 
+D</table> 
+=
+Fdistance
+17 vector3D
+Svirtual
+O#f20
+Pline
+21 sLine3D&
+Sconst
+=
+DReturns the distance vector from the straight line to the shape.     
+=
+FNormal
+21 sLine3D
+Svirtual
+O#f21
+Pline
+21 sLine3D&
+Sconst
+=
+DReturns the hit point of a straigt line with the shape and normal vector of the shape in that point. This is stored in the straight line return value with the Foot-property being the hit point and the Direction-property the normal vector.     
+=
+Fcut
+6 bool
+Svirtual
+O#f22
+Pf
+-1 fiber&
+Sconst
+=
+DReturns true, if the shape and the fiber occupy some space commonly.     
+=
+Foperator=
+7 void
+Svirtual
+O#f23
+Ps
+151 volumeShape*
+=
+DCopy operator. Works only if the shape is a spiral or a wedge. 
+=
+FgetClone
+151 volumeShape*
+Svirtual
+O#f24
+DCreates a new instance of the same volume shape with the same properties. Take care, that you delete this shape correctly after use (potential memory leak).     
+=
+FHitParams
+13 Vector
+Svirtual
+O#f25
+Pline
+21 sLine3D&
+Sconst
+=
+DReturns the parameters for a hit of a straight line with the shape. The pattern will be:       
+D<table>   
+D<tr><th>index of return<th>description     
+D<tr><td>0<td>sigma value     
+D<tr><td>1,2,3<td>entrance point of line/point on line closest to the volume     
+D<tr><td>4,5,6<td>resolution vector     
+D<tr><td>7,8,9<td>point on volume closest to the line     
+D<tr><td>10,11,12<td>minimum distance of line to volume, points to volume     
+D</table> 
+=
+FHitParams
+13 Vector
+Svirtual
+O#f26
+Pshape
+152 planeShape&
+Sconst
+=
+Porigin
+16 point3D
+=
+DReturns the parameters for a hit of a pyramid like shape with the tip at <var>origin</var> and the <var>shape</var> as base with the shape. The pattern will be:       
+D<table>  
+D<tr><th>index of return<th>description     
+D<tr><td>0<td>sigma value     
+D<tr><td>1,2,3<td>entrance point of line/point on line closest to the volume     
+D<tr><td>4,5,6<td>resolution vector     
+D<tr><td>7,8,9<td>point on volume closest to the line     
+D<tr><td>10,11,12<td>minimum distance of line to volume, points to volume     
+D</table>       
+=
+FHitting
+13 Vector
+Svirtual
+O#f27
+Pline
+21 sLine3D&
+Sconst
+=
+DCalculates all characteristics of a hit of a straight line with the volume shape. The return values components will be:     
+D<table>   
+D<tr><th>index <th>value     
+D<tr><td>0, 1, 2 <td>entrance point of line     
+D<tr><td>3, 4, 5 <td>distance of line to volume, points to volume     
+D<tr><td>6, 7, 8 <td>normal vector to volume in entrance point     
+D<tr><td>9 <td>sigma value     
+D</table>     
+=
+FgetFlightPathInShape
+1 float
+Svirtual
+O#f28
+Pline
+21 sLine3D&
+Sconst
+=
+DCalculates the entrance point and the exit point of the <var>line</var> in the shape and returns the length of the distance of the two points.     
+=
+Fentrance
+16 point3D
+Svirtual
+O#f29
+Pline
+21 sLine3D&
+Sconst
+=
+DReturns the entrance point of the straight line into the shape. This point is undefined if the line does not hit the shape.     
+=
+Fsuspect
+0 int
+Svirtual
+O#f30
+Pline
+21 sLine3D&
+Sconst
+=
+PstackType
+0 int
+=
+DAssuming, this volume shape is the first one in a stack of shapes generated with the getNext-method in stacking type <var>stackType</var>.      
+DThen the straight line <var>line</var> will hit the stack in the element number, that is returned or -1 if it doesn't hit the stack.     
+DThis doesn't know about the actual number of elements in this stack, so you'll have to check if the return value exceeds this.     
+=
+FDraw
+7 void
+Svirtual
+O#f31
+Lconst
+Peye
+16 point3D&
+Sconst
+=
+Pplane
+23 plane3D&
+Sconst
+=
+PboundingBox
+19 vector4D*
+=
+PlColor
+0 int
+=
+PfColor
+0 int
+V8
+=
+PfStyle
+0 int
+V1001
+=
+DThis function is used for drawing a shape to a root-TCanvas.  
+DIt will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>.   
+D<br>It is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.      
+=
+FDraw
+7 void
+Svirtual
+O#f32
+Lconst
+Peye
+16 point3D&
+Sconst
+Vpoint3D(0,0,0)
+=
+Pplane
+23 plane3D&
+Sconst
+Vplane3D(point3D(0,0,1),vector3D(0,0,1))
+=
+PboundingBox
+19 vector4D*
+VNULL
+=
+Pident
+-1 TObject**
+VNULL
+=
+PlColor
+0 int
+V1
+=
+PfColor
+0 int
+V8
+=
+PfStyle
+0 int
+V1001
+=
+DThis function is used for drawing a shape to a root-TCanvas.      
+DIt will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>.      
+D<br>It is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.      
+D<br>The parameter <var>ident</var> will return a pointer to the drawn root-primitive to provide the distance-to-primitive functionality.     
+=
+Fdescription
+129 shape_parameter
+Svirtual
+O#f33
+Lconst
+DReturns a description of this spiral.
+=
+FgetDescription
+129 shape_parameter
+Sstatic
+O#f34
+DStatic method. Returns a default description of a spiral with all necessary variables defined.
+=
+S0 1 volumeShape
+volumeshape.html
+volumeShape
+=

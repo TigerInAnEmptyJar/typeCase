@@ -1,0 +1,221 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class plane3D</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class plane3D in "geometry.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This is a plane in 3-dimensional space.
+<DL>
+<DT>Superclass
+<DD><A HREF="geomobj.html">geomObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">plane3D</A>() 
+<LI><A HREF="#c3">plane3D</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<LI><A HREF="#c4">plane3D</A>(const <A HREF="point3d.html">point3D&</A> a, const <A HREF="point3d.html">point3D&</A> b, const <A HREF="point3d.html">point3D&</A> c) 
+<LI><A HREF="#c5">plane3D</A>(const <A HREF="point3d.html">point3D&</A> foot, const <A HREF="vector3d.html">vector3D&</A> dir1, const <A HREF="vector3d.html">vector3D&</A> dir2) 
+<LI><A HREF="#c6">plane3D</A>(const <A HREF="point3d.html">point3D&</A> foot, const <A HREF="vector3d.html">vector3D&</A> norm) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f2">Foot</A>() const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f3">Direction</A>(<vtype>int</vtype> i) const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f4">Normal</A>() const
+<LI><A HREF="#f5"><vtype>void</vtype> operator=</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<LI><A HREF="#f6"><vtype>int</vtype> operator==</A>(const <A HREF="plane3d.html">plane3D&</A> p) const
+<LI><A HREF="#f7"><vtype>geomState</vtype> getState</A>() const
+<LI><A HREF="#f8"><vtype>void</vtype> Zero</A>() 
+<LI><A HREF="#f9"><vtype>rep3D</vtype> getRep</A>() const
+<LI><A HREF="#f10"><vtype>void</vtype> setRep</A>(<vtype>rep3D</vtype> r) 
+<LI><A HREF="#f11"><vtype>planeRep</vtype> getPlaneRep</A>() const
+<LI><A HREF="#f12"><vtype>void</vtype> setPlaneRep</A>(<vtype>planeRep</vtype> r) 
+<LI><A HREF="#f13"><vtype>void</vtype> setPlane</A>(const <A HREF="point3d.html">point3D&</A> foot, const <A HREF="vector3d.html">vector3D&</A> dir1, const <A HREF="vector3d.html">vector3D&</A> dir2) 
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f14">operator&</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f15">operator-</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f16">operator-</A>(const <A HREF="lline3d.html">lLine3D&</A> l) const
+<LI><A HREF="sline3d.html">sLine3D</A> <A HREF="#f17">operator-</A>(const <A HREF="plane3d.html">plane3D&</A> p) const
+<LI>virtual <A HREF="#f18"><vtype>string</vtype> toString</A>(<vtype>int</vtype> pt = -1) const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+<LI>virtual <A HREF="geomobj.html#f8"><vtype>string</vtype> geomObject::toString</A>() const
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Protected Variables
+<DD><vtype>planeRep</vtype> <A HREF="#v2">pr</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">plane3D::plane3D</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">plane3D::plane3D</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">plane3D::plane3D</A>(const <A HREF="point3d.html">point3D&</A> a, const <A HREF="point3d.html">point3D&</A> b, const <A HREF="point3d.html">point3D&</A> c) 
+<BR/><deff>
+Constructor. Sets the footing point to <var>a</var>, the two directions are calculated from <var>a</var> to <var>b</var> or <var>c</var> respectively.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">plane3D::plane3D</A>(const <A HREF="point3d.html">point3D&</A> foot, const <A HREF="vector3d.html">vector3D&</A> dir1, const <A HREF="vector3d.html">vector3D&</A> dir2) 
+<BR/><deff>
+Constructor. Sets the footing point and the two directions making up the plane. Take care that the angle between both directions is not too small.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c6">plane3D::plane3D</A>(const <A HREF="point3d.html">point3D&</A> foot, const <A HREF="vector3d.html">vector3D&</A> norm) 
+<BR/><deff>
+Constructor. Set the footing point and the normal vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">planeRep pr</A>
+<BR/><deff>
+Representation of the plane: _normal_ or _parametric_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f2">plane3D::Foot</A>() const
+<BR/><deff>
+Returns the footing point.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f3">plane3D::Direction</A>(<vtype>int</vtype> i) const
+<BR/><deff>
+Returns the <var>i<sup>th</sup></var> direction of the plane.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f4">plane3D::Normal</A>() const
+<BR/><deff>
+Returns the normal vector of the plane.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> plane3D::operator=</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> plane3D::operator==</A>(const <A HREF="plane3d.html">plane3D&</A> p) const
+<BR/><deff>
+Comparison operator. Returns true if the difference between <var>p</var>'s footing point and this plane is less than __prec (1e-6).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>geomState</vtype> plane3D::getState</A>() const
+<BR/><deff>
+Returns the state of the geometrical object. This can be _regular_, _undefined_, _infinite_ or _zero_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> plane3D::Zero</A>() 
+<BR/><deff>
+Sets the state of the object to _zero_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>rep3D</vtype> plane3D::getRep</A>() const
+<BR/><deff>
+Return the representation of plane's directions.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> plane3D::setRep</A>(<vtype>rep3D</vtype> r) 
+<BR/><deff>
+Set the representation of the plane's directions to eigther _cartesic3_, _spheric_ or _cylindric_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>planeRep</vtype> plane3D::getPlaneRep</A>() const
+<BR/><deff>
+Returns the planes representation.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> plane3D::setPlaneRep</A>(<vtype>planeRep</vtype> r) 
+<BR/><deff>
+Set the planes representation to eigther _normal_ or _parametric_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> plane3D::setPlane</A>(const <A HREF="point3d.html">point3D&</A> foot, const <A HREF="vector3d.html">vector3D&</A> dir1, const <A HREF="vector3d.html">vector3D&</A> dir2) 
+<BR/><deff>
+Set the plane's footing point to <var>foot</var>, and its directions. Take care that the angle between both directions is sufficiently large.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f14">plane3D::operator&</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<BR/><deff>
+Returns the distance of point <var>p</var> to this plane. Vector points to plane.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f15">plane3D::operator-</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<BR/><deff>
+Returns the intersection point of this plane with line <var>l</var>, if it exists.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f16">plane3D::operator-</A>(const <A HREF="lline3d.html">lLine3D&</A> l) const
+<BR/><deff>
+Returns the intersection point of this plane with line <var>l</var>, if it exists.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="sline3d.html">sLine3D</A> <A NAME="f17">plane3D::operator-</A>(const <A HREF="plane3d.html">plane3D&</A> p) const
+<BR/><deff>
+Returns the intersection line of plane <var>p</var> with this plane.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>string</vtype> plane3D::toString</A>(<vtype>int</vtype> pt = -1) const
+<BR/><deff>
+Returns a string representation of the plane dependent on <var>pt</var> = 16*p<sub>plane</sub> + 4*p<sub>vector</sub> + p<sub>foot</sub>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> plane3D::Infinite</A>() 
+<BR/><deff>
+Sets the state of the object to _infinite_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> plane3D::Undefined</A>() 
+<BR/><deff>
+Sets the state of the object to _undefined_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>void</vtype> plane3D::Regular</A>() 
+<BR/><deff>
+Sets the state of the object to _regular_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

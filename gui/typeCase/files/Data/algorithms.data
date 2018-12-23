@@ -1,0 +1,476 @@
+########## algorithm parameter ####### file version :1 #######
+24 ===== read in =====
+#9 0 read in
+#0 0 
+Dblabla
+
+===== Teufel Correction =====
+#42 0 Teufel Correction
+#0 0 
+DDue to the ADC-jumps of several detectors
+Dduring the beamtime in Oct 04, there is
+Da correction needed, shifting 50000 event
+Dwise the spectra to the same level, pedestal
+Dwill be at 1000, data at 1500. Note: raw 
+Dvalues are modified since calibration reads
+Dthe raw values.
+S/home/pion/ehrhardt/Tof2004/Data/CalibrationDataBasis/Teufel/stable/mean_values_run5140.log
+file for reference data
+N2 15 16 Detectors to correct
+
+===== Read Hits from tree =====
+#60 1 Read Hits from tree
+#0 0 
+DThis algorithm reads track data from a simple tree. 
+DThis includes theta, phi, beta and particle ID. 
+B0 search for event
+B0 Use as event input list
+B0 Use local directory
+S/local/scratch0/pion/ehrhardt/tmp
+local directory
+
+===== Read from simple tree =====
+#40 0 Read from simple tree
+#0 0 
+DThis algorithm reads track data from a simple tree. 
+DThis includes theta, phi, beta and particle ID. 
+B0 read Tracks
+B0 read Cluster
+B0 read Pixel
+B1 read Hits
+B1 reset unread data
+B0 shift start event
+B1 copy data to local directory
+I0 starting event
+S/users/scr0_pc46/pion/ehrhardt/Data/Okt_04/mc-pKL-3059-tracks
+Filename
+STof2004
+Treename
+S
+Filename for Tracks
+S
+Filename for Clusters
+S
+Filename for Pixels
+S
+Filename for Hits
+S/local/scratch0/pion/ehrhardt/tmpData
+local directory
+
+===== Calibration =====
+#19 1 Calibration
+#0 0 
+DCombines the different calibration
+Dmethods after the fashion:
+Dif(ADC>Param[0])
+D  ADC=(ADC+Param[1])*Param[2]
+D  TDC=(TDC+Param[3])*Param[4]+Param[5].
+N17 0 1 2 3 4 5 6 7 15 16 17 18 19 20 21 22 23 Correct QDC
+N10 0 1 2 3 4 5 6 7 15 16 Correct TDC
+
+===== Get the hit-shapes =====
+#18 0 Get the hit-shapes
+#0 0 
+DLoads the shapes of the detector segments
+Dto the calibrated hits.
+
+===== Read Tracks from tree =====
+#62 0 Read Tracks from tree
+#0 0 
+DThis algorithm reads track data from a simple tree. 
+DThis includes theta, phi, beta and particle ID. 
+B1 Search for read event
+B1 use as event input list
+B1 read event pattern
+B0 Use local directory
+S/local/scratch0/pion/ehrhardt/tmpData
+local directory
+N3 2 0 0 event pattern
+
+===== HitCluster generation =====
+#53 1 HitCluster generation
+#1 1 
+DThis algorithm can be used instead of or in addition to
+Da pixel-cluster-search. Intuitutionally, a cluster search
+Dis done on pixels, but it can also be done prior to pixel
+Dcalculation for the hits themselves generating hitCluster
+Dinstead of cluster. It searches all elements of one detector,
+Dlooking for neighbouring elements (element numbers). The
+Dtiming of a hit-cluster and the volumeShape are the one
+Dof the element with the largest adc-value in the bundle;
+Dthe adc is added up. Circular detectors are taken into
+Daccount.
+DGive the algorithm a vector of detector IDs, containing
+Dthe hits that should be morved to clusters.
+N7 17 18 19 20 21 22 23 detector IDs
+
+===== Hodo pixel =====
+#21 1 Hodo pixel
+#1 1 
+DDo calculation of pixels in the
+Dtwo-layered Hodoscope detector.
+B0 Use hit-cluster
+B0 Use middle plane
+B0 Use phi modulation function
+I4 Pixel ID
+I19 ID first layer
+I20 ID second layer
+F1.6 maximum chi squared for line fitting
+S-0.00270114+0.0230869*sin(2*(x+0.4474992))
+Phi modulation function
+
+===== Hodo pixel 3 layers =====
+#35 1 Hodo pixel 3 layers
+#1 1 
+DThis algorithm calculates pixel in a three layered   
+Dhodoscope. All layers have to be fibers. One of the layers   
+D(D) shall be of rectangular, the other two (X/Y) of   
+Dextended rectangular stacking. In the overlapp region of   
+Dall three layers, circular pixels are created, quadrangular  
+Delse.  
+B0 Use hit-cluster
+I23 ID_D_layer
+I18 ID_X_layer
+I17 ID_Y_layer
+I3 Pixel_ID
+
+===== Mycro-strip pixel =====
+#23 1 Mycro-strip pixel
+#1 1 
+DDo calculation of pixels in the mycro strip
+Ddetector.
+B0 Use hit-cluster
+I5 PixelID
+I21 ID Ring shaped detector
+I22 ID Wedge shaped detector
+
+===== Quirl pixel =====
+#30 1 Quirl pixel
+#1 1 
+DThis algorithm calculates the pixels out of 
+Dtwo or three elements for the Quirl  
+Ddetector, which has one wedge like and 
+Dtwo archimedian spiral like elements, one 
+Dleft and one right bent. 
+B0 Parallel projection
+B0 Special projection plane
+B0 Origin for projection point
+B0 Target for projection point
+B0 Use time difference
+B0 Correct light flight time
+B1 Triangle approximation
+P0 0 0 projection point
+P0 0 3300 point of projection plane
+V0 0 1 normal to projection plane
+I0 ID first layer
+I1 ID second layer
+I2 ID third layer
+I-1 minimum delta phi
+I1 maximum delta phi
+I2 minimum number of elements
+I23 number of spiral-spiral-crossings
+I0 pixel ID
+F5 maximum chi squared for line fit
+F10 maximum time difference
+
+===== Ring pixel =====
+#30 1 Ring pixel
+#1 1 
+DThis algorithm calculates the pixels out of 
+Dtwo or three elements for the Ring  
+Ddetector, which has one wedge like and 
+Dtwo archimedian spiral like elements, one 
+Dleft and one right bent. 
+B0 Parallel projection
+B0 Special projection plane
+B0 Origin for projection point
+B0 Target for projection point
+B0 Use time difference
+B0 Correct light flight time
+B1 Triangle approximation
+P0 0 0 projection point
+P0 0 0 point of projection plane
+V0 0 0 normal to projection plane
+I3 ID first layer
+I4 ID second layer
+I5 ID third layer
+I-1 minimum delta phi
+I1 maximum delta phi
+I2 minimum number of elements
+I23 number of spiral-spiral-crossings
+I1 pixel ID
+F5 maximum chi squared for line fit
+F10 maximum time difference
+
+===== Barrel pixel =====
+#22 1 Barrel pixel
+#1 1 
+DDo calculation of pixels in the
+DBarrel detector. The pixel z-Position
+Dis calculated via the run-time difference
+Dof the signal in the front and the
+Dback channel.
+I2 PixelID
+I6 ID Front channel
+I7 ID Back channel
+F25 Pixel size
+
+===== Line Track search =====
+#47 1 Line Track search
+#1 1 
+DThis is a track search algorithm in a detector
+Dwithout magnetic field, with thin detectors.
+DThe tracks can be searched in two modes:
+D-with the target as vertex and a pixel center
+D as source for prompt tracks
+D-taking two pixel center as bias for possibly 
+D secondary tracks.
+DAs for the assignment of the hits in the detector
+Dto the track, two modes are possible:
+D-If the enveloping shape of the detector-elements
+D in the detector is regular, hits around a suspect
+D element (taken from volumeShape::suspect()) are
+D taken.
+D-Every hit element of the detector is checked.
+D If the assumed line is close enough this element
+D is used. This method is slower than the other one!
+B1 use vertex as start
+B0 use angular distance
+I2 max number of elements in 2 tracks
+N4 0 1 2 5 pixel stop-IDs
+N4 9 9 8 9 pixel min # elements on track
+N15 3 15 16 22 3 15 16 21 2 15 16 3 15 16 6 pixel: essential detector IDs
+N0 start-pixel IDs
+N17 0 1 2 3 4 5 6 7 15 16 17 18 19 20 21 22 23 detectors
+N17 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 element search mode
+N68 0 0 0 0 0 0 0 0 1 1 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 1 1 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 1 1 5 5 5 5 5 2 5 0 0 0 0 0 0 3 3 1 1 3 3 3 3 1 1 3 max element distance
+N1 5 check pixel IDs
+N0 cluster stop-IDs
+N0 cluster min # elements on track
+N0 cluster: essential detector IDs
+T4 25 25 100 50 pixel: max chi squared for track
+T8 0.1 0.2 0.14 0.45 0.85 1.36 0.4 0.86 theta restriction for stop
+T8 -3.15 3.15 -3.15 3.15 -3.15 3.15 -3.15 3.15 phi restriction for stop
+T4 4 4 20 8 max distance
+T0 cluster: max chi squared for track
+
+===== Pixel Tracking =====
+#64 0 Pixel Tracking
+#1 1 
+DThis Algorithm is a very simple tracking algorithm to
+Dproduce out of any 2 pixels in the hodoscopes a
+Dtrack. Stop pixel is requested.
+DSearches prompt tracks and decay tracks. decay tracks are
+Dassembled to vees. A check for coplanarity with target is
+Dperformed.
+I2 max Prompt Equal
+I2 max Vee Equal
+I12 min Points Vee
+I1 max Decay Start
+F5 max Target Dist
+F3 max Vee Target Dist
+F10 max Dist Vee
+F1.5 max Chi Vee
+N3 1 1 2 max Diff suspect
+N3 9 9 7 min # Points
+T3 8 8 8 max Distance
+T3 25 25 50 max Chi Prompt
+T3 5 5 20 max Chi Decay
+
+===== V-Line Track search =====
+#50 1 V-Line Track search
+#1 1 
+DThis is a track search algorithm in a detector
+Dwithout magnetic field, with thin detectors
+Dfor decays of neutral particles.
+DThe algorithm assumes a prompt neutral track
+Dthat decays and causes hits in two stop detectors
+D=>two stop pixels/clusters.
+DOut of momentum-conservation reasons, the tracks
+Dall lie in the plane defined by the target and the
+Dtwo pixel centers.
+DHere there are pixels/clusters searched that are
+Dclose to the plane. Out of these pixels tracks are
+Dsearched with a secondary vertex point close to the 
+Dplane. 
+DThe angles of the tracks have to be able to add 
+Dup to the primary track.
+DAs for the assignment of the hits in the detector
+Dto the track, two modes are possible:
+D-If the enveloping shape of the detector-elements
+D in the detector is regular, hits around a suspect
+D element (taken from volumeShape::suspect()) are
+D taken.
+D-Every hit element of the detector is checked.
+D If the assumed line is close enough this element
+D is used. This method is slower than the other one!
+B1 use only elements unused of Prompt
+B1 do projection search
+I1 max number of elements in 2 tracks
+I13 min # elements on track-vertex-track
+I1 max elements in common with prompt for pixel
+F10 max Distance Vertex-Plane
+F1.5 maximum chi² for track-vertex-track
+F0.05 max angle diff pri to secondary 
+F2 max Distance pixel-plane
+N3 0 1 2 pixel stop-IDs
+N3 7 7 6 pixel min # elements on track
+N3 0 0 0 pixel: essential detector IDs
+N0 cluster stop-IDs
+N0 cluster min # elements on track
+N0 cluster: essential detector IDs
+N2 3 4 pixel start-IDs
+N0 cluster start-IDs
+N2 2 2 min start objects per plane
+N5 17 18 19 20 23 detectors
+N5 0 0 0 0 0 element search mode
+N1 22 must not detectors
+N18 2 2 2 2 2 1 2 2 2 2 2 1 4 4 4 4 4 1 max suspect-element distance
+T3 4 4 10 pixel: max chi squared for track
+T0 cluster: max chi squared for track
+T3 2 2 5 max distance
+T2 25 100 vertex z-position from target
+
+===== Write Hits to tree =====
+#61 0 Write Hits to tree
+#0 0 
+DThis algorithm reads track data from a simple tree. 
+DThis includes theta, phi, beta and particle ID. 
+S
+file path
+S/local/scratch0/pion/ehrhardt/tmp
+local directory
+
+===== Apply Signal Run Correction=====
+#58 1 Apply Signal Run Correction
+#2 0 
+DThis algorithm applies a light-run-correction to the tdc of some hit. 
+DThere are several possibilities:
+DApply a simple light run correction, 
+Dpath_of_signal_to_common_point * speed_of_signal_in_detector, 
+Dwith type "1"
+DWith type "10" the algorithm applies also a theta dependent offset, 
+Da 4th-degree-polynom with the coefficients getting from a
+D common-calibration-data-base of parameter-ID-8. Type "100" does the 
+Dsame thing but in orders of path_of_signal_to_common_point.
+N6 0 1 2 3 4 5 detectors to apply
+N6 1 101 101 1 101 101 type of calibration
+
+===== Apply Signal Run Correction=====
+#58 1 Apply Signal Run Correction
+#2 0 
+DThis algorithm applies a light-run-correction to the tdc of some hit. 
+DThere are several possibilities:
+DApply a simple light run correction, 
+Dpath_of_signal_to_common_point * speed_of_signal_in_detector, 
+Dwith type "1"
+DWith type "10" the algorithm applies also a theta dependent offset, 
+Da 4th-degree-polynom with the coefficients getting from a
+D common-calibration-data-base of parameter-ID-8. Type "100" does the 
+Dsame thing but in orders of path_of_signal_to_common_point.
+N2 6 7 detectors to apply
+N2 0 0 type of calibration
+
+===== Particle speed =====
+#29 1 Particle speed
+#2 0 
+DCalculates the speed of the particles
+Drepresented by the tracks:
+Dspeed = path_start_to_stop / TimeOfFlight
+DTimeOfFlight = t_stop - t_start
+B1 do charged prompt
+B0 do neutral prompt
+B1 do min angle secs
+B1 do min+1 angle secs
+I15 ID of closest start detector
+N2 15 16 ID of start detectors
+N8 0 1 2 3 4 5 6 7 ID of stop detectors
+
+===== Reaction recognition =====
+#38 1 Reaction recognition
+#2 0 
+DThis algorithm recogizes the pattern of
+Dseveral reactions defined by reaction algorithm
+Dparameters and stores them in the Event.
+S
+Names
+A===== ppelastic =====
+#0 0 ppelastic
+#2 0 
+DThis is the most basic reaction in
+Dproton-proton colisions. Quite useful
+Dfor calibration purpurses.
+F0.05  Maximum deviation from Missing mass
+F0.05  Angle difference from coplanarity
+F0.1  assumed Gamma difference
+
+A===== dpi+ =====
+#1 0 dpi+
+#2 0 
+DBeing a two body reaction, this reaction
+Dis the one of the most basic reaction in
+Dproton-proton colisions. Even better for 
+Dcalibration purpurses, since the velocities 
+Dof the deuteron are smaller than in pp-elastic.
+F0.05  Maximum deviation from Missing mass
+F0.05  Angle difference from coplanarity
+F1.25  Max angle between tracks
+F0.6  Crossover Momentum
+
+A===== pKLambda =====
+#10 1 pKLambda
+#2 0 
+DThis algorithm recogizes the pattern of
+Dseveral reactions defined by reaction algorithm
+Dparameters and stores them in the Event.
+B1 exactly 2 prompt and one decay track
+B1 use a multi line fit for prompt and secondary tracks
+B1 do and decide by kinfit
+B1 use decay for beta determination
+F0.50  Maximum deviation from Missing mass
+F0.509  Max angle between Lambda_rec and Lambda_meas
+F0.5 Maximum deviation from Momentum
+F10000 Chi² limit
+F0.6 Maximum Proton angle
+N4 1 1 1 1 representation for kinfit
+T4 0 1.80 0.0 2.0 Angle Ranges for pK and decay system
+T4 0.5 0.5 0.7 0.7 TOF resolution for measured tracks
+
+===== Compare data Generation =====
+#34 1 Compare data Generation
+#3 0 
+DGenerates an ascii output file with
+Ddata for each track including angles,
+Dvertex position, speed, hit elements.
+B0 use mc file
+B0 write track-data
+B0 write cluster-data
+B0 write pixel-data
+B0 write hit-data
+B1 write reactions
+B0 add file to run
+B0 exchange existing file in run
+B0 use local directory
+S
+MC Track file
+S/users/scr0_pc81/pion/ehrhardt/Results/Tracks/
+Output file
+S/local/scratch0/pion/ehrhardt/tmpData
+local directory
+R2 ppelastic
+pp-pkl-pkppi
+write reactions
+
+===== Write Tracks to tree =====
+#63 1 Write Tracks to tree
+#0 0 
+DThis algorithm reads track data from a simple tree. 
+DThis includes theta, phi, beta and particle ID. 
+B1 Search for read event
+B0 Use local directory
+S
+file path
+S/local/scratch0/pion/ehrhardt/tmp
+local directory
+
+=

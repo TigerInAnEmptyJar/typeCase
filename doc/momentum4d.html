@@ -1,0 +1,546 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class momentum4D</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class momentum4D in "geometry.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This class represents a 4D-momentum vector as used in physics. 
+<DL>
+<DT>Superclass
+<DD><A HREF="vector4d.html">vector4D</A>
+<DT>Constructor
+<LI><A HREF="#c2">momentum4D</A>() 
+<LI><A HREF="#c3">momentum4D</A>(const <A HREF="point4d.html">point4D&</A> p) 
+<LI><A HREF="#c4">momentum4D</A>(const <A HREF="vector4d.html">vector4D&</A> v) 
+<LI><A HREF="#c5">momentum4D</A>(const <A HREF="momentum4d.html">momentum4D&</A> m) 
+<LI><A HREF="#c6">momentum4D</A>(const <A HREF="point3d.html">point3D&</A> p, <vtype>double</vtype> energy) 
+<LI><A HREF="#c7">momentum4D</A>(<vtype>double</vtype> x, <vtype>double</vtype> y, <vtype>double</vtype> z, <vtype>double</vtype> e) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>void</vtype> setPM</A>(const <A HREF="vector3d.html">vector3D&</A> p, <vtype>double</vtype> m) 
+<LI><A HREF="#f3"><vtype>void</vtype> setVM</A>(const <A HREF="vector3d.html">vector3D&</A> v, <vtype>double</vtype> m) 
+<LI><A HREF="#f4"><vtype>void</vtype> setVE</A>(const <A HREF="vector3d.html">vector3D&</A> v, <vtype>double</vtype> e) 
+<LI><A HREF="#f5"><vtype>void</vtype> setPE</A>(const <A HREF="vector3d.html">vector3D&</A> p, <vtype>double</vtype> e) 
+<LI><A HREF="#f6"><vtype>double</vtype> Energy</A>() const
+<LI><A HREF="#f7"><vtype>double</vtype> Mass</A>() const
+<LI><A HREF="#f8"><vtype>double</vtype> Beta</A>() const
+<LI><A HREF="#f9"><vtype>double</vtype> Gamma</A>() const
+<LI><A HREF="#f10"><vtype>double</vtype> Rapidity</A>() const
+<LI><A HREF="#f11"><vtype>double</vtype> Rapidity</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<LI><A HREF="#f12"><vtype>double</vtype> px</A>() const
+<LI><A HREF="#f13"><vtype>double</vtype> py</A>() const
+<LI><A HREF="#f14"><vtype>double</vtype> pz</A>() const
+<LI><A HREF="#f15"><vtype>double</vtype> e</A>() const
+<LI><A HREF="#f16"><vtype>double</vtype> Px</A>() const
+<LI><A HREF="#f17"><vtype>double</vtype> Py</A>() const
+<LI><A HREF="#f18"><vtype>double</vtype> Pz</A>() const
+<LI><A HREF="#f19"><vtype>double</vtype> E</A>() const
+<LI><A HREF="#f20"><vtype>double</vtype> Pt</A>() const
+<LI><A HREF="#f21"><vtype>double</vtype> Pt</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f22">Pt_v</A>(const <A HREF="vector3d.html">vector3D&</A> axis = vector3D(0,0,1)) const
+<LI><A HREF="#f23"><vtype>double</vtype> Pl</A>() const
+<LI><A HREF="#f24"><vtype>double</vtype> Pl</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f25">Pl_v</A>(const <A HREF="vector3d.html">vector3D&</A> axis = vector3D(0,0,1)) const
+<LI><A HREF="#f26"><vtype>double</vtype> pt</A>() const
+<LI><A HREF="#f27"><vtype>double</vtype> pt</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f28">pt_v</A>(const <A HREF="vector3d.html">vector3D&</A> axis = vector3D(0,0,1)) const
+<LI><A HREF="#f29"><vtype>double</vtype> pl</A>() const
+<LI><A HREF="#f30"><vtype>double</vtype> pl</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f31">pl_v</A>(const <A HREF="vector3d.html">vector3D&</A> axis = vector3D(0,0,1)) const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f32">Velocity</A>() const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f33">Momentum</A>() const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f34">Direction</A>() const
+<LI><A HREF="momentum4d.html">momentum4D</A> <A HREF="#f35">boost</A>(const <A HREF="vector3d.html">vector3D&</A> beta) const
+<LI><A HREF="#f37"><vtype>int</vtype> operator==</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) const
+<LI><A HREF="#f38"><vtype>void</vtype> operator=</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) 
+<LI><A HREF="momentum4d.html">momentum4D</A> <A HREF="#f39">operator!</A>() const
+<LI><A HREF="momentum4d.html">momentum4D</A> <A HREF="#f40">operator+</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) const
+<LI><A HREF="momentum4d.html">momentum4D</A> <A HREF="#f41">operator-</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) const
+<LI><A HREF="#f42"><vtype>double</vtype> operator*</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) const
+<LI><A HREF="momentum4d.html">momentum4D</A> <A HREF="#f43">operator*</A>(<vtype>double</vtype> factor) const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="momentum4d.html">momentum4D</A> <A HREF="#f36">CM</A>(const <A HREF="momentum4d.html">momentum4D&</A> v1, const <A HREF="momentum4d.html">momentum4D&</A> v2, const <A HREF="momentum4d.html">momentum4D&</A> v3 = momentum4D(), const <A HREF="momentum4d.html">momentum4D&</A> v4 = momentum4D(), const <A HREF="momentum4d.html">momentum4D&</A> v5 = momentum4D()) 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="#f44"><vtype>double</vtype> operator[]</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="#f45"><vtype>string</vtype> toString</A>(<vtype>int</vtype> pt = -1) const
+<LI>virtual <A HREF="#f44"><vtype>double</vtype> operator[]</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="#f45"><vtype>string</vtype> toString</A>(<vtype>int</vtype> pt = -1) const
+<LI>virtual <A HREF="#f44"><vtype>double</vtype> operator[]</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="#f44"><vtype>double</vtype> operator[]</A>(<vtype>int</vtype> pos) const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="vector4d.html#f2"><vtype>void</vtype> vector4D::setValues</A>(<vtype>double</vtype> x, <vtype>double</vtype> y, <vtype>double</vtype> z, <vtype>double</vtype> w) 
+<LI>virtual <A HREF="vector4d.html#f3"><vtype>void</vtype> vector4D::setValues</A>(<vtype>double</vtype> x, <vtype>double</vtype> y, <vtype>double</vtype> z) 
+<LI>virtual <A HREF="vector4d.html#f4"><vtype>void</vtype> vector4D::setValue</A>(<vtype>int</vtype> pos, <vtype>double</vtype> valueIn) 
+<LI>virtual <A HREF="vector4d.html#f5"><vtype>double</vtype> vector4D::getValue</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="vector4d.html#f6"><vtype>geomState</vtype> vector4D::getState</A>() const
+<LI>virtual <A HREF="vector4d.html#f7"><vtype>int</vtype> vector4D::getDimension</A>() const
+<LI>virtual <A HREF="vector4d.html#f8"><vtype>void</vtype> vector4D::normalize</A>() 
+<LI>virtual <A HREF="vector4d.html#f9"><vtype>double</vtype> vector4D::length</A>() const
+<LI><A HREF="vector4d.html#f10"><vtype>void</vtype> vector4D::operator=</A>(const <A HREF="point.html">point&</A> p) 
+<LI><A HREF="vector4d.html#f11"><vtype>void</vtype> vector4D::operator=</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="vector4d.html#f12"><vtype>void</vtype> vector4D::operator=</A>(const <A HREF="point4d.html">point4D&</A> p) 
+<LI><A HREF="vector4d.html#f13"><vtype>void</vtype> vector4D::operator=</A>(const <A HREF="vector4d.html">vector4D&</A> v) 
+<LI><A HREF="vector4d.html#f14"><vtype>void</vtype> vector4D::operator=</A>(const <A HREF="point3d.html">point3D&</A> p) 
+<LI><A HREF="vector4d.html#f15"><vtype>void</vtype> vector4D::operator=</A>(const <A HREF="vector3d.html">vector3D&</A> v) 
+<LI><A HREF="vector4d.html#f16"><vtype>int</vtype> vector4D::operator==</A>(const <A HREF="vector4d.html">vector4D&</A> v) const
+<LI><A HREF="vector4d.html">vector4D</A> <A HREF="vector4d.html#f17">vector4D::operator!</A>() const
+<LI>virtual <A HREF="point4d.html#f2"><vtype>void</vtype> point4D::setValues</A>(<vtype>double</vtype> x, <vtype>double</vtype> y, <vtype>double</vtype> z, <vtype>double</vtype> w) 
+<LI>virtual <A HREF="point4d.html#f3"><vtype>void</vtype> point4D::setValues</A>(<vtype>double</vtype> x, <vtype>double</vtype> y, <vtype>double</vtype> z) 
+<LI>virtual <A HREF="point4d.html#f4"><vtype>void</vtype> point4D::setValue</A>(<vtype>int</vtype> pos, <vtype>double</vtype> valueIn) 
+<LI>virtual <A HREF="point4d.html#f5"><vtype>int</vtype> point4D::getDimension</A>() const
+<LI>virtual <A HREF="point4d.html#f6"><vtype>double</vtype> point4D::getValue</A>(<vtype>int</vtype> pos) const
+<LI><A HREF="point4d.html#f7"><vtype>double</vtype> point4D::W</A>() const
+<LI><A HREF="point4d.html#f8"><vtype>double</vtype> point4D::X</A>() const
+<LI><A HREF="point4d.html#f9"><vtype>double</vtype> point4D::Y</A>() const
+<LI><A HREF="point4d.html#f10"><vtype>double</vtype> point4D::Z</A>() const
+<LI><A HREF="point4d.html#f11"><vtype>double</vtype> point4D::Phi</A>() const
+<LI><A HREF="point4d.html#f12"><vtype>double</vtype> point4D::Theta</A>() const
+<LI><A HREF="point4d.html#f13"><vtype>double</vtype> point4D::Rho</A>() const
+<LI><A HREF="point4d.html#f14"><vtype>double</vtype> point4D::R</A>() const
+<LI><A HREF="point4d.html#f15"><vtype>double</vtype> point4D::w</A>() const
+<LI><A HREF="point4d.html#f16"><vtype>double</vtype> point4D::x</A>() const
+<LI><A HREF="point4d.html#f17"><vtype>double</vtype> point4D::y</A>() const
+<LI><A HREF="point4d.html#f18"><vtype>double</vtype> point4D::z</A>() const
+<LI><A HREF="point4d.html#f19"><vtype>double</vtype> point4D::phi</A>() const
+<LI><A HREF="point4d.html#f20"><vtype>double</vtype> point4D::theta</A>() const
+<LI><A HREF="point4d.html#f21"><vtype>double</vtype> point4D::rho</A>() const
+<LI><A HREF="point4d.html#f22"><vtype>double</vtype> point4D::r</A>() const
+<LI><A HREF="point4d.html#f23"><vtype>rep3D</vtype> point4D::getRep</A>() const
+<LI><A HREF="point4d.html#f24"><vtype>void</vtype> point4D::setRep</A>(<vtype>rep3D</vtype> r) 
+<LI><A HREF="point4d.html#f25"><vtype>void</vtype> point4D::operator=</A>(const <A HREF="point.html">point&</A> p) 
+<LI><A HREF="point4d.html#f26"><vtype>void</vtype> point4D::operator=</A>(const <A HREF="point3d.html">point3D&</A> p) 
+<LI><A HREF="point4d.html#f27"><vtype>void</vtype> point4D::operator=</A>(const <A HREF="point4d.html">point4D&</A> p) 
+<LI><A HREF="point4d.html#f28"><vtype>int</vtype> point4D::operator==</A>(const <A HREF="point4d.html">point4D&</A> p) 
+<LI>virtual <A HREF="vector.html#f2"><vtype>void</vtype> Vector::normalize</A>() 
+<LI><A HREF="vector.html#f3"><vtype>void</vtype> Vector::transpose</A>() 
+<LI><A HREF="vector.html#f4"><vtype>int</vtype> Vector::isLine</A>() const
+<LI><A HREF="vector.html#f5"><vtype>int</vtype> Vector::isColumn</A>() const
+<LI>virtual <A HREF="vector.html#f6"><vtype>double</vtype> Vector::length</A>() const
+<LI><A HREF="vector.html#f7"><vtype>void</vtype> Vector::operator=</A>(const <A HREF="point.html">point&</A> p) 
+<LI><A HREF="vector.html#f8"><vtype>void</vtype> Vector::operator=</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="vector.html">Vector</A> <A HREF="vector.html#f9">Vector::operator+</A>(const <A HREF="vector.html">Vector&</A> w) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="vector.html#f10">Vector::operator-</A>(const <A HREF="vector.html">Vector&</A> w) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="vector.html#f11">Vector::operator*</A>(<vtype>double</vtype> f) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="vector.html#f12">Vector::operator%</A>(const <A HREF="vector.html">Vector&</A> w) const
+<LI><A HREF="vector.html#f13"><vtype>double</vtype> Vector::operator*</A>(const <A HREF="vector.html">Vector&</A> w) const
+<LI><A HREF="vector.html#f14"><vtype>int</vtype> Vector::operator==</A>(const <A HREF="vector.html">Vector&</A> v) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="vector.html#f15">Vector::operator!</A>() 
+<LI>virtual <A HREF="vector.html#f16"><vtype>string</vtype> Vector::toString</A>() const
+<LI>virtual <A HREF="point.html#f3"><vtype>void</vtype> point::reDimension</A>(<vtype>int</vtype> newDim) 
+<LI><A HREF="point.html#f4"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> values[]) 
+<LI><A HREF="point.html#f5"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> f1 = 0, <vtype>double</vtype> f2 = 0, <vtype>double</vtype> f3 = 0, <vtype>double</vtype> f4 = 0, <vtype>double</vtype> f5 = 0, <vtype>double</vtype> f6 = 0, <vtype>double</vtype> f7 = 0, <vtype>double</vtype> f8 = 0, <vtype>double</vtype> f9 = 0, <vtype>double</vtype> f10 = 0, <vtype>double</vtype> f11 = 0, <vtype>double</vtype> f12 = 0, <vtype>double</vtype> f13 = 0, <vtype>double</vtype> f14 = 0, <vtype>double</vtype> f15 = 0, <vtype>double</vtype> f16 = 0, <vtype>double</vtype> f17 = 0, <vtype>double</vtype> f18 = 0, <vtype>double</vtype> f19 = 0, <vtype>double</vtype> f20 = 0) 
+<LI>virtual <A HREF="point.html#f6"><vtype>void</vtype> point::setValue</A>(<vtype>int</vtype> pos, <vtype>double</vtype> valueIn) 
+<LI>virtual <A HREF="point.html#f7"><vtype>void</vtype> point::Zero</A>() 
+<LI>virtual <A HREF="point.html#f8"><vtype>double</vtype> point::getValue</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="point.html#f9"><vtype>int</vtype> point::getDimension</A>() const
+<LI>virtual <A HREF="point.html#f10"><vtype>geomState</vtype> point::getState</A>() const
+<LI><A HREF="point.html#f11"><vtype>void</vtype> point::operator=</A>(const <A HREF="point.html">point&</A> p) 
+<LI><A HREF="vector.html">Vector</A> <A HREF="point.html#f12">point::operator-</A>(const <A HREF="point.html">point&</A> q) 
+<LI><A HREF="point.html">point</A> <A HREF="point.html#f13">point::operator-</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="point.html">point</A> <A HREF="point.html#f14">point::operator+</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="point.html#f15"><vtype>int</vtype> point::operator==</A>(const <A HREF="point.html">point&</A> p) 
+<LI>virtual <A HREF="point.html#f17"><vtype>string</vtype> point::toString</A>() const
+<LI>virtual <A HREF="point.html#f3"><vtype>void</vtype> point::reDimension</A>(<vtype>int</vtype> newDim) 
+<LI><A HREF="point.html#f4"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> values[]) 
+<LI><A HREF="point.html#f5"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> f1 = 0, <vtype>double</vtype> f2 = 0, <vtype>double</vtype> f3 = 0, <vtype>double</vtype> f4 = 0, <vtype>double</vtype> f5 = 0, <vtype>double</vtype> f6 = 0, <vtype>double</vtype> f7 = 0, <vtype>double</vtype> f8 = 0, <vtype>double</vtype> f9 = 0, <vtype>double</vtype> f10 = 0, <vtype>double</vtype> f11 = 0, <vtype>double</vtype> f12 = 0, <vtype>double</vtype> f13 = 0, <vtype>double</vtype> f14 = 0, <vtype>double</vtype> f15 = 0, <vtype>double</vtype> f16 = 0, <vtype>double</vtype> f17 = 0, <vtype>double</vtype> f18 = 0, <vtype>double</vtype> f19 = 0, <vtype>double</vtype> f20 = 0) 
+<LI>virtual <A HREF="point.html#f6"><vtype>void</vtype> point::setValue</A>(<vtype>int</vtype> pos, <vtype>double</vtype> valueIn) 
+<LI>virtual <A HREF="point.html#f7"><vtype>void</vtype> point::Zero</A>() 
+<LI>virtual <A HREF="point.html#f8"><vtype>double</vtype> point::getValue</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="point.html#f9"><vtype>int</vtype> point::getDimension</A>() const
+<LI>virtual <A HREF="point.html#f10"><vtype>geomState</vtype> point::getState</A>() const
+<LI><A HREF="point.html#f11"><vtype>void</vtype> point::operator=</A>(const <A HREF="point.html">point&</A> p) 
+<LI><A HREF="vector.html">Vector</A> <A HREF="point.html#f12">point::operator-</A>(const <A HREF="point.html">point&</A> q) 
+<LI><A HREF="point.html">point</A> <A HREF="point.html#f13">point::operator-</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="point.html">point</A> <A HREF="point.html#f14">point::operator+</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="point.html#f15"><vtype>int</vtype> point::operator==</A>(const <A HREF="point.html">point&</A> p) 
+<LI>virtual <A HREF="point.html#f17"><vtype>string</vtype> point::toString</A>() const
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+<LI>virtual <A HREF="geomobj.html#f8"><vtype>string</vtype> geomObject::toString</A>() const
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+<LI>virtual <A HREF="geomobj.html#f8"><vtype>string</vtype> geomObject::toString</A>() const
+</UL>
+<DD>protected inherrited<UL>
+<LI>virtual <A HREF="vector4d.html#f20"><vtype>void</vtype> vector4D::Zero</A>() 
+<LI>virtual <A HREF="vector4d.html#f21"><vtype>void</vtype> vector4D::Infinite</A>() 
+<LI>virtual <A HREF="vector4d.html#f22"><vtype>void</vtype> vector4D::Undefined</A>() 
+<LI>virtual <A HREF="vector4d.html#f23"><vtype>void</vtype> vector4D::Regular</A>() 
+<LI>virtual <A HREF="vector.html#f17"><vtype>void</vtype> Vector::Undefined</A>() 
+</UL>
+<DT>Protected Variables
+<DD><A HREF="vector3d.html">vector3D</A> <A HREF="#v2">velocity</A>
+<DD><vtype>double</vtype> <A HREF="#v3">mass</A>
+<DD><vtype>double</vtype> <A HREF="#v4">gamma</A>
+<DT>Protected inherrited variables
+<DD><vtype>double</vtype> <A HREF="point4d.html#v2">point4D::f_r</A>
+<DD><vtype>double</vtype> <A HREF="point4d.html#v3">point4D::f_rho</A>
+<DD><vtype>double</vtype> <A HREF="point4d.html#v4">point4D::f_phi</A>
+<DD><vtype>double</vtype> <A HREF="point4d.html#v5">point4D::f_theta</A>
+<DD><vtype>double</vtype> <A HREF="point4d.html#v6">point4D::value1</A>
+<DD><vtype>double</vtype> <A HREF="point4d.html#v7">point4D::value2</A>
+<DD><vtype>double</vtype> <A HREF="point4d.html#v8">point4D::value3</A>
+<DD><vtype>double</vtype> <A HREF="point4d.html#v9">point4D::value4</A>
+<DD><vtype>int</vtype> <A HREF="point.html#v2">point::dimension</A>
+<DD><vtype>int</vtype> <A HREF="point.html#v3">point::infinityPos</A>
+<DD><vtype>double</vtype> <A HREF="point.html#v4">point::v[20]</A>
+<DD><vtype>double*</vtype> <A HREF="point.html#v5">point::value</A>
+<DD><vtype>int</vtype> <A HREF="point.html#v2">point::dimension</A>
+<DD><vtype>int</vtype> <A HREF="point.html#v3">point::infinityPos</A>
+<DD><vtype>double</vtype> <A HREF="point.html#v4">point::v[20]</A>
+<DD><vtype>double*</vtype> <A HREF="point.html#v5">point::value</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">momentum4D::momentum4D</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">momentum4D::momentum4D</A>(const <A HREF="point4d.html">point4D&</A> p) 
+<BR/><deff>
+Copy constructor. Interpret the first 3 values of <var>p</var> as momentum components and <var>p[3]</var> as energy.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">momentum4D::momentum4D</A>(const <A HREF="vector4d.html">vector4D&</A> v) 
+<BR/><deff>
+Copy constructor. Interpret the first 3 values of <var>v</var> as momentum components and <var>v[3]</var> as energy.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">momentum4D::momentum4D</A>(const <A HREF="momentum4d.html">momentum4D&</A> m) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c6">momentum4D::momentum4D</A>(const <A HREF="point3d.html">point3D&</A> p, <vtype>double</vtype> energy) 
+<BR/><deff>
+Constructor. Set the momentum in 3D-space and the energy of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c7">momentum4D::momentum4D</A>(<vtype>double</vtype> x, <vtype>double</vtype> y, <vtype>double</vtype> z, <vtype>double</vtype> e) 
+<BR/><deff>
+Constructor. Set the cartesic momentum components and the energy of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="#v2">velocity</A>
+<BR/><deff>
+Velocity vector of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">double mass</A>
+<BR/><deff>
+Mass of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">double gamma</A>
+<BR/><deff>
+Gamma value of the particle this is 1/sqrt(1-beta²).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>void</vtype> momentum4D::setPM</A>(const <A HREF="vector3d.html">vector3D&</A> p, <vtype>double</vtype> m) 
+<BR/><deff>
+Sets the particles properties. Vector is interpreted as momentum components, scalar as mass.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>void</vtype> momentum4D::setVM</A>(const <A HREF="vector3d.html">vector3D&</A> v, <vtype>double</vtype> m) 
+<BR/><deff>
+Sets the particles properties. Vector is interpreted as velocity components, scalar as mass.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> momentum4D::setVE</A>(const <A HREF="vector3d.html">vector3D&</A> v, <vtype>double</vtype> e) 
+<BR/><deff>
+Sets the particles properties. Vector is interpreted as velocity components, scalar as energy.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> momentum4D::setPE</A>(const <A HREF="vector3d.html">vector3D&</A> p, <vtype>double</vtype> e) 
+<BR/><deff>
+Sets the particles properties. Vector is interpreted as momentum components, scalar as energy.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>double</vtype> momentum4D::Energy</A>() const
+<BR/><deff>
+Return the energy of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>double</vtype> momentum4D::Mass</A>() const
+<BR/><deff>
+Returns the mass of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>double</vtype> momentum4D::Beta</A>() const
+<BR/><deff>
+Returns the scalar velocity of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>double</vtype> momentum4D::Gamma</A>() const
+<BR/><deff>
+Returns the gamma value of the particle: 1/<sub>sqrt(1-beta²)</sub>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>double</vtype> momentum4D::Rapidity</A>() const
+<BR/><deff>
+Return the Rapidity of the particle along <var>axis</var>.
+1/2*ln(<sup>(e+p<sub>t</sub>)</sup> / <sub>(e-p<sub>t</sub>)</sub>)
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>double</vtype> momentum4D::Rapidity</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<BR/><deff>
+Return the Rapidity of the particle along <var>axis</var>.
+1/2*ln(<sup>(e+p<sub>t</sub>)</sup> / <sub>(e-p<sub>t</sub>)</sub>)
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>double</vtype> momentum4D::px</A>() const
+<BR/><deff>
+Return the x-component of the momentum of the particle in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>double</vtype> momentum4D::py</A>() const
+<BR/><deff>
+Return the y-component of the momentum of the particle in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>double</vtype> momentum4D::pz</A>() const
+<BR/><deff>
+Return the z-component of the momentum of the particle in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>double</vtype> momentum4D::e</A>() const
+<BR/><deff>
+Return the particles energy.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>double</vtype> momentum4D::Px</A>() const
+<BR/><deff>
+Return the x-component of the momentum of the particle in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>double</vtype> momentum4D::Py</A>() const
+<BR/><deff>
+Return the y-component of the momentum of the particle in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>double</vtype> momentum4D::Pz</A>() const
+<BR/><deff>
+Return the z-component of the momentum of the particle in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>double</vtype> momentum4D::E</A>() const
+<BR/><deff>
+Return the particles energy.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>double</vtype> momentum4D::Pt</A>() const
+<BR/><deff>
+Return the transverse momentum of the particle perpendicular to z-axis.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>double</vtype> momentum4D::Pt</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<BR/><deff>
+Return the transverse momentum of the particle perpendicular to <var>axis</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f22">momentum4D::Pt_v</A>(const <A HREF="vector3d.html">vector3D&</A> axis = vector3D(0,0,1)) const
+<BR/><deff>
+Return the transverse momentum-vector perpendicular to <var>axis</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>double</vtype> momentum4D::Pl</A>() const
+<BR/><deff>
+Return the longitudinal momentum of the particle along z-axis.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>double</vtype> momentum4D::Pl</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<BR/><deff>
+Return the longitudinal momentum of the particle along <var>axis</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f25">momentum4D::Pl_v</A>(const <A HREF="vector3d.html">vector3D&</A> axis = vector3D(0,0,1)) const
+<BR/><deff>
+Return the longitudinal momentum-vector of the particle along <var>axis</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f26"><vtype>double</vtype> momentum4D::pt</A>() const
+<BR/><deff>
+Return the transverse momentum of the particle perpendicular to z-axis.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f27"><vtype>double</vtype> momentum4D::pt</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<BR/><deff>
+Return the transverse momentum of the particle perpendicular to <var>axis</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f28">momentum4D::pt_v</A>(const <A HREF="vector3d.html">vector3D&</A> axis = vector3D(0,0,1)) const
+<BR/><deff>
+Return the transverse momentum-vector perpendicular to <var>axis</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f29"><vtype>double</vtype> momentum4D::pl</A>() const
+<BR/><deff>
+Return the longitudinal momentum of the particle along z-axis.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f30"><vtype>double</vtype> momentum4D::pl</A>(const <A HREF="vector3d.html">vector3D&</A> axis) const
+<BR/><deff>
+Return the longitudinal momentum of the particle along <var>axis</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f31">momentum4D::pl_v</A>(const <A HREF="vector3d.html">vector3D&</A> axis = vector3D(0,0,1)) const
+<BR/><deff>
+Return the longitudinal momentum-vector of the particle along <var>axis</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f32">momentum4D::Velocity</A>() const
+<BR/><deff>
+Return the velocity of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f33">momentum4D::Momentum</A>() const
+<BR/><deff>
+Return the momentum of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f34">momentum4D::Direction</A>() const
+<BR/><deff>
+Return the direction of the momentum of the particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D</A> <A NAME="f35">momentum4D::boost</A>(const <A HREF="vector3d.html">vector3D&</A> beta) const
+<BR/><deff>
+Returns a particle that is Lorentz-boosted by <var>beta</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D</A> <A NAME="f36">momentum4D::CM</A>(const <A HREF="momentum4d.html">momentum4D&</A> v1, const <A HREF="momentum4d.html">momentum4D&</A> v2, const <A HREF="momentum4d.html">momentum4D&</A> v3 = momentum4D(), const <A HREF="momentum4d.html">momentum4D&</A> v4 = momentum4D(), const <A HREF="momentum4d.html">momentum4D&</A> v5 = momentum4D()) 
+<BR/><deff>
+Static method to calculate the center of momentum for up to 5 particles.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f37"><vtype>int</vtype> momentum4D::operator==</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) const
+<BR/><deff>
+Comparison operator. Returns true if the difference between the particles is less than __prec (1e-6).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f38"><vtype>void</vtype> momentum4D::operator=</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D</A> <A NAME="f39">momentum4D::operator!</A>() const
+<BR/><deff>
+Transposes the vector and returns the result. A line vector returns a column vector, a column vector a line vector. This vector remains unchanged.
+Inherrited from superclass.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D</A> <A NAME="f40">momentum4D::operator+</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) const
+<BR/><deff>
+Addition operation. Returns the sum of this particle and <var>v</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D</A> <A NAME="f41">momentum4D::operator-</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) const
+<BR/><deff>
+Subtraction operator. Returns the difference between this particle and <var>v</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f42"><vtype>double</vtype> momentum4D::operator*</A>(const <A HREF="momentum4d.html">momentum4D&</A> v) const
+<BR/><deff>
+Multiplication operator. Returns the scalar product of this particle and <var>v</var>. result = e*e<sub>v</sub>-(p*p<sub>v</sub>)
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="momentum4d.html">momentum4D</A> <A NAME="f43">momentum4D::operator*</A>(<vtype>double</vtype> factor) const
+<BR/><deff>
+Multiplication operator. Returns a particle with <var>f</var> times the momentum and <var>f</var> times the energy of this particle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f44"><vtype>double</vtype> momentum4D::operator[]</A>(<vtype>int</vtype> pos) const
+<BR/><deff>
+Access operator. Returns the <var>pos<sup>th</sup></var> component in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f45"><vtype>string</vtype> momentum4D::toString</A>(<vtype>int</vtype> pt = -1) const
+<BR/><deff>
+Returns a string representation of the particle.
+<var>pt</var> is 4*pt<sub>particle</sub>+pt<sub>3D</sub>.
+pt_<sub>particle</sub> is here 
+<table>
+<hr><hd><hd>momentum<hd>veclocity</hr>
+<tr>energy<td>0<td>2</tr>
+<tr>mass<td>1<td>3</tr>
+</table>
+pt<sub>3D</sub> can be eigther _cartesic3_, _cylindric_, _spheric_ or in the momentum's own representation (<var>pt</var>=-1, momentum-energy, default).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

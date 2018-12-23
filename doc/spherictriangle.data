@@ -1,0 +1,407 @@
+sphericTriangle
+spherictriangle.html
+/users/data12/pion/ehrhardt/tofPack2/include/planeShape.h
+CsphericTriangle
+-1 sphericTriangle
+O#c2
+Pcen
+16 point3D
+=
+Pa
+16 point3D
+Vpoint3D()
+=
+Pb
+16 point3D
+Vpoint3D()
+=
+Pc
+16 point3D
+Vpoint3D()
+=
+Pd
+16 point3D
+Vpoint3D()
+=
+Pe
+16 point3D
+Vpoint3D()
+=
+Pf
+16 point3D
+Vpoint3D()
+=
+DConstructor. Sets the corners of the triangle. If <var>d</var>, <var>e</var> and <var>f</var> are undefined, a real triangle remains. 
+=
+CsphericTriangle
+-1 sphericTriangle
+O#c3
+Ps
+152 planeShape&
+Sconst
+=
+DCopy constructor. Copies the points. Works for <var>s</var> being a triangle or a sphericTriangle. 
+=
+CsphericTriangle
+-1 sphericTriangle
+O#c4
+Pdescription
+129 shape_parameter&
+Sconst
+=
+DConstructor. Creates a spheric triangle a specified in the description.
+=
+vrealTriangle
+6 bool
+O#v2
+Dtrue if points A, B, and C are used, false if the others are used too
+=
+vA_
+16 point3D
+O#v3
+Dpoint of the triangle
+=
+vB_
+16 point3D
+O#v4
+Dpoint of the triangle
+=
+vC_
+16 point3D
+O#v5
+Dpoint of the triangle
+=
+vD_
+16 point3D
+O#v6
+Dpoint of the spheric triangle
+=
+vE_
+16 point3D
+O#v7
+Dpoint of the spheric triangle
+=
+vF_
+16 point3D
+O#v8
+Dpoint of the spheric triangle
+=
+F~sphericTriangle
+-1 virtual
+O#f2
+DDestructor  
+=
+FgetNumberOfPoints
+0 int
+Svirtual
+O#f3
+Lconst
+DReturns the number of points for this spheric triangle, can be 3 or 6.  
+=
+FgetPoint
+16 point3D
+Svirtual
+O#f4
+Lconst
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var>point of the triangle.  
+=
+FsetPoint
+7 void
+O#f5
+Pnum
+0 int
+=
+Pp
+16 point3D
+=
+DSets the <var>num<sup>th</sup></var> point of the triangle.  
+=
+FsetPoints
+7 void
+O#f6
+Pcen
+16 point3D
+=
+Pa
+16 point3D
+=
+Pb
+16 point3D
+=
+Pc
+16 point3D
+=
+Pd
+16 point3D
+Vpoint3D()
+=
+Pe
+16 point3D
+Vpoint3D()
+=
+Pf
+16 point3D
+Vpoint3D()
+=
+DSets the points of the spheric triangle. If the points <var>d</var>, <var>e</var> and <var>f</var> are undefined (as by default) a real triangle remains.  
+=
+FA
+16 point3D
+O#f7
+Lconst
+DReturns the A point of the spheric triangle.  
+=
+FB
+16 point3D
+O#f8
+Lconst
+DReturns the B point of the spheric triangle.  
+=
+FC
+16 point3D
+O#f9
+Lconst
+DReturns the C point of the spheric triangle.  
+=
+FD
+16 point3D
+O#f10
+Lconst
+DReturns the D point of the spheric triangle.  
+=
+FE
+16 point3D
+O#f11
+Lconst
+DReturns the E point of the spheric triangle.  
+=
+FF
+16 point3D
+O#f12
+Lconst
+DReturns the F point of the spheric triangle.  
+=
+FsetA
+7 void
+O#f13
+Pp
+16 point3D
+=
+DSets the A point of the spheric triangle.  
+=
+FsetB
+7 void
+O#f14
+Pp
+16 point3D
+=
+DSets the B point of the spheric triangle.  
+=
+FsetC
+7 void
+O#f15
+Pp
+16 point3D
+=
+DSets the C point of the spheric triangle.  
+=
+FsetD
+7 void
+O#f16
+Pp
+16 point3D
+=
+DSets the D point of the spheric triangle.  
+=
+FsetE
+7 void
+O#f17
+Pp
+16 point3D
+=
+DSets the E point of the spheric triangle.  
+=
+FsetF
+7 void
+O#f18
+Pp
+16 point3D
+=
+DSets the F point of the spheric triangle.  
+=
+Farea
+1 float
+Svirtual
+O#f19
+Lconst
+DReturns the area of the spheric triangle.    
+=
+FangularRange_Phi
+1 float
+Svirtual
+O#f20
+Lconst
+Porigin
+16 point3D&
+Sconst
+Vpoint3D(0,0,0)
+=
+PzDirection
+17 vector3D&
+Sconst
+Vvector3D(0,0,1)
+=
+DReturns the polar angular range of the spheric triangle, for any z direction and origin. 
+=
+FangularRange_Theta
+1 float
+Svirtual
+O#f21
+Lconst
+Porigin
+16 point3D&
+Sconst
+Vpoint3D(0,0,0)
+=
+PzDirection
+17 vector3D&
+Sconst
+Vvector3D(0,0,1)
+=
+DReturns the azimuthal angular range of the spheric triangle, for any z direction and origin. 
+=
+FdistancePlane
+17 vector3D
+Svirtual
+O#f22
+Pp
+23 plane3D&
+Sconst
+=
+DReturns the distance vector for a plane to the shperic triangle.  
+=
+Fdistance
+17 vector3D
+Svirtual
+O#f23
+Pline
+21 sLine3D&
+Sconst
+=
+DReturns the distance from a line to the speric triangle. 
+=
+FisRealTriangle
+6 bool
+O#f24
+DReturns true if the points D, E and F are undefined.  
+=
+FgetTriangle
+-1 triangle
+O#f25
+Lconst
+DReturns the first three points of the spheric triangle as a "real" triangle.  
+=
+Foperator=
+7 void
+O#f26
+Pt
+-1 sphericTriangle&
+Sconst
+=
+DCopy operator.  
+=
+FDraw
+7 void
+Svirtual
+O#f27
+Lconst
+Peye
+16 point3D&
+Sconst
+=
+Pplane
+23 plane3D&
+Sconst
+=
+PboundingBox
+19 vector4D*
+=
+PlColor
+0 int
+=
+PfColor
+0 int
+V8
+=
+PfStyle
+0 int
+V1001
+=
+D  This function is used for drawing a shape to a <a href= 
+D"http://root.cern.ch">root</a>-<a href= 
+D"http://root.cern.ch/root/html/TCanvas.html">TCanvas</a>.        
+DIt will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>. 
+DIt is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>. 
+=
+FDraw
+7 void
+Svirtual
+O#f28
+Lconst
+Peye
+16 point3D&
+Sconst
+Vpoint3D(0,0,0)
+=
+Pplane
+23 plane3D&
+Sconst
+Vplane3D(point3D(0,0,1),vector3D(0,0,1))
+=
+PboundingBox
+19 vector4D*
+VNULL
+=
+Pident
+-1 TObject**
+VNULL
+=
+PlColor
+0 int
+V1
+=
+PfColor
+0 int
+V8
+=
+PfStyle
+0 int
+V1001
+=
+D This function is used for drawing a shape to a <a href= 
+D"http://root.cern.ch">root</a>-<a href= 
+D"http://root.cern.ch/root/html/TCanvas.html">TCanvas</a>.         
+DIt will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>. 
+DIt is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>. 
+DThe parameter <var>ident</var> will return a pointer to the drawn root-primitive to provide the distance-to-primitive functionality.  
+=
+Fdescription
+129 shape_parameter
+Svirtual
+O#f29
+Lconst
+DReturns a description of this spheric triangle.
+=
+FgetDescription
+129 shape_parameter
+Sstatic
+O#f30
+DStatic method. Returns a default description of the spheric triangle with all necessary variables defined.
+=
+S0 1 planeShape
+planeshape.html
+planeShape
+=

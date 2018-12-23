@@ -1,0 +1,238 @@
+functionNameTypeDoc
+functionnametypedoc.html
+/users/data12/pion/ehrhardt/tofPack2/documentation/include/tmyclass.h
+CfunctionNameTypeDoc
+-1 functionNameTypeDoc
+O#c2
+DDefault constructor.
+=
+CfunctionNameTypeDoc
+-1 functionNameTypeDoc
+O#c3
+PnameIn
+-1 string
+=
+PtypeIn
+-1 string
+=
+PtypeIdIn
+0 int
+V0
+=
+PspecifierIn
+-1 string
+V""
+=
+PdocIn
+-1 string
+V""
+=
+PtypeDocIn
+-1 string
+V""
+=
+DConstructor. Sets the properties, like name, type, typeID, specifier and the documentation strings both for the type and the function intself.
+=
+CfunctionNameTypeDoc
+-1 functionNameTypeDoc
+O#c4
+Pn
+-1 functionNameTypeDoc&
+Sconst
+=
+DCopy constructor.
+=
+CfunctionNameTypeDoc
+-1 functionNameTypeDoc
+O#c5
+Ps
+-1 string&
+Sconst
+=
+DConstructor. Parses a string.
+=
+gparameter
+-1 vector<nameTypeDoc>
+O#v2
+D
+=
+glimiter
+-1 string
+O#v3
+D
+=
+gcomment
+-1 string
+O#v4
+D
+=
+F~functionNameTypeDoc
+-1 virtual
+O#f2
+DDestructor
+=
+FLimiter
+-1 string
+O#f3
+Lconst
+DReturns the so called "limiter" of the function, the specifier that is located in C++ definition between the parameter list and the end of definition (usually a semicolon), e.g. "const".
+=
+FsetLimiter
+7 void
+O#f4
+Ps
+-1 string&
+Sconst
+=
+DSets the so called "limiter" of the function, the specifier that is located in C++ definition between the parameter list and the end of definition (usually a semicolon), e.g. "const".
+=
+FParameter
+-1 nameTypeDoc&
+O#f5
+Pi
+0 int
+=
+DReturns a reference to the <var>i<sup>th</sup></var> parameter. Take care: if <var>i</var> is non-valid, a reference to the first parameter is returned. This may cause problems.
+=
+FgetParameter
+-1 nameTypeDoc
+O#f6
+Lconst
+Pi
+0 int
+=
+DReturns the <var>i<sup>th</sup></var> parameter. An undefined variable is returned in case <var>i</var> is non valid.
+=
+FnParameters
+0 int
+O#f7
+Lconst
+DReturns the number of parameters.
+=
+FclearParameter
+7 void
+O#f8
+DSets the number of parameters to zero.
+=
+FaddParameter
+7 void
+O#f9
+Pinput
+-1 nameTypeDoc&
+Sconst
+=
+DAdds a parameter to the list of parameters.
+=
+FaddParameter
+7 void
+O#f10
+PnameIn
+-1 string
+=
+PtypeIn
+-1 string
+=
+PtypeIdIn
+0 int
+=
+PspecifierIn
+-1 string
+V""
+=
+PdocIn
+-1 string
+V""
+=
+PtypeDocIn
+-1 string
+V""
+=
+DAdd a parameter to the list of parameters with name <var>nameIn</var>, type <var>typeIn</var>, typeID <var>typeIdIn</var>, specifier <var>specifierIn</var>, and its documentation-links
+=
+Fparse
+7 void
+O#f11
+Ps
+-1 string&
+Sconst
+=
+DParses a string representing a function in C++ code. Ignores comments, handles operators and inline definitions and finds the parameter list. 
+DThe string right of the parameter-list is saved in the Limiter variable, the left is decomposed in specifier, type and name, where constructors and destructors are recogniced and handled differently.
+DThe parameter-list is parsed for its content.
+=
+FtoString
+-1 string
+Svirtual
+O#f12
+Lconst
+Pptt
+0 int
+V0
+=
+DReturns a C++-definition of the function. The pattern <var>ptt</var> is passed to the individual parameters.
+=
+FParameterList
+-1 string
+Svirtual
+O#f13
+Lconst
+Pptt
+0 int
+V0
+=
+DReturns the parameter list in C++-representation, with the pattern <var>ptt</var> being passed to the individual parameters.
+=
+FhtmlHREF
+-1 string
+Svirtual
+O#f14
+Lconst
+DReturns a string containing the html-link to the html-description of the function. If a documentation-file for the type is given or it is listed in the list of known types or classes, this link is included. The same is done for the parameters. Defaults are shown here. Constructor case is taken into account. 
+DViewn with a browser, it looks like a C++-definition of a function.
+=
+FhtmlNAME
+-1 vector<string>
+Svirtual
+O#f15
+Lconst
+Pclassname
+-1 string&
+Sconst
+V""
+=
+DReturns the html-documentation of the function as a vector of strings. If the <var>classname</var> is specified, the function name is given by "classname::functionname".
+DA html-"name"-label is included with the current Doc-string. If name and type are equal (constructor case), type is left out. If a documentation file for the type is specified or listed in the known types or classes, a link is included there, else the ype is colored gray.
+DThe parameters are given as in <a href="nametypedoc.html#f11">nameTypeDoc::htmlNAME()</a>. The description is added in green.
+=
+Foperator=
+-1 functionNameTypeDoc&
+O#f16
+Pfn
+-1 functionNameTypeDoc&
+Sconst
+=
+DCopy operator.
+=
+Foperator==
+6 bool
+O#f17
+Pfn
+-1 functionNameTypeDoc&
+Sconst
+=
+DComparison operator. Returns true if the name, type, specifier, limiter, number of parameters and for each parameter, type and specifier are the same (here names may differ).
+=
+FparseIt
+-1 functionNameTypeDoc
+Sstatic
+O#f18
+Pexpression
+-1 string&
+Sconst
+=
+DStatic function. Parses the function string as it may occur for a C++-definition of a function and returns the function description object. See <a href="#f11">parse()</a>.
+=
+S0 1 nameTypeDoc
+nametypedoc.html
+nameTypeDoc
+=

@@ -1,0 +1,215 @@
+Eparticles
+eparticles.html
+/users/data12/pion/ehrhardt/tofPack2/geometry/include/Eparticles.h
+gisInit
+6 bool
+Sstatic
+O#v2
+D
+=
+gmasses
+1 float*
+Sstatic
+O#v3
+D
+=
+gcharges
+1 float*
+Sstatic
+O#v4
+D
+=
+glifeTimes
+1 float*
+Sstatic
+O#v5
+D
+=
+gnumberOfParticles
+0 int
+Sstatic
+O#v6
+D
+=
+gGeantIDs
+0 int*
+Sstatic
+O#v7
+D
+=
+gnames
+-1 string*
+Sstatic
+O#v8
+D
+=
+Finit
+7 void
+Sstatic
+O#f2
+DDefault init method.
+=
+Finit
+7 void
+Sstatic
+O#f3
+Pfilename
+-1 string
+=
+DStatic function. Init method. Read the particle informations from file <var>filename</var>.
+=
+FsetParticle
+7 void
+Sstatic
+O#f4
+PID
+0 int
+=
+Pname
+-1 string
+=
+Pmass
+1 float
+=
+Pcharge
+1 float
+=
+Plifetime
+1 float
+=
+PGeantID
+0 int
+=
+DStatic function. Sets the particle of the internal number <var>ID</var>.
+=
+FgetNumberOfParticles
+0 int
+Sstatic
+O#f5
+DStatic function. Returns the number of defined particles.
+=
+FgetGeantID
+0 int
+Sstatic
+O#f6
+PID
+0 int
+=
+DStatic function. Returns the GEANT-ID of the particle with the internal ID <var>ID</var>.
+=
+FgetGeantID
+0 int
+Sstatic
+O#f7
+Pname
+-1 string
+=
+DStatic function. Returns the GEANT-ID of the particle <var>name</var>.
+=
+FgetName
+-1 string
+Sstatic
+O#f8
+PID
+0 int
+=
+DStatic function. Returns the name of the particle with the internal ID <var>ID</var>.
+=
+FgetNameG
+-1 string
+Sstatic
+O#f9
+PGeantID
+0 int
+=
+DStatic function. Returns the Name of the particle with the GEANT particle ID <var>GeantID</var>.
+=
+FgetMass
+1 float
+Sstatic
+O#f10
+PID
+0 int
+=
+DStatic function. Returns the mass of the particle with the internal ID <var>ID</var>.
+=
+FgetMass
+1 float
+Sstatic
+O#f11
+Pname
+-1 string
+=
+DStatic function. Returns the lmass of the particle <var>name</var>.
+=
+FgetMassG
+1 float
+Sstatic
+O#f12
+PGeantID
+0 int
+=
+DStatic function. Returns the mass of the particle with the GEANT particle ID <var>GeantID</var>.
+=
+FgetCharge
+1 float
+Sstatic
+O#f13
+PID
+0 int
+=
+DStatic function. Returns the charge of the particle with the internal ID <var>ID</var>.
+=
+FgetCharge
+1 float
+Sstatic
+O#f14
+Pname
+-1 string
+=
+DStatic function. Returns the charge of the particle <var>name</var>.
+=
+FgetChargeG
+1 float
+Sstatic
+O#f15
+PGeantID
+0 int
+=
+DStatic function. Returns the charge of the particle with the GEANT particle ID <var>GeantID</var>.
+=
+FgetLifeTime
+1 float
+Sstatic
+O#f16
+PID
+0 int
+=
+DStatic function. Returns the life-time of the particle with the internal ID <var>ID</var>.
+=
+FgetLifeTime
+1 float
+Sstatic
+O#f17
+Pname
+-1 string
+=
+DStatic function. Returns the life-time of the particle <var>name</var>.
+=
+FgetLifeTimeG
+1 float
+Sstatic
+O#f18
+PGeantID
+0 int
+=
+DStatic function. Returns the life-time of the particle with the GEANT particle ID <var>GeantID</var>.
+=
+FIsInit
+6 bool
+Sstatic
+O#f19
+DStatic function. Returns true if Eparticles has been initialized.
+=
+DThis class is a static data-base class containing properties of particles like masses, charges and life-times along with the GEANT-ID.
+=

@@ -1,0 +1,168 @@
+planeShape
+planeshape.html
+/users/data12/pion/ehrhardt/tofPack2/include/planeShape.h
+CplaneShape
+152 planeShape
+O#c2
+Pn
+-1 string&
+Sconst
+=
+DConstructor. Sets the name of the shape. 
+=
+CplaneShape
+152 planeShape
+O#c3
+Pdescription
+129 shape_parameter&
+Sconst
+=
+DConstructor. Creates a shape as defined in the parameter. Please overwrite in derived classes.
+=
+vnormal
+17 vector3D
+O#v2
+Dnormal vector to the plane 
+=
+vcircRadius
+1 float
+O#v3
+Dcircumscribed radius
+=
+F~planeShape
+-1 virtual
+O#f2
+DDestructor 
+=
+FgetNormal
+17 vector3D
+O#f3
+Lconst
+DReturns the vormal vector of the planar shape. 
+=
+FsetNormal
+7 void
+O#f4
+Pv
+17 vector3D&
+Sconst
+=
+DSet the normal vector of the planar shape. 
+=
+FgetPlane
+23 plane3D
+O#f5
+Lconst
+DReturns the plane the planar shape is defined along. 
+=
+FsetPlane
+7 void
+O#f6
+Pp
+23 plane3D&
+Sconst
+=
+DSet the plane for the planar shape. The normal vector will be set. 
+=
+FgetNumberOfPoints
+0 int
+Svirtual
+O#f7
+Lconst
+DReturns the number of points the planar shape defines. 
+=
+FgetPoint
+16 point3D
+Svirtual
+O#f8
+Lconst
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> point of the planar shape. 
+=
+Farea
+1 float
+Svirtual
+O#f9
+Lconst
+DReturns the area of the planar shape. 
+=
+FangularRange_Phi
+1 float
+Svirtual
+O#f10
+Lconst
+Porigin
+16 point3D&
+Sconst
+Vpoint3D(0,0,0)
+=
+PzDirection
+17 vector3D&
+Sconst
+Vvector3D(0,0,1)
+=
+DReturns the polar angular range of a planar shape, for any z direction and origin.  
+=
+FangularRange_Theta
+1 float
+Svirtual
+O#f11
+Lconst
+Porigin
+16 point3D&
+Sconst
+Vpoint3D(0,0,0)
+=
+PzDirection
+17 vector3D&
+Sconst
+Vvector3D(0,0,1)
+=
+DReturns the azimuthal angular range of a planar shape, for any z direction and origin. 
+=
+FdistancePlane
+17 vector3D
+Svirtual
+O#f12
+Pp
+23 plane3D&
+Sconst
+=
+DReturns the distance vector for a plane to the planar shape. 
+=
+Fdistance
+17 vector3D
+Svirtual
+O#f13
+Pline
+21 sLine3D&
+Sconst
+=
+DReturns the distance from a line to the planar shape. 
+=
+FcircumscribedRadius
+1 float
+Svirtual
+O#f14
+Lconst
+DReturns the circumscribed radius of a planar shape.  
+=
+Fdescription
+129 shape_parameter
+Svirtual
+O#f15
+Lconst
+DReturns a description of this shape. Please overwrite in derived classes.
+=
+FgetDescription
+129 shape_parameter
+Sstatic
+O#f16
+DStatic method. Returns a default description of the shape with all necessary variables defined. Please overwrite in derived classes.
+=
+S0 1 base_shape
+baseshape.html
+base_shape
+=

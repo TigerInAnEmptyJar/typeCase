@@ -1,0 +1,114 @@
+base_parameter
+baseparameter.html
+/users/data12/pion/ehrhardt/tofPack2/include/baseparameter.h
+Cbase_parameter
+120 base_parameter
+O#c2
+DDefault constructor.
+=
+gname
+-1 string
+O#v2
+Dname of parameter
+=
+gdescription
+-1 vector<string>
+O#v3
+DDescription for a parameter.
+=
+F~base_parameter
+-1 virtual
+O#f2
+DDestructor 
+=
+FsetName
+7 void
+O#f3
+Pn
+-1 string&
+Sconst
+=
+DSet the name. 
+=
+FsetDescription
+7 void
+O#f4
+Pd
+-1 vector<string>
+=
+DSet the description. 
+=
+FsetDescription
+7 void
+O#f5
+Pd
+-1 string&
+Sconst
+=
+Pline
+0 int
+=
+DSet the <var>line<sup>th</sup></var> description line to <var>d</var>. 
+=
+FgetName
+-1 string
+O#f6
+Lconst
+DReturns the anem of the parameter. 
+=
+FgetDescription
+-1 string
+O#f7
+Lconst
+Pline
+0 int
+=
+DReturns the <var>line<sup>th</sup></var> description line of the parameter. 
+=
+FgetDescription
+-1 vector<string>
+O#f8
+Lconst
+DReturns the description of the parameter. 
+=
+Foperator<
+6 bool
+O#f9
+Pp
+120 base_parameter
+=
+DComparison operator. Returns true if the name of the parameter is smaller than one of <var>p</var>.  
+=
+Foperator>
+6 bool
+O#f10
+Pp
+120 base_parameter
+=
+DComparison operator. Returns true if the name of the parameter is larger than the one of <var>p</var>.   
+=
+Foperator==
+6 bool
+O#f11
+Pp
+120 base_parameter
+=
+DComparison operator. Returns true if the name of the parameter is equal to the one of <var>p</var>.  
+=
+Foperator<=
+6 bool
+O#f12
+Pp
+120 base_parameter
+=
+DComparison operator. Returns true if the name of the parameter is smaller or equal to the one of <var>p</var>.  
+=
+Foperator>=
+6 bool
+O#f13
+Pp
+120 base_parameter
+=
+DComparison operator. Returns true if the name of the parameter is larger or equal to the one of <var>p</var>.  
+=
+=

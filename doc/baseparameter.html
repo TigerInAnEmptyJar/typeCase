@@ -1,0 +1,119 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class base_parameter</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class base_parameter in "baseparameter.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Constructor
+<LI><A HREF="#c2">base_parameter</A>() 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~base_parameter</A>() 
+<LI><A HREF="#f3"><vtype>void</vtype> setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="#f4"><vtype>void</vtype> setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="#f5"><vtype>void</vtype> setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="#f6"><vtype>string</vtype> getName</A>() const
+<LI><A HREF="#f7"><vtype>string</vtype> getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="#f8"><vtype>vector&lt;string&gt;</vtype> getDescription</A>() const
+<LI><A HREF="#f9"><vtype>bool</vtype> operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="#f10"><vtype>bool</vtype> operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="#f11"><vtype>bool</vtype> operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="#f12"><vtype>bool</vtype> operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="#f13"><vtype>bool</vtype> operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">base_parameter::base_parameter</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> base_parameter::~base_parameter</A>() 
+<BR/><deff>
+Destructor 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<BR/><deff>
+Set the name. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<BR/><deff>
+Set the description. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<BR/><deff>
+Set the <var>line<sup>th</sup></var> description line to <var>d</var>. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<BR/><deff>
+Returns the anem of the parameter. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<BR/><deff>
+Returns the <var>line<sup>th</sup></var> description line of the parameter. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<BR/><deff>
+Returns the description of the parameter. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the name of the parameter is smaller than one of <var>p</var>.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the name of the parameter is larger than the one of <var>p</var>.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the name of the parameter is equal to the one of <var>p</var>.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the name of the parameter is smaller or equal to the one of <var>p</var>.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the name of the parameter is larger or equal to the one of <var>p</var>.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

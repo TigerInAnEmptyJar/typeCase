@@ -1,0 +1,512 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class EventPainter</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class EventPainter in "eventpainter.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qobject.html">QObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">EventPainter</A>() 
+<LI><A HREF="#c3">EventPainter</A>(<A HREF="tevent.html">TEvent*</A> e, <vtype>TPad*</vtype> c) 
+<LI><A HREF="#c4">EventPainter</A>(<A HREF="tevent.html">TEvent*</A> e, <vtype>TPad*</vtype> c, <vtype>float</vtype> left, <vtype>float</vtype> right, <vtype>float</vtype> up, <vtype>float</vtype> down) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual const <A HREF="#f9"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f10"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f13"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f14"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f15"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI><A HREF="#f16"><vtype>vector&lt;TBase*&gt;</vtype> getDrawnObjects</A>(<vtype>double</vtype> x, <vtype>double</vtype> y) 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f11">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f12">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI><A HREF="#l2"><vtype>void</vtype> setTrackLike</A>(<vtype>bool</vtype> like = true) 
+<LI><A HREF="#l3"><vtype>void</vtype> setEvent</A>(<A HREF="tmp.html">TEvent*</A> e) 
+<LI><A HREF="#l4"><vtype>void</vtype> setCanvas</A>(<vtype>TPad*</vtype> c) 
+<LI><A HREF="#l5"><vtype>void</vtype> setSize</A>(<vtype>float</vtype> left, <vtype>float</vtype> right, <vtype>float</vtype> up, <vtype>float</vtype> down) 
+<LI><A HREF="#l6"><vtype>void</vtype> setSize</A>(<A HREF="point2d.html">point2D</A> upperLeftIn, <A HREF="point2d.html">point2D</A> lowerRightIn) 
+<LI><A HREF="#l7"><vtype>void</vtype> rePaint</A>(<A HREF="tmp.html">TEvent*</A> e, <vtype>float</vtype> zoom = 100) 
+<LI><A HREF="#l8"><vtype>void</vtype> rePaint</A>(<vtype>float</vtype> zoom = 100) 
+<LI><A HREF="#l9"><vtype>void</vtype> addDetector</A>(<vtype>int</vtype> detNum, <vtype>int</vtype> color = 1) 
+<LI><A HREF="#l10"><vtype>void</vtype> addPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color = 1, <vtype>int</vtype> marker = 1) 
+<LI><A HREF="#l11"><vtype>void</vtype> addTrackColor</A>(<vtype>int</vtype> color) 
+<LI><A HREF="#l12"><vtype>void</vtype> clearDetectors</A>() 
+<LI><A HREF="#l13"><vtype>void</vtype> clearPixels</A>() 
+<LI><A HREF="#l14"><vtype>void</vtype> clearTrackColor</A>() 
+<LI><A HREF="#l15"><vtype>void</vtype> removeDetector</A>(<vtype>int</vtype> detNum) 
+<LI><A HREF="#l16"><vtype>void</vtype> removePixel</A>(<vtype>int</vtype> pixNum) 
+<LI><A HREF="#l17"><vtype>void</vtype> setDetector</A>(<vtype>int</vtype> detNum, <vtype>int</vtype> color) 
+<LI><A HREF="#l18"><vtype>void</vtype> setPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color) 
+<LI><A HREF="#l19"><vtype>void</vtype> setPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color, <vtype>int</vtype> marker) 
+<LI><A HREF="#l20"><vtype>void</vtype> setTrackSorted</A>(<vtype>bool</vtype> sort = true) 
+<LI><A HREF="#l21"><vtype>void</vtype> setTrackLike</A>(<vtype>bool</vtype> like = true) 
+<LI><A HREF="#l22"><vtype>void</vtype> setEvent</A>(<A HREF="tevent.html">TEvent*</A> e) 
+<LI><A HREF="#l23"><vtype>void</vtype> setCanvas</A>(<vtype>TPad*</vtype> c) 
+<LI><A HREF="#l24"><vtype>void</vtype> setSize</A>(<vtype>float</vtype> left, <vtype>float</vtype> right, <vtype>float</vtype> up, <vtype>float</vtype> down) 
+<LI><A HREF="#l25"><vtype>void</vtype> setSize</A>(<A HREF="point2d.html">point2D</A> upperLeftIn, <A HREF="point2d.html">point2D</A> lowerRightIn) 
+<LI><A HREF="#l26"><vtype>void</vtype> rePaint</A>(<A HREF="tevent.html">TEvent*</A> e) 
+<LI><A HREF="#l27"><vtype>void</vtype> rePaint</A>() 
+<LI><A HREF="#l28"><vtype>void</vtype> addDetector</A>(<vtype>int</vtype> detNum, <vtype>int</vtype> color = 1) 
+<LI><A HREF="#l29"><vtype>void</vtype> addPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color = 1, <vtype>int</vtype> marker = 1) 
+<LI><A HREF="#l30"><vtype>void</vtype> addTrackColor</A>(<vtype>int</vtype> color) 
+<LI><A HREF="#l31"><vtype>void</vtype> addParticleColor</A>(<vtype>int</vtype> ID, <vtype>int</vtype> color) 
+<LI><A HREF="#l32"><vtype>void</vtype> clearDetectors</A>() 
+<LI><A HREF="#l33"><vtype>void</vtype> clearPixels</A>() 
+<LI><A HREF="#l34"><vtype>void</vtype> clearTrackColor</A>() 
+<LI><A HREF="#l35"><vtype>void</vtype> clearParticleColor</A>() 
+<LI><A HREF="#l36"><vtype>void</vtype> removeDetector</A>(<vtype>int</vtype> detNum) 
+<LI><A HREF="#l37"><vtype>void</vtype> removePixel</A>(<vtype>int</vtype> pixNum) 
+<LI><A HREF="#l38"><vtype>void</vtype> setDetector</A>(<vtype>int</vtype> detNum, <vtype>int</vtype> color) 
+<LI><A HREF="#l39"><vtype>void</vtype> setPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color) 
+<LI><A HREF="#l40"><vtype>void</vtype> setPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color, <vtype>int</vtype> marker) 
+<LI><A HREF="#l41"><vtype>void</vtype> setTrackSorted</A>(<vtype>bool</vtype> sort = true) 
+<LI><A HREF="#l42"><vtype>void</vtype> setPaintMode</A>(<vtype>int</vtype> mode) 
+<LI><A HREF="#l43"><vtype>void</vtype> setParticleMode</A>(<vtype>bool</vtype> value = true) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">EventPainter::EventPainter</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">EventPainter::EventPainter</A>(<A HREF="tevent.html">TEvent*</A> e, <vtype>TPad*</vtype> c) 
+<BR/><deff>
+Constructor. Sets the painters properties. <var>e</var> is a pointer to the event structure that shall be painted, <var>c</var> a pointer to the canvas or pad where the event pattern should be drawn onto.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">EventPainter::EventPainter</A>(<A HREF="tevent.html">TEvent*</A> e, <vtype>TPad*</vtype> c, <vtype>float</vtype> left, <vtype>float</vtype> right, <vtype>float</vtype> up, <vtype>float</vtype> down) 
+<BR/><deff>
+Constructor. Sets the painters properties. <var>e</var> is a pointer to the event structure that shall be painted, <var>c</var> a pointer to the canvas or pad where the event pattern should be drawn onto.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> EventPainter::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> EventPainter::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">EventPainter::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">EventPainter::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> EventPainter::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> EventPainter::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> EventPainter::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>char*</vtype> EventPainter::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>bool</vtype> EventPainter::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f11">EventPainter::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f12">EventPainter::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>bool</vtype> EventPainter::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>QVariant</vtype> EventPainter::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>QMetaObject*</vtype> EventPainter::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>vector&lt;TBase*&gt;</vtype> EventPainter::getDrawnObjects</A>(<vtype>double</vtype> x, <vtype>double</vtype> y) 
+<BR/><deff>
+Returns a vector of TObjects that have been drawn to the pad close to the position <var>x-y</var>. 
+This contains hits, pixels and tracks.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> EventPainter::setTrackLike</A>(<vtype>bool</vtype> like = true) 
+<BR/><deff>
+Sets the color mode for the drawn detector elements. If <var>sort</var> is true (default), then the detector elements will be drawn in the track's color instead of the detectors color.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> EventPainter::setEvent</A>(<A HREF="tmp.html">TEvent*</A> e) 
+<BR/><deff>
+Set the event pointer.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> EventPainter::setCanvas</A>(<vtype>TPad*</vtype> c) 
+<BR/><deff>
+Set the canvas or pad the event should be drawn to.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> EventPainter::setSize</A>(<vtype>float</vtype> left, <vtype>float</vtype> right, <vtype>float</vtype> up, <vtype>float</vtype> down) 
+<BR/><deff>
+Set the upper left and lower right corners of the canvas/pad in pad coordinates. 
+Obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> EventPainter::setSize</A>(<A HREF="point2d.html">point2D</A> upperLeftIn, <A HREF="point2d.html">point2D</A> lowerRightIn) 
+<BR/><deff>
+Set the upper left and lower right corners of the canvas/pad in pad coordinates. 
+Obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> EventPainter::rePaint</A>(<A HREF="tmp.html">TEvent*</A> e, <vtype>float</vtype> zoom = 100) 
+<BR/><deff>
+Paints the event <var>e</var> with this <var>zoom</var> to the current canvas/pad.
+First hits, then pixels and tracks are drawn. In the end, there are event statistics added.
+The hits and pixels are drawn using the <a href="baseShape.html#f11">Draw()</a>-method from <a href="baseShape.html">baseShape</a>. 
+The tracks are drawn using markers.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> EventPainter::rePaint</A>(<vtype>float</vtype> zoom = 100) 
+<BR/><deff>
+Paints the event with this <var>zoom</var> to the current canvas. First hits, then pixels and tracks are drawn. In the end, there are event statistics added.
+The hits and pixels are drawn using the <a href="baseShape.html#f11">Draw()</a>-method from <a href="baseShape.html">baseShape</a>. 
+The tracks are drawn using markers.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l9"><vtype>void</vtype> EventPainter::addDetector</A>(<vtype>int</vtype> detNum, <vtype>int</vtype> color = 1) 
+<BR/><deff>
+Adds a detector with ID <var>detNum</var> and <var>color</var> to the list of detectors.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l10"><vtype>void</vtype> EventPainter::addPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color = 1, <vtype>int</vtype> marker = 1) 
+<BR/><deff>
+Adds a pixel with ID <var>pixNum</var>, <var>color</var> and <var>marker</var>-type to the list of pixels.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l11"><vtype>void</vtype> EventPainter::addTrackColor</A>(<vtype>int</vtype> color) 
+<BR/><deff>
+Adds a track color.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l12"><vtype>void</vtype> EventPainter::clearDetectors</A>() 
+<BR/><deff>
+Sets the number of detectors to draw to zero.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l13"><vtype>void</vtype> EventPainter::clearPixels</A>() 
+<BR/><deff>
+Sets the number pf pixels to draw to zero.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l14"><vtype>void</vtype> EventPainter::clearTrackColor</A>() 
+<BR/><deff>
+Sets the number of tracks to draw to zero.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l15"><vtype>void</vtype> EventPainter::removeDetector</A>(<vtype>int</vtype> detNum) 
+<BR/><deff>
+Remove the detector at index <var>detNum</var> from the list of drawn detectors.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l16"><vtype>void</vtype> EventPainter::removePixel</A>(<vtype>int</vtype> pixNum) 
+<BR/><deff>
+Remove the pixel from index <var>pixNum</var> from the list of drawn pixels.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l17"><vtype>void</vtype> EventPainter::setDetector</A>(<vtype>int</vtype> detNum, <vtype>int</vtype> color) 
+<BR/><deff>
+Set the <var>color</var> for the <var>detNum<sup>th</sup></var> detector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l18"><vtype>void</vtype> EventPainter::setPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color) 
+<BR/><deff>
+Sets the <var>color</var> for the <var>pixNum<sup>th</sup></var> pixel.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l19"><vtype>void</vtype> EventPainter::setPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color, <vtype>int</vtype> marker) 
+<BR/><deff>
+Set the <var>color</var> and <var>marker</var> for the <var>pixNum<sup>th</sup></var> pixel.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l20"><vtype>void</vtype> EventPainter::setTrackSorted</A>(<vtype>bool</vtype> sort = true) 
+<BR/><deff>
+Sets the color mode for the drawn detector elements. If <var>sort</var> is true (default), then the detector elements will be drawn in the track's color instead of the detectors color.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l21"><vtype>void</vtype> EventPainter::setTrackLike</A>(<vtype>bool</vtype> like = true) 
+<BR/><deff>
+Sets the color mode for the drawn detector elements. If <var>sort</var> is true (default), then the detector elements will be drawn in the track's color instead of the detectors color.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l22"><vtype>void</vtype> EventPainter::setEvent</A>(<A HREF="tevent.html">TEvent*</A> e) 
+<BR/><deff>
+Set the event pointer.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l23"><vtype>void</vtype> EventPainter::setCanvas</A>(<vtype>TPad*</vtype> c) 
+<BR/><deff>
+Set the canvas or pad the event should be drawn to.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l24"><vtype>void</vtype> EventPainter::setSize</A>(<vtype>float</vtype> left, <vtype>float</vtype> right, <vtype>float</vtype> up, <vtype>float</vtype> down) 
+<BR/><deff>
+Set the upper left and lower right corners of the canvas/pad in pad coordinates. 
+Obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l25"><vtype>void</vtype> EventPainter::setSize</A>(<A HREF="point2d.html">point2D</A> upperLeftIn, <A HREF="point2d.html">point2D</A> lowerRightIn) 
+<BR/><deff>
+Set the upper left and lower right corners of the canvas/pad in pad coordinates. 
+Obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l26"><vtype>void</vtype> EventPainter::rePaint</A>(<A HREF="tevent.html">TEvent*</A> e) 
+<BR/><deff>
+Paints the event <var>e</var> with this <var>zoom</var> to the current canvas/pad.
+First hits, then pixels and tracks are drawn. In the end, there are event statistics added.
+The hits and pixels are drawn using the <a href="baseShape.html#f11">Draw()</a>-method from <a href="baseShape.html">baseShape</a>. 
+The tracks are drawn using markers.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l27"><vtype>void</vtype> EventPainter::rePaint</A>() 
+<BR/><deff>
+Paints the event with this <var>zoom</var> to the current canvas. First hits, then pixels and tracks are drawn. In the end, there are event statistics added.
+The hits and pixels are drawn using the <a href="baseShape.html#f11">Draw()</a>-method from <a href="baseShape.html">baseShape</a>. 
+The tracks are drawn using markers.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l28"><vtype>void</vtype> EventPainter::addDetector</A>(<vtype>int</vtype> detNum, <vtype>int</vtype> color = 1) 
+<BR/><deff>
+Adds a detector with ID <var>detNum</var> and <var>color</var> to the list of detectors.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l29"><vtype>void</vtype> EventPainter::addPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color = 1, <vtype>int</vtype> marker = 1) 
+<BR/><deff>
+Adds a pixel with ID <var>pixNum</var>, <var>color</var> and <var>marker</var>-type to the list of pixels.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l30"><vtype>void</vtype> EventPainter::addTrackColor</A>(<vtype>int</vtype> color) 
+<BR/><deff>
+Adds a track color.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l31"><vtype>void</vtype> EventPainter::addParticleColor</A>(<vtype>int</vtype> ID, <vtype>int</vtype> color) 
+<BR/><deff>
+Add a particle-color. In particle-mode a particle-track with <var>ID</var> is drawn in <var>color</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l32"><vtype>void</vtype> EventPainter::clearDetectors</A>() 
+<BR/><deff>
+Sets the number of detectors to draw to zero.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l33"><vtype>void</vtype> EventPainter::clearPixels</A>() 
+<BR/><deff>
+Sets the number pf pixels to draw to zero.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l34"><vtype>void</vtype> EventPainter::clearTrackColor</A>() 
+<BR/><deff>
+Sets the number of tracks to draw to zero.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l35"><vtype>void</vtype> EventPainter::clearParticleColor</A>() 
+<BR/><deff>
+Clears all particle-colors.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l36"><vtype>void</vtype> EventPainter::removeDetector</A>(<vtype>int</vtype> detNum) 
+<BR/><deff>
+Remove the detector at index <var>detNum</var> from the list of drawn detectors.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l37"><vtype>void</vtype> EventPainter::removePixel</A>(<vtype>int</vtype> pixNum) 
+<BR/><deff>
+Remove the pixel from index <var>pixNum</var> from the list of drawn pixels.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l38"><vtype>void</vtype> EventPainter::setDetector</A>(<vtype>int</vtype> detNum, <vtype>int</vtype> color) 
+<BR/><deff>
+Set the <var>color</var> for the <var>detNum<sup>th</sup></var> detector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l39"><vtype>void</vtype> EventPainter::setPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color) 
+<BR/><deff>
+Sets the <var>color</var> for the <var>pixNum<sup>th</sup></var> pixel.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l40"><vtype>void</vtype> EventPainter::setPixel</A>(<vtype>int</vtype> pixNum, <vtype>int</vtype> color, <vtype>int</vtype> marker) 
+<BR/><deff>
+Set the <var>color</var> and <var>marker</var> for the <var>pixNum<sup>th</sup></var> pixel.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l41"><vtype>void</vtype> EventPainter::setTrackSorted</A>(<vtype>bool</vtype> sort = true) 
+<BR/><deff>
+Sets the color mode for the drawn detector elements. If <var>sort</var> is true (default), then the detector elements will be drawn in the track's color instead of the detectors color.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l42"><vtype>void</vtype> EventPainter::setPaintMode</A>(<vtype>int</vtype> mode) 
+<BR/><deff>
+Set the projection paint mode to parallel, central or fisheye.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l43"><vtype>void</vtype> EventPainter::setParticleMode</A>(<vtype>bool</vtype> value = true) 
+<BR/><deff>
+Sets the particle mode. Particles of a certain ID are drawn in a specific color.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

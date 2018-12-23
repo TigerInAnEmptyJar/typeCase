@@ -1,0 +1,341 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class ReactionDisplay</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class ReactionDisplay in "reactiondisplay.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<table><tr><td>This widget displays the properties of the beam(s) and target of the experiment. See <a href="setup.html">setup</a>.</td><td><img src="pictures/reaction.jpg" width=250/></td></tr></table>
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget</A>
+<DT>Constructor
+<LI><A HREF="#c2">ReactionDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<LI><A HREF="#c3">ReactionDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual <A HREF="#f9"><vtype>bool</vtype> readOnly</A>() 
+<LI>virtual <A HREF="#f10"><vtype>bool</vtype> doDraw</A>() 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI>virtual <A HREF="#l2"><vtype>void</vtype> resize</A>(const <vtype>QSize&</vtype> s) 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<LI>virtual <A HREF="#l4"><vtype>void</vtype> resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<LI>virtual <A HREF="#l5"><vtype>void</vtype> setReaction</A>(<A HREF="reactionparameter.html">reaction_parameter&</A> reactionIn) 
+<LI>virtual <A HREF="#l6"><vtype>void</vtype> setReadOnly</A>(<vtype>bool</vtype> value) 
+<LI>virtual <A HREF="#l7"><vtype>void</vtype> onPropertyChange</A>() 
+<LI>virtual <A HREF="#l8"><vtype>void</vtype> setMaterials</A>(const <vtype>vector&lt;string&gt;&</vtype> mats) 
+<LI>virtual <A HREF="#l9"><vtype>void</vtype> OnDraw</A>() 
+<LI>virtual <A HREF="#l10"><vtype>void</vtype> setDraw</A>(<vtype>bool</vtype> value) 
+<LI>virtual <A HREF="#l11"><vtype>void</vtype> onBeamNumberChange</A>() 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Signals
+<DD>new public<ul>
+<LI><A HREF="#s2"><vtype>void</vtype> changed</A>() 
+</UL>
+<DT>Public Variables
+<DD><vtype>QCheckBox*</vtype> <A HREF="#v2">twoBeam</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v3">mBLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v4">mTLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v5">beamLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v6">targetLabel</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A HREF="#v7">matBeam</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A HREF="#v8">matTarget</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v9">beamInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v10">targetInput</A>
+<DD><vtype>QCanvasWidget*</vtype> <A HREF="#v11">shapeDraw</A>
+<DD><A HREF="shapedisplay.html">ShapeDisplay*</A> <A HREF="#v12">shape</A>
+<DT>Protected Variables
+<DD><A HREF="reactionparameter.html">reaction_parameter*</A> <A HREF="#v13">sp</A>
+<DD><vtype>bool</vtype> <A HREF="#v14">ReadOnly</A>
+<DD><A HREF="reactionparameter.html">reaction_parameter</A> <A HREF="#v15">copy</A>
+<DD><A HREF="baseshape.html">base_shape*</A> <A HREF="#v16">drawer</A>
+<DD><vtype>bool</vtype> <A HREF="#v17">DrawShape</A>
+<DD><vtype>vector&lt;string&gt;</vtype> <A HREF="#v18">materials</A>
+<DD><A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#v19">copyshape</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">ReactionDisplay::ReactionDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt3-version, non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">ReactionDisplay::ReactionDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<BR/><deff>
+Constructor. Qt4-version, non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">QCheckBox* twoBeam</A>
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">QLabel* mBLabel</A>
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">QLabel* mTLabel</A>
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">QLabel* beamLabel</A>
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v6">QLabel* targetLabel</A>
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A NAME="#v7">matBeam</A>
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A NAME="#v8">matTarget</A>
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v9">beamInput</A>
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v10">targetInput</A>
+<BR/><deff>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v11">QCanvasWidget* shapeDraw</A>
+<BR/><deff>
+canvas to draw the target shape
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapedisplay.html">ShapeDisplay*</A> <A NAME="#v12">shape</A>
+<BR/><deff>
+widget to discribe the shape of the target
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="reactionparameter.html">reaction_parameter*</A> <A NAME="#v13">sp</A>
+<BR/><deff>
+pointer to the current reaction_parameter
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v14">bool ReadOnly</A>
+<BR/><deff>
+read-only-property. if it is true, modifications mad in the display won't be applied to the variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="reactionparameter.html">reaction_parameter</A> <A NAME="#v15">copy</A>
+<BR/><deff>
+copy of the current reaction_parameter
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="baseshape.html">base_shape*</A> <A NAME="#v16">drawer</A>
+<BR/><deff>
+pointer to the currently drawn target shape
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v17">bool DrawShape</A>
+<BR/><deff>
+True if the shape of the target should be drawn. Property is passed to the <a href="shapedisplay.html">shapeDisplay</a> displaying the properties of the target shape.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v18">vector<string> materials</A>
+<BR/><deff>
+available material names
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="#v19">copyshape</A>
+<BR/><deff>
+copy of the shape_parameter of the target
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> ReactionDisplay::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> ReactionDisplay::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">ReactionDisplay::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">ReactionDisplay::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> ReactionDisplay::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> ReactionDisplay::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> ReactionDisplay::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>bool</vtype> ReactionDisplay::readOnly</A>() 
+<BR/><deff>
+Returns the read-only-property. If it is set modifications made in the display won't be applied to the current reaction_parameter-variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>bool</vtype> ReactionDisplay::doDraw</A>() 
+<BR/><deff>
+Returns if the target shape shall be drawn.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> ReactionDisplay::resize</A>(const <vtype>QSize&</vtype> s) 
+<BR/><deff>
+resize widget
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> ReactionDisplay::resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<BR/><deff>
+resize event
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> ReactionDisplay::resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<BR/><deff>
+resize widget
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> ReactionDisplay::setReaction</A>(<A HREF="reactionparameter.html">reaction_parameter&</A> reactionIn) 
+<BR/><deff>
+Sets the current reaction_parameter. Take care, that the variable stays as long valid as the widget exists. Also in read-only-mode, the widget may want to reload the properties.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> ReactionDisplay::setReadOnly</A>(<vtype>bool</vtype> value) 
+<BR/><deff>
+Set the read-only-property. If it is true, modifications made in the display-widget won't be applied to the current reaction_parameter pointer.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> ReactionDisplay::onPropertyChange</A>() 
+<BR/><deff>
+Reread the reaction_parameter values out of the pointers variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> ReactionDisplay::setMaterials</A>(const <vtype>vector&lt;string&gt;&</vtype> mats) 
+<BR/><deff>
+Set the available material-names.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l9"><vtype>void</vtype> ReactionDisplay::OnDraw</A>() 
+<BR/><deff>
+If shape shall be drawn and it exists in the typeCase-analysis-package, it is drawn.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l10"><vtype>void</vtype> ReactionDisplay::setDraw</A>(<vtype>bool</vtype> value) 
+<BR/><deff>
+Sets wether the target shape shall be drawn or not. The canvas is not visible for no draw.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l11"><vtype>void</vtype> ReactionDisplay::onBeamNumberChange</A>() 
+<BR/><deff>
+Sets the number of beams. Can be 1 or 2.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l12"><vtype>void</vtype> ReactionDisplay::languageChange</A>() 
+<BR/><deff>
+Sets the label-texts.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s2"><vtype>void</vtype> ReactionDisplay::changed</A>() 
+<BR/><deff>
+If not in read-only-mode, this signal is emitted, when some of the reaction_parameters properties are in the display.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

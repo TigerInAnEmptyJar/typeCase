@@ -1,0 +1,73 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>typeCase shape-package</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">typeCase: shape package</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<table>
+<tr><td>Class tree:</hr>
+<ul>
+<li><a href="baseshape.html">baseShape</a>
+<ul>
+  <li><a href="planeshape.html">planeShape</a>
+  <ul>
+    <li><a href="spherictriangle.html">sphericTriangle</a>
+    <li><a href="triangle.html">triangle</a>
+    <li><a href="circle.html">circle</a>
+    <li><a href="hexagon.html">hexagon</a>
+    <li><a href="rectangle.html">rectangle</a>
+    <li><a href="quadrangle.html">quadrangle</a>
+  </ul>
+  <li><a href="volumeshape.html">volumeShape</a>
+  <ul>
+    <li><a href="spiral.html">spiral</a>
+    <li><a href="cylinder.html">cylinder</a>
+    <li><a href="fiber.html">fiber</a>
+    <li><a href="hexprism.html">hexPrism</a>
+    <li><a href="ring.html">ring</a>
+    <li><a href="wedge.html">wedge</a>
+    <li><a href="strawtube.html">strawTube</a>
+  </ul>
+</ul>
+</ul>
+</td><td>
+<p>The shape package is an extension of the geometry-part of the typeCase
+analysis-framework. The shapes defined here are located in 3-dimensional
+space. There exist two different types of shapes: the planar shapes, cut out of
+a plane in 3D-space that can be used as geometrical representations of pixels
+in a given more-layered detector and the volume shapes, that model the volume
+of detectors and their elements.</p>
+<p>For the volumes it is of interest, what happens when a straight line
+(perhaps in later versions also curved lines) hits this volume. The hit point
+can be retrieved via <var>entrance()</var>, the normal-vector of the surface in
+the entrance-point is given by <var>Normal()</var>; <var>distance()</var>
+provides the distance-vector from the line to the shape and
+<var>Hitting()</var> returns that all at once. Leaves me to mention
+<var>getFilghtPathInShape()</var> which returns the distance from entrance to
+exit point.<br>
+It is possible to generate out of the element with number zero the envelope of
+the detector or any other element in the detector layer (<var>getNext()</var>
+and <var>getEnvelope()</var>). The method <var>suspect()</var> combines this
+property with the line-intersection-calculation: it generates the element
+number of the potential element (if this element has number zero) that could be
+hit by the line.</p>
+<p>The planar shapes also define a distance method returning the distance from
+a straight line or a plane to the shape, as well as an area and a
+circumscribedRadius to retrieve the size of the shape.</p>
+<hr/>
+<p>All shapes come with a <var>draw()</var>-function that draws the shape to a
+<a href="http://root.cern.ch">root</a>-Canvas.</p>
+<p>The shape package depends on the geometry- and the parameter part of the
+typeCase-framework. It is the first part of the typeCase analysis framework,
+that requires an additional external library for complete functionality. Since
+it uses <a href="http://root.cern.ch">root</a> classes for drawing
+(eg. TPolyLine), the package only works if a root distribution is present on
+the current system.</p>
+<p></p>
+<p></p>
+</td></tr></table>
+</body>
+</html>

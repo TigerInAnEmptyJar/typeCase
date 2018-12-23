@@ -1,0 +1,39 @@
+############## Analyse-parameter######################
+1 1 
+P1 0 0
+T0 28 1 20 Track 1
+P0 2 1 20 Quirl
+P1 2 1 20 Ring
+P3 4 1 20 Hodo-2
+P4 5 1 20 Hodo-3
+P5 6 1 20 Micro
+H0 2 1 20 Quirl S
+H1 3 1 20 Quirl L
+H2 4 1 20 Quirl R
+H3 2 1 20 Ring S
+H4 3 1 20 Ring L
+H5 4 1 20 Ring R
+H6 2 1 20 Barrel
+H17 6 1 20 small Hodo X
+H18 6 1 20 small Hodo Y
+H23 6 1 20 small Hodo D
+H19 7 1 20 Hodo X
+H20 7 1 20 Hodo Y
+H21 8 1 20 Micro Ring
+H22 8 1 20 Micro Wedge
+H15 2 1 20 Start A
+H16 4 1 20 Start B
+N
+S
+O
+=Rrun 4900 odd
+ARead Hits from tree
+ACalibration
+AHitCluster generation
+AHodo pixel
+AHodo pixel 3 layers
+AMycro-strip pixel
+AQuirl pixel
+ARing pixel
+ABarrel pixel
+=

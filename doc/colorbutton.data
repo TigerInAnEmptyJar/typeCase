@@ -1,0 +1,230 @@
+ColorButton
+colorbutton.html
+$(KTOFPACK)/gui/root_properties/include/colorbutton.h
+CColorButton
+-1 ColorButton
+O#c2
+Pparent
+-1 QWidget*
+Thttp://doc.trolltech.com/4.4/qwidget.html
+V0
+=
+Pname
+5 char*
+Sconst
+V0
+=
+Pfl
+-1 WFlags
+V0
+=
+DConstructor. Qt3-mode, non-visible in Qt4-mode.
+=
+CColorButton
+-1 ColorButton
+O#c3
+Pparent
+-1 QWidget*
+Thttp://doc.trolltech.com/4.4/qwidget.html
+V0
+=
+Pf
+-1 Qt::WindowFlags
+V0
+=
+DConstructor. Qt4-mode, non-visible in Qt3-mode.
+=
+vReadOnly
+6 bool
+O#v2
+DIf set to false, clicking on the button will open a <a href="colorselectdialog.html"> ColorSelectDialog</a> where a new color can be chosen
+=
+FclassName
+5 char*
+Svirtual const
+O#f2
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f3
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f4
+Thttp://doc.trolltech.com/4.4/qstring.html
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f5
+Thttp://doc.trolltech.com/4.4/qstring.html
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f6
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f7
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f8
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+FgetColor
+0 int
+Svirtual
+O#f9
+DReturns the current color in root-number.
+=
+FgetRGBColor
+-1 QColor
+Svirtual
+O#f10
+DReturns the current color in Qt's RGB-format.
+=
+FreadOnly
+6 bool
+O#f11
+Lconst
+DReturns the value of the <a href="#v0">readOnly</a>-property.
+=
+ginit
+7 void
+O#f12
+D
+=
+gdestroy
+7 void
+O#f13
+D
+=
+LonButtonClick
+7 void
+Svirtual
+O#l2
+DWhen not readOnly, a <a href="colorselectdialog.html"> ColorSelectDialog</a> where a new color can be chosen is executed.
+=
+LsetColor
+7 void
+Svirtual
+O#l3
+Pcolor
+0 int
+=
+DSets the color of the button to the root-color with number <var>color</var>.
+=
+LsetColor
+7 void
+Svirtual
+O#l4
+Pc
+-1 QColor&
+Sconst
+=
+DSets the color to <var>c</var>.
+=
+LsetReadOnly
+7 void
+Svirtual
+O#l5
+Pvalue
+6 bool
+=
+DSets the value of the <a href="#v0">readOnly</a>-property.
+=
+llanguageChange
+7 void
+Svirtual
+O#l6
+D
+=
+NcolorChanged
+7 void
+O#s2
+Pcolor
+0 int
+=
+DWhen the color of the button is changed (not via setColor()), this signal is emitted.
+=
+NcolorChanged
+7 void
+O#s3
+Pcolor
+-1 QColor&
+Sconst
+=
+DWhen the color of the button is changed (not via setColor()), this signal is emitted.
+=
+DThe ColorButton is a colored button showing the root-number of the color it currently displays.
+DWhen not readOnly, clicking on the button opens a <a href="colorselectdialog.html"> ColorSelectDialog</a> where a new color can be chosen.
+S0 0 QPushButton
+http://doc.trolltech.com/3.3/qpushbutton.html
+=

@@ -1,0 +1,340 @@
+doc_update_dialog
+docupdatedialog.html
+/users/data12/pion/ehrhardt/tofPack2/documentation/include/doc_update_dialog.h
+Cdoc_update_dialog
+-1 
+O#c2
+Pparent
+-1 QWidget*
+=
+Pmodal
+6 bool
+Vfalse
+=
+Pfl
+-1 WFlags
+V0
+=
+DConstructor. Qt3-mode; non-visible in Qt4-mode.
+=
+Cdoc_update_dialog
+-1 
+O#c3
+Pparent
+-1 QWidget*
+=
+Pfl
+-1 Qt::WindowFlags
+V0
+=
+DConstructor. Qt4-mode; non-visible in Qt3-mode.
+=
+goldClass
+-1 TMyClass*
+O#v2
+Ttmyclass.html
+D
+=
+gnewClass
+-1 TMyClass*
+O#v3
+Ttmyclass.html
+D
+=
+gassignButton
+-1 QPushButton*
+O#v4
+D
+=
+ghelpButton
+-1 QPushButton*
+O#v5
+D
+=
+gokButton
+-1 QPushButton*
+O#v6
+D
+=
+gcancelButton
+-1 QPushButton*
+O#v7
+D
+=
+goldLabel
+-1 QLabel*
+O#v8
+D
+=
+gnewLabel
+-1 QLabel*
+O#v9
+D
+=
+goldBox
+-1 QListBox*
+O#v10
+D
+=
+gnewBox
+-1 QListBox*
+O#v11
+D
+=
+gtogetherView
+-1 QListView*
+O#v12
+D
+=
+goldBox
+-1 QListBox*
+O#v13
+=
+gnewBox
+-1 QListBox*
+O#v14
+=
+gtogetherView
+-1 QListView*
+O#v15
+=
+gflayout
+-1 QGridLayout*
+O#v16
+D
+=
+FclassName
+5 char*
+Svirtual const
+O#f2
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f3
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f4
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f5
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f6
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f7
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f8
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+FsetOldClass
+7 void
+O#f9
+Pold
+-1 TMyClass*
+Ttmyclass.html
+=
+DSet the class named as "old", the one with the descriptions.
+=
+FsetNewClass
+7 void
+O#f10
+PnCl
+-1 TMyClass*
+Ttmyclass.html
+=
+DSet the class named as "new", the one without descriptions so far.
+=
+FclassesMatch
+6 bool
+O#f11
+DReturns true if both classes are set and all properties of both classes could be assigned to the corresponding property of the other class.
+=
+GcheckBoxes
+7 void
+O#f12
+D
+=
+GgetDoc
+-1 nameTypeDoc*
+O#f13
+Tnametypedoc.html
+Ptp
+0 int
+=
+Pnme
+-1 QString&
+Sconst
+=
+D
+=
+GaddProps2Box
+7 void
+O#f14
+Plb
+-1 QListBox*
+=
+Pcls
+-1 TMyClass*
+Ttmyclass.html
+=
+D
+=
+GaddProps2Box
+7 void
+O#f15
+Plb
+-1 QListWidget*
+=
+Pcls
+-1 TMyClass*
+Ttmyclass.html
+=
+D
+=
+Laccept
+7 void
+Svirtual
+O#l2
+DOverwritten accep() slot from QDialog.
+DCopies the descriptions from the "old" class to the "new" class.
+DFor all assigned properties this is also done.
+=
+LonAssignClick
+7 void
+Svirtual
+O#l3
+DAssigns the current property in the "new"-box to the current property in the "old"-box, adding a new line to the tree-widget and removing the properties from the unassigned boxes.
+=
+LonOldClick
+7 void
+Svirtual
+O#l4
+Pit
+-1 QListBoxItem*
+=
+DDoes nothing so far. Qt3-mode; non-visible in Qt4-mode.
+=
+LonNewClick
+7 void
+Svirtual
+O#l5
+Pit
+-1 QListBoxItem*
+=
+DDoes nothing so far. Qt3-mode; non-visible in Qt4-mode.
+=
+LonTogeterClick
+7 void
+Svirtual
+O#l6
+Pit
+-1 QListViewItem*
+=
+DIf <var>it</var> is non-NULL, the two properties involved are moved to the unassigned boxes. Qt3-mode; non-visible in Qt4-mode.
+=
+LonOldClick
+7 void
+Svirtual
+O#l7
+Pit
+-1 QListWidgetItem*
+=
+DDoes nothing so far. Qt4-mode; non-visible in Qt3-mode.
+=
+LonNewClick
+7 void
+Svirtual
+O#l8
+Pit
+-1 QListWidgetItem*
+=
+DDoes nothing so far. Qt4-mode; non-visible in Qt3-mode.
+=
+LonTogeterClick
+7 void
+Svirtual
+O#l9
+Pit
+-1 QTreeWidgetItem*
+=
+DIf <var>it</var> is non-NULL, the two properties involved are moved to the unassigned boxes. Qt4-mode; non-visible in Qt3-mode.
+=
+DThis widget compares two classes and their methods and variables. If two methods (one from each class) match they are put into the tree-widget and if accepted, the description defined for the "old"-version is copied to the "new" one. 
+DMethods, Variables, etc. that don't match are copied to the list-boxes at top for manual assignment.
+S0 0 QDialog
+http://doc.trolltech.com/4.4/qdialog.html
+=

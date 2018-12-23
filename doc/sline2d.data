@@ -1,0 +1,248 @@
+sLine2D
+sline2d.html
+/users/data12/pion/ehrhardt/tofPack2/include/geometry.h
+CsLine2D
+-1 sLine2D
+O#c2
+DDefault constructor.
+=
+CsLine2D
+-1 sLine2D
+O#c3
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+Pq
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+DConstructor. Sets <var>p</var> as footing point and uses the vector <var>q-p</var> as direction.
+=
+CsLine2D
+-1 sLine2D
+O#c4
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+Pv
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DConstructor. Sets a footing point and the direction.
+=
+CsLine2D
+-1 sLine2D
+O#c5
+Pl
+-1 sLine2D&
+Sconst
+=
+DCopy constructor.
+=
+gfoot
+14 point2D
+O#v2
+Tpoint2d.html
+D
+=
+gd
+15 vector2D
+O#v3
+Tvector2d.html
+D
+=
+FFoot
+14 point2D
+O#f2
+Tpoint2d.html
+Lconst
+DReturns the footing point of the line.
+=
+FDirection
+15 vector2D
+O#f3
+Tvector2d.html
+Lconst
+DReturn the direction-vector of the line.
+=
+FshiftFoot
+7 void
+O#f4
+Pt
+3 double
+=
+DThe new foot is f<sub>new</sub>=f<sub>old</sub>+<var>t</var>*v.
+=
+FnewLine
+7 void
+O#f5
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+Pv
+15 vector2D&
+Sconst
+Tvector2d.html
+=
+DAssigns a new line with footing point <var>p</var> and direction <var>v</var>.
+=
+FisIn
+0 int
+O#f6
+Lconst
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+DReturns true if the distance of point <var>p</var> to the line is smaller than __prec (1e-6).
+=
+FgetRep
+-1 repTD
+O#f7
+Lconst
+DReturns the representation of the line.
+=
+FsetRep
+7 void
+O#f8
+Pr
+-1 repTD
+=
+DSets the representation of the line. This can be _cartesic_ or _polar_.
+=
+FisLine
+0 int
+O#f9
+Lconst
+DReturns true if the direction vector is a line vector.
+=
+FisColumn
+0 int
+O#f10
+Lconst
+DReturns true if the direction vector is a column vector.
+=
+Ftranspose
+7 void
+O#f11
+DTransposes the direction vector. A line vector returns a column vector, a column vector a line vector. 
+=
+FgetState
+-1 geomState
+O#f12
+Lconst
+DReturns the state of the geometrical object. This can be _regular_, _undefined_, _infinite_ or _zero_. 
+=
+FgetDimension
+0 int
+O#f13
+Lconst
+DReturns the dimension of the line which is 2.
+=
+FZero
+7 void
+O#f14
+DSets the state of the object to _regular_. 
+=
+Foperator-
+15 vector2D
+O#f15
+Tvector2d.html
+Lconst
+Pp
+14 point2D&
+Sconst
+Tpoint2d.html
+=
+DReturns the distance of point <var>p</var> to this line.
+=
+Foperator&&
+14 point2D
+O#f16
+Tpoint2d.html
+Lconst
+Pl
+-1 sLine2D&
+Sconst
+=
+DReturns the intersection point of two straight lines.
+=
+Foperator&
+3 double
+O#f17
+Lconst
+Pl
+-1 sLine2D&
+Sconst
+=
+DReturns the minimal distance of the line <var>l</var> and this line. It is zero if the two lines intersect, or non-zero if the lines are parallel.
+=
+Foperator-
+-1 lLine2D
+O#f18
+Lconst
+Pl
+-1 sLine2D&
+Sconst
+=
+DSubtraction operator. Returns a limited straight line with length zero. The begin and end point is the intersection point of the line <var>l</var> and this line.
+=
+Foperator-
+-1 lLine2D
+O#f19
+Lconst
+Pl
+-1 lLine2D&
+Sconst
+=
+DSubtraction operator. Returns a limited straight line with length zero. The begin and end point is the intersection point of the line <var>l</var> and this line. If the l doesn't intersect with this line the return value is the line of closest approach between the limited line and this line.
+=
+Foperator=
+7 void
+O#f20
+Pl
+-1 sLine2D&
+Sconst
+=
+DCopy operator.
+=
+FtoString
+-1 string
+Svirtual
+O#f21
+Lconst
+Ppt
+0 int
+V-1
+=
+DReturns a string representation of the point. Depending on <var>pt</var> this can be eigther _cartesic_, _polar_ or in the points own representation (<var>pt</var>=-1, default) for the direction vector.
+=
+fInfinite
+7 void
+O#f22
+DSets the state of the object to _infinite_.
+=
+fUndefined
+7 void
+O#f23
+DSets the state of the object to _undefined_.
+=
+fRegular
+7 void
+O#f24
+DSets the state of the object to _regular_. 
+=
+DStraight unsimited line in 2 dimensions.
+S0 1 geomObject
+geomobj.html
+geomObject
+=

@@ -1,0 +1,210 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class functionNameTypeDoc</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class functionNameTypeDoc in "tmyclass.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="nametypedoc.html">nameTypeDoc</A>
+<DT>Constructor
+<LI><A HREF="#c2">functionNameTypeDoc</A>() 
+<LI><A HREF="#c3">functionNameTypeDoc</A>(<vtype>string</vtype> nameIn, <vtype>string</vtype> typeIn, <vtype>int</vtype> typeIdIn = 0, <vtype>string</vtype> specifierIn = "", <vtype>string</vtype> docIn = "", <vtype>string</vtype> typeDocIn = "") 
+<LI><A HREF="#c4">functionNameTypeDoc</A>(const <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> n) 
+<LI><A HREF="#c5">functionNameTypeDoc</A>(const <vtype>string&</vtype> s) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~functionNameTypeDoc</A>() 
+<LI><A HREF="#f3"><vtype>string</vtype> Limiter</A>() const
+<LI><A HREF="#f4"><vtype>void</vtype> setLimiter</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="nametypedoc.html">nameTypeDoc&</A> <A HREF="#f5">Parameter</A>(<vtype>int</vtype> i) 
+<LI><A HREF="nametypedoc.html">nameTypeDoc</A> <A HREF="#f6">getParameter</A>(<vtype>int</vtype> i) const
+<LI><A HREF="#f7"><vtype>int</vtype> nParameters</A>() const
+<LI><A HREF="#f8"><vtype>void</vtype> clearParameter</A>() 
+<LI><A HREF="#f9"><vtype>void</vtype> addParameter</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> input) 
+<LI><A HREF="#f10"><vtype>void</vtype> addParameter</A>(<vtype>string</vtype> nameIn, <vtype>string</vtype> typeIn, <vtype>int</vtype> typeIdIn, <vtype>string</vtype> specifierIn = "", <vtype>string</vtype> docIn = "", <vtype>string</vtype> typeDocIn = "") 
+<LI>virtual <A HREF="#f13"><vtype>string</vtype> ParameterList</A>(<vtype>int</vtype> ptt = 0) const
+<LI>virtual <A HREF="#f15"><vtype>vector&lt;string&gt;</vtype> htmlNAME</A>(const <vtype>string&</vtype> classname = "") const
+<LI><A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> <A HREF="#f16">operator=</A>(const <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> fn) 
+<LI><A HREF="#f17"><vtype>bool</vtype> operator==</A>(const <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> fn) 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="functionnametypedoc.html">functionNameTypeDoc</A> <A HREF="#f18">parseIt</A>(const <vtype>string&</vtype> expression) 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI><A HREF="#f11"><vtype>void</vtype> parse</A>(const <vtype>string&</vtype> s) 
+<LI>virtual <A HREF="#f12"><vtype>string</vtype> toString</A>(<vtype>int</vtype> ptt = 0) const
+<LI>virtual <A HREF="#f14"><vtype>string</vtype> htmlHREF</A>() const
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="nametypedoc.html#f3"><vtype>string</vtype> nameTypeDoc::Name</A>() const
+<LI><A HREF="nametypedoc.html#f4"><vtype>string</vtype> nameTypeDoc::Type</A>() const
+<LI><A HREF="nametypedoc.html#f5"><vtype>string</vtype> nameTypeDoc::Doc</A>() const
+<LI><A HREF="nametypedoc.html#f6"><vtype>string</vtype> nameTypeDoc::TypeDoc</A>() const
+<LI><A HREF="nametypedoc.html#f7"><vtype>string</vtype> nameTypeDoc::Description</A>(<vtype>int</vtype> i) const
+<LI><A HREF="nametypedoc.html#f8"><vtype>int</vtype> nameTypeDoc::DescriptionLines</A>() const
+<LI><A HREF="nametypedoc.html#f9"><vtype>string</vtype> nameTypeDoc::Specifier</A>() const
+<LI><A HREF="nametypedoc.html#f10"><vtype>string</vtype> nameTypeDoc::Default</A>() const
+<LI><A HREF="nametypedoc.html#f11"><vtype>int</vtype> nameTypeDoc::TypeId</A>() const
+<LI><A HREF="nametypedoc.html#f12"><vtype>void</vtype> nameTypeDoc::setType</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="nametypedoc.html#f13"><vtype>void</vtype> nameTypeDoc::setName</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="nametypedoc.html#f14"><vtype>void</vtype> nameTypeDoc::setDoc</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="nametypedoc.html#f15"><vtype>void</vtype> nameTypeDoc::setTypeId</A>(<vtype>int</vtype> v) 
+<LI><A HREF="nametypedoc.html#f16"><vtype>void</vtype> nameTypeDoc::setTypeDoc</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="nametypedoc.html#f17"><vtype>void</vtype> nameTypeDoc::setDescription</A>(const <vtype>vector&lt;string&gt;&</vtype> input) 
+<LI><A HREF="nametypedoc.html#f18"><vtype>void</vtype> nameTypeDoc::setSpecifier</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="nametypedoc.html#f19"><vtype>void</vtype> nameTypeDoc::setDefault</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="nametypedoc.html#f20"><vtype>void</vtype> nameTypeDoc::clearDescription</A>() 
+<LI><A HREF="nametypedoc.html#f21"><vtype>void</vtype> nameTypeDoc::addDescriptionLine</A>(const <vtype>string&</vtype> s) 
+<LI>virtual <A HREF="nametypedoc.html#f25"><vtype>vector&lt;string&gt;</vtype> nameTypeDoc::htmlNAME</A>() const
+<LI><A HREF="nametypedoc.html">nameTypeDoc&</A> <A HREF="nametypedoc.html#f26">nameTypeDoc::operator=</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> nt) 
+<LI><A HREF="nametypedoc.html#f27"><vtype>bool</vtype> nameTypeDoc::operator==</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> nt) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">functionNameTypeDoc::functionNameTypeDoc</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">functionNameTypeDoc::functionNameTypeDoc</A>(<vtype>string</vtype> nameIn, <vtype>string</vtype> typeIn, <vtype>int</vtype> typeIdIn = 0, <vtype>string</vtype> specifierIn = "", <vtype>string</vtype> docIn = "", <vtype>string</vtype> typeDocIn = "") 
+<BR/><deff>
+Constructor. Sets the properties, like name, type, typeID, specifier and the documentation strings both for the type and the function intself.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">functionNameTypeDoc::functionNameTypeDoc</A>(const <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> n) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">functionNameTypeDoc::functionNameTypeDoc</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Constructor. Parses a string.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> functionNameTypeDoc::~functionNameTypeDoc</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>string</vtype> functionNameTypeDoc::Limiter</A>() const
+<BR/><deff>
+Returns the so called "limiter" of the function, the specifier that is located in C++ definition between the parameter list and the end of definition (usually a semicolon), e.g. "const".
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> functionNameTypeDoc::setLimiter</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Sets the so called "limiter" of the function, the specifier that is located in C++ definition between the parameter list and the end of definition (usually a semicolon), e.g. "const".
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="nametypedoc.html">nameTypeDoc&</A> <A NAME="f5">functionNameTypeDoc::Parameter</A>(<vtype>int</vtype> i) 
+<BR/><deff>
+Returns a reference to the <var>i<sup>th</sup></var> parameter. Take care: if <var>i</var> is non-valid, a reference to the first parameter is returned. This may cause problems.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="nametypedoc.html">nameTypeDoc</A> <A NAME="f6">functionNameTypeDoc::getParameter</A>(<vtype>int</vtype> i) const
+<BR/><deff>
+Returns the <var>i<sup>th</sup></var> parameter. An undefined variable is returned in case <var>i</var> is non valid.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>int</vtype> functionNameTypeDoc::nParameters</A>() const
+<BR/><deff>
+Returns the number of parameters.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> functionNameTypeDoc::clearParameter</A>() 
+<BR/><deff>
+Sets the number of parameters to zero.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> functionNameTypeDoc::addParameter</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> input) 
+<BR/><deff>
+Adds a parameter to the list of parameters.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> functionNameTypeDoc::addParameter</A>(<vtype>string</vtype> nameIn, <vtype>string</vtype> typeIn, <vtype>int</vtype> typeIdIn, <vtype>string</vtype> specifierIn = "", <vtype>string</vtype> docIn = "", <vtype>string</vtype> typeDocIn = "") 
+<BR/><deff>
+Add a parameter to the list of parameters with name <var>nameIn</var>, type <var>typeIn</var>, typeID <var>typeIdIn</var>, specifier <var>specifierIn</var>, and its documentation-links
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> functionNameTypeDoc::parse</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Parses a string representing a function in C++ code. Ignores comments, handles operators and inline definitions and finds the parameter list. 
+The string right of the parameter-list is saved in the Limiter variable, the left is decomposed in specifier, type and name, where constructors and destructors are recogniced and handled differently.
+The parameter-list is parsed for its content.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>string</vtype> functionNameTypeDoc::toString</A>(<vtype>int</vtype> ptt = 0) const
+<BR/><deff>
+Returns a C++-definition of the function. The pattern <var>ptt</var> is passed to the individual parameters.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>string</vtype> functionNameTypeDoc::ParameterList</A>(<vtype>int</vtype> ptt = 0) const
+<BR/><deff>
+Returns the parameter list in C++-representation, with the pattern <var>ptt</var> being passed to the individual parameters.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>string</vtype> functionNameTypeDoc::htmlHREF</A>() const
+<BR/><deff>
+Returns a string containing the html-link to the html-description of the function. If a documentation-file for the type is given or it is listed in the list of known types or classes, this link is included. The same is done for the parameters. Defaults are shown here. Constructor case is taken into account. 
+Viewn with a browser, it looks like a C++-definition of a function.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>vector&lt;string&gt;</vtype> functionNameTypeDoc::htmlNAME</A>(const <vtype>string&</vtype> classname = "") const
+<BR/><deff>
+Returns the html-documentation of the function as a vector of strings. If the <var>classname</var> is specified, the function name is given by "classname::functionname".
+A html-"name"-label is included with the current Doc-string. If name and type are equal (constructor case), type is left out. If a documentation file for the type is specified or listed in the known types or classes, a link is included there, else the ype is colored gray.
+The parameters are given as in <a href="nametypedoc.html#f11">nameTypeDoc::htmlNAME()</a>. The description is added in green.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> <A NAME="f16">functionNameTypeDoc::operator=</A>(const <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> fn) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>bool</vtype> functionNameTypeDoc::operator==</A>(const <A HREF="functionnametypedoc.html">functionNameTypeDoc&</A> fn) 
+<BR/><deff>
+Comparison operator. Returns true if the name, type, specifier, limiter, number of parameters and for each parameter, type and specifier are the same (here names may differ).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="functionnametypedoc.html">functionNameTypeDoc</A> <A NAME="f18">functionNameTypeDoc::parseIt</A>(const <vtype>string&</vtype> expression) 
+<BR/><deff>
+Static function. Parses the function string as it may occur for a C++-definition of a function and returns the function description object. See <a href="#f11">parse()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

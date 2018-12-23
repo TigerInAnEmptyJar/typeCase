@@ -1,0 +1,41 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>typeCase fit-package</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">typeCase: fit package</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<table>
+<tr><td>Class tree:</hr>
+<ul>
+<li><a href="sline3d.html">sLine3D</a>
+  <ul>
+  <li><a href="linefit.html">lineFit</a>
+  </ul>
+<li><a href="geomobj.html">geomObj</a>
+  <ul>
+  <li><a href="vertexfit.html">vertexFit</a>
+  <li><a href="kinfit.html">kinFit</a>
+  </ul>
+</ul>
+</td><td>
+<p>The fit package is one of the smaller parts of the typeCase-analysis
+framework. It is based on the <a href="geometry.html>geometry-part</a> of the
+analysis-framework, but none else.</p>
+<p>It contains the single line fit, that does in 3-dimensional space a fit to a
+number of points, returning a fitted straight line.</p>
+<p>Second is the vertex fit that fits any number of lines (with their points
+assigned to the individual lines) to a common vertex or footing point. Though
+in principle possible to fit more than 3 lines at once it is strongly
+recomended to use a maximum of 3 at a time.</p>
+<p>Last but not least is the most complicated fit of the set: the kinematical
+fit (kinFit). The first two fits being purely geometrical fits of points to (a)
+line(s), the kinFit imposes kinematical constraints on a set of reaction
+products. Basic here is the momentum- and energy-conservation, basic laws of
+physics. Using the gradient method with lagrangean multipliers, the initial
+momentum values of the particles to fit are modified using provided errors.</p>
+</td></tr></table>
+</body>
+</html>

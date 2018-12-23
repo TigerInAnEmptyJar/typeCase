@@ -1,0 +1,282 @@
+TMaterial
+tmaterial.html
+/users/data12/pion/ehrhardt/tofPack2/include/material.h
+CTMaterial
+106 TMaterial
+O#c2
+PnameIn
+-1 string
+V"proton"
+=
+Pmax
+0 int
+V100
+=
+Pmass
+1 float
+V0.93827231
+=
+Pcharge
+1 float
+V1
+=
+Pweight
+1 float
+V-1
+=
+DConstructor. Defines the name of the material and the first element, the material consists of. Default here is proton gas.  
+=
+gmaxElements
+0 int
+Sconst
+O#v2
+D
+=
+gnumElements
+0 int
+O#v3
+D
+=
+gmasses
+1 float*
+O#v4
+D
+=
+gcharges
+1 float*
+O#v5
+D
+=
+gweights
+1 float*
+O#v6
+D
+=
+gdensity
+1 float
+O#v7
+D
+=
+gradiationLength
+1 float
+O#v8
+D
+=
+gspeedOfLight
+1 float
+O#v9
+D
+=
+genergyloss
+-1 AELossAlgorithm*
+O#v10
+D
+=
+gname
+-1 string
+O#v11
+D
+=
+gdefined
+6 bool
+O#v12
+D
+=
+F~TMaterial
+-1 ~TMaterial
+O#f2
+DDestructor
+=
+FgetName
+-1 string
+O#f3
+Lconst
+DReturns the name of the material. 
+=
+FsetName
+7 void
+O#f4
+Pn
+-1 string
+=
+DSets the name of the material. 
+=
+FgetNumberOfElements
+0 int
+O#f5
+Lconst
+DReturns the actual number of elements stored for this material. 
+=
+FgetMaxNumberOfElements
+0 int
+O#f6
+Lconst
+DReturns the maximal number of elements to be stored for this material. 
+=
+FgetRadiationLength
+1 float
+O#f7
+Lconst
+DReturns the materials radiation length. 
+=
+FgetDensity
+1 float
+O#f8
+Lconst
+DReturns the materials density in units of g/cm³. 
+=
+FsetRadiationLength
+7 void
+O#f9
+Prad
+1 float
+=
+DSets the materials radiation length. 
+=
+FsetDensity
+7 void
+O#f10
+Pd
+1 float
+=
+DSets the density of the material in units of g/cm³. 
+=
+FgetMass
+1 float
+O#f11
+Lconst
+Pnum
+0 int
+V0
+=
+DReturns the mass (GeV) of the <var>num<sup>th</sup></var> element the material consists of. 
+=
+FgetCharge
+1 float
+O#f12
+Lconst
+Pnum
+0 int
+V0
+=
+DReturns the charge of the <var>num<sup>th</sup></var> element the material consists of. 
+=
+FgetWeight
+1 float
+O#f13
+Lconst
+Pnum
+0 int
+V0
+=
+DReturns the relative abundance (0 <= weight <= 1) of an element in the material.   
+DIf the weight stored in this material is positive, this value is returned.   
+DIt it is negative, the relative abundance is calculated:   
+D(1 - sum(positive))/sum( abs(negative) ) * abs(weight)    
+DReturns -1 if <var>num</var> is non valid. 
+=
+FgetMeanMass
+1 float
+O#f14
+Lconst
+DReturns the mean mass (GeV) of a nucleus in the material using the relative abundance of each element.  
+=
+FgetMeanCharge
+1 float
+O#f15
+Lconst
+DReturns the mean charge of a nucleus in the material using the relative abundance of each element. 
+=
+FaddElement
+7 void
+O#f16
+Pmass
+1 float
+=
+Pcharge
+1 float
+=
+Pweight
+1 float
+V-1
+=
+DAdds an element to the list of elements with nuclear mass (Gev) and charge and a weight that defines the abundance of the element in the material.  
+DIf the weight is positive, it gives the relative abundance of this element of all elements in the material.   
+DIf it is negative, the rest of the sum of the positive weights to one is distributed among all elements with negative weight with the relative abundance =   
+D(1 - sum(positive))/sum( abs(negative) ) * abs(weight)  
+=
+FsetElement
+7 void
+O#f17
+Pnum
+0 int
+=
+Pmass
+1 float
+=
+Pcharge
+1 float
+=
+Pweight
+1 float
+V-1
+=
+DSets the nuclear mass (GeV), charge and weight of the <var>num<sup>th</sup></var> element of the material.  
+DIf the weight is positive, it gives the relative abundance of this element of all elements in the material.  
+DIf it is negative, the rest of the sum of the positive weights to one is distributed among all elements with negative weight with the relative abundance =  
+D(1 - sum(positive))/sum( abs(negative) ) * abs(weight) 
+DDoes nothing if <var>num</var> is non valid. 
+=
+FpopElement
+7 void
+O#f18
+DRemoves the last element from the list of elements, the material consists of. 
+=
+FgetAlgorithm
+-1 AELossAlgorithm*
+O#f19
+DReturns the energy loss algorithm used to calculate the energy loss of some particle in the material. 
+=
+FsetAlgorithm
+7 void
+O#f20
+PenergyLoss
+-1 AELossAlgorithm*
+=
+DSets the energy loss algorihm. This algorithm won't be deleted with the material. Take care it is deleted properly after use. 
+=
+FEnergyLoss
+1 float
+O#f21
+Pparticle
+20 momentum4D
+=
+Ppath
+1 float
+=
+DIf the energyloss algorithm is defined, it returns the energyloss of the <var>particle</var> passing the material on a length of <var>path</var>. 
+D<font color="red">Not yet defined properly!</font> 
+=
+FgetSpeedOfLight
+1 float
+O#f22
+Lconst
+DReturns the speed of light in the material in units of the speed of light in vacuum. 
+=
+FsetSpeedOfLight
+7 void
+O#f23
+Pval
+1 float
+=
+DSets the speed of light in the material in units of the speed of light in vacuum. Should not be larger than 1, by definition. 
+=
+FisDefined
+6 bool
+O#f24
+DReturns true, if this material has been defined. 
+=
+S0 1 TBase
+tbase.html
+TBase
+=

@@ -1,0 +1,305 @@
+CommonCalibrationParser
+commoncalibrationparser.html
+/users/data12/pion/ehrhardt/tofPack2/include/CommonCalibrationParser.h
+CCommonCalibrationParser
+-1 CommonCalibrationParser
+O#c2
+PnE
+0 int
+=
+PID
+0 int
+=
+DConstructor. Sets the detector ID and the number of elements, the detector has.
+=
+CCommonCalibrationParser
+-1 CommonCalibrationParser
+O#c3
+DDefault constructor.
+=
+gnumParameters
+0 int
+O#v2
+D
+=
+gnumElements
+0 int
+O#v3
+D
+=
+gDetID
+0 int
+O#v4
+D
+=
+gparamID
+0 int
+O#v5
+D
+=
+gparameter
+1 float**
+O#v6
+D
+=
+grange
+0 int*
+O#v7
+D
+=
+gvalid
+6 bool
+O#v8
+D
+=
+F~CommonCalibrationParser
+-1 ~CommonCalibrationParser
+O#f2
+DDestructor
+=
+FisValid
+6 bool
+O#f3
+Lconst
+DReturns true if the calibration is valid.
+=
+FgetFromFile
+6 bool
+O#f4
+Pinput
+-1 ifstream&
+=
+DReads a calibration from an input file stream and returns true if this operation was sucessful.
+DThis method is obsolete, use <a href="#f24">getFileContent()</a> instread.
+=
+FgetNumParameters
+0 int
+O#f5
+Lconst
+DReturns the number of parameters defined for each element.
+=
+FgetNumElements
+0 int
+O#f6
+Lconst
+DReturns the number of elements of the detector.
+=
+FgetDetector
+0 int
+O#f7
+Lconst
+DReturns the detector ID.
+=
+FgetParamID
+0 int
+O#f8
+Lconst
+DReturns the ID of the calibration.
+=
+FgetRange
+0 int
+O#f9
+Lconst
+Pnum
+0 int
+=
+DReturns the valid range of calibration. For <var>num</var> is 0 or 1, it is the beginning and ending event number, for <var>num</var> 2 or 3, it is the beginning and ending run number.
+=
+FgetParameter
+1 float
+O#f10
+Lconst
+Pelement
+0 int
+=
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> parameter of some <var>element</var>.
+=
+FsetParameter
+7 void
+O#f11
+Pelement
+0 int
+=
+Pnum
+0 int
+=
+Pvalue
+1 float
+=
+DSet the <var>num<sup>th</sup></var> parameter for a specific <var>element</var> to <var>value</var>.
+=
+FsetRange
+7 void
+O#f12
+Pnum
+0 int
+=
+Pvalue
+0 int
+=
+DSets the valid range of calibration. For <var>num</var> is 0 or 1, it is the beginning and ending event number, for <var>num</var> 2 or 3, it is the beginning and ending run number.
+=
+FsetRanges
+7 void
+O#f13
+PfromRun
+0 int
+=
+PtoRun
+0 int
+=
+PfromEvent
+0 int
+V0
+=
+PtoEvent
+0 int
+V9999999
+=
+D
+=
+FsetParamID
+7 void
+O#f14
+Pvalue
+0 int
+=
+DSet the parameter id.
+=
+FsetNumParamsElements
+7 void
+O#f15
+Pelements
+0 int
+=
+Pparams
+0 int
+=
+DSet the number of elements in the detector and the number of parameters for each element.
+=
+FsetDetID
+7 void
+O#f16
+Pvalue
+0 int
+=
+DSet the detector id.
+=
+FsetValid
+7 void
+O#f17
+Pvalue
+6 bool
+Vtrue
+=
+DSets the calibration to valid.
+=
+Foperator==
+6 bool
+O#f18
+Lconst
+Ppars
+-1 CommonCalibrationParser&
+Sconst
+=
+DComparison operator. Returns true the two calibrations describe the same detector with the same number of elements, the same number of parameters and if they have the same ranges.
+=
+Fwrite
+7 void
+O#f19
+Poutput
+8 ostream&
+=
+Pauthor
+-1 string&
+Sconst
+=
+PbeamTime
+-1 string&
+Sconst
+=
+DWrites the calibration data to an ostream in the common-calibration format. You can specify an author and a beamTime for that.
+=
+FgetNumberOfCalibrationsInFile
+0 int
+Sstatic
+O#f20
+Pfilename
+-1 string
+=
+DStatic method. Returns the number of calibrations to be found in this file.
+=
+FgetNumberOfCalibrationsInFile
+0 int
+Sstatic
+O#f21
+Pfilename
+-1 string
+=
+PdetID
+0 int
+=
+DStatic method. Returns the number of calibrations for detector <var>detID</var> in this file.
+=
+FgetNumberOfCalibrationsInFile
+0 int
+Sstatic
+O#f22
+Pfilename
+-1 string
+=
+PdetID
+0 int
+=
+PpID
+0 int
+=
+DStatic method. Returns the number of calibrations of ID <var>pID</var> for detector <var>detID</var> found in the file.
+=
+FgetCalibrationTypesInFile
+0 int
+Sstatic
+O#f23
+Pfilename
+-1 string
+=
+PpIDs
+-1 vector<int>&
+=
+PdetID
+0 int
+=
+DStatic method. Reads an ascii file and returns the calibration IDs of the found calibrations for detector <var>detID</var>. The return value is the number of calibrations found.
+=
+FgetCalibrationTypesInFile
+0 int
+Sstatic
+O#f24
+Pfilename
+-1 string
+=
+PpIDs
+-1 vector<int>&
+=
+Pdets
+-1 vector<int>&
+=
+DStatic method. Reads an ascii file and returns the calibration and detector IDs of the found calibrations. The return value is the number of calibrations found.
+=
+FgetFileContent
+0 int
+Sstatic
+O#f25
+Pfilename
+-1 string
+=
+Pcontent
+-1 vector<CommonCalibrationParser*>&
+=
+DStatic method. Reads an ascii file and returns the found calibrations in the vector <var>content</var>. The return value is the number of calibrations found.
+DTake care, that you delete all entries in the vector correctly after use: potential memory leak.
+=
+=

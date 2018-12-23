@@ -1,0 +1,171 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class TPixel</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class TPixel in "pixel.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="tbase.html">TBase</A>
+<DT>Constructor
+<LI><A HREF="#c2">TPixel</A>(<vtype>int</vtype> numDetIn = 3) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~TPixel</A>() 
+<LI><A HREF="planeshape.html">planeShape*</A> <A HREF="#f3">getShape</A>() 
+<LI><A HREF="tcalibhit.html">TCalibHit</A> <A HREF="#f4">getElement</A>(<vtype>int</vtype> num) const
+<LI><A HREF="tcalibhit.html">TCalibHit&</A> <A HREF="#f5">getElementr</A>(<vtype>int</vtype> num) 
+<LI><A HREF="#f6"><vtype>int</vtype> getNumberOfElements</A>() const
+<LI><A HREF="#f7"><vtype>int</vtype> getNumberOfActualElements</A>() const
+<LI><A HREF="#f8"><vtype>void</vtype> setShape</A>(<A HREF="planeshape.html">planeShape*</A> sh) 
+<LI><A HREF="#f9"><vtype>void</vtype> addElement</A>(<A HREF="tcalibhit.html">TCalibHit&</A> hit) 
+<LI><A HREF="#f10"><vtype>void</vtype> resetElements</A>() 
+<LI><A HREF="#f11"><vtype>int</vtype> getID</A>() const
+<LI><A HREF="#f12"><vtype>void</vtype> setID</A>(<vtype>int</vtype> IDIn) 
+<LI><A HREF="#f13"><vtype>float</vtype> getMaxChiSquared</A>() const
+<LI><A HREF="#f14"><vtype>void</vtype> setMaxChiSquared</A>(<vtype>float</vtype> value) 
+<LI><A HREF="#f15"><vtype>bool</vtype> isDefined</A>() 
+<LI><A HREF="#f16"><vtype>void</vtype> reset</A>() 
+<LI><A HREF="#f17"><vtype>bool</vtype> operator==</A>(<A HREF="tpixel.html">TPixel&</A> tmptpixel0) 
+<LI><A HREF="#f18"><vtype>bool</vtype> isValid</A>() const
+<LI><A HREF="#f19"><vtype>void</vtype> setValid</A>(<vtype>bool</vtype> v = true) 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="tbase.html#f3"><vtype>string</vtype> TBase::name</A>() const
+</UL>
+<DT>Protected inherrited variables
+<DD><vtype>string</vtype> <A HREF="tbase.html#v2">TBase::fname</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">TPixel::TPixel</A>(<vtype>int</vtype> numDetIn = 3) 
+<BR/><deff>
+Constructor. Sets the maximum number of elements this pixel consists of. This is 3 by default. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">TPixel::~TPixel</A>() 
+<BR/><deff>
+Destructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="planeshape.html">planeShape*</A> <A NAME="f3">TPixel::getShape</A>() 
+<BR/><deff>
+Returns a pointer to the planar shape of the pixel. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tcalibhit.html">TCalibHit</A> <A NAME="f4">TPixel::getElement</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> element of the pixel. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tcalibhit.html">TCalibHit&</A> <A NAME="f5">TPixel::getElementr</A>(<vtype>int</vtype> num) 
+<BR/><deff>
+Returns a reference tor the <var>num<sup>th</sup></var> element of the pixel.  
+This routine is prefered. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> TPixel::getNumberOfElements</A>() const
+<BR/><deff>
+Returns the maximum number of elements storable for this pixel. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>int</vtype> TPixel::getNumberOfActualElements</A>() const
+<BR/><deff>
+Returns the number of detector elements in this pixel. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> TPixel::setShape</A>(<A HREF="planeshape.html">planeShape*</A> sh) 
+<BR/><deff>
+Sets the planar shape of the pixel.  
+Warning: Only the pointer is set; no memory of previously devlared shapes is freed. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> TPixel::addElement</A>(<A HREF="tcalibhit.html">TCalibHit&</A> hit) 
+<BR/><deff>
+Add a detector element to the pixel. Routine is skipped, if the number of elements exceeds the maximum. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> TPixel::resetElements</A>() 
+<BR/><deff>
+Sets the number of elements to zero. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>int</vtype> TPixel::getID</A>() const
+<BR/><deff>
+Returns the ID of the pixel. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> TPixel::setID</A>(<vtype>int</vtype> IDIn) 
+<BR/><deff>
+Sets the pixel ID. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>float</vtype> TPixel::getMaxChiSquared</A>() const
+<BR/><deff>
+Retruns a number usable as maximum chi squared in further analysis. <i>obsolete</i> 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> TPixel::setMaxChiSquared</A>(<vtype>float</vtype> value) 
+<BR/><deff>
+Sets the maximum chi squared value. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>bool</vtype> TPixel::isDefined</A>() 
+<BR/><deff>
+Returns true if the pixel has been modified after creation or reset. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>void</vtype> TPixel::reset</A>() 
+<BR/><deff>
+Resets the pixel. The valid property is set to false, the number of elements is set to zero.  
+Warning: No pointers are deleted!! This, the user of this class has to do himself. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>bool</vtype> TPixel::operator==</A>(<A HREF="tpixel.html">TPixel&</A> tmptpixel0) 
+<BR/><deff>
+Returns true if this pixel and the other one consist of the same hits. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>bool</vtype> TPixel::isValid</A>() const
+<BR/><deff>
+Returns the valid property.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> TPixel::setValid</A>(<vtype>bool</vtype> v = true) 
+<BR/><deff>
+Sets the valid property of the pixel. If used without parameter, the method sets it to true. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

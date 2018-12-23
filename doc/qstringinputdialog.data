@@ -1,0 +1,444 @@
+QStringInputDialog
+qstringinputdialog.html
+/users/data12/pion/ehrhardt/tofPack2/gui/widgets/include/qstringinputdialog.h
+CQStringInputDialog
+-1 QStringInputDialog
+O#c2
+Pparent
+-1 QWidget*
+V0
+=
+Pname
+5 char*
+Sconst
+V0
+=
+Pmodal
+6 bool
+VFALSE
+=
+Pfl
+-1 WFlags
+V0
+=
+DConstructor, for Qt3-mode, non-visible in Qt4-mode
+=
+CQStringInputDialog
+-1 QStringInputDialog
+O#c3
+Pparent
+-1 QWidget*
+V0
+=
+Pf
+-1 Qt::WindowFlags
+V0
+=
+DConstructor, for Qt4-mode, non-visible in Qt3-mode
+=
+VlineEdit
+-1 QLineEdit*
+O#v2
+Dcontains the string to be edited
+=
+VbuttonHelp
+-1 QPushButton*
+O#v3
+Dhelp-button, for Qt3-mode, non-visible in Qt4-mode
+=
+VbuttonOk
+-1 QPushButton*
+O#v4
+DOk-button, for Qt3-mode, non-visible in Qt4-mode
+=
+VbuttonCancel
+-1 QPushButton*
+O#v5
+Dcancel-button, for Qt3-mode, non-visible in Qt4-mode
+=
+Vbuttons
+-1 QDialogButtonBox*
+O#v6
+Ddialog-buttons, for Qt4-mode, non-visible in Qt3-mode
+=
+vlayout
+-1 QGridLayout*
+O#v7
+Dlayout
+=
+vHorizontal_Spacing2
+-1 QSpacerItem*
+O#v8
+Dlayout-item
+=
+FclassName
+5 char*
+Svirtual const
+O#f2
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f3
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f4
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f5
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f6
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f7
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f8
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+FclassName
+5 char*
+Svirtual const
+O#f9
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f10
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f11
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f12
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f13
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f14
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f15
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+FclassName
+5 char*
+Svirtual const
+O#f16
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f17
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f18
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f19
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f20
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f21
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f22
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+F~QStringInputDialog
+-1 ~QStringInputDialog
+O#f23
+DDestructor
+=
+Fline
+-1 QString
+Svirtual
+O#f24
+DAfter the execution of the dialog-box the string can be retrieved via this method.
+=
+FgetLine
+-1 QString
+Sstatic
+O#f25
+Ppar
+-1 QWidget*
+=
+Pcapt
+-1 QString&
+Sconst
+=
+Pstart
+-1 QString&
+Sconst
+VQString()
+=
+DStatic method. Starts a dialog-box asking for a single string. <var>start</var> is copied to the line-edit beforehand.
+=
+Lresize
+7 void
+Svirtual
+O#l2
+Ps
+-1 QSize&
+Sconst
+=
+DResize widget. Obsolete since layout is used.
+=
+LresizeEvent
+7 void
+Svirtual
+O#l3
+Pe
+-1 QResizeEvent*
+=
+DResize-event. Obsolete since layout is used.
+=
+Lresize
+7 void
+Svirtual
+O#l4
+Pw
+0 int
+=
+Ph
+0 int
+=
+DResize widget. Obsolete since layout is used.
+=
+LsetStart
+7 void
+Svirtual
+O#l5
+Pn
+-1 QString&
+Sconst
+=
+DSets the text of the line-edit.
+=
+llanguageChange
+7 void
+Svirtual
+O#l6
+D
+=
+DThis class is provided for convenience. It asks for a single string.
+S0 0 QDialog
+http://doc.trolltech.com/4.4/qdialog.html
+=

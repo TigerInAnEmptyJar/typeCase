@@ -1,0 +1,164 @@
+Vector
+vector.html
+/users/data12/pion/ehrhardt/tofPack2/include/geometry.h
+CVector
+13 Vector
+O#c2
+Pdim
+0 int
+V0
+=
+DConstructor. Sets the dimension of the vector (default =0).
+=
+CVector
+13 Vector
+O#c3
+Pv
+13 Vector&
+Sconst
+=
+DCopy constructor.
+=
+CVector
+13 Vector
+O#c4
+Pp
+12 point&
+Sconst
+=
+DCopy constructor from point.
+=
+gkind
+0 int
+O#v2
+D
+=
+Fnormalize
+7 void
+Svirtual
+O#f2
+DNormalizes the vector. All components in cartesian representation are devided by the length of the vector.
+=
+Ftranspose
+7 void
+O#f3
+DTransposes the vector. Converts a line vector into a column vector and vice versa.
+=
+FisLine
+0 int
+O#f4
+Lconst
+DReturns true if this vector is a line vector.
+=
+FisColumn
+0 int
+O#f5
+Lconst
+DReturns true if this vector is a column vector.
+=
+Flength
+3 double
+Svirtual
+O#f6
+Lconst
+DReturns the length of the vector.
+=
+Foperator=
+7 void
+O#f7
+Pp
+12 point&
+Sconst
+=
+DCopy operator. Used is the point vector of the origin to point <var>p</var>. Works only if the dimensions of this vector and <var>p</var> are the same.
+=
+Foperator=
+7 void
+O#f8
+Pv
+13 Vector&
+Sconst
+=
+DCopy operator. Works only if the dimensions of this vector and <var>v</var> are the same.
+=
+Foperator+
+13 Vector
+O#f9
+Lconst
+Pw
+13 Vector&
+Sconst
+=
+DAddition operator. Returns the sum of this vector and vector <var>w</var>. Works only if the dimensions of this vector and <var>w</var> are the same.
+=
+Foperator-
+13 Vector
+O#f10
+Lconst
+Pw
+13 Vector&
+Sconst
+=
+DSubtraction operator. Subtracts <var>w</var> from this vector and returns the result. This vector remains unchanged. Works only if the dimensions of this vector and <var>w</var> are the same.
+=
+Foperator*
+13 Vector
+O#f11
+Lconst
+Pf
+3 double
+=
+DMultiplication operator. Multiplies this vector with <var>f</var> and returns the result. This vector remains unchanged.
+=
+Foperator%
+13 Vector
+O#f12
+Lconst
+Pw
+13 Vector&
+Sconst
+=
+DA multiplication operator. The cartesic component of the return vector at position <i>i</i> is the product of the component of this vector at position <i>i</i> and the one of vector <var>w</var> at position <i>i</i>.
+=
+Foperator*
+3 double
+O#f13
+Lconst
+Pw
+13 Vector&
+Sconst
+=
+DMultiplication operator. Returns the scalar product of vector <var>w</var> wit this vector. Works only if the dimensions of this vector and <var>w</var> are the same.
+=
+Foperator==
+0 int
+O#f14
+Lconst
+Pv
+13 Vector&
+Sconst
+=
+DComparison operator. Returns true if the dimension of this vector is the same as of vector <var>v</var> a if the components are the same.
+=
+Foperator!
+13 Vector
+O#f15
+DTransposition operator. Converts a line vector into a column vector and vice versa and returns the result. This vector remains unchanged.
+=
+FtoString
+-1 string
+Svirtual
+O#f16
+Lconst
+DReturns a string representation of the vector.
+=
+fUndefined
+7 void
+Svirtual
+O#f17
+DSets the state of the object to _undefined_. 
+=
+S0 1 point
+point.html
+point
+=

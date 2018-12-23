@@ -1,0 +1,423 @@
+shapeWriter
+shapewriter.html
+/users/data12/pion/ehrhardt/tofPack2/code/include/shapewriter.h
+CshapeWriter
+-1 shapeWriter
+O#c2
+DDefault constructor.
+=
+gfmakefile
+-1 string
+Sstatic
+O#v2
+D
+=
+gfheader
+-1 string
+Sstatic
+O#v3
+D
+=
+gfanalyser
+-1 string
+Sstatic
+O#v4
+D
+=
+gfheader_file
+-1 string
+O#v5
+D
+=
+gfdefinition
+-1 TMyClass
+O#v6
+Ttmyclass.html
+D
+=
+gfclass_in_header
+0 int
+O#v7
+D
+=
+gfconstructor_in_class
+0 int
+O#v8
+D
+=
+gfsource_files
+-1 vector<string>
+O#v9
+D
+=
+gfparameter
+129 shape_parameter
+O#v10
+Tshapeparameter.html
+D
+=
+gfcopy_or_link
+0 int
+O#v11
+D
+=
+gfcall_parameter
+-1 vector<string>
+O#v12
+D
+=
+gfconstructor_call
+-1 vector<string>
+O#v13
+D
+=
+F~shapeWriter
+-1 ~shapeWriter
+O#f2
+DDestructor
+=
+Finit
+7 void
+Sstatic
+O#f3
+PmakefileIn
+-1 string
+=
+PheaderIn
+-1 string
+=
+PgetShapeFileIn
+-1 string
+=
+DInitializes the static member variables. The default values for the files to alter during installation are:
+D<table>
+D<tr><th>property</th><th>default</th></tr>
+D<tr><td>makefile</td><td>$(KTOFPACK)/shapes/makefile</td></tr>
+D<tr><td>header</td><td>$(KTOFPACK)/shapes/include/shapes.h</td></tr>
+D<tr><td>getShapeFile</td><td>$(KTOFPACK)/shapes/src/getShape.cpp</td></tr>
+D</table>
+D
+=
+Fmakefile
+-1 string
+Sstatic
+O#f4
+L{ inline
+D{return fmakefile} Static inline function.
+DReturns the file-name of the makefile for the shapes-package.
+=
+Fheader
+-1 string
+S} static
+O#f5
+L{ inline
+D{return fheader} Static inline function.
+DReturns the general include file for the shape-package.
+=
+FgetShapeFile
+-1 string
+S} static
+O#f6
+L{ inline
+D{return fanalyser} Static inline function.
+DReturns the file-name of the file where the getShape()-function is implemented.
+=
+FheaderFile
+-1 string
+S}
+O#f7
+Lconst{ inline
+D{return fheader_file} Inline function.
+DReturns the header-file-name.
+D
+=
+Fdefinition
+-1 TMyClass
+S}
+O#f8
+Ttmyclass.html
+Lconst{ inline
+D{return fdefinition} Inline function.
+DReturns the definition of the class and its properties.
+D
+=
+FclassInHeader
+0 int
+S}
+O#f9
+Lconst{ inline
+D{return fclass_in_header} Inline function.
+DReturns the position of the class in the header-file.
+D
+=
+FconstructorInClass
+0 int
+S}
+O#f10
+Lconst{ inline
+D{return fconstructor_in_class} Returns the position of the used constructor in the list of defined constructors.
+D
+=
+FsourceFiles
+-1 string
+S}
+O#f11
+Lconst{ inline
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> source file in the source-files-list.
+=
+FnSourceFiles
+0 int
+S}
+O#f12
+Lconst{ inline
+DInline function.
+DReturns the number of source files.
+=
+Fparameter
+129 shape_parameter
+S}
+O#f13
+Tshapeparameter.html
+Lconst{ inline
+D{return fparameter} Inline function.
+DReturns the description of the shape with all necessary variables defined.
+D
+=
+FcopyOrLink
+0 int
+S}
+O#f14
+Lconst{ inline
+D{return fcopy_or_link} Inline function.
+DReturns the action to be taken at the installation process with the header and code files.
+D<table>
+D<tr><th>Value<th>Action
+D<tr><td>0<td>none
+D<tr><td>1<td>copy files to $(KTOFPACK)/shape/include and $(KTOFPACK)/shape/src
+D<tr><td>2<td>link files to $(KTOFPACK)/shape/include and $(KTOFPACK)/shape/src
+D</table>
+=
+FcallParameter
+-1 string
+S}
+O#f15
+Lconst{ inline
+Pnum
+0 int
+=
+DReturns the parameter passed for the <var>num<sup>th</sup></var> constructor-parameter used in the getShape()-function.
+=
+FconstructorCall
+-1 vector<string>
+S}
+O#f16
+Lconst{ inline
+D{return fconstructor_call} Returns the code to insert into the getShape()-function to generate a shape of the type in question out of the description.
+D
+=
+FsetHeaderFile
+7 void
+S}
+O#f17
+L{ inline
+Ps
+-1 string
+=
+D{fheader_file=s} Inline function.
+DSets the header file where the class is defined.
+D
+=
+FsetDefinition
+7 void
+S}
+O#f18
+L{ inline
+Pt
+-1 TMyClass&
+Sconst
+Ttmyclass.html
+=
+D{fdefinition=t} Inline function.
+DSet the description of the class (<a href="tmyclass.html">TMyClass</a>).
+D
+=
+FsetClassInHeader
+7 void
+S}
+O#f19
+L{ inline
+Pn
+0 int
+=
+D{fclass_in_header=n}Inline function.
+DSets the position of the shape-class in its header.
+D
+=
+FaddSourceFiles
+7 void
+S}
+O#f20
+L{ inline
+Pfn
+-1 string
+=
+DInline function.
+DAdds a source file to the source-files-list
+=
+FsetSourceFiles
+7 void
+S}
+O#f21
+L{ inline
+Pnum
+0 int
+=
+Pfn
+-1 string
+=
+DInline function.
+DSets the <var>num<sup>th</sup></var> source file to be <var>fn</var>.
+=
+FclearSourceFiles
+7 void
+S}
+O#f22
+L{ inline
+DInline function.
+DRemoves all source files from the source-files-list.
+=
+FremoveSourceFile
+7 void
+S}
+O#f23
+L{ inline
+Pfn
+-1 string
+=
+DInline function.
+DRemoves a source file from the source-files-list.
+D
+=
+FsetParameter
+7 void
+S}
+O#f24
+L{ inline
+Pp
+129 shape_parameter&
+Sconst
+Tshapeparameter.html
+=
+D{fparameter=p} Inline function.
+DSets the shape-parameter to describe the shape, that has all necessary variables defined to generate a shape of the type in question.
+D
+=
+FsetCopyOrLink
+7 void
+S}
+O#f25
+L{ inline
+Pn
+0 int
+=
+D{fcopy_or_link=n} Inline function.
+DSets the action to be taken at the installation process with the header and code files.
+D<table>
+D<tr><th>Value<th>Action
+D<tr><td>0<td>none
+D<tr><td>1<td>copy files to $(KTOFPACK)/shape/include and $(KTOFPACK)/shape/src
+D<tr><td>2<td>link files to $(KTOFPACK)/shape/include and $(KTOFPACK)/shape/src
+D</table>
+=
+FsetCallParameter
+7 void
+S}
+O#f26
+L{ inline
+Pnum
+0 int
+=
+Pparam
+-1 string
+=
+DInline function.
+DSets the <var>num<sup>th</sup></var> parameter of the constructor to be <var>param</var> in the call in the getShape-function.
+=
+FsetConstructorCall
+7 void
+S}
+O#f27
+L{ inline
+Ps
+-1 vector<string>
+=
+D{fconstructor_call=s} Inline function.
+DSets the way the constructor of the shape is called in the getShape()-function.
+D
+=
+FmakeFileCall
+-1 vector<string>
+S}
+O#f28
+DReturns the commands for the make-file, that is:
+Dthe header-file,
+Dthe code-file(s),
+Dthe object-file(s).
+=
+FheaderCall
+-1 vector<string>
+O#f29
+DReturns the include-command for the header-file.
+=
+FconstrCall
+-1 vector<string>
+O#f30
+DReturns the code necessary to generate a shape of the type in question off a description (shape_parameter).
+=
+FinsertToMakeFile
+7 void
+O#f31
+DInserts the necessary commands into the makefile to include the shape into the package and the library.
+DBasically this means inserting the file-names into the HDR, SRC, OBJS lists.
+=
+FinsertToHeader
+7 void
+O#f32
+DInserts the necessary include-command into the general-shapes-header to make it available for use.
+=
+FinsertToShapes
+7 void
+O#f33
+DInserts the necessary constructor-call into the code of the getShape()-function.
+=
+FshapeAvail
+6 bool
+O#f34
+Lconst
+DReturns true if the shape is already contained in the library or if the shape is contained in the code of the getShape()-function but not yet compiled.
+=
+FheaderAvail
+6 bool
+O#f35
+Lconst
+DParses the header-file that includes all shapes for the shape's header-file. Returns true if this include command was found.
+=
+FmakeAvail
+6 bool
+O#f36
+Lconst
+DParses the makefile of the shape-package to see if the shape's-files are included. Returns true if this is the case.
+=
+FlibAvail
+6 bool
+O#f37
+Lconst
+DChecks wether the shape is already included into the library and returns true if this is the case.
+=
+DThe shapeWriter class was written to make the installation process of new shapes a lot easier. Instead of editing all necessary files youself you can supply some principle information about the shape, its header- and code-files and the way it should be treated at initialisation. The actual installation is then done by this class.
+DThe iostream operators give the possibility to save the installation parameters and reload them at a later time (possibly also by someone else).
+DThere exists a graphical front-end, the <a href="shapewizard.html">ShapeWizard</a>.
+=

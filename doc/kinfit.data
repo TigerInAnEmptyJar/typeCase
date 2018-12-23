@@ -1,0 +1,655 @@
+kinFit
+kinfit.html
+/users/data12/pion/ehrhardt/tofPack2/include/fittingRoutines.h
+CkinFit
+-1 kinFit
+O#c2
+DDefault constructor.  
+=
+CkinFit
+-1 kinFit
+O#c3
+PinFit
+-1 kinFit&
+Sconst
+=
+DCopy constructor.  
+=
+CkinFit
+-1 kinFit
+O#c4
+PmaxIterationIn
+0 int
+=
+PmaxParticlesIn
+0 int
+=
+PepsilonIn
+1 float
+=
+DConstructor. Sets the maximum number of iterations and particles and the maximum derivation of the kinematic variable from its restrictions.  
+=
+gmaxParticles
+0 int
+Sconst
+O#v2
+D
+=
+gmaxIteration
+0 int
+Sconst
+O#v3
+D
+=
+gnP
+0 int
+O#v4
+D
+=
+gepsilon
+1 float
+O#v5
+D
+=
+gin
+0 int**
+O#v6
+D
+=
+gparticles
+17 vector3D*
+O#v7
+D
+=
+gdpin
+17 vector3D*
+O#v8
+D
+=
+gam
+1 float*
+O#v9
+D
+=
+gp
+17 vector3D*
+O#v10
+D
+=
+gnC
+0 int
+O#v11
+D
+=
+gain
+1 float*
+O#v12
+D
+=
+guseCovariant
+6 bool
+O#v13
+D
+=
+goutCode
+0 int
+O#v14
+D
+=
+gchi
+1 float
+O#v15
+D 
+=
+gfm
+13 Vector
+O#v16
+D
+=
+gd_last
+1 float
+O#v17
+D
+=
+F~kinFit
+-1 virtual
+O#f2
+DDestructor 
+=
+FEpsilon
+1 float
+O#f3
+Lconst
+DReturns the maximal derivation of the kinematic variable to the conservation laws. 
+=
+FsetEpsilon
+7 void
+O#f4
+Pvalue
+1 float
+=
+DSets the maximal derivation of the kinematic variable to the conservation laws. 
+=
+FNParticles
+0 int
+O#f5
+Lconst
+DReturns the current number of particles. 
+=
+FMaxIterations
+0 int
+O#f6
+Lconst
+DReturns the maximum number of iterations for the fit. 
+=
+FMaxParticles
+0 int
+O#f7
+Lconst
+DReturns the maximum number of particles. 
+=
+Fclear
+7 void
+O#f8
+DClears the fits particles. For a new fit, add new particles. 
+=
+Fadd
+7 void
+O#f9
+Pdata
+13 Vector&
+Sconst
+=
+DAdds a particle to the fit.   
+D<table>   
+D<tr><th>index/indices<th>description   
+D<tr><td>0, 1, 2<td>particle values  
+D<tr><td>3, 4, 5<td> value errors  
+D<tr><td>6<td> mass  
+D<tr><td>7, 8, 9<td> fixed/measured/unmeasured  
+D<tr><td>10<td> representation  
+D<tr><td>rest<td> contribute to additional constraint  
+D</table>   
+=
+Fadd
+7 void
+O#f10
+Pproperties
+17 vector3D&
+Sconst
+=
+Perrors
+17 vector3D&
+Sconst
+=
+PdoFit
+17 vector3D&
+Sconst
+=
+Pmass
+1 float
+=
+Prepresentation
+0 int
+=
+Pin_out_going
+0 int
+V1
+=
+PadditionalConstraints
+0 int*
+VNULL
+=
+DAdd a particle to the fit with its <var>properties</var>, <var>errors</var>, its <var>mass</var>, the <var>representation</var> the values are given. The parameter <var>in_out_going</var> shall be 1 if the particle is an outgoing particle in the initial reaction, -1 if it is in-going and 0 if it doesn't take place in the initial reaction.    
+DThe parameter <var>doFit</var> sets the individual values to fixed (2), measured (1) or unmeasured (3).  
+DThe <var>additionalConstraints</var> is an array (-pointer) with its components being 0 (doesn't contribute) or 1 (contributes).   
+DIf the array is NULL (default), the particle doesn't contribute in any additional constraint.   
+=
+FaddMomentum
+7 void
+O#f11
+Pproperties
+17 vector3D&
+Sconst
+=
+Perrors
+17 vector3D&
+Sconst
+=
+PdoFit
+17 vector3D&
+Sconst
+=
+Pmass
+1 float
+=
+Pin_out_going
+0 int
+V1
+=
+PadditionalConstraints
+0 int*
+VNULL
+=
+DAdd a particle in representation (Px,Py,Pz) see <a href=#f10>add()</a>.
+=
+FaddEnergyThetaPhi
+7 void
+O#f12
+Pproperties
+17 vector3D&
+Sconst
+=
+Perrors
+17 vector3D&
+Sconst
+=
+PdoFit
+17 vector3D&
+Sconst
+=
+Pmass
+1 float
+=
+Pin_out_going
+0 int
+V1
+=
+PadditionalConstraints
+0 int*
+VNULL
+=
+DAdd a particle in representation (E,theta,phi) see <a href=#f10>add()</a>.
+=
+FaddBetaThetaPhi
+7 void
+O#f13
+Pproperties
+17 vector3D&
+Sconst
+=
+Perrors
+17 vector3D&
+Sconst
+=
+PdoFit
+17 vector3D&
+Sconst
+=
+Pmass
+1 float
+=
+Pin_out_going
+0 int
+V1
+=
+PadditionalConstraints
+0 int*
+VNULL
+=
+DAdd a particle in representation (ß,theta,phi) see <a href=#f10>add()</a>.
+=
+FaddMomentumThetaPhi
+7 void
+O#f14
+Pproperties
+17 vector3D&
+Sconst
+=
+Perrors
+17 vector3D&
+Sconst
+=
+PdoFit
+17 vector3D&
+Sconst
+=
+Pmass
+1 float
+=
+Pin_out_going
+0 int
+V1
+=
+PadditionalConstraints
+0 int*
+VNULL
+=
+DAdd a particle in representation (P,theta,phi) see <a href=#f10>add()</a>.
+=
+FaddEnergyDxDy
+7 void
+O#f15
+Pproperties
+17 vector3D&
+Sconst
+=
+Perrors
+17 vector3D&
+Sconst
+=
+PdoFit
+17 vector3D&
+Sconst
+=
+Pmass
+1 float
+=
+Pin_out_going
+0 int
+V1
+=
+PadditionalConstraints
+0 int*
+VNULL
+=
+DAdd a particle in representation (E,dx,dy) see <a href=#f10>add()</a>.
+=
+FaddBetaDxDy
+7 void
+O#f16
+Pproperties
+17 vector3D&
+Sconst
+=
+Perrors
+17 vector3D&
+Sconst
+=
+PdoFit
+17 vector3D&
+Sconst
+=
+Pmass
+1 float
+=
+Pin_out_going
+0 int
+V1
+=
+PadditionalConstraints
+0 int*
+VNULL
+=
+DAdd a particle in representation (ß,dx,dy) see <a href=#f10>add()</a>.
+=
+FaddMomentumDxDy
+7 void
+O#f17
+Pproperties
+17 vector3D&
+Sconst
+=
+Perrors
+17 vector3D&
+Sconst
+=
+PdoFit
+17 vector3D&
+Sconst
+=
+Pmass
+1 float
+=
+Pin_out_going
+0 int
+V1
+=
+PadditionalConstraints
+0 int*
+VNULL
+=
+DAdd a particle in representation (P,dx,dy) see <a href=#f10>add()</a>.
+=
+FErrors
+17 vector3D
+O#f18
+Lconst
+Pnum
+0 int
+=
+DReturns the errors for values of particle <var>num</var> in current representation. 
+=
+FNonFittedParticle
+17 vector3D
+O#f19
+Lconst
+Pnum
+0 int
+=
+DReturns the values of the non-fitted particle <var>num</var> in current representation.  
+=
+FMass
+1 float
+O#f20
+Lconst
+Pnum
+0 int
+=
+DReturns the mass for the <var>num<sup>th</sup></var> particle in units of GeV.   
+=
+FConstraint
+0 int
+O#f21
+Lconst
+PnumP
+0 int
+=
+PnumC
+0 int
+=
+DReturns the constraint value for particle <var>numP</var> in constraint <var>numC</var>. This should be 0 if the particle is not participating in the constraint, and 1 if it is. If <var>numP</var> or <var>numC</var> are non-valid, it returns 0.   
+=
+FRepresentation
+0 int
+O#f22
+Lconst
+Pnum
+0 int
+=
+DReturns the representation of the <var>num<sup>th</sup></var> particle. Known representations are:    
+D<table>    
+D<tr><th>value<th>representation    
+D<tr><td>1<td>px, py, pz    
+D<tr><td>2<td>E, azimuthal-, polar angle    
+D<tr><td>3<td>v, azimuthal-, polar angle    
+D<tr><td>4<td>p, azimuthal-, polar angle    
+D</table>    
+=
+FKnownRepresentations
+0 int
+Sstatic
+O#f23
+Pbuffer
+0 int**
+VNULL
+=
+DStatic method. Returns the number of known representations and the representation number if the <var>buffer</var> pointer is not NULL, then a new array of integer will be allocated and the values will be copied to it. Take care, that you dispose it correctly after use (potential memory leak).  
+=
+FKnownRepresentation
+0 int
+Sstatic
+O#f24
+Pnum
+0 int
+=
+DStatic method. It returns the value of the <var>num<sup>th</sup></var> representation.  
+D<i>obsolete</i> removed from class
+=
+FsetConstraints
+7 void
+O#f25
+PnCin
+0 int
+=
+Pmasses
+13 Vector
+=
+DSets the number of constraints and the invariant masses for each constraint. Take care that the vectors dimension is at least <var>nCin</var>, else it does nothing.  
+=
+FInvariantMass
+1 float
+O#f26
+Lconst
+Pconstraint
+0 int
+=
+DReturns the invariant mass (units of GeV) for constraint <var>constraint</var>.   
+=
+FConstraints
+0 int
+O#f27
+Lconst
+DReturns the number of additional constraints.  
+=
+FChi2
+1 float
+O#f28
+Lconst
+DReturns the chi² value of the fit.   
+=
+FOutInfo
+0 int
+O#f29
+Lconst
+DReturns the number of Iterations needed to come to an end. If the maximum number of iterations was exceeded, the return value is negative.   
+=
+FResult
+13 Vector
+O#f30
+Lconst
+DReturns the result vector that is all the particles values in current representation stuffed into one vector of length nParticles*3, with the particle values together.     
+DIt might be easier to come to the result by <a href="#f24"> FittedParticle</a>.    
+=
+FFittedParticle
+17 vector3D
+O#f31
+Lconst
+Pnum
+0 int
+=
+DReturns the values of the <var>num<sup>th</sup></var> particle in current representation.   
+=
+FgetMomentum
+20 momentum4D
+O#f32
+Pnum
+0 int
+=
+Ppm
+17 vector3D
+=
+DCalculates the 4-momentum of the <var>num<sup>th</sup></var> particle using its mass and the values in <var>pm</var> according to its representation.  
+=
+FgetMomentum
+20 momentum4D
+Sstatic
+O#f33
+Ppm
+17 vector3D
+=
+Prep
+0 int
+=
+Pmass
+1 float
+=
+DSatic method to calculate the 4-momentum of a particle using its <var>mass</var> and the values in <var>pm</var> according to its representation <var>rep</var>.  
+=
+FFM_last
+13 Vector
+O#f34
+Lconst
+DReturns the last balance vector of the fit. The first four components are the components of the sum of all (initially participating, with sign for in-/out-going) particle 4-momenta.
+DThe rest components are the difference of the invariant masses to the invariant mass of the corresponding constraint.
+=
+FD_last
+1 float
+O#f35
+Lconst
+DReturns the remaining length of the balance vector after the fit. See <a href="#">FM_last()</a>.
+=
+Ffit
+1 float
+O#f36
+DMain fitting routine performs the fit and returns the chi² value.   
+=
+GgetPDerivative
+19 vector4D
+O#f37
+PisIn
+0 int
+=
+Ppos
+0 int
+=
+Ppm
+17 vector3D
+=
+Pmass
+1 float
+=
+DReturns the derivative of the 4-momentum (better, the sum of the participating 4-momenta) with respect to particle value <var>pm</var> index <var>pos</var> of mass <var>mass</var> (units of GeV) in representation <var>isIn</var>.   
+=
+GgetMDerivative
+1 float
+O#f38
+Prepresentation
+0 int
+=
+Ppos
+0 int
+=
+Ppm
+17 vector3D
+=
+Pmass
+1 float
+=
+Psf
+13 Vector
+=
+DReturns the derivative of the invariant mass with respect to the component <var>pos</var> of a particle of mass <var>mass</var> (units of GeV) in a certain <var>representation</var> with the values <var>pm</var>.   
+DThe vector <var>sf</var> is (sum_all(px), sum_all(py), sum_all(py),sum_all(E),M_inv) of all particlipating particles.    
+=
+GcalculateCinematics
+7 void
+O#f39
+Pppx
+20 momentum4D*
+=
+PFM
+13 Vector&
+=
+Psf
+13 Vector*
+=
+Pd
+1 float&
+=
+DCalculates the sum of momenta and energy (<var>FM</var> index 0-3) of the initially participating particles (<var>ppx</var>) and the invariant mass for the additional constraints (<var>sf</var> and <var>FM</var> index 4-4+nConstraints). The length of the <var>FM</var> vector is copied to <var>d</var>  
+=
+GcheckValues
+7 void
+O#f40
+Prep
+0 int
+=
+Ppm
+17 vector3D&
+=
+Pm1
+6 bool
+=
+Pm2
+6 bool
+=
+Pm3
+6 bool
+=
+D?
+=
+S0 1 geomObject
+geomobj.html
+geomObject
+=

@@ -1,0 +1,332 @@
+AFitAlgorithm
+afitalgorithm.html
+/users/data12/pion/ehrhardt/tofPack2/include/fitAlgorithm.h
+CAFitAlgorithm
+-1 AFitAlgorithm
+O#c2
+Pname
+-1 string&
+Sconst
+Vstring()
+=
+DConstructor. Sets the name of the algorithm. 
+=
+FclassName
+5 char*
+Svirtual const
+O#f2
+DThe className() function that returns the class name as a string at runtime,  
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler. 
+DThe className() function that returns the class name as a string at runtime,   
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.  
+=
+Finherrits
+6 bool
+Sconst
+O#f3
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class  
+Dthat inherits a specified class within the QObject inheritance tree.  
+Dthe inherits() function that returns whether an object is an instance of a class   
+Dthat inherits a specified class within the QObject inheritance tree.   
+=
+Ftr
+-1 QString
+Sstatic
+O#f4
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no  
+Dappropriate translated version. The translation context is QObject with comment  
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have  
+Da reimplementation of this function with the subclass name as context. 
+DWarning: This method is reentrant only if all translators are installed before calling  
+Dthis method. Installing or removing translators while performing translations is not  
+Dsupported. Doing so will probably result in crashes or other undesirable behavior.  
+DReturns a translated version of sourceText, or sourceText itself if there is no   
+Dappropriate translated version. The translation context is QObject with comment   
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have   
+Da reimplementation of this function with the subclass name as context.  
+DWarning: This method is reentrant only if all translators are installed before calling   
+Dthis method. Installing or removing translators while performing translations is not   
+Dsupported. Doing so will probably result in crashes or other undesirable behavior.   
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there   
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment).   
+DWarning: This method is reentrant only if all translators are installed before calling   
+Dthis method. Installing or removing translators while performing translations is not   
+Dsupported. Doing so will probably result in crashes or other undesirable behavior.   
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f5
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there  
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment).  
+DWarning: This method is reentrant only if all translators are installed before calling  
+Dthis method. Installing or removing translators while performing translations is not  
+Dsupported. Doing so will probably result in crashes or other undesirable behavior.  
+D  
+=
+FsetProperty
+6 bool
+Svirtual
+O#f6
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value. 
+DReturns TRUE if the operation was successful; otherwise returns FALSE.  
+DInformation about all available properties is provided through the metaObject() 
+DSets the value of the object's name property to value.  
+DReturns TRUE if the operation was successful; otherwise returns FALSE.   
+DInformation about all available properties is provided through the metaObject()  
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f7
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property.  
+DIf no such property exists, the returned variant is invalid.  
+DInformation about all available properties are provided through the metaObject().  
+DReturns the value of the object's name property.   
+DIf no such property exists, the returned variant is invalid.   
+DInformation about all available properties are provided through the metaObject().   
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f8
+Lconst
+DReturns a pointer to the meta object of this object.  
+DA meta object contains information about a class that inherits QObject, e.g. class name, 
+Dsuperclass name, properties, signals and slots. Every class that contains the  
+DQ_OBJECT macro will also have a meta object.  
+DThe meta object information is required by the signal/slot connection mechanism  
+Dand the property system. The functions isA() and inherits() also make use of the meta object.  
+DReturns a pointer to the meta object of this object.   
+DA meta object contains information about a class that inherits QObject, e.g. class name,  
+Dsuperclass name, properties, signals and slots. Every class that contains the   
+DQ_OBJECT macro will also have a meta object.   
+DThe meta object information is required by the signal/slot connection mechanism   
+Dand the property system. The functions isA() and inherits() also make use of the meta object.   
+=
+FclassName
+5 char*
+Svirtual const
+O#f9
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f10
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f11
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f12
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f13
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f14
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f15
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+F~AFitAlgorithm
+-1 virtual
+O#f16
+DDestructor 
+=
+Fprocess
+7 void*
+Svirtual
+O#f17
+Pptr
+7 void*
+=
+DBase functionality is defined here. In the analysis class, this method will be called once for every event, so plug in the functionality you want to provide with your algorithm here.   
+D<br>For the fit algorithms, this method is not as important as for the other algorithms. But if you call in this method the <a href="#f15">fit</a>-method, you can also use it.  
+=
+Fadd
+7 void
+Svirtual
+O#f18
+Pdata
+13 Vector&
+=
+DAdds a new data-point to the fit. 
+=
+Fclear
+7 void
+Svirtual
+O#f19
+DClears the fit. To make a new fit make use of the <a href="#f11">add</a>() method.  
+=
+FgetResult
+13 Vector
+Svirtual
+O#f20
+DReturns a n-dimensional vector containing the result, where n is the number of parameters of the fit. 
+=
+FgetClone
+-1 AFitAlgorithm*
+Svirtual
+O#f21
+DReturns a copy of the fit-algorithm. Note, that a new object is allocated. Take care, that you dispose it correctly after use (potential memory leak). 
+=
+Ffit
+1 float
+Svirtual
+O#f22
+DMain fitting procedure. Performs the fit and returns the chi² value of the fit. 
+=
+LgetAddPoint
+7 void
+Svirtual
+O#l2
+Pdata
+13 Vector&
+Tvector.html
+=
+DA slot defined to add data to the fit so you can make use of the signal-and-slot-mechanism of Qt. With this slot, the calling routine for the fit doesn't have to know the fitting class. 
+=
+LgetAddPoint
+7 void
+Svirtual
+O#l3
+Pdata
+13 Vector&
+=
+DA slot defined to add data to the fit so you can make use of the signal-and-slot-mechanism of Qt. With this slot, the calling routine for the fit doesn't have to know the fitting class. 
+=
+Nfitted
+7 void
+Svirtual
+O#s2
+Pchi
+1 float
+=
+Presult
+13 Vector&
+Tvector.html
+=
+DSignal emitted when a fit is done with the chi² value and the result of the fit. 
+=
+Nfitted
+7 void
+Svirtual
+O#s3
+Pchi
+1 float
+=
+Presult
+13 Vector&
+=
+DSignal emitted when a fit is done with the chi² value and the result of the fit. 
+=
+S0 1 AAlgorithm
+aalgorithm.html
+AAlgorithm
+=

@@ -1,0 +1,213 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class ColorSelectDialog</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class ColorSelectDialog in "colorselectdialog.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+Color-select-dialog is a small dialog, that selects one of the predefined root-colors. Each button on the dialog has a different root color.
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qdialog.html">QDialog</A>
+<DT>Constructor
+<LI><A HREF="#c2">ColorSelectDialog</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>bool</vtype> modal = FALSE, <vtype>WFlags</vtype> fl = 0) 
+<LI><A HREF="#c3">ColorSelectDialog</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual <A HREF="#f9"><vtype>int</vtype> getColor</A>() 
+<LI>virtual <A HREF="#f10"><vtype>QColor</vtype> getRGBColor</A>() 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="#f11"><vtype>QColor</vtype> Root2Qt</A>(<vtype>int</vtype> colo) 
+<LI>static <A HREF="#f12"><vtype>int</vtype> Qt2Root</A>(const <vtype>QColor&</vtype> c) 
+<LI>static <A HREF="#f13"><vtype>QColor</vtype> Root2Qt</A>(const <vtype>TColor&</vtype> c) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI>virtual <A HREF="#l2"><vtype>void</vtype> resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> resize</A>(const <vtype>QSize&</vtype> s) 
+<LI>virtual <A HREF="#l4"><vtype>void</vtype> resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<LI>virtual <A HREF="#l5"><vtype>void</vtype> accept</A>() 
+<LI>virtual <A HREF="#l6"><vtype>void</vtype> OnButtonDown</A>() 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Protected Variables
+<DD><vtype>int</vtype> <A HREF="#v2">selectedColor</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton**</A> <A HREF="#v3">buttons</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">ColorSelectDialog::ColorSelectDialog</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>bool</vtype> modal = FALSE, <vtype>WFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">ColorSelectDialog::ColorSelectDialog</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<BR/><deff>
+Constructor. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">int selectedColor</A>
+<BR/><deff>
+currently selected color
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton**</A> <A NAME="#v3">buttons</A>
+<BR/><deff>
+buttons with all the root colors
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> ColorSelectDialog::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> ColorSelectDialog::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">ColorSelectDialog::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">ColorSelectDialog::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> ColorSelectDialog::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> ColorSelectDialog::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> ColorSelectDialog::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>int</vtype> ColorSelectDialog::getColor</A>() 
+<BR/><deff>
+Returns the selected color in root-number.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>QColor</vtype> ColorSelectDialog::getRGBColor</A>() 
+<BR/><deff>
+Returns the selected color in RGB.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>QColor</vtype> ColorSelectDialog::Root2Qt</A>(<vtype>int</vtype> colo) 
+<BR/><deff>
+Static function. Returns the RGB-version of the root color <var>colo</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>int</vtype> ColorSelectDialog::Qt2Root</A>(const <vtype>QColor&</vtype> c) 
+<BR/><deff>
+Static function returns the root number of the RGB-color <var>c</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>QColor</vtype> ColorSelectDialog::Root2Qt</A>(const <vtype>TColor&</vtype> c) 
+<BR/><deff>
+Static function. Returns the RGB-equivalent of the root-color c.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> ColorSelectDialog::resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<BR/><deff>
+Resize event, when the widget is resized.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> ColorSelectDialog::resize</A>(const <vtype>QSize&</vtype> s) 
+<BR/><deff>
+Resizes the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> ColorSelectDialog::resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<BR/><deff>
+Resizes the widget.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> ColorSelectDialog::accept</A>() 
+<BR/><deff>
+Overwritten from <a href="http://doc.trolltech.com/4.4/qdialog.html"> QDialog</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> ColorSelectDialog::OnButtonDown</A>() 
+<BR/><deff>
+Sets the current color to the one of the pressed button and accepts the dialog.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> ColorSelectDialog::languageChange</A>() 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class SetupWidget</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class SetupWidget in "setupwidget.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+The setup-widget contains a <a href="detectorwidget.html"> DetectorWidget</a>, a <a href="materialwidget.html"> MaterialWidget</a>, a <a href="shapewidget.html"> ShapeWidget</a> and a <a href="reactiondisplay.html> ReactionDisplay</a> to display one complete experimental setup.
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget</A>
+<DT>Constructor
+<LI><A HREF="#c2">SetupWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<LI><A HREF="#c3">SetupWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI>virtual <A HREF="#l2"><vtype>void</vtype> resize</A>(const <vtype>QSize&</vtype> s) 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<LI>virtual <A HREF="#l4"><vtype>void</vtype> resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<LI>virtual <A HREF="#l5"><vtype>void</vtype> setSetup</A>(<vtype>vector&lt;detector_parameter&gt;&</vtype> d, <vtype>vector&lt;material_parameter&gt;&</vtype> m, <vtype>vector&lt;shape_parameter&gt;&</vtype> s, <A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<LI>virtual <A HREF="#l6"><vtype>void</vtype> setSetup</A>(<vtype>vector&lt;detector_parameter*&gt;&</vtype> d, <vtype>vector&lt;material_parameter*&gt;&</vtype> m, <vtype>vector&lt;shape_parameter*&gt;&</vtype> s, <A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<LI>virtual <A HREF="#l7"><vtype>void</vtype> setShapes</A>(<vtype>vector&lt;shape_parameter&gt;&</vtype> s) 
+<LI>virtual <A HREF="#l8"><vtype>void</vtype> setShapes</A>(<vtype>vector&lt;shape_parameter*&gt;&</vtype> s) 
+<LI>virtual <A HREF="#l9"><vtype>void</vtype> setDetectors</A>(<vtype>vector&lt;detector_parameter&gt;&</vtype> d) 
+<LI>virtual <A HREF="#l10"><vtype>void</vtype> setDetectors</A>(<vtype>vector&lt;detector_parameter*&gt;&</vtype> d) 
+<LI>virtual <A HREF="#l11"><vtype>void</vtype> setMaterials</A>(<vtype>vector&lt;material_parameter&gt;&</vtype> m) 
+<LI>virtual <A HREF="#l12"><vtype>void</vtype> setMaterials</A>(<vtype>vector&lt;material_parameter*&gt;&</vtype> m) 
+<LI>virtual <A HREF="#l13"><vtype>void</vtype> setReaction</A>(<A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<LI>virtual <A HREF="#l14"><vtype>void</vtype> setReaction</A>(<A HREF="reactionparameter.html">reaction_parameter*</A> r) 
+</UL>
+<DT>Signals
+<DD>new public<ul>
+<LI><A HREF="#s2"><vtype>void</vtype> changed</A>() 
+</UL>
+<DT>Public Variables
+<DD><vtype>QTabWidget*</vtype> <A HREF="#v2">tabWidget</A>
+<DD><vtype>DetectorWidget*</vtype> <A HREF="#v3">detwidget</A>
+<DD><A HREF="shapewidget.html">ShapeWidget*</A> <A HREF="#v4">shpwidget</A>
+<DD><vtype>MaterialWidget*</vtype> <A HREF="#v5">matwidget</A>
+<DD><A HREF="reactiondisplay.html">ReactionDisplay*</A> <A HREF="#v6">rdisplay</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">SetupWidget::SetupWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt3-version, non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">SetupWidget::SetupWidget</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<BR/><deff>
+Constructor. Qt4-version, non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">QTabWidget* tabWidget</A>
+<BR/><deff>
+tabs
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">DetectorWidget* detwidget</A>
+<BR/><deff>
+lists and displays all current <a href ="detectorparameter.html">detectors</a>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapewidget.html">ShapeWidget*</A> <A NAME="#v4">shpwidget</A>
+<BR/><deff>
+lists and displays all defined <a href = "shapeparameter.html"> shape_parameter</a>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">MaterialWidget* matwidget</A>
+<BR/><deff>
+lists and displays all defined <a href="materialparameter.html">material-parameter</a>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v6">ReactionDisplay* rdisplay</A>
+<BR/><deff>
+display of the <a href="reactionparameter.html"> reaction-parameter</a> describing the experiment.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> SetupWidget::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> SetupWidget::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">SetupWidget::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">SetupWidget::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> SetupWidget::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> SetupWidget::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> SetupWidget::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9">SetupWidget::</A>() 
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> SetupWidget::resize</A>(const <vtype>QSize&</vtype> s) 
+<BR/><deff>
+resize window
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> SetupWidget::resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<BR/><deff>
+resize event
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> SetupWidget::resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<BR/><deff>
+resize window
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> SetupWidget::setSetup</A>(<vtype>vector&lt;detector_parameter&gt;&</vtype> d, <vtype>vector&lt;material_parameter&gt;&</vtype> m, <vtype>vector&lt;shape_parameter&gt;&</vtype> s, <A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<BR/><deff>
+Sets the complete experimental setup including all available shapes and materials, the detectors and the reaction-parameter.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> SetupWidget::setSetup</A>(<vtype>vector&lt;detector_parameter*&gt;&</vtype> d, <vtype>vector&lt;material_parameter*&gt;&</vtype> m, <vtype>vector&lt;shape_parameter*&gt;&</vtype> s, <A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<BR/><deff>
+Sets the complete experimental setup including all available shapes and materials, the detectors and the reaction-parameter.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> SetupWidget::setShapes</A>(<vtype>vector&lt;shape_parameter&gt;&</vtype> s) 
+<BR/><deff>
+Sets the available shapes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> SetupWidget::setShapes</A>(<vtype>vector&lt;shape_parameter*&gt;&</vtype> s) 
+<BR/><deff>
+Sets the available shapes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l9"><vtype>void</vtype> SetupWidget::setDetectors</A>(<vtype>vector&lt;detector_parameter&gt;&</vtype> d) 
+<BR/><deff>
+Sets the detectors of the current setup.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l10"><vtype>void</vtype> SetupWidget::setDetectors</A>(<vtype>vector&lt;detector_parameter*&gt;&</vtype> d) 
+<BR/><deff>
+Sets the detectors of the current setup.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l11"><vtype>void</vtype> SetupWidget::setMaterials</A>(<vtype>vector&lt;material_parameter&gt;&</vtype> m) 
+<BR/><deff>
+Sets the materials for the current setup.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l12"><vtype>void</vtype> SetupWidget::setMaterials</A>(<vtype>vector&lt;material_parameter*&gt;&</vtype> m) 
+<BR/><deff>
+Sets the materials available for the curren setup.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l13"><vtype>void</vtype> SetupWidget::setReaction</A>(<A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<BR/><deff>
+Sets the reaction of the current setup.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l14"><vtype>void</vtype> SetupWidget::setReaction</A>(<A HREF="reactionparameter.html">reaction_parameter*</A> r) 
+<BR/><deff>
+Sets the reaction_parameter of the current setup.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s2"><vtype>void</vtype> SetupWidget::changed</A>() 
+<BR/><deff>
+This signal is directly connected to the changed() signals of <a href="shapedisplay.html#s1" > ShapeDisplay</a>, <a href= "detectordisplay.html#s1"> DetectorDisplay</a>, <a href= "materialdisplay.html#s1"> MaterialDisplay</a>, <a href= "reactiondisplay.html#s1"> ReactionDisplay</a>. Whenever one of these signals is emitted, this changed() signal is also emitted.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

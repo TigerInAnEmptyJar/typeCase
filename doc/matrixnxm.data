@@ -1,0 +1,367 @@
+matrixNxM
+matrixnxm.html
+/users/data12/pion/ehrhardt/tofPack2/include/geometry.h
+CmatrixNxM
+-1 matrixNxM
+O#c2
+Pn
+0 int
+V1
+=
+Pm
+0 int
+V1
+=
+DConstructor. Sets the number of lines to <var>n</var>, and the number of columns to <var>m</var>.
+=
+CmatrixNxM
+-1 matrixNxM
+O#c3
+Pmat
+-1 matrixNxM&
+Sconst
+Tmatrixnxm.html
+=
+DCopy constructor.
+=
+CmatrixNxM
+-1 matrixNxM
+O#c4
+Pmat
+-1 matrixNxMT<double>&
+Sconst
+=
+DCopy constructor.
+=
+CmatrixNxM
+-1 matrixNxM
+O#c5
+Pmat
+-1 matrixNxMT<float>&
+Sconst
+=
+DCopy constructor.
+=
+CmatrixNxM
+-1 matrixNxM
+O#c6
+Pmat
+-1 matrixNxMT<long double>&
+Sconst
+=
+DCopy constructor.
+=
+CmatrixNxM
+-1 matrixNxM
+O#c7
+Pn
+0 int
+=
+Pm
+0 int
+=
+Pdatas
+3 double*
+=
+DConstructor. Sets the number of lines to <var>n</var>, the number of columns to <var>m</var>. The elements are filled from the array <var>datas</var>. Take care that <var>datas</var> is correctly dimensioned. The elements are read line-wise.
+=
+gnumberOfColumns
+0 int
+O#v2
+D
+=
+gnumberOfLines
+0 int
+O#v3
+D
+=
+gdata
+3 double*
+O#v4
+D
+=
+F~matrixNxM
+-1 ~matrixNxM
+O#f2
+DDestructor
+=
+FgetValue
+3 double
+O#f3
+Lconst
+Pline
+0 int
+=
+Pcolumn
+0 int
+=
+DReturn the element a position (<var>line</var>,<var>column</var>).
+=
+FsetValue
+7 void
+O#f4
+Pline
+0 int
+=
+Pcolumn
+0 int
+=
+Pvalue
+3 double
+=
+DSet the element at position (<var>line</var>,<var>column</var>) to <var>value</var>.
+=
+FColumns
+0 int
+O#f5
+Lconst
+DReturns the number of columns of this matrix.
+=
+FLines
+0 int
+O#f6
+Lconst
+DReturns the number of lines of the matrix.
+=
+FUnity
+7 void
+O#f7
+DMakes a unit matrix out of this matrix.
+=
+Ftranspose
+7 void
+O#f8
+DTransposes the matrix.
+=
+FDeterminant
+3 double
+O#f9
+Lconst
+DReturns the determinant of the matrix.
+=
+FDiagonal
+6 bool
+O#f10
+Lconst
+DReturns true if the matrix is diagonal.
+=
+FUpperTriangular
+6 bool
+O#f11
+Lconst
+DReturns true if the matrix is a upper triangular matrix.
+=
+FLowerTriangular
+6 bool
+O#f12
+Lconst
+DReturns true if the matrix is a lower triangular matrix.
+=
+Fsubset
+-1 matrixNxM
+O#f13
+Tmatrixnxm.html
+Lconst
+PlineBegin
+0 int
+=
+PlineEnd
+0 int
+=
+PcolumnBegin
+0 int
+=
+PcolumnEnd
+0 int
+=
+DReturn a subset of the matrix.
+=
+FdecomposeLU
+7 void
+O#f14
+Lconst
+PL
+-1 matrixNxM&
+Tmatrixnxm.html
+=
+PU
+-1 matrixNxM&
+Tmatrixnxm.html
+=
+DDecompose the sqare matrix into a lower triangular matrix (saved in <var>L</var>) and an upper triangular matrix (saved in <var>R</var>). A pre step for inversion.
+=
+FdecomposeLDU
+7 void
+O#f15
+Lconst
+PL
+-1 matrixNxM&
+Tmatrixnxm.html
+=
+PD
+-1 matrixNxM&
+Tmatrixnxm.html
+=
+PU
+-1 matrixNxM&
+Tmatrixnxm.html
+=
+DDecompose the sqare matrix into a lower triangular matrix (saved in <var>L</var>), an upper triangular matrix (saved in <var>R</var>) and a diagonal matrix. A pre step for inversion.
+=
+FdecomposeQR
+7 void
+O#f16
+Lconst
+PQ
+-1 matrixNxM&
+Tmatrixnxm.html
+=
+PR
+-1 matrixNxM&
+Tmatrixnxm.html
+=
+DDo a QR-decomposition of the matrix and save the results in the matrices <var>Q</var> and <var>R</var>. This is not implemented yet, giving the reason why inversion is not working yet for non-square matrices.
+=
+Foperator=
+7 void
+O#f17
+Pmat
+-1 matrixNxM&
+Sconst
+Tmatrixnxm.html
+=
+DCopy operator.
+=
+Foperator=
+7 void
+O#f18
+Pmat
+-1 matrixNxMT<double>&
+Sconst
+=
+DCopy operator.
+=
+Foperator=
+7 void
+O#f19
+Pmat
+-1 matrixNxMT<long double>&
+Sconst
+=
+DCopy operator.
+=
+Foperator=
+7 void
+O#f20
+Pmat
+-1 matrixNxMT<float>&
+Sconst
+=
+DCopy operator.
+=
+Foperator[]
+13 Vector
+O#f21
+Tvector.html
+Lconst
+Pnum
+0 int
+=
+DAccess operator. Return the <var>num<sup>th</sup></var> line of the matrix. To access an individual element use m[line][column].
+=
+Foperator()
+13 Vector
+O#f22
+Tvector.html
+Lconst
+Pnum
+0 int
+=
+DAccess operator. Return the <var>num<sup>th</sup></var> column of the matrix.
+=
+Foperator*
+13 Vector
+O#f23
+Tvector.html
+Lconst
+Pv
+13 Vector&
+Sconst
+Tvector.html
+=
+DMultiplication operator. Multiplies this matrix to a vector <var>v</var> and returns the result. Works only if <var>v</var> is a column vector and has 'number of columns' elements.
+=
+Foperator*
+-1 matrixNxM
+O#f24
+Tmatrixnxm.html
+Lconst
+Pm
+-1 matrixNxM&
+Sconst
+Tmatrixnxm.html
+=
+DMatrix multiplication. Multiplies this matrix to <var>m</var> and returns the result. This matrix is left unchanged.
+DNote this is genuine matrix multiplication. This does not commute.
+DWorks only if this' number of columns equals <var>m</var>'s number of lines.
+=
+Foperator*
+-1 matrixNxM
+O#f25
+Tmatrixnxm.html
+Lconst
+Pvalue
+3 double
+=
+DMultiplication operator. Multiplies <var>value</var> to all elements of the matrix and returns the result. This matrix is left unchanged.
+=
+Foperator+
+-1 matrixNxM
+O#f26
+Tmatrixnxm.html
+Lconst
+Pm
+-1 matrixNxM&
+Sconst
+Tmatrixnxm.html
+=
+DAddition operator. Adds <var>m</var> to this matrix and returns the result. This matrix is left unchanged. Works only if this matrix and <var>m</var> have the same number of columns and number of lines.
+=
+Foperator-
+-1 matrixNxM
+O#f27
+Tmatrixnxm.html
+Lconst
+Pm
+-1 matrixNxM&
+Sconst
+Tmatrixnxm.html
+=
+DSuptraction operator. Subtracts <var>m</var> from this matrix and returns the result. This matrix is left unchanged. Works only if this matrix and <var>m</var> have the same number of columns and number of lines.
+=
+Foperator!
+-1 matrixNxM
+O#f28
+Tmatrixnxm.html
+Lconst
+DTransposition operator. Returns the transposed of the matrix.
+=
+Foperator-
+-1 matrixNxM
+O#f29
+Tmatrixnxm.html
+Lconst
+DInversion operator. Works reliably but only for square matrices. Returns the inverse of the matrix and leaves the original matrix unchanged.
+=
+FtoString
+-1 string
+Svirtual
+O#f30
+Lconst
+DReturns a string representation of the matrix. Note this contains line breaks.
+=
+DGeneral matrix. Note that inversion only works for square matrices.
+S0 1 geomObject
+geomobj.html
+geomObject
+=

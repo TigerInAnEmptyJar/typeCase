@@ -1,0 +1,215 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class TMaterial</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class TMaterial in "material.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="tbase.html">TBase</A>
+<DT>Constructor
+<LI><A HREF="#c2">TMaterial</A>(<vtype>string</vtype> nameIn = "proton", <vtype>int</vtype> max = 100, <vtype>float</vtype> mass = 0.93827231, <vtype>float</vtype> charge = 1, <vtype>float</vtype> weight = -1) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~TMaterial</A>() 
+<LI><A HREF="#f3"><vtype>string</vtype> getName</A>() const
+<LI><A HREF="#f4"><vtype>void</vtype> setName</A>(<vtype>string</vtype> n) 
+<LI><A HREF="#f5"><vtype>int</vtype> getNumberOfElements</A>() const
+<LI><A HREF="#f6"><vtype>int</vtype> getMaxNumberOfElements</A>() const
+<LI><A HREF="#f7"><vtype>float</vtype> getRadiationLength</A>() const
+<LI><A HREF="#f8"><vtype>float</vtype> getDensity</A>() const
+<LI><A HREF="#f9"><vtype>void</vtype> setRadiationLength</A>(<vtype>float</vtype> rad) 
+<LI><A HREF="#f10"><vtype>void</vtype> setDensity</A>(<vtype>float</vtype> d) 
+<LI><A HREF="#f11"><vtype>float</vtype> getMass</A>(<vtype>int</vtype> num = 0) const
+<LI><A HREF="#f12"><vtype>float</vtype> getCharge</A>(<vtype>int</vtype> num = 0) const
+<LI><A HREF="#f13"><vtype>float</vtype> getWeight</A>(<vtype>int</vtype> num = 0) const
+<LI><A HREF="#f14"><vtype>float</vtype> getMeanMass</A>() const
+<LI><A HREF="#f15"><vtype>float</vtype> getMeanCharge</A>() const
+<LI><A HREF="#f16"><vtype>void</vtype> addElement</A>(<vtype>float</vtype> mass, <vtype>float</vtype> charge, <vtype>float</vtype> weight = -1) 
+<LI><A HREF="#f17"><vtype>void</vtype> setElement</A>(<vtype>int</vtype> num, <vtype>float</vtype> mass, <vtype>float</vtype> charge, <vtype>float</vtype> weight = -1) 
+<LI><A HREF="#f18"><vtype>void</vtype> popElement</A>() 
+<LI><A HREF="aelossalgorithm.html">AELossAlgorithm*</A> <A HREF="#f19">getAlgorithm</A>() 
+<LI><A HREF="#f20"><vtype>void</vtype> setAlgorithm</A>(<A HREF="aelossalgorithm.html">AELossAlgorithm*</A> energyLoss) 
+<LI><A HREF="#f21"><vtype>float</vtype> EnergyLoss</A>(<A HREF="momentum4d.html">momentum4D</A> particle, <vtype>float</vtype> path) 
+<LI><A HREF="#f22"><vtype>float</vtype> getSpeedOfLight</A>() const
+<LI><A HREF="#f23"><vtype>void</vtype> setSpeedOfLight</A>(<vtype>float</vtype> val) 
+<LI><A HREF="#f24"><vtype>bool</vtype> isDefined</A>() 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="tbase.html#f3"><vtype>string</vtype> TBase::name</A>() const
+</UL>
+<DT>Protected inherrited variables
+<DD><vtype>string</vtype> <A HREF="tbase.html#v2">TBase::fname</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">TMaterial::TMaterial</A>(<vtype>string</vtype> nameIn = "proton", <vtype>int</vtype> max = 100, <vtype>float</vtype> mass = 0.93827231, <vtype>float</vtype> charge = 1, <vtype>float</vtype> weight = -1) 
+<BR/><deff>
+Constructor. Defines the name of the material and the first element, the material consists of. Default here is proton gas.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">TMaterial::~TMaterial</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>string</vtype> TMaterial::getName</A>() const
+<BR/><deff>
+Returns the name of the material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> TMaterial::setName</A>(<vtype>string</vtype> n) 
+<BR/><deff>
+Sets the name of the material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>int</vtype> TMaterial::getNumberOfElements</A>() const
+<BR/><deff>
+Returns the actual number of elements stored for this material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> TMaterial::getMaxNumberOfElements</A>() const
+<BR/><deff>
+Returns the maximal number of elements to be stored for this material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>float</vtype> TMaterial::getRadiationLength</A>() const
+<BR/><deff>
+Returns the materials radiation length. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>float</vtype> TMaterial::getDensity</A>() const
+<BR/><deff>
+Returns the materials density in units of g/cm³. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> TMaterial::setRadiationLength</A>(<vtype>float</vtype> rad) 
+<BR/><deff>
+Sets the materials radiation length. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> TMaterial::setDensity</A>(<vtype>float</vtype> d) 
+<BR/><deff>
+Sets the density of the material in units of g/cm³. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>float</vtype> TMaterial::getMass</A>(<vtype>int</vtype> num = 0) const
+<BR/><deff>
+Returns the mass (GeV) of the <var>num<sup>th</sup></var> element the material consists of. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>float</vtype> TMaterial::getCharge</A>(<vtype>int</vtype> num = 0) const
+<BR/><deff>
+Returns the charge of the <var>num<sup>th</sup></var> element the material consists of. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>float</vtype> TMaterial::getWeight</A>(<vtype>int</vtype> num = 0) const
+<BR/><deff>
+Returns the relative abundance (0 <= weight <= 1) of an element in the material.   
+If the weight stored in this material is positive, this value is returned.   
+It it is negative, the relative abundance is calculated:   
+(1 - sum(positive))/sum( abs(negative) ) * abs(weight)    
+Returns -1 if <var>num</var> is non valid. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>float</vtype> TMaterial::getMeanMass</A>() const
+<BR/><deff>
+Returns the mean mass (GeV) of a nucleus in the material using the relative abundance of each element.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>float</vtype> TMaterial::getMeanCharge</A>() const
+<BR/><deff>
+Returns the mean charge of a nucleus in the material using the relative abundance of each element. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>void</vtype> TMaterial::addElement</A>(<vtype>float</vtype> mass, <vtype>float</vtype> charge, <vtype>float</vtype> weight = -1) 
+<BR/><deff>
+Adds an element to the list of elements with nuclear mass (Gev) and charge and a weight that defines the abundance of the element in the material.  
+If the weight is positive, it gives the relative abundance of this element of all elements in the material.   
+If it is negative, the rest of the sum of the positive weights to one is distributed among all elements with negative weight with the relative abundance =   
+(1 - sum(positive))/sum( abs(negative) ) * abs(weight)  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> TMaterial::setElement</A>(<vtype>int</vtype> num, <vtype>float</vtype> mass, <vtype>float</vtype> charge, <vtype>float</vtype> weight = -1) 
+<BR/><deff>
+Sets the nuclear mass (GeV), charge and weight of the <var>num<sup>th</sup></var> element of the material.  
+If the weight is positive, it gives the relative abundance of this element of all elements in the material.  
+If it is negative, the rest of the sum of the positive weights to one is distributed among all elements with negative weight with the relative abundance =  
+(1 - sum(positive))/sum( abs(negative) ) * abs(weight) 
+Does nothing if <var>num</var> is non valid. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> TMaterial::popElement</A>() 
+<BR/><deff>
+Removes the last element from the list of elements, the material consists of. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="aelossalgorithm.html">AELossAlgorithm*</A> <A NAME="f19">TMaterial::getAlgorithm</A>() 
+<BR/><deff>
+Returns the energy loss algorithm used to calculate the energy loss of some particle in the material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> TMaterial::setAlgorithm</A>(<A HREF="aelossalgorithm.html">AELossAlgorithm*</A> energyLoss) 
+<BR/><deff>
+Sets the energy loss algorihm. This algorithm won't be deleted with the material. Take care it is deleted properly after use. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>float</vtype> TMaterial::EnergyLoss</A>(<A HREF="momentum4d.html">momentum4D</A> particle, <vtype>float</vtype> path) 
+<BR/><deff>
+If the energyloss algorithm is defined, it returns the energyloss of the <var>particle</var> passing the material on a length of <var>path</var>. 
+<font color="red">Not yet defined properly!</font> 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>float</vtype> TMaterial::getSpeedOfLight</A>() const
+<BR/><deff>
+Returns the speed of light in the material in units of the speed of light in vacuum. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>void</vtype> TMaterial::setSpeedOfLight</A>(<vtype>float</vtype> val) 
+<BR/><deff>
+Sets the speed of light in the material in units of the speed of light in vacuum. Should not be larger than 1, by definition. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>bool</vtype> TMaterial::isDefined</A>() 
+<BR/><deff>
+Returns true, if this material has been defined. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

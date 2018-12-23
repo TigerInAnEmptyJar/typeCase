@@ -1,0 +1,761 @@
+EventPainter
+eventpainter.html
+/users/data12/pion/ehrhardt/tofPack2/include/eventpainter.h
+CEventPainter
+-1 EventPainter
+O#c2
+DDefault constructor.
+=
+CEventPainter
+-1 EventPainter
+O#c3
+Pe
+105 TEvent*
+=
+Pc
+-1 TPad*
+=
+DConstructor. Sets the painters properties. <var>e</var> is a pointer to the event structure that shall be painted, <var>c</var> a pointer to the canvas or pad where the event pattern should be drawn onto.
+=
+CEventPainter
+-1 EventPainter
+O#c4
+Pe
+105 TEvent*
+=
+Pc
+-1 TPad*
+=
+Pleft
+1 float
+=
+Pright
+1 float
+=
+Pup
+1 float
+=
+Pdown
+1 float
+=
+DConstructor. Sets the painters properties. <var>e</var> is a pointer to the event structure that shall be painted, <var>c</var> a pointer to the canvas or pad where the event pattern should be drawn onto.
+=
+gEvent
+105 TEvent*
+O#v2
+D
+=
+gcanvas
+-1 TPad*
+O#v3
+D
+=
+gupperLeft
+14 point2D
+O#v4
+D
+=
+glowerRight
+14 point2D
+O#v5
+D
+=
+gdrawings
+-1 vector<TObject*>
+O#v6
+D
+=
+gdrawnObjects
+-1 vector<TBase*>
+O#v7
+D
+=
+gdetectors
+-1 vector<int>
+O#v8
+D
+=
+gdetectorColors
+-1 vector<int>
+O#v9
+D
+=
+gpixels
+-1 vector<int>
+O#v10
+D
+=
+gpixelColors
+-1 vector<int>
+O#v11
+D
+=
+gpixelMarker
+-1 vector<int>
+O#v12
+D
+=
+gtrackColors
+-1 vector<int>
+O#v13
+D
+=
+gparticleColors
+-1 vector<int>
+O#v14
+D
+=
+gdetSorted
+6 bool
+O#v15
+D
+=
+gtrackLike
+6 bool
+O#v16
+D
+=
+gparticleLike
+6 bool
+O#v17
+D
+=
+FclassName
+5 char*
+Svirtual const
+O#f2
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f3
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f4
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f5
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f6
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f7
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f8
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+FclassName
+5 char*
+Svirtual const
+O#f9
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f10
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f11
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f12
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f13
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f14
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f15
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+FgetDrawnObjects
+-1 vector<TBase*>
+O#f16
+Px
+3 double
+=
+Py
+3 double
+=
+DReturns a vector of TObjects that have been drawn to the pad close to the position <var>x-y</var>. 
+DThis contains hits, pixels and tracks.
+=
+GpaintHits
+7 void
+O#f17
+DPaints the hits in this event.
+=
+GpaintPixels
+7 void
+O#f18
+DPaints the pixel in this event.
+=
+GpaintTracks
+7 void
+O#f19
+DPaints the tracks.
+=
+LsetTrackLike
+7 void
+O#l2
+Plike
+6 bool
+Vtrue
+=
+DSets the color mode for the drawn detector elements. If <var>sort</var> is true (default), then the detector elements will be drawn in the track's color instead of the detectors color.
+=
+LsetEvent
+7 void
+O#l3
+Pe
+105 TEvent*
+Ttmp.html
+=
+DSet the event pointer.
+=
+LsetCanvas
+7 void
+O#l4
+Pc
+-1 TPad*
+=
+DSet the canvas or pad the event should be drawn to.
+=
+LsetSize
+7 void
+O#l5
+Pleft
+1 float
+=
+Pright
+1 float
+=
+Pup
+1 float
+=
+Pdown
+1 float
+=
+DSet the upper left and lower right corners of the canvas/pad in pad coordinates. 
+DObsolete.
+=
+LsetSize
+7 void
+O#l6
+PupperLeftIn
+14 point2D
+Tpoint2d.html
+=
+PlowerRightIn
+14 point2D
+Tpoint2d.html
+=
+DSet the upper left and lower right corners of the canvas/pad in pad coordinates. 
+DObsolete.
+=
+LrePaint
+7 void
+O#l7
+Pe
+105 TEvent*
+Ttmp.html
+=
+Pzoom
+1 float
+V100
+=
+DPaints the event <var>e</var> with this <var>zoom</var> to the current canvas/pad.
+DFirst hits, then pixels and tracks are drawn. In the end, there are event statistics added.
+DThe hits and pixels are drawn using the <a href="baseShape.html#f11">Draw()</a>-method from <a href="baseShape.html">baseShape</a>. 
+DThe tracks are drawn using markers.
+=
+LrePaint
+7 void
+O#l8
+Pzoom
+1 float
+V100
+=
+DPaints the event with this <var>zoom</var> to the current canvas. First hits, then pixels and tracks are drawn. In the end, there are event statistics added.
+DThe hits and pixels are drawn using the <a href="baseShape.html#f11">Draw()</a>-method from <a href="baseShape.html">baseShape</a>. 
+DThe tracks are drawn using markers.
+=
+LaddDetector
+7 void
+O#l9
+PdetNum
+0 int
+=
+Pcolor
+0 int
+V1
+=
+DAdds a detector with ID <var>detNum</var> and <var>color</var> to the list of detectors.
+=
+LaddPixel
+7 void
+O#l10
+PpixNum
+0 int
+=
+Pcolor
+0 int
+V1
+=
+Pmarker
+0 int
+V1
+=
+DAdds a pixel with ID <var>pixNum</var>, <var>color</var> and <var>marker</var>-type to the list of pixels.
+=
+LaddTrackColor
+7 void
+O#l11
+Pcolor
+0 int
+=
+DAdds a track color.
+=
+LclearDetectors
+7 void
+O#l12
+DSets the number of detectors to draw to zero.
+=
+LclearPixels
+7 void
+O#l13
+DSets the number pf pixels to draw to zero.
+=
+LclearTrackColor
+7 void
+O#l14
+DSets the number of tracks to draw to zero.
+=
+LremoveDetector
+7 void
+O#l15
+PdetNum
+0 int
+=
+DRemove the detector at index <var>detNum</var> from the list of drawn detectors.
+=
+LremovePixel
+7 void
+O#l16
+PpixNum
+0 int
+=
+DRemove the pixel from index <var>pixNum</var> from the list of drawn pixels.
+=
+LsetDetector
+7 void
+O#l17
+PdetNum
+0 int
+=
+Pcolor
+0 int
+=
+DSet the <var>color</var> for the <var>detNum<sup>th</sup></var> detector.
+=
+LsetPixel
+7 void
+O#l18
+PpixNum
+0 int
+=
+Pcolor
+0 int
+=
+DSets the <var>color</var> for the <var>pixNum<sup>th</sup></var> pixel.
+=
+LsetPixel
+7 void
+O#l19
+PpixNum
+0 int
+=
+Pcolor
+0 int
+=
+Pmarker
+0 int
+=
+DSet the <var>color</var> and <var>marker</var> for the <var>pixNum<sup>th</sup></var> pixel.
+=
+LsetTrackSorted
+7 void
+O#l20
+Psort
+6 bool
+Vtrue
+=
+DSets the color mode for the drawn detector elements. If <var>sort</var> is true (default), then the detector elements will be drawn in the track's color instead of the detectors color.
+=
+LsetTrackLike
+7 void
+O#l21
+Plike
+6 bool
+Vtrue
+=
+DSets the color mode for the drawn detector elements. If <var>sort</var> is true (default), then the detector elements will be drawn in the track's color instead of the detectors color.
+=
+LsetEvent
+7 void
+O#l22
+Pe
+105 TEvent*
+=
+DSet the event pointer.
+=
+LsetCanvas
+7 void
+O#l23
+Pc
+-1 TPad*
+=
+DSet the canvas or pad the event should be drawn to.
+=
+LsetSize
+7 void
+O#l24
+Pleft
+1 float
+=
+Pright
+1 float
+=
+Pup
+1 float
+=
+Pdown
+1 float
+=
+DSet the upper left and lower right corners of the canvas/pad in pad coordinates. 
+DObsolete.
+=
+LsetSize
+7 void
+O#l25
+PupperLeftIn
+14 point2D
+=
+PlowerRightIn
+14 point2D
+=
+DSet the upper left and lower right corners of the canvas/pad in pad coordinates. 
+DObsolete.
+=
+LrePaint
+7 void
+O#l26
+Pe
+105 TEvent*
+=
+DPaints the event <var>e</var> with this <var>zoom</var> to the current canvas/pad.
+DFirst hits, then pixels and tracks are drawn. In the end, there are event statistics added.
+DThe hits and pixels are drawn using the <a href="baseShape.html#f11">Draw()</a>-method from <a href="baseShape.html">baseShape</a>. 
+DThe tracks are drawn using markers.
+=
+LrePaint
+7 void
+O#l27
+DPaints the event with this <var>zoom</var> to the current canvas. First hits, then pixels and tracks are drawn. In the end, there are event statistics added.
+DThe hits and pixels are drawn using the <a href="baseShape.html#f11">Draw()</a>-method from <a href="baseShape.html">baseShape</a>. 
+DThe tracks are drawn using markers.
+=
+LaddDetector
+7 void
+O#l28
+PdetNum
+0 int
+=
+Pcolor
+0 int
+V1
+=
+DAdds a detector with ID <var>detNum</var> and <var>color</var> to the list of detectors.
+=
+LaddPixel
+7 void
+O#l29
+PpixNum
+0 int
+=
+Pcolor
+0 int
+V1
+=
+Pmarker
+0 int
+V1
+=
+DAdds a pixel with ID <var>pixNum</var>, <var>color</var> and <var>marker</var>-type to the list of pixels.
+=
+LaddTrackColor
+7 void
+O#l30
+Pcolor
+0 int
+=
+DAdds a track color.
+=
+LaddParticleColor
+7 void
+O#l31
+PID
+0 int
+=
+Pcolor
+0 int
+=
+DAdd a particle-color. In particle-mode a particle-track with <var>ID</var> is drawn in <var>color</var>.
+=
+LclearDetectors
+7 void
+O#l32
+DSets the number of detectors to draw to zero.
+=
+LclearPixels
+7 void
+O#l33
+DSets the number pf pixels to draw to zero.
+=
+LclearTrackColor
+7 void
+O#l34
+DSets the number of tracks to draw to zero.
+=
+LclearParticleColor
+7 void
+O#l35
+DClears all particle-colors.
+=
+LremoveDetector
+7 void
+O#l36
+PdetNum
+0 int
+=
+DRemove the detector at index <var>detNum</var> from the list of drawn detectors.
+=
+LremovePixel
+7 void
+O#l37
+PpixNum
+0 int
+=
+DRemove the pixel from index <var>pixNum</var> from the list of drawn pixels.
+=
+LsetDetector
+7 void
+O#l38
+PdetNum
+0 int
+=
+Pcolor
+0 int
+=
+DSet the <var>color</var> for the <var>detNum<sup>th</sup></var> detector.
+=
+LsetPixel
+7 void
+O#l39
+PpixNum
+0 int
+=
+Pcolor
+0 int
+=
+DSets the <var>color</var> for the <var>pixNum<sup>th</sup></var> pixel.
+=
+LsetPixel
+7 void
+O#l40
+PpixNum
+0 int
+=
+Pcolor
+0 int
+=
+Pmarker
+0 int
+=
+DSet the <var>color</var> and <var>marker</var> for the <var>pixNum<sup>th</sup></var> pixel.
+=
+LsetTrackSorted
+7 void
+O#l41
+Psort
+6 bool
+Vtrue
+=
+DSets the color mode for the drawn detector elements. If <var>sort</var> is true (default), then the detector elements will be drawn in the track's color instead of the detectors color.
+=
+LsetPaintMode
+7 void
+O#l42
+Pmode
+0 int
+=
+DSet the projection paint mode to parallel, central or fisheye.
+=
+LsetParticleMode
+7 void
+O#l43
+Pvalue
+6 bool
+Vtrue
+=
+DSets the particle mode. Particles of a certain ID are drawn in a specific color.
+=
+S0 0 QObject
+http://doc.trolltech.com/4.4/qobject.html
+=

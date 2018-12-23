@@ -1,0 +1,249 @@
+TCalibHit
+tcalibhit.html
+/users/data12/pion/ehrhardt/tofPack2/include/calibHit.h
+CTCalibHit
+101 TCalibHit
+O#c2
+DDefault constructor. 
+=
+CTCalibHit
+101 TCalibHit
+O#c3
+PADC
+1 float
+=
+PTDC
+1 float
+=
+Phit
+100 TRawHit&
+Sconst
+=
+DConstructor. Sets the properties, raw-hit (element, detectorID, QDC, TDC) calibrated QDC and TDC.
+=
+CTCalibHit
+101 TCalibHit
+O#c4
+Phit
+100 TRawHit&
+Sconst
+=
+PADC
+1 float
+V-1
+=
+PTDC
+1 float
+V-1
+=
+Psh
+151 volumeShape*
+VNULL
+=
+DConstructor. Sets the properties, raw-hit (element, detectorID, QDC, TDC) calibrated QDC and TDC and the shape of the detector element.
+=
+CTCalibHit
+101 TCalibHit
+O#c5
+Phit
+101 TCalibHit&
+Sconst
+=
+DCopy constructor. 
+=
+graws
+100 TRawHit
+O#v2
+D
+=
+gadc
+1 float
+O#v3
+D
+=
+gtdc
+1 float
+O#v4
+D
+=
+ghitShape
+151 volumeShape*
+O#v5
+D
+=
+ghitShape_clone
+151 volumeShape*
+O#v6
+D
+=
+gdefined
+6 bool
+O#v7
+D
+=
+gvalid
+6 bool
+O#v8
+D
+=
+F~TCalibHit
+-1 ~TCalibHit
+O#f2
+DDestructor. 
+=
+FgetADC
+1 float
+O#f3
+Lconst
+DReturns the calibrated ADC-value of the hit. 
+=
+FgetTDC
+1 float
+O#f4
+Lconst
+DReturns the TDC of the hit. 
+=
+FgetRawADC
+0 int
+O#f5
+Lconst
+DReturns the raw, uncalibrated ADC of the hit. 
+=
+FgetRawTDC
+0 int
+O#f6
+Lconst
+DReturns the raw, uncalibrated TDC of the hit.  
+=
+FgetDetector
+0 int
+O#f7
+Lconst
+DRetruns the detector ID of the hit. 
+=
+FgetElement
+0 int
+O#f8
+Lconst
+DRetruns the element number of the hit. 
+=
+FgetHitShape
+151 volumeShape*
+O#f9
+DReturns a pointer to the shape of the hit detector element. May be modified. Do not delete. 
+DIt is a copy of the shape stored in every detector.  
+DNote: this may be NULL.   
+=
+FsetADC
+7 void
+O#f10
+PadcIn
+1 float
+=
+DSets the ADC-value of the calibrated hit. 
+=
+FsetTDC
+7 void
+O#f11
+PtdcIn
+1 float
+=
+DSets the TDC-value of the calibrated hit. 
+=
+FsetRaw
+7 void
+O#f12
+Ph
+100 TRawHit&
+Sconst
+=
+DSets the properties of the raw component, such as raw ADC, raw TDC, detector iD and element number. 
+=
+FsetHitShape
+7 void
+O#f13
+PshapeIn
+151 volumeShape*
+=
+DSets the hit shape. A copy of this shape is produced, when getHitShape() is called. This copy is a property of the hit and will be deleted, when necessary. 
+=
+Foperator=
+101 TCalibHit&
+O#f14
+Phit
+101 TCalibHit&
+Sconst
+=
+DCopy operator. 
+=
+FgetADCr
+1 float&
+O#f15
+DReturns a reference to the calibrated ADC-value of the hit. 
+=
+FgetTDCr
+1 float&
+O#f16
+DReturns a reference to the TDC of the hit. 
+=
+FgetRawADCr
+0 int&
+O#f17
+DReturns a reference to the raw, uncalibrated ADC of the hit.  
+=
+FgetRawTDCr
+0 int&
+O#f18
+DReturns a reference to the raw, uncalibrated TDC of the hit.  
+=
+FgetDetectorr
+0 int&
+O#f19
+DRetruns a reference tothe detector ID of the hit. 
+=
+FgetElementr
+0 int&
+O#f20
+DRetruns a reference to the element number of the hit. 
+=
+FgetHitShaper
+151 volumeShape*
+O#f21
+Lconst
+DReturns a pointer to the shape of the hit detector element. May be modified.   
+DNote: this may be NULL.   
+=
+FisDefined
+6 bool
+O#f22
+DReturns true if the hit was modified after creation. 
+=
+FgetRaw
+100 TRawHit&
+O#f23
+DReturns the raw hit component of the hit. 
+=
+FisValid
+6 bool
+O#f24
+Lconst
+DReturns the valid property. This may be set if the hit shape is defined, or the hit is valid in terms of analysis cases. 
+=
+FsetValid
+7 void
+O#f25
+Pval
+6 bool
+Vtrue
+=
+DSet the valid-property. If called without parameter, by default it is set to true. 
+=
+Freset
+7 void
+O#f26
+DResets the hit. The valid property is set to false. 
+=
+S0 1 TBase
+tbase.html
+TBase
+=

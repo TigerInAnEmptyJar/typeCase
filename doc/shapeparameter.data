@@ -1,0 +1,149 @@
+shape_parameter
+shapeparameter.html
+/users/data12/pion/ehrhardt/tofPack2/include/shapeparameter.h
+Cshape_parameter
+129 shape_parameter
+O#c2
+DDefault constructor.
+=
+Cshape_parameter
+129 shape_parameter
+O#c3
+Psp
+129 shape_parameter&
+Sconst
+=
+DCopy constructor.
+=
+gpoints
+-1 vector<single_parameter<point3D> >
+O#v2
+D 
+=
+gvectors
+-1 vector<single_parameter<vector3D> >
+O#v3
+D 
+=
+gintegers
+-1 vector<single_parameter<int> >
+O#v4
+D 
+=
+gfloats
+-1 vector<single_parameter<float> >
+O#v5
+D 
+=
+gstrings_
+-1 vector<single_parameter<string> >
+O#v6
+D 
+=
+gfcompleteWrite
+6 bool
+O#v7
+D
+=
+F~shape_parameter
+-1 ~shape_parameter
+O#f2
+DDestructor
+=
+FgetParam
+-1 T
+Stemplate<class T>
+O#f3
+Lconst
+Pi
+0 int
+=
+DTemplate method. Returns the <var>i<sup>th</sup></var> parameters value stored for the specified type. This can be int, float, point3D, vector3D or QString. 
+=
+FgetParamName
+-1 string
+Stemplate<class T>
+O#f4
+Lconst
+Pi
+0 int
+=
+DTemplate method. Returns the <var>i<sup>th</sup></var> parameters name stored for the specified type. This can be int, float, point3D, vector3D or QString. 
+=
+FsetParam
+7 void
+Stemplate<class T>
+O#f5
+Pi
+0 int
+=
+Pp
+-1 T&
+Sconst
+=
+DTemplate method. Sets the <var>i<sup>th</sup></var> parameters value of the specified type. This can be int, float, point3D, vector3D or QString. 
+=
+FsetParamName
+7 void
+Stemplate<class T>
+O#f6
+Pi
+0 int
+=
+Pn
+-1 string
+=
+DTemplate method. Sets the <var>i<sup>th</sup></var> parameters name stored for the specified type. This can be int, float, point3D, vector3D or QString. 
+=
+FaddParam
+7 void
+Stemplate<class T>
+O#f7
+Pp
+-1 T
+=
+Pn
+-1 string
+=
+DTemplate method. Adds a parameter to the list of parameters stored for the specified type. This can be int, float, point3D, vector3D or QString. 
+=
+FNumberOfParams
+0 int
+Stemplate<class T>
+O#f8
+Lconst
+DTemplate method. Returns the number of parameters stored for the specified type. This can be int, float, point3D, vector3D or QString. 
+=
+FclearProperties
+7 void
+O#f9
+DEmpties all parameters.
+=
+Foperator=
+7 void
+O#f10
+Psh
+129 shape_parameter&
+Sconst
+=
+DCopy operator. 
+=
+FcompleteWrite
+6 bool
+O#f11
+Lconst
+DRetruns wether the values of the parameters should be written in addition to their names.
+=
+FsetCompleteWrite
+7 void
+O#f12
+Pvalue
+6 bool
+Vtrue
+=
+DComplete-write is when in addition to the names of the parameters, the values are written to ostream with the "operator<<". This property is set here.
+=
+S0 1 base_parameter
+baseparameter.html
+base_parameter
+=

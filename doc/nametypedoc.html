@@ -1,0 +1,254 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class nameTypeDoc</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class nameTypeDoc in "tmyclass.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Constructor
+<LI><A HREF="#c2">nameTypeDoc</A>() 
+<LI><A HREF="#c3">nameTypeDoc</A>(<vtype>string</vtype> nameIn, <vtype>string</vtype> typeIn, <vtype>int</vtype> typeIdIn = 0, <vtype>string</vtype> specifierIn = "", <vtype>string</vtype> docIn = "", <vtype>string</vtype> typeDocIn = "") 
+<LI><A HREF="#c4">nameTypeDoc</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> n) 
+<LI><A HREF="#c5">nameTypeDoc</A>(const <vtype>string&</vtype> s) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~nameTypeDoc</A>() 
+<LI><A HREF="#f3"><vtype>string</vtype> Name</A>() const
+<LI><A HREF="#f4"><vtype>string</vtype> Type</A>() const
+<LI><A HREF="#f5"><vtype>string</vtype> Doc</A>() const
+<LI><A HREF="#f6"><vtype>string</vtype> TypeDoc</A>() const
+<LI><A HREF="#f7"><vtype>string</vtype> Description</A>(<vtype>int</vtype> i) const
+<LI><A HREF="#f8"><vtype>int</vtype> DescriptionLines</A>() const
+<LI><A HREF="#f9"><vtype>string</vtype> Specifier</A>() const
+<LI><A HREF="#f10"><vtype>string</vtype> Default</A>() const
+<LI><A HREF="#f11"><vtype>int</vtype> TypeId</A>() const
+<LI><A HREF="#f12"><vtype>void</vtype> setType</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="#f13"><vtype>void</vtype> setName</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="#f14"><vtype>void</vtype> setDoc</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="#f15"><vtype>void</vtype> setTypeId</A>(<vtype>int</vtype> v) 
+<LI><A HREF="#f16"><vtype>void</vtype> setTypeDoc</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="#f17"><vtype>void</vtype> setDescription</A>(const <vtype>vector&lt;string&gt;&</vtype> input) 
+<LI><A HREF="#f18"><vtype>void</vtype> setSpecifier</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="#f19"><vtype>void</vtype> setDefault</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="#f20"><vtype>void</vtype> clearDescription</A>() 
+<LI><A HREF="#f21"><vtype>void</vtype> addDescriptionLine</A>(const <vtype>string&</vtype> s) 
+<LI><A HREF="#f22"><vtype>void</vtype> parse</A>(const <vtype>string&</vtype> expression) 
+<LI>virtual <A HREF="#f23"><vtype>string</vtype> toString</A>(<vtype>int</vtype> ptt = 0) const
+<LI>virtual <A HREF="#f24"><vtype>string</vtype> htmlHREF</A>() const
+<LI>virtual <A HREF="#f25"><vtype>vector&lt;string&gt;</vtype> htmlNAME</A>() const
+<LI><A HREF="nametypedoc.html">nameTypeDoc&</A> <A HREF="#f26">operator=</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> nt) 
+<LI><A HREF="#f27"><vtype>bool</vtype> operator==</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> nt) 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="#f28"><vtype>int</vtype> typeIDS</A>(const <vtype>string&</vtype> s) 
+<LI>static <A HREF="nametypedoc.html">nameTypeDoc</A> <A HREF="#f29">parseIt</A>(const <vtype>string&</vtype> expression) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">nameTypeDoc::nameTypeDoc</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">nameTypeDoc::nameTypeDoc</A>(<vtype>string</vtype> nameIn, <vtype>string</vtype> typeIn, <vtype>int</vtype> typeIdIn = 0, <vtype>string</vtype> specifierIn = "", <vtype>string</vtype> docIn = "", <vtype>string</vtype> typeDocIn = "") 
+<BR/><deff>
+Constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">nameTypeDoc::nameTypeDoc</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> n) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">nameTypeDoc::nameTypeDoc</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Constructor. Parses the string <var>s</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> nameTypeDoc::~nameTypeDoc</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>string</vtype> nameTypeDoc::Name</A>() const
+<BR/><deff>
+Returns the name of the variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>string</vtype> nameTypeDoc::Type</A>() const
+<BR/><deff>
+Returns the name of the type of the variable
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>string</vtype> nameTypeDoc::Doc</A>() const
+<BR/><deff>
+Returns the html-documentation file or link-label for the variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>string</vtype> nameTypeDoc::TypeDoc</A>() const
+<BR/><deff>
+Returns the html-documentation file of the type of the variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>string</vtype> nameTypeDoc::Description</A>(<vtype>int</vtype> i) const
+<BR/><deff>
+Returns the <var>i<sup>th</sup></var> line of the description.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>int</vtype> nameTypeDoc::DescriptionLines</A>() const
+<BR/><deff>
+Returns the number of lines the description is made up of.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>string</vtype> nameTypeDoc::Specifier</A>() const
+<BR/><deff>
+Returns the additional specifier. This can be any C++ specifer like "const", "extern", "friend", "inline", "static", etc.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>string</vtype> nameTypeDoc::Default</A>() const
+<BR/><deff>
+Returns the default of the variable. Since there are no limits to the type of the variable, a string representation is saved here. You might need to parse it if you want to use it other than for documentation purposes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>int</vtype> nameTypeDoc::TypeId</A>() const
+<BR/><deff>
+Returns the type ID of the variable. It is zero or larger if the type is known to the class.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> nameTypeDoc::setType</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Sets the type of the variable. There is a lookup done if it is a type known to the class, then the typeID is looked up.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> nameTypeDoc::setName</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Sets the name of the variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> nameTypeDoc::setDoc</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Sets the documentation-file or jump label for the documentation of the variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>void</vtype> nameTypeDoc::setTypeId</A>(<vtype>int</vtype> v) 
+<BR/><deff>
+Sets the ID of the type. See <a href="#f28">TypeIDs()</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>void</vtype> nameTypeDoc::setTypeDoc</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Sets the documentation-file for the type. If it is an empty string a lookup in the list of known types is done, when the type-doc is needed.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> nameTypeDoc::setDescription</A>(const <vtype>vector&lt;string&gt;&</vtype> input) 
+<BR/><deff>
+Sets the description of the variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> nameTypeDoc::setSpecifier</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Sets the specifier of the variable. This might be "const", "static", "virtual" or other C++ specifiers for variables or functions.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> nameTypeDoc::setDefault</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Sets the default value of the variable. Since the type is not limited in any way, the default is saved as a string representation of the original value.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> nameTypeDoc::clearDescription</A>() 
+<BR/><deff>
+Empties the description vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>void</vtype> nameTypeDoc::addDescriptionLine</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Adds a line to the description of the variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>void</vtype> nameTypeDoc::parse</A>(const <vtype>string&</vtype> expression) 
+<BR/><deff>
+Parses a C++ - variable-definition string. Ignores comments like "//" or "/**/". Can read default values given by "=defaultValue". Knows templates. The name is always given without any pointer or reference characters, they are passed to the type. As separators it accepts "*", "&", spaces and for templates ">" characters.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>string</vtype> nameTypeDoc::toString</A>(<vtype>int</vtype> ptt = 0) const
+<BR/><deff>
+Returns a C++ definition of the variable, as it might have been parsed from.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>string</vtype> nameTypeDoc::htmlHREF</A>() const
+<BR/><deff>
+Returns an html-link to the description of the variable. It is displayed with a link to the type-documentation if there exists one, else the type is colored gray. If there is a default, it is appended with an "=" character.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f25"><vtype>vector&lt;string&gt;</vtype> nameTypeDoc::htmlNAME</A>() const
+<BR/><deff>
+Returns a vector of strings containing the html-"name" label and the description of the variable. If a html-documentation-file exists for the type, a link is included to the documentation file of the type.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="nametypedoc.html">nameTypeDoc&</A> <A NAME="f26">nameTypeDoc::operator=</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> nt) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f27"><vtype>bool</vtype> nameTypeDoc::operator==</A>(const <A HREF="nametypedoc.html">nameTypeDoc&</A> nt) 
+<BR/><deff>
+Comparison operator. Returns true if name, type and specifier are the same.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f28"><vtype>int</vtype> nameTypeDoc::typeIDS</A>(const <vtype>string&</vtype> s) 
+<BR/><deff>
+Static method. Returns the type ID of a type that s represented by <var>s</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="nametypedoc.html">nameTypeDoc</A> <A NAME="f29">nameTypeDoc::parseIt</A>(const <vtype>string&</vtype> expression) 
+<BR/><deff>
+Parses a C++ definition of a variable and stores the result.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

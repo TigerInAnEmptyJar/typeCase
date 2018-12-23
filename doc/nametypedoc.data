@@ -1,0 +1,313 @@
+nameTypeDoc
+nametypedoc.html
+/users/data12/pion/ehrhardt/tofPack2/documentation/include/tmyclass.h
+CnameTypeDoc
+-1 nameTypeDoc
+O#c2
+DDefault constructor.
+=
+CnameTypeDoc
+-1 nameTypeDoc
+O#c3
+PnameIn
+-1 string
+=
+PtypeIn
+-1 string
+=
+PtypeIdIn
+0 int
+V0
+=
+PspecifierIn
+-1 string
+V""
+=
+PdocIn
+-1 string
+V""
+=
+PtypeDocIn
+-1 string
+V""
+=
+DConstructor.
+=
+CnameTypeDoc
+-1 nameTypeDoc
+O#c4
+Pn
+-1 nameTypeDoc&
+Sconst
+=
+DCopy constructor.
+=
+CnameTypeDoc
+-1 nameTypeDoc
+O#c5
+Ps
+-1 string&
+Sconst
+=
+DConstructor. Parses the string <var>s</var>.
+=
+gname
+-1 string
+O#v2
+D
+=
+gtype
+-1 string
+O#v3
+D
+=
+gtypeId
+0 int
+O#v4
+D
+=
+gdoc
+-1 string
+O#v5
+D
+=
+gtypeDoc
+-1 string
+O#v6
+D
+=
+gdescription
+-1 vector<string>
+O#v7
+D
+=
+gspecifier
+-1 string
+O#v8
+D
+=
+gdefaultvalue
+-1 string
+O#v9
+D
+=
+F~nameTypeDoc
+-1 virtual
+O#f2
+DDestructor
+=
+FName
+-1 string
+O#f3
+Lconst
+DReturns the name of the variable.
+=
+FType
+-1 string
+O#f4
+Lconst
+DReturns the name of the type of the variable
+=
+FDoc
+-1 string
+O#f5
+Lconst
+DReturns the html-documentation file or link-label for the variable.
+=
+FTypeDoc
+-1 string
+O#f6
+Lconst
+DReturns the html-documentation file of the type of the variable.
+=
+FDescription
+-1 string
+O#f7
+Lconst
+Pi
+0 int
+=
+DReturns the <var>i<sup>th</sup></var> line of the description.
+=
+FDescriptionLines
+0 int
+O#f8
+Lconst
+DReturns the number of lines the description is made up of.
+=
+FSpecifier
+-1 string
+O#f9
+Lconst
+DReturns the additional specifier. This can be any C++ specifer like "const", "extern", "friend", "inline", "static", etc.
+=
+FDefault
+-1 string
+O#f10
+Lconst
+DReturns the default of the variable. Since there are no limits to the type of the variable, a string representation is saved here. You might need to parse it if you want to use it other than for documentation purposes.
+=
+FTypeId
+0 int
+O#f11
+Lconst
+DReturns the type ID of the variable. It is zero or larger if the type is known to the class.
+=
+FsetType
+7 void
+O#f12
+Ps
+-1 string&
+Sconst
+=
+DSets the type of the variable. There is a lookup done if it is a type known to the class, then the typeID is looked up.
+=
+FsetName
+7 void
+O#f13
+Ps
+-1 string&
+Sconst
+=
+DSets the name of the variable.
+=
+FsetDoc
+7 void
+O#f14
+Ps
+-1 string&
+Sconst
+=
+DSets the documentation-file or jump label for the documentation of the variable.
+=
+FsetTypeId
+7 void
+O#f15
+Pv
+0 int
+=
+DSets the ID of the type. See <a href="#f28">TypeIDs()</a>.
+=
+FsetTypeDoc
+7 void
+O#f16
+Ps
+-1 string&
+Sconst
+=
+DSets the documentation-file for the type. If it is an empty string a lookup in the list of known types is done, when the type-doc is needed.
+=
+FsetDescription
+7 void
+O#f17
+Pinput
+-1 vector<string>&
+Sconst
+=
+DSets the description of the variable.
+=
+FsetSpecifier
+7 void
+O#f18
+Ps
+-1 string&
+Sconst
+=
+DSets the specifier of the variable. This might be "const", "static", "virtual" or other C++ specifiers for variables or functions.
+=
+FsetDefault
+7 void
+O#f19
+Ps
+-1 string&
+Sconst
+=
+DSets the default value of the variable. Since the type is not limited in any way, the default is saved as a string representation of the original value.
+=
+FclearDescription
+7 void
+O#f20
+DEmpties the description vector.
+=
+FaddDescriptionLine
+7 void
+O#f21
+Ps
+-1 string&
+Sconst
+=
+DAdds a line to the description of the variable.
+=
+Fparse
+7 void
+O#f22
+Pexpression
+-1 string&
+Sconst
+=
+DParses a C++ - variable-definition string. Ignores comments like "//" or "/**/". Can read default values given by "=defaultValue". Knows templates. The name is always given without any pointer or reference characters, they are passed to the type. As separators it accepts "*", "&", spaces and for templates ">" characters.
+=
+FtoString
+-1 string
+Svirtual
+O#f23
+Lconst
+Pptt
+0 int
+V0
+=
+DReturns a C++ definition of the variable, as it might have been parsed from.
+=
+FhtmlHREF
+-1 string
+Svirtual
+O#f24
+Lconst
+DReturns an html-link to the description of the variable. It is displayed with a link to the type-documentation if there exists one, else the type is colored gray. If there is a default, it is appended with an "=" character.
+=
+FhtmlNAME
+-1 vector<string>
+Svirtual
+O#f25
+Lconst
+DReturns a vector of strings containing the html-"name" label and the description of the variable. If a html-documentation-file exists for the type, a link is included to the documentation file of the type.
+=
+Foperator=
+-1 nameTypeDoc&
+O#f26
+Pnt
+-1 nameTypeDoc&
+Sconst
+=
+DCopy operator.
+=
+Foperator==
+6 bool
+O#f27
+Pnt
+-1 nameTypeDoc&
+Sconst
+=
+DComparison operator. Returns true if name, type and specifier are the same.
+=
+FtypeIDS
+0 int
+Sstatic
+O#f28
+Ps
+-1 string&
+Sconst
+=
+DStatic method. Returns the type ID of a type that s represented by <var>s</var>.
+=
+FparseIt
+-1 nameTypeDoc
+Sstatic
+O#f29
+Pexpression
+-1 string&
+Sconst
+=
+DParses a C++ definition of a variable and stores the result.
+=
+=

@@ -1,0 +1,120 @@
+TBeam
+tbeam.html
+/users/data12/pion/ehrhardt/tofPack2/include/setup.h
+CTBeam
+109 TBeam
+O#c2
+D
+DDefault constructor.
+=
+CTBeam
+109 TBeam
+O#c3
+Pparticle
+20 momentum4D
+=
+DConstructor. Sets the beam particles 4-momentum. 
+=
+CTBeam
+109 TBeam
+O#c4
+Pb
+109 TBeam&
+Sconst
+=
+DCopy constructor. 
+=
+gparticle_
+20 momentum4D
+O#v2
+D
+=
+gemmitance_
+1 float
+O#v3
+D
+=
+gbeamSpot_
+152 planeShape
+O#v4
+D
+=
+F~TBeam
+-1 ~TBeam
+O#f2
+D
+DDestructor
+=
+FgetParticle
+20 momentum4D
+O#f3
+Lconst
+DReturns the beam particles 4-momentum. 
+=
+FgetParticler
+20 momentum4D&
+O#f4
+DReturns a reference to the beam particles 4-momentum. 
+=
+FsetParticle
+7 void
+O#f5
+Pp
+20 momentum4D&
+Sconst
+=
+DSet the beam particles 4-momentum. 
+=
+FgetSpot
+152 planeShape
+O#f6
+Lconst
+DReturns the planar shape that defines the interaction area of the beam with another beam or target material. 
+=
+FgetSpotr
+152 planeShape&
+O#f7
+DReturns a reference to the beam spot. 
+=
+FsetSpot
+7 void
+O#f8
+PbeamSpot
+152 planeShape&
+Sconst
+=
+DSets the planar shape defining the beam spot in the target or the interaction area of two beams. 
+=
+FgetEmmitance
+1 float
+O#f9
+Lconst
+DReturns a reference to the emmitance parameter. 
+=
+FgetEmmitance
+1 float&
+O#f10
+D
+=
+FsetEmmitance
+7 void
+O#f11
+Pemm
+1 float
+=
+DSets the emmitance parameter. 
+=
+Foperator=
+7 void
+O#f12
+Pb
+109 TBeam&
+Sconst
+=
+DCopy operator. 
+=
+DThis class is describing a particle beam made of particles with a definite 4-momentum. It has am emmitance parameter and a planar shape that describes the beam spot on the target. 
+S0 1 TObject
+root.cern.ch/root/html/TObject.html
+TObject
+=

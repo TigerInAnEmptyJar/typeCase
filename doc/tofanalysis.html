@@ -1,0 +1,592 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class tofAnalysis</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class tofAnalysis in "tofAnalysis_t.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qobject.html">QObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">tofAnalysis</A>(<vtype>int</vtype> max = 100, <vtype>int</vtype> maxDets = 100, <vtype>int</vtype> NThreads = 1) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual const <A HREF="#f9"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f10"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f13"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f14"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f15"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI><A HREF="#f16">~tofAnalysis</A>() 
+<LI><A HREF="#f17"><vtype>bool</vtype> process</A>() 
+<LI><A HREF="#f18"><vtype>void</vtype> initStep</A>(const <vtype>vector&lt;algorithm_parameter&gt;&</vtype> p, <vtype>vector&lt;beamTime_parameter&gt;&</vtype> beamParam, <vtype>vector&lt;run_parameter&gt;&</vtype> runParam, <vtype>vector&lt;detector_parameter&gt;&</vtype> dets, <vtype>vector&lt;material_parameter&gt;&</vtype> mats, <A HREF="reactionparameter.html">reaction_parameter</A> col) 
+<LI><A HREF="#f19"><vtype>bool</vtype> step</A>(<vtype>int</vtype> num = 1) 
+<LI><A HREF="#f20"><vtype>void</vtype> endStep</A>() 
+<LI><A HREF="#f21"><vtype>void</vtype> initAlgorithms</A>(const <vtype>vector&lt;algorithm_parameter&gt;&</vtype> p, const <A HREF="runparameter.html">run_parameter&</A> runParam) 
+<LI><A HREF="#f22"><vtype>void</vtype> killAlgorithms</A>() 
+<LI><A HREF="#f23"><vtype>void</vtype> initData</A>() 
+<LI><A HREF="#f24"><vtype>void</vtype> killData</A>() 
+<LI><A HREF="#f26"><vtype>void</vtype> defineMaterials</A>(const <vtype>string&</vtype> fileName, const <vtype>string&</vtype> fileName2) 
+<LI><A HREF="#f27"><vtype>void</vtype> defineMaterials</A>(<vtype>vector&lt;material_parameter&gt;&</vtype> mats, <vtype>vector&lt;detector_parameter&gt;&</vtype> dets) 
+<LI><A HREF="#f28"><vtype>void</vtype> defineDetectors</A>(const <vtype>string&</vtype> fileName) 
+<LI><A HREF="#f29"><vtype>void</vtype> defineDetectors</A>(<vtype>vector&lt;detector_parameter&gt;&</vtype> dets) 
+<LI><A HREF="#f30"><vtype>void</vtype> defineReaction</A>(<A HREF="reactionparameter.html">reaction_parameter</A> col) 
+<LI><A HREF="#f31"><vtype>void</vtype> createSetup</A>(<vtype>vector&lt;detector_parameter&gt;&</vtype> dets, <vtype>vector&lt;material_parameter&gt;&</vtype> mats, <A HREF="reactionparameter.html">reaction_parameter</A> col) 
+<LI><A HREF="#f32"><vtype>void</vtype> createSetup</A>(const <vtype>string&</vtype> setupFileName, const <vtype>string&</vtype> materialFileName) 
+<LI><A HREF="#f33"><vtype>void</vtype> killSetup</A>() 
+<LI><A HREF="#f34"><vtype>void*</vtype> thread_run</A>(<vtype>void*</vtype> ptr) 
+<LI><A HREF="#f35"><vtype>vector&lt;vector&lt;string&gt; &gt;</vtype> getHistogramNames</A>() 
+<LI><A HREF="http://root.cern.ch/html524/src/TH1.html">TH1*</A> <A HREF="#f36">getHisto</A>(const <vtype>string&</vtype> name) 
+<LI><A HREF="#f37"><vtype>vector&lt;vector&lt;string&gt; &gt;</vtype> getTreeNames</A>() 
+<LI><A HREF="http://root.cern.ch/html524/src/TTree.html">TTree*</A> <A HREF="#f38">getTree</A>(const <vtype>string&</vtype> name) 
+<LI><A HREF="#f47"><vtype>int</vtype> stopAnalysis</A>() 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f11">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f12">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f25">getVShape</A>(<A HREF="shapeparameter.html">shape_parameter&</A> sh) 
+<LI>static <A HREF="#f39"><vtype>vector&lt;string&gt;</vtype> getVariables</A>() 
+<LI>static <A HREF="#f40"><vtype>vector&lt;string&gt;</vtype> getTheTypes</A>() 
+<LI>static <A HREF="#f41"><vtype>vector&lt;int&gt;</vtype> getTheVID</A>() 
+<LI>static <A HREF="#f42"><vtype>int</vtype> getID</A>() 
+<LI>static <A HREF="#f43"><vtype>void</vtype> newID</A>() 
+<LI>static <A HREF="#f44"><vtype>void</vtype> init</A>() 
+<LI>static <A HREF="algorithmparameter.html">algorithm_parameter</A> <A HREF="#f45">getAlgorithmParameter</A>(<vtype>int</vtype> ID) 
+<LI>static <A HREF="#f46"><vtype>int</vtype> getAlgorithm</A>(<A HREF="aalgorithm.html">AAlgorithm***</A> out, <vtype>int&</vtype> executeUpTo, const <A HREF="algorithmparameter.html">algorithm_parameter&</A> param, const <A HREF="runparameter.html">run_parameter&</A> firstRun, <A HREF="tevent.html">TEvent&</A> event, <A HREF="tsetup.html">TSetup&</A> setup, <vtype>int**</vtype> numberOfHits, <vtype>int*</vtype> numberOfTracks, <vtype>int**</vtype> numberOfPixels, <vtype>int**</vtype> numberOfClusters, <vtype>int**</vtype> numberOfHitClusters, <A HREF="trawhit.html">TRawHit***</A> raws, <A HREF="tcalibhit.html">TCalibHit***</A> calibratedHits, <A HREF="thitcluster.html">THitCluster***</A> hitClusters, <A HREF="ttrack.html">TTrack**</A> tracks, <A HREF="tpixel.html">TPixel***</A> pixels, <A HREF="tcluster.html">TCluster***</A> clusters, <A HREF="tmaterial.html">TMaterial**</A> materials, <A HREF="tdetector.html">TDetector**</A> detectors, <vtype>bool&</vtype> readValid, <vtype>int&</vtype> readInID, <A HREF="http://doc.trolltech.com/4.4/qobject.html">QObject*</A> stearIt, <vtype>bool&</vtype> eventRequesting) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI><A HREF="#l2"><vtype>void</vtype> addRun</A>(<A HREF="runparameter.html">run_parameter&</A> rp) 
+<LI><A HREF="#l3"><vtype>void</vtype> removeRun</A>(<A HREF="runparameter.html">run_parameter&</A> rp) 
+<LI><A HREF="#l4"><vtype>void</vtype> addRun</A>(<A HREF="runparameter.html">run_parameter&</A> rp) 
+<LI><A HREF="#l5"><vtype>void</vtype> removeRun</A>(<A HREF="runparameter.html">run_parameter&</A> rp) 
+<LI><A HREF="#l6"><vtype>void</vtype> doRequestEvent</A>(<vtype>int</vtype> eventNumber, <vtype>int</vtype> runNumber) 
+<LI><A HREF="#l7"><vtype>void</vtype> doRequestNextEvent</A>() 
+<LI><A HREF="#l8"><vtype>void</vtype> showNewRun</A>(<A HREF="runparameter.html">run_parameter&</A> run) 
+</UL>
+<DT>Signals
+<DD>new public<ul>
+<LI><A HREF="#s2"><vtype>void</vtype> newRun</A>(<A HREF="runparameter.html">run_parameter&</A> r, <A HREF="beamtimeparameter.html">beamTime_parameter&</A> b) 
+<LI><A HREF="#s3"><vtype>void</vtype> newEvent</A>(<vtype>int</vtype> nrEvent) 
+<LI><A HREF="#s4"><vtype>void</vtype> changeEvent</A>(<A HREF="tmp.html">TEvent*</A> ev) 
+<LI><A HREF="#s5"><vtype>void</vtype> algorithmInit</A>(<vtype>int</vtype> algoID) 
+<LI><A HREF="#s6"><vtype>void</vtype> algorithmInited</A>(<vtype>int</vtype> algoID) 
+<LI><A HREF="#s7"><vtype>void</vtype> analysisFinished</A>(<vtype>int</vtype> numEvents) 
+<LI><A HREF="#s8"><vtype>void</vtype> initStateChanged</A>(const <vtype>char*</vtype> msg) 
+<LI><A HREF="#s9"><vtype>void</vtype> newRun</A>(<A HREF="runparameter.html">run_parameter&</A> r, <A HREF="beamtimeparameter.html">beamTime_parameter&</A> b) 
+<LI><A HREF="#s10"><vtype>void</vtype> newEvent</A>(<vtype>int</vtype> nrEvent) 
+<LI><A HREF="#s11"><vtype>void</vtype> changeEvent</A>(<A HREF="tevent.html">TEvent*</A> ev) 
+<LI><A HREF="#s12"><vtype>void</vtype> algorithmInit</A>(<vtype>int</vtype> algoID) 
+<LI><A HREF="#s13"><vtype>void</vtype> algorithmInited</A>(<vtype>int</vtype> algoID) 
+<LI><A HREF="#s14"><vtype>void</vtype> analysisFinished</A>(<vtype>int</vtype> numEvents) 
+<LI><A HREF="#s15"><vtype>void</vtype> initStateChanged</A>(const <vtype>char*</vtype> msg) 
+<LI><A HREF="#s16"><vtype>void</vtype> finishStateChanged</A>(const <vtype>char*</vtype> msg) 
+<LI><A HREF="#s17"><vtype>void</vtype> requestEvent</A>(<vtype>int</vtype> eventnumber, <vtype>int</vtype> runnumber) 
+<LI><A HREF="#s18"><vtype>void</vtype> requestNextEvent</A>() 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">tofAnalysis::tofAnalysis</A>(<vtype>int</vtype> max = 100, <vtype>int</vtype> maxDets = 100, <vtype>int</vtype> NThreads = 1) 
+<BR/><deff>
+Constructor. Sets the maximum number of hits, pixels, clusters and tracks (per detector or ID) to <var>max</var> (default = 100) and the maximum number of IDs or detectors to <var>maxDet</var> (default = 100).
+The number of parallel processes is set to <var>NThreads</var>. Don't set it to a number larger than the number of processors in your machine. It won't break, but there will only be a speed decrease.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> tofAnalysis::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> tofAnalysis::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">tofAnalysis::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">tofAnalysis::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> tofAnalysis::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> tofAnalysis::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> tofAnalysis::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>char*</vtype> tofAnalysis::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>bool</vtype> tofAnalysis::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f11">tofAnalysis::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f12">tofAnalysis::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>bool</vtype> tofAnalysis::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>QVariant</vtype> tofAnalysis::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>QMetaObject*</vtype> tofAnalysis::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16">tofAnalysis::~tofAnalysis</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>bool</vtype> tofAnalysis::process</A>() 
+<BR/><deff>
+Does analysis until all input is read.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> tofAnalysis::initStep</A>(const <vtype>vector&lt;algorithm_parameter&gt;&</vtype> p, <vtype>vector&lt;beamTime_parameter&gt;&</vtype> beamParam, <vtype>vector&lt;run_parameter&gt;&</vtype> runParam, <vtype>vector&lt;detector_parameter&gt;&</vtype> dets, <vtype>vector&lt;material_parameter&gt;&</vtype> mats, <A HREF="reactionparameter.html">reaction_parameter</A> col) 
+<BR/><deff>
+Initializes the complete analysis. The setup is defined with <var>col</var> describing the reaction properties, <var>dets</var> the detectors, <var>mats</var> the materials.
+The algorithms are initialized (see <a href="#f14">initAlgorithms()</a>. and the <var>beamParam</var> and <var>runParam</var> are initializing the data and calibration for read in.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>bool</vtype> tofAnalysis::step</A>(<vtype>int</vtype> num = 1) 
+<BR/><deff>
+Do <var>num</var> events in analysis. Stops if no data is left to read.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> tofAnalysis::endStep</A>() 
+<BR/><deff>
+Kills all data, algorithms and such. Done before finally leaving the analysis.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>void</vtype> tofAnalysis::initAlgorithms</A>(const <vtype>vector&lt;algorithm_parameter&gt;&</vtype> p, const <A HREF="runparameter.html">run_parameter&</A> runParam) 
+<BR/><deff>
+Initializes the algorithms used in the analysis. In principle it is a giant switch-command taking the ID of the parameter <var>p</var> for all of the algorithms.
+Here the algorithms-constructors are called, the data structures are passed.
+At the end, the <a href="#s2">newRun</a> signal is emitted.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>void</vtype> tofAnalysis::killAlgorithms</A>() 
+<BR/><deff>
+Deletes the algorithms used in the analysis. Here the destructor is called. In many an algorithm the write-to-file is done here!
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>void</vtype> tofAnalysis::initData</A>() 
+<BR/><deff>
+Initializes the Data structures for analysis.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>void</vtype> tofAnalysis::killData</A>() 
+<BR/><deff>
+Deletes the Data-structures for the analysis.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f25">tofAnalysis::getVShape</A>(<A HREF="shapeparameter.html">shape_parameter&</A> sh) 
+<BR/><deff>
+Static method. Takes a shape_parameter and converts it into a volumeShape of the appropriate type. Has to be modified if new shapes are defined.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f26"><vtype>void</vtype> tofAnalysis::defineMaterials</A>(const <vtype>string&</vtype> fileName, const <vtype>string&</vtype> fileName2) 
+<BR/><deff>
+Reads the material parameters from file <var>fileName2</var> and creates the materials as described. It also reads the setupdescription from <var>fileName</var> to assign the correct materials to the detectors.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f27"><vtype>void</vtype> tofAnalysis::defineMaterials</A>(<vtype>vector&lt;material_parameter&gt;&</vtype> mats, <vtype>vector&lt;detector_parameter&gt;&</vtype> dets) 
+<BR/><deff>
+Defines the materials according to the material describtions <var>mats</var> and assigns them to the detectors.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f28"><vtype>void</vtype> tofAnalysis::defineDetectors</A>(const <vtype>string&</vtype> fileName) 
+<BR/><deff>
+Reads the detector parameters from file <var>fileName</var> and creates the detectors according to the description.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f29"><vtype>void</vtype> tofAnalysis::defineDetectors</A>(<vtype>vector&lt;detector_parameter&gt;&</vtype> dets) 
+<BR/><deff>
+Defines the detectors as described by <var>dets</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f30"><vtype>void</vtype> tofAnalysis::defineReaction</A>(<A HREF="reactionparameter.html">reaction_parameter</A> col) 
+<BR/><deff>
+Defines the reaction properties according to the reaction parameter <var>col</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f31"><vtype>void</vtype> tofAnalysis::createSetup</A>(<vtype>vector&lt;detector_parameter&gt;&</vtype> dets, <vtype>vector&lt;material_parameter&gt;&</vtype> mats, <A HREF="reactionparameter.html">reaction_parameter</A> col) 
+<BR/><deff>
+Creates a setup out of the detectors parameterized by <var>dets</var>, the materials by <var>mats</var> and the reaction properties <var>col</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f32"><vtype>void</vtype> tofAnalysis::createSetup</A>(const <vtype>string&</vtype> setupFileName, const <vtype>string&</vtype> materialFileName) 
+<BR/><deff>
+Creates a setup by reading a setup-file and a material-file.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f33"><vtype>void</vtype> tofAnalysis::killSetup</A>() 
+<BR/><deff>
+Destroys the detector setup. All shapes, materials, and detectors are deleted.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f34"><vtype>void*</vtype> tofAnalysis::thread_run</A>(<vtype>void*</vtype> ptr) 
+<BR/><deff>
+Runs a thread. <font color="red">Do not call. Will be called from inside the class. Would have been private, but that was not possible out of technical reasons</font>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f35"><vtype>vector&lt;vector&lt;string&gt; &gt;</vtype> tofAnalysis::getHistogramNames</A>() 
+<BR/><deff>
+Returns the histogram names of the histograms that have been defined by the algorithms in the analysis. Note that the first element in the vector-elements are the algorithm name.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://root.cern.ch/html524/src/TH1.html">TH1*</A> <A NAME="f36">tofAnalysis::getHisto</A>(const <vtype>string&</vtype> name) 
+<BR/><deff>
+Returns a pointer to the histogram of name <var>name</var> defined in one of the algorithms. Returns NULL if no such histogram has been defined.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f37"><vtype>vector&lt;vector&lt;string&gt; &gt;</vtype> tofAnalysis::getTreeNames</A>() 
+<BR/><deff>
+Returns the names of the TTree-variables that are defined in the algorithms of the analysis. The first element of each vector-element is the algorithm name.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://root.cern.ch/html524/src/TTree.html">TTree*</A> <A NAME="f38">tofAnalysis::getTree</A>(const <vtype>string&</vtype> name) 
+<BR/><deff>
+Returns the TTree-variable of name <var>name</var>, that was defined by one of the algorithms. Returns NULL if no such tree has been declared.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f39"><vtype>vector&lt;string&gt;</vtype> tofAnalysis::getVariables</A>() 
+<BR/><deff>
+Static method. Returns a vector of strings. Each three following elements define a variable. First is the variable name, second its type and the third one defines the binding.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f40"><vtype>vector&lt;string&gt;</vtype> tofAnalysis::getTheTypes</A>() 
+<BR/><deff>
+obsolete. Static method for retrieving the types of the variables the class defines for the analysis.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f41"><vtype>vector&lt;int&gt;</vtype> tofAnalysis::getTheVID</A>() 
+<BR/><deff>
+obsolete. Static method to retrieve the binding of the variables defined in the class for analysis purpurses.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f42"><vtype>int</vtype> tofAnalysis::getID</A>() 
+<BR/><deff>
+obsolete. Static method. Returns the currently new ID for a new algorithm.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f43"><vtype>void</vtype> tofAnalysis::newID</A>() 
+<BR/><deff>
+obsolete. Static method. Generates a possible new ID for a new algorithm.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f44"><vtype>void</vtype> tofAnalysis::init</A>() 
+<BR/><deff>
+Static method to init the IDs. obsolete!
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="algorithmparameter.html">algorithm_parameter</A> <A NAME="f45">tofAnalysis::getAlgorithmParameter</A>(<vtype>int</vtype> ID) 
+<BR/><deff>
+Depending on the ID, the result of the <a href="aalgorithm.html#f9">static getDescription()</a> of the corresponding installed algorithm is returned.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f46"><vtype>int</vtype> tofAnalysis::getAlgorithm</A>(<A HREF="aalgorithm.html">AAlgorithm***</A> out, <vtype>int&</vtype> executeUpTo, const <A HREF="algorithmparameter.html">algorithm_parameter&</A> param, const <A HREF="runparameter.html">run_parameter&</A> firstRun, <A HREF="tevent.html">TEvent&</A> event, <A HREF="tsetup.html">TSetup&</A> setup, <vtype>int**</vtype> numberOfHits, <vtype>int*</vtype> numberOfTracks, <vtype>int**</vtype> numberOfPixels, <vtype>int**</vtype> numberOfClusters, <vtype>int**</vtype> numberOfHitClusters, <A HREF="trawhit.html">TRawHit***</A> raws, <A HREF="tcalibhit.html">TCalibHit***</A> calibratedHits, <A HREF="thitcluster.html">THitCluster***</A> hitClusters, <A HREF="ttrack.html">TTrack**</A> tracks, <A HREF="tpixel.html">TPixel***</A> pixels, <A HREF="tcluster.html">TCluster***</A> clusters, <A HREF="tmaterial.html">TMaterial**</A> materials, <A HREF="tdetector.html">TDetector**</A> detectors, <vtype>bool&</vtype> readValid, <vtype>int&</vtype> readInID, <A HREF="http://doc.trolltech.com/4.4/qobject.html">QObject*</A> stearIt, <vtype>bool&</vtype> eventRequesting) 
+<BR/><deff>
+Static method. This is the main Algorithm defining method. It contains the huge switch-call to decide on the ID of the parameter which algorithm to initialize. It returns the total number of algorithms allocated.
+In <var>out</var> these algorithms are saved. Delete them after use.
+<var>executeUpTo</var> gives the number of algorithms that should be called in the event-loop, the rest can be such things as fitting algorithms. Apart from the data-structures, there are <var>readValid</var> that is given to reading-algorithms that will switch it to false if the number of remaining events for the current file is zero, <var>readInID</var> which is obsolete but kept for backward comptability, <var>stearIt</var> the class, that provides the essential signals for e.g. new runs, <var>eventRequesting</var> that provides a switch, that of several different reading algorithms one (not necessarily the first one) can act as an event-input-list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f47"><vtype>int</vtype> tofAnalysis::stopAnalysis</A>() 
+<BR/><deff>
+Stops the analysis. The number of processed events is returned. 
+Actually, the analysis will stop, when the last algorithm for this event has finished.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> tofAnalysis::addRun</A>(<A HREF="runparameter.html">run_parameter&</A> rp) 
+<BR/><deff>
+Adds a run to the list of runs to process.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> tofAnalysis::removeRun</A>(<A HREF="runparameter.html">run_parameter&</A> rp) 
+<BR/><deff>
+Remove run <var>rp</var> from the list of runs to process. Does nothing if <var>rp</var> is not in the list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> tofAnalysis::addRun</A>(<A HREF="runparameter.html">run_parameter&</A> rp) 
+<BR/><deff>
+Adds a run to the list of runs to process.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> tofAnalysis::removeRun</A>(<A HREF="runparameter.html">run_parameter&</A> rp) 
+<BR/><deff>
+Remove run <var>rp</var> from the list of runs to process. Does nothing if <var>rp</var> is not in the list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> tofAnalysis::doRequestEvent</A>(<vtype>int</vtype> eventNumber, <vtype>int</vtype> runNumber) 
+<BR/><deff>
+Emit the requestEvent-Signal, that can be caught by an input algorithm.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> tofAnalysis::doRequestNextEvent</A>() 
+<BR/><deff>
+Emit the requestNextEvent-Signal, that can be caught by an input algorithm.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> tofAnalysis::showNewRun</A>(<A HREF="runparameter.html">run_parameter&</A> run) 
+<BR/><deff>
+Debugging output. Writes Run information to analysisLog.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s2"><vtype>void</vtype> tofAnalysis::newRun</A>(<A HREF="runparameter.html">run_parameter&</A> r, <A HREF="beamtimeparameter.html">beamTime_parameter&</A> b) 
+<BR/><deff>
+This signal is emitted, whenever a run has been read and a new one is due. It passes the new run <var>r</var> and its beam-time <var>b</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s3"><vtype>void</vtype> tofAnalysis::newEvent</A>(<vtype>int</vtype> nrEvent) 
+<BR/><deff>
+This signal is emitted, when an event has been processed. If you chose to analyse a single event it will be emitted after this, but if the number of events is large, it is only emitted all "showFrequency" events.<br>
+This is 10000 if no more than 4 algorithms have been defined, 1000 else. Some algorithms also modify this value.
+For single event mode, the event-number is passed, the number of processed events else.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s4"><vtype>void</vtype> tofAnalysis::changeEvent</A>(<A HREF="tmp.html">TEvent*</A> ev) 
+<BR/><deff>
+This signal is emitted, when an event has been processed. If you chose to analyse a single event it will be emitted after this, but if the number of events is large, it is only emitted all "showFrequency" events.<br>
+This is 10000 if no more than 4 algorithms have been defined, 1000 else. Some algorithms also modify this value.
+<br>The complete event-structure is passed when called. Do not modify it. Others do perhaps also want to use it.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s5"><vtype>void</vtype> tofAnalysis::algorithmInit</A>(<vtype>int</vtype> algoID) 
+<BR/><deff>
+Signal that is emitted, when an algorithm is going to be initialized. <var>algoID</var> is the position of the algorithm in the array.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s6"><vtype>void</vtype> tofAnalysis::algorithmInited</A>(<vtype>int</vtype> algoID) 
+<BR/><deff>
+Signal that is emitted, when an algorithm has been initialized. <var>algoID</var> is the position of the algorithm in the array.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s7"><vtype>void</vtype> tofAnalysis::analysisFinished</A>(<vtype>int</vtype> numEvents) 
+<BR/><deff>
+Signal that is emitted, when the analysis finished (because of reached maximum of events to process or read in is no longer valid). The parameter <var>numEvents</var> will hold the number of events that have been processed.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s8"><vtype>void</vtype> tofAnalysis::initStateChanged</A>(const <vtype>char*</vtype> msg) 
+<BR/><deff>
+This signal is emitted, whenever a new algorithm is going to be initialized, the data-structures, setup etc are being created.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s9"><vtype>void</vtype> tofAnalysis::newRun</A>(<A HREF="runparameter.html">run_parameter&</A> r, <A HREF="beamtimeparameter.html">beamTime_parameter&</A> b) 
+<BR/><deff>
+This signal is emitted, whenever a run has been read and a new one is due. It passes the new run <var>r</var> and its beam-time <var>b</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s10"><vtype>void</vtype> tofAnalysis::newEvent</A>(<vtype>int</vtype> nrEvent) 
+<BR/><deff>
+This signal is emitted, when an event has been processed. If you chose to analyse a single event it will be emitted after this, but if the number of events is large, it is only emitted all "showFrequency" events.<br>
+This is 10000 if no more than 4 algorithms have been defined, 1000 else. Some algorithms also modify this value.
+For single event mode, the event-number is passed, the number of processed events else.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s11"><vtype>void</vtype> tofAnalysis::changeEvent</A>(<A HREF="tevent.html">TEvent*</A> ev) 
+<BR/><deff>
+This signal is emitted, when an event has been processed. If you chose to analyse a single event it will be emitted after this, but if the number of events is large, it is only emitted all "showFrequency" events.<br>
+This is 10000 if no more than 4 algorithms have been defined, 1000 else. Some algorithms also modify this value.
+<br>The complete event-structure is passed when called. Do not modify it. Others do perhaps also want to use it.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s12"><vtype>void</vtype> tofAnalysis::algorithmInit</A>(<vtype>int</vtype> algoID) 
+<BR/><deff>
+Signal that is emitted, when an algorithm is going to be initialized. <var>algoID</var> is the position of the algorithm in the array.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s13"><vtype>void</vtype> tofAnalysis::algorithmInited</A>(<vtype>int</vtype> algoID) 
+<BR/><deff>
+Signal that is emitted, when an algorithm has been initialized. <var>algoID</var> is the position of the algorithm in the array.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s14"><vtype>void</vtype> tofAnalysis::analysisFinished</A>(<vtype>int</vtype> numEvents) 
+<BR/><deff>
+Signal that is emitted, when the analysis finished (because of reached maximum of events to process or read in is no longer valid). The parameter <var>numEvents</var> will hold the number of events that have been processed.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s15"><vtype>void</vtype> tofAnalysis::initStateChanged</A>(const <vtype>char*</vtype> msg) 
+<BR/><deff>
+This signal is emitted, whenever a new algorithm is going to be initialized, the data-structures, setup etc are being created.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s16"><vtype>void</vtype> tofAnalysis::finishStateChanged</A>(const <vtype>char*</vtype> msg) 
+<BR/><deff>
+Signal emitted when a part of the finalisation is finished. Which one is given in <var>msg</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s17"><vtype>void</vtype> tofAnalysis::requestEvent</A>(<vtype>int</vtype> eventnumber, <vtype>int</vtype> runnumber) 
+<BR/><deff>
+Requests a specific event. Should be cought by an input algorithm.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s18"><vtype>void</vtype> tofAnalysis::requestNextEvent</A>() 
+<BR/><deff>
+Requests the next Event in queue. Should be cought by an input algorithm.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

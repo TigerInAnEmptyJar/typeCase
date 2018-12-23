@@ -1,0 +1,46 @@
+body{
+background-color: rgb(255,255,200);
+color:rgb(0,0,255);
+font-family:Tahoma, Geneva, sans-serif;
+}
+a:link {color:rgb(0,0,0);}      /* unvisited link */
+a:visited {color:rgb(0,0,0);}  /* visited link */
+p{
+color: rgb(0,0,255);
+}
+deff{
+color: green;
+}
+vtype{
+color: gray;
+}
+ttop{
+font-family: times;
+}
+hr{
+align:center;
+size:5;
+}
+div.img
+{
+  margin: 2px;
+  border: 1px solid #0000ff;
+  height: auto;
+  width: auto;
+  float: left;
+  text-align: center;
+}	
+div.img img
+{
+  display: inline;
+  margin: 3px;
+  border: 1px solid #ffffff;
+}
+div.img a:hover img {border: 1px solid #0000ff;}
+div.desc
+{
+  text-align: center;
+  font-weight: normal;
+  width: 220px;
+  margin: 2px;
+}

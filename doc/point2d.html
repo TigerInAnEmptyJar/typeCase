@@ -1,0 +1,273 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class point2D</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class point2D in "geometry.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+Point in 2 dimensional space.
+<DL>
+<DT>Superclass
+<DD><A HREF="point.html">point</A>
+<DT>Constructor
+<LI><A HREF="#c2">point2D</A>() 
+<LI><A HREF="#c3">point2D</A>(const <A HREF="point.html">point&</A> p) 
+<LI><A HREF="#c4">point2D</A>(const <A HREF="point2d.html">point2D&</A> p) 
+<LI><A HREF="#c5">point2D</A>(<vtype>double</vtype> x, <vtype>double</vtype> y) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual <A HREF="#f2"><vtype>void</vtype> setValues</A>(<vtype>double</vtype> x, <vtype>double</vtype> y) 
+<LI>virtual <A HREF="#f4"><vtype>double</vtype> X</A>() const
+<LI>virtual <A HREF="#f5"><vtype>double</vtype> Y</A>() const
+<LI>virtual <A HREF="#f6"><vtype>double</vtype> R</A>() const
+<LI>virtual <A HREF="#f7"><vtype>double</vtype> Phi</A>() const
+<LI>virtual <A HREF="#f8"><vtype>double</vtype> x</A>() const
+<LI>virtual <A HREF="#f9"><vtype>double</vtype> y</A>() const
+<LI>virtual <A HREF="#f10"><vtype>double</vtype> r</A>() const
+<LI>virtual <A HREF="#f11"><vtype>double</vtype> phi</A>() const
+<LI>virtual <A HREF="#f12"><vtype>int</vtype> isCartesic</A>() const
+<LI>virtual <A HREF="#f13"><vtype>void</vtype> toggleRep</A>() 
+<LI><A HREF="#f18"><vtype>void</vtype> operator=</A>(const <A HREF="point2d.html">point2D&</A> p) 
+<LI><A HREF="vector2d.html">vector2D</A> <A HREF="#f19">operator-</A>(const <A HREF="point2d.html">point2D&</A> q) const
+<LI><A HREF="point2d.html">point2D</A> <A HREF="#f20">operator-</A>(const <A HREF="vector2d.html">vector2D&</A> v) const
+<LI><A HREF="point2d.html">point2D</A> <A HREF="#f21">operator+</A>(const <A HREF="vector2d.html">vector2D&</A> v) const
+<LI><A HREF="#f23"><vtype>int</vtype> operator==</A>(const <A HREF="point2d.html">point2D&</A> p) const
+<LI>virtual <A HREF="#f24"><vtype>string</vtype> toString</A>(<vtype>int</vtype> pt = -1) const
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="#f3"><vtype>void</vtype> setValue</A>(<vtype>int</vtype> pos, <vtype>double</vtype> valueIn) 
+<LI>virtual <A HREF="#f16"><vtype>double</vtype> getValue</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="#f15"><vtype>int</vtype> getDimension</A>() const
+<LI>virtual <A HREF="#f14"><vtype>geomState</vtype> getState</A>() const
+<LI><A HREF="#f17"><vtype>void</vtype> operator=</A>(const <A HREF="point.html">point&</A> p) 
+<LI>virtual <A HREF="#f22"><vtype>double</vtype> operator[]</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="#f14"><vtype>geomState</vtype> getState</A>() const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="point.html#f3"><vtype>void</vtype> point::reDimension</A>(<vtype>int</vtype> newDim) 
+<LI><A HREF="point.html#f4"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> values[]) 
+<LI><A HREF="point.html#f5"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> f1 = 0, <vtype>double</vtype> f2 = 0, <vtype>double</vtype> f3 = 0, <vtype>double</vtype> f4 = 0, <vtype>double</vtype> f5 = 0, <vtype>double</vtype> f6 = 0, <vtype>double</vtype> f7 = 0, <vtype>double</vtype> f8 = 0, <vtype>double</vtype> f9 = 0, <vtype>double</vtype> f10 = 0, <vtype>double</vtype> f11 = 0, <vtype>double</vtype> f12 = 0, <vtype>double</vtype> f13 = 0, <vtype>double</vtype> f14 = 0, <vtype>double</vtype> f15 = 0, <vtype>double</vtype> f16 = 0, <vtype>double</vtype> f17 = 0, <vtype>double</vtype> f18 = 0, <vtype>double</vtype> f19 = 0, <vtype>double</vtype> f20 = 0) 
+<LI>virtual <A HREF="point.html#f7"><vtype>void</vtype> point::Zero</A>() 
+<LI><A HREF="vector.html">Vector</A> <A HREF="point.html#f12">point::operator-</A>(const <A HREF="point.html">point&</A> q) 
+<LI><A HREF="point.html">point</A> <A HREF="point.html#f13">point::operator-</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="point.html">point</A> <A HREF="point.html#f14">point::operator+</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="point.html#f15"><vtype>int</vtype> point::operator==</A>(const <A HREF="point.html">point&</A> p) 
+<LI>virtual <A HREF="point.html#f17"><vtype>string</vtype> point::toString</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+<LI>virtual <A HREF="geomobj.html#f8"><vtype>string</vtype> geomObject::toString</A>() const
+</UL>
+<DT>Protected Variables
+<DD><vtype>double</vtype> <A HREF="#v2">f_phi</A>
+<DD><vtype>double</vtype> <A HREF="#v3">f_r</A>
+<DD><vtype>double</vtype> <A HREF="#v4">value1</A>
+<DD><vtype>double</vtype> <A HREF="#v5">value2</A>
+<DT>Protected inherrited variables
+<DD><vtype>int</vtype> <A HREF="point.html#v2">point::dimension</A>
+<DD><vtype>int</vtype> <A HREF="point.html#v3">point::infinityPos</A>
+<DD><vtype>double</vtype> <A HREF="point.html#v4">point::v[20]</A>
+<DD><vtype>double*</vtype> <A HREF="point.html#v5">point::value</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">point2D::point2D</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">point2D::point2D</A>(const <A HREF="point.html">point&</A> p) 
+<BR/><deff>
+Copy constructor. Works only if the dimension of point <var>p</var> is 2.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">point2D::point2D</A>(const <A HREF="point2d.html">point2D&</A> p) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">point2D::point2D</A>(<vtype>double</vtype> x, <vtype>double</vtype> y) 
+<BR/><deff>
+Constructor. Defines a 2D-point with the cartesian coordinates <var>x</var> and <var>y</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">double f_phi</A>
+<BR/><deff>
+phi-coordinate.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">double f_r</A>
+<BR/><deff>
+r-coordinate: distance to origin.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">double value1</A>
+<BR/><deff>
+x-coordinate.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">double value2</A>
+<BR/><deff>
+y-coordinate.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>void</vtype> point2D::setValues</A>(<vtype>double</vtype> x, <vtype>double</vtype> y) 
+<BR/><deff>
+Sets the components in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>void</vtype> point2D::setValue</A>(<vtype>int</vtype> pos, <vtype>double</vtype> valueIn) 
+<BR/><deff>
+Setter sets the <var>pos<sup>th</sup></var> component in cartesic coordinates to <var>valueIn</var>
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>double</vtype> point2D::X</A>() const
+<BR/><deff>
+Returns the x-component in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>double</vtype> point2D::Y</A>() const
+<BR/><deff>
+Returns the y-component in cartesic coordinates. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>double</vtype> point2D::R</A>() const
+<BR/><deff>
+Returns the points distance to the origin.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>double</vtype> point2D::Phi</A>() const
+<BR/><deff>
+Returns the phi-component in polar coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>double</vtype> point2D::x</A>() const
+<BR/><deff>
+Returns the x-component in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>double</vtype> point2D::y</A>() const
+<BR/><deff>
+Returns the y-component in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>double</vtype> point2D::r</A>() const
+<BR/><deff>
+Returns the distance of the point to the origin.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>double</vtype> point2D::phi</A>() const
+<BR/><deff>
+Return the phi-component in polar coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>int</vtype> point2D::isCartesic</A>() const
+<BR/><deff>
+Returns true if the points representation is _cartesic_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> point2D::toggleRep</A>() 
+<BR/><deff>
+Switches the points representation fron _cartesic_ to _polar_, or vice versa.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>geomState</vtype> point2D::getState</A>() const
+<BR/><deff>
+Returns the state of the geometrical object. This can be _regular_, _undefined_, _infinite_ or _zero_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>int</vtype> point2D::getDimension</A>() const
+<BR/><deff>
+Returns the dimension of the point which is 2.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>double</vtype> point2D::getValue</A>(<vtype>int</vtype> pos) const
+<BR/><deff>
+Returns the <var>pos<sup>th</sup></var> component in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> point2D::operator=</A>(const <A HREF="point.html">point&</A> p) 
+<BR/><deff>
+Copy operator. Works only if <var>p</var> is two-dimensional.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> point2D::operator=</A>(const <A HREF="point2d.html">point2D&</A> p) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector2d.html">vector2D</A> <A NAME="f19">point2D::operator-</A>(const <A HREF="point2d.html">point2D&</A> q) const
+<BR/><deff>
+Subtraction operator. Returns the vector to come from point <var>q</var> to this point.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point2d.html">point2D</A> <A NAME="f20">point2D::operator-</A>(const <A HREF="vector2d.html">vector2D&</A> v) const
+<BR/><deff>
+Subtraction operator. Returns a point that is shifted by minus <var>v</var> from this point.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point2d.html">point2D</A> <A NAME="f21">point2D::operator+</A>(const <A HREF="vector2d.html">vector2D&</A> v) const
+<BR/><deff>
+Addition operator. Returns a point that is shifted by vector <var>v</var> from this point.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>double</vtype> point2D::operator[]</A>(<vtype>int</vtype> pos) const
+<BR/><deff>
+Access operator. Returns the <var>pos<sup>th</sup></var> component in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>int</vtype> point2D::operator==</A>(const <A HREF="point2d.html">point2D&</A> p) const
+<BR/><deff>
+Comparison operator. Returns true if this point and <var>p</var> refer to the same point.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>string</vtype> point2D::toString</A>(<vtype>int</vtype> pt = -1) const
+<BR/><deff>
+Returns a string representation of the point. Depending on <var>pt</var> the representation is eigther in cartesic coordinates (_cartesic_) or in polar coordinates (_polar_). if <var>pt</var> is -1, the points own representation is used.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

@@ -1,0 +1,31 @@
+TBase
+tbase.html
+/users/data12/pion/ehrhardt/tofPack2/container/include/TBase.h
+CTBase
+-1 TBase
+O#c2
+Pnme
+-1 string&
+Sconst
+=
+DConstructor. Sets the name of the type.
+=
+vfname
+-1 string
+O#v2
+DName of the type of the object.
+=
+F~TBase
+-1 ~TBase
+O#f2
+D
+DDestructor
+=
+Fname
+-1 string
+O#f3
+Lconst
+DReturns the name of the type.
+=
+DTBase was introduced to get rid of the root overhead but to maintain some basic features, like distinguishability of the different types while being able to store them in the same array.
+=

@@ -1,0 +1,380 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class BeamTimeDisplay</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class BeamTimeDisplay in "beamtimedisplay.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This widget displays the properties of a single <a href="beamtimeparameter.html">beamTime_parameter</a>. 
+
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget</A>
+<DT>Constructor
+<LI><A HREF="#c2">BeamTimeDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<LI><A HREF="#c3">BeamTimeDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual <A HREF="#f9"><vtype>bool</vtype> readOnly</A>() const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI>virtual <A HREF="#l2"><vtype>void</vtype> resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> resize</A>(const <vtype>QSize&</vtype> s) 
+<LI>virtual <A HREF="#l4"><vtype>void</vtype> resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<LI>virtual <A HREF="#l5"><vtype>void</vtype> setBeamTime</A>(<A HREF="beamtimeparameter.html">beamTime_parameter&</A> beamTime) 
+<LI>virtual <A HREF="#l6"><vtype>void</vtype> onBrowseClick</A>() 
+<LI>virtual <A HREF="#l7"><vtype>void</vtype> onCalibrationRemove</A>(<vtype>int</vtype> id) 
+<LI>virtual <A HREF="#l8"><vtype>void</vtype> onCalibrationChange</A>(<vtype>int</vtype> id) 
+<LI>virtual <A HREF="#l9"><vtype>void</vtype> onCalibrationRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistboxitem.html">QListBoxItem*</A> it, const <vtype>QPoint&</vtype> p) 
+<LI>virtual <A HREF="#l10"><vtype>void</vtype> onCalibrationRightClick</A>(const <vtype>QPoint&</vtype> p) 
+<LI>virtual <A HREF="#l11"><vtype>void</vtype> onCalibrationDo</A>(<vtype>QAction*</vtype> ac) 
+<LI>virtual <A HREF="#l12"><vtype>void</vtype> onDescriptionChange</A>() 
+<LI>virtual <A HREF="#l13"><vtype>void</vtype> onCalibrationAdd</A>() 
+<LI>virtual <A HREF="#l14"><vtype>void</vtype> setReadOnly</A>(<vtype>bool</vtype> value) 
+<LI>virtual <A HREF="#l15"><vtype>void</vtype> onPropertyChange</A>() 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Signals
+<DD>new public<ul>
+<LI><A HREF="#s2"><vtype>void</vtype> changed</A>() 
+</UL>
+<DT>Public Variables
+<DD><vtype>QLabel*</vtype> <A HREF="#v2">nameLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v3">monthLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v4">yearLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v5">setupLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v6">calibrationLabel</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v7">descrLabel</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v8">nameInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A HREF="#v9">monthInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A HREF="#v10">yearInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A HREF="#v11">setupInput</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qlistbox.html">QListBox*</A> <A HREF="#v12">calInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qlistwidget.html">QListWidget*</A> <A HREF="#v13">calInput</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit*</A> <A HREF="#v14">descrInput</A>
+<DD><A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A HREF="#v15">browseButton</A>
+<DT>Protected Variables
+<DD><A HREF="beamtimeparameter.html">beamTime_parameter*</A> <A HREF="#v16">sp</A>
+<DD><A HREF="beamtimeparameter.html">beamTime_parameter</A> <A HREF="#v17">copy</A>
+<DD><vtype>bool</vtype> <A HREF="#v18">ReadOnly</A>
+<DD><vtype>QGridLayout*</vtype> <A HREF="#v19">layout</A>
+<DD><vtype>QMenu*</vtype> <A HREF="#v20">tmpMenu</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">BeamTimeDisplay::BeamTimeDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt3-version, non-visibe in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">BeamTimeDisplay::BeamTimeDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<BR/><deff>
+Constructor. Qt4-version, non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">QLabel* nameLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">QLabel* monthLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">QLabel* yearLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">QLabel* setupLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v6">QLabel* calibrationLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v7">QLabel* descrLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v8">nameInput</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A NAME="#v9">monthInput</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A NAME="#v10">yearInput</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlineedit.html">QLineEdit*</A> <A NAME="#v11">setupInput</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qlistbox.html">QListBox*</A> <A NAME="#v12">calInput</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qlistwidget.html">QListWidget*</A> <A NAME="#v13">calInput</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit*</A> <A NAME="#v14">descrInput</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/3.3/qpushbutton.html">QPushButton*</A> <A NAME="#v15">browseButton</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="beamtimeparameter.html">beamTime_parameter*</A> <A NAME="#v16">sp</A>
+<BR/><deff>
+pointer to the current beam-time-parameter
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="beamtimeparameter.html">beamTime_parameter</A> <A NAME="#v17">copy</A>
+<BR/><deff>
+copy of the current beam-time-parameter
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v18">bool ReadOnly</A>
+<BR/><deff>
+read-only-property. in read-only-mode, modifications made in this widget won't be applied to the original variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v19">QGridLayout* layout</A>
+<BR/><deff>
+layout
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v20">QMenu* tmpMenu</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> BeamTimeDisplay::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> BeamTimeDisplay::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">BeamTimeDisplay::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">BeamTimeDisplay::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> BeamTimeDisplay::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> BeamTimeDisplay::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> BeamTimeDisplay::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>bool</vtype> BeamTimeDisplay::readOnly</A>() const
+<BR/><deff>
+Returns the read-only-property. If in read-only-mode, modifications made in the widget won't be applied to the original beam-time-variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> BeamTimeDisplay::resizeEvent</A>(<vtype>QResizeEvent*</vtype> e) 
+<BR/><deff>
+resize event. obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> BeamTimeDisplay::resize</A>(const <vtype>QSize&</vtype> s) 
+<BR/><deff>
+resize widget. obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> BeamTimeDisplay::resize</A>(<vtype>int</vtype> w, <vtype>int</vtype> h) 
+<BR/><deff>
+resize widget. obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> BeamTimeDisplay::setBeamTime</A>(<A HREF="beamtimeparameter.html">beamTime_parameter&</A> beamTime) 
+<BR/><deff>
+Sets the current beam-time-parameter. Take care, that the variable stays valid as long as the widget displays this beam-time. In read-only-mode, the original beam-time-variable won't be modified even if changes in the widget occur.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> BeamTimeDisplay::onBrowseClick</A>() 
+<BR/><deff>
+Bowses for a setup file.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> BeamTimeDisplay::onCalibrationRemove</A>(<vtype>int</vtype> id) 
+<BR/><deff>
+Removes calibration file of index <var>id</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> BeamTimeDisplay::onCalibrationChange</A>(<vtype>int</vtype> id) 
+<BR/><deff>
+Browses for a new calibration file for the file with index <var>id</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l9"><vtype>void</vtype> BeamTimeDisplay::onCalibrationRightClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistboxitem.html">QListBoxItem*</A> it, const <vtype>QPoint&</vtype> p) 
+<BR/><deff>
+Qt3-method, non-visible in Qt4-mode. Opens a popup-menu on the calibration files list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l10"><vtype>void</vtype> BeamTimeDisplay::onCalibrationRightClick</A>(const <vtype>QPoint&</vtype> p) 
+<BR/><deff>
+Qt4-method, non-visible in Qt3-mode. Opens a popup-menu on the calibration files list.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l11"><vtype>void</vtype> BeamTimeDisplay::onCalibrationDo</A>(<vtype>QAction*</vtype> ac) 
+<BR/><deff>
+Qt4-method, non-visible in Qt3-mode. This method is executed when an item of the popup-menu on the list of calibration files is activated. It calls functions corresponding to the item selected.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l12"><vtype>void</vtype> BeamTimeDisplay::onDescriptionChange</A>() 
+<BR/><deff>
+If not in read-only-mode, it copies the changed Description to the beam-time.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l13"><vtype>void</vtype> BeamTimeDisplay::onCalibrationAdd</A>() 
+<BR/><deff>
+Browses for a calibration file and adds it to the beam-times list of calibration files.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l14"><vtype>void</vtype> BeamTimeDisplay::setReadOnly</A>(<vtype>bool</vtype> value) 
+<BR/><deff>
+Sets the read-only-property. In read-only-mode, modifications made in the widget won't be applied to the original beal-time-variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l15"><vtype>void</vtype> BeamTimeDisplay::onPropertyChange</A>() 
+<BR/><deff>
+In read-only mode, in rereads the properties from the beam-time to the widget.
+Else it applies the changes to the original beam-time-variable.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l16"><vtype>void</vtype> BeamTimeDisplay::languageChange</A>() 
+<BR/><deff>
+Sets the label-texts.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="s2"><vtype>void</vtype> BeamTimeDisplay::changed</A>() 
+<BR/><deff>
+This signal is emitted, when not in read-only-mode, modifications in the widget are made and the beam-time-variable is modified.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

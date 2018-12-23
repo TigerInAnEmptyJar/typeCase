@@ -1,0 +1,267 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class ring</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class ring in "ring.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="volumeshape.html">volumeShape</A>
+<DT>Constructor
+<LI><A HREF="#c2">ring</A>(<A HREF="point3d.html">point3D</A> centerIn = point3D(0,0,0), <A HREF="vector3d.html">vector3D</A> normalIn = vector3D(0,0,1), <vtype>float</vtype> innerRadius = 0, <vtype>float</vtype> outerRadius = 100, <vtype>float</vtype> thicknessIn = 1) 
+<LI><A HREF="#c3">ring</A>(const <A HREF="volumeshape.html">volumeShape&</A> s) 
+<LI><A HREF="#c4">ring</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~ring</A>() 
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f3">getNormal</A>() const
+<LI>virtual <A HREF="#f4"><vtype>float</vtype> getInnerRadius</A>() const
+<LI>virtual <A HREF="#f5"><vtype>float</vtype> getOuterRadius</A>() const
+<LI>virtual <A HREF="#f6"><vtype>float</vtype> getThickness</A>() const
+<LI>virtual <A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#f21">description</A>() const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#f22">getDescription</A>() 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="#f17"><vtype>float</vtype> getFlightPathInShape</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f7">getClone</A>() 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="#f15">HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="#f10">Hitting</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="#f16">HitParams</A>(const <A HREF="planeshape.html">planeShape&</A> shape, <A HREF="point3d.html">point3D</A> origin) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f8">getNext</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f9">getEnvelope</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="#f18"><vtype>int</vtype> suspect</A>(const <A HREF="sline3d.html">sLine3D&</A> line, <vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="point3d.html">point3D</A> <A HREF="#f11">entrance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f12">distance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="sline3d.html">sLine3D</A> <A HREF="#f13">Normal</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="#f14"><vtype>bool</vtype> cut</A>(const <A HREF="fiber.html">fiber&</A> f) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="#f15">HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="#f19"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<LI>virtual <A HREF="#f20"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="volumeshape.html#f3"><vtype>float</vtype> volumeShape::getMaxDistance</A>() const
+<LI><A HREF="volumeshape.html#f4"><vtype>void</vtype> volumeShape::setMaxDistance</A>(<vtype>float</vtype> value) 
+<LI><A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="baseshape.html#f2">base_shape::getName</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#f3">base_shape::getCenter</A>() const
+<LI><A HREF="baseshape.html#f4"><vtype>void</vtype> base_shape::setCenter</A>(<A HREF="point3d.html">point3D</A> c) 
+<LI><A HREF="baseparameter.html#f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="baseparameter.html#f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="baseparameter.html#f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="baseparameter.html#f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<LI><A HREF="baseparameter.html#f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="baseparameter.html#f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<LI><A HREF="baseparameter.html#f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+<DT>Protected inherrited variables
+<DD><A HREF="vector3d.html">vector3D</A> <A HREF="volumeshape.html#v2">volumeShape::res</A>
+<DD><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#v2">base_shape::center</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">ring::ring</A>(<A HREF="point3d.html">point3D</A> centerIn = point3D(0,0,0), <A HREF="vector3d.html">vector3D</A> normalIn = vector3D(0,0,1), <vtype>float</vtype> innerRadius = 0, <vtype>float</vtype> outerRadius = 100, <vtype>float</vtype> thicknessIn = 1) 
+<BR/><deff>
+Constructor. Sets the center point, the normal vector to the front plane, the inner and outer radius and the thickness of the ring. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">ring::ring</A>(const <A HREF="volumeshape.html">volumeShape&</A> s) 
+<BR/><deff>
+Copy constructor. Works only if the shape is a ring. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">ring::ring</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<BR/><deff>
+Constructor. Creates a ring out of the values in the parameter.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> ring::~ring</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f3">ring::getNormal</A>() const
+<BR/><deff>
+Returns the normal vector to the front plane of the ring. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>float</vtype> ring::getInnerRadius</A>() const
+<BR/><deff>
+Returns the inner radius of the ring. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>float</vtype> ring::getOuterRadius</A>() const
+<BR/><deff>
+Returns the outer radius of the ring. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>float</vtype> ring::getThickness</A>() const
+<BR/><deff>
+Returns the thickness of the ring. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f7">ring::getClone</A>() 
+<BR/><deff>
+Creates a new instance of the same volume shape with the same properties. Take care, that you delete this shape correctly after use (potential memory leak).     
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f8">ring::getNext</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<BR/><deff>
+Returns a new volume shape, that is shifted, rotated, shrunk, enlarged, or else modified according to the parameter <var>stackType</var>, generating the <var>times<sup>th</sup></var> element in the stack.       
+Take care, that you delete this shape correctly after use (potential memory leak). <br>   
+<table>    
+<tr><th>type<th>description    
+<tr><td>1<td>circle stacking, the radii of the shapes become bigger, but not the radius difference.    
+<tr><td>2<td>line stacking, the shapes are aligned one after the other in negative normal direction.    
+</table>    
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f9">ring::getEnvelope</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<BR/><deff>
+Returns a volume shape, that will be the envelope of <var>times</var> shapes, generated with the getNext-method in stack mode <var>stackType</var>.      
+Take care, that you delete this shape correctly after use (potential memory leak).<br>  
+The following <var>stackType</var>s have been defined:  
+<table>  
+<tr><th>type<th>description  
+<tr><td>1<td>circle stacking, the envelope is again a ring with a <var>times</var> larger outer radius,  
+<tr><td>2<td>line stacking, the envelope is again a ring with a <var>times</var> larger thickness. 
+</table>  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f10">ring::Hitting</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Calculates all characteristics of a hit of a straight line with the volume shape. The return values components will be:     
+<table>   
+<tr><th>index <th>value     
+<tr><td>0, 1, 2 <td>entrance point of line     
+<tr><td>3, 4, 5 <td>distance of line to volume, points to volume     
+<tr><td>6, 7, 8 <td>normal vector to volume in entrance point     
+<tr><td>9 <td>sigma value     
+</table>     
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f11">ring::entrance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the entrance point of the straight line into the shape. This point is undefined if the line does not hit the shape.     
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f12">ring::distance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the distance vector from the straight line to the shape.     
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="sline3d.html">sLine3D</A> <A NAME="f13">ring::Normal</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the hit point of a straigt line with the shape and normal vector of the shape in that point. This is stored in the straight line return value with the Foot-property being the hit point and the Direction-property the normal vector.     
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>bool</vtype> ring::cut</A>(const <A HREF="fiber.html">fiber&</A> f) 
+<BR/><deff>
+Returns true, if the shape and the fiber occupy some space commonly.     
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f15">ring::HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the parameters for a hit of a straight line with the shape. The pattern will be: 
+<table> 
+<tr><th>index of return<th>description 
+<tr><td>0<td>sigma value 
+<tr><td>1,2,3<td>entrance point of line/point on line closest to the volume 
+<tr><td>4,5,6<td>resolution vector 
+<tr><td>7,8,9<td>point on volume closest to the line      
+<tr><td>10,11,12<td>minimum distance of line to volume, points to volume 
+</table> 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f16">ring::HitParams</A>(const <A HREF="planeshape.html">planeShape&</A> shape, <A HREF="point3d.html">point3D</A> origin) 
+<BR/><deff>
+Returns the parameters for a hit of a pyramid like shape with the tip at <var>origin</var> and the <var>shape</var> as base with the shape. The pattern will be:       
+<table>  
+<tr><th>index of return<th>description     
+<tr><td>0<td>sigma value     
+<tr><td>1,2,3<td>entrance point of line/point on line closest to the volume     
+<tr><td>4,5,6<td>resolution vector     
+<tr><td>7,8,9<td>point on volume closest to the line     
+<tr><td>10,11,12<td>minimum distance of line to volume, points to volume     
+</table>       
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>float</vtype> ring::getFlightPathInShape</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Calculates the entrance point and the exit point of the <var>line</var> in the shape and returns the length of the distance of the two points.     
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>int</vtype> ring::suspect</A>(const <A HREF="sline3d.html">sLine3D&</A> line, <vtype>int</vtype> stackType) 
+<BR/><deff>
+Assuming, this volume shape is the first one in a stack of shapes generated with the getNext-method in stacking type <var>stackType</var>.      
+Then the straight line <var>line</var> will hit the stack in the element number, that is returned or -1 if it doesn't hit the stack.     
+This doesn't know about the actual number of elements in this stack, so you'll have to check if the return value exceeds this.     
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> ring::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<BR/><deff>
+This function is used for drawing a shape to a root-TCanvas.  
+It will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>.   
+<br>It is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.      
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> ring::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<BR/><deff>
+This function is used for drawing a shape to a root-TCanvas.      
+It will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>.      
+<br>It is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.      
+<br>The parameter <var>ident</var> will return a pointer to the drawn root-primitive to provide the distance-to-primitive functionality.     
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f21">ring::description</A>() const
+<BR/><deff>
+Returns a description of this ring.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f22">ring::getDescription</A>() 
+<BR/><deff>
+Static Method. Returns a default description of a ring with all necessary variables defined.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

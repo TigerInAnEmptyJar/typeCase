@@ -1,0 +1,953 @@
+algorithmWriter
+algorithmwriter.html
+/users/data12/pion/ehrhardt/tofPack2/code/include/algorithmwriter.h
+CalgorithmWriter
+-1 algorithmWriter
+O#c2
+DDefault constructor.
+=
+gfmakefile
+-1 string
+Sstatic
+O#v2
+D
+=
+gfiomakefile
+-1 string
+Sstatic
+O#v3
+D
+=
+gfheader
+-1 string
+Sstatic
+O#v4
+D
+=
+gfw_header
+-1 string
+Sstatic
+O#v5
+D
+=
+gfiwidget
+-1 string
+Sstatic
+O#v6
+D
+=
+gfowidget
+-1 string
+Sstatic
+O#v7
+D
+=
+gfanalyser
+-1 string
+Sstatic
+O#v8
+D
+=
+gfheader_file
+-1 string
+O#v9
+D
+=
+gfdefinition
+-1 TMyClass
+O#v10
+Ttmyclass.html
+D
+=
+gfclass_in_header
+0 int
+O#v11
+D
+=
+gfsource_files
+-1 vector<string>
+O#v12
+D
+=
+gfparameter
+121 algorithm_parameter
+O#v13
+Talgorithmparameter.html
+D
+=
+gfneeds_moc
+6 bool
+O#v14
+D
+=
+gfcopy_or_link
+0 int
+O#v15
+D
+=
+gfis_io
+6 bool
+O#v16
+D
+=
+gfinput_algo
+6 bool
+O#v17
+D
+=
+gfwidget_name
+-1 string
+O#v18
+D
+=
+gfwidget_header
+-1 string
+O#v19
+D
+=
+gfwidget_source
+-1 string
+O#v20
+D
+=
+gfversion_dependent_header
+6 bool
+O#v21
+D
+=
+gfioversion_dependent_header
+6 bool
+O#v22
+D
+=
+gffrequency
+0 int
+O#v23
+D
+=
+gffrequency_string
+0 int
+O#v24
+D
+=
+gfnuncall
+0 int
+O#v25
+D
+=
+gfid
+0 int
+O#v26
+D
+=
+gfconnections
+-1 vector<string>
+O#v27
+D
+=
+gfcall_parameter
+-1 vector<string>
+O#v28
+D
+=
+gfcomment_on_init
+-1 string
+O#v29
+D
+=
+gfconstructor_call
+-1 vector<string>
+O#v30
+D
+=
+F~algorithmWriter
+-1 ~algorithmWriter
+O#f2
+DDestructor
+=
+Finit
+7 void
+Sstatic
+O#f3
+PmakefileIn
+-1 string
+=
+PiomakefileIn
+-1 string
+=
+PheaderIn
+-1 string
+=
+PwidgetHeaderIn
+-1 string
+=
+PiwidgetIn
+-1 string
+=
+PowidgetIn
+-1 string
+=
+PanalyserIn
+-1 string
+=
+DStatic function. Sets the important files to modify like makefiles (algorithm-package and IO-algorithm-widgets), header-files (for all algorithms and all IO-widgets), code-files for Input-widgets, Output-widgets and <a href="tofanalysis.html#f46> tofAnalysis::getAlgorithm(...)</a>.
+DDefault values are
+D<table>
+D<tr><th>file<th>default
+D<tr><td>makefile<td>$(KTOFPACK)/algorithms/makefile
+D<tr><td>iomakefile<td>$(KTOFPACK)/gui/io_algorithm_widgets/makefile
+D<tr><td>header<td>$(KTOFPACK)/algorithms/include/algorithms.h
+D<tr><td>iwidget<td>$(KTOFPACK)/gui/typeCase/src/addInputAlgoWidget.h
+D<tr><td>owidget<td>$(KTOFPACK)/gui/typeCase/src/addOutputAlgoWidget.h
+D<tr><td>analyser<td>$(KTOFPACK)/analyser/src/tofAnalysis_algorithm_t.cpp
+D<tr><td>widgetHeader<td>$(KTOFPACK)/gui/io_algorithm_widgets/include/ioalgorithms.h
+D</table>
+DIf you use files different from these default values specify them with this method.
+=
+Fmakefile
+-1 string
+Sstatic
+O#f4
+L{ inline
+D{return fmakefile}Static inline function.
+DReturns the makefile for the algorithm-package.
+=
+Fheader
+-1 string
+S} static
+O#f5
+L{ inline
+D{return fheader} Static inline function.
+DReturns the file where the include commands of the algorithms are written.
+=
+Fiwidget
+-1 string
+S} static
+O#f6
+L{ inline
+D{return fiwidget} Static inline function.
+DReturns the file where the allocation-commands for the Input-algorithm-widgets are written.
+=
+Fowidget
+-1 string
+S} static
+O#f7
+L{ inline
+D{return fowidget} Static inline function.
+DReturns the file where the allocation-commands for the Output-algorithm-widgets are written.
+=
+Fanalyser
+-1 string
+S} static
+O#f8
+L{ inline
+D{return fanalyser} Static inline function.
+DReturns the filename of the file where the code of the <a href="tofanalysis.html#f46"> tofAnalysis::getAlgorithm(...)</a> function is written.
+=
+FIOmakefile
+-1 string
+S} static
+O#f9
+L{ inline
+D{return fiomakefile} Static inline function.
+DReturns the makefile for the IO-algrithm-widgets.
+=
+FIOwidgetHeader
+-1 string
+S} static
+O#f10
+L{ inline
+D{return fw_header} Static inline function.
+DReturns the file with the widgets include-commands.
+=
+FID
+0 int
+S}
+O#f11
+Lconst{ inline
+D{return fid} Inline function.
+DReturns the ID of the algorithm in question in the analysis. Can be set using <a href="#f90">getNextID()</a> or <a href="#f91">getInstalledID()</a>.
+=
+FheaderFile
+-1 string
+S}
+O#f12
+Lconst{ inline
+D{return fheader_file} Inline function.
+DReturns the header file for the algorithm in question.
+=
+Fdefinition
+-1 TMyClass
+S}
+O#f13
+Ttmyclass.html
+Lconst{ inline
+D{return fdefinition} Inline function.
+DReturns the class-description-object for the algorithm in question.
+=
+FclassInHeader
+0 int
+S}
+O#f14
+Lconst{ inline
+D{return fclass_in_header} Inline function.
+DReturns the position of the class in the header-file.
+D
+=
+FsourceFiles
+-1 string
+S}
+O#f15
+Lconst{ inline
+Pnum
+0 int
+=
+DInline function.
+DReturns the <var>num<sup>th</sup></var> source file in the list. 
+=
+FnSourceFiles
+0 int
+S}
+O#f16
+Lconst{ inline
+DInline function.
+DReturns the number of source files for the algorithm.
+=
+Fparameter
+121 algorithm_parameter
+S}
+O#f17
+Talgorithmparameter.html
+Lconst{ inline
+D{return fparameter} Inline function.
+DReturns the description of the algorithm in question to be used for the analysis.
+=
+FneedsMOC
+6 bool
+S}
+O#f18
+Lconst{ inline
+D{return fneeds_moc} Inline function.
+DReturns true if the algorithm in question contains the Q_OBJECT-makro, which is necessary to handle the algorithms signals and slots properly (only if it defines any). See <a href="http://doc.trolltech.com/4.6/signalsandslots.html">Qt-Signal-and-Slot-mechanism</a>
+=
+FcopyOrLink
+0 int
+S}
+O#f19
+Lconst{ inline
+D{return fcopy_or_link} Inline function.
+DReturns the action to be taken at the installation process with the header and code files.
+D<table>
+D<tr><th>Value<th>Action
+D<tr><td>0<td>none
+D<tr><td>1<td>copy files to $(KTOFPACK)/algorithm/include and $(KTOFPACK)/algorithm/src
+D<tr><td>2<td>link files to $(KTOFPACK)/algorithm/include and $(KTOFPACK)/algorithm/src
+D</table>
+D
+=
+FisIo
+6 bool
+S}
+O#f20
+Lconst{ inline
+D{return fis_io} Inline function.
+DReturns true if the algorithm in question is an IO-algorithm.
+=
+FinputAlgo
+6 bool
+S}
+O#f21
+Lconst{ inline
+D{return finput_algo} Inline function.
+DReturns true if the IO-algorithm is an Input-algorithm, false if it is an Output-algorithm.
+=
+FwidgetHeader
+-1 string
+S}
+O#f22
+Lconst{ inline
+D{return fwidget_header} Inline function.
+DIf the algorithm in question is an IO-algorithm it returns the filename of the header.
+D
+=
+FwidgetName
+-1 string
+S}
+O#f23
+Lconst{ inline
+D{return fwidget_name} Inline function.
+DIf the algorithm in question is an IO-algorithm it returns the name of the IO-widget class.
+=
+FwidgetSource
+-1 string
+S}
+O#f24
+Lconst{ inline
+D{return fwidget_source} Inline function.
+DIf the algorithm in question is an IO-algorithm it returns the source file for the IO-widget.
+D
+=
+FversionDependentHeader
+6 bool
+S}
+O#f25
+Lconst{ inline
+D{return fversion_dependent_header} Inline function.
+DReturns wether the header file of the algorithm in question contains any Qt-version-dependent signals or slots. 
+DThis is necessary since the Qt-meta-object-compiler doesn't understand preprocessor-commands.
+=
+FioVersionDependentHeader
+6 bool
+S}
+O#f26
+Lconst{ inline
+D{return fioversion_dependent_header} Inline function.
+DIf the algorithm in question is an IO-algorithm it returns wether the header-file of the widget contains Qt-version-dependent signals or slots. 
+DThis is necessary since the Qt-meta-object-compiler doesn't understand preprocessor commands.
+D
+=
+Ffrequency
+0 int
+S}
+O#f27
+Lconst{ inline
+D{return ffrequency} Inline function.
+DReturns the frequency-variable see <a href="#f57"> setFrequency()</a>.
+=
+FfrequencyString
+0 int
+S}
+O#f28
+Lconst{ inline
+D{return ffrequency_string} Inline function.
+DReturns the frequencyString variable see <a href="#f58">setFrequencyString()</a>.
+D
+=
+FnunCall
+0 int
+S}
+O#f29
+Lconst{ inline
+D{return fnuncall}Inline function.
+DReturns the number of algorithms that are allocated during the init-process but not to be called during the event-loop (e.g. fit-algorithms).
+=
+Fconnections
+-1 string
+S}
+O#f30
+Lconst{ inline
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> part of the connections list. This is the <var>(num/4)<sup>th</sup></var> connection and
+Dthe
+D<table>
+D<tr><th>num%4<th>
+D<tr><td>0<td>sender
+D<tr><td>1<td>signal
+D<tr><td>2<td>receiver
+D<tr><td>3<td>slot
+D</table>
+=
+FnConnections
+0 int
+S}
+O#f31
+Lconst{ inline
+DInline function.
+DReturns the number of connections for the algorithm in question. See <a href="http://doc.trolltech.com/4.6/signalsandslots.html">Qt-Signal-and-Slot-mechanism</a>
+=
+FcallParameter
+-1 string
+S}
+O#f32
+Lconst{ inline
+Pnum
+0 int
+=
+DInline function.
+DReturns the <var>num<sup>th</sup></var> parameter from the constructor-call.
+=
+FcommentOnInit
+-1 string
+S}
+O#f33
+Lconst{ inline
+D{return fcomment_on_init} Inline function.
+DReturns the comment that is written to the log-file analysisLog just before the beginning of the initialisation if the algorithm in question.
+=
+FconstructorCall
+-1 vector<string>
+S}
+O#f34
+Lconst{ inline
+D{return fconstructor_call} Inline function.
+DReturns the constructor call, that is made in <a href="tofanalysis.html#f46"> tofAnalysis::getAlgorithm(...)</a>.
+=
+FsetID
+7 void
+S}
+O#f35
+L{ inline
+Pn
+0 int
+=
+D{fid=n} Inline function.
+DSets the ID of the algorithm in question.
+=
+FsetHeaderFile
+7 void
+S}
+O#f36
+L{ inline
+Ps
+-1 string
+=
+D{fheader_file=s} Inline function.
+DSets the header file of the algorithm in question.
+D
+=
+FsetDefinition
+7 void
+S}
+O#f37
+L{ inline
+Pt
+-1 TMyClass&
+Sconst
+Ttmyclass.html
+=
+D{fdefinition=t} Inline function.
+DSets the class-description of the algorithm in questuion.
+D
+=
+FsetClassInHeader
+7 void
+S}
+O#f38
+L{ inline
+Pn
+0 int
+=
+D{fclass_in_header=n} Inline function.
+DSets the position of the class in the header-file.
+D
+=
+FaddSourceFiles
+7 void
+S}
+O#f39
+L{ inline
+Pfn
+-1 string
+=
+DInline function.
+DAdds a file <var>fn</var> to the list of source files.
+=
+FsetSourceFiles
+7 void
+S}
+O#f40
+L{ inline
+Pnum
+0 int
+=
+Pfn
+-1 string
+=
+DInline function.
+DSets the <var>num<sup>th</sup></var> source file to <var>fn</var>.
+=
+FclearSourceFiles
+7 void
+S}
+O#f41
+L{ inline
+DInline function.
+DRemoves all source files.
+=
+FremoveSourceFile
+7 void
+S}
+O#f42
+L{ inline
+Pfn
+-1 string
+=
+D{ vector<string> tmp} Inline function.
+DRemoves source file <var>fn</var> from the list.
+=
+FsetParameter
+7 void
+S}
+O#f43
+L{ inline
+Pp
+121 algorithm_parameter&
+Sconst
+Talgorithmparameter.html
+=
+D{fparameter=p} Inline function.
+DSets the parameter for the algorithm in question. The ID-property will be set in the course of installation.
+D
+=
+FsetCopyOrLink
+7 void
+S}
+O#f44
+L{ inline
+Pn
+0 int
+=
+D{fcopy_or_link=n} Inline function.
+DSets the action to be taken for the code and header files at installation.
+D<table>
+D<tr><th>Value<th>Action
+D<tr><td>0<td>none
+D<tr><td>1<td>copy files to $(KTOFPACK)/algorithm/include and $(KTOFPACK)/algorithm/src
+D<tr><td>2<td>link files to $(KTOFPACK)/algorithm/include and $(KTOFPACK)/algorithm/src
+D</table>
+D
+=
+FsetNeedsMOC
+7 void
+S}
+O#f45
+L{ inline
+Pv
+6 bool
+=
+D{fneeds_moc=v} Inline function.
+DSets wether the algorithm in question contains the Q_OBJECT-makro which is necessary to properly include signals and slots for this algorithm.
+D
+=
+FsetIo
+7 void
+S}
+O#f46
+L{ inline
+Pv
+6 bool
+=
+D{fis_io=v} Inline function.
+DSets wether the algorithm in question is an IO-algorithm.
+D
+=
+FsetInputAlgo
+7 void
+S}
+O#f47
+L{ inline
+Pv
+6 bool
+=
+D{finput_algo=v} Inline function.
+DSets wether the algorithm in question is an Input-algorithm (false means output-algorithm).
+D
+=
+FsetWidgetHeader
+7 void
+S}
+O#f48
+L{ inline
+Ps
+-1 string
+=
+D{fwidget_header=s} Inline function.
+DIf the algorithm in question is an IO-algorithm it sets the header file for the IO-widget.
+D
+=
+FsetWidgetName
+7 void
+S}
+O#f49
+L{ inline
+Ps
+-1 string
+=
+D{fwidget_name=s} Inline function.
+DIf the algorithm in question is an IO-algorithm it sets the name of the widget-class for this algorithm.
+D
+=
+FsetWidgetSource
+7 void
+S}
+O#f50
+L{ inline
+Ps
+-1 string
+=
+D{fwidget_source=s} Inline function.
+DIf the algorithm in question is an IO-algorithm it sets the source file for the widget.
+D
+=
+FsetVersionDependentHeader
+7 void
+S}
+O#f51
+L{ inline
+Pv
+6 bool
+=
+D{fversion_dependent_header=v} Inline function.
+DSets wether the header file of the algorithm in question has Qt-version dependent signals or slots.
+DThis is necessary since the Qt-meta-object-compiler doesn't understand preprocessor commands.
+D
+=
+FsetIoVersionDependentHeader
+7 void
+S}
+O#f52
+L{ inline
+Pv
+6 bool
+=
+D{fioversion_dependent_header=v} Inline function.
+Dif the algorithm in question is an IO-algorithm it sets wether the header-file has signals or slots that depend on the Qt-version.
+DThis is necessary since the meta-object-compiler of Qt doesn't understand preprocessor-commands.
+D
+=
+FsetFrequency
+7 void
+S}
+O#f53
+L{ inline
+Pn
+0 int
+=
+D{ffrequency=n} Inline function.
+DSets the n number of call types for the algorithm:
+D<table>
+D<tr><th>Value<th>meaning
+D<tr><td>0<td>1
+D<tr><td>1<td>once per track
+D<tr><td>2<td>once per detector
+D<tr><td>3<td>see <a href="#f58"> frequencyString</a>
+D</table>
+D
+=
+FsetFrequencyString
+7 void
+S}
+O#f54
+L{ inline
+Pn
+0 int
+=
+D{ffrequency_string=n} Inline function.
+DSets the frequencyString-variable. This variable is only important if the number of algorithm-calls per event depends on the size of a vector-variable in the parameter.
+DSay the parameter has n<sub>i</sub> integer-vectors, n<sub>f</sub> float-vectors and n<sub>s</sub> string-vectors and the size of the m<sup>th</sup> string-vector (m&lt n<sub>s</sub>) then the frequencyString would be 
+Dfs = n<sub>i</sub>+n<sub>f</sub>+m
+=
+FsetNunCall
+7 void
+S}
+O#f55
+L{ inline
+Pn
+0 int
+=
+D{fnuncall=n} Inline function.
+DSets the number of algorithms that are allocated but not called by the event-loop, such like fit-algorithms.
+D
+=
+FaddConnection
+7 void
+S}
+O#f56
+L{ inline
+Psender
+-1 string
+=
+Psignal
+-1 string
+=
+Preceiver
+-1 string
+=
+Pslot
+-1 string
+=
+DAdds a connection of the SIGNAL-and-SLOT type of Qt. Where the <var>sender</var> emits a <var>signal</var>, that is caught by the <var>receiver</var> by its <var>slot</var>. Take care, that the parameter-list of the <var>slot</var> matches the beginning of the parameter-list of <var>signal</var>.
+=
+FclearConnections
+7 void
+S}
+O#f57
+L{ inline
+DInline function.
+DClears the connections-vector.
+=
+FclearCallParameter
+7 void
+S}
+O#f58
+L{ inline
+DInline function.
+DClears the call-parameter-vector for the constructor-call in <a href="tofanalysis.html#f46">getAlgorithm()</a>.
+=
+FsetCallParameter
+7 void
+S}
+O#f59
+L{ inline
+Pnum
+0 int
+=
+Pparam
+-1 string
+=
+DSets the <var>num<sup>th</sup></var> parameter of the constructor-call to <var>param</var>.
+=
+FsetCommentOnInit
+7 void
+S}
+O#f60
+L{ inline
+Ps
+-1 string
+=
+D{fcomment_on_init=s} inline function.
+DSets the comment that is written to the log-file analysisLog on the start of the initialisation of the algorithm in question.
+DUse this, it is good for debugging purposes.
+D
+=
+FsetConstructorCall
+7 void
+S}
+O#f61
+L{ inline
+Ps
+-1 vector<string>
+=
+D{fconstructor_call=s} inline function.
+DSets the call of the constructor of the algorithm in question in the function <a href="tofAnalysis#f46"> getAlgorithm(...)</a>.
+D
+=
+FmakeFileCall
+-1 vector<string>
+S}
+O#f62
+DIt generates and returns the commands to insert into the algorithms-makefile.
+DThese are the addition to the lists $(HDR), $(SRC), $(OBJ) and $(MOCOBJ).
+=
+FiomakeFileCall
+-1 vector<string>
+O#f63
+DIf the algorithm in question is an IO-algorithm it generates and returns the commands to insert into the IO-widget-makefile.
+DThese are the addition to the lists $(HDR), $(SRC), $(OBJ) and $(MOCOBJ).
+=
+FheaderCall
+-1 vector<string>
+O#f64
+DIt generates and returns the include-command of the algorithm in question.
+=
+FioHeaderCall
+-1 vector<string>
+O#f65
+DIf the algorithm in question is an IO-algorithm, it generates and returns the include-command of the IO-widget of the algorithm in question.
+=
+FioCall
+-1 vector<string>
+O#f66
+DIf the algorithm in question is an IO-algorithm, it generates and returns the defaut allocation commands for the IO-widget of the algorithm in question, inserting it into typeCase.
+=
+FconstrCall
+-1 vector<string>
+O#f67
+DReturns a standard version of the constructor call for the algorithm in question. The algorithm is allocated once, connections are made.
+DTo have a more elaborate constructor call, use <a href="#f69">setConstructorCall</a>.
+=
+FgetFrequency
+-1 string
+O#f68
+DReturns a string that contains the number of algorithm-objects that have to be allocated for the algorithm in question depending possibly also on the parameter that was passed to the init-method.
+=
+FinsertToMakeFile
+7 void
+O#f69
+DOpens the algorithm-makefile to insert the commands for the compilation of the algorithm in question.
+=
+FinsertToIOMakeFile
+7 void
+O#f70
+DIf the algorithm in question is an IO-algorithm it opens the IO-algorithm-makefile to insert the commands for the compilation of the widget of the algorithm in question.
+=
+FinsertToHeader
+7 void
+O#f71
+DOpens the algorithms-header file and inserts the include call for the algorithm in question.
+=
+FinsertToIOHeader
+7 void
+O#f72
+DIf the algorithm in question is an IO-algorithm, it opens the IO-algorithms-headerfile and inserts the include-command for the widget of the algorithm in question.
+=
+FinsertToIO
+7 void
+O#f73
+DIf the algorithm in question is an IO-algorithm, it opens the file for the allocation of Input- or Output-widgets and inserts the code to allocate the widget for the algorithm in question. 
+DTo make the widget available for typeCase, typeCase has to be recompiled.
+=
+FinsertToAnalyser
+7 void
+O#f74
+DOpens the code-file of the class <a href="tofanalysis.html">tofAnalysis</a> containing the algorithms-definition-methods and inserts the code for allocation of the algorithm in question within the analysis, along with the code for retrieving the algorithm_parameter.
+DTo use the algorithm afterwards, the analyser has to be recompiled.
+=
+FanalyserAvail
+6 bool
+O#f75
+Lconst
+DOpens the code-file of the class <a href="tofanalysis.html">tofAnalysis</a> containing the algorithms-definition-methods and parses the file to see wether the algorithm in question has been already installed and returns the result.
+=
+FioAvail
+6 bool
+O#f76
+Lconst
+DIf the algorithm in question is an IO-algorithm it opens the definition-file of the Input- or Output-widgets to parse them for the allocation of the widget for the algorithm in question. Returns true if these commands are found.
+=
+FioMakeAvail
+6 bool
+O#f77
+Lconst
+DIf the algorithm in question is an IO-algorithm it opens the IO-algorithms-makefile to parse for the commands for the widget of the algorithm in question. Returns true if these commands are found.
+=
+FioHeaderAvail
+6 bool
+O#f78
+Lconst
+DIf it is a IO-algorithm it opens the io-algorithms-header-file to parse for the io-algorithm-header-file. It returns true if it is found.
+=
+FheaderAvail
+6 bool
+O#f79
+Lconst
+DOpens the algorithms-header-file, parses it to see wether the algorithm in question has been declared and returns the result.
+=
+FmakeAvail
+6 bool
+O#f80
+Lconst
+DParses the algorithms-makefile to check wether the algorithm in question is included into the makefile and returns the result.
+=
+FlibAvail
+6 bool
+O#f81
+Lconst
+DDummy function at the moment. Returns false. Should return wether the algorithm is defined in the current libalgorithm.so.
+=
+FgetNextID
+0 int
+O#f82
+DOpens the code-file of the class <a href="tofanalysis.html">tofAnalysis</a> containing the algorithms-definition-methods and parses the file to retrieve the next possible ID to give to a new algorithm.
+=
+FgetInstalledID
+0 int
+O#f83
+DOpens the code-file of the class <a href="tofanalysis.html">tofAnalysis</a> containing the algorithms-definition-methods and parses the file to retrieve the ID of the algorithm in question. If the algorithm is not installed yet, it returns -1.
+=
+DThe algorithmWriter class was written to make the installation process of new algorithms a lot easier. Instead of editing all necessary files youself you can supply some principle information about the algorithm, its header- and code-files and the way it should be treated at initialisation. The actual installation is then done by this class.
+DThe iostream operators give the possibility to save the installation parameters and reload them at a later time (possibly also by someone else).
+DThere exists a graphical front-end, the <a href="algorithmwizard.html">AlgorithmWizard</a>.
+=

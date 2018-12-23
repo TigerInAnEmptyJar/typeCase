@@ -1,0 +1,182 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class lineFit</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class lineFit in "fittingRoutines.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This class implements a simple line fit in 3D. 
+<DL>
+<DT>Superclass
+<DD><A HREF="sline3d.html">sLine3D</A>
+<DT>Constructor
+<LI><A HREF="#c2">lineFit</A>() 
+<LI><A HREF="#c3">lineFit</A>(const <A HREF="linefit.html">lineFit&</A> line) 
+<LI><A HREF="#c4">lineFit</A>(<vtype>int</vtype> maxPointsIn) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~lineFit</A>() 
+<LI><A HREF="#f3"><vtype>void</vtype> clear</A>() 
+<LI><A HREF="#f4"><vtype>int</vtype> MaxPoints</A>() const
+<LI><A HREF="#f5"><vtype>int</vtype> Points</A>() const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f6">Point</A>(<vtype>int</vtype> num) const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f7">ResolutionVector</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f8"><vtype>float</vtype> Sigma</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f9"><vtype>bool</vtype> Fitted</A>() const
+<LI><A HREF="#f10"><vtype>float</vtype> Chi</A>() const
+<LI><A HREF="#f11"><vtype>void</vtype> addPoint</A>(const <A HREF="vector3d.html">vector3D&</A> point, const <A HREF="vector3d.html">vector3D&</A> resolution, <vtype>float</vtype> sigma) 
+<LI><A HREF="sline3d.html">sLine3D</A> <A HREF="#f12">Result</A>() 
+<LI><A HREF="#f13"><vtype>float</vtype> fit</A>() 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="#f14"><vtype>float</vtype> fit</A>(<vtype>int</vtype> numPoints, <A HREF="vector3d.html">vector3D*</A> points, <A HREF="vector3d.html">vector3D*</A> resolution, <vtype>float*</vtype> sigmas, <A HREF="sline3d.html">sLine3D&</A> result) 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="point3d.html">point3D</A> <A HREF="sline3d.html#f2">sLine3D::Foot</A>() const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="sline3d.html#f3">sLine3D::Direction</A>() const
+<LI><A HREF="sline3d.html#f4"><vtype>void</vtype> sLine3D::shiftFoot</A>(<vtype>double</vtype> t) 
+<LI><A HREF="sline3d.html#f5"><vtype>void</vtype> sLine3D::newLine</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="vector3d.html">vector3D&</A> v) 
+<LI><A HREF="sline3d.html#f6"><vtype>int</vtype> sLine3D::isIn</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<LI><A HREF="sline3d.html#f7"><vtype>rep3D</vtype> sLine3D::getRep</A>() const
+<LI><A HREF="sline3d.html#f8"><vtype>void</vtype> sLine3D::setRep</A>(<vtype>rep3D</vtype> r) 
+<LI><A HREF="sline3d.html#f9"><vtype>int</vtype> sLine3D::isLine</A>() const
+<LI><A HREF="sline3d.html#f10"><vtype>int</vtype> sLine3D::isColumn</A>() const
+<LI><A HREF="sline3d.html#f11"><vtype>void</vtype> sLine3D::transpose</A>() 
+<LI><A HREF="sline3d.html#f12"><vtype>geomState</vtype> sLine3D::getState</A>() const
+<LI><A HREF="sline3d.html#f13"><vtype>int</vtype> sLine3D::getDimension</A>() const
+<LI><A HREF="sline3d.html#f14"><vtype>void</vtype> sLine3D::Zero</A>() 
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="sline3d.html#f15">sLine3D::operator-</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="sline3d.html#f16">sLine3D::operator&&</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<LI><A HREF="sline3d.html#f17"><vtype>double</vtype> sLine3D::operator&</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<LI><A HREF="lline3d.html">lLine3D</A> <A HREF="sline3d.html#f18">sLine3D::operator-</A>(const <A HREF="sline3d.html">sLine3D&</A> l) const
+<LI><A HREF="lline3d.html">lLine3D</A> <A HREF="sline3d.html#f19">sLine3D::operator-</A>(const <A HREF="lline3d.html">lLine3D&</A> l) const
+<LI><A HREF="sline3d.html#f20"><vtype>void</vtype> sLine3D::operator=</A>(const <A HREF="sline3d.html">sLine3D&</A> l) 
+<LI>virtual <A HREF="sline3d.html#f21"><vtype>string</vtype> sLine3D::toString</A>(<vtype>int</vtype> pt = -1) const
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+<LI>virtual <A HREF="geomobj.html#f8"><vtype>string</vtype> geomObject::toString</A>() const
+</UL>
+<DD>protected inherrited<UL>
+<LI><A HREF="sline3d.html#f22"><vtype>void</vtype> sLine3D::Infinite</A>() 
+<LI><A HREF="sline3d.html#f23"><vtype>void</vtype> sLine3D::Undefined</A>() 
+<LI><A HREF="sline3d.html#f24"><vtype>void</vtype> sLine3D::Regular</A>() 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">lineFit::lineFit</A>() 
+<BR/><deff>
+Default constructor.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">lineFit::lineFit</A>(const <A HREF="linefit.html">lineFit&</A> line) 
+<BR/><deff>
+Copy constructor.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">lineFit::lineFit</A>(<vtype>int</vtype> maxPointsIn) 
+<BR/><deff>
+Constructor. Defines the maximum number of points that can be fitted to a line.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">lineFit::~lineFit</A>() 
+<BR/><deff>
+Destructor 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>void</vtype> lineFit::clear</A>() 
+<BR/><deff>
+Clears the points. A new fit with new points can be done. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>int</vtype> lineFit::MaxPoints</A>() const
+<BR/><deff>
+Returns the maximum number of points the line can be fitted to. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>int</vtype> lineFit::Points</A>() const
+<BR/><deff>
+Returns the number of point the line will be fitted to. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f6">lineFit::Point</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> point. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f7">lineFit::ResolutionVector</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the resolution vector for point <var>num</var>. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>float</vtype> lineFit::Sigma</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the error value for point <var>num</var>. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>bool</vtype> lineFit::Fitted</A>() const
+<BR/><deff>
+Returns true if the fit has been done. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>float</vtype> lineFit::Chi</A>() const
+<BR/><deff>
+Returns the chi² of the fit. Returns -1 if the fit has not been performed yet. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> lineFit::addPoint</A>(const <A HREF="vector3d.html">vector3D&</A> point, const <A HREF="vector3d.html">vector3D&</A> resolution, <vtype>float</vtype> sigma) 
+<BR/><deff>
+Adds a <var>point</var> to the line. <var>resolution</var> gives the direction in which the point may be modified and <var>sigma</var> its error.  
+Does nothing, if the number of points to be stored is at maximum. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="sline3d.html">sLine3D</A> <A NAME="f12">lineFit::Result</A>() 
+<BR/><deff>
+Returns the result of the fit (straight line, the foot being in the x-y-plane), if it has been performed. Returns an undefined line, if not.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>float</vtype> lineFit::fit</A>() 
+<BR/><deff>
+Main fitting routine. Does the fit and returns the chi² value.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>float</vtype> lineFit::fit</A>(<vtype>int</vtype> numPoints, <A HREF="vector3d.html">vector3D*</A> points, <A HREF="vector3d.html">vector3D*</A> resolution, <vtype>float*</vtype> sigmas, <A HREF="sline3d.html">sLine3D&</A> result) 
+<BR/><deff>
+Static method. Fits a line to <var>numPoints</var> points in 3D. The <var>resolution</var>-vectors are the vectors in which the points can be modified, the <var>sigma</var>s, the errors for the points.  
+<br>Take care, that the arrays <var>points</var>, <var>resolution</var> and <var>sigmas</var> are at least <var>numPoints</var> indeces long.  
+<br>The result of the fit is given by the straight line <var>result</var>, where the Foot of the line is always in the x-y-plane.<br>  
+The return value is the chi² value of the fit.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

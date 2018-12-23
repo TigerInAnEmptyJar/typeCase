@@ -1,0 +1,241 @@
+material_parameter
+materialparameter.html
+/users/data12/pion/ehrhardt/tofPack2/include/materialparameter.h
+Cmaterial_parameter
+124 material_parameter
+O#c2
+DDefault constructor. 
+=
+Cmaterial_parameter
+124 material_parameter
+O#c3
+Pm
+124 material_parameter&
+Sconst
+=
+DCopy constructor. 
+=
+gactive
+6 bool
+O#v2
+D
+=
+gradiationLength
+1 float
+O#v3
+D
+=
+gdensity
+1 float
+O#v4
+D
+=
+gspeed
+1 float
+O#v5
+D
+=
+gelements
+-1 vector<element_parameter>
+O#v6
+D 
+=
+genergyloss
+-1 vector<float>
+O#v7
+D 
+=
+F~material_parameter
+-1 ~material_parameter
+O#f2
+DDestructor 
+=
+Foperator=
+124 material_parameter&
+O#f3
+Pm
+124 material_parameter&
+Sconst
+=
+DCopy operator.
+=
+FIsActive
+6 bool
+O#f4
+Lconst
+DReturns true if this is an active detecting material. 
+=
+FEnergyLoss
+1 float
+O#f5
+Lconst
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> parameters value for the energy loss algorithm. 
+=
+FDensity
+1 float
+O#f6
+Lconst
+DReturns the density of the material in units of g/cm³. 
+=
+FRadiationLength
+1 float
+O#f7
+Lconst
+DReturns the radiation length in the material. 
+=
+FElement
+128 element_parameter
+O#f8
+Lconst
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> element defined for the material. Returns a proton if <var>num</var> is non-valid. 
+=
+FaddElement
+7 void
+O#f9
+Pep
+128 element_parameter&
+Sconst
+=
+DAdds an element to the list of elements in the material. 
+=
+FsetElement
+7 void
+O#f10
+Ppos
+0 int
+=
+Pep
+128 element_parameter&
+Sconst
+=
+DSet the <var>pos<sup>th</sup></var> element to <var>ep</var>.
+=
+FNumberOfElements
+0 int
+O#f11
+Lconst
+DReturns the number of elements used for the material. 
+=
+FdeleteElement
+7 void
+O#f12
+Pnum
+0 int
+=
+DRemoves the <var>num<sup>th</sup></var> element from the list of elements for the material. 
+=
+FNumberOfEnergyLossParams
+0 int
+O#f13
+Lconst
+DReturns the number of parameters for the energy loss algorithm. 
+=
+FClearEnergyLoss
+7 void
+O#f14
+DClears the parameters for the energy loss algorithm. 
+=
+FsetActive
+7 void
+O#f15
+Pis
+6 bool
+=
+DSet if the material is an active detector material. Usable for monte-carlo-simulations. 
+=
+FsetEnergyLoss
+7 void
+O#f16
+Pnum
+0 int
+=
+Pvalue
+1 float
+=
+DSets the parameter <var>num</var> for the energy loss algorithm. 
+=
+FsetDensity
+7 void
+O#f17
+Pvalue
+1 float
+=
+DSets the density of the material in units of g/cm³. 
+=
+FsetRadiationLength
+7 void
+O#f18
+Pvalue
+1 float
+=
+DSets the radiation length in the material. 
+=
+FSpeed
+1 float
+O#f19
+Lconst
+DReturns the speed of light in the material in units of the speed of light in vacuum. This should not exceed 1. 
+=
+FsetSpeed
+7 void
+O#f20
+Pval
+1 float
+=
+DSets the speed of light in the material in units of the speed of light in vacuum. This should not exceed 1. 
+=
+Foperator<
+6 bool
+O#f21
+Pp
+124 material_parameter&
+Sconst
+=
+DCoparison operator. Returns true if the name of this material is smaller the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+=
+Foperator>
+6 bool
+O#f22
+Pp
+124 material_parameter&
+Sconst
+=
+DCoparison operator. Returns true if the name of this material is larger the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+=
+Foperator==
+6 bool
+O#f23
+Pp
+124 material_parameter&
+Sconst
+=
+DCoparison operator. Returns true if the name of this material is equal the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+=
+Foperator<=
+6 bool
+O#f24
+Pp
+124 material_parameter&
+Sconst
+=
+DCoparison operator. Returns true if the name of this material is smaller or equal the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+=
+Foperator>=
+6 bool
+O#f25
+Pp
+124 material_parameter&
+Sconst
+=
+DCoparison operator. Returns true if the name of this material is larger or equal the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+=
+S0 1 base_parameter
+baseparameter.html
+base_parameter
+=

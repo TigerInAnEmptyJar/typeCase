@@ -1,0 +1,192 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class planeShape</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class planeShape in "planeShape.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="baseshape.html">base_shape</A>
+<DT>Constructor
+<LI><A HREF="#c2">planeShape</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="#c3">planeShape</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~planeShape</A>() 
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f3">getNormal</A>() const
+<LI><A HREF="#f4"><vtype>void</vtype> setNormal</A>(const <A HREF="vector3d.html">vector3D&</A> v) 
+<LI><A HREF="plane3d.html">plane3D</A> <A HREF="#f5">getPlane</A>() const
+<LI><A HREF="#f6"><vtype>void</vtype> setPlane</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<LI>virtual <A HREF="#f7"><vtype>int</vtype> getNumberOfPoints</A>() const
+<LI>virtual <A HREF="point3d.html">point3D</A> <A HREF="#f8">getPoint</A>(<vtype>int</vtype> num) const
+<LI>virtual <A HREF="#f9"><vtype>float</vtype> area</A>() const
+<LI>virtual <A HREF="#f10"><vtype>float</vtype> angularRange_Phi</A>(const <A HREF="point3d.html">point3D&</A> origin = point3D(0,0,0), const <A HREF="vector3d.html">vector3D&</A> zDirection = vector3D(0,0,1)) const
+<LI>virtual <A HREF="#f11"><vtype>float</vtype> angularRange_Theta</A>(const <A HREF="point3d.html">point3D&</A> origin = point3D(0,0,0), const <A HREF="vector3d.html">vector3D&</A> zDirection = vector3D(0,0,1)) const
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f12">distancePlane</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<LI>virtual <A HREF="#f14"><vtype>float</vtype> circumscribedRadius</A>() const
+<LI>virtual <A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#f15">description</A>() const
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#f16">getDescription</A>() 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f13">distance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="baseshape.html#f2">base_shape::getName</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#f3">base_shape::getCenter</A>() const
+<LI><A HREF="baseshape.html#f4"><vtype>void</vtype> base_shape::setCenter</A>(<A HREF="point3d.html">point3D</A> c) 
+<LI>virtual <A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#f5">base_shape::entrance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="sline3d.html">sLine3D</A> <A HREF="baseshape.html#f7">base_shape::Normal</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="baseshape.html#f8"><vtype>bool</vtype> base_shape::cut</A>(const <A HREF="fiber.html">fiber&</A> f) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="baseshape.html#f9">base_shape::HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="baseshape.html#f10"><vtype>void</vtype> base_shape::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<LI>virtual <A HREF="baseshape.html#f11"><vtype>void</vtype> base_shape::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<LI><A HREF="baseparameter.html#f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="baseparameter.html#f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="baseparameter.html#f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="baseparameter.html#f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<LI><A HREF="baseparameter.html#f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="baseparameter.html#f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<LI><A HREF="baseparameter.html#f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+<DT>Protected Variables
+<DD><A HREF="vector3d.html">vector3D</A> <A HREF="#v2">normal</A>
+<DD><vtype>float</vtype> <A HREF="#v3">circRadius</A>
+<DT>Protected inherrited variables
+<DD><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#v2">base_shape::center</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">planeShape::planeShape</A>(const <vtype>string&</vtype> n) 
+<BR/><deff>
+Constructor. Sets the name of the shape. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">planeShape::planeShape</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<BR/><deff>
+Constructor. Creates a shape as defined in the parameter. Please overwrite in derived classes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="#v2">normal</A>
+<BR/><deff>
+normal vector to the plane 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">float circRadius</A>
+<BR/><deff>
+circumscribed radius
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> planeShape::~planeShape</A>() 
+<BR/><deff>
+Destructor 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f3">planeShape::getNormal</A>() const
+<BR/><deff>
+Returns the vormal vector of the planar shape. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> planeShape::setNormal</A>(const <A HREF="vector3d.html">vector3D&</A> v) 
+<BR/><deff>
+Set the normal vector of the planar shape. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="plane3d.html">plane3D</A> <A NAME="f5">planeShape::getPlane</A>() const
+<BR/><deff>
+Returns the plane the planar shape is defined along. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>void</vtype> planeShape::setPlane</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<BR/><deff>
+Set the plane for the planar shape. The normal vector will be set. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>int</vtype> planeShape::getNumberOfPoints</A>() const
+<BR/><deff>
+Returns the number of points the planar shape defines. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f8">planeShape::getPoint</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> point of the planar shape. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>float</vtype> planeShape::area</A>() const
+<BR/><deff>
+Returns the area of the planar shape. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>float</vtype> planeShape::angularRange_Phi</A>(const <A HREF="point3d.html">point3D&</A> origin = point3D(0,0,0), const <A HREF="vector3d.html">vector3D&</A> zDirection = vector3D(0,0,1)) const
+<BR/><deff>
+Returns the polar angular range of a planar shape, for any z direction and origin.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>float</vtype> planeShape::angularRange_Theta</A>(const <A HREF="point3d.html">point3D&</A> origin = point3D(0,0,0), const <A HREF="vector3d.html">vector3D&</A> zDirection = vector3D(0,0,1)) const
+<BR/><deff>
+Returns the azimuthal angular range of a planar shape, for any z direction and origin. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f12">planeShape::distancePlane</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<BR/><deff>
+Returns the distance vector for a plane to the planar shape. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f13">planeShape::distance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the distance from a line to the planar shape. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>float</vtype> planeShape::circumscribedRadius</A>() const
+<BR/><deff>
+Returns the circumscribed radius of a planar shape.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f15">planeShape::description</A>() const
+<BR/><deff>
+Returns a description of this shape. Please overwrite in derived classes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f16">planeShape::getDescription</A>() 
+<BR/><deff>
+Static method. Returns a default description of the shape with all necessary variables defined. Please overwrite in derived classes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

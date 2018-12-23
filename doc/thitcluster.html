@@ -1,0 +1,151 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class THitCluster</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class THitCluster in "hitCluster.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+
+<DL>
+<DT>Superclass
+<DD><A HREF="tcalibhit.html">TCalibHit</A>
+<DT>Constructor
+<LI><A HREF="#c2">THitCluster</A>(<vtype>int</vtype> maxElements = 50) 
+<LI><A HREF="#c3">THitCluster</A>(const <A HREF="thitcluster.html">THitCluster&</A> cls) 
+<LI><A HREF="#c4">THitCluster</A>(<A HREF="tcalibhit.html">TCalibHit&</A> input, <vtype>int</vtype> maxElements = 50) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~THitCluster</A>() 
+<LI><A HREF="#f3"><vtype>int</vtype> getNumberOfHits</A>() const
+<LI><A HREF="#f4"><vtype>int</vtype> getMaxNumberOfHits</A>() const
+<LI><A HREF="tcalibhit.html">TCalibHit*</A> <A HREF="#f5">getHit</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f6"><vtype>void</vtype> addHit</A>(<A HREF="tcalibhit.html">TCalibHit*</A> h) 
+<LI><A HREF="#f7"><vtype>void</vtype> resetHits</A>() 
+<LI>virtual <A HREF="#f8"><vtype>void</vtype> reset</A>() 
+<LI><A HREF="thitcluster.html">THitCluster&</A> <A HREF="#f9">operator=</A>(const <A HREF="thitcluster.html">THitCluster&</A> hc) 
+<LI><A HREF="thitcluster.html">THitCluster&</A> <A HREF="#f10">operator=</A>(const <A HREF="tcalibhit.html">TCalibHit&</A> hc) 
+<LI><A HREF="#f11"><vtype>void</vtype> operator+=</A>(<A HREF="tcalibhit.html">TCalibHit&</A> hc) 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="tcalibhit.html#f3"><vtype>float</vtype> TCalibHit::getADC</A>() const
+<LI><A HREF="tcalibhit.html#f4"><vtype>float</vtype> TCalibHit::getTDC</A>() const
+<LI><A HREF="tcalibhit.html#f5"><vtype>int</vtype> TCalibHit::getRawADC</A>() const
+<LI><A HREF="tcalibhit.html#f6"><vtype>int</vtype> TCalibHit::getRawTDC</A>() const
+<LI><A HREF="tcalibhit.html#f7"><vtype>int</vtype> TCalibHit::getDetector</A>() const
+<LI><A HREF="tcalibhit.html#f8"><vtype>int</vtype> TCalibHit::getElement</A>() const
+<LI><A HREF="volumeshape.html">volumeShape*</A> <A HREF="tcalibhit.html#f9">TCalibHit::getHitShape</A>() 
+<LI><A HREF="tcalibhit.html#f10"><vtype>void</vtype> TCalibHit::setADC</A>(<vtype>float</vtype> adcIn) 
+<LI><A HREF="tcalibhit.html#f11"><vtype>void</vtype> TCalibHit::setTDC</A>(<vtype>float</vtype> tdcIn) 
+<LI><A HREF="tcalibhit.html#f12"><vtype>void</vtype> TCalibHit::setRaw</A>(const <A HREF="trawhit.html">TRawHit&</A> h) 
+<LI><A HREF="tcalibhit.html#f13"><vtype>void</vtype> TCalibHit::setHitShape</A>(<A HREF="volumeshape.html">volumeShape*</A> shapeIn) 
+<LI><A HREF="tcalibhit.html">TCalibHit&</A> <A HREF="tcalibhit.html#f14">TCalibHit::operator=</A>(const <A HREF="tcalibhit.html">TCalibHit&</A> hit) 
+<LI><A HREF="tcalibhit.html#f15"><vtype>float&</vtype> TCalibHit::getADCr</A>() 
+<LI><A HREF="tcalibhit.html#f16"><vtype>float&</vtype> TCalibHit::getTDCr</A>() 
+<LI><A HREF="tcalibhit.html#f17"><vtype>int&</vtype> TCalibHit::getRawADCr</A>() 
+<LI><A HREF="tcalibhit.html#f18"><vtype>int&</vtype> TCalibHit::getRawTDCr</A>() 
+<LI><A HREF="tcalibhit.html#f19"><vtype>int&</vtype> TCalibHit::getDetectorr</A>() 
+<LI><A HREF="tcalibhit.html#f20"><vtype>int&</vtype> TCalibHit::getElementr</A>() 
+<LI><A HREF="volumeshape.html">volumeShape*</A> <A HREF="tcalibhit.html#f21">TCalibHit::getHitShaper</A>() const
+<LI><A HREF="tcalibhit.html#f22"><vtype>bool</vtype> TCalibHit::isDefined</A>() 
+<LI><A HREF="trawhit.html">TRawHit&</A> <A HREF="tcalibhit.html#f23">TCalibHit::getRaw</A>() 
+<LI><A HREF="tcalibhit.html#f24"><vtype>bool</vtype> TCalibHit::isValid</A>() const
+<LI><A HREF="tcalibhit.html#f25"><vtype>void</vtype> TCalibHit::setValid</A>(<vtype>bool</vtype> val = true) 
+<LI><A HREF="tcalibhit.html#f26"><vtype>void</vtype> TCalibHit::reset</A>() 
+<LI><A HREF="tbase.html#f3"><vtype>string</vtype> TBase::name</A>() const
+</UL>
+<DT>Protected inherrited variables
+<DD><vtype>string</vtype> <A HREF="tbase.html#v2">TBase::fname</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">THitCluster::THitCluster</A>(<vtype>int</vtype> maxElements = 50) 
+<BR/><deff>
+Default constructor. Sets the maximal number of hits for this cluster.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">THitCluster::THitCluster</A>(const <A HREF="thitcluster.html">THitCluster&</A> cls) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">THitCluster::THitCluster</A>(<A HREF="tcalibhit.html">TCalibHit&</A> input, <vtype>int</vtype> maxElements = 50) 
+<BR/><deff>
+Constructor. Sets the maximum number of hits in this cluster and initializes the base hit.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> THitCluster::~THitCluster</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>int</vtype> THitCluster::getNumberOfHits</A>() const
+<BR/><deff>
+Returns the current number of hits in this hit-cluster.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>int</vtype> THitCluster::getMaxNumberOfHits</A>() const
+<BR/><deff>
+Returns the maximum number of hits for this hit-cluster.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tcalibhit.html">TCalibHit*</A> <A NAME="f5">THitCluster::getHit</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> hit of the cluster (or NULL if <var>num</var> is invalid).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>void</vtype> THitCluster::addHit</A>(<A HREF="tcalibhit.html">TCalibHit*</A> h) 
+<BR/><deff>
+Adds a hit to the hit-cluster. If it is already contained in the hit-cluster, it is not added a second time.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> THitCluster::resetHits</A>() 
+<BR/><deff>
+Resets the hits in this hit cluster. But not the inherrited properties.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> THitCluster::reset</A>() 
+<BR/><deff>
+Resets the hit-cluster.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="thitcluster.html">THitCluster&</A> <A NAME="f9">THitCluster::operator=</A>(const <A HREF="thitcluster.html">THitCluster&</A> hc) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="thitcluster.html">THitCluster&</A> <A NAME="f10">THitCluster::operator=</A>(const <A HREF="tcalibhit.html">TCalibHit&</A> hc) 
+<BR/><deff>
+Copy operator. Copies the base properties of <var>hc</var>, the number of hits in this cluster is 1.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> THitCluster::operator+=</A>(<A HREF="tcalibhit.html">TCalibHit&</A> hc) 
+<BR/><deff>
+Addition operator. Adds a hit to the hit-cluster. If this hit is already contained, it is not added a second time.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

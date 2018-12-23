@@ -1,0 +1,348 @@
+ShapeWidget
+
+$(KTOFPACK)/gui/list_widgets/include/shapewidget.h
+CShapeWidget
+-1 ShapeWidget
+O#c2
+Pparent
+-1 QWidget*
+Thttp://doc.trolltech.com/4.4/qwidget.html
+V0
+=
+Pname
+5 char*
+Sconst
+V0
+=
+Pfl
+-1 WFlags
+V0
+=
+DConstructor. Qt3-version, non-visible in Qt4-mode.
+=
+CShapeWidget
+-1 ShapeWidget
+O#c3
+Pparent
+-1 QWidget*
+Thttp://doc.trolltech.com/4.4/qwidget.html
+V0
+=
+Pf
+-1 Qt::WindowFlags
+V0
+=
+DConstructor. Qt4-version, non-visible in Qt3-mode.
+=
+VlistView
+-1 QListView*
+O#v2
+Thttp://doc.trolltech.com/3.3/qlistview.html
+D
+=
+VlistView
+-1 QTreeWidget*
+O#v3
+Thttp://doc.trolltech.com/4.4/qtreewidget.html
+D
+=
+Vline
+-1 QFrame*
+O#v4
+D
+=
+Vpdisplay
+-1 ShapeDisplay*
+O#v5
+D
+=
+vReadOnly
+6 bool
+O#v6
+Dread-only-property. In read only mode, variables won't be modified if changes are made in the widget.
+=
+vap1
+-1 vector<shape_parameter>*
+O#v7
+Dstores the list of shapes
+=
+vap2
+-1 vector<shape_parameter*>*
+O#v8
+Dstores the list of shape-pointers
+=
+vfraction
+1 float
+O#v9
+Dfraction of widget width the list of shape shall have
+=
+vmode
+0 int
+O#v10
+Dstores how the current shape-vector has been provided.
+=
+FclassName
+5 char*
+Svirtual const
+O#f2
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f3
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f4
+Thttp://doc.trolltech.com/4.4/qstring.html
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f5
+Thttp://doc.trolltech.com/4.4/qstring.html
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f6
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f7
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f8
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+FreadOnly
+6 bool
+Svirtual
+O#f9
+DReturns the read-only-property. In read-only-mode, modifications made in this widget won't be applied to the given variables.
+=
+fgetParameterFromItem
+129 shape_parameter*
+O#f10
+Tshapeparameter.html
+Pit
+-1 QListViewItem*
+Thttp://doc.trolltech.com/3.3/qlistviewitem.html
+=
+DReturns a pointer to the shape, that is represented by the given list-view-item or NULL if none is found. Qt3-version, non-visible in Qt4-mode.
+=
+fgetItemFromParameter
+-1 QListViewItem*
+O#f11
+Thttp://doc.trolltech.com/3.3/qlistviewitem.html
+Pal
+129 shape_parameter*
+Tshapeparameter.html
+=
+DReturns the tree-widget-item, that represents the given shape-parameter or NULL if none is found.
+=
+fgetParameterFromItem
+129 shape_parameter*
+O#f12
+Tshapeparameter.html
+Pit
+-1 QTreeWidgetItem*
+Thttp://doc.trolltech.com/4.4/qtreewidgetitem.html
+=
+DReturns a pointer to the shape, that is represented by the given tree-widget-item or NULL if none is found. Qt4-version, non-visible in Qt3-mode.
+=
+fgetItemFromParameter
+-1 QTreeWidgetItem*
+O#f13
+Thttp://doc.trolltech.com/4.4/qtreewidgetitem.html
+Pal
+129 shape_parameter*
+Tshapeparameter.html
+=
+=
+gpointOnCanvas
+14 point2D
+O#f14
+Tpoint2d.html
+Pp
+-1 QPoint&
+Sconst
+=
+DTransforms and returns pixel-coordinates into canvas-coordinates.
+=
+ginit
+7 void
+O#f15
+DCalled by constructor.
+=
+gdestroy
+7 void
+O#f16
+DCalled by the destructor.
+=
+glanguageChange
+7 void
+O#f17
+DSets the label-texts.
+=
+Lresize
+7 void
+Svirtual
+O#l2
+Ps
+-1 QSize&
+Sconst
+=
+Dresize widget.
+=
+LresizeEvent
+7 void
+Svirtual
+O#l3
+Pe
+-1 QResizeEvent*
+=
+Dresize event.
+=
+Lresize
+7 void
+Svirtual
+O#l4
+Pw
+0 int
+=
+Ph
+0 int
+=
+Dresize widget.
+=
+LsetShapes
+7 void
+Svirtual
+O#l5
+PalgoIn
+-1 vector<shape_parameter>&
+=
+DSets the list of shapes (version 2). Take care, that both the shapes and the vector stay valid as long as the widget could need them. It may want to reread it.
+=
+LsetShapes
+7 void
+Svirtual
+O#l6
+PalgoIn
+-1 vector<shape_parameter*>&
+=
+DSets the list of shapes (version 1). Take care, that both the shapes and the vector stay valid as long as the widget could need them. It may want to reread it.
+=
+LsetReadOnly
+7 void
+Svirtual
+O#l7
+Pvalue
+6 bool
+=
+DSets the read-only-property. In read-only-mode, modifications made in the widget won't be applied to the given variable.
+=
+LmouseMoveEvent
+7 void
+Svirtual
+O#l8
+Pe
+-1 QMouseEvent*
+=
+DEnables drag and drop to shrink and enlarge the shape-list width.
+=
+lonShapeSelect
+7 void
+Svirtual
+O#l9
+Pit
+-1 QListViewItem*
+Thttp://doc.trolltech.com/3.3/qlistviewitem.html
+=
+DQt3-method, non-visible in Qt4-mode. Selects the shape represented by the given item.
+=
+lonShapeSelect
+7 void
+Svirtual
+O#l10
+Pit
+-1 QTreeWidgetItem*
+Thttp://doc.trolltech.com/4.4/qtreewidgetitem.html
+=
+DQt4-method, non-visible in Qt3-mode. Selects the shape represented by the given item.
+=
+Nchanged
+7 void
+O#s2
+DIf not in read only mode, this signal is emitted if one of the shapes was changed by the widget.
+=
+DThis widget displays a list of <a href="shapeparameter.html"> shape_parameters </a>. It has on the left side a list of the shapes and on the right side, a <a href="shapedisplay.html">shapeDisplay</a>.
+S0 0 QWidget
+
+=

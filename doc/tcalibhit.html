@@ -1,0 +1,241 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class TCalibHit</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class TCalibHit in "calibHit.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="tbase.html">TBase</A>
+<DT>Constructor
+<LI><A HREF="#c2">TCalibHit</A>() 
+<LI><A HREF="#c3">TCalibHit</A>(<vtype>float</vtype> ADC, <vtype>float</vtype> TDC, const <A HREF="trawhit.html">TRawHit&</A> hit) 
+<LI><A HREF="#c4">TCalibHit</A>(const <A HREF="trawhit.html">TRawHit&</A> hit, <vtype>float</vtype> ADC = -1, <vtype>float</vtype> TDC = -1, <A HREF="volumeshape.html">volumeShape*</A> sh = NULL) 
+<LI><A HREF="#c5">TCalibHit</A>(const <A HREF="tcalibhit.html">TCalibHit&</A> hit) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~TCalibHit</A>() 
+<LI><A HREF="#f3"><vtype>float</vtype> getADC</A>() const
+<LI><A HREF="#f4"><vtype>float</vtype> getTDC</A>() const
+<LI><A HREF="#f5"><vtype>int</vtype> getRawADC</A>() const
+<LI><A HREF="#f6"><vtype>int</vtype> getRawTDC</A>() const
+<LI><A HREF="#f7"><vtype>int</vtype> getDetector</A>() const
+<LI><A HREF="#f8"><vtype>int</vtype> getElement</A>() const
+<LI><A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f9">getHitShape</A>() 
+<LI><A HREF="#f10"><vtype>void</vtype> setADC</A>(<vtype>float</vtype> adcIn) 
+<LI><A HREF="#f11"><vtype>void</vtype> setTDC</A>(<vtype>float</vtype> tdcIn) 
+<LI><A HREF="#f12"><vtype>void</vtype> setRaw</A>(const <A HREF="trawhit.html">TRawHit&</A> h) 
+<LI><A HREF="#f13"><vtype>void</vtype> setHitShape</A>(<A HREF="volumeshape.html">volumeShape*</A> shapeIn) 
+<LI><A HREF="tcalibhit.html">TCalibHit&</A> <A HREF="#f14">operator=</A>(const <A HREF="tcalibhit.html">TCalibHit&</A> hit) 
+<LI><A HREF="#f15"><vtype>float&</vtype> getADCr</A>() 
+<LI><A HREF="#f16"><vtype>float&</vtype> getTDCr</A>() 
+<LI><A HREF="#f17"><vtype>int&</vtype> getRawADCr</A>() 
+<LI><A HREF="#f18"><vtype>int&</vtype> getRawTDCr</A>() 
+<LI><A HREF="#f19"><vtype>int&</vtype> getDetectorr</A>() 
+<LI><A HREF="#f20"><vtype>int&</vtype> getElementr</A>() 
+<LI><A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f21">getHitShaper</A>() const
+<LI><A HREF="#f22"><vtype>bool</vtype> isDefined</A>() 
+<LI><A HREF="trawhit.html">TRawHit&</A> <A HREF="#f23">getRaw</A>() 
+<LI><A HREF="#f24"><vtype>bool</vtype> isValid</A>() const
+<LI><A HREF="#f25"><vtype>void</vtype> setValid</A>(<vtype>bool</vtype> val = true) 
+<LI><A HREF="#f26"><vtype>void</vtype> reset</A>() 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="tbase.html#f3"><vtype>string</vtype> TBase::name</A>() const
+</UL>
+<DT>Protected inherrited variables
+<DD><vtype>string</vtype> <A HREF="tbase.html#v2">TBase::fname</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">TCalibHit::TCalibHit</A>() 
+<BR/><deff>
+Default constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">TCalibHit::TCalibHit</A>(<vtype>float</vtype> ADC, <vtype>float</vtype> TDC, const <A HREF="trawhit.html">TRawHit&</A> hit) 
+<BR/><deff>
+Constructor. Sets the properties, raw-hit (element, detectorID, QDC, TDC) calibrated QDC and TDC.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">TCalibHit::TCalibHit</A>(const <A HREF="trawhit.html">TRawHit&</A> hit, <vtype>float</vtype> ADC = -1, <vtype>float</vtype> TDC = -1, <A HREF="volumeshape.html">volumeShape*</A> sh = NULL) 
+<BR/><deff>
+Constructor. Sets the properties, raw-hit (element, detectorID, QDC, TDC) calibrated QDC and TDC and the shape of the detector element.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">TCalibHit::TCalibHit</A>(const <A HREF="tcalibhit.html">TCalibHit&</A> hit) 
+<BR/><deff>
+Copy constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">TCalibHit::~TCalibHit</A>() 
+<BR/><deff>
+Destructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>float</vtype> TCalibHit::getADC</A>() const
+<BR/><deff>
+Returns the calibrated ADC-value of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>float</vtype> TCalibHit::getTDC</A>() const
+<BR/><deff>
+Returns the TDC of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>int</vtype> TCalibHit::getRawADC</A>() const
+<BR/><deff>
+Returns the raw, uncalibrated ADC of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> TCalibHit::getRawTDC</A>() const
+<BR/><deff>
+Returns the raw, uncalibrated TDC of the hit.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>int</vtype> TCalibHit::getDetector</A>() const
+<BR/><deff>
+Retruns the detector ID of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>int</vtype> TCalibHit::getElement</A>() const
+<BR/><deff>
+Retruns the element number of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f9">TCalibHit::getHitShape</A>() 
+<BR/><deff>
+Returns a pointer to the shape of the hit detector element. May be modified. Do not delete. 
+It is a copy of the shape stored in every detector.  
+Note: this may be NULL.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> TCalibHit::setADC</A>(<vtype>float</vtype> adcIn) 
+<BR/><deff>
+Sets the ADC-value of the calibrated hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> TCalibHit::setTDC</A>(<vtype>float</vtype> tdcIn) 
+<BR/><deff>
+Sets the TDC-value of the calibrated hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> TCalibHit::setRaw</A>(const <A HREF="trawhit.html">TRawHit&</A> h) 
+<BR/><deff>
+Sets the properties of the raw component, such as raw ADC, raw TDC, detector iD and element number. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> TCalibHit::setHitShape</A>(<A HREF="volumeshape.html">volumeShape*</A> shapeIn) 
+<BR/><deff>
+Sets the hit shape. A copy of this shape is produced, when getHitShape() is called. This copy is a property of the hit and will be deleted, when necessary. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="tcalibhit.html">TCalibHit&</A> <A NAME="f14">TCalibHit::operator=</A>(const <A HREF="tcalibhit.html">TCalibHit&</A> hit) 
+<BR/><deff>
+Copy operator. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>float&</vtype> TCalibHit::getADCr</A>() 
+<BR/><deff>
+Returns a reference to the calibrated ADC-value of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>float&</vtype> TCalibHit::getTDCr</A>() 
+<BR/><deff>
+Returns a reference to the TDC of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>int&</vtype> TCalibHit::getRawADCr</A>() 
+<BR/><deff>
+Returns a reference to the raw, uncalibrated ADC of the hit.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>int&</vtype> TCalibHit::getRawTDCr</A>() 
+<BR/><deff>
+Returns a reference to the raw, uncalibrated TDC of the hit.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>int&</vtype> TCalibHit::getDetectorr</A>() 
+<BR/><deff>
+Retruns a reference tothe detector ID of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>int&</vtype> TCalibHit::getElementr</A>() 
+<BR/><deff>
+Retruns a reference to the element number of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f21">TCalibHit::getHitShaper</A>() const
+<BR/><deff>
+Returns a pointer to the shape of the hit detector element. May be modified.   
+Note: this may be NULL.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>bool</vtype> TCalibHit::isDefined</A>() 
+<BR/><deff>
+Returns true if the hit was modified after creation. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="trawhit.html">TRawHit&</A> <A NAME="f23">TCalibHit::getRaw</A>() 
+<BR/><deff>
+Returns the raw hit component of the hit. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>bool</vtype> TCalibHit::isValid</A>() const
+<BR/><deff>
+Returns the valid property. This may be set if the hit shape is defined, or the hit is valid in terms of analysis cases. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f25"><vtype>void</vtype> TCalibHit::setValid</A>(<vtype>bool</vtype> val = true) 
+<BR/><deff>
+Set the valid-property. If called without parameter, by default it is set to true. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f26"><vtype>void</vtype> TCalibHit::reset</A>() 
+<BR/><deff>
+Resets the hit. The valid property is set to false. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

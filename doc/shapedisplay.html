@@ -1,0 +1,257 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class ShapeDisplay</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class ShapeDisplay in "shapedisplay.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Constructor
+<LI><A HREF="#c2">ShapeDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<LI><A HREF="#c3">ShapeDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI>virtual <A HREF="#f9"><vtype>bool</vtype> readOnly</A>() 
+<LI>virtual <A HREF="#f10"><vtype>bool</vtype> isConstant</A>() 
+<LI>virtual <A HREF="#f11"><vtype>bool</vtype> doDraw</A>() 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DD>new protected<ul>
+</UL>
+<DT>Public Variables
+<DD><vtype>QLabel*</vtype> <A HREF="#v2">nameLabel</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A HREF="#v3">nameInput</A>
+<DD><vtype>QLabel*</vtype> <A HREF="#v4">descLabel</A>
+<DD><A HREF="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit*</A> <A HREF="#v5">descriptionEdit</A>
+<DD><vtype>QGroupBox*</vtype> <A HREF="#v6">propertyGroup</A>
+<DD><vtype>QGroupBox*</vtype> <A HREF="#v7">helpGroup</A>
+<DD><vtype>QGridLayout*</vtype> <A HREF="#v8">propertyGroup</A>
+<DD><vtype>QCanvasWidget*</vtype> <A HREF="#v9">shapeShow</A>
+<DD><vtype>vector&lt;QWidget*&gt;</vtype> <A HREF="#v10">properties</A>
+<DT>Protected Variables
+<DD><A HREF="shapeparameter.html">shape_parameter*</A> <A HREF="#v11">sp</A>
+<DD><A HREF="baseshape.html">base_shape*</A> <A HREF="#v12">drawer</A>
+<DD><vtype>bool</vtype> <A HREF="#v13">ReadOnly</A>
+<DD><vtype>bool</vtype> <A HREF="#v14">IsConstant</A>
+<DD><A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#v15">copy</A>
+<DD><vtype>float</vtype> <A HREF="#v16">fraction</A>
+<DD><vtype>bool</vtype> <A HREF="#v17">DrawShape</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">ShapeDisplay::ShapeDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, const <vtype>char*</vtype> name = 0, <vtype>WFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt3-version, non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">ShapeDisplay::ShapeDisplay</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent = 0, <vtype>Qt::WindowFlags</vtype> f = 0) 
+<BR/><deff>
+Constructor. Qt4-version, non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">QLabel* nameLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> <A NAME="#v3">nameInput</A>
+<BR/><deff>
+line-edit for shape-name
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">QLabel* descLabel</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit*</A> <A NAME="#v5">descriptionEdit</A>
+<BR/><deff>
+text-edit to provide description
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v6">QGroupBox* propertyGroup</A>
+<BR/><deff>
+groupbox for the property-widgets
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v7">QGroupBox* helpGroup</A>
+<BR/><deff>
+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v8">QGridLayout* propertyGroup</A>
+<BR/><deff>
+layout for the property-widgets
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v9">QCanvasWidget* shapeShow</A>
+<BR/><deff>
+Canvas to draw the shape if desired.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v10">vector<QWidget*> properties</A>
+<BR/><deff>
+vector with widgets holding the different properties of the current shape_parameter, like <a href="point3d.html">point3D</a>, <a href="vector3d.html">vector3D</a>, int, float or string.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter*</A> <A NAME="#v11">sp</A>
+<BR/><deff>
+pointer to the variable of the current shape_parameter
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="baseshape.html">base_shape*</A> <A NAME="#v12">drawer</A>
+<BR/><deff>
+pointer to the drawn base_shape has to be kept while drawn in the canvas to be deleted afterwards.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v13">bool ReadOnly</A>
+<BR/><deff>
+read-only-property. if true, the variable, the current pointer points to won't be modified if the properties in the display change
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v14">bool IsConstant</A>
+<BR/><deff>
+obsolete
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="#v15">copy</A>
+<BR/><deff>
+copy of the current shape_parameter
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v16">float fraction</A>
+<BR/><deff>
+fraction of widget width, the canvas shall hold
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v17">bool DrawShape</A>
+<BR/><deff>
+property holding wether the canvas for drawing the shape is visible.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> ShapeDisplay::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> ShapeDisplay::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">ShapeDisplay::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">ShapeDisplay::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> ShapeDisplay::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> ShapeDisplay::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> ShapeDisplay::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>bool</vtype> ShapeDisplay::readOnly</A>() 
+<BR/><deff>
+Returns the read-only-property. If it is true, the variable, the current pointer points to won't be modified if the properties in the display change.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>bool</vtype> ShapeDisplay::isConstant</A>() 
+<BR/><deff>
+obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>bool</vtype> ShapeDisplay::doDraw</A>() 
+<BR/><deff>
+Returns true, if the canvas to draw the shape shall be visible.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> ShapeDisplay::addItemToLayout</A>(<vtype>int</vtype> tp, <vtype>string</vtype> name, <vtype>string</vtype> widgetName) 
+<BR/><deff>
+Adds an item of type <var>tp</var> (point3D, vector3D, int, float, string) with some parameter-name and a widget-name to the property-layout.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

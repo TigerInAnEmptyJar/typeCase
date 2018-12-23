@@ -1,0 +1,142 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class reaction_parameter</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class reaction_parameter in "detectorparameter.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="baseparameter.html">base_parameter</A>
+<DT>Constructor
+<LI><A HREF="#c2">reaction_parameter</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> target = shape_parameter(), <vtype>bool</vtype> twoBeamIn = false, <vtype>int</vtype> first = 0, <vtype>int</vtype> sec = 0) 
+<LI><A HREF="#c3">reaction_parameter</A>(const <A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~reaction_parameter</A>() 
+<LI><A HREF="reactionparameter.html">reaction_parameter&</A> <A HREF="#f3">operator=</A>(const <A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<LI><A HREF="#f4"><vtype>bool</vtype> hasTwoBeams</A>() const
+<LI><A HREF="#f5"><vtype>void</vtype> setTwoBeams</A>(<vtype>bool</vtype> tb = true) 
+<LI><A HREF="#f6"><vtype>int</vtype> getMaterial</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f7"><vtype>int</vtype> getTargetMaterial</A>() const
+<LI><A HREF="#f8"><vtype>void</vtype> setMaterial</A>(<vtype>int</vtype> num, <vtype>int</vtype> mat) 
+<LI><A HREF="#f9"><vtype>void</vtype> setTargetMaterial</A>(<vtype>int</vtype> mat) 
+<LI><A HREF="#f10"><vtype>float</vtype> getBeamMomentum</A>(<vtype>int</vtype> num = 0) const
+<LI><A HREF="#f11"><vtype>void</vtype> setBeamMomentum</A>(<vtype>float</vtype> value, <vtype>int</vtype> num = 0) 
+<LI><A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#f12">getTargetShape</A>() const
+<LI><A HREF="#f13"><vtype>void</vtype> setTargetShape</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> s) 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="baseparameter.html#f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="baseparameter.html#f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="baseparameter.html#f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="baseparameter.html#f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<LI><A HREF="baseparameter.html#f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="baseparameter.html#f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<LI><A HREF="baseparameter.html#f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">reaction_parameter::reaction_parameter</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> target = shape_parameter(), <vtype>bool</vtype> twoBeamIn = false, <vtype>int</vtype> first = 0, <vtype>int</vtype> sec = 0) 
+<BR/><deff>
+Constructor. 
+Sets the targets shape and weather it is a collider experiment. The parameters <var>first</var> and <var>second</var> give the material numbers for beam and beam/target material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">reaction_parameter::reaction_parameter</A>(const <A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">reaction_parameter::~reaction_parameter</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="reactionparameter.html">reaction_parameter&</A> <A NAME="f3">reaction_parameter::operator=</A>(const <A HREF="reactionparameter.html">reaction_parameter&</A> r) 
+<BR/><deff>
+Copy operator
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>bool</vtype> reaction_parameter::hasTwoBeams</A>() const
+<BR/><deff>
+Returns true if this is a collider experiment. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> reaction_parameter::setTwoBeams</A>(<vtype>bool</vtype> tb = true) 
+<BR/><deff>
+Sets if the experiment is a collinder experiment. For a fixed target experiment do setTwoBeams(false). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> reaction_parameter::getMaterial</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the material number of the interacting materials. <var>num</var>=0, will be the (first) beam and <var>num</var>=1, will be the target/second beam.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>int</vtype> reaction_parameter::getTargetMaterial</A>() const
+<BR/><deff>
+Returns the targets material number or -1 if no target has been defined. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> reaction_parameter::setMaterial</A>(<vtype>int</vtype> num, <vtype>int</vtype> mat) 
+<BR/><deff>
+Sets the material number of the interacting materials. <var>num</var>=0, will be the (first) beam and <var>num</var>=1, will be the target/second beam. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> reaction_parameter::setTargetMaterial</A>(<vtype>int</vtype> mat) 
+<BR/><deff>
+Sets the material number of the target if a target is defined. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>float</vtype> reaction_parameter::getBeamMomentum</A>(<vtype>int</vtype> num = 0) const
+<BR/><deff>
+Returns the momentum of the <var>num<sup>th</sup></var> beam/target particle. Returns -1 if <var>num</var> is non-valid. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> reaction_parameter::setBeamMomentum</A>(<vtype>float</vtype> value, <vtype>int</vtype> num = 0) 
+<BR/><deff>
+Sets the momentum (units of GeV) of the <var>num<sup>th</sup></var> beam. Does nothing, if <var>num</var> is smaller than 0 or larger than 1. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f12">reaction_parameter::getTargetShape</A>() const
+<BR/><deff>
+Returns the shape parameter for the targets shape. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> reaction_parameter::setTargetShape</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> s) 
+<BR/><deff>
+Sets the shape parameter for the targets shape. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

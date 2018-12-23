@@ -1,0 +1,254 @@
+ColorSelectDialog
+
+$(KTOFPACK)/gui/root_properties/include/colorselectdialog.h
+CColorSelectDialog
+-1 ColorSelectDialog
+O#c2
+Pparent
+-1 QWidget*
+Thttp://doc.trolltech.com/4.4/qwidget.html
+V0
+=
+Pname
+5 char*
+Sconst
+V0
+=
+Pmodal
+6 bool
+VFALSE
+=
+Pfl
+-1 WFlags
+V0
+=
+DConstructor. Qt3-mode; non-visible in Qt4-mode.
+=
+CColorSelectDialog
+-1 ColorSelectDialog
+O#c3
+Pparent
+-1 QWidget*
+Thttp://doc.trolltech.com/4.4/qwidget.html
+V0
+=
+Pf
+-1 Qt::WindowFlags
+V0
+=
+DConstructor. Qt4-mode; non-visible in Qt3-mode.
+=
+vselectedColor
+0 int
+O#v2
+Dcurrently selected color
+=
+vbuttons
+-1 QPushButton**
+O#v3
+Thttp://doc.trolltech.com/3.3/qpushbutton.html
+Dbuttons with all the root colors
+=
+FclassName
+5 char*
+Svirtual const
+O#f2
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f3
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f4
+Thttp://doc.trolltech.com/4.4/qstring.html
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f5
+Thttp://doc.trolltech.com/4.4/qstring.html
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f6
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f7
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f8
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+FgetColor
+0 int
+Svirtual
+O#f9
+DReturns the selected color in root-number.
+=
+FgetRGBColor
+-1 QColor
+Svirtual
+O#f10
+DReturns the selected color in RGB.
+=
+FRoot2Qt
+-1 QColor
+Sstatic
+O#f11
+Pcolo
+0 int
+=
+DStatic function. Returns the RGB-version of the root color <var>colo</var>.
+=
+FQt2Root
+0 int
+Sstatic
+O#f12
+Pc
+-1 QColor&
+Sconst
+=
+DStatic function returns the root number of the RGB-color <var>c</var>.
+=
+FRoot2Qt
+-1 QColor
+Sstatic
+O#f13
+Pc
+-1 TColor&
+Sconst
+=
+DStatic function. Returns the RGB-equivalent of the root-color c.
+=
+ginit
+7 void
+O#f14
+Dcalled by constructor.
+=
+gdestroy
+7 void
+O#f15
+Dcalled by destructor.
+=
+LresizeEvent
+7 void
+Svirtual
+O#l2
+Pe
+-1 QResizeEvent*
+=
+DResize event, when the widget is resized.
+=
+Lresize
+7 void
+Svirtual
+O#l3
+Ps
+-1 QSize&
+Sconst
+=
+DResizes the widget.
+=
+Lresize
+7 void
+Svirtual
+O#l4
+Pw
+0 int
+=
+Ph
+0 int
+=
+DResizes the widget.
+=
+Laccept
+7 void
+Svirtual
+O#l5
+DOverwritten from <a href="http://doc.trolltech.com/4.4/qdialog.html"> QDialog</a>.
+=
+LOnButtonDown
+7 void
+Svirtual
+O#l6
+DSets the current color to the one of the pressed button and accepts the dialog.
+=
+llanguageChange
+7 void
+Svirtual
+O#l7
+D
+=
+DColor-select-dialog is a small dialog, that selects one of the predefined root-colors. Each button on the dialog has a different root color.
+S0 0 QDialog
+
+=

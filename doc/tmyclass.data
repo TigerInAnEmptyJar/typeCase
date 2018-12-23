@@ -1,0 +1,922 @@
+TMyClass
+tmyclass.html
+/users/data12/pion/ehrhardt/tofPack2/documentation/include/tmyclass.h
+CTMyClass
+-1 TMyClass
+O#c2
+Pname
+-1 string
+V""
+=
+Pdoc
+-1 string
+V""
+=
+DConstructor. Sets the name and the html-documentation-file of the class.
+=
+CTMyClass
+-1 TMyClass
+O#c3
+Pn
+-1 TMyClass&
+Sconst
+=
+DCopy constructor.
+=
+gclassName
+-1 string
+O#v2
+D
+=
+gclassDoc
+-1 string
+O#v3
+D
+=
+gheaderfile
+-1 string
+O#v4
+D
+=
+gdescription
+-1 vector<string>
+O#v5
+D
+=
+gsuperClasses
+-1 vector<string>
+O#v6
+D
+=
+gsuperClassDocs
+-1 vector<string>
+O#v7
+D
+=
+gsupers
+-1 vector<TMyClass*>
+O#v8
+D
+=
+ginherritance
+-1 vector<int>
+O#v9
+D
+=
+gvariablesPrivate
+-1 vector<nameTypeDoc>
+O#v10
+D
+=
+gvariablesProtected
+-1 vector<nameTypeDoc>
+O#v11
+D
+=
+gvariablesPublic
+-1 vector<nameTypeDoc>
+O#v12
+D
+=
+gfunctionsPrivate
+-1 vector<functionNameTypeDoc>
+O#v13
+D
+=
+gfunctionsProtected
+-1 vector<functionNameTypeDoc>
+O#v14
+D
+=
+gfunctionsPublic
+-1 vector<functionNameTypeDoc>
+O#v15
+D
+=
+gthesignals
+-1 vector<functionNameTypeDoc>
+O#v16
+D
+=
+gslotsPublic
+-1 vector<functionNameTypeDoc>
+O#v17
+D
+=
+gslotsProtected
+-1 vector<functionNameTypeDoc>
+O#v18
+D
+=
+gslotsPrivate
+-1 vector<functionNameTypeDoc>
+O#v19
+D
+=
+gfunctionType
+-1 vector<vector<int> >
+O#v20
+D
+=
+gconstructors
+-1 vector<functionNameTypeDoc>
+O#v21
+D
+=
+F~TMyClass
+-1 virtual
+O#f2
+DDestructor
+=
+Foperator=
+-1 TMyClass&
+O#f3
+Pn
+-1 TMyClass&
+Sconst
+=
+DCopy operator.
+=
+Fclear
+7 void
+O#f4
+DClears all superclasses, methods, slots, signals, constructors and variables.
+=
+FName
+-1 string
+O#f5
+Lconst
+DReturns the class' name.
+=
+FsetName
+7 void
+O#f6
+Ps
+-1 string&
+Sconst
+=
+DSets the class' name.
+=
+FDoc
+-1 string
+O#f7
+Lconst
+DReturns the html-documentation file.
+=
+FsetDoc
+7 void
+O#f8
+Ps
+-1 string&
+Sconst
+=
+DSets the html-documentation-file.
+=
+FinherritsFrom
+6 bool
+O#f9
+Pclsn
+-1 string&
+Sconst
+=
+DReturns true if somewhere in the super class tree there occurs a class with name <var>clsn</var>.
+=
+FDescription
+-1 string
+O#f10
+Lconst
+Pi
+0 int
+=
+DReturns the <var>i<sup>th</sup></var> line of the class' description. Returns an empty string if <var>i</var> is larger than the number of description lines.
+=
+FDescriptionLines
+0 int
+O#f11
+Lconst
+DReturns the number of lines for the class description.
+=
+FsetDescription
+7 void
+O#f12
+Pinput
+-1 vector<string>&
+Sconst
+=
+DAdds the lines of <var>input</var> to the class description.
+=
+FclearDescription
+7 void
+O#f13
+DClears the class description,
+=
+FaddDescriptionLine
+7 void
+O#f14
+Ps
+-1 string&
+Sconst
+=
+DAdds a line to the class description.
+=
+FHeaderFile
+-1 string
+O#f15
+Lconst
+DReturns the C++ header file where the class is defined in.
+=
+FsetHeaderFile
+7 void
+O#f16
+Ps
+-1 string&
+Sconst
+=
+DSets the header file, where the class is defined in.
+=
+FnSuperClasses
+0 int
+O#f17
+Lconst
+DReturns the number of superclasses.
+=
+FSuperClass
+-1 string
+O#f18
+Lconst
+Pi
+0 int
+=
+DReturns the classname of the <var>i<sup>th</sup></var> superclass. Returns an empty string if <var>i</var> is non-valid.
+=
+FSuperClassDoc
+-1 string
+O#f19
+Lconst
+Pi
+0 int
+=
+DReturns the html-documentation-file for the <var>i<sup>th</sup></var> superclass. Returns an empty string if <var>i</var> is non valid.
+=
+FSuper
+-1 TMyClass*
+O#f20
+Lconst
+Pi
+0 int
+=
+DReturns a pointer to the <var>i<sup>th</sup></var> superclass. Returns NULL if <var>i</var> is non-valid. May also be NULL if <var>i</var> is valid.
+=
+FInherritanceType
+0 int
+O#f21
+Lconst
+Pi
+0 int
+=
+DReturns the inherritance type of the <var>i<sup>th</sup></var> superclass. 0 for public, 1 for protected and 2 for private.
+=
+FInherritance
+-1 string
+O#f22
+Lconst
+Pi
+0 int
+=
+DReturns the inherritance definition of the <var>i<sup>th</sup></var> superclass. This can be eighter "public", "protected" or "private". Returns an empty string if  <var>i</var> is non valid.
+=
+FnVariables
+0 int
+O#f23
+Lconst
+Pt
+0 int
+=
+DReturns the corresponding number of variables.
+=
+FVariable
+-1 nameTypeDoc&
+O#f24
+Pi
+0 int
+=
+Pt
+0 int
+=
+DReturns a reference to the <var>i<sup>th</sup></var> variable in the corresponding list of variables.
+=
+FgetVariable
+-1 nameTypeDoc
+O#f25
+Lconst
+Pi
+0 int
+=
+Pt
+0 int
+=
+DReturns the <var>i<sup>th</sup></var> variable in the corresponding list of variables.
+=
+FnMethods
+0 int
+O#f26
+Lconst
+Pt
+0 int
+=
+DReturns the corresponding number of methods.
+=
+FMethod
+-1 functionNameTypeDoc&
+O#f27
+Pi
+0 int
+=
+Pt
+0 int
+=
+DReturns a reference to the <var>i<sup>th</sup></var> method in the corresponding list of methods.
+=
+FgetMethod
+-1 functionNameTypeDoc
+O#f28
+Lconst
+Pi
+0 int
+=
+Pt
+0 int
+=
+DReturns the <var>i<sup>th</sup></var> method in the corresponding list of methods.
+=
+FMethodType
+0 int
+O#f29
+Lconst
+Pi
+0 int
+=
+Pt
+0 int
+=
+DReturns the method type of the <var>i<sup>th</sup></var> method of type <var>t</var>, 0 if it is a new method, 1, if it is overwritten, 2, if it is inherrited?
+=
+FnSlots
+0 int
+O#f30
+Lconst
+Pi
+0 int
+=
+DReturns the corresponding number of slots.
+=
+FSlot
+-1 functionNameTypeDoc&
+O#f31
+Pi
+0 int
+=
+Pt
+0 int
+=
+DReturns a reference to the <var>i<sup>th</sup></var> slot in the corresponding list f slots.
+=
+FgetSlot
+-1 functionNameTypeDoc
+O#f32
+Lconst
+Pi
+0 int
+=
+Pt
+0 int
+=
+DReturns the <var>i<sup>th</sup></var> slot in the corresponding list f slots.
+=
+FnSignals
+0 int
+O#f33
+Lconst
+DReturns the number of signals.
+=
+FSignal
+-1 functionNameTypeDoc&
+O#f34
+Pi
+0 int
+=
+DReturns a reference to the <var>i<sup>th</sup></var> signal in the list of signals.
+=
+FgetSignal
+-1 functionNameTypeDoc
+O#f35
+Lconst
+Pi
+0 int
+=
+DReturns the <var>i<sup>th</sup></var> signal in the list of signals.
+=
+FnConstructors
+0 int
+O#f36
+Lconst
+DReturns the number of constructors.
+=
+FgetConstructor
+-1 functionNameTypeDoc
+O#f37
+Lconst
+Pi
+0 int
+=
+DReturns the <var>i<sup>th</sup></var> constructor in the list of constructors.
+=
+FConstructor
+-1 functionNameTypeDoc&
+O#f38
+Pi
+0 int
+=
+DReturns a reference to the <var>i<sup>th</sup></var> constructor in the list of constructors.
+=
+FclearSuperClasses
+7 void
+O#f39
+DSets the number of super classes to zero.
+=
+FaddSuperClass
+7 void
+O#f40
+PsuperClassName
+-1 string&
+Sconst
+=
+PsuperClassDoc
+-1 string&
+Sconst
+=
+Pderived
+0 int
+V0
+=
+Psuper
+-1 TMyClass*
+VNULL
+=
+DAdds a super class (with its pointer) to the list of superclasses. <var>derived</var> gives the visibility of the superclass. 0 means public, 1 protected and 2 private.
+=
+FaddSuperClass
+7 void
+O#f41
+Psuper
+-1 TMyClass*
+=
+Pderived
+0 int
+V0
+=
+DAdds a super class (with its pointer) to the list of superclasses. <var>derived</var> gives the visibility of the superclass. 0 means public, 1 protected and 2 private.
+=
+FremoveSuperClass
+7 void
+O#f42
+Pn
+-1 string&
+Sconst
+=
+DRemoves super-class of name <var>n</var> from the list of super classes. Does nothing if no such super class exists.
+=
+FremoveSuperClass
+7 void
+O#f43
+Pnum
+0 int
+=
+DRemoves the <var>num<sup>th</sup></var> super class from the list of superclasses. Does nothing if <var>num</var> is non valid.
+=
+FclearVariable
+7 void
+O#f44
+Pt
+0 int
+=
+DSets the corresponding number of variables to zero. That is public for <var>t</var>=0, protected for <var>t</var>=1 and private for <var>t</var>=2. 
+=
+FaddVariable
+7 void
+O#f45
+Pt
+0 int
+=
+Pvar
+-1 nameTypeDoc&
+Sconst
+=
+DAdds a variable to the corresponding list of variables. That is public for <var>t</var>=0, protected for <var>t</var>=1 and private for <var>t</var>=2. Does nothing if <var>t</var> is non valid. 
+=
+FaddVariable
+7 void
+O#f46
+Pt
+0 int
+=
+PnameIn
+-1 string
+=
+PtypeIn
+-1 string
+=
+PtypeIdIn
+0 int
+=
+Pspecifier
+-1 string
+=
+PdocIn
+-1 string
+V""
+=
+PtypeDocIn
+-1 string
+V""
+=
+DAdds a variable to the corresponding list of variables. That is public for <var>t</var>=0, protected for <var>t</var>=1 and private for <var>t</var>=2. Does nothing if <var>t</var> is non valid. 
+=
+FremoveVariable
+7 void
+O#f47
+Pt
+0 int
+=
+Pi
+0 int
+=
+DRemoves the <var>i<sup>th</sup></var> variable from the corresponding list of variables. That is public for <var>t</var>=0, protected for <var>t</var>=1 and private for <var>t</var>=2.
+=
+FremoveVariable
+7 void
+O#f48
+Pn
+-1 string&
+Sconst
+=
+DRemoves the last variable of name <var>n</var>. Does nothing if no such variable exists.
+=
+FclearMethod
+7 void
+O#f49
+Pt
+0 int
+=
+DSets the corresponding number of methods to zero. That is public for <var>t</var>=0, protected for <var>t</var>=1, private for <var>t</var>=2, public slots for <var>t</var>=3, protected slots for <var>t</var>=4, private slots for <var>t</var>=5 and signals for <var>t</var>=6.
+=
+FaddMethod
+7 void
+O#f50
+Pt
+0 int
+=
+Pvar
+-1 functionNameTypeDoc&
+Sconst
+=
+DAdds a method to the corresponding list of methods. That is public for <var>t</var>=0, protected for <var>t</var>=1, private for <var>t</var>=2, public slots for <var>t</var>=3, protected slots for <var>t</var>=4, private slots for <var>t</var>=5 and signals for <var>t</var>=6. Does nothing if <var>t</var> is non valid. 
+=
+FaddMethod
+7 void
+O#f51
+Pt
+0 int
+=
+PnameIn
+-1 string
+=
+PtypeIn
+-1 string
+=
+PtypeIdIn
+0 int
+=
+Pspecifier
+-1 string
+=
+PdocIn
+-1 string
+V""
+=
+PtypeDocIn
+-1 string
+V""
+=
+DAdds a method to the corresponding list of methods. That is public for <var>t</var>=0, protected for <var>t</var>=1, private for <var>t</var>=2, public slots for <var>t</var>=3, protected slots for <var>t</var>=4, private slots for <var>t</var>=5 and signals for <var>t</var>=6. Does nothing if <var>t</var> are non valid. 
+=
+FremoveMethod
+7 void
+O#f52
+Pt
+0 int
+=
+Pi
+0 int
+=
+DRemoves the <var>i<sup>th</sup></var> method of the corresponding list of methods. That is public for <var>t</var>=0, protected for <var>t</var>=1, private for <var>t</var>=2, public slots for <var>t</var>=3, protected slots for <var>t</var>=4, private slots for <var>t</var>=5 and signals for <var>t</var>=6. Does nothing if <var>i</var> or <var>t</var> are non valid.
+=
+FremoveMethod
+7 void
+O#f53
+Pn
+-1 string&
+Sconst
+=
+DRemoves the last method of name <var>n</var> from the list of methods. Checks first the public, then the protected and finally the private method. Does nothing if no such method exists.
+=
+FclearSlots
+7 void
+O#f54
+Pi
+0 int
+=
+DSets the corresponding number of slots to zero. That is public for <var>t</var>=0, protected for <var>t</var>=1, private for <var>t</var>=2 and signals for <var>t</var>=3. 
+=
+FaddSlot
+7 void
+O#f55
+Pt
+0 int
+=
+Pvar
+-1 functionNameTypeDoc&
+Sconst
+=
+DAdds a slot to the corresponding list of slots. That is public for <var>t</var>=0, protected for <var>t</var>=1, private for <var>t</var>=2 and signals for <var>t</var>=3. Does nothing if <var>t</var> is non valid. 
+DIf the type is not "void", it is added to the corresponding list of methods.
+=
+FaddSlot
+7 void
+O#f56
+Pt
+0 int
+=
+PnameIn
+-1 string
+=
+PtypeIn
+-1 string
+=
+PtypeIdIn
+0 int
+=
+Pspecifier
+-1 string
+=
+PdocIn
+-1 string
+V""
+=
+PtypeDocIn
+-1 string
+V""
+=
+DAdds a slot to the corresponding list of slots. That is public for <var>t</var>=0, protected for <var>t</var>=1, private for <var>t</var>=2 and signals for <var>t</var>=3. Does nothing if <var>t</var> are non valid. 
+DIf the type is not "void", it is added to the corresponding list of methods.
+=
+FremoveSlot
+7 void
+O#f57
+Pt
+0 int
+=
+Pi
+0 int
+=
+DRemoves the <var>i<sup>th</sup></var> slot of the corresponding list of slots. That is public for <var>t</var>=0, protected for <var>t</var>=1 and private for <var>t</var>=2. Does nothing if <var>i</var> or <var>t</var> are non valid.
+=
+FremoveSlot
+7 void
+O#f58
+Pn
+-1 string&
+Sconst
+=
+DRemoves the last slot of name <var>n</var> from the list of slots. Checks first the public, then the protected and finally the private slots. Does nothing if no such slot exists.
+=
+FclearSignals
+7 void
+O#f59
+DSets the number of signals to zero.
+=
+FaddSignal
+7 void
+O#f60
+Pvar
+-1 functionNameTypeDoc&
+Sconst
+=
+DAdds a signal to the list of signals. If the type is not "void", the method is added to the public methods.
+=
+FaddSignal
+7 void
+O#f61
+PnameIn
+-1 string
+=
+PtypeIn
+-1 string
+=
+PtypeIdIn
+0 int
+=
+Pspecifier
+-1 string
+=
+PdocIn
+-1 string
+V""
+=
+PtypeDocIn
+-1 string
+V""
+=
+DAdds a signal to the list of signals. If the type is not "void", this method is added to the public methods.
+=
+FclearConstructor
+7 void
+O#f62
+DSets the number of constructors to zero.
+=
+FaddConstructor
+7 void
+O#f63
+Pvar
+-1 functionNameTypeDoc&
+Sconst
+=
+DAdds a constructor to the list of constructors. If the name and the type do not equal the class-name, the method is added to the public methods of the class.
+=
+FaddConstructor
+7 void
+O#f64
+PtypeIn
+-1 string
+=
+PtypeIdIn
+0 int
+=
+Pspecifier
+-1 string
+=
+PdocIn
+-1 string
+V""
+=
+PtypeDocIn
+-1 string
+V""
+=
+DAdds the default constructor to the list of constructors. Not so elegant, use <a href="#f63">addConstructor()</a> instead.
+=
+FremoveConstructor
+7 void
+O#f65
+Pi
+0 int
+=
+DRemoves the <var>i<sup>th</sup></var> constructor in the list of constructors. Does nothing if <var>i</var> is non-valid.
+=
+FremoveConstructor
+7 void
+O#f66
+Pn
+-1 string&
+Sconst
+=
+DRemoves the fist constructor in the list. Does nothing if <var>n</var> isn't the class-name or the list is empty.
+=
+FaddSuperDescriptions
+7 void
+O#f67
+DFor all superclasses this method looks up (in case the class is defined by a TMyClass-object) all methods defined in this class.
+DIf some method has been overwritten, the description of the overwritten method is added to the description of the overwriting method.
+=
+FtoHTML
+-1 vector<string>
+O#f68
+Lconst
+DGenerates an html-documentation of the complete class as you are viewing right now. It provides links to the documentation of the superclasses if available, if the super-classes are defined as TMyClass, the inherrited methods and variables are shown with a link to their description. 
+DAt the base of the file there will be the description of any public or protected method or variable, the class defines.
+=
+FtoHTML
+-1 vector<string>
+O#f69
+Lconst
+PassociatedFunctions
+-1 vector<functionNameTypeDoc>&
+Sconst
+=
+DGenerates an html-documentation of the complete class as you are viewing right now. It provides links to the documentation of the superclasses if available, if the super-classes are defined as TMyClass, the inherrited methods and variables are shown with a link to their description. 
+DAt the base of the file there will be the description of any public or protected method or variable, the class defines.
+=
+FtoHeader
+-1 vector<string>
+O#f70
+Lconst
+DCreates a vector of strings, that is, if written to file a C++ header definition of the described class.
+=
+FreadFromFile
+6 bool
+O#f71
+Pfiletype
+0 int
+=
+Pfilename
+-1 string&
+Sconst
+=
+PnameIn
+-1 string&
+Sconst
+V""
+=
+DParses a file for class definitions of class <var>nameIn</var>and returns true if the class is defined there. The found class is written to this.
+DIf the <var>fileType</var> is 0, the classes are streamed from an input stream, if it is 1 or 2 the file is taken as C++ header.
+DIt finds the defined classes along with their variables, constructors, destructors, methods, signals and slots. Some macros can be recognized like the "Q_OBJECT" macro from Qt and the "ClassDef(const char*, int)" macro from root. Also the super classes are found and, if they are defined in the current frame, a pointer to them is stored for the class.
+=
+FreadFromData
+6 bool
+O#f72
+Pdatatype
+0 int
+=
+Pdata
+-1 vector<string>&
+Sconst
+=
+PnameIn
+-1 string&
+Sconst
+V""
+=
+DStatic method. Parses a vector of strings for class definitions of class <var>nameIn</var>and returns true if the class is defined there. The found class is written to this.
+DIf the <var>fileType</var> is 0, the classes are streamed from an input stream, if it is 1 or 2 the <var>data</var> is taken as C++ header.
+DIt finds the defined classes along with their variables, constructors, destructors, methods, signals and slots. Some macros can be recognized like the "Q_OBJECT" macro from Qt and the "ClassDef(const char*, int)" macro from root. Also the super classes are found and, if they are defined in the current frame, a pointer to them is stored for the class.
+=
+FfileContent
+0 int
+Sstatic
+O#f73
+PfileType
+0 int
+=
+Pfilename
+-1 string&
+Sconst
+=
+Pcontent
+-1 vector<TMyClass>&
+=
+DStatic method. Parses a file for class definitions and returns the found class-descriptions in the vector <var>content</var>. 
+DIf the <var>fileType</var> is 0, the classes are streamed from an input stream, if it is 1 or 2 the file is taken as C++ header.
+DIt finds the defined classes along with their variables, constructors, destructors, methods, signals and slots. Some macros can be recognized like the "Q_OBJECT" macro from Qt and the "ClassDef(const char*, int)" macro from root. Also the super classes are found and, if they are defined in the current frame, a pointer to them is stored for the class.
+=
+Fcontent
+0 int
+Sstatic
+O#f74
+PdataType
+0 int
+=
+Pdata
+-1 vector<string>&
+Sconst
+=
+Pcontent
+-1 vector<TMyClass>&
+=
+DStatic method. Parses a vector of strings (as could have been read from a header file) for class definitions and returns the found class-descriptions in the vector <var>content</var>. 
+DIf the <var>dataType</var> is 0, the classes are handled as streamed from an input stream, f it is 1 or two the <var>data</var> is taken as C++ code.
+DIt finds the defined classes along with their variables, constructors, destructors, methods, signals and slots. Some macros can be recognized like the "Q_OBJECT" macro from Qt and the "ClassDef(const char*, int)" macro from root. Also the super classes are found and, if they are defined in the current frame, a pointer to them is stored for the class.
+DHm, bad naming, I will change that soon.
+=
+Fupdate
+0 int
+O#f75
+DRereads the header file and adds new methods and variables. If a method/variable is no more found, the property is NOT removed but a remark "obsolete" is added to the description. Also if the visibility of a method/variable is changed this is noted in the properties description.
+=
+GremoveFromVector
+7 void
+Stemplate<class X>
+O#f76
+Pv
+-1 vector<X>&
+=
+Ppos
+0 int
+=
+D
+=
+GcheckFunctionType
+7 void
+O#f77
+D
+=
+=

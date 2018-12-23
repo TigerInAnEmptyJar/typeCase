@@ -1,0 +1,213 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class lLine2D</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class lLine2D in "geometry.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This is a limited straight line in 2-dimensions. In eukledean space the shortest connection between two points P and Q.
+<DL>
+<DT>Superclass
+<DD><A HREF="geomObj.html">geomObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">lLine2D</A>() 
+<LI><A HREF="#c3">lLine2D</A>(const <A HREF="point2d.html">point2D&</A> p, const <A HREF="point2d.html">point2D&</A> q) 
+<LI><A HREF="#c4">lLine2D</A>(const <A HREF="point2d.html">point2D&</A> p, const <A HREF="vector2d.html">vector2D&</A> v) 
+<LI><A HREF="#c5">lLine2D</A>(const <A HREF="lline2d.html">lLine2D&</A> l) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="point2d.html">point2D</A> <A HREF="#f2">P</A>() const
+<LI><A HREF="point2d.html">point2D</A> <A HREF="#f3">Q</A>() const
+<LI><A HREF="vector2d.html">vector2D</A> <A HREF="#f4">Direction</A>() const
+<LI><A HREF="point2d.html">point2D</A> <A HREF="#f5">Mid</A>() const
+<LI><A HREF="#f6"><vtype>int</vtype> isIn</A>(const <A HREF="point2d.html">point2D&</A> p) const
+<LI><A HREF="#f7"><vtype>void</vtype> newLine</A>(const <A HREF="point2d.html">point2D&</A> p, const <A HREF="point2d.html">point2D&</A> q) 
+<LI><A HREF="#f8"><vtype>repTD</vtype> getRep</A>() const
+<LI><A HREF="#f9"><vtype>double</vtype> length</A>() const
+<LI><A HREF="#f10"><vtype>void</vtype> setRep</A>(<vtype>repTD</vtype> r) 
+<LI><A HREF="#f11"><vtype>geomState</vtype> getState</A>() const
+<LI><A HREF="#f12"><vtype>int</vtype> getDimension</A>() const
+<LI><A HREF="#f13"><vtype>void</vtype> Zero</A>() 
+<LI><A HREF="#f14"><vtype>void</vtype> operator=</A>(const <A HREF="lline2d.html">lLine2D&</A> l) 
+<LI><A HREF="vector2d.html">vector2D</A> <A HREF="#f15">operator-</A>(const <A HREF="point2d.html">point2D&</A> p) const
+<LI><A HREF="lline2d.html">lLine2D</A> <A HREF="#f16">operator-</A>(const <A HREF="lline2d.html">lLine2D&</A> l) const
+<LI><A HREF="point2d.html">point2D</A> <A HREF="#f17">operator&&</A>(const <A HREF="lline2d.html">lLine2D&</A> l) const
+<LI><A HREF="#f18"><vtype>double</vtype> operator&</A>(const <A HREF="lline2d.html">lLine2D&</A> l) const
+<LI>virtual <A HREF="#f19"><vtype>string</vtype> toString</A>(<vtype>int</vtype> pt = -1) const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+<LI>virtual <A HREF="geomobj.html#f8"><vtype>string</vtype> geomObject::toString</A>() const
+</UL>
+<DD>new protected<ul>
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">lLine2D::lLine2D</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">lLine2D::lLine2D</A>(const <A HREF="point2d.html">point2D&</A> p, const <A HREF="point2d.html">point2D&</A> q) 
+<BR/><deff>
+Constructor. Sets the end points.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">lLine2D::lLine2D</A>(const <A HREF="point2d.html">point2D&</A> p, const <A HREF="vector2d.html">vector2D&</A> v) 
+<BR/><deff>
+Constructor. First end point is <var>p</var>, second end point is <var>p+v</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">lLine2D::lLine2D</A>(const <A HREF="lline2d.html">lLine2D&</A> l) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point2d.html">point2D</A> <A NAME="f2">lLine2D::P</A>() const
+<BR/><deff>
+Returns the first end point of the limited straight line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point2d.html">point2D</A> <A NAME="f3">lLine2D::Q</A>() const
+<BR/><deff>
+Returns the second end point of the limited straight line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector2d.html">vector2D</A> <A NAME="f4">lLine2D::Direction</A>() const
+<BR/><deff>
+Returns the direction from P to Q.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point2d.html">point2D</A> <A NAME="f5">lLine2D::Mid</A>() const
+<BR/><deff>
+Return the mid of the line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> lLine2D::isIn</A>(const <A HREF="point2d.html">point2D&</A> p) const
+<BR/><deff>
+Returns true if the distance of <var>p</var> to the line is smaller than __prec (1e-6)
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> lLine2D::newLine</A>(const <A HREF="point2d.html">point2D&</A> p, const <A HREF="point2d.html">point2D&</A> q) 
+<BR/><deff>
+Assign a new line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>repTD</vtype> lLine2D::getRep</A>() const
+<BR/><deff>
+Returns the representation of the line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>double</vtype> lLine2D::length</A>() const
+<BR/><deff>
+Returns the length of the line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> lLine2D::setRep</A>(<vtype>repTD</vtype> r) 
+<BR/><deff>
+Set the representation of the line, this can be eigther _cartesic_ or _polar_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>geomState</vtype> lLine2D::getState</A>() const
+<BR/><deff>
+Returns the state of the geometrical object. This can be _regular_, _undefined_, _infinite_ or _zero_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>int</vtype> lLine2D::getDimension</A>() const
+<BR/><deff>
+Returns the dimension of the line which is 2.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> lLine2D::Zero</A>() 
+<BR/><deff>
+Sets the state of the object to _zero_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> lLine2D::operator=</A>(const <A HREF="lline2d.html">lLine2D&</A> l) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector2d.html">vector2D</A> <A NAME="f15">lLine2D::operator-</A>(const <A HREF="point2d.html">point2D&</A> p) const
+<BR/><deff>
+Returns the distance of point <var>p</var> to the line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="lline2d.html">lLine2D</A> <A NAME="f16">lLine2D::operator-</A>(const <A HREF="lline2d.html">lLine2D&</A> l) const
+<BR/><deff>
+Returns the line of closest approach between two straight lines. If the lines intersect, both endpoints of the resulting line are the intersection point. If they don't intersect, the first endpoint lies on this line the second on <var>l</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point2d.html">point2D</A> <A NAME="f17">lLine2D::operator&&</A>(const <A HREF="lline2d.html">lLine2D&</A> l) const
+<BR/><deff>
+Returns the intersection point of two limited straight lines.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>double</vtype> lLine2D::operator&</A>(const <A HREF="lline2d.html">lLine2D&</A> l) const
+<BR/><deff>
+Returns the distance between two limited straight lines.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>string</vtype> lLine2D::toString</A>(<vtype>int</vtype> pt = -1) const
+<BR/><deff>
+Returns a string representation of the point. Depending on <var>pt</var> this can be eigther _cartesic_, _polar_ or in the points own representation (<var>pt</var>=-1, default) for the direction vector.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> lLine2D::Infinite</A>() 
+<BR/><deff>
+Sets the state of the object to _infinite_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>void</vtype> lLine2D::Undefined</A>() 
+<BR/><deff>
+Sets the state of the object to _undefined_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>void</vtype> lLine2D::Regular</A>() 
+<BR/><deff>
+Sets the state of the object to _regular_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

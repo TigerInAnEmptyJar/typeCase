@@ -1,0 +1,216 @@
+circle
+circle.html
+/users/data12/pion/ehrhardt/tofPack2/include/circle.h
+Ccircle
+-1 circle
+O#c2
+Pcen
+16 point3D
+=
+Pnor
+17 vector3D
+=
+PrIn
+1 float
+=
+DConstructor. Sets the center point, the normal vector and the radius.  
+=
+Ccircle
+-1 circle
+O#c3
+Pdescription
+129 shape_parameter&
+Sconst
+=
+DConstructor creates a circle from parameter.
+=
+grad
+1 float
+O#v2
+Dradius of the circle 
+=
+F~circle
+-1 virtual
+O#f2
+DDestructor 
+=
+FgetNumberOfPoints
+0 int
+Svirtual
+O#f3
+Lconst
+DReturns the number of points of the shape: 1. 
+=
+FgetPoint
+16 point3D
+Svirtual
+O#f4
+Lconst
+Pnum
+0 int
+=
+DReturns the <var>num<sup>th</sup></var> point of the shape: only <var>num</var>=0 is valid, this gives the center point. Else it returns an undefined point. 
+=
+Farea
+1 float
+Svirtual
+O#f5
+Lconst
+DReturns the area of the circle. 
+=
+FangularRange_Phi
+1 float
+Svirtual
+O#f6
+Lconst
+Porigin
+16 point3D&
+Sconst
+Vpoint3D(0,0,0)
+=
+PzDirection
+17 vector3D&
+Sconst
+Vvector3D(0,0,1)
+=
+DReturns the polar angular range of a circle, for any z direction and origin.  
+=
+FangularRange_Theta
+1 float
+Svirtual
+O#f7
+Lconst
+Porigin
+16 point3D&
+Sconst
+Vpoint3D(0,0,0)
+=
+PzDirection
+17 vector3D&
+Sconst
+Vvector3D(0,0,1)
+=
+DReturns the azimuthal angular range of a circle, for any z direction and origin.   
+=
+Fradius
+1 float
+O#f8
+Lconst
+DReturns the radius.  
+=
+FsetRadius
+7 void
+O#f9
+Ptmpfloat0
+-1 float
+=
+DSets the radius.  
+=
+FdistancePlane
+17 vector3D
+Svirtual
+O#f10
+Pp
+23 plane3D&
+Sconst
+=
+DReturns the distance vector from the plane to the shape.   
+=
+Fdistance
+17 vector3D
+Svirtual
+O#f11
+Pline
+21 sLine3D&
+Sconst
+=
+DReturns the distance vector from the straight line to the shape.  
+=
+FDraw
+7 void
+Svirtual
+O#f12
+Lconst
+Peye
+16 point3D&
+Sconst
+=
+Pplane
+23 plane3D&
+Sconst
+=
+PboundingBox
+19 vector4D*
+=
+PlColor
+0 int
+=
+PfColor
+0 int
+V8
+=
+PfStyle
+0 int
+V1001
+=
+DThis function is used for drawing a shape to a root-TCanvas.     
+DIt will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>.     
+DIt is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.  
+=
+FDraw
+7 void
+Svirtual
+O#f13
+Lconst
+Peye
+16 point3D&
+Sconst
+Vpoint3D(0,0,0)
+=
+Pplane
+23 plane3D&
+Sconst
+Vplane3D(point3D(0,0,1),vector3D(0,0,1))
+=
+PboundingBox
+19 vector4D*
+VNULL
+=
+Pident
+-1 TObject**
+VNULL
+=
+PlColor
+0 int
+V1
+=
+PfColor
+0 int
+V8
+=
+PfStyle
+0 int
+V1001
+=
+DThis function is used for drawing a shape to a root-TCanvas.     
+DIt will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>.     
+DIt is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.     
+DThe parameter <var>ident</var> will return a pointer to the drawn root-primitive to provide the distance-to-primitive functionality.    
+=
+Fdescription
+129 shape_parameter
+Svirtual
+O#f14
+Lconst
+DReturns a description of this shape, that would produce a shape like this.
+=
+FgetDescription
+129 shape_parameter
+Sstatic
+O#f15
+DStatic method. Returns a default shape-parameter with all necessary variables defined. Check contens of parameter for sensible values.
+=
+S0 1 planeShape
+planeshape.html
+planeShape
+=

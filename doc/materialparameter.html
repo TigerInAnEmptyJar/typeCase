@@ -1,0 +1,225 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class material_parameter</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class material_parameter in "materialparameter.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="baseparameter.html">base_parameter</A>
+<DT>Constructor
+<LI><A HREF="#c2">material_parameter</A>() 
+<LI><A HREF="#c3">material_parameter</A>(const <A HREF="materialparameter.html">material_parameter&</A> m) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~material_parameter</A>() 
+<LI><A HREF="materialparameter.html">material_parameter&</A> <A HREF="#f3">operator=</A>(const <A HREF="materialparameter.html">material_parameter&</A> m) 
+<LI><A HREF="#f4"><vtype>bool</vtype> IsActive</A>() const
+<LI><A HREF="#f5"><vtype>float</vtype> EnergyLoss</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f6"><vtype>float</vtype> Density</A>() const
+<LI><A HREF="#f7"><vtype>float</vtype> RadiationLength</A>() const
+<LI><A HREF="elementparameter.html">element_parameter</A> <A HREF="#f8">Element</A>(<vtype>int</vtype> num) const
+<LI><A HREF="#f9"><vtype>void</vtype> addElement</A>(const <A HREF="elementparameter.html">element_parameter&</A> ep) 
+<LI><A HREF="#f10"><vtype>void</vtype> setElement</A>(<vtype>int</vtype> pos, const <A HREF="elementparameter.html">element_parameter&</A> ep) 
+<LI><A HREF="#f11"><vtype>int</vtype> NumberOfElements</A>() const
+<LI><A HREF="#f12"><vtype>void</vtype> deleteElement</A>(<vtype>int</vtype> num) 
+<LI><A HREF="#f13"><vtype>int</vtype> NumberOfEnergyLossParams</A>() const
+<LI><A HREF="#f14"><vtype>void</vtype> ClearEnergyLoss</A>() 
+<LI><A HREF="#f15"><vtype>void</vtype> setActive</A>(<vtype>bool</vtype> is) 
+<LI><A HREF="#f16"><vtype>void</vtype> setEnergyLoss</A>(<vtype>int</vtype> num, <vtype>float</vtype> value) 
+<LI><A HREF="#f17"><vtype>void</vtype> setDensity</A>(<vtype>float</vtype> value) 
+<LI><A HREF="#f18"><vtype>void</vtype> setRadiationLength</A>(<vtype>float</vtype> value) 
+<LI><A HREF="#f19"><vtype>float</vtype> Speed</A>() const
+<LI><A HREF="#f20"><vtype>void</vtype> setSpeed</A>(<vtype>float</vtype> val) 
+<LI><A HREF="#f21"><vtype>bool</vtype> operator<</A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+<LI><A HREF="#f22"><vtype>bool</vtype> operator></A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+<LI><A HREF="#f23"><vtype>bool</vtype> operator==</A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+<LI><A HREF="#f24"><vtype>bool</vtype> operator<=</A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+<LI><A HREF="#f25"><vtype>bool</vtype> operator>=</A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="baseparameter.html#f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="baseparameter.html#f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="baseparameter.html#f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="baseparameter.html#f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<LI><A HREF="baseparameter.html#f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="baseparameter.html#f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<LI><A HREF="baseparameter.html#f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">material_parameter::material_parameter</A>() 
+<BR/><deff>
+Default constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">material_parameter::material_parameter</A>(const <A HREF="materialparameter.html">material_parameter&</A> m) 
+<BR/><deff>
+Copy constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">material_parameter::~material_parameter</A>() 
+<BR/><deff>
+Destructor 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="materialparameter.html">material_parameter&</A> <A NAME="f3">material_parameter::operator=</A>(const <A HREF="materialparameter.html">material_parameter&</A> m) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>bool</vtype> material_parameter::IsActive</A>() const
+<BR/><deff>
+Returns true if this is an active detecting material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>float</vtype> material_parameter::EnergyLoss</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> parameters value for the energy loss algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>float</vtype> material_parameter::Density</A>() const
+<BR/><deff>
+Returns the density of the material in units of g/cm³. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>float</vtype> material_parameter::RadiationLength</A>() const
+<BR/><deff>
+Returns the radiation length in the material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="elementparameter.html">element_parameter</A> <A NAME="f8">material_parameter::Element</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> element defined for the material. Returns a proton if <var>num</var> is non-valid. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> material_parameter::addElement</A>(const <A HREF="elementparameter.html">element_parameter&</A> ep) 
+<BR/><deff>
+Adds an element to the list of elements in the material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> material_parameter::setElement</A>(<vtype>int</vtype> pos, const <A HREF="elementparameter.html">element_parameter&</A> ep) 
+<BR/><deff>
+Set the <var>pos<sup>th</sup></var> element to <var>ep</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>int</vtype> material_parameter::NumberOfElements</A>() const
+<BR/><deff>
+Returns the number of elements used for the material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> material_parameter::deleteElement</A>(<vtype>int</vtype> num) 
+<BR/><deff>
+Removes the <var>num<sup>th</sup></var> element from the list of elements for the material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>int</vtype> material_parameter::NumberOfEnergyLossParams</A>() const
+<BR/><deff>
+Returns the number of parameters for the energy loss algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> material_parameter::ClearEnergyLoss</A>() 
+<BR/><deff>
+Clears the parameters for the energy loss algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>void</vtype> material_parameter::setActive</A>(<vtype>bool</vtype> is) 
+<BR/><deff>
+Set if the material is an active detector material. Usable for monte-carlo-simulations. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>void</vtype> material_parameter::setEnergyLoss</A>(<vtype>int</vtype> num, <vtype>float</vtype> value) 
+<BR/><deff>
+Sets the parameter <var>num</var> for the energy loss algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> material_parameter::setDensity</A>(<vtype>float</vtype> value) 
+<BR/><deff>
+Sets the density of the material in units of g/cm³. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> material_parameter::setRadiationLength</A>(<vtype>float</vtype> value) 
+<BR/><deff>
+Sets the radiation length in the material. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>float</vtype> material_parameter::Speed</A>() const
+<BR/><deff>
+Returns the speed of light in the material in units of the speed of light in vacuum. This should not exceed 1. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> material_parameter::setSpeed</A>(<vtype>float</vtype> val) 
+<BR/><deff>
+Sets the speed of light in the material in units of the speed of light in vacuum. This should not exceed 1. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>bool</vtype> material_parameter::operator<</A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+<BR/><deff>
+Coparison operator. Returns true if the name of this material is smaller the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>bool</vtype> material_parameter::operator></A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+<BR/><deff>
+Coparison operator. Returns true if the name of this material is larger the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>bool</vtype> material_parameter::operator==</A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+<BR/><deff>
+Coparison operator. Returns true if the name of this material is equal the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>bool</vtype> material_parameter::operator<=</A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+<BR/><deff>
+Coparison operator. Returns true if the name of this material is smaller or equal the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f25"><vtype>bool</vtype> material_parameter::operator>=</A>(const <A HREF="materialparameter.html">material_parameter&</A> p) 
+<BR/><deff>
+Coparison operator. Returns true if the name of this material is larger or equal the one of material <var>p</var>. Needed for the sorting algorithm of the root-TObjArray. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

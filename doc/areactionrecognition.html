@@ -1,0 +1,69 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class AReactionRecognition</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class AReactionRecognition in "AReactionRecognition.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This algorithm belongs to the basic algorithms. As the <a href="tofanalysis.html">tofAnalysis</a> the algorithm AReactionRecognition does not do any reaction-recognition itself, but it hosts the reaction classes that do the reaction-recognition themselves and only starts the RR and sorts the possible reactions for the event itself.
+<DL>
+<DT>Superclass
+<DD><A HREF="aalgorithm.html">AAlgorithm</A>
+<DT>Constructor
+<LI><A HREF="#c2">AReactionRecognition</A>(<A HREF="tsetup.html">TSetup&</A> setup, <A HREF="tevent.html">TEvent&</A> eventIn, <A HREF="afitalgorithm.html">AFitAlgorithm*</A> kinfitIn, <vtype>string</vtype> options) 
+<LI><A HREF="#c3">AReactionRecognition</A>(<A HREF="tsetup.html">TSetup&</A> setup, <A HREF="tevent.html">TEvent&</A> eventIn, <A HREF="afitalgorithm.html">AFitAlgorithm*</A> kinfitIn, <vtype>vector&lt;algorithm_parameter&gt;</vtype> processes) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~AReactionRecognition</A>() 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="#f3"><vtype>void*</vtype> process</A>(<vtype>void*</vtype> ptr) 
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="aalgorithm.html#f2"><vtype>string</vtype> AAlgorithm::getName</A>() const
+<LI>virtual <A HREF="aalgorithm.html#f4"><vtype>vector&lt;string&gt;</vtype> AAlgorithm::histogramNames</A>() 
+<LI>virtual <A HREF="http://root.cern.ch/html524/src/TH1.html">TH1*</A> <A HREF="aalgorithm.html#f5">AAlgorithm::histogram</A>(<vtype>string</vtype> histoName) 
+<LI>virtual <A HREF="aalgorithm.html#f6"><vtype>vector&lt;string&gt;</vtype> AAlgorithm::treeNames</A>() 
+<LI>virtual <A HREF="http://root.cern.ch/html524/src/TTree.html">TTree*</A> <A HREF="aalgorithm.html#f7">AAlgorithm::tree</A>(<vtype>string</vtype> treename) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">AReactionRecognition::AReactionRecognition</A>(<A HREF="tsetup.html">TSetup&</A> setup, <A HREF="tevent.html">TEvent&</A> eventIn, <A HREF="afitalgorithm.html">AFitAlgorithm*</A> kinfitIn, <vtype>string</vtype> options) 
+<BR/><deff>
+Constructor. Obsolete, but still provided for backward comptability.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">AReactionRecognition::AReactionRecognition</A>(<A HREF="tsetup.html">TSetup&</A> setup, <A HREF="tevent.html">TEvent&</A> eventIn, <A HREF="afitalgorithm.html">AFitAlgorithm*</A> kinfitIn, <vtype>vector&lt;algorithm_parameter&gt;</vtype> processes) 
+<BR/><deff>
+Constructor. The <var>setup</var> is needed to get the initial conditions (beam(s) and target) for the reaction recognition, <var>eventIn</var> is needed to get the event-information, like tracks, trigger, etc. The <var>kinfit</var>-variable is passed to the reactions if it is not NULL. Most likely it is not used, but the <a href="kinfit.html"> kinFit</a> from the fit-package is used.
+In <var>processes</var> a description of the reactions to check including cuts, etc. is passed to the RR.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> AReactionRecognition::~AReactionRecognition</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>void*</vtype> AReactionRecognition::process</A>(<vtype>void*</vtype> ptr) 
+<BR/><deff>
+Main function. It is called once every event. Here for every defined reaction the function <a href="rbasereaction.html#f12">checkNew(...)</a> is called and saved if the result is not NULL.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

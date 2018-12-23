@@ -1,0 +1,194 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class lLine3D</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class lLine3D in "geometry.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This class represents a limited straight line. In eukledean space the shortest connection between the points P and Q.
+<DL>
+<DT>Superclass
+<DD><A HREF="geomobj.html">geomObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">lLine3D</A>() 
+<LI><A HREF="#c3">lLine3D</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="point3d.html">point3D&</A> q) 
+<LI><A HREF="#c4">lLine3D</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="vector3d.html">vector3D&</A> v) 
+<LI><A HREF="#c5">lLine3D</A>(const <A HREF="lline3d.html">lLine3D&</A> l) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f2">P</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f3">Q</A>() const
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f4">Direction</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f5">Mid</A>() const
+<LI><A HREF="#f6"><vtype>int</vtype> isIn</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<LI><A HREF="#f7"><vtype>void</vtype> newLine</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="point3d.html">point3D&</A> q) 
+<LI><A HREF="#f8"><vtype>rep3D</vtype> getRep</A>() const
+<LI><A HREF="#f9"><vtype>double</vtype> length</A>() const
+<LI><A HREF="#f10"><vtype>void</vtype> setRep</A>(<vtype>rep3D</vtype> r) 
+<LI><A HREF="#f11"><vtype>geomState</vtype> getState</A>() const
+<LI><A HREF="#f12"><vtype>int</vtype> getDimension</A>() const
+<LI><A HREF="#f13"><vtype>void</vtype> Zero</A>() 
+<LI><A HREF="#f14"><vtype>void</vtype> operator=</A>(const <A HREF="lline3d.html">lLine3D&</A> l) 
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="#f15">operator-</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f16">operator&&</A>(const <A HREF="lline3d.html">lLine3D&</A> l) const
+<LI><A HREF="#f17"><vtype>double</vtype> operator&</A>(const <A HREF="lline3d.html">lLine3D&</A> l) const
+<LI>virtual <A HREF="#f18"><vtype>string</vtype> toString</A>(<vtype>int</vtype> pt = -1) const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+<LI>virtual <A HREF="geomobj.html#f8"><vtype>string</vtype> geomObject::toString</A>() const
+</UL>
+<DD>new protected<ul>
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">lLine3D::lLine3D</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">lLine3D::lLine3D</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="point3d.html">point3D&</A> q) 
+<BR/><deff>
+Constructor. Sets the end points.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">lLine3D::lLine3D</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="vector3d.html">vector3D&</A> v) 
+<BR/><deff>
+Constructor. Sets the first end point to <var>p</var> and the second to <var>p+v</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">lLine3D::lLine3D</A>(const <A HREF="lline3d.html">lLine3D&</A> l) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f2">lLine3D::P</A>() const
+<BR/><deff>
+Returns the first endpoint.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f3">lLine3D::Q</A>() const
+<BR/><deff>
+Returns the second endpoint.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f4">lLine3D::Direction</A>() const
+<BR/><deff>
+Returns the direction from the first endpoint P to the second endpoint Q.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f5">lLine3D::Mid</A>() const
+<BR/><deff>
+Returns the middle point of the limited straight line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> lLine3D::isIn</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<BR/><deff>
+Returns true if the distance of the point <var>p</var> to this line is smaller than __prec (1e-6).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> lLine3D::newLine</A>(const <A HREF="point3d.html">point3D&</A> p, const <A HREF="point3d.html">point3D&</A> q) 
+<BR/><deff>
+Assigns new properties to the line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>rep3D</vtype> lLine3D::getRep</A>() const
+<BR/><deff>
+Returns the representation of the endpoints.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>double</vtype> lLine3D::length</A>() const
+<BR/><deff>
+Returns the length of the limited straight line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> lLine3D::setRep</A>(<vtype>rep3D</vtype> r) 
+<BR/><deff>
+Set the representation of the endpoints this can be eigther _cartesic3_, _cylindric_ or _spheric_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>geomState</vtype> lLine3D::getState</A>() const
+<BR/><deff>
+Returns the state of the geometrical object. This can be _regular_, _undefined_, _infinite_ or _zero_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>int</vtype> lLine3D::getDimension</A>() const
+<BR/><deff>
+Returns the lines dimension which is 3.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> lLine3D::Zero</A>() 
+<BR/><deff>
+Sets the state of the object to _zero_.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> lLine3D::operator=</A>(const <A HREF="lline3d.html">lLine3D&</A> l) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f15">lLine3D::operator-</A>(const <A HREF="point3d.html">point3D&</A> p) const
+<BR/><deff>
+Returns the distance of a point to this line. Vector points to this line.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f16">lLine3D::operator&&</A>(const <A HREF="lline3d.html">lLine3D&</A> l) const
+<BR/><deff>
+Returns the intersection point of this line with <var>l</var>, if it exists.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>double</vtype> lLine3D::operator&</A>(const <A HREF="lline3d.html">lLine3D&</A> l) const
+<BR/><deff>
+Returns the minimal distance between the two lines.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>string</vtype> lLine3D::toString</A>(<vtype>int</vtype> pt = -1) const
+<BR/><deff>
+Returns a string representation of the line. Depending on <var>pt</var> this can be eigther _cartesic3_, _cylindric_, _spheric_ or in the points' own representation (<var>pt</var>=-1, default).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> lLine3D::Undefined</A>() 
+<BR/><deff>
+Sets the state of the object to _undefined_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

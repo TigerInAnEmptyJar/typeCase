@@ -1,0 +1,261 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class strawTube</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class strawTube in "strawTube.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This class implements a straw-tube as it is used in the COSY-TOF- and PANDA-experiment.
+It is derived of the shape <a href="cylinder.html">cylinder</a> giving it the properties of the base class. Additionally it has an iso-chrone-radius. This is the distance a particle passed the counter's central wire.
+<DL>
+<DT>Superclass
+<DD><A HREF="cylinder.html">cylinder</A>
+<DT>Constructor
+<LI><A HREF="#c2">strawTube</A>() 
+<LI><A HREF="#c3">strawTube</A>(<A HREF="point3d.html">point3D</A> centerIn, <A HREF="vector3d.html">vector3D</A> lineDirection, <vtype>float</vtype> rad, <A HREF="vector3d.html">vector3D</A> stackDirection, <A HREF="vector3d.html">vector3D</A> shiftDirection, <vtype>float</vtype> isoChroneR, <vtype>int</vtype> halv, <vtype>int</vtype> halvAt) 
+<LI><A HREF="#c4">strawTube</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<LI><A HREF="#c5">strawTube</A>(const <A HREF="strawtube.html">strawTube&</A> tube) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~strawTube</A>() 
+<LI>virtual <A HREF="#f3"><vtype>float</vtype> getIsoChroneRadius</A>() const
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f4">getStackingDirection</A>() const
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f5">getShift</A>() const
+<LI>virtual <A HREF="#f6"><vtype>int</vtype> getNumberOfHalvedElements</A>() const
+<LI>virtual <A HREF="#f7"><vtype>int</vtype> getHalvedAt</A>() const
+<LI>virtual <A HREF="#f8"><vtype>void</vtype> setIsoChroneRadius</A>(<vtype>float</vtype> value) 
+<LI>virtual <A HREF="#f9"><vtype>void</vtype> setStackingDirection</A>(<A HREF="vector3d.html">vector3D</A> value) 
+<LI>virtual <A HREF="#f10"><vtype>void</vtype> setShift</A>(<A HREF="vector3d.html">vector3D</A> value) 
+<LI>virtual <A HREF="#f11"><vtype>void</vtype> setNumberOfHalvedElements</A>(<vtype>int</vtype> value) 
+<LI>virtual <A HREF="#f12"><vtype>void</vtype> setHalvedAt</A>(<vtype>int</vtype> value) 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f16">getNext</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="#f15"><vtype>void</vtype> operator=</A>(const <A HREF="volumeshape.html">volumeShape&</A> s) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f14">getClone</A>() 
+<LI>virtual <A HREF="#f19"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<LI>virtual <A HREF="#f20"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<LI>virtual <A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#f21">description</A>() const
+<LI>virtual <A HREF="#f13"><vtype>float</vtype> getFlightPathInShape</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f14">getClone</A>() 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f16">getNext</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="#f17">getEnvelope</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="#f18"><vtype>int</vtype> suspect</A>(const <A HREF="sline3d.html">sLine3D&</A> line, <vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="#f19"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<LI>virtual <A HREF="#f20"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="cylinder.html#f3">cylinder::getDirection</A>(<vtype>int</vtype> num = 0) const
+<LI>virtual <A HREF="lline3d.html">lLine3D</A> <A HREF="cylinder.html#f4">cylinder::getLine</A>() const
+<LI><A HREF="cylinder.html#f5"><vtype>float</vtype> cylinder::getRadius</A>() const
+<LI><A HREF="cylinder.html#f6"><vtype>void</vtype> cylinder::setLine</A>(const <A HREF="lline3d.html">lLine3D&</A> l) 
+<LI><A HREF="cylinder.html#f7"><vtype>void</vtype> cylinder::setLine</A>(<A HREF="point3d.html">point3D</A> p, <A HREF="point3d.html">point3D</A> q) 
+<LI><A HREF="cylinder.html#f8"><vtype>void</vtype> cylinder::setLine</A>(<A HREF="point3d.html">point3D</A> c, <A HREF="vector3d.html">vector3D</A> d) 
+<LI><A HREF="cylinder.html#f9"><vtype>void</vtype> cylinder::setRadius</A>(<vtype>float</vtype> r) 
+<LI>virtual <A HREF="volumeshape.html">volumeShape*</A> <A HREF="cylinder.html#f11">cylinder::getEnvelope</A>(<vtype>int</vtype> stackType) 
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="cylinder.html#f12">cylinder::distance</A>(const <A HREF="sline3d.html">sLine3D&</A> l) 
+<LI>virtual <A HREF="sline3d.html">sLine3D</A> <A HREF="cylinder.html#f13">cylinder::Normal</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="cylinder.html#f14"><vtype>bool</vtype> cylinder::cut</A>(const <A HREF="fiber.html">fiber&</A> f) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="cylinder.html#f17">cylinder::HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="cylinder.html#f18">cylinder::HitParams</A>(const <A HREF="planeshape.html">planeShape&</A> shape, <A HREF="point3d.html">point3D</A> origin) 
+<LI>virtual <A HREF="point3d.html">point3D</A> <A HREF="cylinder.html#f19">cylinder::entrance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="cylinder.html#f20">cylinder::Hitting</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI><A HREF="volumeshape.html#f3"><vtype>float</vtype> volumeShape::getMaxDistance</A>() const
+<LI><A HREF="volumeshape.html#f4"><vtype>void</vtype> volumeShape::setMaxDistance</A>(<vtype>float</vtype> value) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="volumeshape.html#f7">volumeShape::HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="volumeshape.html#f8">volumeShape::Hitting</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="volumeshape.html#f9">volumeShape::HitParams</A>(const <A HREF="planeshape.html">planeShape&</A> shape, <A HREF="point3d.html">point3D</A> origin) 
+<LI><A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="baseshape.html#f2">base_shape::getName</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#f3">base_shape::getCenter</A>() const
+<LI><A HREF="baseshape.html#f4"><vtype>void</vtype> base_shape::setCenter</A>(<A HREF="point3d.html">point3D</A> c) 
+<LI>virtual <A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#f5">base_shape::entrance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="baseshape.html#f6">base_shape::distance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="sline3d.html">sLine3D</A> <A HREF="baseshape.html#f7">base_shape::Normal</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="baseshape.html#f8"><vtype>bool</vtype> base_shape::cut</A>(const <A HREF="fiber.html">fiber&</A> f) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="baseshape.html#f9">base_shape::HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI><A HREF="baseparameter.html#f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="baseparameter.html#f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="baseparameter.html#f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="baseparameter.html#f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<LI><A HREF="baseparameter.html#f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="baseparameter.html#f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<LI><A HREF="baseparameter.html#f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+<DT>Protected inherrited variables
+<DD><A HREF="vector3d.html">vector3D</A> <A HREF="cylinder.html#v2">cylinder::direction</A>
+<DD><vtype>float</vtype> <A HREF="cylinder.html#v3">cylinder::radius</A>
+<DD><A HREF="vector3d.html">vector3D</A> <A HREF="volumeshape.html#v2">volumeShape::res</A>
+<DD><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#v2">base_shape::center</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">strawTube::strawTube</A>() 
+<BR/><deff>
+Default constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">strawTube::strawTube</A>(<A HREF="point3d.html">point3D</A> centerIn, <A HREF="vector3d.html">vector3D</A> lineDirection, <vtype>float</vtype> rad, <A HREF="vector3d.html">vector3D</A> stackDirection, <A HREF="vector3d.html">vector3D</A> shiftDirection, <vtype>float</vtype> isoChroneR, <vtype>int</vtype> halv, <vtype>int</vtype> halvAt) 
+<BR/><deff>
+Constructor. Creates a straw tube. <var>centerIn</var> is the center of the tube, <var>line</var> the direction from the center to one end of the tube, <var>rad</var> is the radius of the tube. It has an additional radius-variable the iso-chrone-radius.
+To stack the tubes a stack-direction is necessary and, if they are stacked in more than one layer, the shift from one layer to the next has to be given. <var>hav</var> is the number of elements halved due to beam-tube and <var>halvAt</var> is the element-number of the first halved element.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">strawTube::strawTube</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<BR/><deff>
+Constructor. Creates a straw-tube with the properties from the description.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">strawTube::strawTube</A>(const <A HREF="strawtube.html">strawTube&</A> tube) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> strawTube::~strawTube</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>float</vtype> strawTube::getIsoChroneRadius</A>() const
+<BR/><deff>
+Returns the Iso-Chrone-Radius.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f4">strawTube::getStackingDirection</A>() const
+<BR/><deff>
+Returns the stacking direction of the strawTube-stack.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f5">strawTube::getShift</A>() const
+<BR/><deff>
+Returns the shift-vector from the first layer to the second one.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> strawTube::getNumberOfHalvedElements</A>() const
+<BR/><deff>
+Return the number of elements that are halved due to beam-tube.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>int</vtype> strawTube::getHalvedAt</A>() const
+<BR/><deff>
+Returns the element number of the element that is first halved due to beam-tube.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> strawTube::setIsoChroneRadius</A>(<vtype>float</vtype> value) 
+<BR/><deff>
+Sets the Iso-Chrone-radius.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> strawTube::setStackingDirection</A>(<A HREF="vector3d.html">vector3D</A> value) 
+<BR/><deff>
+Sets the direction in which the strawTubes shall be stacked.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> strawTube::setShift</A>(<A HREF="vector3d.html">vector3D</A> value) 
+<BR/><deff>
+Sets the shift-vector, from the front layer to the second layer.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> strawTube::setNumberOfHalvedElements</A>(<vtype>int</vtype> value) 
+<BR/><deff>
+Sets the number of elements in the stack that are halved due to beam-tube.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> strawTube::setHalvedAt</A>(<vtype>int</vtype> value) 
+<BR/><deff>
+Sets the number of the element that is first halved due to beam-tube.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>float</vtype> strawTube::getFlightPathInShape</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the length of the path a <var>line</var> has in the shape.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f14">strawTube::getClone</A>() 
+<BR/><deff>
+Returns a clone of the shape. Take care that you free the memory after use.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>void</vtype> strawTube::operator=</A>(const <A HREF="volumeshape.html">volumeShape&</A> s) 
+<BR/><deff>
+Copy operator. Works only if <var>s</var> is a strawTube or a <a href="cylinder.html">cylinder</a>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f16">strawTube::getNext</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<BR/><deff>
+Assuming a certain stackType, the shape of the elements <var>times</var> farther in the stack is generated and returned.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="volumeshape.html">volumeShape*</A> <A NAME="f17">strawTube::getEnvelope</A>(<vtype>int</vtype> times, <vtype>int</vtype> stackType) 
+<BR/><deff>
+Returns the enveloping shape of the stack of <var>times</var> strawTubes, stacked in type <var>stackType</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>int</vtype> strawTube::suspect</A>(const <A HREF="sline3d.html">sLine3D&</A> line, <vtype>int</vtype> stackType) 
+<BR/><deff>
+For a stack of strawTubes with a certain <var>stackType</var>, the hit of the <var>line</var> with the overall shape of the stack is calculated computing the element number of the element that was most likely hit.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> strawTube::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<BR/><deff>
+Projects and draws the quadrangle using the root-Draw functions to a root-TCanvas.
+The projection plane is <var>plane</var>, the eye-point is <var>eye</var>. You can provide line color, fill color and fill style. Supplying a suitable pointer for the bounding-box returns the size of the shape on the canvas. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> strawTube::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<BR/><deff>
+Projects and draws the quadrangle using the root-Draw functions to a root-TCanvas.
+The projection plane is <var>plane</var>, the eye-point is <var>eye</var>. You can provide line color, fill color and fill style. Supplying a suitable pointer for the bounding-box returns the size of the shape on the canvas. Ident can hold a pointer to the TPolyLine that was drawn to canvas.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f21">strawTube::description</A>() const
+<BR/><deff>
+Returns a description of this strawTube.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f22">strawTube::getDescription</A>() 
+<BR/><deff>
+Static method. Returns a default description of a strawTube with all necessary variables declared.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

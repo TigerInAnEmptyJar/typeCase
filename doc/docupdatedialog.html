@@ -1,0 +1,200 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class doc_update_dialog</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class doc_update_dialog in "doc_update_dialog.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This widget compares two classes and their methods and variables. If two methods (one from each class) match they are put into the tree-widget and if accepted, the description defined for the "old"-version is copied to the "new" one. 
+Methods, Variables, etc. that don't match are copied to the list-boxes at top for manual assignment.
+<DL>
+<DT>Superclass
+<DD><A HREF="http://doc.trolltech.com/4.4/qdialog.html">QDialog</A>
+<DT>Constructor
+<LI><A HREF="#c2"><vtype></vtype> doc_update_dialog</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent, <vtype>bool</vtype> modal = false, <vtype>WFlags</vtype> fl = 0) 
+<LI><A HREF="#c3"><vtype></vtype> doc_update_dialog</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent, <vtype>Qt::WindowFlags</vtype> fl = 0) 
+<DT>Functions
+<DD>new public<ul>
+<LI>virtual const <A HREF="#f2"><vtype>char*</vtype> className</A>() 
+<LI>const <A HREF="#f3"><vtype>bool</vtype> inherrits</A>(const <vtype>char*</vtype> clname) 
+<LI>virtual <A HREF="#f6"><vtype>bool</vtype> setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<LI>virtual <A HREF="#f7"><vtype>QVariant</vtype> property</A>(const <vtype>char*</vtype> name) const
+<LI>virtual <A HREF="#f8"><vtype>QMetaObject*</vtype> metaObject</A>() const
+<LI><A HREF="#f9"><vtype>void</vtype> setOldClass</A>(<A HREF="tmyclass.html">TMyClass*</A> old) 
+<LI><A HREF="#f10"><vtype>void</vtype> setNewClass</A>(<A HREF="tmyclass.html">TMyClass*</A> nCl) 
+<LI><A HREF="#f11"><vtype>bool</vtype> classesMatch</A>() 
+</UL>
+<DD>static<ul>
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f4">tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<LI>static <A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="#f5">trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+</UL>
+<DT>Slots
+<DD>new public<ul>
+<LI>virtual <A HREF="#l2"><vtype>void</vtype> accept</A>() 
+<LI>virtual <A HREF="#l3"><vtype>void</vtype> onAssignClick</A>() 
+<LI>virtual <A HREF="#l4"><vtype>void</vtype> onOldClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistboxitem.html">QListBoxItem*</A> it) 
+<LI>virtual <A HREF="#l5"><vtype>void</vtype> onNewClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistboxitem.html">QListBoxItem*</A> it) 
+<LI>virtual <A HREF="#l6"><vtype>void</vtype> onTogeterClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<LI>virtual <A HREF="#l7"><vtype>void</vtype> onOldClick</A>(<A HREF="http://doc.trolltech.com/4.4/qlistwidgetitem.html">QListWidgetItem*</A> it) 
+<LI>virtual <A HREF="#l8"><vtype>void</vtype> onNewClick</A>(<A HREF="http://doc.trolltech.com/4.4/qlistwidgetitem.html">QListWidgetItem*</A> it) 
+<LI>virtual <A HREF="#l9"><vtype>void</vtype> onTogeterClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2"><vtype></vtype> doc_update_dialog::doc_update_dialog</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent, <vtype>bool</vtype> modal = false, <vtype>WFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3"><vtype></vtype> doc_update_dialog::doc_update_dialog</A>(<A HREF="http://doc.trolltech.com/4.4/qwidget.html">QWidget*</A> parent, <vtype>Qt::WindowFlags</vtype> fl = 0) 
+<BR/><deff>
+Constructor. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>char*</vtype> doc_update_dialog::className</A>() 
+<BR/><deff>
+The className() function that returns the class name as a string at runtime, 
+without requiring native runtime type information (RTTI) support through the C++ compiler.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>bool</vtype> doc_update_dialog::inherrits</A>(const <vtype>char*</vtype> clname) 
+<BR/><deff>
+the inherits() function that returns whether an object is an instance of a class 
+that inherits a specified class within the QObject inheritance tree. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f4">doc_update_dialog::tr</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or sourceText itself if there is no 
+appropriate translated version. The translation context is QObject with comment 
+(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+a reimplementation of this function with the subclass name as context.
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A NAME="f5">doc_update_dialog::trUtf8</A>(const <vtype>char*</vtype> sourceText, const <vtype>char*</vtype> comment) 
+<BR/><deff>
+Returns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+is no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+Warning: This method is reentrant only if all translators are installed before calling 
+this method. Installing or removing translators while performing translations is not 
+supported. Doing so will probably result in crashes or other undesirable behavior. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>bool</vtype> doc_update_dialog::setProperty</A>(const <vtype>char*</vtype> name, const <vtype>QVariant&</vtype> value) 
+<BR/><deff>
+Sets the value of the object's name property to value.
+Returns TRUE if the operation was successful; otherwise returns FALSE. 
+Information about all available properties is provided through the metaObject()
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>QVariant</vtype> doc_update_dialog::property</A>(const <vtype>char*</vtype> name) const
+<BR/><deff>
+Returns the value of the object's name property. 
+If no such property exists, the returned variant is invalid. 
+Information about all available properties are provided through the metaObject(). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>QMetaObject*</vtype> doc_update_dialog::metaObject</A>() const
+<BR/><deff>
+Returns a pointer to the meta object of this object. 
+A meta object contains information about a class that inherits QObject, e.g. class name,
+superclass name, properties, signals and slots. Every class that contains the 
+Q_OBJECT macro will also have a meta object. 
+The meta object information is required by the signal/slot connection mechanism 
+and the property system. The functions isA() and inherits() also make use of the meta object. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>void</vtype> doc_update_dialog::setOldClass</A>(<A HREF="tmyclass.html">TMyClass*</A> old) 
+<BR/><deff>
+Set the class named as "old", the one with the descriptions.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> doc_update_dialog::setNewClass</A>(<A HREF="tmyclass.html">TMyClass*</A> nCl) 
+<BR/><deff>
+Set the class named as "new", the one without descriptions so far.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>bool</vtype> doc_update_dialog::classesMatch</A>() 
+<BR/><deff>
+Returns true if both classes are set and all properties of both classes could be assigned to the corresponding property of the other class.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l2"><vtype>void</vtype> doc_update_dialog::accept</A>() 
+<BR/><deff>
+Overwritten accep() slot from QDialog.
+Copies the descriptions from the "old" class to the "new" class.
+For all assigned properties this is also done.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l3"><vtype>void</vtype> doc_update_dialog::onAssignClick</A>() 
+<BR/><deff>
+Assigns the current property in the "new"-box to the current property in the "old"-box, adding a new line to the tree-widget and removing the properties from the unassigned boxes.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l4"><vtype>void</vtype> doc_update_dialog::onOldClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistboxitem.html">QListBoxItem*</A> it) 
+<BR/><deff>
+Does nothing so far. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l5"><vtype>void</vtype> doc_update_dialog::onNewClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistboxitem.html">QListBoxItem*</A> it) 
+<BR/><deff>
+Does nothing so far. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l6"><vtype>void</vtype> doc_update_dialog::onTogeterClick</A>(<A HREF="http://doc.trolltech.com/3.3/qlistviewitem.html">QListViewItem*</A> it) 
+<BR/><deff>
+If <var>it</var> is non-NULL, the two properties involved are moved to the unassigned boxes. Qt3-mode; non-visible in Qt4-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l7"><vtype>void</vtype> doc_update_dialog::onOldClick</A>(<A HREF="http://doc.trolltech.com/4.4/qlistwidgetitem.html">QListWidgetItem*</A> it) 
+<BR/><deff>
+Does nothing so far. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l8"><vtype>void</vtype> doc_update_dialog::onNewClick</A>(<A HREF="http://doc.trolltech.com/4.4/qlistwidgetitem.html">QListWidgetItem*</A> it) 
+<BR/><deff>
+Does nothing so far. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="l9"><vtype>void</vtype> doc_update_dialog::onTogeterClick</A>(<A HREF="http://doc.trolltech.com/4.4/qtreewidgetitem.html">QTreeWidgetItem*</A> it) 
+<BR/><deff>
+If <var>it</var> is non-NULL, the two properties involved are moved to the unassigned boxes. Qt4-mode; non-visible in Qt3-mode.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

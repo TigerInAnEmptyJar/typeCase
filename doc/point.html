@@ -1,0 +1,214 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class point</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class point in "geometry.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+This class represents a point in n-dimensional space.
+<DL>
+<DT>Superclass
+<DD><A HREF="geomobj.html">geomObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">point</A>(<vtype>int</vtype> dim = 0) 
+<LI><A HREF="#c3">point</A>(const <A HREF="point.html">point&</A> p) 
+<LI><A HREF="#c4">point</A>(const <A HREF="point2d.html">point2D&</A> p) 
+<LI><A HREF="#c5">point</A>(const <A HREF="point3d.html">point3D&</A> p) 
+<LI><A HREF="#c6">point</A>(const <A HREF="point4d.html">point4D&</A> p) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~point</A>() 
+<LI>virtual <A HREF="#f3"><vtype>void</vtype> reDimension</A>(<vtype>int</vtype> newDim) 
+<LI><A HREF="#f4"><vtype>void</vtype> setValues</A>(<vtype>double</vtype> values[]) 
+<LI><A HREF="#f5"><vtype>void</vtype> setValues</A>(<vtype>double</vtype> f1 = 0, <vtype>double</vtype> f2 = 0, <vtype>double</vtype> f3 = 0, <vtype>double</vtype> f4 = 0, <vtype>double</vtype> f5 = 0, <vtype>double</vtype> f6 = 0, <vtype>double</vtype> f7 = 0, <vtype>double</vtype> f8 = 0, <vtype>double</vtype> f9 = 0, <vtype>double</vtype> f10 = 0, <vtype>double</vtype> f11 = 0, <vtype>double</vtype> f12 = 0, <vtype>double</vtype> f13 = 0, <vtype>double</vtype> f14 = 0, <vtype>double</vtype> f15 = 0, <vtype>double</vtype> f16 = 0, <vtype>double</vtype> f17 = 0, <vtype>double</vtype> f18 = 0, <vtype>double</vtype> f19 = 0, <vtype>double</vtype> f20 = 0) 
+<LI>virtual <A HREF="#f6"><vtype>void</vtype> setValue</A>(<vtype>int</vtype> pos, <vtype>double</vtype> valueIn) 
+<LI>virtual <A HREF="#f8"><vtype>double</vtype> getValue</A>(<vtype>int</vtype> pos) const
+<LI>virtual <A HREF="#f9"><vtype>int</vtype> getDimension</A>() const
+<LI><A HREF="#f11"><vtype>void</vtype> operator=</A>(const <A HREF="point.html">point&</A> p) 
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f12">operator-</A>(const <A HREF="point.html">point&</A> q) 
+<LI><A HREF="point.html">point</A> <A HREF="#f13">operator-</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="point.html">point</A> <A HREF="#f14">operator+</A>(const <A HREF="vector.html">Vector&</A> v) 
+<LI><A HREF="#f15"><vtype>int</vtype> operator==</A>(const <A HREF="point.html">point&</A> p) 
+<LI>virtual <A HREF="#f16"><vtype>double</vtype> operator[]</A>(<vtype>int</vtype> pos) const
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="#f10"><vtype>geomState</vtype> getState</A>() const
+<LI>virtual <A HREF="#f7"><vtype>void</vtype> Zero</A>() 
+<LI>virtual <A HREF="#f17"><vtype>string</vtype> toString</A>() const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+</UL>
+<DT>Protected Variables
+<DD><vtype>int</vtype> <A HREF="#v2">dimension</A>
+<DD><vtype>int</vtype> <A HREF="#v3">infinityPos</A>
+<DD><vtype>double</vtype> <A HREF="#v4">v[20]</A>
+<DD><vtype>double*</vtype> <A HREF="#v5">value</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">point::point</A>(<vtype>int</vtype> dim = 0) 
+<BR/><deff>
+Constructor set the dimension of the space the point is located in (default =0).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">point::point</A>(const <A HREF="point.html">point&</A> p) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">point::point</A>(const <A HREF="point2d.html">point2D&</A> p) 
+<BR/><deff>
+Copy constructor from 2D.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">point::point</A>(const <A HREF="point3d.html">point3D&</A> p) 
+<BR/><deff>
+Copy constructor from 3D.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c6">point::point</A>(const <A HREF="point4d.html">point4D&</A> p) 
+<BR/><deff>
+Copy constructor from 4D.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v2">int dimension</A>
+<BR/><deff>
+dimension of the space the point is located in
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v3">int infinityPos</A>
+<BR/><deff>
+position where there is a first inf-value. obsolete.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v4">double v[20]</A>
+<BR/><deff>
+values for dimension 0-20
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="#v5">double* value</A>
+<BR/><deff>
+values for dimension 20+
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> point::~point</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>void</vtype> point::reDimension</A>(<vtype>int</vtype> newDim) 
+<BR/><deff>
+Erase all information about position of the point and re-allocate it in <var>newDim</var>-dimensional space.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> values[]) 
+<BR/><deff>
+Sets all elements of the point in cartesic coordinates. Take care that <var>values</var> is correctly dimensioned.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> point::setValues</A>(<vtype>double</vtype> f1 = 0, <vtype>double</vtype> f2 = 0, <vtype>double</vtype> f3 = 0, <vtype>double</vtype> f4 = 0, <vtype>double</vtype> f5 = 0, <vtype>double</vtype> f6 = 0, <vtype>double</vtype> f7 = 0, <vtype>double</vtype> f8 = 0, <vtype>double</vtype> f9 = 0, <vtype>double</vtype> f10 = 0, <vtype>double</vtype> f11 = 0, <vtype>double</vtype> f12 = 0, <vtype>double</vtype> f13 = 0, <vtype>double</vtype> f14 = 0, <vtype>double</vtype> f15 = 0, <vtype>double</vtype> f16 = 0, <vtype>double</vtype> f17 = 0, <vtype>double</vtype> f18 = 0, <vtype>double</vtype> f19 = 0, <vtype>double</vtype> f20 = 0) 
+<BR/><deff>
+Sets up to dimension elements in cartesic coordinates. If the dimension is larger than 20 it sets only the 20 first elements.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>void</vtype> point::setValue</A>(<vtype>int</vtype> pos, <vtype>double</vtype> valueIn) 
+<BR/><deff>
+Setter. Sets the <var>pos<sup>th</sup></var> element of the point in cartesic coordinates to <var>value</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> point::Zero</A>() 
+<BR/><deff>
+Sets the state of the objet to _zero_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>double</vtype> point::getValue</A>(<vtype>int</vtype> pos) const
+<BR/><deff>
+Getter. Returns the <var>pos<sup>th</sup></var> element of the point in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>int</vtype> point::getDimension</A>() const
+<BR/><deff>
+Returns the dimension of the space the point is located in.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>geomState</vtype> point::getState</A>() const
+<BR/><deff>
+Returns the state of the geometrical object. This can be _regular_, _undefined_, _infinite_ or _zero_. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> point::operator=</A>(const <A HREF="point.html">point&</A> p) 
+<BR/><deff>
+Copy operator. Works only if the dimension of this point is equal to the dimension of <var>p</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f12">point::operator-</A>(const <A HREF="point.html">point&</A> q) 
+<BR/><deff>
+Subtraction operator. Return the distance vector between point <var>q</var> and this point.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point.html">point</A> <A NAME="f13">point::operator-</A>(const <A HREF="vector.html">Vector&</A> v) 
+<BR/><deff>
+Subtraction operator. Add the vector <var>v</var> multiplied by -1 to the point and return the result.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point.html">point</A> <A NAME="f14">point::operator+</A>(const <A HREF="vector.html">Vector&</A> v) 
+<BR/><deff>
+Addition operator. Add a vector to a point and return the result.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>int</vtype> point::operator==</A>(const <A HREF="point.html">point&</A> p) 
+<BR/><deff>
+Comparison operator. Returns 1 if the dimension as well as the individual elements of the two points are equal.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>double</vtype> point::operator[]</A>(<vtype>int</vtype> pos) const
+<BR/><deff>
+Access-operator. Returns the <var>pos<sup>th</sup></var> element of the point in cartesic coordinates.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>string</vtype> point::toString</A>() const
+<BR/><deff>
+Returns a cartesic string representation of the point.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

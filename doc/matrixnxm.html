@@ -1,0 +1,287 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class matrixNxM</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class matrixNxM in "geometry.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+General matrix. Note that inversion only works for square matrices.
+<DL>
+<DT>Superclass
+<DD><A HREF="geomobj.html">geomObject</A>
+<DT>Constructor
+<LI><A HREF="#c2">matrixNxM</A>(<vtype>int</vtype> n = 1, <vtype>int</vtype> m = 1) 
+<LI><A HREF="#c3">matrixNxM</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> mat) 
+<LI><A HREF="#c4">matrixNxM</A>(const <vtype>matrixNxMT&lt;double&gt;&</vtype> mat) 
+<LI><A HREF="#c5">matrixNxM</A>(const <vtype>matrixNxMT&lt;float&gt;&</vtype> mat) 
+<LI><A HREF="#c6">matrixNxM</A>(const <vtype>matrixNxMT&lt;long double&gt;&</vtype> mat) 
+<LI><A HREF="#c7">matrixNxM</A>(<vtype>int</vtype> n, <vtype>int</vtype> m, <vtype>double*</vtype> datas) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2">~matrixNxM</A>() 
+<LI><A HREF="#f3"><vtype>double</vtype> getValue</A>(<vtype>int</vtype> line, <vtype>int</vtype> column) const
+<LI><A HREF="#f4"><vtype>void</vtype> setValue</A>(<vtype>int</vtype> line, <vtype>int</vtype> column, <vtype>double</vtype> value) 
+<LI><A HREF="#f5"><vtype>int</vtype> Columns</A>() const
+<LI><A HREF="#f6"><vtype>int</vtype> Lines</A>() const
+<LI><A HREF="#f7"><vtype>void</vtype> Unity</A>() 
+<LI><A HREF="#f8"><vtype>void</vtype> transpose</A>() 
+<LI><A HREF="#f9"><vtype>double</vtype> Determinant</A>() const
+<LI><A HREF="#f10"><vtype>bool</vtype> Diagonal</A>() const
+<LI><A HREF="#f11"><vtype>bool</vtype> UpperTriangular</A>() const
+<LI><A HREF="#f12"><vtype>bool</vtype> LowerTriangular</A>() const
+<LI><A HREF="matrixnxm.html">matrixNxM</A> <A HREF="#f13">subset</A>(<vtype>int</vtype> lineBegin, <vtype>int</vtype> lineEnd, <vtype>int</vtype> columnBegin, <vtype>int</vtype> columnEnd) const
+<LI><A HREF="#f14"><vtype>void</vtype> decomposeLU</A>(<A HREF="matrixnxm.html">matrixNxM&</A> L, <A HREF="matrixnxm.html">matrixNxM&</A> U) const
+<LI><A HREF="#f15"><vtype>void</vtype> decomposeLDU</A>(<A HREF="matrixnxm.html">matrixNxM&</A> L, <A HREF="matrixnxm.html">matrixNxM&</A> D, <A HREF="matrixnxm.html">matrixNxM&</A> U) const
+<LI><A HREF="#f16"><vtype>void</vtype> decomposeQR</A>(<A HREF="matrixnxm.html">matrixNxM&</A> Q, <A HREF="matrixnxm.html">matrixNxM&</A> R) const
+<LI><A HREF="#f17"><vtype>void</vtype> operator=</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> mat) 
+<LI><A HREF="#f18"><vtype>void</vtype> operator=</A>(const <vtype>matrixNxMT&lt;double&gt;&</vtype> mat) 
+<LI><A HREF="#f19"><vtype>void</vtype> operator=</A>(const <vtype>matrixNxMT&lt;long double&gt;&</vtype> mat) 
+<LI><A HREF="#f20"><vtype>void</vtype> operator=</A>(const <vtype>matrixNxMT&lt;float&gt;&</vtype> mat) 
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f21">operator[]</A>(<vtype>int</vtype> num) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f22">operator()</A>(<vtype>int</vtype> num) const
+<LI><A HREF="vector.html">Vector</A> <A HREF="#f23">operator*</A>(const <A HREF="vector.html">Vector&</A> v) const
+<LI><A HREF="matrixnxm.html">matrixNxM</A> <A HREF="#f24">operator*</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> m) const
+<LI><A HREF="matrixnxm.html">matrixNxM</A> <A HREF="#f25">operator*</A>(<vtype>double</vtype> value) const
+<LI><A HREF="matrixnxm.html">matrixNxM</A> <A HREF="#f26">operator+</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> m) const
+<LI><A HREF="matrixnxm.html">matrixNxM</A> <A HREF="#f27">operator-</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> m) const
+<LI><A HREF="matrixnxm.html">matrixNxM</A> <A HREF="#f28">operator!</A>() const
+<LI><A HREF="matrixnxm.html">matrixNxM</A> <A HREF="#f29">operator-</A>() const
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="#f30"><vtype>string</vtype> toString</A>() const
+</UL>
+<DD>public inherrited<UL>
+<LI>virtual <A HREF="geomobj.html#f3"><vtype>geomState</vtype> geomObject::getState</A>() const
+<LI>virtual <A HREF="geomobj.html#f4"><vtype>void</vtype> geomObject::Zero</A>() 
+<LI>virtual <A HREF="geomobj.html#f5"><vtype>void</vtype> geomObject::Infinite</A>() 
+<LI>virtual <A HREF="geomobj.html#f6"><vtype>void</vtype> geomObject::Undefined</A>() 
+<LI>virtual <A HREF="geomobj.html#f7"><vtype>void</vtype> geomObject::Regular</A>() 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">matrixNxM::matrixNxM</A>(<vtype>int</vtype> n = 1, <vtype>int</vtype> m = 1) 
+<BR/><deff>
+Constructor. Sets the number of lines to <var>n</var>, and the number of columns to <var>m</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">matrixNxM::matrixNxM</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> mat) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">matrixNxM::matrixNxM</A>(const <vtype>matrixNxMT&lt;double&gt;&</vtype> mat) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">matrixNxM::matrixNxM</A>(const <vtype>matrixNxMT&lt;float&gt;&</vtype> mat) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c6">matrixNxM::matrixNxM</A>(const <vtype>matrixNxMT&lt;long double&gt;&</vtype> mat) 
+<BR/><deff>
+Copy constructor.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c7">matrixNxM::matrixNxM</A>(<vtype>int</vtype> n, <vtype>int</vtype> m, <vtype>double*</vtype> datas) 
+<BR/><deff>
+Constructor. Sets the number of lines to <var>n</var>, the number of columns to <var>m</var>. The elements are filled from the array <var>datas</var>. Take care that <var>datas</var> is correctly dimensioned. The elements are read line-wise.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2">matrixNxM::~matrixNxM</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>double</vtype> matrixNxM::getValue</A>(<vtype>int</vtype> line, <vtype>int</vtype> column) const
+<BR/><deff>
+Return the element a position (<var>line</var>,<var>column</var>).
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>void</vtype> matrixNxM::setValue</A>(<vtype>int</vtype> line, <vtype>int</vtype> column, <vtype>double</vtype> value) 
+<BR/><deff>
+Set the element at position (<var>line</var>,<var>column</var>) to <var>value</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>int</vtype> matrixNxM::Columns</A>() const
+<BR/><deff>
+Returns the number of columns of this matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> matrixNxM::Lines</A>() const
+<BR/><deff>
+Returns the number of lines of the matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> matrixNxM::Unity</A>() 
+<BR/><deff>
+Makes a unit matrix out of this matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>void</vtype> matrixNxM::transpose</A>() 
+<BR/><deff>
+Transposes the matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>double</vtype> matrixNxM::Determinant</A>() const
+<BR/><deff>
+Returns the determinant of the matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>bool</vtype> matrixNxM::Diagonal</A>() const
+<BR/><deff>
+Returns true if the matrix is diagonal.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>bool</vtype> matrixNxM::UpperTriangular</A>() const
+<BR/><deff>
+Returns true if the matrix is a upper triangular matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>bool</vtype> matrixNxM::LowerTriangular</A>() const
+<BR/><deff>
+Returns true if the matrix is a lower triangular matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="matrixnxm.html">matrixNxM</A> <A NAME="f13">matrixNxM::subset</A>(<vtype>int</vtype> lineBegin, <vtype>int</vtype> lineEnd, <vtype>int</vtype> columnBegin, <vtype>int</vtype> columnEnd) const
+<BR/><deff>
+Return a subset of the matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>void</vtype> matrixNxM::decomposeLU</A>(<A HREF="matrixnxm.html">matrixNxM&</A> L, <A HREF="matrixnxm.html">matrixNxM&</A> U) const
+<BR/><deff>
+Decompose the sqare matrix into a lower triangular matrix (saved in <var>L</var>) and an upper triangular matrix (saved in <var>R</var>). A pre step for inversion.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>void</vtype> matrixNxM::decomposeLDU</A>(<A HREF="matrixnxm.html">matrixNxM&</A> L, <A HREF="matrixnxm.html">matrixNxM&</A> D, <A HREF="matrixnxm.html">matrixNxM&</A> U) const
+<BR/><deff>
+Decompose the sqare matrix into a lower triangular matrix (saved in <var>L</var>), an upper triangular matrix (saved in <var>R</var>) and a diagonal matrix. A pre step for inversion.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>void</vtype> matrixNxM::decomposeQR</A>(<A HREF="matrixnxm.html">matrixNxM&</A> Q, <A HREF="matrixnxm.html">matrixNxM&</A> R) const
+<BR/><deff>
+Do a QR-decomposition of the matrix and save the results in the matrices <var>Q</var> and <var>R</var>. This is not implemented yet, giving the reason why inversion is not working yet for non-square matrices.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> matrixNxM::operator=</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> mat) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> matrixNxM::operator=</A>(const <vtype>matrixNxMT&lt;double&gt;&</vtype> mat) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> matrixNxM::operator=</A>(const <vtype>matrixNxMT&lt;long double&gt;&</vtype> mat) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> matrixNxM::operator=</A>(const <vtype>matrixNxMT&lt;float&gt;&</vtype> mat) 
+<BR/><deff>
+Copy operator.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f21">matrixNxM::operator[]</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Access operator. Return the <var>num<sup>th</sup></var> line of the matrix. To access an individual element use m[line][column].
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f22">matrixNxM::operator()</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Access operator. Return the <var>num<sup>th</sup></var> column of the matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector.html">Vector</A> <A NAME="f23">matrixNxM::operator*</A>(const <A HREF="vector.html">Vector&</A> v) const
+<BR/><deff>
+Multiplication operator. Multiplies this matrix to a vector <var>v</var> and returns the result. Works only if <var>v</var> is a column vector and has 'number of columns' elements.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="matrixnxm.html">matrixNxM</A> <A NAME="f24">matrixNxM::operator*</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> m) const
+<BR/><deff>
+Matrix multiplication. Multiplies this matrix to <var>m</var> and returns the result. This matrix is left unchanged.
+Note this is genuine matrix multiplication. This does not commute.
+Works only if this' number of columns equals <var>m</var>'s number of lines.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="matrixnxm.html">matrixNxM</A> <A NAME="f25">matrixNxM::operator*</A>(<vtype>double</vtype> value) const
+<BR/><deff>
+Multiplication operator. Multiplies <var>value</var> to all elements of the matrix and returns the result. This matrix is left unchanged.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="matrixnxm.html">matrixNxM</A> <A NAME="f26">matrixNxM::operator+</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> m) const
+<BR/><deff>
+Addition operator. Adds <var>m</var> to this matrix and returns the result. This matrix is left unchanged. Works only if this matrix and <var>m</var> have the same number of columns and number of lines.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="matrixnxm.html">matrixNxM</A> <A NAME="f27">matrixNxM::operator-</A>(const <A HREF="matrixnxm.html">matrixNxM&</A> m) const
+<BR/><deff>
+Suptraction operator. Subtracts <var>m</var> from this matrix and returns the result. This matrix is left unchanged. Works only if this matrix and <var>m</var> have the same number of columns and number of lines.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="matrixnxm.html">matrixNxM</A> <A NAME="f28">matrixNxM::operator!</A>() const
+<BR/><deff>
+Transposition operator. Returns the transposed of the matrix.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="matrixnxm.html">matrixNxM</A> <A NAME="f29">matrixNxM::operator-</A>() const
+<BR/><deff>
+Inversion operator. Works reliably but only for square matrices. Returns the inverse of the matrix and leaves the original matrix unchanged.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f30"><vtype>string</vtype> matrixNxM::toString</A>() const
+<BR/><deff>
+Returns a string representation of the matrix. Note this contains line breaks.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

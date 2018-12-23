@@ -1,0 +1,275 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class triangle</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class triangle in "planeShape.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="planeshape.html">planeShape</A>
+<DT>Constructor
+<LI><A HREF="#c2">triangle</A>(<A HREF="point3d.html">point3D</A> a = point3D(), <A HREF="point3d.html">point3D</A> b = point3D(), <A HREF="point3d.html">point3D</A> c = point3D()) 
+<LI><A HREF="#c3">triangle</A>(<A HREF="point3d.html">point3D</A> a, <A HREF="vector3d.html">vector3D</A> v1, <A HREF="vector3d.html">vector3D</A> v2) 
+<LI><A HREF="#c4">triangle</A>(const <A HREF="planeshape.html">planeShape&</A> s) 
+<LI><A HREF="#c5">triangle</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~triangle</A>() 
+<LI><A HREF="#f5"><vtype>void</vtype> setPoint</A>(<vtype>int</vtype> num, <A HREF="point3d.html">point3D</A> p) 
+<LI><A HREF="#f6"><vtype>void</vtype> setPoints</A>(<A HREF="point3d.html">point3D</A> a, <A HREF="point3d.html">point3D</A> b, <A HREF="point3d.html">point3D</A> c) 
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f7">A</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f8">B</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="#f9">C</A>() const
+<LI><A HREF="#f10"><vtype>void</vtype> setA</A>(<A HREF="point3d.html">point3D</A> p) 
+<LI><A HREF="#f11"><vtype>void</vtype> setB</A>(<A HREF="point3d.html">point3D</A> p) 
+<LI><A HREF="#f12"><vtype>void</vtype> setC</A>(<A HREF="point3d.html">point3D</A> p) 
+<LI><A HREF="#f18"><vtype>void</vtype> operator=</A>(const <A HREF="triangle.html">triangle&</A> t) 
+<LI><A HREF="#f19"><vtype>void</vtype> operator=</A>(const <A HREF="spherictriangle.html">sphericTriangle&</A> t) 
+</UL>
+<DD>public overwritten inherrited<UL>
+<LI>virtual <A HREF="#f4"><vtype>int</vtype> getNumberOfPoints</A>() const
+<LI>virtual <A HREF="point3d.html">point3D</A> <A HREF="#f3">getPoint</A>(<vtype>int</vtype> num) const
+<LI>virtual <A HREF="#f13"><vtype>float</vtype> area</A>() const
+<LI>virtual <A HREF="#f14"><vtype>float</vtype> angularRange_Phi</A>(const <A HREF="point3d.html">point3D&</A> origin = point3D(0,0,0), const <A HREF="vector3d.html">vector3D&</A> zDirection = vector3D(0,0,1)) const
+<LI>virtual <A HREF="#f15"><vtype>float</vtype> angularRange_Theta</A>(const <A HREF="point3d.html">point3D&</A> origin = point3D(0,0,0), const <A HREF="vector3d.html">vector3D&</A> zDirection = vector3D(0,0,1)) const
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f16">distancePlane</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f17">distance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="shapeparameter.html">shape_parameter</A> <A HREF="#f22">description</A>() const
+<LI>virtual <A HREF="vector3d.html">vector3D</A> <A HREF="#f17">distance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="#f20"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<LI>virtual <A HREF="#f21"><vtype>void</vtype> Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="vector3d.html">vector3D</A> <A HREF="planeshape.html#f3">planeShape::getNormal</A>() const
+<LI><A HREF="planeshape.html#f4"><vtype>void</vtype> planeShape::setNormal</A>(const <A HREF="vector3d.html">vector3D&</A> v) 
+<LI><A HREF="plane3d.html">plane3D</A> <A HREF="planeshape.html#f5">planeShape::getPlane</A>() const
+<LI><A HREF="planeshape.html#f6"><vtype>void</vtype> planeShape::setPlane</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<LI>virtual <A HREF="planeshape.html#f14"><vtype>float</vtype> planeShape::circumscribedRadius</A>() const
+<LI><A HREF="http://doc.trolltech.com/4.4/qstring.html">QString</A> <A HREF="baseshape.html#f2">base_shape::getName</A>() const
+<LI><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#f3">base_shape::getCenter</A>() const
+<LI><A HREF="baseshape.html#f4"><vtype>void</vtype> base_shape::setCenter</A>(<A HREF="point3d.html">point3D</A> c) 
+<LI>virtual <A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#f5">base_shape::entrance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="sline3d.html">sLine3D</A> <A HREF="baseshape.html#f7">base_shape::Normal</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI>virtual <A HREF="baseshape.html#f8"><vtype>bool</vtype> base_shape::cut</A>(const <A HREF="fiber.html">fiber&</A> f) 
+<LI>virtual <A HREF="vector.html">Vector</A> <A HREF="baseshape.html#f9">base_shape::HitParams</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<LI><A HREF="baseparameter.html#f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="baseparameter.html#f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="baseparameter.html#f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="baseparameter.html#f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<LI><A HREF="baseparameter.html#f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="baseparameter.html#f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<LI><A HREF="baseparameter.html#f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+<DT>Protected Variables
+<DD><A HREF="point3d.html">point3D</A> <A HREF="#v2">A_</A>
+<DD><A HREF="point3d.html">point3D</A> <A HREF="#v3">B_</A>
+<DD><A HREF="point3d.html">point3D</A> <A HREF="#v4">C_</A>
+<DT>Protected inherrited variables
+<DD><A HREF="vector3d.html">vector3D</A> <A HREF="planeshape.html#v2">planeShape::normal</A>
+<DD><vtype>float</vtype> <A HREF="planeshape.html#v3">planeShape::circRadius</A>
+<DD><A HREF="point3d.html">point3D</A> <A HREF="baseshape.html#v2">base_shape::center</A>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">triangle::triangle</A>(<A HREF="point3d.html">point3D</A> a = point3D(), <A HREF="point3d.html">point3D</A> b = point3D(), <A HREF="point3d.html">point3D</A> c = point3D()) 
+<BR/><deff>
+Constructor. Sets the three points the triangle consists of. Center and normal are calculated. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">triangle::triangle</A>(<A HREF="point3d.html">point3D</A> a, <A HREF="vector3d.html">vector3D</A> v1, <A HREF="vector3d.html">vector3D</A> v2) 
+<BR/><deff>
+Constructor. Sets one of the points and the two other points are <var>a</var> + <var>v1</var> and <var>a</var> + <var>v2</var>. Center and Normal are calculated. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">triangle::triangle</A>(const <A HREF="planeshape.html">planeShape&</A> s) 
+<BR/><deff>
+Copy constructor. Sets the center and the normal of the triangle. If the <var>s</var> is a triangle or a sphericTriangle, the points are also set. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">triangle::triangle</A>(const <A HREF="shapeparameter.html">shape_parameter&</A> description) 
+<BR/><deff>
+Constructor. Creates a triangle acording to the given description.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="#v2">A_</A>
+<BR/><deff>
+a point of the triangle
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="#v3">B_</A>
+<BR/><deff>
+a point of the triangle
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="#v4">C_</A>
+<BR/><deff>
+a point of the triangle
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> triangle::~triangle</A>() 
+<BR/><deff>
+Destructor 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f3">triangle::getPoint</A>(<vtype>int</vtype> num) const
+<BR/><deff>
+Returns the <var>num<sup>th</sup></var> point of the triangle. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>int</vtype> triangle::getNumberOfPoints</A>() const
+<BR/><deff>
+Returns the number of points of this shape: 3. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> triangle::setPoint</A>(<vtype>int</vtype> num, <A HREF="point3d.html">point3D</A> p) 
+<BR/><deff>
+Sets the <var>num<sup>th</sup></var> point of the triangle. Center and normal are recalculated. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>void</vtype> triangle::setPoints</A>(<A HREF="point3d.html">point3D</A> a, <A HREF="point3d.html">point3D</A> b, <A HREF="point3d.html">point3D</A> c) 
+<BR/><deff>
+Sets the points of the triangle. Center and normal are recalculated. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f7">triangle::A</A>() const
+<BR/><deff>
+Returns the first, the A point of the triangle. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f8">triangle::B</A>() const
+<BR/><deff>
+Returns the second, the B point of the triangle. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="point3d.html">point3D</A> <A NAME="f9">triangle::C</A>() const
+<BR/><deff>
+Returns the third, the C point of the triangle. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> triangle::setA</A>(<A HREF="point3d.html">point3D</A> p) 
+<BR/><deff>
+Set the first point of the triangle. Center and normal are recalculated. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> triangle::setB</A>(<A HREF="point3d.html">point3D</A> p) 
+<BR/><deff>
+Set the second point of the triangle. Center and normal are recalculated. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> triangle::setC</A>(<A HREF="point3d.html">point3D</A> p) 
+<BR/><deff>
+Set the third point of the triangle. Center and normal are recalculated. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>float</vtype> triangle::area</A>() const
+<BR/><deff>
+Returns the area of the triangle. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>float</vtype> triangle::angularRange_Phi</A>(const <A HREF="point3d.html">point3D&</A> origin = point3D(0,0,0), const <A HREF="vector3d.html">vector3D&</A> zDirection = vector3D(0,0,1)) const
+<BR/><deff>
+Returns the polar angular range of a triangle, for any z direction and origin.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>float</vtype> triangle::angularRange_Theta</A>(const <A HREF="point3d.html">point3D&</A> origin = point3D(0,0,0), const <A HREF="vector3d.html">vector3D&</A> zDirection = vector3D(0,0,1)) const
+<BR/><deff>
+Returns the azimuthal angular range of the triangle, for any z direction and origin.   
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f16">triangle::distancePlane</A>(const <A HREF="plane3d.html">plane3D&</A> p) 
+<BR/><deff>
+Returns the distance vector for a plane to the triangle. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="vector3d.html">vector3D</A> <A NAME="f17">triangle::distance</A>(const <A HREF="sline3d.html">sLine3D&</A> line) 
+<BR/><deff>
+Returns the distance vector from a line to the triangle. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> triangle::operator=</A>(const <A HREF="triangle.html">triangle&</A> t) 
+<BR/><deff>
+Copy operator. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> triangle::operator=</A>(const <A HREF="spherictriangle.html">sphericTriangle&</A> t) 
+<BR/><deff>
+Copy operator. Copies the first three points from a spheric triangle. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>void</vtype> triangle::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye, const <A HREF="plane3d.html">plane3D&</A> plane, <A HREF="vector4d.html">vector4D*</A> boundingBox, <vtype>int</vtype> lColor, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<BR/><deff>
+This function is used for drawing a shape to a <a href=    
+"http://root.cern.ch">root</a>-<a href=    
+"http://root.cern.ch/root/html/TCanvas.html">TCanvas</a>.        
+It will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>.        
+It is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.          
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>void</vtype> triangle::Draw</A>(const <A HREF="point3d.html">point3D&</A> eye = point3D(0,0,0), const <A HREF="plane3d.html">plane3D&</A> plane = plane3D(point3D(0,0,1),vector3D(0,0,1)), <A HREF="vector4d.html">vector4D*</A> boundingBox = NULL, <A HREF="tobject.html">TObject**</A> ident = NULL, <vtype>int</vtype> lColor = 1, <vtype>int</vtype> fColor = 8, <vtype>int</vtype> fStyle = 1001) const
+<BR/><deff>
+This function is used for drawing a triangle to a <a href= 
+"http://root.cern.ch"> root</a>-<a href= 
+"http://root.cern.ch/root/html/TCanvas.html"> 
+TCanvas</a>.     
+It will draw a projection of the 3D shape from the <var>eye</var>-point to a <var>plane</var>. The corners of the drawn shape in canvas coordinates are stored in <var>boundingBox</var>.     
+It is drawn using <var>lColor</var> as line color, <var>fColor</var> as fill color and <var>fStyle</var> as fill style. See <a href="http://root.cern.ch/root/html/TAttFill.html"> root-colors and -styles</a>.     
+The parameter <var>ident</var> will return a pointer to the drawn root-primitive to provide the distance-to-primitive functionality.    
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f22">triangle::description</A>() const
+<BR/><deff>
+Returns a description of this triangle.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A HREF="shapeparameter.html">shape_parameter</A> <A NAME="f23">triangle::getDescription</A>() 
+<BR/><deff>
+Static method. Returns a default description of a triangle defining the necessary variables in the parameter.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>

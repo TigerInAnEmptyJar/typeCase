@@ -1,0 +1,169 @@
+reaction_parameter
+reactionparameter.html
+/users/data12/pion/ehrhardt/tofPack2/include/detectorparameter.h
+Creaction_parameter
+123 reaction_parameter
+O#c2
+Ptarget
+129 shape_parameter&
+Sconst
+Vshape_parameter()
+=
+PtwoBeamIn
+6 bool
+Vfalse
+=
+Pfirst
+0 int
+V0
+=
+Psec
+0 int
+V0
+=
+DConstructor. 
+DSets the targets shape and weather it is a collider experiment. The parameters <var>first</var> and <var>second</var> give the material numbers for beam and beam/target material. 
+=
+Creaction_parameter
+123 reaction_parameter
+O#c3
+Pr
+123 reaction_parameter&
+Sconst
+=
+DCopy constructor.
+=
+gtwoBeams
+6 bool
+O#v2
+D 
+=
+gfirstMat
+0 int
+O#v3
+D 
+=
+gsecMat
+0 int
+O#v4
+D 
+=
+gfirstMom
+1 float
+O#v5
+D 
+=
+gsecMom
+1 float
+O#v6
+D 
+=
+gtargetShape
+129 shape_parameter
+O#v7
+D 
+=
+F~reaction_parameter
+-1 ~reaction_parameter
+O#f2
+DDestructor
+=
+Foperator=
+123 reaction_parameter&
+O#f3
+Pr
+123 reaction_parameter&
+Sconst
+=
+DCopy operator
+=
+FhasTwoBeams
+6 bool
+O#f4
+Lconst
+DReturns true if this is a collider experiment. 
+=
+FsetTwoBeams
+7 void
+O#f5
+Ptb
+6 bool
+Vtrue
+=
+DSets if the experiment is a collinder experiment. For a fixed target experiment do setTwoBeams(false). 
+=
+FgetMaterial
+0 int
+O#f6
+Lconst
+Pnum
+0 int
+=
+DReturns the material number of the interacting materials. <var>num</var>=0, will be the (first) beam and <var>num</var>=1, will be the target/second beam.  
+=
+FgetTargetMaterial
+0 int
+O#f7
+Lconst
+DReturns the targets material number or -1 if no target has been defined. 
+=
+FsetMaterial
+7 void
+O#f8
+Pnum
+0 int
+=
+Pmat
+0 int
+=
+DSets the material number of the interacting materials. <var>num</var>=0, will be the (first) beam and <var>num</var>=1, will be the target/second beam. 
+=
+FsetTargetMaterial
+7 void
+O#f9
+Pmat
+0 int
+=
+DSets the material number of the target if a target is defined. 
+=
+FgetBeamMomentum
+1 float
+O#f10
+Lconst
+Pnum
+0 int
+V0
+=
+DReturns the momentum of the <var>num<sup>th</sup></var> beam/target particle. Returns -1 if <var>num</var> is non-valid. 
+=
+FsetBeamMomentum
+7 void
+O#f11
+Pvalue
+1 float
+=
+Pnum
+0 int
+V0
+=
+DSets the momentum (units of GeV) of the <var>num<sup>th</sup></var> beam. Does nothing, if <var>num</var> is smaller than 0 or larger than 1. 
+=
+FgetTargetShape
+129 shape_parameter
+O#f12
+Lconst
+DReturns the shape parameter for the targets shape. 
+=
+FsetTargetShape
+7 void
+O#f13
+Ps
+129 shape_parameter&
+Sconst
+=
+DSets the shape parameter for the targets shape. 
+=
+S0 1 base_parameter
+baseparameter.html
+base_parameter
+=

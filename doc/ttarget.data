@@ -1,0 +1,122 @@
+TTarget
+ttarget.html
+/users/data12/pion/ehrhardt/tofPack2/include/setup.h
+CTTarget
+110 TTarget
+O#c2
+D
+DDefault constructor.
+=
+CTTarget
+110 TTarget
+O#c3
+Pparticle
+20 momentum4D
+=
+Pshape
+151 volumeShape&
+=
+DConstructor. Sets the target particles 4-momentum and the volume shape. As shape for the target, a pointer of <var>shape</var> and no copy is saved. So take care, that the object persists in memory and that you delete it after use, if necessary. 
+=
+CTTarget
+110 TTarget
+O#c4
+Pt
+-1 TTarget&
+Sconst
+=
+DCopy constructor. 
+=
+gshape_
+151 volumeShape*
+O#v2
+D
+=
+gparticle_
+20 momentum4D
+O#v3
+D
+=
+gtemperature_
+1 float
+O#v4
+D
+=
+F~TTarget
+-1 ~TTarget
+O#f2
+D
+DDestructor
+=
+FgetShape
+151 volumeShape
+O#f3
+Lconst
+DReturns a copy of the target volume shape.  
+=
+FgetShaper
+151 volumeShape&
+O#f4
+DReturns a reference to the target volume shape.  
+=
+FsetShape
+7 void
+O#f5
+Pshape
+151 volumeShape&
+=
+DSets the target volume shape. Since only a pointer to <var>shape</var> is stored and no copy is made, make sure, that this object persists in memory while it is needed and that it is correctly deleted after use. 
+=
+FgetParticle
+20 momentum4D
+O#f6
+Lconst
+DReturns the target-particles 4-momentum. 
+=
+FgetParticler
+20 momentum4D&
+O#f7
+DReturns a reference to the target-particles 4-momentum. 
+=
+FsetParticle
+7 void
+O#f8
+Pp
+20 momentum4D&
+Sconst
+=
+DSets the target-particles 4-momentum. 
+=
+FgetTemperature
+1 float
+O#f9
+Lconst
+DReturns a reference to the temperature of the target in units of kelvin. 
+=
+FgetTemperature
+1 float&
+O#f10
+D
+=
+FsetTemperature
+7 void
+O#f11
+Pt
+1 float
+=
+DSets the temperature of the target in units of kelvin. 
+=
+Foperator=
+7 void
+O#f12
+Pt
+110 TTarget&
+Sconst
+=
+DCopy operator. 
+=
+DThis is the target class. A target here is defined by a volume shape, a temperature and a 4-momentum for the particle. This class is still incomplete and will be modified, when needed. Like all the other container classes, this class provides no functionality for itself, it has to be filled during the analysis.   
+S0 1 TBase
+tbase.html
+TBase
+=

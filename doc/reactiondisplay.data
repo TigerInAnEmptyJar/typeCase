@@ -1,0 +1,349 @@
+ReactionDisplay
+reactiondisplay.html
+$(KTOFPACK)/gui/parameter_widgets/include/reactiondisplay.h
+CReactionDisplay
+-1 ReactionDisplay
+O#c2
+Pparent
+-1 QWidget*
+Thttp://doc.trolltech.com/4.4/qwidget.html
+V0
+=
+Pname
+5 char*
+Sconst
+V0
+=
+Pfl
+-1 WFlags
+V0
+=
+DConstructor. Qt3-version, non-visible in Qt4-mode.
+=
+CReactionDisplay
+-1 ReactionDisplay
+O#c3
+Pparent
+-1 QWidget*
+Thttp://doc.trolltech.com/4.4/qwidget.html
+V0
+=
+Pf
+-1 Qt::WindowFlags
+V0
+=
+DConstructor. Qt4-version, non-visible in Qt3-mode.
+=
+VtwoBeam
+-1 QCheckBox*
+O#v2
+=
+VmBLabel
+-1 QLabel*
+O#v3
+=
+VmTLabel
+-1 QLabel*
+O#v4
+=
+VbeamLabel
+-1 QLabel*
+O#v5
+=
+VtargetLabel
+-1 QLabel*
+O#v6
+=
+VmatBeam
+-1 QWidget*
+O#v7
+Thttp://doc.trolltech.com/4.4/qwidget.html
+=
+VmatTarget
+-1 QWidget*
+O#v8
+Thttp://doc.trolltech.com/4.4/qwidget.html
+=
+VbeamInput
+-1 QLineEdit*
+O#v9
+Thttp://doc.trolltech.com/4.4/qlineedit.html
+=
+VtargetInput
+-1 QLineEdit*
+O#v10
+Thttp://doc.trolltech.com/4.4/qlineedit.html
+=
+VshapeDraw
+-1 QCanvasWidget*
+O#v11
+Dcanvas to draw the target shape
+=
+Vshape
+-1 ShapeDisplay*
+O#v12
+Tshapedisplay.html
+Dwidget to discribe the shape of the target
+=
+vsp
+123 reaction_parameter*
+O#v13
+Treactionparameter.html
+Dpointer to the current reaction_parameter
+=
+vReadOnly
+6 bool
+O#v14
+Dread-only-property. if it is true, modifications mad in the display won't be applied to the variable.
+=
+vcopy
+123 reaction_parameter
+O#v15
+Treactionparameter.html
+Dcopy of the current reaction_parameter
+=
+vdrawer
+-1 base_shape*
+O#v16
+Tbaseshape.html
+Dpointer to the currently drawn target shape
+=
+vDrawShape
+6 bool
+O#v17
+DTrue if the shape of the target should be drawn. Property is passed to the <a href="shapedisplay.html">shapeDisplay</a> displaying the properties of the target shape.
+=
+vmaterials
+-1 vector<string>
+O#v18
+Davailable material names
+=
+vcopyshape
+129 shape_parameter
+O#v19
+Tshapeparameter.html
+Dcopy of the shape_parameter of the target
+=
+FclassName
+5 char*
+Svirtual const
+O#f2
+DThe className() function that returns the class name as a string at runtime, 
+Dwithout requiring native runtime type information (RTTI) support through the C++ compiler.
+=
+Finherrits
+6 bool
+Sconst
+O#f3
+Pclname
+5 char*
+Sconst
+=
+Dthe inherits() function that returns whether an object is an instance of a class 
+Dthat inherits a specified class within the QObject inheritance tree. 
+=
+Ftr
+-1 QString
+Sstatic
+O#f4
+Thttp://doc.trolltech.com/4.4/qstring.html
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or sourceText itself if there is no 
+Dappropriate translated version. The translation context is QObject with comment 
+D(0 by default). All QObject subclasses using the Q_OBJECT macro automatically have 
+Da reimplementation of this function with the subclass name as context.
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FtrUtf8
+-1 QString
+Sstatic
+O#f5
+Thttp://doc.trolltech.com/4.4/qstring.html
+PsourceText
+5 char*
+Sconst
+=
+Pcomment
+5 char*
+Sconst
+=
+DReturns a translated version of sourceText, or QString::fromUtf8(sourceText) if there 
+Dis no appropriate version. It is otherwise identical to tr(sourceText, comment). 
+DWarning: This method is reentrant only if all translators are installed before calling 
+Dthis method. Installing or removing translators while performing translations is not 
+Dsupported. Doing so will probably result in crashes or other undesirable behavior. 
+=
+FsetProperty
+6 bool
+Svirtual
+O#f6
+Pname
+5 char*
+Sconst
+=
+Pvalue
+-1 QVariant&
+Sconst
+=
+DSets the value of the object's name property to value.
+DReturns TRUE if the operation was successful; otherwise returns FALSE. 
+DInformation about all available properties is provided through the metaObject()
+=
+Fproperty
+-1 QVariant
+Svirtual
+O#f7
+Lconst
+Pname
+5 char*
+Sconst
+=
+DReturns the value of the object's name property. 
+DIf no such property exists, the returned variant is invalid. 
+DInformation about all available properties are provided through the metaObject(). 
+=
+FmetaObject
+-1 QMetaObject*
+Svirtual
+O#f8
+Lconst
+DReturns a pointer to the meta object of this object. 
+DA meta object contains information about a class that inherits QObject, e.g. class name,
+Dsuperclass name, properties, signals and slots. Every class that contains the 
+DQ_OBJECT macro will also have a meta object. 
+DThe meta object information is required by the signal/slot connection mechanism 
+Dand the property system. The functions isA() and inherits() also make use of the meta object. 
+=
+FreadOnly
+6 bool
+Svirtual
+O#f9
+DReturns the read-only-property. If it is set modifications made in the display won't be applied to the current reaction_parameter-variable.
+=
+FdoDraw
+6 bool
+Svirtual
+O#f10
+DReturns if the target shape shall be drawn.
+=
+ginit
+7 void
+O#f11
+DCalled by constructor.
+=
+gdestroy
+7 void
+O#f12
+DCalled by destructor.
+=
+Lresize
+7 void
+Svirtual
+O#l2
+Ps
+-1 QSize&
+Sconst
+=
+Dresize widget
+=
+LresizeEvent
+7 void
+Svirtual
+O#l3
+Pe
+-1 QResizeEvent*
+=
+Dresize event
+=
+Lresize
+7 void
+Svirtual
+O#l4
+Pw
+0 int
+=
+Ph
+0 int
+=
+Dresize widget
+=
+LsetReaction
+7 void
+Svirtual
+O#l5
+PreactionIn
+123 reaction_parameter&
+Treactionparameter.html
+=
+DSets the current reaction_parameter. Take care, that the variable stays as long valid as the widget exists. Also in read-only-mode, the widget may want to reload the properties.
+=
+LsetReadOnly
+7 void
+Svirtual
+O#l6
+Pvalue
+6 bool
+=
+DSet the read-only-property. If it is true, modifications made in the display-widget won't be applied to the current reaction_parameter pointer.
+=
+LonPropertyChange
+7 void
+Svirtual
+O#l7
+DReread the reaction_parameter values out of the pointers variable.
+=
+LsetMaterials
+7 void
+Svirtual
+O#l8
+Pmats
+-1 vector<string>&
+Sconst
+=
+DSet the available material-names.
+=
+LOnDraw
+7 void
+Svirtual
+O#l9
+DIf shape shall be drawn and it exists in the typeCase-analysis-package, it is drawn.
+=
+LsetDraw
+7 void
+Svirtual
+O#l10
+Pvalue
+6 bool
+=
+DSets wether the target shape shall be drawn or not. The canvas is not visible for no draw.
+=
+LonBeamNumberChange
+7 void
+Svirtual
+O#l11
+DSets the number of beams. Can be 1 or 2.
+=
+llanguageChange
+7 void
+Svirtual
+O#l12
+DSets the label-texts.
+=
+Nchanged
+7 void
+O#s2
+DIf not in read-only-mode, this signal is emitted, when some of the reaction_parameters properties are in the display.
+=
+D<table><tr><td>This widget displays the properties of the beam(s) and target of the experiment. See <a href="setup.html">setup</a>.</td><td><img src="pictures/reaction.jpg" width=250/></td></tr></table>
+S0 0 QWidget
+
+=

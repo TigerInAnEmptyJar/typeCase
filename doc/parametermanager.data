@@ -1,0 +1,564 @@
+parameterManager
+parametermanager.html
+/users/data12/pion/ehrhardt/tofPack2/parameter/include/parameterManager.h
+gisInit
+6 bool
+Sstatic
+O#v2
+D
+=
+gnVersions
+0 int*
+Sstatic
+O#v3
+D
+=
+gversionNumbers
+0 int**
+Sstatic
+O#v4
+D
+=
+gversionDates
+-1 tm**
+Sstatic
+O#v5
+D
+=
+FIsInit
+6 bool
+Sstatic
+O#f2
+DStatic method. Returns true if initialized.
+=
+Finit
+7 void
+Sstatic
+O#f3
+DInitialize static class-variables.
+=
+FnumberOfVersions
+0 int
+Stemplate<class X> static
+O#f4
+DStatic template method. Returns the number of versions for the with template specified property was introduced. 
+=
+Fversion
+0 int
+Stemplate<class X> static
+O#f5
+Pnum
+0 int
+=
+DStatic template method. Returns the version number of the <var>num<sup>th</sup></var> version for the with template specified property. 
+=
+FversionDate
+-1 tm
+Stemplate<class X> static
+O#f6
+Pnum
+0 int
+=
+DStatic template method. Returns the date, the <var>num<sup>th</sup></var> version for the with template specified property was introduced. 
+=
+FreadAlgorithmParameter_ascii
+6 bool
+Sstatic
+O#f7
+Pfilename
+-1 string
+=
+Pret
+-1 vector<algorithm_parameter>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads algorithm-parameter from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FreadUsedAlgorithmParameter_ascii
+6 bool
+Sstatic
+O#f8
+Pfilename
+-1 string
+=
+Pret
+-1 vector<algorithm_parameter>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads algorithm-parameter from file <var>filename</var> and returns only the algorithms with the isUsed-flag switched on. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FwriteAlgorithmParameter_ascii
+6 bool
+Sstatic
+O#f9
+Pfilename
+-1 string
+=
+Pret
+-1 vector<algorithm_parameter>&
+Sconst
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes algorithm-parameter to file <var>filename</var>.
+=
+FreadAlgorithmParameter_ascii
+6 bool
+Sstatic
+O#f10
+Pfilename
+-1 string
+=
+Pret
+-1 vector<algorithm_parameter*>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads algorithm-parameter from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FreadUsedAlgorithmParameter_ascii
+6 bool
+Sstatic
+O#f11
+Pfilename
+-1 string
+=
+Pret
+-1 vector<algorithm_parameter*>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads algorithm-parameter from file <var>filename</var> returning only the ones with the isUsed flag being switched on. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FwriteAlgorithmParameter_ascii
+6 bool
+Sstatic
+O#f12
+Pfilename
+-1 string
+=
+Pret
+-1 vector<algorithm_parameter*>&
+Sconst
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes algorithm parameter to file <var>filename</var>.
+=
+FreadDetectorParameter_ascii
+6 bool
+Sstatic
+O#f13
+Pfilename
+-1 string
+=
+Pret
+-1 vector<detector_parameter>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads detector-parameter from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FreadDetectorParameter_ascii
+6 bool
+Sstatic
+O#f14
+Pfilename
+-1 string
+=
+Pret
+-1 vector<detector_parameter>&
+=
+Pcol
+123 reaction_parameter&
+Treactionparameter.html
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads detector-parameter from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FwriteDetectorParameter_ascii
+6 bool
+Sstatic
+O#f15
+Pfilename
+-1 string
+=
+Pret
+-1 vector<detector_parameter>&
+Sconst
+=
+Pcol
+123 reaction_parameter&
+Sconst
+Treactionparameter.html
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes detector-parameter to file <var>filename</var>.
+=
+FreadMaterialParameter_ascii
+6 bool
+Sstatic
+O#f16
+Pfilename
+-1 string
+=
+Pret
+-1 vector<material_parameter>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads material-parameter from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FwriteMaterialParameter_ascii
+6 bool
+Sstatic
+O#f17
+Pfilename
+-1 string
+=
+Pret
+-1 vector<material_parameter>&
+Sconst
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes material-parameter to file <var>filename</var>.
+=
+FreadSetup_ascii
+6 bool
+Sstatic
+O#f18
+Pfilename
+-1 string
+=
+Pret
+-1 vector<detector_parameter>&
+=
+Pmret
+-1 vector<material_parameter>&
+=
+Pcol
+123 reaction_parameter&
+Treactionparameter.html
+=
+Pversion
+0 int
+V-1
+=
+Pfilename1
+-1 string
+V""
+=
+DStatic method. Reads setup from file. reaction-parameter and detector-parameter are read from file <var>filename</var>, material-parameter from file <var>filename1</var>.
+DFor the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FwriteSetup_ascii
+6 bool
+Sstatic
+O#f19
+Pfilename
+-1 string
+=
+Pfilename1
+-1 string
+=
+Pret
+-1 vector<detector_parameter>&
+Sconst
+=
+Pmret
+-1 vector<material_parameter>&
+Sconst
+=
+Pcol
+123 reaction_parameter&
+Sconst
+Treactionparameter.html
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes setup to file. Detector-parameters and reaction-parameter are written to file <var>filename</var>, material-parameter to file <var>filename1</var>.
+=
+FreadShapeParameter_ascii
+6 bool
+Sstatic
+O#f20
+Pfilename
+-1 string
+=
+Pret
+-1 vector<shape_parameter>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads shape-parameter from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FwriteShapeParameter_ascii
+6 bool
+Sstatic
+O#f21
+Pfilename
+-1 string
+=
+Pret
+-1 vector<shape_parameter>&
+Sconst
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes shape-parameters to file <var>filename</var>.
+=
+FreadPaintParameter_ascii
+6 bool
+Sstatic
+O#f22
+Pfilename
+-1 string
+=
+Pret
+-1 vector<vector<paint_parameter> >&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads paint-parameters from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FwritePaintParameter_ascii
+6 bool
+Sstatic
+O#f23
+Pfilename
+-1 string
+=
+Pret
+-1 vector<vector<paint_parameter> >&
+Sconst
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes paint-parameter to file <var>filename</var>.
+=
+FreadBeamTimeParameter_ascii
+6 bool
+Sstatic
+O#f24
+Pfilename
+-1 string
+=
+Pret
+-1 vector<beamTime_parameter>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads beam-time-parameter from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FreadRunParameter_ascii
+6 bool
+Sstatic
+O#f25
+Pfilename
+-1 string
+=
+Pret
+-1 vector<run_parameter>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads run-parameter from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FaddRunParameter_ascii
+6 bool
+Sstatic
+O#f26
+Pfilename
+-1 string
+=
+Pret
+-1 vector<run_parameter>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic function. Reads and adds runs from file <var>filename</var> to <var>ret</var>.
+=
+FreadDataBasis_ascii
+6 bool
+Sstatic
+O#f27
+Pfilename
+-1 string
+=
+Pbret
+-1 vector<beamTime_parameter>&
+=
+Prret
+-1 vector<run_parameter>&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads a data-basis from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FreadDataBasis_ascii
+6 bool
+Sstatic
+O#f28
+Pfilename
+-1 string
+=
+Pbret
+-1 vector<beamTime_parameter>&
+=
+Prret
+-1 vector<vector<run_parameter> >&
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Reads a data-basis from file <var>filename</var>. For the newer file-versions a version-check is performed, unfortionatelly this is not possible for the older ones.
+=
+FwriteBeamTimeParameter_ascii
+6 bool
+Sstatic
+O#f29
+Pfilename
+-1 string
+=
+Pret
+-1 vector<beamTime_parameter>&
+Sconst
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes the beam-time-parameters to file <var>filename</var>.
+=
+FwriteRunParameter_ascii
+6 bool
+Sstatic
+O#f30
+Pfilename
+-1 string
+=
+Pret
+-1 vector<run_parameter>&
+Sconst
+=
+PbeamTime
+0 int
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes run-parameter of the parent <var>beamTime</var> to file <var>filename</var>.
+=
+FwriteRunParameter_ascii
+6 bool
+Sstatic
+O#f31
+Pfilename
+-1 string
+=
+Pret
+-1 vector<run_parameter>&
+Sconst
+=
+PbeamTime
+125 beamTime_parameter*
+Tbeamtimeparameter.html
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes run-parameter of the parent <var>beamTime</var> to file <var>filename</var>.
+=
+FwriteDataBasis_ascii
+6 bool
+Sstatic
+O#f32
+Pfilename
+-1 string
+=
+Pbret
+-1 vector<beamTime_parameter>&
+Sconst
+=
+Prret
+-1 vector<run_parameter>&
+Sconst
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes a data-basis to file <var>filename</var>. Note that the runs are saved in the files specified in <var>bret</var>.
+=
+FwriteDataBasis_ascii
+6 bool
+Sstatic
+O#f33
+Pfilename
+-1 string
+=
+Pbret
+-1 vector<beamTime_parameter>&
+Sconst
+=
+Prret
+-1 vector<vector<run_parameter> >&
+Sconst
+=
+Pversion
+0 int
+V-1
+=
+DStatic method. Writes a data-basis to file <var>filename</var>. Note that the runs are saved in the files specified in <var>bret</var>.
+=
+DThis class is a static helper class to read and write the parameter-classes from and to file.
+DSince it can read different file-versions not just current ones it is quite useful, but take care to initialize it before use.
+=

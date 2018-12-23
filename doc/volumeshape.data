@@ -1,0 +1,167 @@
+volumeShape
+volumeshape.html
+/users/data12/pion/ehrhardt/tofPack2/include/volumeShape.h
+CvolumeShape
+151 volumeShape
+O#c2
+Pn
+-1 string
+V"undefined"
+=
+DConstructor. Sets the name of the shape.   
+=
+CvolumeShape
+151 volumeShape
+O#c3
+Ps
+151 volumeShape&
+Sconst
+=
+DCopy constructor.   
+=
+vres
+17 vector3D
+O#v2
+D 
+=
+gmaxDist
+1 float
+O#v3
+D 
+=
+F~volumeShape
+-1 virtual
+O#f2
+DDestructor   
+=
+FgetMaxDistance
+1 float
+O#f3
+Lconst
+DReturns the maxDistance property, that can be used to define the maximum distance, of a line to be counted as hitting the volume.   
+=
+FsetMaxDistance
+7 void
+O#f4
+Pvalue
+1 float
+=
+DSets the maxDistance property, that can be used to define the maximum distance, of a line to be counted as hitting the volume.    
+=
+FgetFlightPathInShape
+1 float
+Svirtual
+O#f5
+Pline
+21 sLine3D&
+Sconst
+=
+DCalculates the entrance point and the exit point of the <var>line</var> in the shape and returns the length of the distance of the two points.    
+=
+FgetClone
+151 volumeShape*
+Svirtual
+O#f6
+DCreates a new instance of the same volume shape with the same properties. Take care, that you delete this shape correctly after use (potential memory leak).    
+=
+FHitParams
+13 Vector
+Svirtual
+O#f7
+Pline
+21 sLine3D&
+Sconst
+=
+DReturns the parameters for a hit of a straight line with the shape. The pattern will be:      
+D<table>  
+D<tr><th>index of return<th>description    
+D<tr><td>0<td>sigma value    
+D<tr><td>1,2,3<td>entrance point of line/point on line closest to the volume    
+D<tr><td>4,5,6<td>resolution vector    
+D<tr><td>7,8,9<td>point on volume closest to the line    
+D<tr><td>10,11,12<td>minimum distance of line to volume, points to volume    
+D</table>      
+=
+FHitting
+13 Vector
+Svirtual
+O#f8
+Pline
+21 sLine3D&
+Sconst
+=
+DCalculates all characteristics of a hit of a straight line with the volume shape. The return values components will be:    
+D<table>  
+D<tr><th>index <th>value    
+D<tr><td>0, 1, 2 <td>entrance point of line    
+D<tr><td>3, 4, 5 <td>distance of line to volume, points to volume    
+D<tr><td>6, 7, 8 <td>normal vector to volume in entrance point    
+D<tr><td>9 <td>sigma value    
+D</table>    
+=
+FHitParams
+13 Vector
+Svirtual
+O#f9
+Pshape
+152 planeShape&
+Sconst
+=
+Porigin
+16 point3D
+=
+DReturns the parameters for a hit of a pyramid like shape with the tip at <var>origin</var> and the <var>shape</var> as base with the shape. The pattern will be:      
+D<table> 
+D<tr><th>index of return<th>description    
+D<tr><td>0<td>sigma value    
+D<tr><td>1,2,3<td>entrance point of line/point on line closest to the volume    
+D<tr><td>4,5,6<td>resolution vector    
+D<tr><td>7,8,9<td>point on volume closest to the line    
+D<tr><td>10,11,12<td>minimum distance of line to volume, points to volume    
+D</table>      
+=
+FgetNext
+151 volumeShape*
+Svirtual
+O#f10
+Ptimes
+0 int
+=
+PstackType
+0 int
+=
+DReturns a new volume shape, that is shifted, rotated, shrunk, enlarged, or else modified according to the parameter <var>stackType</var>, generating the <var>times<sup>th</sup></var> element in the stack.    
+DTake care, that you delete this shape correctly after use (potential memory leak).    
+=
+FgetEnvelope
+151 volumeShape*
+Svirtual
+O#f11
+Ptimes
+0 int
+=
+PstackType
+0 int
+=
+DReturns a volume shape, that will be the envelope of <var>times</var> shapes, generated with the getNext-method in stack mode <var>stackType</var>.    
+DTake care, that you delete this shape correctly after use (potential memory leak).    
+=
+Fsuspect
+0 int
+Svirtual
+O#f12
+Pline
+21 sLine3D&
+Sconst
+=
+PstackType
+0 int
+=
+DAssuming, this volume shape is the first one in a stack of shapes generated with the getNext-method in stacking type <var>stackType</var>.     
+DThen the straight line <var>line</var> will hit the stack in the element number, that is returned or -1 if it doesn't hit the stack.    
+DThis doesn't know about the actual number of elements in this stack, so you'll have to check if the return value exceeds this.    
+=
+S0 1 base_shape
+baseshape.html
+base_shape
+=

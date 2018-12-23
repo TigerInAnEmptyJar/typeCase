@@ -1,0 +1,259 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css"/>
+<HEAD>
+<TITLE>Class algorithm_parameter</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="top">Class algorithm_parameter in "algorithmparameter.h"</A></H1>
+<P> <a href="">back</a>
+<hr/>
+<DL>
+<DT>Superclass
+<DD><A HREF="baseparameter.html">base_parameter</A>
+<DT>Constructor
+<LI><A HREF="#c2">algorithm_parameter</A>() 
+<LI><A HREF="#c3">algorithm_parameter</A>(const <A HREF="algorithmparameter.html">algorithm_parameter&</A> ap) 
+<LI><A HREF="#c4">algorithm_parameter</A>(<vtype>string</vtype> tmpstring0, <vtype>int</vtype> id) 
+<LI><A HREF="#c5">algorithm_parameter</A>(<vtype>string</vtype> tmpstring0, <vtype>int</vtype> tmpint0, <vtype>int</vtype> tmpint1, <vtype>int</vtype> id = -1) 
+<LI><A HREF="#c6">algorithm_parameter</A>(<vtype>string</vtype> tmpstring0, <vtype>bool</vtype> tmpbool0, <vtype>int</vtype> tmpint0, <vtype>int</vtype> tmpint1, <vtype>int</vtype> id = -1) 
+<DT>Functions
+<DD>new public<ul>
+<LI><A HREF="#f2"><vtype>virtual</vtype> ~algorithm_parameter</A>() 
+<LI>virtual <A HREF="#f3"><vtype>void</vtype> setCategory</A>(<vtype>int</vtype> cat) 
+<LI>virtual <A HREF="#f4"><vtype>int</vtype> getCategory</A>() const
+<LI>virtual <A HREF="#f5"><vtype>void</vtype> setLevel</A>(<vtype>int</vtype> lev) 
+<LI>virtual <A HREF="#f6"><vtype>int</vtype> getLevel</A>() const
+<LI>virtual <A HREF="#f7"><vtype>void</vtype> setUse</A>(<vtype>bool</vtype> in) 
+<LI>virtual <A HREF="#f8"><vtype>bool</vtype> IsUsed</A>() const
+<LI>virtual <A HREF="#f9"><vtype>int</vtype> getID</A>() const
+<LI>virtual <A HREF="#f10"><vtype>void</vtype> setID</A>(<vtype>int</vtype> id) 
+<LI>template<class X> <A HREF="#f11"><vtype>void</vtype> changeParam</A>(<vtype>string</vtype> name, <vtype>X</vtype> data) 
+<LI>template<class X> <A HREF="#f12"><vtype>void</vtype> changeParam</A>(<vtype>string</vtype> name, const <vtype>bool</vtype> data[], <vtype>int</vtype> num) 
+<LI>template<class X> <A HREF="#f13"><vtype>void</vtype> changeParam</A>(<vtype>string</vtype> name, <vtype>X</vtype> data, <vtype>int</vtype> pos) 
+<LI>template<class X> <A HREF="#f14"><vtype>int</vtype> getNumberOfParam</A>() const
+<LI>template<class X> <A HREF="#f15"><vtype>single_parameter&lt;X&gt;</vtype> getParam</A>(<vtype>int</vtype> i) const
+<LI>template<class X> <A HREF="#f16"><vtype>single_parameter&lt;X&gt;</vtype> getParam</A>(const <vtype>string&</vtype> nme) const
+<LI>template<class X> <A HREF="#f17"><vtype>void</vtype> addParam</A>(<vtype>single_parameter&lt;X&gt;</vtype> data) 
+<LI>template<class X> <A HREF="#f18"><vtype>void</vtype> popParam</A>() 
+<LI><A HREF="#f19"><vtype>void</vtype> removeParam</A>(const <vtype>string&</vtype> paramName) 
+<LI><A HREF="#f20"><vtype>bool</vtype> operator<</A>(<A HREF="algorithmparameter.html">algorithm_parameter</A> p) 
+<LI><A HREF="#f21"><vtype>bool</vtype> operator></A>(<A HREF="algorithmparameter.html">algorithm_parameter</A> p) 
+<LI><A HREF="#f22"><vtype>bool</vtype> operator==</A>(const <A HREF="algorithmparameter.html">algorithm_parameter&</A> p) 
+<LI><A HREF="#f23"><vtype>bool</vtype> operator<=</A>(<A HREF="algorithmparameter.html">algorithm_parameter</A> p) 
+<LI><A HREF="#f24"><vtype>bool</vtype> operator>=</A>(<A HREF="algorithmparameter.html">algorithm_parameter</A> p) 
+<LI><A HREF="#f25"><vtype>void</vtype> operator=</A>(const <A HREF="algorithmparameter.html">algorithm_parameter&</A> p) 
+<LI><A HREF="#f26"><vtype>string</vtype> toString</A>(<vtype>int</vtype> pattern = 1) const
+</UL>
+<DD>public inherrited<UL>
+<LI><A HREF="baseparameter.html#f3"><vtype>void</vtype> base_parameter::setName</A>(const <vtype>string&</vtype> n) 
+<LI><A HREF="baseparameter.html#f4"><vtype>void</vtype> base_parameter::setDescription</A>(<vtype>vector&lt;string&gt;</vtype> d) 
+<LI><A HREF="baseparameter.html#f5"><vtype>void</vtype> base_parameter::setDescription</A>(const <vtype>string&</vtype> d, <vtype>int</vtype> line) 
+<LI><A HREF="baseparameter.html#f6"><vtype>string</vtype> base_parameter::getName</A>() const
+<LI><A HREF="baseparameter.html#f7"><vtype>string</vtype> base_parameter::getDescription</A>(<vtype>int</vtype> line) const
+<LI><A HREF="baseparameter.html#f8"><vtype>vector&lt;string&gt;</vtype> base_parameter::getDescription</A>() const
+<LI><A HREF="baseparameter.html#f9"><vtype>bool</vtype> base_parameter::operator<</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f10"><vtype>bool</vtype> base_parameter::operator></A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f11"><vtype>bool</vtype> base_parameter::operator==</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f12"><vtype>bool</vtype> base_parameter::operator<=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+<LI><A HREF="baseparameter.html#f13"><vtype>bool</vtype> base_parameter::operator>=</A>(<A HREF="baseparameter.html">base_parameter</A> p) 
+</UL>
+</DL>
+<hr/>
+<H2>Descriptions</H2>
+<UL TYPE=square>
+<li>
+<A NAME="c2">algorithm_parameter::algorithm_parameter</A>() 
+<BR/><deff>
+Default constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c3">algorithm_parameter::algorithm_parameter</A>(const <A HREF="algorithmparameter.html">algorithm_parameter&</A> ap) 
+<BR/><deff>
+Copy constructor. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c4">algorithm_parameter::algorithm_parameter</A>(<vtype>string</vtype> tmpstring0, <vtype>int</vtype> id) 
+<BR/><deff>
+Constructor. Sets the name and the ID of the algorithm.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c5">algorithm_parameter::algorithm_parameter</A>(<vtype>string</vtype> tmpstring0, <vtype>int</vtype> tmpint0, <vtype>int</vtype> tmpint1, <vtype>int</vtype> id = -1) 
+<BR/><deff>
+Constructor. Sets the algorithms name, level and category and its ID. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="c6">algorithm_parameter::algorithm_parameter</A>(<vtype>string</vtype> tmpstring0, <vtype>bool</vtype> tmpbool0, <vtype>int</vtype> tmpint0, <vtype>int</vtype> tmpint1, <vtype>int</vtype> id = -1) 
+<BR/><deff>
+Constructor. Sets the constructors name, weather it is used, its level and category and the ID (-1 by default). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f2"><vtype>virtual</vtype> algorithm_parameter::~algorithm_parameter</A>() 
+<BR/><deff>
+Destructor
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f3"><vtype>void</vtype> algorithm_parameter::setCategory</A>(<vtype>int</vtype> cat) 
+<BR/><deff>
+Sets the category of the parameter in display with the analysis program typeCase. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f4"><vtype>int</vtype> algorithm_parameter::getCategory</A>() const
+<BR/><deff>
+Returns the category of the parameter in display with the analysis program typeCase. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f5"><vtype>void</vtype> algorithm_parameter::setLevel</A>(<vtype>int</vtype> lev) 
+<BR/><deff>
+Sets the level of the parameter in display with the analysis program typeCase. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f6"><vtype>int</vtype> algorithm_parameter::getLevel</A>() const
+<BR/><deff>
+Returns the level of the parameter in display with the analysis program typeCase. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f7"><vtype>void</vtype> algorithm_parameter::setUse</A>(<vtype>bool</vtype> in) 
+<BR/><deff>
+Sets, if the algorithm described by this parameter should be used in analysis. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f8"><vtype>bool</vtype> algorithm_parameter::IsUsed</A>() const
+<BR/><deff>
+Returns true, if the algorithm described by this parameter should be used in analysis. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f9"><vtype>int</vtype> algorithm_parameter::getID</A>() const
+<BR/><deff>
+Returns the ID of the algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f10"><vtype>void</vtype> algorithm_parameter::setID</A>(<vtype>int</vtype> id) 
+<BR/><deff>
+Sets the ID of the algorithm. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f11"><vtype>void</vtype> algorithm_parameter::changeParam</A>(<vtype>string</vtype> name, <vtype>X</vtype> data) 
+<BR/><deff>
+Template method. Changes the parameter with name <var>name</var>of the specified type (bool, int, float,QString, point3D, vector3D, vector<int>, vector<float>, vector<QString>, algorithm_parameter). It gets a new value. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f12"><vtype>void</vtype> algorithm_parameter::changeParam</A>(<vtype>string</vtype> name, const <vtype>bool</vtype> data[], <vtype>int</vtype> num) 
+<BR/><deff>
+Template method. Changes the <var>pos<sup>th</sup></var> parameter of the specified type (bool, int, float,QString, point3D, vector3D, vector<int>, vector<float>, vector<QString>, algorithm_parameter). It gets a new <var>name</var> and a new value. This only works for the template class QBitArray. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f13"><vtype>void</vtype> algorithm_parameter::changeParam</A>(<vtype>string</vtype> name, <vtype>X</vtype> data, <vtype>int</vtype> pos) 
+<BR/><deff>
+Template method. Changes the <var>pos<sup>th</sup></var> parameter of the specified type (bool, int, float,QString, point3D, vector3D, vector<int>, vector<float>, vector<QString>, algorithm_parameter). It gets a new <var>name</var> and a new value. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f14"><vtype>int</vtype> algorithm_parameter::getNumberOfParam</A>() const
+<BR/><deff>
+Template method. Removes the number of parameters of the specified type (bool, int, float,QString, point3D, vector3D, vector<int>, vector<float>, vector<QString>, algorithm_parameter). 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f15"><vtype>single_parameter&lt;X&gt;</vtype> algorithm_parameter::getParam</A>(<vtype>int</vtype> i) const
+<BR/><deff>
+Template method. Returns the <var>i<sup>th</sup></var> parameter of the specified type (bool, int, float,QString, point3D, vector3D, vector<int>, vector<float>, vector<QString>, algorithm_parameter) from the list of parameters.  
+<font color="red">Warning: no consistency check, breaks if <var>i</var> is larger than the number of parameters stored for this type.</font> 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f16"><vtype>single_parameter&lt;X&gt;</vtype> algorithm_parameter::getParam</A>(const <vtype>string&</vtype> nme) const
+<BR/><deff>
+Returns the first parameter with name <var>nme</var>.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f17"><vtype>void</vtype> algorithm_parameter::addParam</A>(<vtype>single_parameter&lt;X&gt;</vtype> data) 
+<BR/><deff>
+Template method. Adds a parameter of the specified type (bool, int, float,QString, point3D, vector3D, vector<int>, vector<float>, vector<QString>, algorithm_parameter) to the list of parameters. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f18"><vtype>void</vtype> algorithm_parameter::popParam</A>() 
+<BR/><deff>
+Template method. Removes the last parameter of the specified type (bool, int, float,QString, point3D, vector3D, vector<int>, vector<float>, vector<QString>, algorithm_parameter) from the list of parameters. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f19"><vtype>void</vtype> algorithm_parameter::removeParam</A>(const <vtype>string&</vtype> paramName) 
+<BR/><deff>
+Searches a parameter of that name in the parameter lists, starting with bool, int, float, point3D, vector3D, QString, vector<int>, vector<float>, vector<QString>, algorithm_parameter. If a parameter of that name is found, it is removed and it quits the method.
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f20"><vtype>bool</vtype> algorithm_parameter::operator<</A>(<A HREF="algorithmparameter.html">algorithm_parameter</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the algorithms ID is smaller the one of <var>p</var>. Needed for the sorting algorithm of the root-TObjArray-class. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f21"><vtype>bool</vtype> algorithm_parameter::operator></A>(<A HREF="algorithmparameter.html">algorithm_parameter</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the algorithms ID is larger the one of <var>p</var>. Needed for the sorting algorithm of the root-TObjArray-class. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f22"><vtype>bool</vtype> algorithm_parameter::operator==</A>(const <A HREF="algorithmparameter.html">algorithm_parameter&</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the algorithms ID is equal the one of <var>p</var>. Needed for the sorting algorithm of the root-TObjArray-class. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f23"><vtype>bool</vtype> algorithm_parameter::operator<=</A>(<A HREF="algorithmparameter.html">algorithm_parameter</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the algorithms ID is smaller or equal the one of <var>p</var>. Needed for the sorting algorithm of the root-TObjArray-class. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f24"><vtype>bool</vtype> algorithm_parameter::operator>=</A>(<A HREF="algorithmparameter.html">algorithm_parameter</A> p) 
+<BR/><deff>
+Comparison operator. Returns true if the algorithms ID is larger or equal the one of <var>p</var>. Needed for the sorting algorithm of the root-TObjArray-class. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f25"><vtype>void</vtype> algorithm_parameter::operator=</A>(const <A HREF="algorithmparameter.html">algorithm_parameter&</A> p) 
+<BR/><deff>
+Copy operator. 
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop><hr/>
+<li>
+<A NAME="f26"><vtype>string</vtype> algorithm_parameter::toString</A>(<vtype>int</vtype> pattern = 1) const
+<BR/><deff>
+Returns a string representation of the algorithms parameter, name description, etc. Contains line breaks.  
+<br>pattern = 1: cathegory, level and used status are shown in one line, 
+<br>pattern = 2: cathegory, level and used status are shown with description, 
+<br>pattern = 3: only ID is shown with description, 
+<br>else: only ID is shown. 
+<br>In all modes the parameters are shown.  
+</deff>
+<BR/><ttop><a href="#top">top</a></ttop>
+</UL>
+<hr><table width="30%"><tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This
+work is licensed under a <a rel="license"
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/">cc by-nc-sa 3.0
+Unported License</a> unless marked otherwise.</td></tr></table>
+</body>
+</html>
