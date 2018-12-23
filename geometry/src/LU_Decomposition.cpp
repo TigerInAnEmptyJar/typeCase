@@ -57,7 +57,7 @@ bool LUDec(const matrixNxM &matIn,matrixNxM &outL, matrixNxM &outU, matrixNxM &p
   long double ptmp1[lines*columns];
   long double ptmp2[lines*columns];
   for(int i=0;i<lines;i++)for(int j=0;j<columns;j++)ptmp[i*columns+j]=(i==j?1:0);
-  bool permut=false;
+//  bool permut=false;
   for(int j=0;j<columns-1;j++)
     {
       for(int i=0;i<lines;i++)for(int j=0;j<columns;j++)tmpL[i*columns+j]=(i==j?1:0);
@@ -66,7 +66,7 @@ bool LUDec(const matrixNxM &matIn,matrixNxM &outL, matrixNxM &outU, matrixNxM &p
       //      tmpL_1.Unity();
       if(OU[j*columns+j]/*.getValue(j,j)*/==0)
 	{
-	  permut=true;
+//	  permut=true;
 	  //	  cout<<"shit permutation necessary"<<endl;
 	  int p=-1;
 	  for(int i=j+1;i<columns;i++)

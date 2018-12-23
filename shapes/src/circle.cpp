@@ -74,7 +74,7 @@ vector3D circle::distance(const sLine3D &line)
   if(l.R()<=rad)return vector3D(0,0,0);
   return l*(l.R()-rad);
 }
-
+/*
 #include <TPolyLine.h>
 void circle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle)const
 {
@@ -150,7 +150,7 @@ void circle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBo
 	  boundingBox->setValues(pcv.X()-rad*(d1/(d1+d2)),pcv.Y()-rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)));
 	}
     }
-}
+}*/
 void circle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, int lColor, int fColor, int fStyle)const
 {
   Draw(eye,plane,boundingBox,NULL,lColor,fColor,fStyle);

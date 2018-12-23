@@ -4,8 +4,8 @@
 #include "TH1.h"
 #include "TFile.h"
 #include <vector>
-#include <qstring.h>
-#include <qobject.h> 
+#include <QtCore/QString>
+#include <QtCore/QObject> 
 #include <fstream>
 #include "algorithm.h"
 #include "fitAlgorithm.h"

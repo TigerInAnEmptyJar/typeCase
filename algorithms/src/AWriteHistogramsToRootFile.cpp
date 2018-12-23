@@ -1,7 +1,7 @@
 #include "AWriteHistogramsToRootFile.h"
 #include <TCanvas.h>
 //#include <qfile.h>
-#include <qdatetime.h>
+#include <QtCore/QDateTime>
 #include "logger.h"
 extern bool existing(string filename);
 AWriteHistogramsToRootFile::AWriteHistogramsToRootFile(const string &filename, const string &directory, TEvent &eventIn,TSetup &setup,const string &option,bool serv,void *histo_mutexIn):AAlgorithm("Write histograms to root file"),event(eventIn),server(serv)

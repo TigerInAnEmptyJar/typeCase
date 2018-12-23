@@ -49,11 +49,13 @@ vector3D matrix3D::operator[](int num)const//returns a line of the matrix
 
 void matrix3D::operator = (const matrix3D &m)
 {
-  for(int i=0;i<3;i++)
-    for( int j=0;j<3;j++)
+  for(int i=0;i<3;i++) {
+    for( int j=0;j<3;j++) {
       data[i*3+j]=m.getValue(i,j);
-    unit=m.Unitary();
-    reel=m.Orthogonal();
+    }
+  }
+  unit=m.Unitary();
+  reel=m.Orthogonal();
 }
 
 vector3D matrix3D::operator *(const vector3D &v)const

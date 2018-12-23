@@ -267,7 +267,7 @@ float kinFit::fit()
   int Meas[nmea],Unmeas[numea];
 //   bool condition=true;
   int iteration=0;
-  float chi2_prev=0,d_prev,d0;
+  float /*chi2_prev=0,*/d_prev/*,d0*/;
   int num,pos,number,*mmtmp;
   int sig;
   momentum4D tmp4d;
@@ -318,7 +318,7 @@ float kinFit::fit()
 
   calculateCinematics(ppx, FM, sf, d);
   FM0=FM;
-  d0=d;
+//  d0=d;
 //   cout<<"\nStart:"<<d0<<FM<<d<<endl;
   //iteration
 //   float value;
@@ -412,7 +412,7 @@ float kinFit::fit()
 	checkValues(in[i][3],p[i],abs(in[i][0])!=2,abs(in[i][1])!=2,abs(in[i][2])!=2);
 
        //cout<<iteration<<" g"<<endl;
-      chi2_prev=chi2;
+//      chi2_prev=chi2;
        //cout<<iteration<<" h"<<endl;
       chi2=epsM*((GM)*epsM);
        //cout<<iteration<<" i"<<endl;

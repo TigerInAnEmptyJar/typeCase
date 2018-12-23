@@ -1,7 +1,6 @@
 all:
 	make --directory=geometry -f makefile 
 	make --directory=fit -f makefile 
-	make --directory=eventpainter -f makefile 
 	make --directory=parameter -f makefile 
 	make --directory=shapes -f makefile 
 	make --directory=container -f makefile 
@@ -11,6 +10,7 @@ all:
 	make --directory=analyser -f makefile
 	make --directory=code -f makefile 
 	make --directory=qt-utils -f makefile 
+	make --directory=eventpainter -f makefile 
 
 clean:
 	make --directory=geometry -f makefile clean

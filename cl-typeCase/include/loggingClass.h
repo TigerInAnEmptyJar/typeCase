@@ -1,6 +1,6 @@
-#include <qstring.h>
-#include <qobject.h>
-#include <qdatetime.h>
+#include <QtCore/QString>
+#include <QtCore/QObject>
+#include <QtCore/QDateTime>
 #include "beamtimeparameter.h"
 #include "eventpainter.h"
 class TCanvas;

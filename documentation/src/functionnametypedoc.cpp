@@ -391,7 +391,6 @@ void functionNameTypeDoc::parse(const string &s1)
   vector<string> parts;
   string word;
   int brck=0,i=0;
-  bool def=false;
   word="";
   while(i<(int)inBrackets.length())
     {
@@ -399,12 +398,10 @@ void functionNameTypeDoc::parse(const string &s1)
 	{
 	  if(inBrackets[i]=='(')brck++;
 	  if(inBrackets[i]==')')brck--;
-	  if(inBrackets[i]=='=')def=true;
 	  if(inBrackets[i]==','&&brck==0)
 	    {
 	      parts.push_back(word);
 	      word="";
-	      def=false;
 	    }
 	  else
 	    {

@@ -10,8 +10,8 @@
 #ifndef MY_DOC_CLASSES_H
 #define MY_DOC_CLASSES_H
 
-#include <qvariant.h>
-#include <qwidget.h>
+#include <QtCore/QVariant>
+#include <QtWidgets/QWidget>
 
 class QVBoxLayout;
 class QHBoxLayout;

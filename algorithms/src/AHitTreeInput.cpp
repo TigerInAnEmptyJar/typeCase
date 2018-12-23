@@ -268,10 +268,9 @@ void AHitTreeInput::clearTree()
       while(!copyFile.empty())
 	{
 	  string command="rm -f ";
-	  int ret;
 	  command=command+copyFile.back();
 	  cout<<command.data()<<endl;
-	  ret=system(command.data());
+	  system(command.data());
 	  copyFile.pop_back();
 	}
     }
@@ -292,7 +291,6 @@ void AHitTreeInput::newRun(run_parameter &r)
   if(filenames.size()<=0)return;
   if(localDirectory)
     {
-      int ret;
       if(!existing(directory))
 	{
 	  cout<<"local directory \""<<directory.data()<<"\"doesn\'t exist: create it"<<endl;
@@ -312,16 +310,15 @@ void AHitTreeInput::newRun(run_parameter &r)
 		  continue;
 		}
 	      cout<<"mkdir "<<parentdirs[i].data()<<endl;
-	      ret=system((string("mkdir ")+parentdirs[i]).data());
+	      system((string("mkdir ")+parentdirs[i]).data());
 	    }
-	  ret=system((string("mkdir ")+directory).data());
+	  system((string("mkdir ")+directory).data());
 	}
     }
   if(useChain)
     {
       if(localDirectory)
 	{
-	  int ret;
 	  for(unsigned int i=0;i<filenames.size();i++)
 	    {
 	      string s=filenames[i];
@@ -334,7 +331,7 @@ void AHitTreeInput::newRun(run_parameter &r)
 		  string command="cp ";
 		  command=command+filenames[i]+" "+copyFile.back();
 		  cout<<"bash # "<<command.data()<<endl;
-		  ret=system(command.data());
+		  system(command.data());
 		  filenames[i]=copyFile.back();
 		  if(!existing(copyFile.back()))
 		    {
@@ -358,7 +355,6 @@ void AHitTreeInput::newRun(run_parameter &r)
     }
   else
     {
-      int ret;
       if(localDirectory)
 	{
 	  string s=filenames.back();
@@ -371,7 +367,7 @@ void AHitTreeInput::newRun(run_parameter &r)
 	      string command="cp ";
 	      command=command+filenames.back()+" "+copyFile.back();
 	      cout<<"bash # "<<command.data()<<endl;
-	      ret=system(command.data());
+	      system(command.data());
 	      filenames.back()=copyFile.back();
 	      if(!existing(copyFile.back()))
 		{

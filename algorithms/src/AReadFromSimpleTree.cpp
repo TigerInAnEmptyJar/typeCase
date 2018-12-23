@@ -3,8 +3,8 @@
 #include "Eparticles.h"
 #include <TLeaf.h>
 //#include <qfile.h>
-#include <qdir.h>
-#include <qprocess.h>
+#include <QtCore/QDir>
+#include <QtCore/QProcess>
 #include <stdlib.h>
 bool rever;
 extern bool existing(string filename);

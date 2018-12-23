@@ -488,8 +488,6 @@ volumeShape* wedge::getClone()
     return sh;
 }
 
-#include <TPolyLine.h>
-
 #include "sphericRectangle.h"
 Vector wedge::Hitting(const sLine3D &line)
 {
@@ -981,13 +979,13 @@ Vector wedge::HitParams(const planeShape &shape, point3D origin)
   ret.setValue(12,dist.Z());
   return ret;
 }
-#include <TPolyLine.h>
 #include "quadrangle.h"
 void wedge::Draw(const point3D &eye, const plane3D &plane,vector4D* boundingBox, int lColor, int fColor, int fStyle)const
 {
   Draw(eye,plane,boundingBox,NULL,lColor,fColor,fStyle);
 }
 #include "sphericRectangle.h"
+/*
 void wedge::Draw(const point3D &eye, const plane3D &plane,vector4D* boundingBox, TObject**ident, int lColor, int fColor, int fStyle)const
 {
   if(distBarrel>0)
@@ -1090,7 +1088,7 @@ void wedge::Draw(const point3D &eye, const plane3D &plane,vector4D* boundingBox,
   pl2.SetFillColor(fColor);
   pl2.SetLineColor(lColor);
   pl2.SetFillStyle(fStyle);
-}
+}*/
 int wedge::suspect(const sLine3D &line, int stackType)
 {
   switch(stackType)

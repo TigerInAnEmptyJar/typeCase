@@ -1876,17 +1876,14 @@ int TMyClass::content(int dataType, const vector<string> &data, vector<TMyClass>
     int nfound=0;
     string tmp,tmp1,classNameString,superString,propertyString;
     string comment;
-    int ii;
     datastreamer streamer(data);
     char c;
-    int brck;
     bool finished=false;
     //    cout<<"start"<<endl;
     while(!streamer.eof())
       {
 	tmp=streamer.getline();//eliminateCommentPreproc(streamer,NULL);
 	if(streamer.eof()||tmp=="")continue;
-	brck=0;
 	while(!(hasA(tmp,"class")||streamer.eof()))
 	  {
 	    tmp=streamer.getline();//eliminateCommentPreproc(streamer,NULL);
@@ -2105,7 +2102,6 @@ int TMyClass::content(int dataType, const vector<string> &data, vector<TMyClass>
     return nfound;
     while(i<(int)data.size())
     {
-      ii=0;
       tmp=data[i];
       if(tmp[0]=='#'){i++;continue;}//preprocessor command
       if(hasA(tmp,"//"))

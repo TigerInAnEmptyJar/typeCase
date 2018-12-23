@@ -2,7 +2,7 @@
 #define _EVENTPAINTER_
 #include "container.h"
 #include <TCanvas.h>
-#include <qobject.h>
+#include <QtCore/QObject>
 #include <TObject.h>
 #include <vector>
 #include "shapes.h"

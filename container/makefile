@@ -6,7 +6,7 @@ TARGET1=lib$(LIBNAME)$(PCCODE).so.2
 CCC = $(CDIR)/g++
 LINK = $(CDIR)/g++
 LFLAGS = -shared -Wl,-soname,$(TARGET1)
-INCS = -I. -Iinclude -I$(KTOFPACK)/include 
+INCS = -I. -Iinclude -I$(KTOFPACK)/include -I../shapes/include -I../geometry/include -I../basic/include
 CFLAGS= -c -g -O -Werror -Wall -fPIC #-Wextra
 LIBS = #-L$(KTOFPACK)/lib -lgeometry$(PCCODE) -lparameter$(PCCODE) -lshape$(PCCODE)
  #-L/usr/lib64 -lThread -lQt3Support -lQtSql -pthread -lQtXml -L/usr/X11R6/lib64 -lQtNetwork -lQtGui -lpng -lSM -lICE -lXi -lXrender -lXrandr -lXfixes -lXcursor -lXinerama -lfreetype -lfontconfig -lXext -lX11 -lQtCore -lz -lm -lgthread-2.0 -lrt -lglib-2.0 -ldl 

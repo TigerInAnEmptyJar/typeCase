@@ -1,6 +1,6 @@
 //#include "algorithms.h"
 #include "logger.h"
-#include <qdatetime.h>
+#include <QtCore/QDateTime>
 #include "tofAnalysis_t.h"
 void tofAnalysis::initData()
 {

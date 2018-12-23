@@ -34,14 +34,12 @@ void *ACalibration::process(void*ptr)
 {
   if(!checkRange())return ptr;
   int numElem;
-  int numDet;
   int rawADC,rawTDC;
   int nv=0;
   float walk,cADC,cTDC;
   for(int i=0;i<numberOfHits;i++)
     {
       numElem=hits[i]->getElement();
-      numDet=hits[i]->getDetector();
       if(numElem>=numberOfElements||numElem<0)
 	{
 	  hits[i]->setValid(false);

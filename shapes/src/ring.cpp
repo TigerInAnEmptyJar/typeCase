@@ -426,7 +426,6 @@ Vector ring::HitParams(const planeShape &shape, point3D origin)
   ret.setValue(12,dist.Z());
   return ret;
 }
-#include <TPolyLine.h>
 #include "wedge.h"
 void ring::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle)const
 {

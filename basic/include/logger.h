@@ -4,7 +4,7 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include<qobject.h>
+#include<QtCore/QObject>
 #include "parameterManager.h"
 class logMan
 {

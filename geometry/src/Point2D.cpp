@@ -159,7 +159,7 @@ void point2D::operator = (const point2D &p)
 //#ifdef USEQT
 string point2D::toString(int pt)const
 {
-  if(!getState()==_regular_)return point::toString();
+  if(getState()!=_regular_)return point::toString();
   repTD re=repre;
   switch(pt)
     {

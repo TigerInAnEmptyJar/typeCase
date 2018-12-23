@@ -141,7 +141,7 @@ int AReactionRecognition::getReactions(TSetup& setup,string option)
   //  n+=s.contains("");
   //  n+=s.contains("");
   reactions=new RbaseReaction*[n];
-  AFitAlgorithm *tmp;
+//  AFitAlgorithm *tmp;
   momentum4D m1,m2;
   m1=setup.getBeamr().getParticle();
   m2=(!setup.hasTarget()?setup.getBeamr(1).getParticle():setup.getTargetr().getParticle());
@@ -163,7 +163,7 @@ int AReactionRecognition::getReactions(TSetup& setup,string option)
       while(contains(s,(string("__")+subN+"_").data()))
 	{
 	  subC=s.substr(s.find("__"+subN+"_")+subN.length()+3,s.find("_",s.find("__"+subN+"_")+subN.length()+3)-s.find("__"+subN+"_")-subN.length()-3);
-	  tmp=kinfit->getClone();
+	  kinfit->getClone();
 	  reactions[n]=getReactionFromName(subN, m1, m2);
 	  reactions[n]->setChiLimit(toFloat(subC));
 	  n++;

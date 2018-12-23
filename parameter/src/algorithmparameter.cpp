@@ -383,27 +383,27 @@ template<class X> int algorithm_parameter::getNumberOfParam()const
 template<class X> single_parameter<X> algorithm_parameter::getParam(const string &nme) const
 {
   const void *p=0;
-  if(typeid(X)==typeid(int))
+  if(typeid(X)==typeid(int)) {
     for(int i=integers.size()-1;i>=0;i--)
       if(integers[i].getName()==nme)
 	p=&integers.at(i);
-  else if(typeid(X)==typeid(float))
+  }else if(typeid(X)==typeid(float)){
     for(int i=floats.size()-1;i>=0;i--)
       if(floats[i].getName()==nme)
 	p=&floats.at(i);
-  else if(typeid(X)==typeid(point3D))
+  }else if(typeid(X)==typeid(point3D)){
     for(int i=points.size()-1;i>=0;i--)
       if(points[i].getName()==nme)
 	p=&points.at(i);
-  else if(typeid(X)==typeid(bool))
+  }else if(typeid(X)==typeid(bool)){
     for(int i=switches.size()-1;i>=0;i--)
       if(switches[i].getName()==nme)
 	p=&switches.at(i);
-  else if(typeid(X)==typeid(string))
+  }else if(typeid(X)==typeid(string)){
     for(int i=stringes.size()-1;i>=0;i--)
       if(stringes[i].getName()==nme)
 	p=&stringes.at(i);
-  else if(typeid(X)==typeid(vector3D))
+  }else if(typeid(X)==typeid(vector3D)){
     for(int i=vectors.size()-1;i>=0;i--)
       if(vectors[i].getName()==nme)
 	p=&vectors.at(i);
@@ -411,22 +411,25 @@ template<class X> single_parameter<X> algorithm_parameter::getParam(const string
 //     for(int i=bitmaps.size()-1;i>=0;i--)
 //       if(bitmaps[i].getName()==nme)
 // 	p=&bitmaps.at(i);
-  else if(typeid(X)==typeid(vector<int>))
+  }else if(typeid(X)==typeid(vector<int>)){
     for(int i=intVectors.size()-1;i>=0;i--)
       if(intVectors[i].getName()==nme)
 	p=&intVectors.at(i);
-  else if(typeid(X)==typeid(vector<float>))
-     for(int i=floatVectors.size()-1;i>=0;i--)
+  }else if(typeid(X)==typeid(vector<float>)){
+     for(int i=floatVectors.size()-1;i>=0;i--){
       if(floatVectors[i].getName()==nme)
 	p=&floatVectors.at(i);
-  else if(typeid(X)==typeid(vector<string>))
-    for(int i=stringVectors.size()-1;i>=0;i--)
+     }
+  }else if(typeid(X)==typeid(vector<string>)){
+    for(int i=stringVectors.size()-1;i>=0;i--) {
       if(stringVectors[i].getName()==nme)
 	p=&stringVectors.at(i);
-  else if(typeid(X)==typeid(algorithm_parameter))
+    }
+  }else if(typeid(X)==typeid(algorithm_parameter)){
     for(int i=algos.size()-1;i>=0;i--)
       if(algos[i].getName()==nme)
 	p=&algos.at(i);
+  }
   if(p!=0) return *((single_parameter<X>*)p);
   return single_parameter<X>();
 }

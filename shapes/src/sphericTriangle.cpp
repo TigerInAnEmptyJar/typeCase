@@ -405,7 +405,7 @@ int sphericTriangle::getNumberOfPoints() const
   if(realTriangle)return 3;
   return 6;
 }
-#include <TPolyLine.h>
+
 extern void DrawPoints(int nPoints, point3D* points,const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle);
 void sphericTriangle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle)const
 {

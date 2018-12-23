@@ -1,12 +1,12 @@
 #include "tofAnalysis_t.h"
 #include <iostream>
 #include <fstream>
-#include<qdatetime.h>
+#include <QtCore/QDateTime>
 #include "loggingClass.h"
 #include "parameterManager.h"
 #include <iostream>
 #include <signal.h>
-#include <qfile.h>
+#include <QtCore/QFile>
 #include <stdlib.h>
 #include <time.h>
 #include <boost/program_options.hpp>
@@ -637,7 +637,7 @@ bool checkOptions(po::options_description &desc, po::variables_map &vam, paramet
     cout << desc << "\n";
     return false;
   }
-  bool show=false,showA=false;
+  bool show=false;
   if(vam.count("s")){param.setupFile=vam["s"].as<string>();param.rootS=false;}
   if(vam.count("S")){param.setupFile=vam["S"].as<string>();param.rootS=true;}
   if(vam.count("a")){param.algoFile=vam["a"].as<string>();param.rootA=false;}
@@ -661,7 +661,7 @@ bool checkOptions(po::options_description &desc, po::variables_map &vam, paramet
   if(vam.count("j"))param.nThreads=vam["j"].as<int>();
   if(vam.count("l")){param.shiftEvent=true;param.EventShift=vam["l"].as<int>();}
   if(vam.count("o")){param.outpath=vam["o"].as<string>();}
-  if(vam.count("H")){show=true;showA=true;}
+  if(vam.count("H")){show=true;}
   if(vam.count("I"))param.showInitState=true;
   if(vam.count("local"))param.local=true;
   if(vam.count("nonLocal"))param.local=false;

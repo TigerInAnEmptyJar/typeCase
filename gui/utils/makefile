@@ -1,10 +1,10 @@
 INSTALLER=../../installer.sh
 CCC = $(CDIR)/g++
 LINK = $(CDIR)/g++
-MOC=moc
+MOC=$(QT_DIR)/bin/moc
 LFLAGS = 
-INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(QT_INCLUDE) -I$(ROOTINCLUDE) 
-CFLAGS= -c -g -O -Werror -Wall -fPIC -Wno-deprecated #-Wextra
+INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(QT_INCLUDE) -I../../geometry/include
+CFLAGS= -c -g -O -Werror -Wall -fPIC -std=c++11 -Wno-deprecated #-Wextra
 LIBS = -L$(KTOFPACK)/lib -lparameter$(PCCODE) -lgeometry$(PCCODE) $(QT_LIBS) $(shell root-config --libs) #-lGQt # -lcode$(PCCODE)
 PACKDIR=$(KTOFPACK)/gui/utils
 

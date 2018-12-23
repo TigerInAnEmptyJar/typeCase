@@ -85,7 +85,7 @@ cleanLibs:
 	rm -f $(KTOFPACK)/lib/$(TARGET) $(KTOFPACK)/lib/$(TARGETA) $(KTOFPACK)/lib/$(TARGET1)
 
 obj/%$(PCCODE).o: src/%.cpp
-	$(CCC) $(CFLAGS) $(INCS) -c "$<" -o "$@"
+	$(CCC) $(CFLAGS) -std=c++11 $(INCS) -c "$<" -o "$@"
 obj/%$(PCCODE).o: src/%.c
 	$(CCC) $(CFLAGS) -x c $(INCS) -c "$<" -o "$@"
 

@@ -315,7 +315,7 @@ volumeShape* spiral::getClone()
     return sh;
 }
 
-#include <TPolyLine.h>
+//#include <TPolyLine.h>
 
 Vector spiral::Hitting(const sLine3D &line)
 {
@@ -631,6 +631,7 @@ Vector spiral::HitParams(const planeShape &shape, point3D origin)
   ret.setValue(12,dist.Z());
   return ret;
 }
+/*
 void spiral::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle)const
 {
   int numberOfPointsPerEdge=100;
@@ -776,7 +777,7 @@ void spiral::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBo
     }
   delete []edges;
   delete []edges2;
-}
+}*/
 void spiral::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, int lColor, int fColor, int fStyle)const
 {
   Draw(eye,plane,boundingBox,NULL,lColor,fColor,fStyle);

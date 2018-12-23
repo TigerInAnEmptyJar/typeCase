@@ -6,7 +6,7 @@ TARGET=lib$(LIBNAME)$(PCCODE).so
 TARGET0=$(TARGET)
 TARGET1=lib$(LIBNAME)$(PCCODE).so.2
 LFLAGS =  -shared -Wl,-soname,$(TARGET1)
-INCS = -I. -Iinclude -I$(KTOFPACK)/include 
+INCS = -I. -Iinclude -I$(KTOFPACK)/include -I../geometry/include
 CFLAGS= -c -g -O -Werror -Wall -fPIC #-Wextra
 LIBS = #-L$(KTOFPACK)/lib -lgeometry$(PCCODE) 
 

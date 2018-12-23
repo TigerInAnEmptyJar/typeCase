@@ -1,6 +1,6 @@
 #include "logger.h"
 #include "AMultipleTreeInput.h"
-#include <qfile.h>
+#include <QtCore/QFile>
 //#define OUTPUT
 //#define TDC_OUTPUT
 #ifdef TDC_OUTPUT

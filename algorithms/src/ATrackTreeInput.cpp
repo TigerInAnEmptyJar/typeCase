@@ -10,7 +10,7 @@ extern logger readWriteLog;
 #include "ring.h"
 #include "spiral.h"
 #include <stdlib.h>
-#include <qprocess.h>
+#include <QtCore/QProcess>
 void ATrackTreeInput::setTrackErrors(TTrack *tr)
 {
   if(tr->isSecondary())
@@ -427,13 +427,12 @@ void ATrackTreeInput::clearTree()
   valid=false;
   if(localDirectory)
     {
-      int ret;
       if(copyFile!="")
 	{
 	  string command="rm -f ";
 	  command=command+copyFile;
 	  cout<<"bash # "<<command.data()<<endl;
-	  ret=system(command.data());
+	  system(command.data());
 	}
     }
 }
@@ -470,7 +469,6 @@ void ATrackTreeInput::onNewRun(run_parameter &run)
   readWriteLog<<"TrackTreeInput: "<<filename.data()<<endli;
   if(localDirectory)
     {
-      int ret;
       if(!existing(directory))
 	{
 	  cout<<"local directory \""<<directory.data()<<"\"doesn\'t exist: create it"<<endl;
@@ -490,9 +488,9 @@ void ATrackTreeInput::onNewRun(run_parameter &run)
 		  continue;
 		}
 	      cout<<"mkdir "<<parentdirs[i].data()<<endl;
-	      ret=system((string("mkdir ")+parentdirs[i]).data());
+	      system((string("mkdir ")+parentdirs[i]).data());
 	    }
-	  ret=system((string("mkdir ")+directory).data());
+	  system((string("mkdir ")+directory).data());
 	}
       copyFile=filename;
       if(hasA(copyFile,"/"))
@@ -504,7 +502,7 @@ void ATrackTreeInput::onNewRun(run_parameter &run)
 	  string command="cp ";
 	  command=command+filename+" "+copyFile;
 	  cout<<"bash # "<<command.data()<<endl;
-	  ret=system(command.data());
+	  system(command.data());
 	  filename=copyFile;
 	  if(!existing(copyFile))
 	    {

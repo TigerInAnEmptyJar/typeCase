@@ -1,11 +1,11 @@
 TARGET=cl-typeCase$(PCCODE)
 CCC = $(CDIR)/g++
 LINK = $(CDIR)/g++
-MOC=moc
+MOC=$(QT_DIR)/bin/moc
 LFLAGS =
-INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(ROOTINCLUDE) -I$(QT_INCLUDE) -I$(BOOSTINCLUDE) -I$(BOOST_ROOT)
-CFLAGS= -c -g -O -Werror -Wall -fPIC #-Wextra 
-MYLIBS = -L$(KTOFPACK)/lib -lparameter$(PCCODE) -lshape$(PCCODE) -lcontainer$(PCCODE) -lbasic$(PCCODE) -lreaction$(PCCODE) -lalgorithm$(PCCODE) -lanalyser$(PCCODE) -lfit$(PCCODE) -lgeometry$(PCCODE) -leventpainter$(PCCODE) 
+INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(QT_DIR)/include -I$(BOOST_DIR) -I../analyser/include -I../container/include -I../geometry/include -I../parameter/include -I../shapes/include -I../basic/include 
+CFLAGS= -c -g -O -Werror -Wall -fPIC -std=c++11 #-Wextra 
+MYLIBS = -L../parameter -L../shapes -L../container -L../geometry -L../basic -L../algorithms -L../analyser/ -L../fit -L../reaction -L../eventpainter -lparameter$(PCCODE) -lshape$(PCCODE) -lcontainer$(PCCODE) -lbasic$(PCCODE) -lreaction$(PCCODE) -lalgorithm$(PCCODE) -lanalyser$(PCCODE) -lfit$(PCCODE) -lgeometry$(PCCODE) -leventpainter$(PCCODE) 
 STATICLIBS =$(KTOFPACK)/lib/analyser$(PCCODE).a \
 	$(KTOFPACK)/lib/eventpainter$(PCCODE).a \
 	$(KTOFPACK)/lib/algorithm$(PCCODE).a \
@@ -18,7 +18,7 @@ STATICLIBS =$(KTOFPACK)/lib/analyser$(PCCODE).a \
 	$(KTOFPACK)/lib/fit$(PCCODE).a \
 	$(KTOFPACK)/lib/geometry$(PCCODE).a
 
-LIBS=$(MYLIBS) $(QT_LIBS) -L$(BOOSTLIB) -lboost_program_options $(shell root-config --libs) #-L$(QTDIR)/lib -lqt-mt
+LIBS=$(MYLIBS) $(QT_LIBS) -L$(BOOST_DIR)/stage/lib -lboost_program_options $(shell root-config --libs) #-L$(QTDIR)/lib -lqt-mt
 #LIBS=$(MYLIBS) -L/usr/lib64 -lQtCore 
 
 HDR =include/loggingClass.h
@@ -31,7 +31,7 @@ MORELIB=$(KTOFPACK)/lib/libparameter$(PCCODE).so $(KTOFPACK)/lib/libshape$(PCCOD
 all: $(TARGET)
 
 
-$(TARGET):  $(OBJS) $(SUBLIBS) $(OBJCOMP) $(MOCSRC) $(MOCOBJ) $(MYLIBS)
+$(TARGET):  $(OBJS) $(SUBLIBS) $(OBJCOMP) $(MOCSRC) $(MOCOBJ)
 	$(LINK) $(LFLAGS) $(OBJS) $(MOCOBJ) $(LIBS) -o $(TARGET) 
 
 STATIC:  $(OBJS) $(SUBLIBS) $(OBJCOMP) $(MOCSRC) $(MOCOBJ) $(STATICLIB)

@@ -1,5 +1,5 @@
 #include "logger.h"
-#include <qdatetime.h>
+#include <QtCore/QDateTime>
 #include "tofAnalysis_t.h"
 #include "Eparticles.h"
 #include "ABetheBloch.h"

@@ -4,8 +4,8 @@
 #include "reactions.h" 
 #include <pthread.h>
 #include "logger.h"
-#include <qdir.h>
-#include <qprocess.h>
+#include <QtCore/QDir>
+#include <QtCore/QProcess>
 #include "beamtimeparameter.h"
 float mass[50];
 Int_t **fromSave;

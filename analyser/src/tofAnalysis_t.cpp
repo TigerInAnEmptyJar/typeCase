@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "tofAnalysis_t.h"
 #include "logger.h"
-#include <qdatetime.h>
+#include <QtCore/QDateTime>
 #include "Eparticles.h"
 #ifndef INT_MAX
 #define INT_MAX 100000000
@@ -183,9 +183,7 @@ bool tofAnalysis::step(int num)
     if(!isInitS) return false;
     QTime timer,tim;
     timer.start();
-    long times[numAlgorithms];
     for(int i=0;i<numAlgorithms;i++)
-	times[i]=0;
     //    int i=0;
     if(run==true)
       count=0;

@@ -6,6 +6,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include "beamtimeparameter.h"
+#include <unistd.h>
 char li[200];
 extern bool existing(string filename);
 class asciiReader
@@ -33,8 +34,8 @@ void* feederFuction(void* params)
   //  cout<<"feederFunction"<<endl;
   feederstruct_t parameter;
   setFee(parameter,(feederstruct_t*)params);
-  int ret;
-  ret=system((parameter.feederName+" "+parameter.inputFile+" "+parameter.fifoFile).data());
+//  int ret;
+  system((parameter.feederName+" "+parameter.inputFile+" "+parameter.fifoFile).data());
   return NULL;
 }
 asciiReader::asciiReader(istream&in):input(in)
@@ -99,17 +100,17 @@ AReadFromTade::~AReadFromTade()
     }
   pthread_cancel(*((pthread_t*)feeder));
   delete (pthread_t*)feeder;//((QProcess*)feeder);
-  int ret;
+//  int ret;
   if(filetype>0)
     {
       cout<<"call cleaner"<<endl;
-      ret=system((string("rm -f ")+scriptFile).data());
+      system((string("rm -f ")+scriptFile).data());
     }
   cout<<"call feeder"<<endl;
   if(cleanupInput)
     {
       cout<<"call cleaner input"<<endl;
-      ret=system((string("rm -f ")+fifoFile).data());
+      system((string("rm -f ")+fifoFile).data());
     }
   cout<<"last event was "<<nextEventNumber<<endl;
 }
@@ -246,14 +247,13 @@ void AReadFromTade::newInput(const string & filename)
       emit newRun(input);
     }
 }
-#include <qdir.h>
+#include <QtCore/QDir>
 #include <sys/types.h>
 #include <sys/stat.h>
 void AReadFromTade::newInput(run_parameter&r)
 {
   anaLog<<"AReadFromTade::newInput()"<<endli;
   string filename="",actualFileName="";
-  int ret;
   for(int i=0;i<r.getNumberOfFiles();i++)
     if(r.getFileType(i)==0)
       {
@@ -268,14 +268,14 @@ void AReadFromTade::newInput(run_parameter&r)
       if(filetype>0)
 	{
 	  cout<<"call cleaner"<<endl;
-	  ret=system((string("rm -f ")+scriptFile).data());
+	  system((string("rm -f ")+scriptFile).data());
 	}
       cout<<"call feeder"<<endl;
       if(cleanupInput)
 	{
 	  pthread_cancel(*((pthread_t*)feeder));
 	  cout<<"call cleaner input"<<endl;
-	  ret=system((string("rm -f ")+fifoFile).data());
+	  system((string("rm -f ")+fifoFile).data());
 	}
 // #if QT_VERSION < 0x040000
 //       ((QProcess*)feeder)->clearArguments();
@@ -342,8 +342,8 @@ void AReadFromTade::newInput(run_parameter&r)
       else
 	scripter<<"bzcat $1 > $2"<<endl;
       scripter.close();
-      int ret;
-      ret=system((string("chmod u=rwx ")+scriptFile).data());
+//      int ret;
+      system((string("chmod u=rwx ")+scriptFile).data());
       feederstruct_t tmp;
       tmp.feederName=scriptFile;
       if(filetype<8)

@@ -670,7 +670,7 @@ void AReadReactionFromRoot::read_rea()
   Int_t tmpev[NRea];
   bool val=false;
   bool hasA=false;
-  bool mee=false;
+//  bool mee=false;
   for(int j=0;j<NRea;j++) 
     {
       if(RTra[j]==NULL)continue;
@@ -691,7 +691,7 @@ void AReadReactionFromRoot::read_rea()
 	}
       hasA=true;
       if(currentReaEntry[j]<reactionTree[j]->GetEntries())val=true;
-      else {/*cout<<j<<" "<<event.getRunNumber()<<" "<<event.getEventNumber()<<" "<<currentReaEntry[j]<<endl;*/mee=true;}
+      else {/*cout<<j<<" "<<event.getRunNumber()<<" "<<event.getEventNumber()<<" "<<currentReaEntry[j]<<endl;mee=true;*/}
       //      cout<<" "<<reactionNames[j].data()<<endl;
       RbaseReaction *rb=theReaction[j]->getClone();
       for(int k=0;k<nRtr[j];k++)
@@ -917,12 +917,12 @@ void AReadReactionFromRoot::searchEvent(int eventNumber, int runNumber, int mode
       if(!hasA)validInput=false;
       return;
     }
-  TTree *numTree=NULL;
+//  TTree *numTree=NULL;
   TTree **dataTree=NULL;
   int nData=0;
   Int_t *currentEntry=NULL;
-  Int_t *nextEntry=NULL;
-  TFile *treeFile=NULL;
+//  Int_t *nextEntry=NULL;
+//  TFile *treeFile=NULL;
   Int_t *evtNr=NULL;
   Int_t *runNr=NULL;
   TBranch *eventNrBranch=NULL;
@@ -934,12 +934,12 @@ void AReadReactionFromRoot::searchEvent(int eventNumber, int runNumber, int mode
       {
 	if(Hits==NULL)
 	  set_hit((files[0])[filePos[0]]);
-	numTree=numHitTree;
+//	numTree=numHitTree;
 	dataTree=hitTree;
 	nData=NHit;
 	currentEntry=currentHitEntry;
-	nextEntry=nextHitEntry;
-	treeFile=hitf;
+//	nextEntry=nextHitEntry;
+//	treeFile=hitf;
 	evtNr=&evNH;
 	runNr=&ruNH;
 	hasA=false;
@@ -949,12 +949,12 @@ void AReadReactionFromRoot::searchEvent(int eventNumber, int runNumber, int mode
       {
 	if(Pix==NULL)
 	  set_pix(files[1][filePos[1]]);
-	numTree=numPixTree;
+//	numTree=numPixTree;
 	dataTree=pixTree;
 	nData=NPix;
 	currentEntry=currentPixEntry;
-	nextEntry=nextPixEntry;
-	treeFile=pixf;
+//	nextEntry=nextPixEntry;
+//	treeFile=pixf;
 	evtNr=&evNP;
 	runNr=&ruNP;
 	hasA=readHits;
@@ -964,12 +964,12 @@ void AReadReactionFromRoot::searchEvent(int eventNumber, int runNumber, int mode
       {
 	if(Clus==NULL)
 	  set_clu(files[2][filePos[2]]);
-	numTree=numCluTree;
+//	numTree=numCluTree;
 	dataTree=cluTree;
 	nData=NClu;
 	currentEntry=currentCluEntry;
-	nextEntry=nextCluEntry;
-	treeFile=cluf;
+//	nextEntry=nextCluEntry;
+//	treeFile=cluf;
 	evtNr=&evNC;
 	runNr=&ruNC;
 	hasA=readHits||readPixel;
@@ -979,12 +979,12 @@ void AReadReactionFromRoot::searchEvent(int eventNumber, int runNumber, int mode
       {
 	if(Tracks==NULL)
 	  set_tra(files[3][filePos[3]]);
-	numTree=numTraTree;
+//	numTree=numTraTree;
 	dataTree=traTree;
 	nData=NTra;
 	currentEntry=currentTraEntry;
-	nextEntry=nextTraEntry;
-	treeFile=traf;
+//	nextEntry=nextTraEntry;
+//	treeFile=traf;
 	evtNr=&evNT;
 	runNr=&ruNT;
 	hasA=readHits||readPixel||readCluster;

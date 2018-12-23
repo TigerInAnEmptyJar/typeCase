@@ -1,13 +1,13 @@
-#include <qwidget.h>
-#include <qcombobox.h>
-#include <qspinbox.h>
-#include <qpalette.h>
-#include <qlabel.h>
-#include <qmessagebox.h>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QSpinBox>
+#include <QtGui/QPalette>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMessageBox>
 #if QT_VERSION < 0x040000
-#include <qlistbox.h>
+#include <QtWidgets/QListBox>
 #else
-#include <QtGui/QListWidget>
+#include <QtWidgets/QListWidget>
 #endif
 using namespace std;
 
@@ -76,7 +76,7 @@ QComboBox* defineComboBox(bool val,QWidget *parent,const char* name)
   return new QComboBox(parent);
 #endif
 }
-#include <qfiledialog.h>
+#include <QtWidgets/QFileDialog>
 #include <string>
 #include <vector>
 string getOpenFileName(QWidget *parent, const string &caption, const string &startWith, const string &filter, string *selectedFilter)
@@ -91,9 +91,9 @@ string getOpenFileName(QWidget *parent, const string &caption, const string &sta
 #else
   fn=QFileDialog::getOpenFileName(parent, caption.data(), startWith.data(), filter.data(), &sf);
   if(selectedFilter!=NULL)
-    *selectedFilter=string(sf.toAscii());
+    *selectedFilter=sf.toStdString();
   if(fn=="")return "";
-  return string(fn.toAscii());
+  return fn.toStdString();
 #endif
 }
 string getSaveFileName(QWidget *parent, const string &caption, const string &startWith, const string &filter, string *selectedFilter)
@@ -108,9 +108,9 @@ string getSaveFileName(QWidget *parent, const string &caption, const string &sta
 #else
   fn=QFileDialog::getSaveFileName(parent, caption.data(), startWith.data(), filter.data(), &sf);
   if(selectedFilter!=NULL)
-    *selectedFilter=string(sf.toAscii());
+    *selectedFilter=sf.toStdString();
   if(fn=="")return "";
-  return string(fn.toAscii());
+  return fn.toStdString();
 #endif
 }
 string getSaveFileName(QWidget *parent, const string &caption, const string &startWith, const string &filter, bool reAsk, string *selectedFilter)
@@ -144,10 +144,10 @@ vector<string> getOpenFileNames(QWidget *parent, const string &caption, const st
 #else
   fn=QFileDialog::getOpenFileNames(parent, caption.data(), startWith.data(), filter.data(), &sf);
   if(selectedFilter!=NULL)
-    *selectedFilter=string(sf.toAscii());
+    *selectedFilter=sf.toStdString();
   for(int i=0;i<(int)fn.size();i++)
     if(fn[i]!=NULL)
-      ret.push_back(string(fn[i].toAscii()));
+      ret.push_back(fn[i].toStdString());
 #endif
   return ret;
 }
@@ -161,7 +161,7 @@ string getOpenDirectory(QWidget *parent, const string &caption, const string &st
 #else
   fn=QFileDialog::getExistingDirectory (parent, caption.data(), startWith.data());
   if(fn=="")return "";
-  return string(fn.toAscii());
+  return fn.toStdString();
 #endif
 }
 string QS2s(const QString &s)
@@ -169,7 +169,7 @@ string QS2s(const QString &s)
 #if QT_VERSION < 0x040000
   return string(s.ascii());
 #else
-  return string(s.toAscii());
+  return s.toStdString();
 #endif
 }
 #ifdef QLISTBOX_H

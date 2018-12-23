@@ -911,8 +911,8 @@ float Rpp_pkl_pkppi::justCheck(TTrack **tracks_nd, int num_nd, TTrack **tracks_1
       bool useGeometry=false;
       momentum4D pI(initParticles[0]+initParticles[1]),ka,pr,l1;
       vector3D dir[6];
-      float sp[5],p1,p2,chi,ma,bestMass=1e+5,secBestMass=1e+5, secBest=0;
-      float mass[num_nd*num_nd*num_2s];
+      float sp[5],p1,p2,chi,ma,bestMass=1e+5,secBestMass=1e+5;//, secBest=0;
+//      float mass[num_nd*num_nd*num_2s];
       float mP=Eparticles::getMassG(particleIDs[0]),
 	mK=Eparticles::getMassG(particleIDs[1]),
 	mL=Eparticles::getMassG(particleIDs[2]);
@@ -988,7 +988,7 @@ float Rpp_pkl_pkppi::justCheck(TTrack **tracks_nd, int num_nd, TTrack **tracks_1
 			sp[2]=tracks_2s[k]->getSecondary(0)->getSpeed();
 			sp[3]=tracks_2s[k]->getSecondary(1)->getSpeed();
 			
-			mass[2*(i+j*num_nd+k*num_nd*num_nd)+l]=acos((dir[4]*dir[5])/dir[4].R()/dir[5].R());
+//			mass[2*(i+j*num_nd+k*num_nd*num_nd)+l]=acos((dir[4]*dir[5])/dir[4].R()/dir[5].R());
 			if(acos((dir[4]*dir[5])/dir[4].R()/dir[5].R())>angleLimit)
 			  {continue;}
 			if(l==0)
@@ -1016,7 +1016,7 @@ float Rpp_pkl_pkppi::justCheck(TTrack **tracks_nd, int num_nd, TTrack **tracks_1
 		if(chi>bchi&&chi<secBestMass)
 		  {
 		    secBestMass=chi;
-		    secBest=acos((dir[4]*dir[5])/dir[4].R()/dir[5].R());
+//		    secBest=acos((dir[4]*dir[5])/dir[4].R()/dir[5].R());
 		  }
 	      }
 	  }    

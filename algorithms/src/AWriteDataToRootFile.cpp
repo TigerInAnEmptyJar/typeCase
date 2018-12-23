@@ -1,5 +1,5 @@
 #include "AWriteDataToRootFile.h"
-#include <qfile.h>
+#include <QtCore/QFile>
 #include <TArrayI.h>
 extern bool existing(string filename);
 AWriteDataToRootFile::AWriteDataToRootFile(const string &filename, const string &directory, const string &treeName, TEvent &eventIn,TSetup &setupIn,int maxTracks,bool serv):AAlgorithm("Write data to root file"),setup(setupIn),maxDet(eventIn.getMaxNumber<TDetector>()),maxTrack(maxTracks),maxCluster(eventIn.getMaxNumber<TCluster>()),maxPixel(eventIn.getMaxNumber<TPixel>()),maxHit(eventIn.getMaxNumber<TCalibHit>()),server(serv)

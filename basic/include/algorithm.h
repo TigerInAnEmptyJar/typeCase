@@ -1,6 +1,6 @@
 #ifndef ALGORITHM
 #define ALGORITHM
-#include <qobject.h>
+#include <QtCore/QObject>
 #include <vector>
 #include <string>
 class algorithm_parameter;

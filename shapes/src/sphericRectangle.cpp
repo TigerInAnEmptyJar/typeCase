@@ -69,10 +69,10 @@ sphericRectangle::sphericRectangle(point3D mid, vector3D lp, vector3D nor, float
   tmp=turn*tmp;
   C_=mid+tmp*ra;
   D_=mid+tmp*ri;
-  float th,ph,r;
-  r=(ri+ra)/2.0;
-  th=(nor.Theta()+lp.Theta())/2.0;
-  ph=(nor.Phi()+lp.Phi())/2.0;
+//  float th,ph,r;
+//  r=(ri+ra)/2.0;
+//  th=(nor.Theta()+lp.Theta())/2.0;
+//  ph=(nor.Phi()+lp.Phi())/2.0;
   vector3D v1(A_-center),v2(B_-center);
   circRadius=v1.R();
   if(v2.R()>circRadius)circRadius=v2.R();
@@ -370,7 +370,7 @@ vector3D sphericRectangle::distance(const sLine3D &line)
 
 //   if(l.R()<
 }
-
+/*
 #include <TPolyLine.h>
 void sphericRectangle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle)const
 {
@@ -402,6 +402,7 @@ void sphericRectangle::Draw(const point3D &eye, const plane3D &plane, vector4D* 
   if(ident!=NULL)(*ident)=pl.Clone();
   if(boundingBox!=NULL)*boundingBox=bb;
 }
+*/
 void sphericRectangle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, int lColor, int fColor, int fStyle)const
 {
   Draw(eye,plane,boundingBox,NULL,lColor,fColor,fStyle);

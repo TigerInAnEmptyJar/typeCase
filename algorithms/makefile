@@ -6,10 +6,10 @@ TARGET1=lib$(LIBNAME)$(PCCODE).so.2
 CCC = $(CDIR)/g++
 LINK = $(CDIR)/g++
 LFLAGS = -shared -Wl,-soname,$(TARGET1)
-MOC=moc
+MOC=$(QT_DIR)/bin/moc
 INCSSTRAW = -I/users/data12/pion/ehrhardt/straw/Straws/include -I/users/scr0_pc85/pion/ehrhardt/minuit-1.7.9_zi42/include/ -I/users/scr0_pc85/pion/ehrhardt/minuit-1.7.9_zi42/include/Minuit 
-INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(ROOTINCLUDE) $(INCSSTRAW) -I$(QT_INCLUDE)
-CFLAGS= -c -g -O -Werror -Wall -fPIC # -Wextra
+INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(ROOTINCLUDE) $(INCSSTRAW) -I$(QT_INCLUDE) -I../basic/include -I../container/include -I../geometry/include -I../shapes/include -I../algorithms/include -I../basic/include -I../parameter/include -I../reaction/include
+CFLAGS= -c -g -O -Werror -Wall -fPIC -std=c++11 # -Wextra
 LIBS = #-L$(KTOFPACK)/lib -lgeometry$(PCCODE) -lparameter$(PCCODE) -lshape$(PCCODE) -lcontainer$(PCCODE) -lbasic$(PCCODE) -lreaction$(PCCODE)
 HDR =include/AapplyLRC.h \
 	include/AAssignHitsToTracks.h \
@@ -62,9 +62,9 @@ HDR =include/AapplyLRC.h \
 	include/MicroCluster.h \
 	include/MicroPixel.h \
 	include/readFromTade.h \
-	include/Ringpixel.h \
-	include/TüTrackSearch.h \
-	include/TüVSearch.h
+	include/Ringpixel.h #\
+#	include/TuTrackSearch.h \
+#	include/TuVSearch.h
 SRC =src/AapplyLRC.cpp \
 	src/AAssignHitsToTracks.cpp \
 	src/ABetheBloch.cpp \
@@ -127,9 +127,9 @@ SRC =src/AapplyLRC.cpp \
 	src/MicroCluster.cpp \
 	src/MicroPixel.cpp \
 	src/readFromTade.cpp \
-	src/Ringpixel.cpp \
-	src/TüTrackSearch.cpp \
-	src/TüVSearch.cpp 
+	src/Ringpixel.cpp # \
+#	src/TuTrackSearch.cpp \
+#	src/TuVSearch.cpp 
 OBJS =	obj/AConversion$(PCCODE).o \
 	obj/AGenerateEvents$(PCCODE).o \
 	obj/AGenerateEventsWithDecay$(PCCODE).o \
@@ -158,8 +158,8 @@ OBJS =	obj/AConversion$(PCCODE).o \
 	obj/MicroCluster$(PCCODE).o \
 	obj/MicroPixel$(PCCODE).o \
 	obj/Ringpixel$(PCCODE).o \
-	obj/TüTrackSearch$(PCCODE).o \
-	obj/TüVSearch$(PCCODE).o \
+#	obj/TüTrackSearch$(PCCODE).o \
+#	obj/TüVSearch$(PCCODE).o \
 	obj/ALineTrackSearch$(PCCODE).o \
 	obj/AVLineTrackSearch$(PCCODE).o \
 	obj/APixelTracking$(PCCODE).o \

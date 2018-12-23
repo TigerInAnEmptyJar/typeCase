@@ -7,12 +7,12 @@ TARGETP=documentation$(PCCODE)
 INSTALLER=../installer.sh
 CCC = $(CDIR)/g++
 LINK = $(CDIR)/g++
-MOC=moc
+MOC=$(QT_DIR)/bin/moc
 LFLAGS = -shared -Wl,-soname,$(TARGET1)
-INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(KTOFPACK)/gui/widgets/include -I$(QT_INCLUDE) -I$(QT_INCLUDE)Gui -I$(ROOTINCLUDE)
+INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(KTOFPACK)/gui/widgets/include -I$(QT_DIR)/include -I../geometry/include
 HDRMAKER=$(KTOFPACK)/gui/utils/header-3-4/header-3-4$(PCCODE)
-CFLAGS= -c -g -O -Werror -Wall -fPIC -Wno-deprecated #-Wextra
-LIBS = -L$(KTOFPACK)/lib -lgeometry$(PCCODE) -lqt-util$(PCCODE) # -lparameter$(PCCODE) -lshape$(PCCODE) -lcontainer$(PCCODE) -lgeometry$(PCCODE)
+CFLAGS= -c -g -O -Werror -Wall -fPIC -Wno-deprecated -std=c++11 #-Wextra
+LIBS = -L$(KTOFPACK)/lib -L../geometry -L../qt-utils -L../parameter -L../shapes -L../container -lgeometry$(PCCODE) -lqt-util$(PCCODE) # -lparameter$(PCCODE) -lshape$(PCCODE) -lcontainer$(PCCODE) -lgeometry$(PCCODE)
 HDR=include/tmyclass.h
 
 SRC=src/tmyclass.cpp \

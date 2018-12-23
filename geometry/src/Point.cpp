@@ -20,7 +20,7 @@ point::point(const point &p):geomObject(),dimension(p.getDimension())
     value=NULL;
   else
     value = new double[dimension-20];
-    if (p.getState()==_regular_)
+  if (p.getState()==_regular_)
     {
 	Regular();
 	if(dimension<=20)
@@ -68,7 +68,7 @@ point::point(const point2D &p):geomObject(),dimension(2)
     value=NULL;
   else
     value = new double[dimension-20];
-    if (p.getState()==_regular_)
+  if (p.getState()==_regular_)
     {
 	Regular();
 	if(dimension<=20)
@@ -116,12 +116,13 @@ point::point(const point3D &p):geomObject(),dimension(3)
     value=NULL;
   else
     value = new double[dimension-20];
-    if (p.getState()==_regular_)
+  if (p.getState()==_regular_)
     {
 	Regular();
-	if(dimension<=20)
+	if(dimension<=20){
 	  for (int i=0; i < dimension; i++)
 	    v[i] = p.getValue(i);
+  }
 	else
 	  {
 	    for(int i=0;i<20;i++)
@@ -165,7 +166,7 @@ point::point(const point4D &p):geomObject(),dimension(4)
     value=NULL;
   else
     value = new double[dimension-20];
-    if (p.getState()==_regular_)
+  if (p.getState()==_regular_)
     {
 	Regular();
 	if(dimension<=20)

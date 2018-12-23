@@ -5,10 +5,10 @@ TARGET0=$(TARGET)
 TARGET1=lib$(LIBNAME)$(PCCODE).so.2
 CCC = $(CDIR)/g++
 LINK = $(CDIR)/g++
-MOC=moc
+MOC=$(QT_DIR)/bin/moc
 LFLAGS = -shared -Wl,-soname,$(TARGET1)
-INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(KTOFPACK)/algorithms/include -I$(ROOTINCLUDE) -I$(QT_INCLUDE)
-CFLAGS= -c -g -O -Werror -Wall -fPIC #-Wextra
+INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(KTOFPACK)/algorithms/include -I$(QT_DIR)/include -I../basic/include -I../parameter/include -I../geometry/include -I../container/include -I../shapes/include -I../algorithms/include -I../fit/include
+CFLAGS= -c -g -O -Werror -Wall -std=c++11 -fPIC #-Wextra
 LIBS = #-L$(KTOFPACK)/lib -lgeometry$(PCCODE) -lparameter$(PCCODE) -lshape$(PCCODE) -lcontainer$(PCCODE) -lbasic$(PCCODE) -lreaction$(PCCODE) -lalgorithm$(PCCODE)
 HDR =include/tofAnalysis_t.h
 SRC =src/tofAnalysis_algorithm_t.cpp \

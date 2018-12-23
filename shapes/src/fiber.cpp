@@ -392,7 +392,7 @@ volumeShape* fiber::getClone()
     return sh;
 }
 
-#include <TPolyLine.h>
+//#include <TPolyLine.h>
 
 Vector fiber::Hitting(const sLine3D &line)
 {

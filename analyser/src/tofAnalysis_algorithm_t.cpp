@@ -1,7 +1,7 @@
 #include "algorithms.h"
 #include "AReactionRecognition.h"
 #include "logger.h"
-#include <qdatetime.h>
+#include <QtCore/QDateTime>
 #include "tofAnalysis_t.h"
 #include "shapes.h" 
 
@@ -214,10 +214,10 @@ algorithm_parameter tofAnalysis::getAlgorithmParameter(int ID)
     case 30:
     case 31:
       return ARingpixel::getDescription();
-    case 17: 
-      return ATuTrackSearch::getDescription();
-    case 36:
-      return ATuVSearch::getDescription();
+    //case 17: 
+      //return ATuTrackSearch::getDescription();
+    //case 36:
+      //return ATuVSearch::getDescription();
     case 18: 
       return AGetTheShape::getDescription();
     case 19: 
@@ -426,109 +426,109 @@ int tofAnalysis::getAlgorithm(AAlgorithm ***out,int &executeUpTo,const algorithm
 	anaLog<<"done"<<endli;
 	break;//quirl/ringPixel
       }
-    case 17: 
-      {
-	anaLog<<"prompt tracking: ";
-	int n=0;
-	AAlgorithm **tmpA;
-	int ec;
-	if(param.getNumberOfParam<algorithm_parameter>()>0)
-	  n=getAlgorithm(&tmpA,ec,param.getParam<algorithm_parameter>(0).getData(),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
-	else
-	  n=getAlgorithm(&tmpA,ec,algorithm_parameter("line fit",0,0,0),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
-	nAlgos=n+1;     
-	(*out)=new AAlgorithm*[nAlgos];
-	for(int i=0;i<n;i++)(*out)[i+1]=tmpA[i];
-	delete[]tmpA;
-	//showFrequency=showFrequency/10;
-	int num;//param.getNumberOfParam<QBitArray>();
-	num=30;
-	int tmp[num];
-	for(int k=0;k< num;k++)
-	  tmp[num]=0;
-	(*out)[0]=new ATuTrackSearch(event.getMaxNumber<TTrack>(), 
-				     numberOfTracks,tracks, 
-				     numberOfPixels,pixels, 
-				     setup.getNumberOfDetectors(), 
-				     numberOfHits,calibratedHits, 
-				     param.getParam<int>(0).getData(), 
-				     ((AFitAlgorithm*)(*out)[1]), tmp,
-				     param.getParam<vector<int> >(0).getData(), 
-				     param.getParam<vector<int> >(1).getData(), 
-				     param.getParam<vector<int> >(2).getData(),
-				     param.getParam<vector<float> >(0).getData(),
-				     param.getParam<vector<float> >(1).getData(),
-				     param.getParam<vector<int> >(3).getData(),
-				     param.getParam<vector<int> >(4).getData(),
-				     param.getParam<vector<int> >(5).getData());
-	anaLog<<"done"<<endli;
-	break;//prompt Tracking
-      }
-    case 36:
-      {
-	anaLog<<"Tuebingen vertex tracking: ";
-	if(param.getNumberOfParam<algorithm_parameter>()>0)
-	  {
-	    AAlgorithm **tmpA[param.getNumberOfParam<algorithm_parameter>()];
-	    int n[param.getNumberOfParam<algorithm_parameter>()];
-	    nAlgos=1;
-	    int ec;
-	    for(int i=0;i<param.getNumberOfParam<algorithm_parameter>();i++)
-	      {
-		n[i]=getAlgorithm(&(tmpA[i]),ec,param.getParam<algorithm_parameter>(0).getData(),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
-		nAlgos+=n[i];
-	      }
-	    (*out)=new AAlgorithm*[nAlgos];
-	    int sum=0;
-	    for(int j=0;j<param.getNumberOfParam<algorithm_parameter>();j++)
-	      {
-		for(int i=0;i<n[j];i++)
-		  (*out)[i+1+sum]=tmpA[j][i];
-		sum+=n[j];
-		delete[] tmpA[j];
-	      }
-	  }
-	else
-	  {
-	    AAlgorithm **tmpA=NULL;
-	    AAlgorithm **tmpB=NULL;
-	    AAlgorithm **tmpC=NULL;
-	    int ec;
-	    int n1=getAlgorithm(&tmpA,ec,algorithm_parameter("line fit",0,0,0),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
-	    int n2=getAlgorithm(&tmpA,ec,algorithm_parameter("line fit",0,0,0),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
-	    int n3=getAlgorithm(&tmpA,ec,algorithm_parameter("vertex fit",0,0,1),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
-	    nAlgos=n1+n2+n3+1;     
-	    (*out)=new AAlgorithm*[nAlgos];
-	    for(int i=0;i<n1;i++)(*out)[i+1]=tmpA[i];
-	    delete[]tmpA;
-	    for(int i=0;i<n2;i++)(*out)[i+1+n2]=tmpB[i];
-	    delete[]tmpB;
-	    for(int i=0;i<n3;i++)(*out)[i+1+n2+n3]=tmpC[i];
-	    delete[]tmpC;
-	  }
+    //case 17: 
+      //{
+	//anaLog<<"prompt tracking: ";
+	//int n=0;
+	//AAlgorithm **tmpA;
+	//int ec;
+	//if(param.getNumberOfParam<algorithm_parameter>()>0)
+	  //n=getAlgorithm(&tmpA,ec,param.getParam<algorithm_parameter>(0).getData(),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
+	//else
+	  //n=getAlgorithm(&tmpA,ec,algorithm_parameter("line fit",0,0,0),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
+	//nAlgos=n+1;     
+	//(*out)=new AAlgorithm*[nAlgos];
+	//for(int i=0;i<n;i++)(*out)[i+1]=tmpA[i];
+	//delete[]tmpA;
+	////showFrequency=showFrequency/10;
+	//int num;//param.getNumberOfParam<QBitArray>();
+	//num=30;
+	//int tmp[num];
+	//for(int k=0;k< num;k++)
+	  //tmp[num]=0;
+	//(*out)[0]=new ATuTrackSearch(event.getMaxNumber<TTrack>(), 
+				     //numberOfTracks,tracks, 
+				     //numberOfPixels,pixels, 
+				     //setup.getNumberOfDetectors(), 
+				     //numberOfHits,calibratedHits, 
+				     //param.getParam<int>(0).getData(), 
+				     //((AFitAlgorithm*)(*out)[1]), tmp,
+				     //param.getParam<vector<int> >(0).getData(), 
+				     //param.getParam<vector<int> >(1).getData(), 
+				     //param.getParam<vector<int> >(2).getData(),
+				     //param.getParam<vector<float> >(0).getData(),
+				     //param.getParam<vector<float> >(1).getData(),
+				     //param.getParam<vector<int> >(3).getData(),
+				     //param.getParam<vector<int> >(4).getData(),
+				     //param.getParam<vector<int> >(5).getData());
+	//anaLog<<"done"<<endli;
+	//break;//prompt Tracking
+      //}
+    //case 36:
+      //{
+	//anaLog<<"Tuebingen vertex tracking: ";
+	//if(param.getNumberOfParam<algorithm_parameter>()>0)
+	  //{
+	    //AAlgorithm **tmpA[param.getNumberOfParam<algorithm_parameter>()];
+	    //int n[param.getNumberOfParam<algorithm_parameter>()];
+	    //nAlgos=1;
+	    //int ec;
+	    //for(int i=0;i<param.getNumberOfParam<algorithm_parameter>();i++)
+	      //{
+		//n[i]=getAlgorithm(&(tmpA[i]),ec,param.getParam<algorithm_parameter>(0).getData(),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
+		//nAlgos+=n[i];
+	      //}
+	    //(*out)=new AAlgorithm*[nAlgos];
+	    //int sum=0;
+	    //for(int j=0;j<param.getNumberOfParam<algorithm_parameter>();j++)
+	      //{
+		//for(int i=0;i<n[j];i++)
+		  //(*out)[i+1+sum]=tmpA[j][i];
+		//sum+=n[j];
+		//delete[] tmpA[j];
+	      //}
+	  //}
+	//else
+	  //{
+	    //AAlgorithm **tmpA=NULL;
+	    //AAlgorithm **tmpB=NULL;
+	    //AAlgorithm **tmpC=NULL;
+	    //int ec;
+	    //int n1=getAlgorithm(&tmpA,ec,algorithm_parameter("line fit",0,0,0),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
+	    //int n2=getAlgorithm(&tmpA,ec,algorithm_parameter("line fit",0,0,0),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
+	    //int n3=getAlgorithm(&tmpA,ec,algorithm_parameter("vertex fit",0,0,1),firstRun, event,setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors, readValid,readInID,stearIt,eventRequesting);
+	    //nAlgos=n1+n2+n3+1;     
+	    //(*out)=new AAlgorithm*[nAlgos];
+	    //for(int i=0;i<n1;i++)(*out)[i+1]=tmpA[i];
+	    //delete[]tmpA;
+	    //for(int i=0;i<n2;i++)(*out)[i+1+n2]=tmpB[i];
+	    //delete[]tmpB;
+	    //for(int i=0;i<n3;i++)(*out)[i+1+n2+n3]=tmpC[i];
+	    //delete[]tmpC;
+	  //}
 
-	//	showFrequency=showFrequency/10;
-	(*out)[0]=new ATuVSearch(setup.getNumberOfDetectors(),event.getMaxNumber<TTrack>(),
-				 event.getMaxNumber<TPixel>(),event.getMaxNumber<TPixel>(), 
-				 *numberOfTracks, numberOfHits, numberOfPixels,
-				 numberOfClusters, 
-				 calibratedHits, pixels, clusters, tracks, 
-				 ((AFitAlgorithm*)(*out)[3]),((AFitAlgorithm*) (*out)[2]),((AFitAlgorithm*)(*out)[1]), 
-				 param.getParam<float>(0).getData(), param.getParam<float>(1).getData(), 
-				 param.getParam<int>(0).getData(), param.getParam<point3D>(0).getData(), 
-				 param.getParam<int>(1).getData(),param.getParam<float>(2).getData(),
-				 param.getParam<int>(2).getData(),param.getParam<float>(3).getData(),
-				 param.getParam<float>(4).getData(),/*param.getParam<float>(5).getData(),
-								      param.getParam<float>(6).getData(),*/param.getParam<bool>(0).getData(),
-				 param.getParam<vector<int> >(0).getData(),param.getParam<vector<float> >(0).getData(),
-				 param.getParam<vector<int> >(2).getData(),param.getParam<vector<int> >(3).getData(),
-				 param.getParam<vector<float> >(1).getData(),param.getParam<vector<int> >(1).getData(),
-				 param.getParam<vector<int> >(4).getData(),param.getParam<vector<int> >(5).getData(),
-				 param.getParam<vector<int> >(6).getData(),param.getParam<vector<float> >(2).getData(),
-				 param.getParam<vector<float> >(3).getData());
-	anaLog<<"done"<<endli;
-	break;//tuebingen vertex search
-      }
+	////	showFrequency=showFrequency/10;
+	//(*out)[0]=new ATuVSearch(setup.getNumberOfDetectors(),event.getMaxNumber<TTrack>(),
+				 //event.getMaxNumber<TPixel>(),event.getMaxNumber<TPixel>(), 
+				 //*numberOfTracks, numberOfHits, numberOfPixels,
+				 //numberOfClusters, 
+				 //calibratedHits, pixels, clusters, tracks, 
+				 //((AFitAlgorithm*)(*out)[3]),((AFitAlgorithm*) (*out)[2]),((AFitAlgorithm*)(*out)[1]), 
+				 //param.getParam<float>(0).getData(), param.getParam<float>(1).getData(), 
+				 //param.getParam<int>(0).getData(), param.getParam<point3D>(0).getData(), 
+				 //param.getParam<int>(1).getData(),param.getParam<float>(2).getData(),
+				 //param.getParam<int>(2).getData(),param.getParam<float>(3).getData(),
+				 //param.getParam<float>(4).getData(),/*param.getParam<float>(5).getData(),
+								      //param.getParam<float>(6).getData(),*/param.getParam<bool>(0).getData(),
+				 //param.getParam<vector<int> >(0).getData(),param.getParam<vector<float> >(0).getData(),
+				 //param.getParam<vector<int> >(2).getData(),param.getParam<vector<int> >(3).getData(),
+				 //param.getParam<vector<float> >(1).getData(),param.getParam<vector<int> >(1).getData(),
+				 //param.getParam<vector<int> >(4).getData(),param.getParam<vector<int> >(5).getData(),
+				 //param.getParam<vector<int> >(6).getData(),param.getParam<vector<float> >(2).getData(),
+				 //param.getParam<vector<float> >(3).getData());
+	//anaLog<<"done"<<endli;
+	//break;//tuebingen vertex search
+      //}
     case 18: 
       {
 	anaLog<<"asign shapes to the hits: ";

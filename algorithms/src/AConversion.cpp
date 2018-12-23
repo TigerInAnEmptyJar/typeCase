@@ -3,9 +3,9 @@
 AConversion::AConversion(const string &filename,TEvent &ev,void* input_mutexIn, bool &validInputIn):AAlgorithm("Convert data from one format to KTOF format"),actualEvent(0),event(ev),validInput(validInputIn)
 {
   input_mutex=input_mutexIn;
-  convertedData=new TTree();
+//  convertedData=new TTree();
   getNewRun(filename);
-  convertedData->SetBranchAddress("Event",&event);
+//  convertedData->SetBranchAddress("Event",&event);
 }
 
 AConversion::~AConversion()
@@ -17,7 +17,7 @@ void *AConversion::Process(void*ptr)
 {
   if(actualEvent+1>=convertedData->GetEntries())
     validInput=false;
-  convertedData->GetEntry(actualEvent);
+//  convertedData->GetEntry(actualEvent);
   actualEvent++;
   emit eventRead();
   return ptr;
@@ -57,6 +57,6 @@ void AConversion::getNewRun(const string &filename)
   //ev.getNumberOfTracks()=numTracksFound;
   //ev.getTrack(count).setPath(sLine3D(point3D(0,0,0),vector3D(0,0,1)));
 
-  convertedData->Fill();
+//  convertedData->Fill();
   pthread_mutex_unlock((pthread_mutex_t*)input_mutex);//for multiThreading: let only read one thread at a time, unlock input
 }

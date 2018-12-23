@@ -79,7 +79,7 @@ shape_parameter base_shape::getDescription()
   sh.setName("shape");
   return sh;
 }
-#include <TPolyLine.h>
+/*#include <TPolyLine.h>
 void DrawPoints(int nPoints, point3D* points,const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle)
 {
   int nPointsPerEdge=20;
@@ -129,3 +129,4 @@ void DrawPoints(int nPoints, point3D* points,const point3D &eye, const plane3D &
     }
 
 }
+*/

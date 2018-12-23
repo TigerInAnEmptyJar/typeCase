@@ -230,8 +230,8 @@ void *AVirtualMachine::process(void *ptr)
     int hit[numberOfTracks*numberOfDetectors];
     vector3D distanceToVertex[numberOfTracks*numberOfDetectors];
     int sorting[numberOfDetectors];
-    int last[numberOfTracks];
-    float timeToTrigger[numberOfTracks];
+//    int last[numberOfTracks];
+//    float timeToTrigger[numberOfTracks];
     bool used[numberOfDetectors];
     sLine3D path;
     int n;
@@ -243,8 +243,8 @@ void *AVirtualMachine::process(void *ptr)
 	path=tracks[i]->getPath();
  	//cout<<" "<<i<<path<<endl;
 	direction=path.Direction();
-	last[i]=-1;
-	timeToTrigger[i]=-1;
+//	last[i]=-1;
+//	timeToTrigger[i]=-1;
 	if(!tracks[i]->isSecondary()&&(promptThetaRange[0]>direction.Theta()||promptThetaRange[1]<direction.Theta()))
 	  {
 // 	    cout<<"outside defined range"<<endl;
@@ -284,11 +284,11 @@ void *AVirtualMachine::process(void *ptr)
 //tdc trigger
 	if(commonStart)
 	{
-	    last[i]=sorting[0];
-	    timeToTrigger[i]=distanceToVertex[i*numberOfDetectors+sorting[0]].R()/tracks[i]->getSpeed()*299.792;
+//	    last[i]=sorting[0];
+//	    timeToTrigger[i]=distanceToVertex[i*numberOfDetectors+sorting[0]].R()/tracks[i]->getSpeed()*299.792;
 	}
-	else
-	    last[i]=sorting[n-1];
+	//else
+	    //last[i]=sorting[n-1];
 	TCalibHit*tmpHit;
 // 	cout<<n<<" "<<tracks[i]->getNumberOfCalibHits()<<endl;
 	float tmpF,timing=0,dt;

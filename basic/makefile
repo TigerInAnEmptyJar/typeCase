@@ -5,10 +5,10 @@ TARGET0=$(TARGET)
 TARGET1=lib$(LIBNAME)$(PCCODE).so.2
 CCC = $(CDIR)/g++
 LINK = $(CDIR)/g++
-MOC=moc
+MOC=$(QT_DIR)/bin/moc
 LFLAGS = -shared -Wl,-soname,$(TARGET1)
-INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(QT_INCLUDE)
-CFLAGS= -c -g -O -Werror -Wall -fPIC #-Wextra
+INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(QT_INCLUDE) -I../parameter/include -I../geometry/include -I../container/include -I../shapes/include -I../reaction/include
+CFLAGS= -c -g -O -Werror -Wall -fPIC -std=c++11 #-Wextra
 LIBS = #-L$(KTOFPACK)/lib -lparameter$(PCCODE) -lshape$(PCCODE) -lcontainer$(PCCODE) -lgeometry$(PCCODE)
 HDR =include/algorithm.h \
 	include/eLossAlgorithm.h \

@@ -9,8 +9,8 @@ LINK = $(CDIR)/g++
 MOC=moc
 HDRMAKER=$(KTOFPACK)/gui/utils/header-3-4/header-3-4$(PCCODE)
 LFLAGS =  -shared -Wl,-soname,$(TARGET1)
-INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(QT_INCLUDE) -I$(QT_INCLUDE)Gui -I/usr/include/QtGui -I/usr/include/QtCore -I$(ROOTINCLUDE) #-I../widgets/include
-CFLAGS= -c -g -O -Werror -Wall -fPIC -Wno-deprecated #-Wextra
+INCS = -I. -Iinclude -I$(KTOFPACK)/include -I$(QT_INCLUDE) 
+CFLAGS= -c -g -O -Werror -Wall -fPIC -std=c++11 -Wno-deprecated #-Wextra
 LIBS = #-L$(KTOFPACK)/lib -lparameter$(PCCODE) -lshape$(PCCODE) -lcontainer$(PCCODE) -lgeometry$(PCCODE)
 HDR =	include/utilities.h \
 
