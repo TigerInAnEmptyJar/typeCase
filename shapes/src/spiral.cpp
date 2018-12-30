@@ -631,10 +631,10 @@ Vector spiral::HitParams(const planeShape &shape, point3D origin)
   ret.setValue(12,dist.Z());
   return ret;
 }
-/*
+
 void spiral::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle)const
 {
-  int numberOfPointsPerEdge=100;
+/*  int numberOfPointsPerEdge=100;
   if(eye==plane.Foot()) numberOfPointsPerEdge=100;
   point3D **edges=new point3D*[8];
   for(int i=0;i<8;i++)edges[i]=new point3D[numberOfPointsPerEdge];
@@ -776,8 +776,8 @@ void spiral::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBo
       delete []edges2[i];
     }
   delete []edges;
-  delete []edges2;
-}*/
+  delete []edges2;*/
+}
 void spiral::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, int lColor, int fColor, int fStyle)const
 {
   Draw(eye,plane,boundingBox,NULL,lColor,fColor,fStyle);

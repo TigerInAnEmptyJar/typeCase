@@ -206,7 +206,7 @@ vector<string> functionNameTypeDoc::htmlNAME(const string &classname)const
 }
 ostream &operator << (ostream & o, const functionNameTypeDoc & t)
 {
-    if(o==cout)
+    if(&o==&cout)
     {
 	o<<"Name:"<<t.Name().data()<<endl;
 	o<<"Type:"<<t.TypeId()<<" "<<t.Type().data()<<endl;
@@ -230,8 +230,8 @@ ostream &operator << (ostream & o, const functionNameTypeDoc & t)
       if(t.Limiter()!="")o<<"L"<<t.Limiter().data()<<endl;
       for(int i=0;i<t.nParameters();i++)
 	o<<"P"<<t.getParameter(i);
-      for(int i=0;i<t.DescriptionLines();i++)
-	o<<"D"<<t.Description(i).data()<<endl;
+      for(int i=0;i<t.DescriptionLines();i++) {
+        o<<"D"<<t.Description(i).data()<<endl;}
 	o<<"="<<endl;
       //old version
 	/*	o<<t.Name().data()<<endl;
@@ -337,7 +337,7 @@ void functionNameTypeDoc::parse(const string &s1)
       int opPos=s.find("operator");
       while(isSpace(s[opPos+8]))s=s.substr(0,opPos+8)+s.substr(opPos+9,s.length()-opPos-9);
     }
-  if(hasA(s,"(")==2&&hasA(s,")")==2&&hasA(s,"operator"))
+  if((contains(s,"(")==2)&&(contains(s,")")==2)&&(hasA(s,"operator")))
     {
       right=s.substr(s.rfind(")")+1,s.length()-s.rfind(")")-1);
       s=s.substr(0,s.rfind(")"));

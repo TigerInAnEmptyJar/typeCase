@@ -1010,7 +1010,7 @@ string algorithm_parameter::toString(int pattern)const
 }
 ostream & operator<<(ostream & o, const algorithm_parameter & a)
 {
-  if(o==cout)
+  if(&o==&cout)
     {
       string s;
       o<<a.getName().data()<<":"<<endl;

@@ -19,7 +19,7 @@ TRawHit::TRawHit(int detector, int element, int ADC, int TDC):TBase("TRawHit")
 
 ostream &operator <<(ostream &o,const TRawHit &r)
 {
-  if (o==cout)
+  if (&o==&cout)
     {
       o<<"Det: ";
       o.width(4);

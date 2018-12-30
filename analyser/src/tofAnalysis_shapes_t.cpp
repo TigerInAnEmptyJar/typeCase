@@ -12,9 +12,9 @@ volumeShape *tofAnalysis::getVShape(shape_parameter &sp)
   if(sh==NULL)return new volumeShape("none");
   if(sh->getName()=="wedge"||sh->getName()=="spiral"||sh->getName()=="fiber"
      ||sh->getName()=="ring"||sh->getName()=="cylinder"||sh->getName()=="hexPrism"
-     ||sh->getName()=="strawTube")
+          ||sh->getName()=="strawTube"){
     return (volumeShape*)sh;
-
+}
     volumeShape*shape;
 	shape=new volumeShape("none");
     return shape;

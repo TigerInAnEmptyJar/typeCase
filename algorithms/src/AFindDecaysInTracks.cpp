@@ -31,7 +31,6 @@ void *AFindDecayInTracks::process(void *ptr)
 {
   bool isSecondary[numberOfTracks];
   int decayedOf[numberOfTracks];
-  int vertex[numberOfTracks];
   sLine3D paths[numberOfTracks];
   volumeShape *target=setup.getTargetr().getShape().getClone();
   point3D origin(0,0,0);
@@ -42,7 +41,6 @@ void *AFindDecayInTracks::process(void *ptr)
     {
       isSecondary[i]=false;
       decayedOf[i]=-1;
-      vertex[i]=-1;
       paths[i]=tracks[i]->getPath();
     }
   if(target==NULL)

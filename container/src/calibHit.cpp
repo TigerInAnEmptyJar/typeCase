@@ -50,7 +50,7 @@ void TCalibHit::setHitShape(volumeShape *shapeIn)
 }
 ostream &operator<<(ostream &o,const TCalibHit &r)
 {
-    if (o==cout)
+    if (&o==&cout)
     {
       o<<"Det: ";
       o.width(4);

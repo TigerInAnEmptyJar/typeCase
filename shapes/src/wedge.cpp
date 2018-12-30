@@ -733,7 +733,7 @@ Vector wedge::Hitting(const sLine3D &line)
       dir1=hpe;
     }
   point3D sidePoint=side-line;
-  if(!sidePoint.getState()==_undefined_)
+  if(sidePoint.getState()!=_undefined_)
     {
       vector3D cTsp=sidePoint-center;
       v1=dir1*(dir1*cTsp);
@@ -985,10 +985,10 @@ void wedge::Draw(const point3D &eye, const plane3D &plane,vector4D* boundingBox,
   Draw(eye,plane,boundingBox,NULL,lColor,fColor,fStyle);
 }
 #include "sphericRectangle.h"
-/*
+
 void wedge::Draw(const point3D &eye, const plane3D &plane,vector4D* boundingBox, TObject**ident, int lColor, int fColor, int fStyle)const
 {
-  if(distBarrel>0)
+/*  if(distBarrel>0)
     {
 	double l=sqrt(outerR*outerR-distBarrel*distBarrel);
 	vector3D rot_vec=lpe*(outerR-distBarrel*distBarrel/l)+outerR*distBarrel/l*normal;
@@ -1088,7 +1088,8 @@ void wedge::Draw(const point3D &eye, const plane3D &plane,vector4D* boundingBox,
   pl2.SetFillColor(fColor);
   pl2.SetLineColor(lColor);
   pl2.SetFillStyle(fStyle);
-}*/
+  */
+}
 int wedge::suspect(const sLine3D &line, int stackType)
 {
   switch(stackType)

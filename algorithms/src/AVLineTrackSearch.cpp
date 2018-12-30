@@ -40,7 +40,7 @@ algorithm_parameter AVLineTrackSearch::getDescription()
   ret.addParam<int>(single_parameter<int>("max number of elements in 2 tracks",2));
   ret.addParam<int>(single_parameter<int>("min # elements on track-vertex-track",7));
   ret.addParam<float>(single_parameter<float>("max Distance Vertex-Plane",10));
-  ret.addParam<float>(single_parameter<float>("maximum chi² for track-vertex-track",10));
+  ret.addParam<float>(single_parameter<float>("maximum chi-squared for track-vertex-track",10));
   ret.addParam<float>(single_parameter<float>("max angle diff pri to secondary",0.05));
   ret.addParam<float>(single_parameter<float>("max Distance pixel-plane",10));
   vector<int> tmp;
@@ -289,7 +289,7 @@ AVLineTrackSearch::AVLineTrackSearch(TSetup &setupIn, TTrack **tracksIn, TCluste
   for(int i=0;i<numStop;i++)cout<<stopIDs[i]<<"\t"<<flush;
   cout<<endl<<"  min # : "<<flush;
   for(int i=0;i<numStop;i++)cout<<minElements[i]<<"\t"<<flush;
-  cout<<endl<<"  max x²: "<<flush;
+  cout<<endl<<"  max x-squared: "<<flush;
   for(int i=0;i<numStop;i++)cout<<maxChi[i]<<"\t"<<flush;
   cout<<endl<<"  mx dist:"<<flush;
   for(int i=0;i<numStop;i++)cout<<maxDistance[i]<<"\t"<<flush;
@@ -298,7 +298,7 @@ AVLineTrackSearch::AVLineTrackSearch(TSetup &setupIn, TTrack **tracksIn, TCluste
   for(int i=0;i<numStopCluster;i++)cout<<stopClusterIDs[i]<<"\t"<<flush;
   cout<<endl<<"  min # : "<<flush;
   for(int i=0;i<numStopCluster;i++)cout<<minClusterElements[i]<<"\t"<<flush;
-  cout<<endl<<"  max x²: "<<flush;
+  cout<<endl<<"  max x-squared: "<<flush;
   for(int i=0;i<numStopCluster;i++)cout<<maxClusterChi[i]<<"\t"<<flush;
   cout<<endl<<"  mx dist:"<<flush;
   for(int i=0;i<numStopCluster;i++)cout<<maxDistance[i+numStop]<<"\t"<<flush;
@@ -684,13 +684,13 @@ bool AVLineTrackSearch::searchATrack(int tracknum,int basis, int stopI, TBase *p
 	}
       chi=line1.fit();
 #ifdef DEBUGTRACKSEARCH
-      cout<<"chi² "<<chi<<" max "<<(typ1==0?maxChi[stopI]:maxClusterChi[stopI])<<endl;
+      cout<<"chi-squared "<<chi<<" max "<<(typ1==0?maxChi[stopI]:maxClusterChi[stopI])<<endl;
 #endif
     
      if(chi<0||chi>(typ1==0?maxChi[stopI]:maxClusterChi[stopI]))
        {
 #ifdef DEBUGTRACKING
-	 cout<<"chi² "<<chi<<" max "<<(typ1==0?maxChi[stopI]:maxClusterChi[stopI])<<endl;
+	 cout<<"chi-squared "<<chi<<" max "<<(typ1==0?maxChi[stopI]:maxClusterChi[stopI])<<endl;
 #endif
 	 return false;
        }
@@ -783,13 +783,13 @@ bool AVLineTrackSearch::trackAPlane(int planenum, int id[2])
   //Idea: fix stop-point and try tracks with any combination of one stop and one intermediate point
   //works well for quirl and ring <== fixed geometry, but not so well for barrel
   //solution try also any combination of intermediate pix, and check, that pixel-shape is hit
-  int ID=0;
+//  int ID=0;
   for(int l=0;l<2;l++)
     {
-      if(typ[l]==1)
-	ID=((TCluster*)planePoints[planenum][l])->getID();
-      else
-	ID=((TPixel*)planePoints[planenum][l])->getID();
+//      if(typ[l]==1)
+//	ID=((TCluster*)planePoints[planenum][l])->getID();
+//      else
+//	ID=((TPixel*)planePoints[planenum][l])->getID();
 #ifdef DEBUGINFO
       cout<<"bias "<<l<<endl;
 #endif
@@ -917,7 +917,7 @@ bool AVLineTrackSearch::trackAPlane(int planenum, int id[2])
 	chivees[j+i*numPlaneTracks[1]]=vee[numVees]->getChiSquared();
 #endif
 #ifdef DEBUGTRACKING
-	cout<<"chi² "<<vee[numVees]->getChiSquared()<<" max "<<maxVertexChi<<endl;
+	cout<<"chi-squared "<<vee[numVees]->getChiSquared()<<" max "<<maxVertexChi<<endl;
 	cout<<"vertex "<<vee[numVees]->getVertex()<<endl;
 	cout<<"dir1   "<<vee[numVees]->getDirection(0).toString(_spheric_).data()<<endl;
 	cout<<"dir2   "<<vee[numVees]->getDirection(1).toString(_spheric_).data()<<endl;
@@ -948,7 +948,7 @@ bool AVLineTrackSearch::trackAPlane(int planenum, int id[2])
 #ifdef DEBUGINFO
       cout<<"trackAPlane("<<planenum<<") no vees found"<<endl;
       cout<<"  out of "<<numPlaneTracks[0]<<"*"<<numPlaneTracks[1]<<" combinations"<<endl;
-      cout<<"  chi²s("<<flush;
+      cout<<"  chi-squareds("<<flush;
       for(int i=0;i<nD-1;i++)cout<<chivees[i]<<", ";
       cout<<chivees[nD-1]<<")"<<endl;
 #endif
@@ -962,7 +962,7 @@ bool AVLineTrackSearch::trackAPlane(int planenum, int id[2])
     }
 #ifdef DEBUGINFO
   cout<<"out of "<<nD<<" combinations:"<<endl;
-  cout<<"chi² "<<vee[best]->getChiSquared()<<" max "<<maxVertexChi<<endl;
+  cout<<"chi-squared "<<vee[best]->getChiSquared()<<" max "<<maxVertexChi<<endl;
   cout<<"vertex "<<vee[best]->getVertex()<<endl;
   cout<<"dir1   "<<vee[best]->getDirection(0).toString(_spheric_).data()<<endl;
   cout<<"dir2   "<<vee[best]->getDirection(1).toString(_spheric_).data()<<endl;
@@ -1360,7 +1360,7 @@ void *AVLineTrackSearch::process(void *ptr)
    *  the end_points are from target more distant than 0.05rad 
    *  and the result of the two-track-fit is:
    *   the decay-vertex is close enough to the plane
-   *   chi² is lower than a maximum
+   *   chi-squared is lower than a maximum
    *   the direction target-vertex is close to:
    *    d_vert = a * d_1 + b * d_2 with a,b>0
    *
@@ -1516,7 +1516,7 @@ void *AVLineTrackSearch::process(void *ptr)
   int tmp;
   vector3D neutral,neut;
   for(int i=0;i<tmpNum;i++)position[i]=i;
-  //Sort by chi²
+  //Sort by chi-squared
   for(int i=0;i<tmpNum;i++)
     {
       pos=position[i];
@@ -1631,7 +1631,7 @@ void *AVLineTrackSearch::process(void *ptr)
       tracks[numberOfTracks+nums+i*2+1]->setErrorPhi(4*M_PI/180.);
 #ifdef DEBUGINFO
       cout<<"plane "<<i<<":"<<position[i]<<endl;
-      cout<<" chi²   :"<<planeTrack[0][position[i]]->getChiSquared()<<"\t"
+      cout<<" chi-squared   :"<<planeTrack[0][position[i]]->getChiSquared()<<"\t"
 	  <<" # Elements: "<<planeTrack[0][position[i]]->getNumberOfCalibHits(-1)<<" "<<planeTrack[1][position[i]]->getNumberOfCalibHits(-1)<<endl;
       cout<<" neutral:"<<direction<<endl;
       cout<<" vertex :"<<planeTrack[0][position[i]]->getPath().Foot()<<endl;

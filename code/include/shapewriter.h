@@ -1,7 +1,7 @@
 #ifndef SHAPEWRITER_H
 #define SHAPEWRITER_H
 #include "shapeparameter.h"
-#include "documentation/include/tmyclass.h"
+#include "tmyclass.h"
 #include <vector>
 #include <iostream>
 using namespace std;

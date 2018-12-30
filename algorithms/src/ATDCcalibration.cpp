@@ -191,7 +191,7 @@ ATDCcalibration::ATDCcalibration(int &evtnr, int &rnr,TTrack **trIn, TPixel ***p
 	    {
 	      vector3D tmp((i-19.5)*0.001,(j-19.5)*0.001,1);tmp.normalize();
 	      beamHistos[i][j]=new TH1F((string("beam ")+string_number(i)+" "+string_number(j)).data(),
-					(string("beam at \\theta=")+string_number(tmp.Theta()*180./M_PI)+"°, \\phi="+string_number(tmp.Phi()*180./M_PI)+"°").data(),100,-1,1);
+					(string("beam at \\theta=")+string_number(tmp.Theta()*180./M_PI)+"deg, \\phi="+string_number(tmp.Phi()*180./M_PI)+"deg").data(),100,-1,1);
 	      beamHistos[i][j]->SetDirectory(NULL);
 	    }
 	}
@@ -1496,17 +1496,17 @@ void ATDCcalibration::fillWalkHistos(int pattern)//, float ***offsets,float*** s
     for(int i=0;i<nCalibDets;i++)
       if(resolutionHisto1[i]!=NULL)resolutionHisto1[i]->Reset();
   float zfront[nCalibDets];
-  float zmid[nCalibDets];
+//  float zmid[nCalibDets];
   for(int i=0;i<nCalibDets;i++)
     {
       zfront[i]=0;
-      zmid[i]=0;
+//      zmid[i]=0;
       if(calibPos[3][i]<0)continue;
       wedge* sh=((wedge*)setup.getDetectorr(detectors[i]).getShape(0));
       zfront[i]=sh->getCenter().Z()-sqrt(sh->getOuterRadius()*sh->getOuterRadius()-sh->getDistToBarrelCenter()*sh->getDistToBarrelCenter());
-      float z1=sqrt(sh->getOuterRadius()*sh->getOuterRadius()-sh->getDistToBarrelCenter()*sh->getDistToBarrelCenter());
-      float z2=z1*(sh->getInnerRadius()/sh->getOuterRadius());
-      zmid[i]=(z1-z2)/2.;
+//      float z1=sqrt(sh->getOuterRadius()*sh->getOuterRadius()-sh->getDistToBarrelCenter()*sh->getDistToBarrelCenter());
+//      float z2=z1*(sh->getInnerRadius()/sh->getOuterRadius());
+//      zmid[i]=(z1-z2)/2.;
     }
   int cor=0;
   if(hasTrack)
@@ -1588,12 +1588,12 @@ void ATDCcalibration::fillWalkHistos(int pattern)//, float ***offsets,float*** s
   cor=0;
   if(hasPix)
     {
-      float theta;
+//      float theta;
       for(int j=0;j<pixTree->GetEntries()/*50000*/;j++)
 	{
 	  pixTree->GetEntry(j);
 	  while(evtNr>offsetRanges[cor+1]&&cor<noffsetRanges)cor++;
-	  theta=atan(sqrt(outpix.pointx*outpix.pointx+outpix.pointy*outpix.pointy)/outpix.pointz);
+//	  theta=atan(sqrt(outpix.pointx*outpix.pointx+outpix.pointy*outpix.pointy)/outpix.pointz);
 	  for(int i=0;i<nCalibDets;i++)
 	    {
 	      tdcs[0][i]=1e9;
@@ -1791,7 +1791,7 @@ void ATDCcalibration::fillOffsetHistos(/*float ***offsets, float ***slopes,*/ TH
 }
 void ATDCcalibration::fillOnlineOffsetHisto()
 {
-  TCalibHit *currentHit;
+  //TCalibHit *currentHit;
   int cor=0;
   while(cor<noffsetRanges&&offsetRanges[cor]<eventNumber)cor++;
   for(int i=0;i<numberOfTracks;i++)
@@ -1800,8 +1800,8 @@ void ATDCcalibration::fillOnlineOffsetHisto()
 	{
 	  for(int k=0;k<tracks[i]->getNumberOfCalibHits(detectors[j]);k++)
 	    {
-	      currentHit=tracks[i]->getCalibSrcr(detectors[j],k);
-	      offsetHistos2[cor][j][currentHit->getElement()]->Fill(currentHit->getTDC());
+//	      currentHit=tracks[i]->getCalibSrcr(detectors[j],k);
+//	      offsetHistos2[cor][j][currentHit->getElement()]->Fill(currentHit->getTDC());
 	    }
 	}
     }
@@ -2261,10 +2261,10 @@ void ATDCcalibration::doCalibrationOffset()
   TH1*tmph[4]={NULL,NULL,NULL,NULL};
   TF1 func("func","[0]+[1]*x+[2]*x*x+[3]*x*x*x");
   bool redo=true;
-  float mean[nCalibDets];
-  for(int ii=0;ii<nCalibDets;ii++)
-    if(detectors[ii]<6)mean[ii]=12.5;
-    else mean[ii]=10;
+//  float mean[nCalibDets];
+//  for(int ii=0;ii<nCalibDets;ii++)
+//    if(detectors[ii]<6)mean[ii]=12.5;
+//    else mean[ii]=10;
   string option="Q0+";
   if(printAbsolute)option="Q";
   for(int ii=0;ii<6;ii++)
@@ -2297,7 +2297,7 @@ void ATDCcalibration::doCalibrationOffset()
 			{
 			  //  nextPad(4,postscript,canvas,nc,((TObject**)NULL));
 			}
-		      else delete tmph[nc];tmph[nc]=NULL;
+		      else{ delete tmph[nc];tmph[nc]=NULL;}
 		    }
 		}
 	      else if(ii==5&&printAbsolute)
@@ -2460,13 +2460,13 @@ void ATDCcalibration::fillTwoSidedHisto(int ptt)//, float ***offs,float ***slop)
       }
     case 1:
       {
-	float theta;
+//	float theta;
 	int cor=0;
 	for(int k=0;k<pixTree->GetEntries();k++)
 	  {
 	    pixTree->GetEntry(k);
 	    while(evtNr>offsetRanges[cor+1]&&cor<noffsetRanges)cor++;
-	    theta=vector3D(outpix.pointx,outpix.pointy,outpix.pointz).theta();
+//	    theta=vector3D(outpix.pointx,outpix.pointy,outpix.pointz).theta();
 	    for(int i=0;i<nTwoSided;i++)
 	      {
 		el=outpix.el[pixelDets[twoDets[i]]];
@@ -2834,7 +2834,7 @@ void nextPad(int nPads,TPostScript *ps,TCanvas *canv, int &nc, TObject **pointer
 	{
 	  for(int ii=0;ii<nPads;ii++)
 	    {
-	      if(pointers[ii]!=NULL)delete pointers[ii];pointers[ii]=NULL;
+	      if(pointers[ii]!=NULL){delete pointers[ii];pointers[ii]=NULL;}
 	    }
 	}
     }

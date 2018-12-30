@@ -1,0 +1,130 @@
+project(algorithm)
+
+find_package(Qt5 COMPONENTS Core REQUIRED)
+
+add_library(lib${PROJECT_NAME} STATIC
+    include/AHitClusterSearch.h
+    include/GetTheShape.h
+    include/APromptHistoTracker.h
+    include/AFindDecaysInTracks.h
+    include/AHitTreeInput.h
+    include/ALineTrackSearch.h
+    include/Ringpixel.h
+    include/ACalibrationAlgorithm.h
+    include/AWriteDataToRootFile.h
+    include/ATofStrawTrackFinder.h
+    include/ABetheBloch.h
+    include/lineFitAlgorithm.h
+    include/AKinFit.h
+    include/ATDCcalibration.h
+    include/AAssignHitsToTracks.h
+    include/AWriteHistogramsToRootFile.h
+    include/AHodo3Pixel.h
+    include/AVertexFit.h
+    include/AReadFromRoot.h
+    include/AKinkSearch.h
+    include/AMultipleTreeInput.h
+    include/AMultipleTreeOutput.h
+    include/AVirtualMachine.h
+    include/MicroCluster.h
+    include/ATrackTreeOutput.h
+    include/AHistoAlgorithm.h
+    include/AHitTreeOutput.h
+    include/AReadReactionFromRoot.h
+    include/ACalibrationGeneration.h
+    include/algorithms.h
+    include/BarrelPixel.h
+    include/ACalculateTrackProperties.h
+    include/ACalibration.h
+    include/readFromTade.h
+    include/ATofPixCorrection.h
+    include/ATrackTreeInput.h
+    include/AGenerateOutput.h
+    include/HodoPixel.h
+    include/APixelTracking.h
+    include/Calibrations.h
+    include/AVLineTrackSearch.h
+    include/ACMTransformation.h
+    include/AGenerateEventsWithDecay.h
+    include/AMomentumFromGeometry.h
+    include/AConversion.h
+    include/ACompareToGIN.h
+    include/APulsHeightCorrection.h
+    include/AReadFromSimpleTree.h
+    include/MicroPixel.h
+    include/ATeufelCorrection.h
+    include/APixelTreeWriteOut.h
+    include/AGenerateEvents.h
+    include/AapplyLRC.h
+    src/AAssignHitsToTracks.cpp
+    src/AapplyLRC.cpp
+    src/ABetheBloch.cpp
+    src/ACalculateTrackProperties.cpp
+    src/ACalibrationAlgorithm.cpp
+    src/ACalibration.cpp
+    src/ACalibrationGeneration.cpp
+    src/ACMTransformation.cpp
+    src/ACompareToGIN.cpp
+    src/AConversion.cpp
+    src/AFindDecaysInTracks.cpp
+    src/AGenerateEvents.cpp
+    src/AGenerateEventsWithDecay.cpp
+    src/AGenerateOutput.cpp
+    src/AHistoAlgorithm.cpp
+    src/AHitClusterSearch.cpp
+    src/AHitTreeInput.cpp
+    src/AHitTreeOutput.cpp
+    src/AHodo3Pixel.cpp
+    src/AKinFit.cpp
+    src/AKinkSearch.cpp
+    src/ALineTrackSearch.cpp
+#    src/AMCCompare.cpp
+    src/AMomentumFromGeometry.cpp
+    src/AMultipleTreeInput.cpp
+    src/AMultipleTreeOutput.cpp
+    src/APixelTracking.cpp
+    src/APixelTreeWriteOut.cpp
+    src/APromptHistoTracker.cpp
+    src/APulsHeightCorrection.cpp
+    src/AReadFromRoot.cpp
+    src/AReadFromSimpleTree.cpp
+    src/AReadReactionFromRoot.cpp
+    src/ATDCcalibration.cpp
+    src/ATeufelCorrection.cpp
+    src/ATofPixCorrection.cpp
+#    src/ATofStrawTrackFinder.cpp
+    src/ATrackTreeInput.cpp
+    src/ATrackTreeOutput.cpp
+    src/AVertexFit.cpp
+    src/AVirtualMachine.cpp
+    src/AVLineTrackSearch.cpp
+    src/AWriteDataToRootFile.cpp
+    src/AWriteHistogramsToRootFile.cpp
+    src/BarrelPixel.cpp
+    src/Calibrations0.cpp
+    src/Calibrations11.cpp
+    src/Calibrations12.cpp
+    src/Calibrations1.cpp
+    src/Calibrations2.cpp
+    src/Calibrations3.cpp
+    src/Calibrations4.cpp
+    src/Calibrations5.cpp
+    src/Calibrations6.cpp
+    src/Calibrations7.cpp
+    src/Calibrations8.cpp
+    src/GetTheShape.cpp
+    src/HodoPixel.cpp
+    src/lineFitAlgorithm.cpp
+    src/MicroCluster.cpp
+    src/MicroPixel.cpp
+    src/readFromTade.cpp
+    src/Ringpixel.cpp
+)
+target_include_directories(lib${PROJECT_NAME}
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+target_link_libraries(lib${PROJECT_NAME}
+    PUBLIC libparameter
+    PUBLIC libbasic
+    PUBLIC pthread
+)

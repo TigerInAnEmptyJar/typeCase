@@ -1,7 +1,7 @@
 #ifndef ALGORITHMWRITER_H
 #define ALGORITHMWRITER_H
 #include "algorithmparameter.h"
-#include "documentation/include/tmyclass.h"
+#include "tmyclass.h"
 #include <vector>
 #include <iostream>
 using namespace std;

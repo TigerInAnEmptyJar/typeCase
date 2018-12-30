@@ -21,8 +21,8 @@ private:
   int actuallyDone;
 public:
   loggingClass(string fn="");
-  ~loggingClass();
- public slots:
+  virtual ~loggingClass();
+// public slots:
    void setData(string d);
  void newRun(run_parameter &r);
  void eventsDone(int num);

@@ -371,38 +371,38 @@ vector3D sphericRectangle::distance(const sLine3D &line)
 //   if(l.R()<
 }
 /*
-#include <TPolyLine.h>
+#include <TPolyLine.h>*/
 void sphericRectangle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle)const
 {
-  point2D dp[4];
-  if(eye==plane.Foot())
-    dp[0].setValues(0,0);
-  Double_t pox[5],poy[5];
-  vector4D bb(10000,10000,-10000,-10000);
-  for(int i=0;i<4;i++)
-    {
-//       ps[i]=getPoint(i);
-//       ps[i]=plane-sLine3D(eye,ps[i]-eye);
-//       dp[i].setValues(plane.Direction(0)*ps[i],plane.Direction(1)*ps[i]);
-      dp[i]=projector::project(getPoint(i));
-      pox[i]=dp[i].X();
-      poy[i]=dp[i].Y();
-      if(bb.X()>pox[i])bb.setValue(0,pox[i]);
-      if(bb.Y()>poy[i])bb.setValue(1,poy[i]);
-      if(bb.Z()<pox[i])bb.setValue(2,pox[i]);
-      if(bb.W()<poy[i])bb.setValue(3,poy[i]);
-    }
-  pox[4]=dp[0].X();
-  poy[4]=dp[0].Y();
-  TPolyLine pl(5,pox,poy);
-  pl.SetFillColor(fColor);
-  pl.SetLineColor(lColor);
-  pl.SetFillStyle(fStyle);
-  pl.DrawPolyLine(5,pox,poy,"f");
-  if(ident!=NULL)(*ident)=pl.Clone();
-  if(boundingBox!=NULL)*boundingBox=bb;
+//  point2D dp[4];
+//  if(eye==plane.Foot())
+//    dp[0].setValues(0,0);
+//  Double_t pox[5],poy[5];
+//  vector4D bb(10000,10000,-10000,-10000);
+//  for(int i=0;i<4;i++)
+//    {
+////       ps[i]=getPoint(i);
+////       ps[i]=plane-sLine3D(eye,ps[i]-eye);
+////       dp[i].setValues(plane.Direction(0)*ps[i],plane.Direction(1)*ps[i]);
+//      dp[i]=projector::project(getPoint(i));
+//      pox[i]=dp[i].X();
+//      poy[i]=dp[i].Y();
+//      if(bb.X()>pox[i])bb.setValue(0,pox[i]);
+//      if(bb.Y()>poy[i])bb.setValue(1,poy[i]);
+//      if(bb.Z()<pox[i])bb.setValue(2,pox[i]);
+//      if(bb.W()<poy[i])bb.setValue(3,poy[i]);
+//    }
+//  pox[4]=dp[0].X();
+//  poy[4]=dp[0].Y();
+//  TPolyLine pl(5,pox,poy);
+//  pl.SetFillColor(fColor);
+//  pl.SetLineColor(lColor);
+//  pl.SetFillStyle(fStyle);
+//  pl.DrawPolyLine(5,pox,poy,"f");
+//  if(ident!=NULL)(*ident)=pl.Clone();
+//  if(boundingBox!=NULL)*boundingBox=bb;
 }
-*/
+
 void sphericRectangle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, int lColor, int fColor, int fStyle)const
 {
   Draw(eye,plane,boundingBox,NULL,lColor,fColor,fStyle);

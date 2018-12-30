@@ -33,7 +33,10 @@ bool parameterManager::readAlgorithmParameter_ascii(string filename, vector<algo
       char li[1000];
       input1.getline(li,1000);
       string line(li);
-      if(!((line.find("version")<line.npos||line.find("Version"))<line.npos&&line.find("parameter")<line.npos&&line.find("algorithm")<line.npos))return false;
+      if(!((line.find("version")<line.npos
+            ||line.find("Version")<line.npos)
+           &&line.find("parameter")<line.npos
+           &&line.find("algorithm")<line.npos))return false;
       input1>>num;
       for(int j=0;j<num;j++)
 	{
@@ -684,7 +687,10 @@ bool parameterManager::readRunParameter_ascii(string filename, vector<run_parame
       char li[1000];
       input1.getline(li,1000);
       string line(li);
-      if(!((line.find("version")<line.npos||line.find("Version"))<line.npos&&line.find("parameter")<line.npos&&line.find("run")<line.npos))return false;
+      if(!((line.find("version")<line.npos
+            ||line.find("Version")<line.npos)
+           &&line.find("parameter")<line.npos
+           &&line.find("run")<line.npos))return false;
       input1>>numRuns;
       for(int j=0;j<numRuns;j++)
 	{

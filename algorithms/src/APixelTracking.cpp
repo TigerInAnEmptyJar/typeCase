@@ -614,8 +614,8 @@ void *APixelTracking::process(void* ptr)
   vector3D v;
   TCalibHit *tmpHit,*addHit;
   vector3D distance,bestDistance;
-  TTrack *promptTracks[maxTracks];
-  int nprompttracks=0;
+//  TTrack *promptTracks[maxTracks];
+//  int nprompttracks=0;
   TTrack *decayTracks[maxTracks];
   int ndecaytracks=0;
   TTrack *veeTracks[maxTracks];
@@ -788,7 +788,7 @@ void *APixelTracking::process(void* ptr)
 			  continue;
 		      if(tmptracks[tmpNum]->getNumberOfCalibHits(15)<=0||tmptracks[tmpNum]->getNumberOfCalibHits(16)<=0)
 			  continue;
-		      promptTracks[nprompttracks++]=tmptracks[tmpNum];
+//		      promptTracks[nprompttracks++]=tmptracks[tmpNum];
 		      tmpNum++;
 		    }
 		  else if(1==1||distance.R()>maxTargetDist)

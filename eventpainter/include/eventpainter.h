@@ -8,9 +8,9 @@
 #include "shapes.h"
 using namespace std;
 
-class EventPainter:public QObject
+class EventPainter: public QObject
 {
-    Q_OBJECT
+Q_OBJECT
 private:
     TEvent *Event;
     TPad *canvas;
@@ -36,6 +36,7 @@ public:
     EventPainter(TEvent *e,TPad *c);
     EventPainter(TEvent *e,TPad *c,float left,float right, float up, float down);
     vector<TBase*> getDrawnObjects(double x,double y);
+    virtual ~EventPainter() = default;
 public slots:
     void setTrackLike(bool like=true);
     void setEvent(TEvent *e);

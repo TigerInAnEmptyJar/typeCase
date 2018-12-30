@@ -66,7 +66,7 @@ void element_parameter::setWeight(float w)
 
 ostream &operator <<(ostream &o, const element_parameter &ep)
 {
-    if((o==cout)||(o==cerr))
+    if((&o==&cout)||(&o==&cerr))
     {
 	o<<ep.getName().data()<<": mass: "<<ep.getMass()<<", charge: "<<ep.getCharge()<<" , n-density: "<<ep.getWeight();
     }
@@ -295,7 +295,7 @@ istream &operator>>(istream &i, material_parameter &m)
 
 ostream &operator<<(ostream &o, const material_parameter &m)
 {
-    if((o==cout)||(o==cerr))
+    if((&o==&cout)||(&o==&cerr))
     {
 	o<<m.getName().data()<<endl;
 	o<<"density: "<<m.Density()<<", radiation length: "<< m.RadiationLength()<<", speed of Light in Medium "<<m.Speed()<<", "<<((m.IsActive())?"active medium":"detecting medium")<<endl;

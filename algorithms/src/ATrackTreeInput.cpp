@@ -321,8 +321,8 @@ void ATrackTreeInput::readPrompt()
 	  cout<<*(tracks[numberOfTracks])<<endl;
 	  cout<<tracks[numberOfTracks]->getNumberOfCalibHits()<<endl;*/
 	  cout<<"bad track "<<eventNumber<< "("<<flush;
-	  for(int j=0;j<prompt[8]->GetValue(i);j++)
-	    cout<<prompt[9]->GetValue(ntmp-((int)prompt[8]->GetValue(i))+j)<<" "<<prompt[10]->GetValue(ntmp-((int)prompt[8]->GetValue(i))+j)<<","<<flush;
+          for(int j=0;j<prompt[8]->GetValue(i);j++){
+            cout<<prompt[9]->GetValue(ntmp-((int)prompt[8]->GetValue(i))+j)<<" "<<prompt[10]->GetValue(ntmp-((int)prompt[8]->GetValue(i))+j)<<","<<flush;}
 	    cout<<")"<<endl;
 	}
     }

@@ -81,9 +81,11 @@ void AMultipleTreeInput::cleanUp()
 {
   for(int i=0;i<3;i++)
     {
-      if(trees!=NULL)
-	if(trees[i]!=NULL)
+      if(trees!=NULL) {
+        if(trees[i]!=NULL) {
 	  delete []trees[i];
+        }
+      }
 	if(leaves!=NULL)
 	  {
 	    if(leaves[i]!=NULL)

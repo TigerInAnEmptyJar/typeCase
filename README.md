@@ -34,13 +34,19 @@ suite (most probably using gtest), the testing code I had seems to be lost.
 The first commit is exactly the state that I copied it in 2011. On the 
 second commit I have it compile, not skillfully though, with gcc-4.8.
 Compile but not link. Using makefiles is just a pain, because you have to
-make sure you list the libraries in the correct order. I'll leave that, 
-because the very next step is to introduce cmake.
+make sure you list the libraries in the correct order.
+
+That's why I introduced cmake with the third commit. Also the makefiles are
+removed with this step. Now the command-line applications compile and link.
+But the UI-applications aren't added to the compilation yet. The reason
+is sad but simple: I'm using Qt5 to compile, but the UI still needs Qt3.
+I think, I'll leave that until I rework the UI (which I will most probably
+do with qml).
 
 Try it, if you like. Prerequisites are:
 
 * gcc-4.8 (newer versions will lead to compiler errors; yes, the compilers
 have become more strict)
 * boost program_options
-* Qt 4
+* Qt 5
 * root (root.cern.ch)

@@ -16,7 +16,6 @@ void *AKinkSearch::process(void*ptr)
   Vector *PromptParams=new Vector[numPromptDet];
   for(int i=0;i<numPromptDet;i++)PromptParams[i].reDimension(7);
   int numPromptParams=0;
-  int promptNumber=tmpNum;
   //prompt loop
   for(int i2=0;i2<2;i2++)//switch prompt pixel/cluster
     {
@@ -36,7 +35,6 @@ void *AKinkSearch::process(void*ptr)
 	      promptLine.newLine(vertex,(i2==0?pixels[pPID][ii]->getShape()->getCenter():clusters[pPID][ii]->getCenter())-vertex);
 	      if(!checkLine(promptLine))//check if detectors just allowed for decay tracks lie on the line
 		continue;
-	      promptNumber=tmpNum;
 	      tmpPrompt->reset();
 	      tmpPrompt->setPath(promptLine);
 	      tmpPrompt->setOrder(false);

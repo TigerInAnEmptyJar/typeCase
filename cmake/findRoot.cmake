@@ -1,0 +1,20 @@
+find_package(ROOT COMPONENTS
+    Core
+    RIO
+    Tree
+    Hist
+    Imt
+    Net
+    Graf
+    Graf3d
+    Gpad
+    ROOTDataFrame
+    TreePlayer
+    Rint
+    Postscript
+    Matrix
+    Physics
+    MathCore
+    Thread
+    MultiProc
+)

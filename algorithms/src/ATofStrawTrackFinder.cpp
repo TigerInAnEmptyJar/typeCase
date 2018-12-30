@@ -1,5 +1,5 @@
 #include "ATofStrawTrackFinder.h"
-#include "tofTaskManager.h"
+//#include "tofTaskManager.h"
 //#include "strawTube.h"
 #include "algorithmparameter.h"
 ATofStrawTrackFinder::ATofStrawTrackFinder(TTrack **tracksIn, int &numberOfTracksIn, TSetup &setup, TCalibHit ***hitsIn, int **numberOfHitsIn, const algorithm_parameter &descr):AAlgorithm("interface to tofStraws::tofTrackFinder"),numberOfTracks(numberOfTracksIn)
@@ -104,7 +104,7 @@ algorithm_parameter ATofStrawTrackFinder::getDescription()
   algorithm_parameter ret("TOF straw-track-finder",0,0,0);
   vector<string> des;
   des.push_back("This algorithm is the interface to the straw track finder implemented ");
-  des.push_back("by Ralph Castelijns at the Forschungszentrum Jülich for the COSY-TOF-Detector. ");
+  des.push_back("by Ralph Castelijns at the Forschungszentrum Juelich for the COSY-TOF-Detector. ");
   des.push_back("The adjustments made are tiny and do not extend so far as the tofStraw-library.");
   des.push_back("The geometry used for this library is quite fixed though I tried to widen the ");
   des.push_back("possibilities a bit.");
@@ -112,7 +112,7 @@ algorithm_parameter ATofStrawTrackFinder::getDescription()
   des.push_back("tilted with respect to each other around some axis. Though there is some axis ");
   des.push_back("you can specify as rotation axis I hope, the z-axis (as used for the COSY-TOF-");
   des.push_back("Detector) is not hard coded. There are three possible angular alignments, a tilt ");
-  des.push_back("of 60° each (give here 1.047 == pi/3 as rotation angle), again I don't know ");
+  des.push_back("of 60deg each (give here 1.047 == pi/3 as rotation angle), again I don't know ");
   des.push_back("whether other alignments, peraps as pentagram or so, would work.");
   des.push_back("The documentation for this trackfinder is given in ");
   des.push_back("http://www.fz-juelich.de/ikp/COSY-TOF/manuals/Manuals/straws/html/index.html, ");

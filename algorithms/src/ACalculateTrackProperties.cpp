@@ -162,10 +162,8 @@ ACalculateTrackProperties::~ACalculateTrackProperties()
 #include "container_utilities.h"
 void *ACalculateTrackProperties::process(void*ptr)
 {
-  float gt;
   point3D hit2,hit3,hittmp;
   if (numberOfTracks>=100||numberOfTracks==0)return 0;
-  gt=0;
   float startTimings[numberOfTracks];
   float stopTimings[numberOfTracks];
   point3D startPoints[numberOfTracks];

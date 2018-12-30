@@ -605,12 +605,12 @@ int algorithmWriter::getNextID()
 int algorithmWriter::getInstalledID()
 {
   if(!analyserAvail())return -1;
-  int n, foundn=-1;
   ifstream input;
   string s;
   char c;
   string search=fdefinition.Name();
   input.open(algorithmWriter::fanalyser.data());
+  int n;
   while(!input.eof())
     {
       s="";
@@ -622,11 +622,12 @@ int algorithmWriter::getInstalledID()
 	}
       if(hasA(s,search))
 	{
-	  foundn=n;
+          input.close();
+          return n;
 	}
     }
   input.close();  
-  return foundn;
+  return -1;
 }
 
 ostream &operator <<(ostream &o, const algorithmWriter &wr)
@@ -747,10 +748,10 @@ istream &operator >>(istream &o, algorithmWriter &wr)
       if(o.eof())return o;
       string s3=s;
       s="";o.get(c);while(!(c=='\n'||o.eof())){s=s+c;o.get(c);}
-      if(o.eof())return o;
+      if(o.eof()){return o;}
       wr.addConnection(s1,s2,s3,s);
     }
-  if(n[3]==0)o.get(c);while(!(c=='\n'||o.eof()))o.get(c);if(o.eof())return o;
+  if(n[3]==0){o.get(c);while(!(c=='\n'||o.eof()))o.get(c);if(o.eof())return o;}
   o.get(c);while(!(c=='\n'||o.eof()))o.get(c);if(o.eof())return o;
   n[0]=0;
   o.get(c);

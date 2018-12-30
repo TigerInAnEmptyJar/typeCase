@@ -117,10 +117,6 @@ bool ALineTrackSearch::searchATrack(int tracknum, int stopI, TBase *pix, TBase *
   int pixelDists[setup.getNumberOfDetectors()];
   float pd;
   vector3D dis;
-  //necessary for fit: fit only considers lines with angles up to 90°
-  float modFactor=1;
-  if(path.Direction().Theta()>M_PI*0.5)
-    modFactor=-1;
   for(int i=0;i<numMid;i++)
     {
       if((*(numberOfPixels[midIDs[i]]))==0)continue;

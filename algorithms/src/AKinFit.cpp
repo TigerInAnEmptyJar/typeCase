@@ -141,7 +141,7 @@ float AKinFit::fit()
   bool condition=true;
   //  int info=nC+4;
   int iteration=0;
-  float chi2_prev=0,d_prev,d0;
+  float chi2_prev=0,d_prev;
   float sum;
   int num,pos,number,*mmtmp;
   vector4D tmp4d(1,1,1,1);
@@ -233,7 +233,6 @@ float AKinFit::fit()
     }
   d=sqrt(FM*FM);
   FM0=FM;
-  d0=d;
   if(printEventInfo)
     cout<<"FM: "<<FM<<" d: "<<d<<endl;
   //iteration

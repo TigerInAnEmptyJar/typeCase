@@ -74,83 +74,83 @@ vector3D circle::distance(const sLine3D &line)
   if(l.R()<=rad)return vector3D(0,0,0);
   return l*(l.R()-rad);
 }
-/*
-#include <TPolyLine.h>
+
+//#include <TPolyLine.h>
 void circle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, TObject **ident, int lColor, int fColor, int fStyle)const
 {
-  double angle=plane.Normal()*normal;
-  if(angle<__prec)return;
-  vector3D viewDir=plane.Foot()-eye;
-  viewDir.normalize();
-  if(angle==1)
-    {
-      point3D pc=plane-sLine3D(eye,center-eye);
-      vector2D pcv(plane.Direction(0)*pc, plane.Direction(1)*pc);
-      float d1=(eye-pc).R(),d2=(eye-center).R();
-      int numPoints=100;
-//       point3D ps[numPoints];
-      point2D dp[numPoints];
-      Double_t pox[numPoints+1],poy[numPoints+1];
-      vector3D start(plane.Direction(0));
-      start.normalize();
-      matrix3D turn(normal,M_PI*2./(double)numPoints);
-      for(int i=0;i<numPoints;i++)
-	{
-	  dp[i]=projector::project(center+start*rad);//ps[i]=center+start*rad;
-	  //ps[i]=plane-sLine3D(eye,ps[i]-eye);
-	  //dp[i].setValues(plane.Direction(0)*ps[i],plane.Direction(1)*ps[i]);
-	  pox[i]=dp[i][0];
-	  poy[i]=dp[i][1];
-	  start=turn*start;
-	}
-      pox[numPoints]=pox[0];
-      poy[numPoints]=poy[0];
-      TPolyLine pl(numPoints+1,pox,poy);
-      pl.SetFillColor(fColor);
-      pl.SetLineColor(lColor);
-      pl.SetFillStyle(fStyle);
-      pl.DrawPolyLine(numPoints+1,pox,poy,"f");
-      if(ident!=NULL)(*ident)=pl.Clone();
-      if(boundingBox!=NULL)
-	boundingBox->setValues(pcv.X()-rad*(d1/(d1+d2)),pcv.Y()-rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)));
-    }
-  else
-    {
-      int numPoints=100;
-//       point3D ps[numPoints];
-      point2D dp[numPoints];
-      Double_t pox[numPoints+1],poy[numPoints+1];
-      vector3D start(plane.Direction(0));
-      start.normalize();
-      matrix3D turn(normal,M_PI*2./(double)numPoints);
-      for(int i=0;i<numPoints;i++)
-	{
-	  dp[i]=projector::project(center+start*rad);//getPoint(i)+v[i]*(((double)j)/((double)nPointsPerEdge)))	  ps[i]=center+start*rad;
-	  //ps[i]=plane-sLine3D(eye,ps[i]-eye);
-	  //dp[i].setValues(plane.Direction(0)*ps[i],plane.Direction(1)*ps[i]);
-	  pox[i]=dp[i][0];
-	  poy[i]=dp[i][1];
-	  start=turn*start;
-	}
-      pox[numPoints]=pox[0];
-      poy[numPoints]=poy[0];
-      TPolyLine pl(numPoints+1,pox,poy);
-      pl.SetFillColor(fColor);
-      pl.SetLineColor(lColor);
-      pl.SetFillStyle(fStyle);
-      pl.DrawPolyLine(numPoints+1,pox,poy,"f");
-      if(ident!=NULL)(*ident)=pl.Clone();
-      point3D pc=plane-sLine3D(eye,center-eye);
-      vector2D pcv(plane.Direction(0)*pc, plane.Direction(1)*pc);
-      float d1=(eye-pc).R(),d2=(eye-center).R();
-      vector3D n=normal-plane.Normal()*(normal*plane.Normal());
-//       float m1=n*plane.Direction(0);
-      if(boundingBox!=NULL)
-	{
-	  boundingBox->setValues(pcv.X()-rad*(d1/(d1+d2)),pcv.Y()-rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)));
-	}
-    }
-}*/
+//  double angle=plane.Normal()*normal;
+//  if(angle<__prec)return;
+//  vector3D viewDir=plane.Foot()-eye;
+//  viewDir.normalize();
+//  if(angle==1)
+//    {
+//      point3D pc=plane-sLine3D(eye,center-eye);
+//      vector2D pcv(plane.Direction(0)*pc, plane.Direction(1)*pc);
+//      float d1=(eye-pc).R(),d2=(eye-center).R();
+//      int numPoints=100;
+////       point3D ps[numPoints];
+//      point2D dp[numPoints];
+//      Double_t pox[numPoints+1],poy[numPoints+1];
+//      vector3D start(plane.Direction(0));
+//      start.normalize();
+//      matrix3D turn(normal,M_PI*2./(double)numPoints);
+//      for(int i=0;i<numPoints;i++)
+//	{
+//	  dp[i]=projector::project(center+start*rad);//ps[i]=center+start*rad;
+//	  //ps[i]=plane-sLine3D(eye,ps[i]-eye);
+//	  //dp[i].setValues(plane.Direction(0)*ps[i],plane.Direction(1)*ps[i]);
+//	  pox[i]=dp[i][0];
+//	  poy[i]=dp[i][1];
+//	  start=turn*start;
+//	}
+//      pox[numPoints]=pox[0];
+//      poy[numPoints]=poy[0];
+//      TPolyLine pl(numPoints+1,pox,poy);
+//      pl.SetFillColor(fColor);
+//      pl.SetLineColor(lColor);
+//      pl.SetFillStyle(fStyle);
+//      pl.DrawPolyLine(numPoints+1,pox,poy,"f");
+//      if(ident!=NULL)(*ident)=pl.Clone();
+//      if(boundingBox!=NULL)
+//	boundingBox->setValues(pcv.X()-rad*(d1/(d1+d2)),pcv.Y()-rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)));
+//    }
+//  else
+//    {
+//      int numPoints=100;
+////       point3D ps[numPoints];
+//      point2D dp[numPoints];
+//      Double_t pox[numPoints+1],poy[numPoints+1];
+//      vector3D start(plane.Direction(0));
+//      start.normalize();
+//      matrix3D turn(normal,M_PI*2./(double)numPoints);
+//      for(int i=0;i<numPoints;i++)
+//	{
+//	  dp[i]=projector::project(center+start*rad);//getPoint(i)+v[i]*(((double)j)/((double)nPointsPerEdge)))	  ps[i]=center+start*rad;
+//	  //ps[i]=plane-sLine3D(eye,ps[i]-eye);
+//	  //dp[i].setValues(plane.Direction(0)*ps[i],plane.Direction(1)*ps[i]);
+//	  pox[i]=dp[i][0];
+//	  poy[i]=dp[i][1];
+//	  start=turn*start;
+//	}
+//      pox[numPoints]=pox[0];
+//      poy[numPoints]=poy[0];
+//      TPolyLine pl(numPoints+1,pox,poy);
+//      pl.SetFillColor(fColor);
+//      pl.SetLineColor(lColor);
+//      pl.SetFillStyle(fStyle);
+//      pl.DrawPolyLine(numPoints+1,pox,poy,"f");
+//      if(ident!=NULL)(*ident)=pl.Clone();
+//      point3D pc=plane-sLine3D(eye,center-eye);
+//      vector2D pcv(plane.Direction(0)*pc, plane.Direction(1)*pc);
+//      float d1=(eye-pc).R(),d2=(eye-center).R();
+//      vector3D n=normal-plane.Normal()*(normal*plane.Normal());
+////       float m1=n*plane.Direction(0);
+//      if(boundingBox!=NULL)
+//	{
+//	  boundingBox->setValues(pcv.X()-rad*(d1/(d1+d2)),pcv.Y()-rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)),pcv.Y()+rad*(d1/(d1+d2)));
+//	}
+//    }
+}
 void circle::Draw(const point3D &eye, const plane3D &plane, vector4D* boundingBox, int lColor, int fColor, int fStyle)const
 {
   Draw(eye,plane,boundingBox,NULL,lColor,fColor,fStyle);
