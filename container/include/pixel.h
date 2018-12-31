@@ -1,40 +1,41 @@
 #ifndef PIXEL
 #define PIXEL
-#include "planeShape.h"
-#include "calibHit.h"
 #include "TBase.h"
+#include "calibHit.h"
+#include "planeShape.h"
 
-class TPixel:public TBase
+class TPixel : public TBase
 {
- private:
-  const int numDet;  //  TRef p_shape;
-  planeShape* p_shape;//  TRef *elements;//TRef is a nice idea, if it worked
-  TCalibHit **elements;//[accNum]->
-  planeShape *emergencySave;//!
+private:
+  const int numDet;          //  TRef p_shape;
+  planeShape* p_shape;       //  TRef *elements;//TRef is a nice idea, if it worked
+  TCalibHit** elements;      //[accNum]->
+  planeShape* emergencySave; //!
   int accNum;
   int ID;
   float maxChi;
-  bool defined;//!
+  bool defined; //!
   bool valid;
- public:
-  TPixel(int numDetIn=3);
+
+public:
+  TPixel(int numDetIn = 3);
   ~TPixel();
-  planeShape *getShape();
+  planeShape* getShape();
   TCalibHit getElement(int num) const;
-  TCalibHit &getElementr(int num);
+  TCalibHit& getElementr(int num);
   int getNumberOfElements() const;
   int getNumberOfActualElements() const;
-  void setShape(planeShape *sh);
-  void addElement(TCalibHit &hit);
+  void setShape(planeShape* sh);
+  void addElement(TCalibHit& hit);
   void resetElements();
   int getID() const;
   void setID(int IDIn);
-  float getMaxChiSquared()const;
+  float getMaxChiSquared() const;
   void setMaxChiSquared(float value);
   bool isDefined();
   void reset();
-  bool operator ==(TPixel &);
-  bool isValid()const;
-  void setValid(bool v=true);
+  bool operator==(TPixel&);
+  bool isValid() const;
+  void setValid(bool v = true);
 };
 #endif

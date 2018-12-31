@@ -5,16 +5,18 @@ using namespace std;
 class Eparticles
 {
   static bool isInit;
-  static float *masses;
-  static float *charges;
-  static float *lifeTimes;
+  static float* masses;
+  static float* charges;
+  static float* lifeTimes;
   static int numberOfParticles;
-  static int *GeantIDs;
-  static string *names;
- public:
+  static int* GeantIDs;
+  static string* names;
+
+public:
   static void init();
   static void init(string filename);
-  static void setParticle(int ID, string name, float mass, float charge, float lifetime, int GeantID);
+  static void setParticle(int ID, string name, float mass, float charge, float lifetime,
+                          int GeantID);
   static int getNumberOfParticles();
   static int getGeantID(int ID);
   static int getGeantID(string name);

@@ -5,11 +5,12 @@ using namespace std;
 
 class TBase
 {
- protected:
+protected:
   string fname;
- public:
+
+public:
   TBase(const string& nme);
   ~TBase();
-  string name()const;
+  string name() const;
 };
 #endif

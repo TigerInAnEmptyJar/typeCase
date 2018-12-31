@@ -3,16 +3,17 @@
 #include "algorithm.h"
 #include "geometry.h"
 
-class AELossAlgorithm: public AAlgorithm
+class AELossAlgorithm : public AAlgorithm
 {
- private:
+private:
   int num;
- public:
+
+public:
   AELossAlgorithm();
   virtual ~AELossAlgorithm();
-  virtual void *process(void*ptr);
+  virtual void* process(void* ptr);
   virtual float energyLoss(momentum4D particle, float path);
-  virtual float energyLoss(momentum4D particle, float path,float charge);
+  virtual float energyLoss(momentum4D particle, float path, float charge);
   virtual float energyLossM(int geantId, float momentum, float path);
   virtual float energyLossB(int geantId, float beta, float path);
   virtual float energyLossE(int geantId, float energy, float path);
@@ -21,9 +22,9 @@ class AELossAlgorithm: public AAlgorithm
   virtual float penetrationDepth(momentum4D particle, double charge);
   virtual float betaAfter(float path, momentum4D before, float charge);
   virtual float betaAfter(float path, int geantId, float betaIn);
-  virtual Vector parameters()const;
-  virtual void setParameters(const Vector &parameter);
-  virtual AELossAlgorithm *getClone()const;
+  virtual Vector parameters() const;
+  virtual void setParameters(const Vector& parameter);
+  virtual AELossAlgorithm* getClone() const;
 };
 
 #endif

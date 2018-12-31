@@ -13,49 +13,51 @@ typedef struct
   Int_t ID;
   Int_t nEl;
 } trackT;
-#include <TTree.h>
-#include "container.h"
 #include "algorithm.h"
+#include "container.h"
+#include <TTree.h>
 class run_parameter;
 using namespace std;
 
-class AMultipleTreeOutput: public AAlgorithm
+class AMultipleTreeOutput : public AAlgorithm
 {
-Q_OBJECT
- private:
-  const int maxtrees;//!
-  TTrack **tracks;//!
-  int &numberOfTracks;//!
-  int &eventNr;//!
-  int &runNr;//!
-  int &trgg;//!
-  TTree *countTree;//!
-  TTree ***trees;//!
-  trackT ***trackOut;//!
-  TFile *outFile;//!
-  int nTrees[3];//!
-  Int_t nTracks;//!
-  Int_t eventNumber;//!
-  Int_t runNumber;//!
-  Int_t trigger;//!
-  Int_t nPTracks;//!
-  Int_t nVTracks;//!
-  Int_t nKTracks;//!
-  Int_t **entryNumbers;//!
-  int nTracks_per_tree;//!
-  bool newFileEachRun;//!
-  string filePattern;//!
+  Q_OBJECT
+private:
+  const int maxtrees;   //!
+  TTrack** tracks;      //!
+  int& numberOfTracks;  //!
+  int& eventNr;         //!
+  int& runNr;           //!
+  int& trgg;            //!
+  TTree* countTree;     //!
+  TTree*** trees;       //!
+  trackT*** trackOut;   //!
+  TFile* outFile;       //!
+  int nTrees[3];        //!
+  Int_t nTracks;        //!
+  Int_t eventNumber;    //!
+  Int_t runNumber;      //!
+  Int_t trigger;        //!
+  Int_t nPTracks;       //!
+  Int_t nVTracks;       //!
+  Int_t nKTracks;       //!
+  Int_t** entryNumbers; //!
+  int nTracks_per_tree; //!
+  bool newFileEachRun;  //!
+  string filePattern;   //!
   void initNumTree();
   void cleanTree();
   void addATree(int tp);
-  void setTree(TTrack *in,trackT *out);
-  void setDefault(trackT *tr);
+  void setTree(TTrack* in, trackT* out);
+  void setDefault(trackT* tr);
   void writeTracks();
- public:
-  AMultipleTreeOutput(int max, int &evtNr,int &rnNr, int &triggerIn, int &nTrack, TTrack **tracksIn, const algorithm_parameter &param);
+
+public:
+  AMultipleTreeOutput(int max, int& evtNr, int& rnNr, int& triggerIn, int& nTrack,
+                      TTrack** tracksIn, const algorithm_parameter& param);
   virtual ~AMultipleTreeOutput();
-  virtual void *process(void* ptr);
+  virtual void* process(void* ptr);
   static algorithm_parameter getDescription();
-  public slots:
-    void newRun(run_parameter &rp);
+public slots:
+  void newRun(run_parameter& rp);
 };

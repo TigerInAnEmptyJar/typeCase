@@ -2,12 +2,17 @@
 //#include <TH2.h>
 //#include <TTree.h>
 // TH2F histo("speedHisto","speedHisto",200,0.6,1,400,0,0.4);
-// TH2F referenceThB("\\theta vs. \\beta_{ref}","\\theta vs. \\beta_{ref}",60,0,60,200,0.6,1);
+// TH2F referenceThB("\\theta vs. \\beta_{ref}","\\theta vs.
+// \\beta_{ref}",60,0,60,200,0.6,1);
 // TH2F ThB("\\theta vs. \\beta","\\theta vs. \\beta",60,0,60,200,0,0.4);
-// TH2F ringTof("R:tdcfac vs \\theta","R:tdcfac vs \\theta",100,10,26,200,-100,0);
-// TH2F barrelTof("B:tdcfac vs \\theta","B:tdcfac vs \\theta",100,20,60,200,-100,0);
-// TH2F ringTofref("R:tdcfac_{ref} vs \\theta","R:tdcfac_{ref} vs \\theta",100,10,26,200,-100,0);
-// TH2F barrelTofref("B:tdcfac_{ref} vs \\theta","B:tdcfac_{ref} vs \\theta",100,20,60,200,-100,0);
+// TH2F ringTof("R:tdcfac vs \\theta","R:tdcfac vs
+// \\theta",100,10,26,200,-100,0);
+// TH2F barrelTof("B:tdcfac vs \\theta","B:tdcfac vs
+// \\theta",100,20,60,200,-100,0);
+// TH2F ringTofref("R:tdcfac_{ref} vs \\theta","R:tdcfac_{ref} vs
+// \\theta",100,10,26,200,-100,0);
+// TH2F barrelTofref("B:tdcfac_{ref} vs \\theta","B:tdcfac_{ref} vs
+// \\theta",100,20,60,200,-100,0);
 // TTree outTree("Speed","Speed");
 // Double_t beta_m;
 // Double_t beta_r;
@@ -24,11 +29,11 @@
 //   TCalibHit *r1=NULL, *r2=NULL, *r3=NULL;
 //   TCalibHit *s1=NULL,*s2=NULL;
 //   point3D sto1,sto2,sto3,sta1,sta2;
-//   r1=t1->getCalibSrcr(3,0); 
-//   r2=t1->getCalibSrcr(4,0); 
-//   r3=t1->getCalibSrcr(5,0); 
-//   s1=t1->getCalibSrcr(15,0); 
-//   s2=t1->getCalibSrcr(16,0); 
+//   r1=t1->getCalibSrcr(3,0);
+//   r2=t1->getCalibSrcr(4,0);
+//   r3=t1->getCalibSrcr(5,0);
+//   s1=t1->getCalibSrcr(15,0);
+//   s2=t1->getCalibSrcr(16,0);
 //   if(r1!=NULL)
 //     sto1=r1->getHitShape()->entrance(path);
 //   if(r2!=NULL)//->isValid())
@@ -60,7 +65,7 @@
 //   int pixpat=0;
 //   if(r1!=NULL)//->isValid())
 //     pixpat=pixpat+1;
-//   if(r2!=NULL)//->isValid()) 
+//   if(r2!=NULL)//->isValid())
 //     pixpat=pixpat+2;
 //   if(r3!=NULL)//->isValid())
 //     pixpat=pixpat+4;
@@ -71,19 +76,19 @@
 //     }
 //   switch(pixpat)
 //     {
-//     case 1: 
+//     case 1:
 //       meanStop=r1->getTDC();
 //       stopHit=sto1;
 //       el[0]=r1->getElement();
 //       det[0]=r1->getDetector();
 //       break;
-//     case 2: 
+//     case 2:
 //       meanStop=r2->getTDC();
 //       stopHit=sto2;
 //       el[0]=r2->getElement();
 //       det[0]=r2->getDetector();
 //       break;
-//     case 3: 
+//     case 3:
 //       meanStop=(r1->getTDC()+r2->getTDC())*0.5;
 //       stopHit=sto1+(sto2-sto1)*0.5;
 //       el[0]=r1->getElement();
@@ -91,13 +96,13 @@
 //       el[1]=r2->getElement();
 //       det[1]=r2->getDetector();
 //       break;
-//     case 4: 
+//     case 4:
 //       meanStop=r3->getTDC();
 //       stopHit=sto3;
 //       el[0]=r3->getElement();
 //       det[0]=r3->getDetector();
 //       break;
-//     case 5: 
+//     case 5:
 //       meanStop=(r1->getTDC()+r3->getTDC())*0.5;
 //       stopHit=sto1+(sto3-sto1)*0.5;
 //       el[0]=r1->getElement();
@@ -105,7 +110,7 @@
 //       el[1]=r3->getElement();
 //       det[1]=r3->getDetector();
 //       break;
-//     case 6: 
+//     case 6:
 //       meanStop=(r2->getTDC()+r3->getTDC())*0.5;
 //       stopHit=sto3+(sto2-sto3)*0.5;
 //       el[0]=r2->getElement();
@@ -113,7 +118,7 @@
 //       el[1]=r3->getElement();
 //       det[1]=r3->getDetector();
 //       break;
-//     case 7: 
+//     case 7:
 //       meanStop=(r1->getTDC()+r2->getTDC()+r3->getTDC())/3.0;
 //       stopHit=point3D(0,0,0)+(vector3D(sto1)+vector3D(sto2)+vector3D(sto1))*(1/3.0);
 //       el[0]=r1->getElement();
@@ -142,10 +147,10 @@
 //   TCalibHit *r1=NULL, *r2=NULL;
 //   TCalibHit *s1=NULL,*s2=NULL;
 //   point3D sto1,sto2,sto3,sta1,sta2;
-//   r1=t1->getCalibSrcr(6,0); 
-//   r2=t1->getCalibSrcr(7,0); 
-//   s1=t1->getCalibSrcr(15,0); 
-//   s2=t1->getCalibSrcr(16,0); 
+//   r1=t1->getCalibSrcr(6,0);
+//   r2=t1->getCalibSrcr(7,0);
+//   s1=t1->getCalibSrcr(15,0);
+//   s2=t1->getCalibSrcr(16,0);
 //   if(r1!=NULL)//->isValid())
 //     sto1=r1->getHitShape()->entrance(path);
 //   if(r2!=NULL)//->isValid())
@@ -210,65 +215,60 @@
 //   pathlength_C=pathlength;
 //   outTree.Fill();
 // }
-Rppelastic::Rppelastic():RbaseReaction(NULL,2,2)
+Rppelastic::Rppelastic() : RbaseReaction(NULL, 2, 2)
 {
-  fname="Rppelastic";
-  if(!Eparticles::IsInit())Eparticles::init();
-  numberOfParticles=2;
-  particles=new momentum4D[getNumberOfSecondaries()];
-  cmparticles=new momentum4D[getNumberOfSecondaries()];
-  particleIDs=new int[2];
-  particleIDs[0]=14;
-  particleIDs[1]=14;
+  fname = "Rppelastic";
+  if (!Eparticles::IsInit())
+    Eparticles::init();
+  numberOfParticles = 2;
+  particles = new momentum4D[getNumberOfSecondaries()];
+  cmparticles = new momentum4D[getNumberOfSecondaries()];
+  particleIDs = new int[2];
+  particleIDs[0] = 14;
+  particleIDs[1] = 14;
 }
-Rppelastic::Rppelastic(AFitAlgorithm *kinFitIn, momentum4D p1, momentum4D p2):RbaseReaction(kinFitIn,2,2)
+Rppelastic::Rppelastic(AFitAlgorithm* kinFitIn, momentum4D p1, momentum4D p2)
+    : RbaseReaction(kinFitIn, 2, 2)
 {
-  fname="Rppelastic";
-  if(!Eparticles::IsInit())Eparticles::init();
-  numberOfParticles=2;
-  particles=new momentum4D[getNumberOfSecondaries()];
-  cmparticles=new momentum4D[getNumberOfSecondaries()];
+  fname = "Rppelastic";
+  if (!Eparticles::IsInit())
+    Eparticles::init();
+  numberOfParticles = 2;
+  particles = new momentum4D[getNumberOfSecondaries()];
+  cmparticles = new momentum4D[getNumberOfSecondaries()];
   momentum4D p[2];
-  p[0]=p1;
-  p[1]=p2;
-  particles[0].setPM(vector3D(0,0,0),Eparticles::getMass("proton"));
-  particles[1].setPM(vector3D(0,0,0),Eparticles::getMass("proton"));
-  setInitParticles(2,p);
-  particleIDs=new int[2];
-  particleIDs[0]=14;
-  particleIDs[1]=14;
+  p[0] = p1;
+  p[1] = p2;
+  particles[0].setPM(vector3D(0, 0, 0), Eparticles::getMass("proton"));
+  particles[1].setPM(vector3D(0, 0, 0), Eparticles::getMass("proton"));
+  setInitParticles(2, p);
+  particleIDs = new int[2];
+  particleIDs[0] = 14;
+  particleIDs[1] = 14;
 }
 
-Rppelastic::Rppelastic(const Rppelastic &rIn):RbaseReaction(rIn)
+Rppelastic::Rppelastic(const Rppelastic& rIn) : RbaseReaction(rIn)
 {
-  fname="Rppelastic";
-  if(!Eparticles::IsInit())Eparticles::init();
-  particles=new momentum4D[getNumberOfSecondaries()];
-  cmparticles=new momentum4D[getNumberOfSecondaries()];
+  fname = "Rppelastic";
+  if (!Eparticles::IsInit())
+    Eparticles::init();
+  particles = new momentum4D[getNumberOfSecondaries()];
+  cmparticles = new momentum4D[getNumberOfSecondaries()];
   momentum4D p[2];
-  p[0]=rIn.getInitParticle(0);
-  p[1]=rIn.getInitParticle(1);
-  setInitParticles(2,p);
-  particleIDs=new int[2];
-  particleIDs[0]=14;
-  particleIDs[1]=14;
-  GammaDifference=rIn.getGammaDifference();
-  CoplanarityDifference=rIn.getCoplanarityDifference();
+  p[0] = rIn.getInitParticle(0);
+  p[1] = rIn.getInitParticle(1);
+  setInitParticles(2, p);
+  particleIDs = new int[2];
+  particleIDs[0] = 14;
+  particleIDs[1] = 14;
+  GammaDifference = rIn.getGammaDifference();
+  CoplanarityDifference = rIn.getCoplanarityDifference();
 }
 
-Rppelastic::~Rppelastic()
-{
-  delete []cmparticles;
-}
+Rppelastic::~Rppelastic() { delete[] cmparticles; }
 
-int Rppelastic::getNumberOfPrimaries() const
-{
-  return 2;
-}
-int Rppelastic::getNumberOfSecondaries() const
-{
-  return 2;
-}
+int Rppelastic::getNumberOfPrimaries() const { return 2; }
+int Rppelastic::getNumberOfSecondaries() const { return 2; }
 // float Rppelastic::check(TTrack **tracksIn, int num)
 // {
 //   if(num<2) return -1;
@@ -286,9 +286,12 @@ int Rppelastic::getNumberOfSecondaries() const
 // // 	  momentum4D pI(0,0,0,0);
 // // 	  for(int i=0;i<numberOfInitParticles;i++)
 // // 	    pI=pI+initParticles[i];
-// 	  float pt= initParticles[0].Momentum().R()*tan(d1.Theta())*tan(d2.Theta())/(tan(d1.Theta())+tan(d2.Theta()));
-// 	  float pl1=initParticles[0].Momentum().R()*tan(d2.Theta())/(tan(d1.Theta())+tan(d2.Theta()));
-// 	  float pl2=initParticles[0].Momentum().R()*tan(d1.Theta())/(tan(d1.Theta())+tan(d2.Theta()));
+// 	  float pt=
+// initParticles[0].Momentum().R()*tan(d1.Theta())*tan(d2.Theta())/(tan(d1.Theta())+tan(d2.Theta()));
+// 	  float
+// pl1=initParticles[0].Momentum().R()*tan(d2.Theta())/(tan(d1.Theta())+tan(d2.Theta()));
+// 	  float
+// pl2=initParticles[0].Momentum().R()*tan(d1.Theta())/(tan(d1.Theta())+tan(d2.Theta()));
 // 	  float p1=sqrt(pt*pt+pl1*pl1);
 // 	  float p2=sqrt(pt*pt+pl2*pl2);
 
@@ -303,12 +306,18 @@ int Rppelastic::getNumberOfSecondaries() const
 //       chi2=ret;
 //       setTrack(0,tracksIn[index[0]]);
 //       setTrack(1,tracksIn[index[1]]);
-// //       histo.Fill(particles[0].Velocity().length(),tracksIn[com1[best]]->getSpeed());
-// //       histo.Fill(particles[1].Velocity().length(),tracksIn[com2[best]]->getSpeed());
-// //       referenceThB.Fill(particles[0].Momentum().Theta()*108/M_PI,particles[0].Velocity().length());
-// //       ThB.Fill(particles[0].Momentum().Theta()*108/M_PI,tracksIn[com1[best]]->getSpeed());
-// //       referenceThB.Fill(particles[1].Momentum().Theta()*108/M_PI,particles[1].Velocity().length());
-// //       ThB.Fill(particles[1].Momentum().Theta()*108/M_PI,tracksIn[com2[best]]->getSpeed());
+// //
+// histo.Fill(particles[0].Velocity().length(),tracksIn[com1[best]]->getSpeed());
+// //
+// histo.Fill(particles[1].Velocity().length(),tracksIn[com2[best]]->getSpeed());
+// //
+// referenceThB.Fill(particles[0].Momentum().Theta()*108/M_PI,particles[0].Velocity().length());
+// //
+// ThB.Fill(particles[0].Momentum().Theta()*108/M_PI,tracksIn[com1[best]]->getSpeed());
+// //
+// referenceThB.Fill(particles[1].Momentum().Theta()*108/M_PI,particles[1].Velocity().length());
+// //
+// ThB.Fill(particles[1].Momentum().Theta()*108/M_PI,tracksIn[com2[best]]->getSpeed());
 // //       if(tracksIn[com1[best]]->getNumberOfCalibHits(6)==0)
 // // 	fillRingHisto(tracksIn[com1[best]], particles[0].Velocity().length());
 // //       else
@@ -321,7 +330,8 @@ int Rppelastic::getNumberOfSecondaries() const
 //     }
 //   return ret;
 // }
-// float Rppelastic::justCheck(TTrack **tracksIn, int num, int *indexes, momentum4D *results)
+// float Rppelastic::justCheck(TTrack **tracksIn, int num, int *indexes,
+// momentum4D *results)
 // {
 //   if(num<2) return 10000;
 //   double gamma2=(1-cm.Beta()*cm.Beta());
@@ -386,9 +396,11 @@ int Rppelastic::getNumberOfSecondaries() const
 // 	  phid=fabs(phid-M_PI);
 // 	  theta1=acos(dirs[pris[i]]*z/z.R()/dirs[pris[i]].R());
 // 	  theta2=acos(dirs[pris[j]]*z/z.R()/dirs[pris[j]].R());
-// 	  //	  cout<<phid<<" "<<fabs(tan(theta1)*tan(theta2)-gamma2)<<" "<<endl;
-// 	  //	  cout<<"\t"<<gamma2<<" "<<tan(theta1)*tan(theta2)<<" "<<fabs(tan(theta1)*tan(theta2)-gamma2)<<" "<<phid<<endl;
-// 	  if(	  
+// 	  //	  cout<<phid<<" "<<fabs(tan(theta1)*tan(theta2)-gamma2)<<"
+// "<<endl;
+// 	  //	  cout<<"\t"<<gamma2<<" "<<tan(theta1)*tan(theta2)<<"
+// "<<fabs(tan(theta1)*tan(theta2)-gamma2)<<" "<<phid<<endl;
+// 	  if(
 // 	 //coplanarity
 // 	     (phid>CoplanarityDifference)
 //          //within detector ranges
@@ -401,12 +413,13 @@ int Rppelastic::getNumberOfSecondaries() const
 // 	     )continue;
 // 	  if(!useTiming)
 // 	    {
-// 	      pt= initParticles[0].Momentum().R()*tan(dirs[pris[i]].Theta())*tan(dirs[pris[j]].Theta())/(tan(dirs[pris[i]].Theta())+tan(dirs[pris[j]].Theta()));
+// 	      pt=
+// initParticles[0].Momentum().R()*tan(dirs[pris[i]].Theta())*tan(dirs[pris[j]].Theta())/(tan(dirs[pris[i]].Theta())+tan(dirs[pris[j]].Theta()));
 // 	      pl2=initParticles[0].Momentum().R()*tan(dirs[pris[i]].Theta())/(tan(dirs[pris[i]].Theta())+tan(dirs[pris[j]].Theta()));
 // 	      pl1=initParticles[0].Momentum().R()*tan(dirs[pris[j]].Theta())/(tan(dirs[pris[i]].Theta())+tan(dirs[pris[j]].Theta()));
 // 	      px1=sqrt(pt*pt+pl1*pl1);
 // 	      px2=sqrt(pt*pt+pl2*pl2);
-	      
+
 // 	      p1.setPM(dirs[pris[i]]*px1,mass);
 // 	      p2.setPM(dirs[pris[j]]*px2,mass);
 // 	    }
@@ -460,7 +473,8 @@ int Rppelastic::getNumberOfSecondaries() const
 //     {
 //       return NULL;
 //     }
-//   RbaseReaction *ret=new Rppelastic(fkinFit,initParticles[0],initParticles[1]);
+//   RbaseReaction *ret=new
+//   Rppelastic(fkinFit,initParticles[0],initParticles[1]);
 //   ret->setChiLimit(chiLimit);
 //   ((Rppelastic*)ret)->setGammaDifference(GammaDifference);
 //   ((Rppelastic*)ret)->setCoplanarityDifference(CoplanarityDifference);
@@ -490,133 +504,132 @@ int Rppelastic::getNumberOfSecondaries() const
 //   return ret;
 // }
 
-void Rppelastic::setInitParticles(int num, momentum4D *p)
+void Rppelastic::setInitParticles(int num, momentum4D* p)
 {
-  RbaseReaction::setInitParticles(num,p);
-  excessEnergy=cm.Energy()-2*Eparticles::getMass("proton");
-  useTiming=false;
+  RbaseReaction::setInitParticles(num, p);
+  excessEnergy = cm.Energy() - 2 * Eparticles::getMass("proton");
+  useTiming = false;
 }
 RbaseReaction* Rppelastic::getClone()
 {
-  RbaseReaction *ret=new Rppelastic(fkinFit,initParticles[0],initParticles[1]);
+  RbaseReaction* ret = new Rppelastic(fkinFit, initParticles[0], initParticles[1]);
   ret->setChiLimit(chiLimit);
   ((Rppelastic*)ret)->setGammaDifference(GammaDifference);
   ((Rppelastic*)ret)->setCoplanarityDifference(CoplanarityDifference);
-  return ret;//new Rppelastic(*this);
+  return ret; // new Rppelastic(*this);
 }
-void Rppelastic::setCoplanarityDifference(float val)
-{
-  CoplanarityDifference=val;
-}
-void Rppelastic::setGammaDifference(float val)
-{
-  GammaDifference=val;
-}
-float Rppelastic::getCoplanarityDifference()const
-{
-  return CoplanarityDifference;
-}
-float Rppelastic::getGammaDifference()const
-{
-  return GammaDifference;
-}
+void Rppelastic::setCoplanarityDifference(float val) { CoplanarityDifference = val; }
+void Rppelastic::setGammaDifference(float val) { GammaDifference = val; }
+float Rppelastic::getCoplanarityDifference() const { return CoplanarityDifference; }
+float Rppelastic::getGammaDifference() const { return GammaDifference; }
 void Rppelastic::calculate(int justGeometry)
 {
-  if(tracks[0]==NULL||tracks[1]==NULL)return;
-  switch(justGeometry)
-    {
-    case 0:
-      {
-	momentum4D p1,p2;
-	TTrack *tr=((TTrack*)tracks[0]);
-	p1.setVM(tr->getPath().Direction()*tr->getSpeed(),Eparticles::getMassG(particleIDs[0]));
-	tr=((TTrack*)tracks[1]);
-	p2.setVM(tr->getPath().Direction()*tr->getSpeed(),Eparticles::getMassG(particleIDs[1]));
-	particles[0]=p1;
-	particles[1]=p2;
-	calculateCM();
-	break;
-      }
-    case 1:
-      {
-	vector3D dir1=((TTrack*)tracks[0])->getPath().Direction(),
-	  dir2=((TTrack*)tracks[1])->getPath().Direction();
-	float y1=tan(dir1.Theta())*cos(dir1.Phi());
-	float x1=tan(dir1.Theta())*sin(dir1.Phi());
-	float y2=tan(dir2.Theta())*cos(dir2.Phi());
-	float x2=tan(dir2.Theta())*sin(dir2.Phi());
+  if (tracks[0] == NULL || tracks[1] == NULL)
+    return;
+  switch (justGeometry) {
+  case 0: {
+    momentum4D p1, p2;
+    TTrack* tr = ((TTrack*)tracks[0]);
+    p1.setVM(tr->getPath().Direction() * tr->getSpeed(), Eparticles::getMassG(particleIDs[0]));
+    tr = ((TTrack*)tracks[1]);
+    p2.setVM(tr->getPath().Direction() * tr->getSpeed(), Eparticles::getMassG(particleIDs[1]));
+    particles[0] = p1;
+    particles[1] = p2;
+    calculateCM();
+    break;
+  }
+  case 1: {
+    vector3D dir1 = ((TTrack *)tracks[0])->getPath().Direction(),
+             dir2 = ((TTrack *)tracks[1])->getPath().Direction();
+    float y1 = tan(dir1.Theta()) * cos(dir1.Phi());
+    float x1 = tan(dir1.Theta()) * sin(dir1.Phi());
+    float y2 = tan(dir2.Theta()) * cos(dir2.Phi());
+    float x2 = tan(dir2.Theta()) * sin(dir2.Phi());
 
-	float r1=sqrt(x1*x1+y1*y1);
-	float r2=sqrt(x2*x2+y2*y2);
-	    
-	float pt= initParticles[0].Momentum().R()*r1*r2/(r1+r2);
-	float pl1=initParticles[0].Momentum().R()*r2/(r1+r2);
-	float pl2=initParticles[0].Momentum().R()*r1/(r1+r2);
-	float p1=sqrt(pt*pt+pl1*pl1);
-	float p2=sqrt(pt*pt+pl2*pl2);
-	particles[0].setPM(dir1*p1,Eparticles::getMassG(particleIDs[0]));
-	particles[1].setPM(dir2*p2,Eparticles::getMassG(particleIDs[1]));
-	calculateCM();
-	break;
-      }
-    }
+    float r1 = sqrt(x1 * x1 + y1 * y1);
+    float r2 = sqrt(x2 * x2 + y2 * y2);
+
+    float pt = initParticles[0].Momentum().R() * r1 * r2 / (r1 + r2);
+    float pl1 = initParticles[0].Momentum().R() * r2 / (r1 + r2);
+    float pl2 = initParticles[0].Momentum().R() * r1 / (r1 + r2);
+    float p1 = sqrt(pt * pt + pl1 * pl1);
+    float p2 = sqrt(pt * pt + pl2 * pl2);
+    particles[0].setPM(dir1 * p1, Eparticles::getMassG(particleIDs[0]));
+    particles[1].setPM(dir2 * p2, Eparticles::getMassG(particleIDs[1]));
+    calculateCM();
+    break;
+  }
+  }
 }
-float Rppelastic::check(TTrack **tracks_nd, int num_nd, TTrack **tracks_1s, int num_1s, TTrack **tracks_2s, int num_2s)
+float Rppelastic::check(TTrack** tracks_nd, int num_nd, TTrack** tracks_1s, int num_1s,
+                        TTrack** tracks_2s, int num_2s)
 {
-  if(num_nd==0)return chi2;
-  if(tracks_nd==NULL)return chi2;
+  if (num_nd == 0)
+    return chi2;
+  if (tracks_nd == NULL)
+    return chi2;
   int index[2];
-  float chi=justCheck(tracks_nd, num_nd, tracks_1s, num_1s, tracks_2s, num_2s, index,NULL);
-  for(int i=0;i<2;i++)
-    {
-      if(index[i]<0)return chi2;
-      if(index[i]<num_nd)
-	setTrack(i,tracks_nd[index[i]]);
-      else if(index[i]<num_nd+num_1s)
-	setTrack(i,tracks_1s[index[i]-num_nd]);
-      else if(index[i]<num_nd+num_1s+num_2s)
-	setTrack(i,tracks_2s[index[i]-num_nd-num_1s]);
-      else return chi2;
-    }
-  chi2=chi;
-  if(chi>chiLimit) return chi2;
+  float chi = justCheck(tracks_nd, num_nd, tracks_1s, num_1s, tracks_2s, num_2s, index, NULL);
+  for (int i = 0; i < 2; i++) {
+    if (index[i] < 0)
+      return chi2;
+    if (index[i] < num_nd)
+      setTrack(i, tracks_nd[index[i]]);
+    else if (index[i] < num_nd + num_1s)
+      setTrack(i, tracks_1s[index[i] - num_nd]);
+    else if (index[i] < num_nd + num_1s + num_2s)
+      setTrack(i, tracks_2s[index[i] - num_nd - num_1s]);
+    else
+      return chi2;
+  }
+  chi2 = chi;
+  if (chi > chiLimit)
+    return chi2;
   calculate(true);
   return chi2;
 }
-float Rppelastic::justCheck(TTrack **tracks_nd, int num_nd, TTrack **tracks_1s, int num_1s, TTrack **tracks_2s, int num_2s, int *indexes, momentum4D *results)
+float Rppelastic::justCheck(TTrack** tracks_nd, int num_nd, TTrack** tracks_1s, int num_1s,
+                            TTrack** tracks_2s, int num_2s, int* indexes, momentum4D* results)
 {
-  if(num_nd<2) return 1e+5;
-  if(tracks_nd==NULL)return 1e+5;
-  chi2=1e+5;
-  if(num_1s==num_2s)chi2=1e+5;
-  if(tracks_1s==NULL||tracks_2s==NULL)chi2=1e+5;
-  double gamma2=(1-cm.Beta()*cm.Beta());
-  int nPri=0;
+  if (num_nd < 2)
+    return 1e+5;
+  if (tracks_nd == NULL)
+    return 1e+5;
+  chi2 = 1e+5;
+  if (num_1s == num_2s)
+    chi2 = 1e+5;
+  if (tracks_1s == NULL || tracks_2s == NULL)
+    chi2 = 1e+5;
+  double gamma2 = (1 - cm.Beta() * cm.Beta());
+  int nPri = 0;
   float speeds[num_nd];
   vector3D dirs[num_nd];
   int pris[num_nd];
-  float chis[num_nd*num_nd];
-  for(int i=0;i<num_nd*num_nd;i++)chis[i]=1e+5;
-  for(int i=0;i<num_nd;i++)
-    {
-      if(tracks_nd[i]==NULL)continue;
-      if(tracks_nd[i]->isSecondary()
-	 ||tracks_nd[i]->getCharge()==0
-	 ||tracks_nd[i]->getNumberOfSecondaryTracks()>0)continue;
-      pris[nPri++]=i;
-      speeds[i]=tracks_nd[i]->getSpeed();
-      dirs[i]=tracks_nd[i]->getPath().Direction();
-      dirs[i].normalize();
-      dirs[i].setRep(_spheric_);
-      if(speeds[i]>=0.98)speeds[i]=0.98;
-    }
-  if(nPri<2)return 1e+5;
-  momentum4D p1,p2,p12,pI,pR;
-  pI=initParticles[0]+initParticles[1];
+  float chis[num_nd * num_nd];
+  for (int i = 0; i < num_nd * num_nd; i++)
+    chis[i] = 1e+5;
+  for (int i = 0; i < num_nd; i++) {
+    if (tracks_nd[i] == NULL)
+      continue;
+    if (tracks_nd[i]->isSecondary() || tracks_nd[i]->getCharge() == 0 ||
+        tracks_nd[i]->getNumberOfSecondaryTracks() > 0)
+      continue;
+    pris[nPri++] = i;
+    speeds[i] = tracks_nd[i]->getSpeed();
+    dirs[i] = tracks_nd[i]->getPath().Direction();
+    dirs[i].normalize();
+    dirs[i].setRep(_spheric_);
+    if (speeds[i] >= 0.98)
+      speeds[i] = 0.98;
+  }
+  if (nPri < 2)
+    return 1e+5;
+  momentum4D p1, p2, p12, pI, pR;
+  pI = initParticles[0] + initParticles[1];
   vector3D dir;
-  float mass=Eparticles::getMass("proton");
-  double theta1,theta2;
-  vector3D z=pI.Momentum(),dp1,dp2;
+  float mass = Eparticles::getMass("proton");
+  double theta1, theta2;
+  vector3D z = pI.Momentum(), dp1, dp2;
   dp1.setRep(_cylindric_);
   dp2.setRep(_cylindric_);
   z.normalize();
@@ -625,78 +638,73 @@ float Rppelastic::justCheck(TTrack **tracks_nd, int num_nd, TTrack **tracks_1s, 
   float pl2;
   float px1;
   float px2;
-  for(int i=0;i<nPri;i++)
-    {
-      for(int j=i+1;j<nPri;j++)
-	{
-	  chis[i*nPri+j]=10000;
-	  if(i==j)continue;
-	  dp1=dirs[pris[i]]-z*(dirs[pris[i]]*z);
-	  dp2=dirs[pris[j]]-z*(dirs[pris[j]]*z);
-	  double phid=acos((dp1*dp2)/dp1.R()/dp2.R());
-	  phid=fabs(phid-M_PI);
-	  theta1=acos(dirs[pris[i]]*z/z.R()/dirs[pris[i]].R());
-	  theta2=acos(dirs[pris[j]]*z/z.R()/dirs[pris[j]].R());
-	  if(	  
-	 //coplanarity
-	     (phid>CoplanarityDifference)
-         //within detector ranges
-	     ||theta1>M_PI/3.0
-	     ||theta2>M_PI/3.0
-	     ||theta1<0.17
-	     ||theta2<0.17
-	 //elastics condition
-	     ||fabs(tan(theta1)*tan(theta2)-gamma2)>GammaDifference
-	     )continue;
-	  if(!useTiming)
-	    {
-	      pt=initParticles[0].Momentum().R()*tan(theta1)*tan(theta2)/(tan(theta1)+tan(theta2));
-	      pl2=initParticles[0].Momentum().R()*tan(theta1)/(tan(theta2)+tan(theta1));
-	      pl1=initParticles[0].Momentum().R()*tan(theta2)/(tan(theta1)+tan(theta2));
-	      px1=sqrt(pt*pt+pl1*pl1);
-	      px2=sqrt(pt*pt+pl2*pl2);
-	      
-	      p1.setPM(dirs[pris[i]]*px1,mass);
-	      p2.setPM(dirs[pris[j]]*px2,mass);
-	    }
-	  else
-	    {
-	      p1.setVM(dirs[pris[i]]*speeds[pris[i]],mass);
-	      p2.setVM(dirs[pris[j]]*speeds[pris[j]],mass);
-	    }
-	  p12=p1+p2;
-	  pR=pI-p12;
-	  chis[i*nPri+j]=fabs(tan(theta1)*tan(theta2)-gamma2);//(fabs(pR*pR));
-	}
+  for (int i = 0; i < nPri; i++) {
+    for (int j = i + 1; j < nPri; j++) {
+      chis[i * nPri + j] = 10000;
+      if (i == j)
+        continue;
+      dp1 = dirs[pris[i]] - z * (dirs[pris[i]] * z);
+      dp2 = dirs[pris[j]] - z * (dirs[pris[j]] * z);
+      double phid = acos((dp1 * dp2) / dp1.R() / dp2.R());
+      phid = fabs(phid - M_PI);
+      theta1 = acos(dirs[pris[i]] * z / z.R() / dirs[pris[i]].R());
+      theta2 = acos(dirs[pris[j]] * z / z.R() / dirs[pris[j]].R());
+      if (
+          // coplanarity
+          (phid > CoplanarityDifference)
+          // within detector ranges
+          || theta1 > M_PI / 3.0 || theta2 > M_PI / 3.0 || theta1 < 0.17 || theta2 < 0.17
+          // elastics condition
+          || fabs(tan(theta1) * tan(theta2) - gamma2) > GammaDifference)
+        continue;
+      if (!useTiming) {
+        pt = initParticles[0].Momentum().R() * tan(theta1) * tan(theta2) /
+             (tan(theta1) + tan(theta2));
+        pl2 = initParticles[0].Momentum().R() * tan(theta1) / (tan(theta2) + tan(theta1));
+        pl1 = initParticles[0].Momentum().R() * tan(theta2) / (tan(theta1) + tan(theta2));
+        px1 = sqrt(pt * pt + pl1 * pl1);
+        px2 = sqrt(pt * pt + pl2 * pl2);
+
+        p1.setPM(dirs[pris[i]] * px1, mass);
+        p2.setPM(dirs[pris[j]] * px2, mass);
+      } else {
+        p1.setVM(dirs[pris[i]] * speeds[pris[i]], mass);
+        p2.setVM(dirs[pris[j]] * speeds[pris[j]], mass);
+      }
+      p12 = p1 + p2;
+      pR = pI - p12;
+      chis[i * nPri + j] = fabs(tan(theta1) * tan(theta2) - gamma2); //(fabs(pR*pR));
     }
-  int best=0;
-  for(int i=1;i<nPri*nPri;i++)
-    if(chis[i]<chis[best])
-      best=i;
-  float ret=chis[best];
-  if(indexes!=NULL)
-    {
-      indexes[0]=pris[best/nPri];
-      indexes[1]=pris[best%nPri];
-    }
-  if(results!=NULL)
-    {
-      //     results[0]=
-    }
+  }
+  int best = 0;
+  for (int i = 1; i < nPri * nPri; i++)
+    if (chis[i] < chis[best])
+      best = i;
+  float ret = chis[best];
+  if (indexes != NULL) {
+    indexes[0] = pris[best / nPri];
+    indexes[1] = pris[best % nPri];
+  }
+  if (results != NULL) {
+    //     results[0]=
+  }
   return ret;
 }
-RbaseReaction* Rppelastic::checkNew(TTrack **tracks_nd, int num_nd, TTrack **tracks_1s, int num_1s, TTrack **tracks_2s, int num_2s)
+RbaseReaction* Rppelastic::checkNew(TTrack** tracks_nd, int num_nd, TTrack** tracks_1s, int num_1s,
+                                    TTrack** tracks_2s, int num_2s)
 {
-  if(num_nd+num_1s+num_2s<2)return NULL;
-  if(tracks_nd==NULL&&tracks_1s==NULL&&tracks_2s==NULL)return NULL;
-  int index[2];
-  float chi=justCheck(tracks_nd, num_nd, tracks_1s, num_1s, tracks_2s, num_2s, index,NULL);
-  if(chi>getChiLimit()||chi<0)
+  if (num_nd + num_1s + num_2s < 2)
     return NULL;
-  RbaseReaction *ret=new Rppelastic(fkinFit,initParticles[0],initParticles[1]);
+  if (tracks_nd == NULL && tracks_1s == NULL && tracks_2s == NULL)
+    return NULL;
+  int index[2];
+  float chi = justCheck(tracks_nd, num_nd, tracks_1s, num_1s, tracks_2s, num_2s, index, NULL);
+  if (chi > getChiLimit() || chi < 0)
+    return NULL;
+  RbaseReaction* ret = new Rppelastic(fkinFit, initParticles[0], initParticles[1]);
   ret->setChiLimit(chiLimit);
   ((Rppelastic*)ret)->setGammaDifference(GammaDifference);
   ((Rppelastic*)ret)->setCoplanarityDifference(CoplanarityDifference);
-  ret->check(tracks_nd, num_nd, tracks_1s,num_1s, tracks_2s, num_2s);
+  ret->check(tracks_nd, num_nd, tracks_1s, num_1s, tracks_2s, num_2s);
   return ret;
 }

@@ -4,15 +4,15 @@
 #include <TH2.h>
 using namespace std;
 
-class ACompareToGIN:public AAlgorithm
+class ACompareToGIN : public AAlgorithm
 {
- private:
-  ifstream *input;
-  int &eventNumber;
-  TTrack **RecTracks;
+private:
+  ifstream* input;
+  int& eventNumber;
+  TTrack** RecTracks;
   const int maxTracks;
-  int &numberOfTracks;
-  TTrack **InTracks;
+  int& numberOfTracks;
+  TTrack** InTracks;
   int numberOfInTracks;
   string outFileName;
   int nHistos;
@@ -36,14 +36,16 @@ class ACompareToGIN:public AAlgorithm
   TH1F histoNotFoundD;
   bool valid;
   int numSepDet;
-  int *sepDets;
+  int* sepDets;
   float maxAngularDist;
   bool toCout;
- public:
-  ACompareToGIN(TTrack **tracksIn, int& numberOfTracksIn, int &eventNumberIn, int maxTracksIn, const algorithm_parameter &descr);
+
+public:
+  ACompareToGIN(TTrack** tracksIn, int& numberOfTracksIn, int& eventNumberIn, int maxTracksIn,
+                const algorithm_parameter& descr);
   virtual ~ACompareToGIN();
-  virtual void* process(void *ptr);
+  virtual void* process(void* ptr);
   static algorithm_parameter getDescription();
-  virtual vector<string>histogramNames();
+  virtual vector<string> histogramNames();
   virtual TH1* histogram(string histoName);
 };

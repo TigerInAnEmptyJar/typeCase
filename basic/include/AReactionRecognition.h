@@ -1,20 +1,21 @@
-#include "algorithm.h"
 #include "RbaseReaction.h"
+#include "algorithm.h"
 #include "event.h"
 #include "setup.h"
 
-class AReactionRecognition:public AAlgorithm
+class AReactionRecognition : public AAlgorithm
 {
- private:
+private:
   int numberOfReactions;
-  RbaseReaction **reactions;//!
-  TEvent &event;//!
-  TTrack **tracks;//!
-  int getReactions(TSetup& setup,string option);
-  AFitAlgorithm *kinfit;//!
- public:
-  AReactionRecognition(TSetup &setup,TEvent &eventIn,AFitAlgorithm *kinfitIn,string options);
-  AReactionRecognition(TSetup &setup,TEvent &eventIn,AFitAlgorithm *kinfitIn,vector<algorithm_parameter> processes);
+  RbaseReaction** reactions; //!
+  TEvent& event;             //!
+  TTrack** tracks;           //!
+  int getReactions(TSetup& setup, string option);
+  AFitAlgorithm* kinfit; //!
+public:
+  AReactionRecognition(TSetup& setup, TEvent& eventIn, AFitAlgorithm* kinfitIn, string options);
+  AReactionRecognition(TSetup& setup, TEvent& eventIn, AFitAlgorithm* kinfitIn,
+                       vector<algorithm_parameter> processes);
   virtual ~AReactionRecognition();
-  virtual void *process(void *ptr);
+  virtual void* process(void* ptr);
 };

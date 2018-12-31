@@ -1,17 +1,17 @@
 #ifndef RAWHIT
-#define RAWHIT 
+#define RAWHIT
 #include <iostream>
 using namespace std;
 #include "TBase.h"
-class TRawHit:public TBase
+class TRawHit : public TBase
 {
- private:
+private:
   int adc;
   int tdc;
   int detNum;
   int elNum;
   bool defined; //!
- public:
+public:
   TRawHit();
   TRawHit(int detector, int element, int ADC, int TDC);
   ~TRawHit();
@@ -29,6 +29,6 @@ class TRawHit:public TBase
   int& getElementr();
   bool isDefined();
 };
-ostream &operator <<(ostream &o, const TRawHit &r); 
+ostream& operator<<(ostream& o, const TRawHit& r);
 
 #endif

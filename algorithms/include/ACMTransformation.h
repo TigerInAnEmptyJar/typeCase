@@ -1,24 +1,24 @@
 #include "algorithm.h"
 #include "container.h"
-#include <TTree.h>
 #include <TFile.h>
-#include <TList.h>
 #include <TH1.h>
+#include <TList.h>
+#include <TTree.h>
 
-class ACMTransformation:public AAlgorithm
+class ACMTransformation : public AAlgorithm
 {
- private:
+private:
   momentum4D inParticle1;
   momentum4D inParticle2;
   const int maxOutParticles;
-  int &numOutParticles;//!
-  momentum4D **outParticles;//!
+  int& numOutParticles;      //!
+  momentum4D** outParticles; //!
   momentum4D CM;
-  momentum4D *transformedOutParticles;//!
-  TTree *outTree;
-  TDirectory **rootDirectory;//!
-  int &eventNr,&runNr;
-  TList *particleList;
+  momentum4D* transformedOutParticles; //!
+  TTree* outTree;
+  TDirectory** rootDirectory; //!
+  int &eventNr, &runNr;
+  TList* particleList;
   int reactionType;
   float angleCM1;
   float angleCM2;
@@ -32,9 +32,10 @@ class ACMTransformation:public AAlgorithm
   double M;
   double gamma;
   int numHistos;
-  TH1 **histos;//!
- public:
-  ACMTransformation(TSetup &setup, momentum4D **particles, int maxPart, int &numPart,TDirectory **rootfile, int&evNr,int&runNrIn);
+  TH1** histos; //!
+public:
+  ACMTransformation(TSetup& setup, momentum4D** particles, int maxPart, int& numPart,
+                    TDirectory** rootfile, int& evNr, int& runNrIn);
   virtual ~ACMTransformation();
-  virtual void *process(void*ptr);
+  virtual void* process(void* ptr);
 };

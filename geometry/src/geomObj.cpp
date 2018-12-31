@@ -12,7 +12,7 @@
 // {
 // }
 
-// geomState geomObject::getState()const 
+// geomState geomObject::getState()const
 // {
 //     return status;
 // }
@@ -37,15 +37,18 @@
 //     status = _regular_;
 // }
 //#ifdef USEQT
-string geomObject::toString()const
+string geomObject::toString() const
 {
-  switch(status)
-    {
-    case _regular_:return string("(regular)");
-    case _undefined_:return string("(undefined)");
-    case _infinite_:return string("(infinite)");
-    case _zero_:return string("(zero)");
-    }
+  switch (status) {
+  case _regular_:
+    return string("(regular)");
+  case _undefined_:
+    return string("(undefined)");
+  case _infinite_:
+    return string("(infinite)");
+  case _zero_:
+    return string("(zero)");
+  }
   return string("(undefined)");
 }
 //#endif

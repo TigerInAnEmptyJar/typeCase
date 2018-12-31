@@ -1,8 +1,8 @@
 #ifndef CONTAINER
 #define CONTAINER
-#include "setup.h"
-#include "event.h"
 #include "cluster.h"
+#include "event.h"
 #include "hitCluster.h"
+#include "setup.h"
 #include "track.h"
 #endif

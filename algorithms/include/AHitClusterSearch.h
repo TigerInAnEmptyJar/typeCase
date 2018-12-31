@@ -4,20 +4,22 @@
 
 using namespace std;
 
-class AHitClusterSearch: public AAlgorithm
+class AHitClusterSearch : public AAlgorithm
 {
- private:
-  int **nClusters;//!
-  int **nHits;//!
-  TCalibHit*** hits;//!
-  THitCluster ***clusters;//!
-  TSetup &setup;//!
-  bool *circular;//[numDets]
-  int *nEl;//[numDets]
+private:
+  int** nClusters;         //!
+  int** nHits;             //!
+  TCalibHit*** hits;       //!
+  THitCluster*** clusters; //!
+  TSetup& setup;           //!
+  bool* circular;          //[numDets]
+  int* nEl;                //[numDets]
   int numDets;
- public:
-  AHitClusterSearch(TSetup& setupIn, THitCluster ***clustersIn, int **numberOfCluster, TCalibHit*** hitsIn, int** numberOfHits, const algorithm_parameter& ap);
+
+public:
+  AHitClusterSearch(TSetup& setupIn, THitCluster*** clustersIn, int** numberOfCluster,
+                    TCalibHit*** hitsIn, int** numberOfHits, const algorithm_parameter& ap);
   virtual ~AHitClusterSearch();
-  virtual void *process(void *ptr);
+  virtual void* process(void* ptr);
   static algorithm_parameter getDescription();
 };
