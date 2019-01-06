@@ -3,6 +3,9 @@
 #include "event.h"
 #include "setup.h"
 
+/*!
+ * \brief The AReactionRecognition class
+ */
 class AReactionRecognition : public AAlgorithm
 {
 private:
@@ -13,9 +16,34 @@ private:
   int getReactions(TSetup& setup, string option);
   AFitAlgorithm* kinfit; //!
 public:
+  /*!
+   * \brief AReactionRecognition
+   * \param setup
+   * \param eventIn
+   * \param kinfitIn
+   * \param options
+   */
   AReactionRecognition(TSetup& setup, TEvent& eventIn, AFitAlgorithm* kinfitIn, string options);
+
+  /*!
+   * \brief AReactionRecognition
+   * \param setup
+   * \param eventIn
+   * \param kinfitIn
+   * \param processes
+   */
   AReactionRecognition(TSetup& setup, TEvent& eventIn, AFitAlgorithm* kinfitIn,
                        vector<algorithm_parameter> processes);
+
+  /*!
+   * \brief ~AReactionRecognition
+   */
   virtual ~AReactionRecognition();
+
+  /*!
+   * \brief process
+   * \param ptr
+   * \return
+   */
   virtual void* process(void* ptr);
 };

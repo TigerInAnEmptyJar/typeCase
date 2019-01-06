@@ -6,6 +6,9 @@ using namespace std;
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+//!
+//! \brief Manipulators for the logger stream class.
+//!
 class logMan
 {
   int id;
@@ -18,6 +21,9 @@ public:
   int getTer() const;
 };
 
+//!
+//! \brief A loggin stream like class
+//!
 class logger : public QObject
 {
   Q_OBJECT

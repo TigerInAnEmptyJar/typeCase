@@ -1,0 +1,154 @@
+/*!
+\page typecase-main The TypeCase Analysis Package
+The typeCase analysis package is a versatile analysis tool for the use in nuclear physics.
+It can analyse all event based data from any detector-system. Its main features are
+
+- Flexibility both in detector-setup and analysis-method
+- Low divergency
+- Easy to use
+- Easy to adapt
+- Easy to extend
+
+To meet these points a simple frame-work was defined separating the data from the
+generation algorithms. The algorithms are allocated dynamically according to description
+passed to the main analysis tool. Also the detector-setup is defined just prior to the
+analysis by loading detector descriptions from file. Composed objects like pixel, cluster,
+tracks are generated using the algorithms. Data-IO is possible at any position/stage of
+the analysis. Event pattern can be separately written, reaction-recognition performed.
+
+To make the program very easy to use and even useful in some online analysis, a Graphical
+User Interface was designed helping the user to define the necessary parameters, like
+setup, shapes, materials, data-basis, calibration, algorithms, etc.
+Also extension of the current frame-work is made easy using the install-wizards for
+algorithms and shapes.
+For the more advanced user there is also the possibility to use a version of the
+analysis-program in a command-line-version without any graphics poping up.
+See the documentation of the classes of the frame-work and the description of the
+individual widgets for \ref typecase-gui.
+
+\page typecase-gui The typeCase analysis package: Graphical User Interface
+The typeCase analysis package comes with two different main executables -not counting the
+utility programs and scripts. Both use the main analysis-class tofAnalysis, but the way
+the user can interact is different.
+
+While the command-line-program requests files and other options as command-line-parameters
+to control the behaviour of the analysis, the graphical version of typeCase works without
+command-line-parameters but displays the available parameter of the analysis. The
+parameter can be loaded, viewed, modified and saved to file to prepare an online analysis
+or to prepare the files for the command-line-program that has a little advantage when it
+comes to speed.
+
+Most of the widgets for typeCase are to display and modify the analysis-parameter. The
+exception make the main widget, controling the file-IO for the parameter and make the
+currently loaded set of parameters available for viewing, the install-wizards, the
+interface to the meta-code classes, that are able to insert new components into the
+analysis package, and the analysis-widget, that controls the actual analysis.
+
+\page typecase-geometry typeCase: geometry package
+The geometry package is the most basic part of the typeCase analysis framework. It
+implements such useful things as 2- and 3-dimensional points and vectors, straight
+lines both in 2D and 3D, connections between 2D- and 3D-points, a plane and a rotation
+matrix in 3D-space.
+
+For the use in physics 4D (better (3+1)D) points and vectors have been implemented peaking
+in momentum4D a full 4D-lorentzian momentum vector with many useful methods and
+properties.
+In this course the static class Eparticles has been added, providing the user with
+particle masses, -lifetimes and -charges.
+
+Stepping away from the restricted geometry part classes for use in linear algebra have
+been implemented: points, vectors and matrices have been defined in a general way not
+restricting the dimension of the space the object is located in.
+
+The development of this package was not planed a priori. The plan was to use the classes
+defined in the root-framework to have well tested and reliable data structures.
+Unfortunately this proved to be wrong. The definition of the geometrical root classes was
+troubling and important methods were not visible outside the class definition.
+Additionally many operators have been implemented only recently, so in the later versions,
+that were the base to the typeCase analysis-framework, these operators were not present.
+But the most important reason for the redefinition of the matriy classes was the problem
+of the memory management implemented in the root-framework. Initially well meant, the
+reimplementation of memory-management led to unspecified behaviour of the used components.
+
+The geometry package is only based on standard C++ libraries. No further installation of
+other packages is necessary to compile and use the geometry package. It can be used as
+stand-alone package if desired, but it is the base to the other parts of the
+typeCase-analysis-framework.
+
+\page typecase-parameter typeCase: parameter package
+The parameter package defines the necessary parameters for the definition of an analysis
+of data with the typeCase analysis-framework.
+All parameters define a name and a description, to motivate the developper and later the
+user to provide descriptions of the data they define. This makes it easier to keep track
+of ones data and of the available data-structures and processes. Therefore the basic
+parameter defines exactly a name and a description.
+
+single_parameter as template class attaches a name to a value.
+
+To define a material, a detector or dead material can be made of, the material_parameter
+has been defined. This is for example density, radiation length, speed of light in
+material and element decomposition. For the use of the last point, element_parameter
+have been inplemented, handling one element (name, mass, charge and weight).
+
+Geometrical shapes is an important issue, here defined as shape_parameter, handling an
+undefined number of strings, 3D-points, 3D-vectors, integers and floating-point-values,
+that define a specific type of shape as well as a single definite shape.
+
+A complete detector can be defined using detector_parameter, that contains a pointer to
+a material, the shape of the first element of the detector, the number of elements in
+that detector layer and a value specifying the way the other elements' geometries are
+generated out of the first one.
+
+reaction_parameter contains the part of the experimental setup that is not covered by
+the detectors: the beam(s) and the target. Both have a material the target has a volume
+as shape and the beam(s) has a momentum.
+
+The beamTime_parameter class contains the information on one beamTime, including
+calibration (files) and setup(file). The single data-run, having a beamTime as parent
+can define an own calibration file set or an additional one using together with the
+beamTime calibration. Also a different setup(file) can be defined. Additionally
+data-files (with type-specificatio) and start- and stop-time for the recording of the
+data.
+
+the paint_parameter has been implemented to handle the painting properties of the
+detectors, pixels and tracks, when drawn to a root-canvas (see eventPainter).
+
+For file-IO the static class parameterManager has been implemented managing the
+ascii-file-IO of the different parameter-types including different file versions for
+them.
+
+The parameter part of the typeCase analysis framework depends on the geometry-part of
+the framework and on standard C++ libraries. Neigther Qt nor root is needed at this
+point.
+
+\page typecase-shapes typeCase: shape package
+The shape package is an extension of the geometry-part of the typeCase analysis-framework.
+The shapes defined here are located in 3-dimensional space. There exist two different
+types of shapes: the planar shapes, cut out of a plane in 3D-space that can be used as
+geometrical representations of pixels in a given more-layered detector and the volume
+shapes, that model the volume of detectors and their elements.
+
+For the volumes it is of interest, what happens when a straight line (perhaps in later
+versions also curved lines) hits this volume. The hit point can be retrieved via
+entrance(), the normal-vector of the surface in the entrance-point is given by Normal();
+distance() provides the distance-vector from the line to the shape and Hitting() returns
+that all at once. Leaves me to mention getFilghtPathInShape() which returns the distance
+from entrance to exit point.
+It is possible to generate out of the element with number zero the envelope of the
+detector or any other element in the detector layer (getNext() and getEnvelope()). The
+method suspect() combines this property with the line-intersection-calculation: it
+generates the element number of the potential element (if this element has number zero)
+that could be hit by the line.
+
+The planar shapes also define a distance method returning the distance from a straight
+line or a plane to the shape, as well as an area and a circumscribedRadius to retrieve
+the size of the shape.
+
+All shapes come with a draw()-function that draws the shape to a root-Canvas.
+
+The shape package depends on the geometry- and the parameter part of the
+typeCase-framework. It is the first part of the typeCase analysis framework, that
+requires an additional external library for complete functionality. Since it uses root
+classes for drawing (eg. TPolyLine), the package only works if a root distribution is
+present on the current system.
+*/

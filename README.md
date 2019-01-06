@@ -43,6 +43,15 @@ is sad but simple: I'm using Qt5 to compile, but the UI still needs Qt3.
 I think, I'll leave that until I rework the UI (which I will most probably
 do with qml).
 
+An intermediate step is to run clang-format on the code to have an uniform
+coding style.
+
+Next is to exchange that documentation thingy with doxygen. I don't think
+that I ever suffered under the not-invented-here-syndrome, but obviously I
+wasn't aware of doxygen at that time.
+
+Since now all cosmetics are done, it is time to start real refactoring.
+
 Try it, if you like. Prerequisites are:
 
 * gcc-4.8 (newer versions will lead to compiler errors; yes, the compilers
