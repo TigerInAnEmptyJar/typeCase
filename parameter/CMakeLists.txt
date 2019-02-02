@@ -33,4 +33,5 @@ target_include_directories(lib${PROJECT_NAME}
 target_link_libraries(lib${PROJECT_NAME}
     PUBLIC libgeometry
     PUBLIC Qt5::Core
+    PUBLIC Boost::uuid
 )

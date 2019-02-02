@@ -2,6 +2,7 @@
 #include "algorithmparameter.h"
 #include "beamtimeparameter.h"
 #include "logger.h"
+#include "planarShapes.h"
 #include "spiral.h"
 #include "wedge.h"
 #include <stdlib.h>

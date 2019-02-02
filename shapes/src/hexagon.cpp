@@ -1,5 +1,39 @@
-#include "planeShape.h"
+#include "planarShapes.h"
+#include "provideShapes.h"
 #include "shapeparameter.h"
+
+namespace {
+
+const boost::uuids::uuid hexagon_id = {{0x49, 0xde, 0xdb, 0xfa, 0x11, 0xeb, 0x11, 0xe9, 0xab, 0x14,
+                                        0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+struct ShapeProvider : public FactoryShapeProvider,
+                       public std::enable_shared_from_this<ShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    factory.addShapeToFactory(
+        hexagon::getDescription(), ShapeType::PlanarShape,
+        [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
+          return std::shared_ptr<planeShape>(new hexagon(
+              param.getParam<point3D>(0), param.getParam<point3D>(1), param.getParam<vector3D>(0)));
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(hexagon_id);
+  }
+  void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+};
+std::shared_ptr<ShapeProvider> prov = [] {
+  auto r = std::make_shared<ShapeProvider>();
+  r->install();
+  return r;
+}();
+}
+
 hexagon::hexagon(const planeShape& p) : planeShape("hexagon")
 {
   center = p.getCenter();
@@ -210,6 +244,7 @@ shape_parameter hexagon::description() const
 {
   shape_parameter sh;
   sh.setName("hexagon");
+  sh.setId(hexagon_id);
   sh.addParam<point3D>(center, "center");
   sh.addParam<point3D>(A_, "A");
   sh.addParam<vector3D>(normal, "normal");
@@ -220,6 +255,7 @@ shape_parameter hexagon::getDescription()
 {
   shape_parameter sh;
   sh.setName("hexagon");
+  sh.setId(hexagon_id);
   sh.addParam<point3D>(point3D(), "center");
   sh.addParam<point3D>(point3D(), "A");
   sh.addParam<vector3D>(vector3D(), "normal");

@@ -1,7 +1,176 @@
 #include "hexPrism.h"
-#include "planeShape.h"
+#include "planarShapes.h"
+#include "provideShapes.h"
 #include "shapeparameter.h"
+
 #include <stdlib.h>
+
+namespace {
+
+const boost::uuids::uuid hexPrism_id1 = {{0x10, 0xd9, 0x58, 0x58, 0x11, 0xdc, 0x11, 0xe9, 0xab,
+                                          0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+const boost::uuids::uuid hexPrism_id2 = {{0xa2, 0x0c, 0x6c, 0x70, 0x11, 0xdc, 0x11, 0xe9, 0xab,
+                                          0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+const boost::uuids::uuid hexPrism_id3 = {{0xe2, 0x71, 0x8b, 0x10, 0x11, 0xdc, 0x11, 0xe9, 0xab,
+                                          0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+auto calculateLine(size_t& currentLine, size_t currentLineSize, size_t remainingElements,
+                   size_t stacki) -> size_t
+{
+  if (remainingElements < currentLineSize) {
+    return remainingElements;
+  }
+  if (currentLine == stacki - 2) {
+    return calculateLine(++currentLine, currentLineSize, remainingElements - currentLineSize,
+                         stacki);
+  }
+  if (currentLine >= stacki - 1) {
+    return calculateLine(++currentLine, currentLineSize - 1, remainingElements - currentLineSize,
+                         stacki);
+  }
+  return calculateLine(++currentLine, currentLineSize + 1, remainingElements - currentLineSize,
+                       stacki);
+}
+
+auto calculateLine2(size_t& currentLine, size_t currentLineSize, size_t remainingElements,
+                    size_t stacki) -> size_t
+{
+  if (remainingElements < currentLineSize) {
+    return remainingElements;
+  }
+  if (currentLine >= stacki) {
+    return calculateLine(++currentLine, currentLineSize - 1, remainingElements - currentLineSize,
+                         stacki);
+  }
+  return calculateLine(++currentLine, currentLineSize + 1, remainingElements - currentLineSize,
+                       stacki);
+}
+
+struct ShapeProvider : public FactoryShapeProvider,
+                       public std::enable_shared_from_this<ShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    auto shapeCreation = [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
+      return std::shared_ptr<volumeShape>(new hexPrism(
+          param.getParam<point3D>(0), param.getParam<vector3D>(0), param.getParam<vector3D>(1),
+          param.getParam<vector3D>(2), param.getParam<int>(0)));
+    };
+    auto next1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      vector3D stDir = parameter.getParam<vector3D>(2) * (2 * times);
+      auto result = parameter;
+      result.setParam<point3D>(0, result.getParam<point3D>(0) + stDir);
+      return result;
+    };
+    auto next2 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      // in this case we have a stacking in zig-zags:
+      // each line is stacked along dir3,
+      // in the first line there are stacki elements, in the second (stacki +1), etc.
+      // the second line is shifted by 1.5 * vectorToFirstPoint
+      // in line stacki the middle element is left out
+      // from there on there the next lines have one element less each.
+      auto result = parameter;
+      auto center = parameter.getParam<point3D>(0);
+      auto lineStack = parameter.getParam<vector3D>(2);
+      auto nextLine = parameter.getParam<vector3D>(1);
+      auto stacki = parameter.getParam<int>(0);
+
+      auto total = static_cast<size_t>(3 * abs(stacki) * (abs(stacki) - 1) - 3);
+      if (times > total) {
+        return {};
+      }
+      size_t lineNumber{0u};
+      auto itemInLine = calculateLine(lineNumber, static_cast<size_t>(abs(stacki)), times,
+                                      static_cast<size_t>(abs(stacki)));
+      auto centerOfLine = center + nextLine * lineNumber;
+
+      if (static_cast<int>(lineNumber) < stacki - 2) {
+        centerOfLine = centerOfLine - lineStack * lineNumber;
+      } else if (static_cast<int>(lineNumber) == stacki - 1) {
+        centerOfLine = centerOfLine - lineStack * lineNumber;
+        if (static_cast<int>(itemInLine) >= stacki) {
+          itemInLine++;
+        }
+      } else {
+        centerOfLine = centerOfLine - lineStack * abs(abs(stacki) * 2 - 2 - lineNumber);
+      }
+      result.setParam<point3D>(0,
+                               centerOfLine + nextLine * lineNumber + lineStack * itemInLine * 2);
+      return result;
+    };
+    auto next3 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      // in this case we have a stacking in zig-zags:
+      // each line is stacked along dir3,
+      // in the first line there are stacki elements, in the second (stacki +1), etc.
+      // the second line is shifted by 1.5 * vectorToFirstPoint
+      // in line stacki the middle element is not left out
+      // from there on there the next lines have one element less each.
+      auto result = parameter;
+      auto center = parameter.getParam<point3D>(0);
+      auto lineStack = parameter.getParam<vector3D>(2);
+      auto nextLine = parameter.getParam<vector3D>(1);
+      auto stacki = parameter.getParam<int>(0);
+
+      auto total = static_cast<size_t>(3 * abs(stacki) * (abs(stacki) - 1) - 3);
+      if (times > total) {
+        return {};
+      }
+      size_t lineNumber{0u};
+      auto itemInLine = calculateLine2(lineNumber, static_cast<size_t>(abs(stacki)), times,
+                                       static_cast<size_t>(abs(stacki)));
+      auto centerOfLine = center + nextLine * lineNumber;
+
+      if (static_cast<int>(lineNumber) < stacki - 1) {
+        centerOfLine = centerOfLine - lineStack * lineNumber;
+      } else {
+        centerOfLine = centerOfLine - lineStack * abs(abs(stacki) * 2 - 2 - lineNumber);
+      }
+      result.setParam<point3D>(0,
+                               centerOfLine + nextLine * lineNumber + lineStack * itemInLine * 2);
+      return result;
+    };
+    auto envelope1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      auto result = parameter;
+      result.setParam<vector3D>(2, times * parameter.getParam<vector3D>(2));
+      return result;
+    };
+    auto envelope2 = [](shape_parameter const& parameter, size_t) -> shape_parameter {
+      auto result = parameter;
+      auto center = parameter.getParam<point3D>(0);
+      auto lineStack = parameter.getParam<vector3D>(2);
+      auto nextLine = parameter.getParam<vector3D>(1);
+      auto stacki = parameter.getParam<int>(0);
+
+      result.setParam<point3D>(0, center + 1.5 * stacki * nextLine + 1.5 * stacki * lineStack);
+      result.setParam<vector3D>(1, 3 * abs(stacki) * nextLine);
+      result.setParam<vector3D>(2, 3 * abs(stacki) * lineStack);
+      return result;
+    };
+
+    auto description = hexPrism::getDescription();
+    description.setId(hexPrism_id1);
+    factory.addShapeToFactory(description, ShapeType::VolumeShape, shapeCreation, next1, envelope1);
+    description.setId(hexPrism_id2);
+    factory.addShapeToFactory(description, ShapeType::VolumeShape, shapeCreation, next2, envelope2);
+    description.setId(hexPrism_id3);
+    factory.addShapeToFactory(description, ShapeType::VolumeShape, shapeCreation, next3, envelope2);
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(hexPrism_id1);
+    factory.removeShapeFromFactory(hexPrism_id2);
+    factory.removeShapeFromFactory(hexPrism_id3);
+  }
+
+  void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+};
+std::shared_ptr<ShapeProvider> prov = [] {
+  auto r = std::make_shared<ShapeProvider>();
+  r->install();
+  return r;
+}();
+}
+
 hexPrism::hexPrism(point3D c, vector3D thickness, vector3D toFirstPoint, vector3D keyWidth, int st)
     : volumeShape("hexPrism")
 {
@@ -379,7 +548,7 @@ Vector hexPrism::Hitting(const sLine3D& line)
   d3 = dir3;
   d3.normalize();
   int outcode1, outcode2, outcode3;
-  vector3D v1_1, v1_2, v2_1, v2_2, v3_1, v3_2; // components of hit¹-corner¹ in each fiber direction
+  vector3D v1_1, v1_2, v2_1, v2_2, v3_1, v3_2; // components of hit1-corner1 in each fiber direction
   float d11, d12, d21, d22, d31, d32;          // length of these components
   float dr11, dr12, dr21, dr22, dr31, dr32;    // direction of components >0 ->point inwards
   // calculate planes
@@ -833,6 +1002,7 @@ shape_parameter hexPrism::getDescription()
   shape_parameter sh;
   sh.setName("hexPrism");
   sh.setCompleteWrite(true);
+  sh.setId(hexPrism_id1);
   sh.addParam<point3D>(point3D(), "center of front");
   sh.addParam<vector3D>(vector3D(), "thickness vector");
   sh.addParam<vector3D>(vector3D(), "vector to first point");

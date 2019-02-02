@@ -101,7 +101,7 @@ TAB_SIZE               = 2
 # newlines.
 
 ALIASES                =
-
+EXCLUDE_SYMBOLS = test::*
 # The INPUT tag is used to specify the files and/or directories that contain
 # documented source files. You may enter file names like myfile.cpp or
 # directories like /usr/src/myproject. Separate the files or directories with
@@ -117,8 +117,11 @@ INPUT                  = @CMAKE_SOURCE_DIR@/geometry/include \
                          @CMAKE_SOURCE_DIR@/analyser/include \
                          @CMAKE_SOURCE_DIR@/code/include \
                          @CMAKE_SOURCE_DIR@/eventpainter/include \
+                         @CMAKE_SOURCE_DIR@/factories/include \
                          @CMAKE_SOURCE_DIR@/fit/include \
-                         @CMAKE_SOURCE_DIR@/documentation
+                         @CMAKE_SOURCE_DIR@/documentation \
+                         @CMAKE_SOURCE_DIR@/factories/tests \
+                         @CMAKE_SOURCE_DIR@/shapes/tests
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -275,3 +278,4 @@ LATEX_CMD_NAME         = latex
 # This tag requires that the tag HAVE_DOT is set to YES.
 
 UML_LOOK               = NO
+GENERATE_TODOLIST = YES

@@ -1,3 +1,4 @@
+#include "shapeFactory.h"
 #include "shapeparameter.h"
 #include "shapes.h"
 

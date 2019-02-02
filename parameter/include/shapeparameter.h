@@ -2,6 +2,8 @@
 #define __SHAPEPARAM
 #include "baseparameter.h"
 #include "geometry.h"
+
+#include <boost/uuid/uuid.hpp>
 #include <vector>
 using namespace std;
 
@@ -17,6 +19,8 @@ private:
   vector<single_parameter<float>> floats;     //!
   vector<single_parameter<string>> strings_;  //!
   bool fcompleteWrite;                        //!
+  boost::uuids::uuid id;
+
 public:
   /*!
    * \brief shape_parameter
@@ -35,6 +39,18 @@ public:
    * \brief Destructor
    */
   ~shape_parameter();
+
+  /*!
+   * \brief get the id of the shape
+   * \return the id of the shape.
+   */
+  boost::uuids::uuid getId() const;
+
+  /*!
+   * \brief set the id of the shape
+   * \param newId the new id of the shape
+   */
+  void setId(boost::uuids::uuid newId);
 
   /*!
    * Template method. Returns the ith parameters value stored for the specified type. This can be

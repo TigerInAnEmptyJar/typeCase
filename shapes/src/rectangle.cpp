@@ -1,5 +1,39 @@
-#include "planeShape.h"
+#include "planarShapes.h"
+#include "provideShapes.h"
 #include "shapeparameter.h"
+
+namespace {
+// 389e9e10-11ec-11e9-ab14-d663bd873d93
+const boost::uuids::uuid rectangle_id = {{0x38, 0x9e, 0x9e, 0x10, 0x11, 0xec, 0x11, 0xe9, 0xab,
+                                          0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+struct ShapeProvider : public FactoryShapeProvider,
+                       public std::enable_shared_from_this<ShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    factory.addShapeToFactory(rectangle::getDescription(), ShapeType::PlanarShape,
+                              [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
+                                return std::shared_ptr<planeShape>(new rectangle(
+                                    param.getParam<point3D>(0), param.getParam<point3D>(1),
+                                    param.getParam<vector3D>(0), param.getParam<float>(0)));
+                              },
+                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(rectangle_id);
+  }
+  void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+};
+std::shared_ptr<ShapeProvider> prov = [] {
+  auto r = std::make_shared<ShapeProvider>();
+  r->install();
+  return r;
+}();
+}
+
 rectangle::rectangle(const planeShape& p) : planeShape("rectangle")
 {
   center = p.getCenter();
@@ -214,6 +248,7 @@ shape_parameter rectangle::description() const
 {
   shape_parameter sh;
   sh.setName("rectangle");
+  sh.setId(rectangle_id);
   sh.setCompleteWrite(true);
   sh.addParam<point3D>(left.P(), "A");
   sh.addParam<point3D>(left.Q(), "B");
@@ -225,6 +260,7 @@ shape_parameter rectangle::getDescription()
 {
   shape_parameter sh;
   sh.setName("rectangle");
+  sh.setId(rectangle_id);
   sh.addParam<point3D>(point3D(), "A");
   sh.addParam<point3D>(point3D(), "B");
   sh.addParam<point3D>(point3D(), "C");

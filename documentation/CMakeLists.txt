@@ -32,17 +32,3 @@ target_link_libraries(lib${PROJECT_NAME}
     PUBLIC libgeometry
     PUBLIC Qt5::Core
 )
-
-#add_exectuable(${PRIJECT_NAME} STATIC
-#src/doc_classes.cpp
-#src/doc_display.cpp
-#    src/doc_selectclassesdialog.cpp
-#    src/documentation_mw.cpp
-#    src/doc_update_dialog.cpp
-#    src/main.cpp
-#    src/qmake_image_collection.cpp
-#    src/doc_classes.ui.h
-#    src/doc_display.ui.h
-#    src/doc_selectclassesdialog.ui.h
-#    src/documentation_mw.ui.h
-#)

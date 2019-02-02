@@ -1,7 +1,132 @@
 #include "wedge.h"
 #include "planeShape.h"
+#include "provideShapes.h"
+#include "ring.h"
 #include "shapeparameter.h"
 #include "spiral.h"
+
+namespace {
+// 2e501b2e-11f5-11e9-ab14-d663bd873d93
+const boost::uuids::uuid wedge_id1 = {{0x2e, 0x50, 0x1b, 0x2e, 0x11, 0xf5, 0x11, 0xe9, 0xab, 0x14,
+                                       0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+// 332cf48c-11f5-11e9-ab14-d663bd873d93
+const boost::uuids::uuid wedge_id2 = {{0x33, 0x2c, 0xf4, 0x8c, 0x11, 0xf5, 0x11, 0xe9, 0xab, 0x14,
+                                       0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+struct ShapeProvider : public FactoryShapeProvider,
+                       public std::enable_shared_from_this<ShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    auto shapeCreation = [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
+      if (param.NumberOfParams<float>() > 4)
+        return std::shared_ptr<volumeShape>(new wedge(
+            param.getParam<float>(0), param.getParam<float>(1), param.getParam<float>(2),
+            param.getParam<float>(3), param.getParam<point3D>(0), param.getParam<vector3D>(0),
+            param.getParam<vector3D>(1), param.getParam<float>(4)));
+      return std::shared_ptr<volumeShape>(
+          new wedge(param.getParam<float>(0), param.getParam<float>(1), param.getParam<float>(2),
+                    param.getParam<float>(3), param.getParam<point3D>(0),
+                    param.getParam<vector3D>(0), param.getParam<vector3D>(1), -1));
+    };
+
+    //! \todo there is still the wedge-cone stuff to do
+    //        else if (sp.getName() == "wedge-cone") {
+    //            point3D centerOfBase = sp.getParam<point3D>(0);
+    //            vector3D symmetryAxis = sp.getParam<vector3D>(0);
+    //            vector3D lpOnBase = sp.getParam<vector3D>(1);
+    //            float baseRadius = sp.getParam<float>(0);
+    //            float topRadius = sp.getParam<float>(1);
+    //            float length = sp.getParam<float>(2);
+    //            float dp = sp.getParam<float>(3);
+    //            float thickness = sp.getParam<float>(4);
+    //            float Ro, Ri, z = length * baseRadius / (baseRadius - topRadius);
+    //            Ro = sqrt(z * z + baseRadius * baseRadius);
+    //            Ri = Ro * topRadius / baseRadius;
+    //            point3D center = centerOfBase - symmetryAxis * (z / symmetryAxis.R());
+    //            vector3D lpe = symmetryAxis * (z / symmetryAxis.R()) + lpOnBase * (baseRadius /
+    //            lpOnBase.R());
+    //            lpOnBase = matrix3D(symmetryAxis, dp * 0.5) * lpOnBase;
+    //            vector3D normal = (symmetryAxis * baseRadius - lpOnBase * z) / (Ro);
+    //            lpe.normalize();
+    //            normal.normalize();
+    //            //	float alpha=2*asin(baseRadius/Ro*sin(dp*0.5));
+    //            shape = new wedge(Ri, Ro, dp, thickness, center, normal, lpe, baseRadius);
+    //          }
+
+    auto next1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      matrix3D turn(parameter.getParam<vector3D>(0),
+                    static_cast<double>(parameter.getParam<float>(2) * times));
+      vector3D tmp = turn * parameter.getParam<vector3D>(1);
+
+      auto result = parameter;
+      result.setParam<vector3D>(1, tmp);
+
+      return result;
+    };
+    auto next2 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      auto result = parameter;
+      auto outerR = static_cast<double>(parameter.getParam<float>(1));
+      auto distBarrel = static_cast<double>(parameter.getParam<float>(4));
+      auto lpe = parameter.getParam<vector3D>(1);
+      auto dphi = parameter.getParam<float>(2);
+      auto normal = parameter.getParam<vector3D>(0);
+      double l = sqrt(outerR * outerR - distBarrel * distBarrel);
+      vector3D rot_vec = vector3D(0, 0, -1);
+      vector3D lpeBase = lpe - rot_vec * (lpe * rot_vec);
+      lpeBase.normalize();
+      double angle = 2 * atan(l / outerR * tan(dphi / 2.));
+      rot_vec.normalize();
+      matrix3D rotm(rot_vec, angle * times);
+      lpeBase = rotm * lpeBase;
+      vector3D lpeNew =
+          distBarrel * lpeBase + rot_vec * sqrt(outerR * outerR - distBarrel * distBarrel);
+      lpeNew.normalize();
+
+      result.setParam<vector3D>(0, rotm * normal);
+      result.setParam<vector3D>(1, lpeNew);
+      return result;
+    };
+    auto envelope1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      double totalAngle = static_cast<double>(parameter.getParam<float>(2)) * times;
+      if (totalAngle - M_PI * 2 < 0) {
+        auto result = parameter;
+        result.setParam<float>(2, static_cast<float>(totalAngle));
+        return result;
+      }
+      auto result = ring::getDescription();
+      result.setParam<point3D>(0, parameter.getParam<point3D>(0));
+      result.setParam<vector3D>(0, parameter.getParam<vector3D>(0));
+      result.setParam<float>(0, parameter.getParam<float>(0));
+      result.setParam<float>(1, parameter.getParam<float>(1) - parameter.getParam<float>(0));
+      result.setParam<float>(2, parameter.getParam<float>(3));
+      return result;
+    };
+    auto envelope2 = [](shape_parameter const&, size_t) -> shape_parameter {
+      // no shape defined yet for this use-case.
+      return {};
+    };
+
+    auto description = wedge::getDescription();
+    description.setId(wedge_id1);
+    factory.addShapeToFactory(description, ShapeType::VolumeShape, shapeCreation, next1, envelope1);
+    description.setId(wedge_id2);
+    factory.addShapeToFactory(description, ShapeType::VolumeShape, shapeCreation, next2, envelope2);
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(wedge_id1);
+    factory.removeShapeFromFactory(wedge_id2);
+  }
+  void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+};
+std::shared_ptr<ShapeProvider> prov = [] {
+  auto r = std::make_shared<ShapeProvider>();
+  r->install();
+  return r;
+}();
+}
+
 wedge::wedge(float i, float a, float d, float t, point3D c, vector3D n, vector3D l, float dis)
     : volumeShape("wedge")
 {
@@ -1114,6 +1239,7 @@ shape_parameter wedge::description() const
 {
   shape_parameter sh;
   sh.setName("wedge");
+  sh.setId(wedge_id1);
   sh.addParam<point3D>(center, "center");
   sh.addParam<vector3D>(normal, "normal");
   sh.addParam<vector3D>(lpe, "lower phi edge");
@@ -1129,6 +1255,7 @@ shape_parameter wedge::getDescription()
 {
   shape_parameter sh;
   sh.setName("wedge");
+  sh.setId(wedge_id1);
   sh.addParam<point3D>(point3D(), "center");
   sh.addParam<vector3D>(vector3D(), "normal");
   sh.addParam<vector3D>(vector3D(), "lower phi edge");

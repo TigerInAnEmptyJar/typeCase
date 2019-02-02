@@ -4,6 +4,7 @@ shape_parameter::shape_parameter() : base_parameter(), fcompleteWrite(false) {}
 shape_parameter::shape_parameter(const shape_parameter& sp)
     : base_parameter(sp), fcompleteWrite(sp.completeWrite())
 {
+  setId(sp.getId());
   setName(sp.getName());
   setDescription(sp.getDescription());
   for (int i = 0; i < sp.NumberOfParams<point3D>(); i++)
@@ -19,6 +20,10 @@ shape_parameter::shape_parameter(const shape_parameter& sp)
 }
 
 shape_parameter::~shape_parameter() {}
+
+boost::uuids::uuid shape_parameter::getId() const { return id; }
+
+void shape_parameter::setId(boost::uuids::uuid newId) { id = newId; }
 
 template <class T>
 T shape_parameter::getParam(int i) const
@@ -137,6 +142,7 @@ int shape_parameter::NumberOfParams() const
 
 void shape_parameter::operator=(const shape_parameter& sh)
 {
+  setId(sh.getId());
   setName(sh.getName());
   setDescription(sh.getDescription());
   clearProperties();
@@ -415,6 +421,11 @@ ostream& operator<<(ostream& o, const shape_parameter& sh)
 // 	}
 //     }
 // }
+
+template void shape_parameter::setParam<bool>(int i, const bool& p);
+template void shape_parameter::addParam<bool>(bool p, string n);
+template bool shape_parameter::getParam<bool>(int i) const;
+template void shape_parameter::setParamName<bool>(int i, string n);
 
 template void shape_parameter::setParam<int>(int i, const int& p);
 template void shape_parameter::setParamName<int>(int i, string n);

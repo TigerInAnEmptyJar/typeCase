@@ -125,6 +125,7 @@ target_include_directories(lib${PROJECT_NAME}
 )
 target_link_libraries(lib${PROJECT_NAME}
     PUBLIC libparameter
+    PUBLIC libshape
     PUBLIC libbasic
     PUBLIC pthread
 )

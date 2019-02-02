@@ -11,8 +11,10 @@ include(findQt)
 include(findRoot)
 
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O -Werror -Wall -fPIC ")
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 14)
 set(CMAKE_AUTOMOC ON)
+
+enable_testing()
 
 add_subdirectory(geometry)
 add_subdirectory(parameter)
@@ -21,6 +23,7 @@ add_subdirectory(reaction)
 add_subdirectory(container)
 add_subdirectory(basic)
 add_subdirectory(fit)
+add_subdirectory(factories)
 
 add_subdirectory(algorithms)
 add_subdirectory(analyser)

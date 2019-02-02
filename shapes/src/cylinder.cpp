@@ -1,6 +1,41 @@
 #include "planeShape.h"
 #include "shapeparameter.h"
 #include "shapes.h"
+
+#include "provideShapes.h"
+
+namespace {
+
+const boost::uuids::uuid cylinder_id = {{0xea, 0x32, 0xc9, 0x4c, 0x11, 0xc1, 0x11, 0xe9, 0xab, 0x14,
+                                         0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+struct ShapeProvider : public FactoryShapeProvider,
+                       public std::enable_shared_from_this<ShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    factory.addShapeToFactory(
+        cylinder::getDescription(), ShapeType::VolumeShape,
+        [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
+          return std::shared_ptr<volumeShape>(new cylinder(
+              param.getParam<point3D>(0), param.getParam<vector3D>(0), param.getParam<float>(0)));
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(cylinder_id);
+  }
+  void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+};
+std::shared_ptr<ShapeProvider> prov = [] {
+  auto r = std::make_shared<ShapeProvider>();
+  r->install();
+  return r;
+}();
+}
+
 point3D cylinder::entrance(const sLine3D& line)
 {
   Vector hit(Hitting(line));
@@ -404,6 +439,7 @@ shape_parameter cylinder::description() const
 {
   shape_parameter sh;
   sh.setName("cylinder");
+  sh.setId(cylinder_id);
   sh.setCompleteWrite(true);
   sh.addParam<point3D>(center, "center");
   sh.addParam<vector3D>(direction, "direction");
@@ -414,6 +450,7 @@ shape_parameter cylinder::getDescription()
 {
   shape_parameter sh;
   sh.setName("cylinder");
+  sh.setId(cylinder_id);
   sh.addParam<point3D>(point3D(), "center");
   sh.addParam<vector3D>(vector3D(), "direction");
   sh.addParam<float>(0, "radius");

@@ -1,5 +1,40 @@
-#include "planeShape.h"
+#include "planarShapes.h"
 #include "shapeparameter.h"
+
+#include "provideShapes.h"
+
+namespace {
+// f2040ab6-143f-11e9-ab14-d663bd873d93
+const boost::uuids::uuid triangle_id{{0xf2, 0x04, 0x0a, 0xb6, 0x14, 0x3f, 0x11, 0xe9, 0xab, 0x14,
+                                      0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+struct ShapeProvider : public FactoryShapeProvider,
+                       public std::enable_shared_from_this<ShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    factory.addShapeToFactory(
+        triangle::getDescription(), ShapeType::PlanarShape,
+        [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
+          return std::shared_ptr<planeShape>(new triangle(
+              param.getParam<point3D>(0), param.getParam<point3D>(1), param.getParam<point3D>(2)));
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(triangle_id);
+  }
+  void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+};
+std::shared_ptr<ShapeProvider> prov = [] {
+  auto r = std::make_shared<ShapeProvider>();
+  r->install();
+  return r;
+}();
+}
+
 triangle::triangle(const planeShape& p) : planeShape("triangle")
 {
   center = p.getCenter();
@@ -341,6 +376,7 @@ shape_parameter triangle::description() const
 {
   shape_parameter sh;
   sh.setName("triangle");
+  sh.setId(triangle_id);
   sh.setCompleteWrite(true);
   sh.addParam<point3D>(A_, "A");
   sh.addParam<point3D>(B_, "B");
@@ -351,6 +387,7 @@ shape_parameter triangle::getDescription()
 {
   shape_parameter sh;
   sh.setName("triangle");
+  sh.setId(triangle_id);
   sh.addParam<point3D>(point3D(), "A");
   sh.addParam<point3D>(point3D(), "B");
   sh.addParam<point3D>(point3D(), "C");

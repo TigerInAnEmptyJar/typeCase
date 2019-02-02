@@ -1,5 +1,39 @@
-#include "planeShape.h"
+#include "planarShapes.h"
+#include "provideShapes.h"
 #include "shapeparameter.h"
+
+namespace {
+// 171f0f58-11ed-11e9-ab14-d663bd873d93
+const boost::uuids::uuid sphericTriangle_id = {{0x17, 0x1f, 0x0f, 0x58, 0x11, 0xed, 0x11, 0xe9,
+                                                0xab, 0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+struct ShapeProvider : public FactoryShapeProvider,
+                       public std::enable_shared_from_this<ShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    factory.addShapeToFactory(sphericTriangle::getDescription(), ShapeType::PlanarShape,
+                              [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
+                                return std::shared_ptr<planeShape>(new sphericTriangle(
+                                    param.getParam<point3D>(0), param.getParam<point3D>(1),
+                                    param.getParam<point3D>(2), param.getParam<point3D>(3)));
+                              },
+                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(sphericTriangle_id);
+  }
+  void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+};
+std::shared_ptr<ShapeProvider> prov = [] {
+  auto r = std::make_shared<ShapeProvider>();
+  r->install();
+  return r;
+}();
+}
+
 sphericTriangle::sphericTriangle(const planeShape& p) : planeShape("spheric triangle")
 {
   center = p.getCenter();
@@ -521,6 +555,7 @@ shape_parameter sphericTriangle::description() const
   shape_parameter sh;
   sh.setName("sphericTriangle");
   sh.setCompleteWrite(true);
+  sh.setId(sphericTriangle_id);
   sh.addParam<point3D>(center, "center");
   sh.addParam<point3D>(A_, "A");
   sh.addParam<point3D>(B_, "B");
@@ -535,6 +570,7 @@ shape_parameter sphericTriangle::getDescription()
 {
   shape_parameter sh;
   sh.setName("sphericTriangle");
+  sh.setId(sphericTriangle_id);
   sh.addParam<point3D>(point3D(), "center");
   sh.addParam<point3D>(point3D(), "A");
   sh.addParam<point3D>(point3D(), "B");

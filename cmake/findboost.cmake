@@ -11,3 +11,15 @@ if(NOT (${Boost_program_options_LIBRARY_DEBUG} OR ${Boost_program_options_LIBRAR
         INTERFACE Boost::boost)
     add_library(Boost::program_options ALIAS LIBBOOSTPROGRAMOPTIONS)
 endif()
+if(NOT (${Boost_UUID_LIBRARY_DEBUG} OR ${Boost_UUID_LIBRARY_RELEASE}))
+    add_library(LIBBOOSTUUID INTERFACE )
+    target_link_libraries(LIBBOOSTUUID
+        INTERFACE Boost::boost)
+    add_library(Boost::uuid ALIAS LIBBOOSTUUID)
+endif()
+if(NOT (${Boost_SIGNALS2_LIBRARY_DEBUG} OR ${Boost_SIGNALS2_LIBRARY_RELEASE}))
+    add_library(LIBBOOSTSIGNALS2 INTERFACE )
+    target_link_libraries(LIBBOOSTSIGNALS2
+        INTERFACE Boost::boost)
+    add_library(Boost::signals2 ALIAS LIBBOOSTSIGNALS2)
+endif()

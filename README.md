@@ -52,10 +52,23 @@ wasn't aware of doxygen at that time.
 
 Since now all cosmetics are done, it is time to start real refactoring.
 
+Starting with the shapes, I added a factory for them. The individual shapes
+are referenced now using boost::uuid. The factory sends out signals (boost)
+if shapes are added or removed. I needed to split up the shape library into
+a basic shape library containing the three basic shape types and the more
+general shape library that has all the shapes that are natively used by
+typeCase. The factory is still not used by the framework.
+
+I added Google Test for writing Unit-tests and tests for the newly written
+code as well. No serious code should go without some automated tests, so I
+added them here too. They still not test the complete shape library, I'll
+refactor that as well when adding the tests for them.
+
 Try it, if you like. Prerequisites are:
 
 * gcc-4.8 (newer versions will lead to compiler errors; yes, the compilers
 have become more strict)
-* boost program_options
+* boost program_options, uuid, signals2
+* Google Testing (if you want to compile and run tests)
 * Qt 5
 * root (root.cern.ch)

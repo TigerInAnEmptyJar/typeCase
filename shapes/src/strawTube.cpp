@@ -1,5 +1,46 @@
 #include "strawTube.h"
+#include "provideShapes.h"
 #include "shapeparameter.h"
+
+namespace {
+// 299f8546-11f6-11e9-ab14-d663bd873d93
+const boost::uuids::uuid strawtube_id = {{0x29, 0x9f, 0x85, 0x46, 0x11, 0xf6, 0x11, 0xe9, 0xab,
+                                          0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+struct ShapeProvider : public FactoryShapeProvider,
+                       public std::enable_shared_from_this<ShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    factory.addShapeToFactory(strawTube::getDescription(), ShapeType::VolumeShape,
+                              [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
+                                return std::shared_ptr<volumeShape>(new strawTube(
+                                    param.getParam<point3D>(0), param.getParam<vector3D>(0),
+                                    param.getParam<float>(0), param.getParam<vector3D>(1),
+                                    param.getParam<vector3D>(2), param.getParam<float>(1),
+                                    param.getParam<int>(0), param.getParam<int>(1)));
+                              },
+                              [](shape_parameter const&, size_t) -> shape_parameter {
+                                //! \todo implement me
+                                return {};
+                              },
+                              [](shape_parameter const&, size_t) -> shape_parameter {
+                                //! \todo implement me
+                                return {};
+                              });
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(strawtube_id);
+  }
+  void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+};
+std::shared_ptr<ShapeProvider> prov = [] {
+  auto r = std::make_shared<ShapeProvider>();
+  r->install();
+  return r;
+}();
+}
 strawTube::strawTube() : cylinder()
 {
   shift = vector3D(0, 1, 1) * sqrt(2.);
@@ -218,6 +259,7 @@ shape_parameter strawTube::description() const
 {
   shape_parameter sh;
   sh.setName("strawTube");
+  sh.setId(strawtube_id);
   sh.addParam<point3D>(center, "center");
   sh.addParam<vector3D>(direction, "direction");
   sh.addParam<vector3D>(stackingDirection, "stacking direction");
@@ -232,6 +274,7 @@ shape_parameter strawTube::getDescription()
 {
   shape_parameter sh;
   sh.setName("strawTube");
+  sh.setId(strawtube_id);
   sh.addParam<point3D>(point3D(), "center");
   sh.addParam<vector3D>(vector3D(), "direction");
   sh.addParam<vector3D>(vector3D(), "stacking direction");

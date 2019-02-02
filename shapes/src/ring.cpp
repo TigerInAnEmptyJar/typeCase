@@ -1,7 +1,70 @@
 #include "ring.h"
 #include "cylinder.h"
 #include "planeShape.h"
+#include "provideShapes.h"
 #include "shapeparameter.h"
+
+namespace {
+// 9be4d892-11ef-11e9-ab14-d663bd873d93
+const boost::uuids::uuid ring_id1 = {{0x9b, 0xe4, 0xd8, 0x92, 0x11, 0xef, 0x11, 0xe9, 0xab, 0x14,
+                                      0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+// a0a951f0-11ef-11e9-ab14-d663bd873d93
+const boost::uuids::uuid ring_id2 = {{0xa0, 0xa9, 0x51, 0xf0, 0x11, 0xef, 0x11, 0xe9, 0xab, 0x14,
+                                      0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+struct ShapeProvider : public FactoryShapeProvider,
+                       public std::enable_shared_from_this<ShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    auto shapeCreation = [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
+      return std::shared_ptr<volumeShape>(new ring(
+          param.getParam<point3D>(0), param.getParam<vector3D>(0), param.getParam<float>(0),
+          param.getParam<float>(0) + param.getParam<float>(1), param.getParam<float>(2)));
+    };
+    auto next1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      auto result = parameter;
+      result.setParam<float>(0,
+                             parameter.getParam<float>(0) + times * parameter.getParam<float>(1));
+      return result;
+    };
+    auto next2 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      auto result = parameter;
+      result.setParam<point3D>(0, parameter.getParam<point3D>(0) -
+                                      parameter.getParam<vector3D>(0) *
+                                          parameter.getParam<float>(2) * times);
+      return result;
+    };
+    auto envelope1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      auto result = parameter;
+      result.setParam<float>(1, parameter.getParam<float>(1) * times);
+      return result;
+    };
+    auto envelope2 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      auto result = parameter;
+      result.setParam<float>(2, parameter.getParam<float>(2) * times);
+      return result;
+    };
+
+    auto description = ring::getDescription();
+    factory.addShapeToFactory(description, ShapeType::VolumeShape, shapeCreation, next1, envelope1);
+    description.setId(ring_id2);
+    factory.addShapeToFactory(description, ShapeType::VolumeShape, shapeCreation, next2, envelope2);
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(ring_id1);
+    factory.removeShapeFromFactory(ring_id2);
+  }
+  void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+};
+std::shared_ptr<ShapeProvider> prov = [] {
+  auto r = std::make_shared<ShapeProvider>();
+  r->install();
+  return r;
+}();
+}
+
 ring::ring(point3D centerIn, vector3D normalIn, float innerRadius, float outerRadius,
            float thicknessIn)
     : volumeShape("ring")
@@ -61,7 +124,7 @@ volumeShape* ring::getNext(int times, int stackType)
     sh = new ring(center, normal, innerR + add, outerR + add, thickness);
     sh->setMaxDistance(getMaxDistance());
     //	cout<<"ring: "<<times<<" :
-    //"<<atan((innerR+add)/center.Z())*180./M_PI<<"° ->
+    //"<<atan((innerR+add)/center.Z())*180./M_PI<<"deg ->
     //"<<innerR+add<<endl;
     break;
   }
@@ -441,6 +504,7 @@ shape_parameter ring::description() const
 {
   shape_parameter sh;
   sh.setName("ring");
+  sh.setId(ring_id1);
   sh.addParam<point3D>(center, "center");
   sh.addParam<vector3D>(normal, "normal");
   sh.addParam<float>(innerR, "inner radius");
@@ -453,6 +517,7 @@ shape_parameter ring::getDescription()
 {
   shape_parameter sh;
   sh.setName("ring");
+  sh.setId(ring_id1);
   sh.addParam<point3D>(point3D(), "center");
   sh.addParam<vector3D>(vector3D(), "normal");
   sh.addParam<float>(0, "inner radius");

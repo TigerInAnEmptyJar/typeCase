@@ -1,5 +1,40 @@
 #include "circle.h"
+#include "provideShapes.h"
 #include "shapeparameter.h"
+
+namespace Shape {
+
+const boost::uuids::uuid circle_id = {{0x14, 0x8b, 0xec, 0xc6, 0x11, 0xbf, 0x11, 0xe9, 0xab, 0x14,
+                                       0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
+
+struct CircleShapeProvider : public FactoryShapeProvider,
+                             public std::enable_shared_from_this<CircleShapeProvider>
+{
+  void addToFactory(ShapeFactory& factory) const override
+  {
+    factory.addShapeToFactory(
+        circle::getDescription(), ShapeType::PlanarShape,
+        [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
+          return std::shared_ptr<planeShape>(new circle(
+              param.getParam<point3D>(0), param.getParam<vector3D>(0), param.getParam<float>(0)));
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+  }
+  void removeFromFactory(ShapeFactory& factory) const override
+  {
+    factory.removeShapeFromFactory(Shape::circle_id);
+  }
+  void install() { innerShapeProviders.push_back(shared_from_this()); }
+};
+
+std::shared_ptr<CircleShapeProvider> prov = [] {
+  auto r = std::make_shared<CircleShapeProvider>();
+  r->install();
+  return r;
+}();
+}
+
 circle::circle(point3D cen, vector3D nor, float rIn) : planeShape("circle")
 {
   center = cen;
@@ -152,6 +187,7 @@ shape_parameter circle::description() const
 {
   shape_parameter sh;
   sh.setName("circle");
+  sh.setId(Shape::circle_id);
   sh.setCompleteWrite(true);
   sh.addParam<point3D>(center, "center");
   sh.addParam<vector3D>(normal, "normal");
@@ -162,6 +198,7 @@ shape_parameter circle::getDescription()
 {
   shape_parameter sh;
   sh.setName("circle");
+  sh.setId(Shape::circle_id);
   sh.addParam<point3D>(point3D(), "center");
   sh.addParam<vector3D>(vector3D(), "normal");
   sh.addParam<float>(0, "radius");

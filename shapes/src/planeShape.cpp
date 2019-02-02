@@ -1,5 +1,6 @@
 #include "planeShape.h"
 #include "shapeparameter.h"
+
 plane3D planeShape::getPlane() const { return plane3D(center, normal); }
 void planeShape::setPlane(plane3D const& p)
 {
