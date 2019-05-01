@@ -458,7 +458,8 @@ void AReadReactionFromRoot::read_hit()
         th->getRaw().setTDC(Hits[j / 20][j % 20].tdcR);
         th->getRaw().setElement(el);
         th->getRaw().setDetector(de);
-        if (Hits[j / 20][j % 20].el < setup.getDetectorr(de).getNumberOfElements()) {
+        if (Hits[j / 20][j % 20].el <
+            static_cast<int>(setup.getDetectorr(de).getNumberOfElements())) {
           sh = setup.getDetectorr(de).getShape(el);
           th->setHitShape(sh);
           th->setValid(true);
@@ -734,7 +735,7 @@ void AReadReactionFromRoot::read_rea()
     }
     rb->calculate();
     event.addReaction(rb);
-    //      cout<<" use "<<event.getRunNumber()<<"§
+    //      cout<<" use "<<event.getRunNumber()<<"
     //      "<<rb->getTrack(0)->getNumberOfCalibHits(15)+rb->getTrack(0)->getNumberOfCalibHits(16)<<"
     //      "<<rb->getTrack(1)->getNumberOfCalibHits(15)+rb->getTrack(1)->getNumberOfCalibHits(16)<<endl;
   }
@@ -841,7 +842,7 @@ void AReadReactionFromRoot::reconstruct_hits_from_track(track1 Track, TTrack* tr
         th->getRaw().setTDC((int)tdc);
         th->getRaw().setElement(el);
         th->getRaw().setDetector(de);
-        if (el < setup.getDetectorr(de).getNumberOfElements()) {
+        if (el < static_cast<int>(setup.getDetectorr(de).getNumberOfElements())) {
           sh = setup.getDetectorr(de).getShape(el);
           th->setHitShape(sh);
           th->setValid(true);

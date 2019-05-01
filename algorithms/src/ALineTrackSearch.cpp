@@ -252,7 +252,7 @@ bool ALineTrackSearch::searchATrack(int tracknum, int stopI, TBase* pix, TBase* 
         if (tmpTracks[tracknum]->getPixel(0, 0).getID() == pixid)
           cout << "suspect:" << tak2[i] << " " << suspect << flush;
 #endif
-        if (suspect >= 0 && suspect < det->getNumberOfElements()) {
+        if (suspect >= 0 && suspect < static_cast<int>(det->getNumberOfElements())) {
           for (int j = 0; j < (*(numberOfHits[tak2[i]])); j++) {
             if (!hits[tak2[i]][j]->isValid())
               continue;
@@ -382,7 +382,7 @@ bool ALineTrackSearch::searchATrack(int tracknum, int stopI, TBase* pix, TBase* 
           cout << "suspect:" << detectorIDs[i] << " " << suspect << flush;
 #endif
         closest = 0;
-        if (suspect >= 0 && suspect < det->getNumberOfElements()) {
+        if (suspect >= 0 && suspect < static_cast<int>(det->getNumberOfElements())) {
           for (int j = 0; j < (*(numberOfHits[detectorIDs[i]])); j++) {
             if (!hits[detectorIDs[i]][j]->isValid())
               continue;
@@ -510,13 +510,13 @@ bool ALineTrackSearch::searchATrack(int tracknum, int stopI, TBase* pix, TBase* 
     chi = myLineFit.fit();
     if (chi < 0 || chi > (typ == 0 ? maxChi[stopI] : maxClusterChi[stopI])) {
 #ifdef DEBUGINFO
-      cout << out.ascii() << " chi² too high: " << chi << "("
+      cout << out.ascii() << " chi-squared too high: " << chi << "("
            << (typ == 0 ? maxChi[stopI] : maxClusterChi[stopI]) << ")" << endl;
 #endif
 #ifdef MICROPIXELOUT
       if (tmpTracks[tracknum]->getPixel(0, 0).getID() == pixid) {
-        cout << "Micropixel chi² too high: " << path.Direction().toString(_spheric_).ascii() << chi
-             << "(" << (typ == 0 ? maxChi[stopI] : maxClusterChi[stopI]) << ")" << endl;
+        cout << "Micropixel chi-squared too high: " << path.Direction().toString(_spheric_).ascii()
+             << chi << "(" << (typ == 0 ? maxChi[stopI] : maxClusterChi[stopI]) << ")" << endl;
       }
 #endif
       return false;
@@ -544,7 +544,7 @@ void* ALineTrackSearch::process(void* ptr)
    *for any pixel/any two pixels
    *search a track: if fit is good enough
    *  and enough elements
-   *sort by chi²
+   *sort by chi-squared
    *eliminate tracks with too many equal elements
    *sort by theta.
    ************************************************/

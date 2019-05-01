@@ -83,7 +83,7 @@ void* AAssignHitsToTracks::process(void* ptr)
       if (suspectmode) {
         shape = det->getShape(0);
         elem = shape->suspect(path, det->getStackType());
-        if (elem == -1 || elem >= det->getNumberOfElements())
+        if (elem == -1 || elem >= static_cast<int>(det->getNumberOfElements()))
           continue;
         eldis = det->getNumberOfElements();
         closest = -1;
@@ -132,7 +132,7 @@ void* AAssignHitsToTracks::process(void* ptr)
             bestD = distance.R();
           }
         }
-        if (elem >= 0 && elem < det->getNumberOfElements() && bestD < maxDistT) {
+        if (elem >= 0 && elem < static_cast<int>(det->getNumberOfElements()) && bestD < maxDistT) {
           tracks[i]->addCalibSrc(hits[detectorIDs[j]][elem]);
           nEl++;
         }
@@ -172,7 +172,7 @@ algorithm_parameter AAssignHitsToTracks::getDescription()
   des.push_back("line fit.");
   ret.setDescription(des);
   ret.addParam<bool>(single_parameter<bool>("Refit track directions", false));
-  ret.addParam<float>(single_parameter<float>("maximum chi² for refit", 1));
+  ret.addParam<float>(single_parameter<float>("maximum chi-squared for refit", 1));
   ret.addParam<float>(single_parameter<float>("max dist prompt to origin", 10));
   ret.addParam<float>(single_parameter<float>("max distance track-element", 1));
   vector<int> tmp;

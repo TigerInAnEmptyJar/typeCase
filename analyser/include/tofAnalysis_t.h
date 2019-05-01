@@ -187,15 +187,6 @@ public:
   void killData();
 
   /*!
-   * \brief getVShape
-   * Static method. Takes a shape_parameter and converts it into a volumeShape of the appropriate
-   * type. Has to be modified if new shapes are defined.
-   * \param sh
-   * \return
-   */
-  static volumeShape* getVShape(shape_parameter& sh);
-
-  /*!
    * \brief defineMaterials
    * Reads the material parameters from file fileName2 and creates the materials as described. It
    * also reads the setupdescription from fileName to assign the correct materials to the detectors.

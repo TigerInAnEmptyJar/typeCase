@@ -145,7 +145,7 @@ int AVirtualMachine::searchADetector(int detNum, int detID, vector3D& distance, 
       ((mode[detNum] & 4) == 4 && source->isSecondary())) {
     ret = detectorShape->suspect(path, detector->getStackType());
     // cout<<ret<<path<<endl;
-    if (ret <= -1 || ret >= detector->getNumberOfElements()) {
+    if (ret <= -1 || ret >= static_cast<int>(detector->getNumberOfElements())) {
       // cout<<"AVirtualMachine::searchADetector():done"<<endl;
       return -1;
     }
@@ -153,9 +153,10 @@ int AVirtualMachine::searchADetector(int detNum, int detID, vector3D& distance, 
     distance = addHit(detNum, ret, detector->getShape(ret), path, source);
     backside = detectorShape->suspect(sLine3D(path.Foot(), path.Direction() * -1),
                                       detector->getStackType());
-    if (backside > detector->getNumberOfElements())
+    if (backside > static_cast<int>(detector->getNumberOfElements()))
       backside = detector->getNumberOfElements() - 1;
-    if (backside == ret || backside > detector->getNumberOfElements() || backside < 0) {
+    if (backside == ret || backside > static_cast<int>(detector->getNumberOfElements()) ||
+        backside < 0) {
       // cout<<"AVirtualMachine::searchADetector():done"<<endl;
       return ret;
     }
@@ -179,7 +180,7 @@ int AVirtualMachine::searchADetector(int detNum, int detID, vector3D& distance, 
       for (int k = 0; k < begin; k++)
         dist = addHit(detNum, k, detector->getShape(k), path, source);
       // cout<<3<<endl;
-      for (int k = end; k < detector->getNumberOfElements(); k++)
+      for (int k = end; k < static_cast<int>(detector->getNumberOfElements()); k++)
         dist = addHit(detNum, k, detector->getShape(k), path, source);
     } else {
       if (abs(backside - ret) > maxHitPerTrack[detNum]) {

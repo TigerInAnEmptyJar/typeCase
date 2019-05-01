@@ -499,7 +499,7 @@ bool AVLineTrackSearch::searchATrack(int tracknum, int basis, int stopI, TBase* 
     shape = det->getShape(0);
     suspect = shape->suspect(path, det->getStackType());
     closest = 0;
-    if (suspect >= 0 && suspect < det->getNumberOfElements()) {
+    if (suspect >= 0 && suspect < static_cast<int>(det->getNumberOfElements())) {
       for (int j = 0; j < /*(*(numberOfHits[noGoDetectors[i]]))*/ nEl[noGoDetectors[i]]; j++) {
         if (!/*hits*/ chels[noGoDetectors[i]][j]->isValid())
           continue;
@@ -591,7 +591,7 @@ bool AVLineTrackSearch::searchATrack(int tracknum, int basis, int stopI, TBase* 
         shape = det->getShape(0);
         suspect = shape->suspect(path, det->getStackType());
         closest = 0;
-        if (suspect >= 0 && suspect < det->getNumberOfElements()) {
+        if (suspect >= 0 && suspect < static_cast<int>(det->getNumberOfElements())) {
           for (int j = 0; j < nEl[detectorIDs[i]] /*(*(numberOfHits[detectorIDs[i]]))*/; j++) {
             if (!/*hits*/ chels[detectorIDs[i]][j]->isValid())
               continue;

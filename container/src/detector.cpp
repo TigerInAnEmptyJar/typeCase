@@ -1,15 +1,16 @@
 #include "detector.h"
+#include "shapeFactory.h"
+#include "shapeparameter.h"
+
 TDetector::TDetector(TMaterial& matIn, int detNumIn) : TBase("TDetector"), detNum(detNumIn)
 {
   mat = (&matIn);
   numElements = 0;
   stackType = -1;
   defined = true;
-  v_shape = NULL;
   circular = false;
-  //   for(int i=0;i<numElements;i++)
-  //     v_shape[i]=new volumeShape("none");
 }
+
 TDetector::TDetector(const TDetector& det) : TBase("TDetector"), detNum(det.getDetectorNumber())
 {
   mat = det.getMaterial();
@@ -17,29 +18,21 @@ TDetector::TDetector(const TDetector& det) : TBase("TDetector"), detNum(det.getD
   stackType = det.getStackType();
   defined = true;
   circular = det.isCircular();
-  v_shape = new volumeShape*[numElements];
-  for (int i = 0; i < numElements; i++) {
-    v_shape[i] = NULL;
-    if (det.getShape(i) != NULL)
-      v_shape[i] = det.getShape(i)->getClone();
+  _shapes.resize(numElements, {});
+  for (size_t i = 0; i < numElements; i++) {
+    if (det.getShape(i) != nullptr)
+      _shapes[i] = std::shared_ptr<volumeShape>{det.getShape(i)->getClone()};
   }
 }
-TDetector::TDetector() : TBase("TDetector"), detNum(-1), v_shape(NULL)
+
+TDetector::TDetector() : TBase("TDetector"), detNum(-1)
 {
   numElements = 0;
   stackType = -1;
   defined = false;
 }
 
-TDetector::~TDetector()
-{
-  if (v_shape != NULL) {
-    for (int i = 0; i < numElements; i++) {
-      delete v_shape[i];
-    }
-    delete[] v_shape;
-  }
-}
+TDetector::~TDetector() = default;
 
 int TDetector::getDetectorNumber() const { return detNum; }
 
@@ -47,31 +40,21 @@ int TDetector::getStackType() const { return stackType; }
 
 TMaterial* TDetector::getMaterial() const { return mat; }
 
-void TDetector::setNumberOfElements(int num)
+void TDetector::setNumberOfElements(size_t num)
 {
   defined = true;
-  volumeShape* tmp = NULL;
-  if (num < 0)
+  if (num == 0 || numElements == num)
     return;
-  if (v_shape != NULL) {
-    for (int i = 1; i < numElements; i++) {
-      if (v_shape[i] != NULL)
-        delete v_shape[i];
+  _shapes.resize(num, {});
+  auto& shapeFactory = ShapeFactory::getInstance();
+  if (descriptionOfFirstElement) {
+    if (numElements > 0 && _shapes[0]) {
+      for (size_t i = numElements; i < num; i++) {
+        _shapes[i] = shapeFactory.getNext(*descriptionOfFirstElement, i);
+      }
     }
-    tmp = v_shape[0];
-    delete[] v_shape;
   }
   numElements = num;
-  v_shape = new volumeShape*[numElements];
-  if (!tmp) {
-    for (int i = 0; i < numElements; i++) {
-      v_shape[i] = NULL;
-    }
-  } else {
-    for (int i = 0; i < numElements; i++) {
-      v_shape[i] = tmp->getNext(i, stackType);
-    }
-  }
 }
 
 void TDetector::setStackType(int st)
@@ -87,57 +70,38 @@ void TDetector::setMaterial(TMaterial& m)
   mat = &m;
 }
 
-void TDetector::setShapeFirstElement(volumeShape* sh)
+void TDetector::setShapeFirstElement(std::shared_ptr<volumeShape> sh)
 {
-  defined = true;
-  if (numElements) {
-    for (int i = 0; i < numElements; i++) {
-      if (v_shape[i] != NULL)
-        delete v_shape[i];
+  if (!sh) {
+    return;
     }
-  }
-  v_shape[0] = sh;
-  for (int i = 1; i < numElements; i++) {
-    v_shape[i] = sh->getNext(i, stackType);
-  }
-}
-void TDetector::setShapes(int n, volumeShape** shapes)
-{
   defined = true;
-  if (numElements) {
-    for (int i = 0; i < numElements; i++) {
-      if (v_shape[i] != NULL)
-        delete v_shape[i];
+  descriptionOfFirstElement = std::make_unique<shape_parameter>(sh->getDescription());
+  auto& shapeFactory = ShapeFactory::getInstance();
+  if (numElements > 0) {
+    _shapes.resize(numElements);
+    _shapes[0] = sh;
+    for (size_t i = 1; i < numElements; i++) {
+      _shapes[i] = shapeFactory.getNext(*descriptionOfFirstElement, i);
     }
-    delete[] v_shape;
-  }
-  numElements = n;
-  v_shape = new volumeShape*[numElements];
-  for (int i = 0; i < numElements; i++) {
-    v_shape[i] = NULL;
-    if (shapes[i] != NULL)
-      v_shape[i] = shapes[i]->getClone();
   }
 }
 
-volumeShape* TDetector::getOverallShape() const
+std::shared_ptr<volumeShape> TDetector::getOverallShape() const
 {
-  if (v_shape == NULL)
-    return NULL;
-  if (v_shape[0] == NULL)
-    return NULL;
-  volumeShape* ret = v_shape[0]->getEnvelope(numElements, stackType);
-  return ret;
+  if (numElements == 0 || !_shapes[0]) {
+    return nullptr;
+  }
+  auto& shapeFactory = ShapeFactory::getInstance();
+  return shapeFactory.getEnvelope(_shapes[0]->getDescription(), numElements);
 }
 
-volumeShape* TDetector::getShape(int ElementNumber) const
+volumeShape* TDetector::getShape(size_t ElementNumber) const
 {
-  volumeShape* sh;
-  if ((ElementNumber > numElements) || (ElementNumber < 0) || v_shape == NULL) {
-    return NULL;
+  if ((ElementNumber > numElements)) {
+    return nullptr;
   }
-  sh = v_shape[ElementNumber];
-  return sh;
+  return _shapes[ElementNumber].get();
 }
 
 bool TDetector::isDefined() const { return defined; }
@@ -149,20 +113,19 @@ void TDetector::operator=(const TDetector& d)
     return;
   }
   defined = true;
-  if (numElements) {
-    for (int i = 0; i < numElements; i++)
-      if (v_shape[i] != NULL)
-        delete v_shape[i];
-    delete[] v_shape;
-  }
+  _shapes.clear();
   numElements = d.getNumberOfElements();
   stackType = d.getStackType();
-  for (int i = 0; i < numElements; i++)
-    v_shape[i] = d.getShape(i)->getClone();
+  if (numElements > 0) {
+    auto& shapeFactory = ShapeFactory::getInstance();
+    descriptionOfFirstElement = std::make_unique<shape_parameter>(d.getShape(0)->getDescription());
+    for (size_t i = 0; i < numElements; i++)
+      _shapes.push_back(shapeFactory.getNext(*descriptionOfFirstElement, i));
+  }
   mat = d.getMaterial();
 }
 
-int TDetector::getNumberOfElements() const { return numElements; }
+size_t TDetector::getNumberOfElements() const { return numElements; }
 
 int TDetector::getID() const { return detNum; }
 void TDetector::setCircular(bool circ) { circular = circ; }

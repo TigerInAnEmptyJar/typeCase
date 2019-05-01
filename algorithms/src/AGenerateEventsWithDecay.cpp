@@ -77,7 +77,7 @@ bool AGenerateEventsWithDecay::accept(sLine3D* trajectories)
       susp[i] = shape->suspect(trajectories[j], setup.getDetectorr(i).getStackType());
       if (requiredHits[i] > 0 && charge[j] == 0)
         continue;
-      if (susp[i] >= 0 && susp[i] < setup.getDetectorr(i).getNumberOfElements())
+      if (susp[i] >= 0 && susp[i] < static_cast<int>(setup.getDetectorr(i).getNumberOfElements()))
         nHit++;
     }
     if (nHit < abs(requiredHits[i]))

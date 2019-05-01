@@ -4,19 +4,15 @@
 #include "material.h"
 #include "volumeShape.h"
 
+#include <memory>
+#include <vector>
+
+class shape_parameter;
 /*!
  * \brief The TDetector class
  */
 class TDetector : public TBase
 {
-private:
-  int numElements;
-  int stackType;
-  bool circular;
-  const int detNum;
-  volumeShape** v_shape; // volumeShape **v_shape;//[numElements]->
-  TMaterial* mat;        // TMaterial *mat;//->
-  bool defined;          //!
 public:
   /*!
    * \brief TDetector
@@ -40,9 +36,6 @@ public:
    */
   TDetector();
 
-  /*!
-   * \brief Destructor
-   */
   ~TDetector();
 
   /*!
@@ -65,7 +58,7 @@ public:
    * Returns the number of elements defined for the detector.
    * \return
    */
-  int getNumberOfElements() const;
+  size_t getNumberOfElements() const;
 
   /*!
    * \brief getID
@@ -95,7 +88,7 @@ public:
    * correctly implemented. Take care, that this pointer is correctly deleted after use.
    * \return
    */
-  volumeShape* getOverallShape() const;
+  std::shared_ptr<volumeShape> getOverallShape() const;
 
   /*!
    * \brief getShape
@@ -104,7 +97,7 @@ public:
    * \param ElementNumber
    * \return
    */
-  volumeShape* getShape(int ElementNumber) const;
+  volumeShape* getShape(size_t ElementNumber) const;
 
   /*!
    * \brief setNumberOfElements
@@ -113,7 +106,7 @@ public:
    * delete operations.
    * \param num
    */
-  void setNumberOfElements(int num);
+  void setNumberOfElements(size_t num);
 
   /*!
    * \brief setStackType
@@ -138,16 +131,7 @@ public:
    * element volume shape is generated using the getNext() routine and the stackType property.
    * \param sh
    */
-  void setShapeFirstElement(volumeShape* sh);
-
-  /*!
-   * \brief setShapes
-   * Sets all shapes of all detector-elements in one go. Use this if you don't want to use the
-   * getNext()-method, the shapes provide.
-   * \param n
-   * \param shapes
-   */
-  void setShapes(int n, volumeShape** shapes);
+  void setShapeFirstElement(std::shared_ptr<volumeShape> sh);
 
   /*!
    * \brief setCircular
@@ -170,5 +154,15 @@ public:
    * \return
    */
   bool isDefined() const;
+
+private:
+  size_t numElements;
+  int stackType;
+  bool circular;
+  const int detNum;
+  std::vector<std::shared_ptr<volumeShape>> _shapes;
+  std::unique_ptr<shape_parameter> descriptionOfFirstElement;
+  TMaterial* mat;
+  bool defined;
 };
 #endif

@@ -6,7 +6,6 @@ add_library(lib${PROJECT_NAME} STATIC
     src/tofAnalysis_consts_t.cpp
     src/tofAnalysis_data_t.cpp
     src/tofAnalysis_inits_t.cpp
-    src/tofAnalysis_shapes_t.cpp
     src/tofAnalysis_t.cpp
 )
 target_include_directories(lib${PROJECT_NAME}

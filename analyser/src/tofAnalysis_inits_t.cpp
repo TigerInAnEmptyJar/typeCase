@@ -1,8 +1,11 @@
+#include "tofAnalysis_t.h"
+
 #include "ABetheBloch.h"
 #include "Eparticles.h"
 #include "logger.h"
 #include "parameterManager.h"
-#include "tofAnalysis_t.h"
+#include "shapeFactory.h"
+
 #include <QtCore/QDateTime>
 void tofAnalysis::createSetup(vector<detector_parameter>& dets, vector<material_parameter>& mats,
                               reaction_parameter col)
@@ -182,6 +185,7 @@ void tofAnalysis::defineDetectors(vector<detector_parameter>& dets)
     Detectors[i] = 0;
   int id;
   int n;
+  auto& shapeFactory = ShapeFactory::getInstance();
   for (int i = 0; i <= maxID; i++) {
     n = 0;
     id = -1;
@@ -212,7 +216,7 @@ void tofAnalysis::defineDetectors(vector<detector_parameter>& dets)
     Detectors[i]->setStackType(dets[id].getStackType());
     anaLog << "define detector shape " << dets[id].getShape().getName();
     shape_parameter s = dets[id].getShape();
-    volumeShape* shape = tofAnalysis::getVShape(s);
+    auto shape = shapeFactory.getVolume(dets[id].getShape());
     shape->setMaxDistance(dets[id].getMaxDistance());
     anaLog << "... setShape";
     Detectors[i]->setShapeFirstElement(shape);
@@ -236,12 +240,12 @@ void tofAnalysis::defineReaction(reaction_parameter col)
   mom.setPM(vector3D(0, 0, col.getBeamMomentum(1)), Eparticles::getMass("proton"));
   b2.setParticle(mom);
   shape_parameter s = col.getTargetShape();
-  volumeShape* sh1 = tofAnalysis::getVShape(s);
+  auto& shapeFactory = ShapeFactory::getInstance();
+  auto sh1 = shapeFactory.getVolume(s);
   anaLog << "end define setup" << endli;
   isInitS = true;
   mom.setPM(vector3D(0, 0, 0), Eparticles::getMass("proton"));
-  TTarget t(mom, *sh1);
-  //    t.setShape(*sh1);
+  TTarget t(mom, sh1);
   Setup.setNumberOfBeams(((col.hasTwoBeams()) ? 2 : 1));
   Setup.setBeam(b1, 0);
   Setup.setBeam(b2, 1);

@@ -5,6 +5,8 @@
 #define SETUP
 #include "TBase.h"
 
+#include <memory>
+
 /*!
  * \brief The TTarget class
  * This is the target class. A target here is defined by a volume shape, a temperature and a
@@ -15,7 +17,7 @@
 class TTarget : public TBase
 {
 private:
-  volumeShape* shape_;
+  std::shared_ptr<volumeShape> shape_;
   momentum4D particle_;
   float temperature_;
 
@@ -34,7 +36,7 @@ public:
    * \param particle
    * \param shape
    */
-  TTarget(momentum4D particle, volumeShape& shape);
+  TTarget(momentum4D particle, std::shared_ptr<volumeShape> shape);
 
   /*!
    * \brief TTarget
@@ -42,11 +44,6 @@ public:
    * \param t
    */
   TTarget(const TTarget& t);
-
-  /*!
-   * \brief Destructor.
-   */
-  ~TTarget();
 
   /*!
    * \brief getShape
@@ -69,7 +66,7 @@ public:
    * after use.
    * \param shape
    */
-  void setShape(volumeShape& shape);
+  void setShape(std::shared_ptr<volumeShape> shape);
 
   /*!
    * \brief getParticle

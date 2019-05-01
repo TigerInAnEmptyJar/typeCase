@@ -67,9 +67,10 @@ void TSetup::operator=(const TSetup& s)
   else
     tar = s.getTarget();
 }
-TTarget::TTarget() : TBase("TTarget") { shape_ = 0; }
+TTarget::TTarget() : TBase("TTarget") {}
 
-TTarget::TTarget(momentum4D particle, volumeShape& shape) : TBase("TTarget"), shape_(&shape)
+TTarget::TTarget(momentum4D particle, std::shared_ptr<volumeShape> shape)
+    : TBase("TTarget"), shape_(shape)
 {
   particle_ = particle;
 }
@@ -79,18 +80,11 @@ TTarget::TTarget(const TTarget& t) : TBase("TTarget"), particle_(t.getParticle()
   temperature_ = t.getTemperature();
 }
 
-TTarget::~TTarget() { delete shape_; }
-
 volumeShape TTarget::getShape() const { return *shape_; }
 
 volumeShape& TTarget::getShaper() { return *shape_; }
 
-void TTarget::setShape(volumeShape& shape)
-{
-  if (shape_)
-    delete shape_;
-  shape_ = &shape;
-}
+void TTarget::setShape(std::shared_ptr<volumeShape> shape) { shape_ = shape; }
 
 momentum4D TTarget::getParticle() const { return particle_; }
 

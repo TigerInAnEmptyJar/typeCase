@@ -788,7 +788,7 @@ void AReadFromSimpleTree::readTrack(int i)
             th->getRawTDCr() = (int)(tdc);
             th->getElementr() = el;
             th->getDetectorr() = de;
-            if (el < setup->getDetectorr(de).getNumberOfElements()) {
+            if (el < static_cast<int>(setup->getDetectorr(de).getNumberOfElements())) {
               sh = setup->getDetectorr(de).getShape(el);
               th->setHitShape(sh);
               th->setValid(true);
@@ -930,7 +930,8 @@ void AReadFromSimpleTree::readHit(int i)
         th->getRaw().setTDC(Hits[j / 20][j % 20].tdcR);
         th->getRaw().setElement(el);
         th->getRaw().setDetector(de);
-        if (Hits[j / 20][j % 20].el < setup->getDetectorr(de).getNumberOfElements()) {
+        if (Hits[j / 20][j % 20].el <
+            static_cast<int>(setup->getDetectorr(de).getNumberOfElements())) {
           sh = setup->getDetectorr(de).getShape(el);
           th->setHitShape(sh);
           th->setValid(true);

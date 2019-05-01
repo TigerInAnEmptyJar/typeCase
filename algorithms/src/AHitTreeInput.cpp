@@ -222,7 +222,7 @@ void AHitTreeInput::readEntry(int entry)
       continue;
     if ((*(numberOfHits[d])) >= maxHit)
       continue;
-    if (e >= setup.getDetectorr(d).getNumberOfElements() || e < 0)
+    if (e >= static_cast<int>(setup.getDetectorr(d).getNumberOfElements()) || e < 0)
       continue;
     ht = hits[d][*(numberOfHits[d])];
     ht->reset();
