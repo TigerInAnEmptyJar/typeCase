@@ -33,3 +33,10 @@ add_library(lib${PROJECT_NAME} STATIC
 target_include_directories(lib${PROJECT_NAME}
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+
+add_library(newGeometry INTERFACE)
+target_include_directories(newGeometry
+    INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+add_subdirectory(tests)

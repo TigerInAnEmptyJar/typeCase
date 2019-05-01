@@ -64,6 +64,18 @@ code as well. No serious code should go without some automated tests, so I
 added them here too. They still not test the complete shape library, I'll
 refactor that as well when adding the tests for them.
 
+Now typeCase has a new geometry library. It comes with a test suite, that
+should cover most of the functionality. It is not yet complete with respect
+to the functionality that is provided by the old geometry library (matrix
+inversion is not yet working for higher dimensions than 3 and we need that
+for kinetic fitting), but it is considerably faster since I got rid of
+virtual inheritance, used standard library objects and functions and (I guess
+this made the biggest impact) it is now templated, so quite some of the
+calculation is already done at compile time. I made some performance
+comparisons (see: PerformanceTests test suite; run with -V to see the values)
+and the new library seems to be a factor of at least 10 faster.
+It is not yet used in the rest of the code, but I guess that will come soon.
+
 Try it, if you like. Prerequisites are:
 
 * gcc-4.8 (newer versions will lead to compiler errors; yes, the compilers
