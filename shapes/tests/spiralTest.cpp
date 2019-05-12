@@ -18,7 +18,7 @@ TEST(SpiralTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(spiral_id));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(spiral_id));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(spiral_id));
 
   Shape::removeShapesFromFactory(factory);
 }
@@ -28,7 +28,7 @@ TEST(SpiralTest, spiral)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(spiral_id);
+  auto parameter = factory.shapeParameter(spiral_id);
 
   // let's create a stack of 10 spirals .
 
@@ -41,7 +41,7 @@ TEST(SpiralTest, spiral)
   parameter.setParam<float>(3, 1.f);
   parameter.setParam<float>(4, 1.f);
 
-  auto shape = factory.getVolume(parameter);
+  auto shape = factory.createVolume(parameter);
   EXPECT_EQ("spiral", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<spiral>(shape));
   auto spiral_sh = dynamic_pointer_cast<spiral>(shape);
@@ -70,7 +70,7 @@ TEST(SpiralTest, spiral)
   angles.push_back(static_cast<float>(30. * M_PI / 180.));
 
   for (size_t i = 1; i < 10; i++) {
-    auto nextShape = factory.getNext(parameter, i);
+    auto nextShape = factory.createNext(parameter, i);
     ASSERT_NE(nullptr, nextShape);
     auto next_sh = dynamic_pointer_cast<spiral>(nextShape);
     ASSERT_NE(nullptr, next_sh);
@@ -87,7 +87,7 @@ TEST(SpiralTest, spiral)
   }
 
   {
-    auto envelopeShape = factory.getEnvelope(parameter, 10);
+    auto envelopeShape = factory.createEnvelope(parameter, 10);
     EXPECT_NE(nullptr, envelopeShape);
     EXPECT_EQ("spiral", envelopeShape->getName());
 
@@ -110,7 +110,7 @@ TEST(SpiralTest, parameter)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(spiral_id);
+  auto parameter = factory.shapeParameter(spiral_id);
 
   EXPECT_EQ("spiral", parameter.getName());
   EXPECT_EQ(spiral_id, parameter.getId());

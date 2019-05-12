@@ -18,13 +18,8 @@ void removeShapesFromFactory(ShapeFactory& factory)
                 [&factory](auto provider) { provider->removeFromFactory(factory); });
 }
 }
-#include "shapes.h"
+#include "strawTube.h"
 void initEveryThn()
 {
-  circle c{{}};
-  cylinder cy;
-  fiber f;
-  sphericRectangle sr;
   strawTube s;
-  rectangle r;
 }

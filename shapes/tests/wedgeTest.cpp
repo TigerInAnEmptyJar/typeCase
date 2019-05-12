@@ -21,14 +21,14 @@ TEST(WedgeTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(wedge_id1));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(wedge_id1));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(wedge_id1));
   ASSERT_TRUE(factory.isShapeDefined(wedge_id2));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(wedge_id2));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(wedge_id2));
 
   // wedge type 2
   /// \todo move to own test
   {
-    auto parameter = factory.getShapeParameter(wedge_id2);
+    auto parameter = factory.shapeParameter(wedge_id2);
 
     parameter.setParam<point3D>(0, {0, 0, 0});
     parameter.setParam<vector3D>(0, {0, 0, 1});
@@ -39,7 +39,7 @@ TEST(WedgeTest, provider)
     parameter.setParam<float>(3, 1.f);
     parameter.setParam<float>(4, 5.f);
 
-    auto shape = factory.getVolume(parameter);
+    auto shape = factory.createVolume(parameter);
     EXPECT_EQ("wedge", shape->getName());
     ASSERT_NE(nullptr, dynamic_pointer_cast<wedge>(shape));
     auto wedge_sh = dynamic_pointer_cast<wedge>(shape);
@@ -62,7 +62,7 @@ TEST(WedgeTest, wedge1)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(wedge_id1);
+  auto parameter = factory.shapeParameter(wedge_id1);
 
   // let's create a stack of 12 wedges to form a pie.
 
@@ -89,7 +89,7 @@ TEST(WedgeTest, wedge1)
   angles.push_back(static_cast<float>(60. * M_PI / 180.));
   angles.push_back(static_cast<float>(30. * M_PI / 180.));
 
-  auto shape = factory.getVolume(parameter);
+  auto shape = factory.createVolume(parameter);
   EXPECT_EQ("wedge", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<wedge>(shape));
   auto wedge_sh = dynamic_pointer_cast<wedge>(shape);
@@ -104,7 +104,7 @@ TEST(WedgeTest, wedge1)
   EXPECT_EQ(parameter.getParam<float>(4), wedge_sh->getDistToBarrelCenter());
 
   for (size_t i = 1; i < 12; i++) {
-    auto nextShape = factory.getNext(parameter, i);
+    auto nextShape = factory.createNext(parameter, i);
     ASSERT_NE(nullptr, nextShape);
     auto next_sh = dynamic_pointer_cast<wedge>(nextShape);
     ASSERT_NE(nullptr, next_sh);
@@ -122,7 +122,7 @@ TEST(WedgeTest, wedge1)
 
   // pie with one piece missing
   {
-    auto envelopeShape = factory.getEnvelope(parameter, 11);
+    auto envelopeShape = factory.createEnvelope(parameter, 11);
     EXPECT_NE(nullptr, envelopeShape);
     EXPECT_EQ("wedge", envelopeShape->getName());
 
@@ -139,7 +139,7 @@ TEST(WedgeTest, wedge1)
 
   // un cut pie
   {
-    auto envelopeShape = factory.getEnvelope(parameter, 12);
+    auto envelopeShape = factory.createEnvelope(parameter, 12);
     EXPECT_NE(nullptr, envelopeShape);
     EXPECT_EQ("ring", envelopeShape->getName());
 
@@ -162,7 +162,7 @@ TEST(WedgeTest, parameter)
   Shape::addShapesToFactory(factory);
   // wedge type 1
   {
-    auto parameter = factory.getShapeParameter(wedge_id1);
+    auto parameter = factory.shapeParameter(wedge_id1);
 
     EXPECT_EQ("wedge", parameter.getName());
     EXPECT_EQ(wedge_id1, parameter.getId());
@@ -184,7 +184,7 @@ TEST(WedgeTest, parameter)
   }
   // wedge type 2
   {
-    auto parameter = factory.getShapeParameter(wedge_id2);
+    auto parameter = factory.shapeParameter(wedge_id2);
 
     EXPECT_EQ("wedge", parameter.getName());
     EXPECT_EQ(wedge_id2, parameter.getId());

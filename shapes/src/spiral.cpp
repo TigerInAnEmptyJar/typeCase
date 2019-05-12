@@ -55,7 +55,7 @@ struct ShapeProvider : public FactoryShapeProvider,
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
 };
-std::shared_ptr<ShapeProvider> prov = [] {
+volatile static std::shared_ptr<ShapeProvider> prov = [] {
   auto r = std::make_shared<ShapeProvider>();
   r->install();
   return r;

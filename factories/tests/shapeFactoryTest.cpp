@@ -29,7 +29,7 @@ public:
   MOCK_METHOD2(envelope, void(shape_parameter const&, size_t));
 };
 }
-class unitTest : public testing::Test
+class ShapeFactoryUnitTest : public testing::Test
 {
 public:
   void SetUp() override
@@ -90,16 +90,16 @@ public:
                                       0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 };
 
-TEST(BasicTest, instanceTest)
+TEST(BasicShapeFactoryTest, instanceTest)
 {
   auto& factory = ShapeFactory::getInstance();
-  EXPECT_EQ(size_t{0}, factory.getDefinedShapes().size());
+  EXPECT_EQ(size_t{0}, factory.definedShapes().size());
 }
 
-TEST_F(unitTest, installTest)
+TEST_F(ShapeFactoryUnitTest, installTest)
 {
   ShapeFactory factory;
-  EXPECT_EQ(size_t{0}, factory.getDefinedShapes().size());
+  EXPECT_EQ(size_t{0}, factory.definedShapes().size());
   EXPECT_FALSE(factory.isShapeDefined(plane_id));
   EXPECT_FALSE(factory.isShapeDefined(volume_id));
   EXPECT_FALSE(factory.removeShapeFromFactory(plane_id));
@@ -109,46 +109,46 @@ TEST_F(unitTest, installTest)
   {
     EXPECT_TRUE(factory.isShapeDefined(plane_id));
     EXPECT_FALSE(factory.isShapeDefined(volume_id));
-    EXPECT_EQ(ShapeType::PlanarShape, factory.getShapeType(plane_id));
-    ASSERT_EQ(size_t{1}, factory.getDefinedShapes().size());
-    EXPECT_EQ(plane_id, factory.getDefinedShapes()[0].getId());
+    EXPECT_EQ(ShapeType::PlanarShape, factory.shapeType(plane_id));
+    ASSERT_EQ(size_t{1}, factory.definedShapes().size());
+    EXPECT_EQ(plane_id, factory.definedShapes()[0].getId());
     // volume is not available
-    EXPECT_EQ(nullptr, factory.getVolume(volumeDescription));
-    EXPECT_EQ(nullptr, factory.getPlane(volumeDescription));
-    EXPECT_EQ(nullptr, factory.getShape(volumeDescription));
+    EXPECT_EQ(nullptr, factory.createVolume(volumeDescription));
+    EXPECT_EQ(nullptr, factory.createPlane(volumeDescription));
+    EXPECT_EQ(nullptr, factory.createShape(volumeDescription));
   }
   uninstallPlane(factory);
   EXPECT_FALSE(factory.isShapeDefined(plane_id));
   EXPECT_FALSE(factory.isShapeDefined(volume_id));
-  EXPECT_EQ(size_t{0}, factory.getDefinedShapes().size());
+  EXPECT_EQ(size_t{0}, factory.definedShapes().size());
   // volumes
   installVolume(factory);
   {
     EXPECT_FALSE(factory.isShapeDefined(plane_id));
     EXPECT_TRUE(factory.isShapeDefined(volume_id));
-    EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(volume_id));
-    ASSERT_EQ(size_t{1}, factory.getDefinedShapes().size());
-    EXPECT_EQ(volume_id, factory.getDefinedShapes()[0].getId());
+    EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(volume_id));
+    ASSERT_EQ(size_t{1}, factory.definedShapes().size());
+    EXPECT_EQ(volume_id, factory.definedShapes()[0].getId());
     // plane is not available
-    EXPECT_EQ(nullptr, factory.getVolume(planeDescription));
-    EXPECT_EQ(nullptr, factory.getPlane(planeDescription));
-    EXPECT_EQ(nullptr, factory.getShape(planeDescription));
+    EXPECT_EQ(nullptr, factory.createVolume(planeDescription));
+    EXPECT_EQ(nullptr, factory.createPlane(planeDescription));
+    EXPECT_EQ(nullptr, factory.createShape(planeDescription));
   }
   uninstallVolume(factory);
   EXPECT_FALSE(factory.isShapeDefined(plane_id));
   EXPECT_FALSE(factory.isShapeDefined(volume_id));
-  EXPECT_EQ(size_t{0}, factory.getDefinedShapes().size());
+  EXPECT_EQ(size_t{0}, factory.definedShapes().size());
 
   installPlane(factory);
   installVolume(factory);
   EXPECT_TRUE(factory.isShapeDefined(plane_id));
   EXPECT_TRUE(factory.isShapeDefined(volume_id));
-  EXPECT_EQ(size_t{2}, factory.getDefinedShapes().size());
+  EXPECT_EQ(size_t{2}, factory.definedShapes().size());
   uninstallPlane(factory);
   uninstallVolume(factory);
 }
 
-TEST_F(unitTest, creationTest)
+TEST_F(ShapeFactoryUnitTest, creationTest)
 {
   ShapeFactory factory;
   installPlane(factory);
@@ -156,46 +156,46 @@ TEST_F(unitTest, creationTest)
   // planes
   {
     // well, a plane isn't a volume
-    EXPECT_EQ(nullptr, factory.getVolume(planeDescription));
+    EXPECT_EQ(nullptr, factory.createVolume(planeDescription));
 
     EXPECT_CALL(plane_messenger, create(_));
-    auto shape = factory.getPlane(planeDescription);
+    auto shape = factory.createPlane(planeDescription);
     EXPECT_NE(nullptr, shape);
     EXPECT_NE(nullptr, dynamic_pointer_cast<test::TestShape1>(shape));
 
     EXPECT_CALL(plane_messenger, create(_));
-    auto shape2 = factory.getShape(planeDescription);
+    auto shape2 = factory.createShape(planeDescription);
     EXPECT_NE(nullptr, shape2);
     EXPECT_NE(nullptr, dynamic_pointer_cast<test::TestShape1>(shape2));
 
     // for planes there is no such thing as next or envelope
-    EXPECT_EQ(nullptr, factory.getNext(planeDescription, 1));
-    EXPECT_EQ(nullptr, factory.getEnvelope(planeDescription, 1));
+    EXPECT_EQ(nullptr, factory.createNext(planeDescription, 1));
+    EXPECT_EQ(nullptr, factory.createEnvelope(planeDescription, 1));
   }
   // volumes
   {
     // well, a volume isn't a plane
-    EXPECT_EQ(nullptr, factory.getPlane(volumeDescription));
+    EXPECT_EQ(nullptr, factory.createPlane(volumeDescription));
 
     // creation as volume explicitly
     EXPECT_CALL(volume_messenger, create(_));
-    auto shape = factory.getVolume(volumeDescription);
+    auto shape = factory.createVolume(volumeDescription);
     EXPECT_NE(nullptr, shape);
     EXPECT_NE(nullptr, dynamic_pointer_cast<test::TestShape2>(shape));
     // creation as general shape
     EXPECT_CALL(volume_messenger, create(_));
-    auto shape2 = factory.getShape(volumeDescription);
+    auto shape2 = factory.createShape(volumeDescription);
     EXPECT_NE(nullptr, shape2);
     EXPECT_NE(nullptr, dynamic_pointer_cast<test::TestShape2>(shape2));
     // series generation
     EXPECT_CALL(volume_messenger, next(_, 1));
     EXPECT_CALL(volume_messenger, create(_));
-    shape = factory.getNext(volumeDescription, 1);
+    shape = factory.createNext(volumeDescription, 1);
     EXPECT_NE(nullptr, dynamic_pointer_cast<test::TestShape2>(shape));
     // envelope generation
     EXPECT_CALL(volume_messenger, envelope(_, 1));
     EXPECT_CALL(volume_messenger, create(_));
-    shape = factory.getEnvelope(volumeDescription, 1);
+    shape = factory.createEnvelope(volumeDescription, 1);
     EXPECT_NE(nullptr, dynamic_pointer_cast<test::TestShape2>(shape));
   }
   uninstallPlane(factory);

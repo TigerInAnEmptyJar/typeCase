@@ -15,8 +15,6 @@ using namespace std;
  */
 class AAlgorithm : public QObject
 {
-private:
-  string name; //!
 public:
   /*!
    * \brief AAlgorithm
@@ -96,6 +94,9 @@ public:
    * \return
    */
   static algorithm_parameter getDescription();
+
+private:
+  string name; //!
 };
 
 /*!

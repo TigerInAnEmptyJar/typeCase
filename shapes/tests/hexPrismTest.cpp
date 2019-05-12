@@ -22,11 +22,11 @@ TEST(HexprismTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(hexPrism_id1));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(hexPrism_id1));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(hexPrism_id1));
   ASSERT_TRUE(factory.isShapeDefined(hexPrism_id2));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(hexPrism_id2));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(hexPrism_id2));
   ASSERT_TRUE(factory.isShapeDefined(hexPrism_id3));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(hexPrism_id3));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(hexPrism_id3));
 
   Shape::removeShapesFromFactory(factory);
 }
@@ -36,7 +36,7 @@ TEST(HexprismTest, hexprism1)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(hexPrism_id1);
+  auto parameter = factory.shapeParameter(hexPrism_id1);
 
   // let's create a stack of 10 spirals .
 
@@ -46,7 +46,7 @@ TEST(HexprismTest, hexprism1)
   parameter.setParam<vector3D>(2, {1, 0, 0});
   parameter.setParam<int>(0, 1);
 
-  auto shape = factory.getVolume(parameter);
+  auto shape = factory.createVolume(parameter);
   EXPECT_EQ("hexPrism", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<hexPrism>(shape));
   auto hexprism_sh = dynamic_pointer_cast<hexPrism>(shape);
@@ -57,7 +57,7 @@ TEST(HexprismTest, hexprism1)
   EXPECT_EQ(parameter.getParam<vector3D>(2), hexprism_sh->getDirection(2));
 
   for (size_t i = 1; i < 10; i++) {
-    auto nextShape = factory.getNext(parameter, i);
+    auto nextShape = factory.createNext(parameter, i);
     ASSERT_NE(nullptr, nextShape);
     auto next_sh = dynamic_pointer_cast<hexPrism>(nextShape);
     ASSERT_NE(nullptr, next_sh);
@@ -70,7 +70,7 @@ TEST(HexprismTest, hexprism1)
   }
 
   {
-    auto envelopeShape = factory.getEnvelope(parameter, 10);
+    auto envelopeShape = factory.createEnvelope(parameter, 10);
     EXPECT_NE(nullptr, envelopeShape);
     EXPECT_EQ("hexPrism", envelopeShape->getName());
 
@@ -95,7 +95,7 @@ TEST(HexprismTest, parameter)
 
   // hexprism type 1
   {
-    auto parameter = factory.getShapeParameter(hexPrism_id1);
+    auto parameter = factory.shapeParameter(hexPrism_id1);
 
     EXPECT_EQ("hexPrism", parameter.getName());
     EXPECT_EQ(hexPrism_id1, parameter.getId());
@@ -114,7 +114,7 @@ TEST(HexprismTest, parameter)
 
   // hexprism type 2
   {
-    auto parameter = factory.getShapeParameter(hexPrism_id3);
+    auto parameter = factory.shapeParameter(hexPrism_id3);
 
     EXPECT_EQ("hexPrism", parameter.getName());
     EXPECT_EQ(hexPrism_id3, parameter.getId());
@@ -133,7 +133,7 @@ TEST(HexprismTest, parameter)
 
   // hexprism type 3
   {
-    auto parameter = factory.getShapeParameter(hexPrism_id3);
+    auto parameter = factory.shapeParameter(hexPrism_id3);
 
     EXPECT_EQ("hexPrism", parameter.getName());
     EXPECT_EQ(hexPrism_id3, parameter.getId());

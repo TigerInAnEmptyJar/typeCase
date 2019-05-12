@@ -4,7 +4,7 @@
 
 std::vector<std::shared_ptr<FactoryShapeProvider>> FactoryShapeProvider::installedProviders;
 
-std::vector<shape_parameter> ShapeFactory::getDefinedShapes() const
+std::vector<shape_parameter> ShapeFactory::definedShapes() const
 {
   std::vector<shape_parameter> result;
   std::transform(std::begin(installed_shapes), std::end(installed_shapes),
@@ -15,7 +15,7 @@ std::vector<shape_parameter> ShapeFactory::getDefinedShapes() const
   return result;
 }
 
-shape_parameter ShapeFactory::getShapeParameter(boost::uuids::uuid id) const
+shape_parameter ShapeFactory::shapeParameter(boost::uuids::uuid id) const
 {
   auto theShape = installed_shapes.find(id);
   if (theShape == installed_shapes.end()) {
@@ -24,7 +24,7 @@ shape_parameter ShapeFactory::getShapeParameter(boost::uuids::uuid id) const
   return theShape->second.parameter;
 }
 
-ShapeType ShapeFactory::getShapeType(boost::uuids::uuid id) const
+ShapeType ShapeFactory::shapeType(boost::uuids::uuid id) const
 {
   auto theShape = installed_shapes.find(id);
   if (theShape == installed_shapes.end()) {
@@ -38,7 +38,7 @@ bool ShapeFactory::isShapeDefined(boost::uuids::uuid const& id) const
   return installed_shapes.find(id) != installed_shapes.end();
 }
 
-std::shared_ptr<volumeShape> ShapeFactory::getVolume(shape_parameter const& shape) const
+std::shared_ptr<volumeShape> ShapeFactory::createVolume(shape_parameter const& shape) const
 {
   auto theShape = installed_shapes.find(shape.getId());
   if (theShape == installed_shapes.end()) {
@@ -51,8 +51,8 @@ std::shared_ptr<volumeShape> ShapeFactory::getVolume(shape_parameter const& shap
   return dynamic_pointer_cast<volumeShape>(theShape->second.creation(shape));
 }
 
-std::shared_ptr<volumeShape> ShapeFactory::getNext(shape_parameter const& first_element,
-                                                   size_t num) const
+std::shared_ptr<volumeShape> ShapeFactory::createNext(shape_parameter const& first_element,
+                                                      size_t num) const
 {
   auto theShape = installed_shapes.find(first_element.getId());
   if (theShape == installed_shapes.end()) {
@@ -63,11 +63,11 @@ std::shared_ptr<volumeShape> ShapeFactory::getNext(shape_parameter const& first_
     return nullptr;
   }
 
-  return getVolume(theShape->second.series(first_element, num));
+  return createVolume(theShape->second.series(first_element, num));
 }
 
-std::shared_ptr<volumeShape> ShapeFactory::getEnvelope(shape_parameter const& first_element,
-                                                       size_t num) const
+std::shared_ptr<volumeShape> ShapeFactory::createEnvelope(shape_parameter const& first_element,
+                                                          size_t num) const
 {
   auto theShape = installed_shapes.find(first_element.getId());
   if (theShape == installed_shapes.end()) {
@@ -78,10 +78,10 @@ std::shared_ptr<volumeShape> ShapeFactory::getEnvelope(shape_parameter const& fi
     return nullptr;
   }
 
-  return getVolume(theShape->second.envelope(first_element, num));
+  return createVolume(theShape->second.envelope(first_element, num));
 }
 
-std::shared_ptr<planeShape> ShapeFactory::getPlane(shape_parameter const& shape) const
+std::shared_ptr<planeShape> ShapeFactory::createPlane(shape_parameter const& shape) const
 {
   auto theShape = installed_shapes.find(shape.getId());
   if (theShape == installed_shapes.end()) {
@@ -94,7 +94,7 @@ std::shared_ptr<planeShape> ShapeFactory::getPlane(shape_parameter const& shape)
   return dynamic_pointer_cast<planeShape>(theShape->second.creation(shape));
 }
 
-std::shared_ptr<base_shape> ShapeFactory::getShape(shape_parameter const& shape) const
+std::shared_ptr<base_shape> ShapeFactory::createShape(shape_parameter const& shape) const
 {
   auto theShape = installed_shapes.find(shape.getId());
   if (theShape == installed_shapes.end()) {

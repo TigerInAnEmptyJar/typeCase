@@ -18,15 +18,15 @@ TEST(HexagonTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(hexagon_id));
-  EXPECT_EQ(ShapeType::PlanarShape, factory.getShapeType(hexagon_id));
+  EXPECT_EQ(ShapeType::PlanarShape, factory.shapeType(hexagon_id));
 
-  auto parameter = factory.getShapeParameter(hexagon_id);
+  auto parameter = factory.shapeParameter(hexagon_id);
 
   parameter.setParam<point3D>(0, {0, 0, 0});
   parameter.setParam<point3D>(1, {1, 0, 0});
   parameter.setParam<vector3D>(0, {0, 0, 1});
 
-  auto shape = factory.getPlane(parameter);
+  auto shape = factory.createPlane(parameter);
   EXPECT_EQ("hexagon", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<hexagon>(shape));
 
@@ -35,10 +35,10 @@ TEST(HexagonTest, provider)
   EXPECT_EQ(parameter.getParam<vector3D>(0), hexagon_sh->getNormal());
   EXPECT_EQ(parameter.getParam<point3D>(1), hexagon_sh->A());
 
-  auto nextShape = factory.getNext(parameter, 2);
+  auto nextShape = factory.createNext(parameter, 2);
   EXPECT_EQ(nullptr, nextShape);
 
-  auto envelopeShape = factory.getEnvelope(parameter, 2);
+  auto envelopeShape = factory.createEnvelope(parameter, 2);
   EXPECT_EQ(nullptr, envelopeShape);
 
   Shape::removeShapesFromFactory(factory);
@@ -49,7 +49,7 @@ TEST(HexagonTest, parameter)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(hexagon_id);
+  auto parameter = factory.shapeParameter(hexagon_id);
 
   EXPECT_EQ("hexagon", parameter.getName());
   EXPECT_EQ(hexagon_id, parameter.getId());

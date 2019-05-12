@@ -18,15 +18,15 @@ TEST(TriangleTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(triangle_id));
-  EXPECT_EQ(ShapeType::PlanarShape, factory.getShapeType(triangle_id));
+  EXPECT_EQ(ShapeType::PlanarShape, factory.shapeType(triangle_id));
 
-  auto parameter = factory.getShapeParameter(triangle_id);
+  auto parameter = factory.shapeParameter(triangle_id);
   parameter.setParam<point3D>(0, {1, 1, 0});
   parameter.setParam<point3D>(1, {1, -1, 0});
   parameter.setParam<point3D>(2, {-1, -1, 0});
   auto normal = vector3D{0, 0, -1};
 
-  auto shape = factory.getPlane(parameter);
+  auto shape = factory.createPlane(parameter);
   EXPECT_EQ("triangle", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<triangle>(shape));
 
@@ -36,10 +36,10 @@ TEST(TriangleTest, provider)
   EXPECT_EQ(parameter.getParam<point3D>(1), triangle_sh->B());
   EXPECT_EQ(parameter.getParam<point3D>(2), triangle_sh->C());
 
-  auto nextShape = factory.getNext(parameter, 2);
+  auto nextShape = factory.createNext(parameter, 2);
   EXPECT_EQ(nullptr, nextShape);
 
-  auto envelopeShape = factory.getEnvelope(parameter, 2);
+  auto envelopeShape = factory.createEnvelope(parameter, 2);
   EXPECT_EQ(nullptr, envelopeShape);
 
   Shape::removeShapesFromFactory(factory);
@@ -50,7 +50,7 @@ TEST(TriangleTest, parameter)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(triangle_id);
+  auto parameter = factory.shapeParameter(triangle_id);
 
   EXPECT_EQ("triangle", parameter.getName());
   EXPECT_EQ(triangle_id, parameter.getId());

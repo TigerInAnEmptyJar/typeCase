@@ -18,15 +18,15 @@ TEST(CircleTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(circle_id));
-  EXPECT_EQ(ShapeType::PlanarShape, factory.getShapeType(circle_id));
+  EXPECT_EQ(ShapeType::PlanarShape, factory.shapeType(circle_id));
 
-  auto parameter = factory.getShapeParameter(circle_id);
+  auto parameter = factory.shapeParameter(circle_id);
 
   parameter.setParam<point3D>(0, {0, 0, 0});
   parameter.setParam<vector3D>(0, {0, 0, 1});
   parameter.setParam<float>(0, 101.1f);
 
-  auto shape = factory.getPlane(parameter);
+  auto shape = factory.createPlane(parameter);
   EXPECT_EQ("circle", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<circle>(shape));
   auto circle_sh = dynamic_pointer_cast<circle>(shape);
@@ -35,10 +35,10 @@ TEST(CircleTest, provider)
   EXPECT_EQ(parameter.getParam<vector3D>(0), circle_sh->getNormal());
   EXPECT_EQ(parameter.getParam<float>(0), circle_sh->radius());
 
-  auto nextShape = factory.getNext(parameter, 2);
+  auto nextShape = factory.createNext(parameter, 2);
   EXPECT_EQ(nullptr, nextShape);
 
-  auto envelopeShape = factory.getEnvelope(parameter, 2);
+  auto envelopeShape = factory.createEnvelope(parameter, 2);
   EXPECT_EQ(nullptr, envelopeShape);
 
   Shape::removeShapesFromFactory(factory);
@@ -49,7 +49,7 @@ TEST(CircleTest, parameter)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(circle_id);
+  auto parameter = factory.shapeParameter(circle_id);
 
   EXPECT_EQ("circle", parameter.getName());
   EXPECT_EQ(circle_id, parameter.getId());

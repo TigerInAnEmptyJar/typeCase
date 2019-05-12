@@ -218,6 +218,10 @@ int algorithm_parameter::getID() const { return ID; }
 
 void algorithm_parameter::setID(int id) { ID = id; }
 
+boost::uuids::uuid algorithm_parameter::uuid() const { return _id; }
+
+void algorithm_parameter::setUuid(boost::uuids::uuid id) { _id = id; }
+
 algorithm_parameter::algorithm_parameter(string n, bool u, int cat, int lev, int id)
 {
   ID = id;
@@ -233,6 +237,7 @@ algorithm_parameter::algorithm_parameter(const algorithm_parameter& p) : base_pa
   inUse = p.IsUsed();
   category = p.getCategory();
   level = p.getLevel();
+  _id = p.uuid();
   setDescription(p.getDescription());
   for (int i = 0; i < p.getNumberOfParam<int>(); i++)
     addParam<int>(p.getParam<int>(i));
@@ -706,6 +711,7 @@ void algorithm_parameter::operator=(const algorithm_parameter& p)
   inUse = p.IsUsed();
   category = p.getCategory();
   level = p.getLevel();
+  _id = p.uuid();
   setDescription(p.getDescription());
   while (!(integers.empty()))
     integers.pop_back();

@@ -28,7 +28,7 @@ struct CircleShapeProvider : public FactoryShapeProvider,
   void install() { innerShapeProviders.push_back(shared_from_this()); }
 };
 
-std::shared_ptr<CircleShapeProvider> prov = [] {
+volatile static std::shared_ptr<CircleShapeProvider> prov = [] {
   auto r = std::make_shared<CircleShapeProvider>();
   r->install();
   return r;

@@ -18,9 +18,9 @@ TEST(SphericRectangleTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(sphericRectangle_id));
-  EXPECT_EQ(ShapeType::PlanarShape, factory.getShapeType(sphericRectangle_id));
+  EXPECT_EQ(ShapeType::PlanarShape, factory.shapeType(sphericRectangle_id));
 
-  auto parameter = factory.getShapeParameter(sphericRectangle_id);
+  auto parameter = factory.shapeParameter(sphericRectangle_id);
   parameter.setParam<point3D>(0, {0, 0, 0});
   parameter.setParam<point3D>(1, {2, 0, 0});
   parameter.setParam<point3D>(2, {1, 0, 0});
@@ -28,7 +28,7 @@ TEST(SphericRectangleTest, provider)
   parameter.setParam<point3D>(4, {0, 2, 0});
   auto normal = vector3D{0, 0, 1};
 
-  auto shape = factory.getPlane(parameter);
+  auto shape = factory.createPlane(parameter);
   EXPECT_EQ("sphericRectangle", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<sphericRectangle>(shape));
 
@@ -40,10 +40,10 @@ TEST(SphericRectangleTest, provider)
   EXPECT_EQ(parameter.getParam<point3D>(3), sphericRectangle_sh->C());
   EXPECT_EQ(parameter.getParam<point3D>(4), sphericRectangle_sh->D());
 
-  auto nextShape = factory.getNext(parameter, 2);
+  auto nextShape = factory.createNext(parameter, 2);
   EXPECT_EQ(nullptr, nextShape);
 
-  auto envelopeShape = factory.getEnvelope(parameter, 2);
+  auto envelopeShape = factory.createEnvelope(parameter, 2);
   EXPECT_EQ(nullptr, envelopeShape);
 
   Shape::removeShapesFromFactory(factory);
@@ -54,7 +54,7 @@ TEST(SphericRectangleTest, parameter)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(sphericRectangle_id);
+  auto parameter = factory.shapeParameter(sphericRectangle_id);
 
   EXPECT_EQ("sphericRectangle", parameter.getName());
   EXPECT_EQ(sphericRectangle_id, parameter.getId());

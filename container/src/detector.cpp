@@ -50,7 +50,7 @@ void TDetector::setNumberOfElements(size_t num)
   if (descriptionOfFirstElement) {
     if (numElements > 0 && _shapes[0]) {
       for (size_t i = numElements; i < num; i++) {
-        _shapes[i] = shapeFactory.getNext(*descriptionOfFirstElement, i);
+        _shapes[i] = shapeFactory.createNext(*descriptionOfFirstElement, i);
       }
     }
   }
@@ -82,7 +82,7 @@ void TDetector::setShapeFirstElement(std::shared_ptr<volumeShape> sh)
     _shapes.resize(numElements);
     _shapes[0] = sh;
     for (size_t i = 1; i < numElements; i++) {
-      _shapes[i] = shapeFactory.getNext(*descriptionOfFirstElement, i);
+      _shapes[i] = shapeFactory.createNext(*descriptionOfFirstElement, i);
     }
   }
 }
@@ -93,7 +93,7 @@ std::shared_ptr<volumeShape> TDetector::getOverallShape() const
     return nullptr;
   }
   auto& shapeFactory = ShapeFactory::getInstance();
-  return shapeFactory.getEnvelope(_shapes[0]->getDescription(), numElements);
+  return shapeFactory.createEnvelope(_shapes[0]->getDescription(), numElements);
 }
 
 volumeShape* TDetector::getShape(size_t ElementNumber) const
@@ -120,7 +120,7 @@ void TDetector::operator=(const TDetector& d)
     auto& shapeFactory = ShapeFactory::getInstance();
     descriptionOfFirstElement = std::make_unique<shape_parameter>(d.getShape(0)->getDescription());
     for (size_t i = 0; i < numElements; i++)
-      _shapes.push_back(shapeFactory.getNext(*descriptionOfFirstElement, i));
+      _shapes.push_back(shapeFactory.createNext(*descriptionOfFirstElement, i));
   }
   mat = d.getMaterial();
 }

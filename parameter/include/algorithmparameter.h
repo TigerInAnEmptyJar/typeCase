@@ -2,6 +2,9 @@
 #define __ALGPARAM
 #include "baseparameter.h"
 #include "geometry.h"
+
+#include <boost/uuid/uuid.hpp>
+
 using namespace std;
 
 /*!
@@ -25,6 +28,7 @@ private:
   vector<single_parameter<vector<float>>> floatVectors;   //!
   vector<single_parameter<vector<string>>> stringVectors; //!
   vector<single_parameter<algorithm_parameter>> algos;
+  boost::uuids::uuid _id;
 
 public:
   /*!
@@ -123,6 +127,18 @@ public:
    * \param id
    */
   virtual void setID(int id);
+
+  /*!
+   * \brief access the algorithms uuid
+   * \return the algorithms uuid.
+   */
+  boost::uuids::uuid uuid() const;
+
+  /*!
+   * \brief set the uuid of the algorithm
+   * \param id the new uuid of the algorithm.
+   */
+  void setUuid(boost::uuids::uuid id);
 
   /*!
    * Template method. Changes the parameter with name nameof the specified type (bool, int,

@@ -21,8 +21,8 @@ TEST(FiberTest, provider)
 
   ASSERT_TRUE(factory.isShapeDefined(fiber_id1));
   ASSERT_TRUE(factory.isShapeDefined(fiber_id2));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(fiber_id1));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(fiber_id2));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(fiber_id1));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(fiber_id2));
 
   Shape::removeShapesFromFactory(factory);
 }
@@ -32,7 +32,7 @@ TEST(FiberTest, fiber1)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(fiber_id1);
+  auto parameter = factory.shapeParameter(fiber_id1);
 
   // lets create a stack of fibers of the following shape:
   //         _  _  _  _  _  _  _  _  _
@@ -71,7 +71,7 @@ TEST(FiberTest, fiber1)
   corners.push_back({-5, 2.5, 0});
   corners.push_back({-5, 3.5, 0});
 
-  auto shape = factory.getVolume(parameter);
+  auto shape = factory.createVolume(parameter);
   EXPECT_EQ("fiber", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<fiber>(shape));
   auto fiber_sh = dynamic_pointer_cast<fiber>(shape);
@@ -86,7 +86,7 @@ TEST(FiberTest, fiber1)
   // still a bug until booleans are enabled
   parameter.setParam<point3D>(0, point3D{0, 0, 0} - (corners[0] - point3D{0, 0, 0}));
   for (size_t i = 1; i < 10; i++) {
-    auto nextShape = factory.getNext(parameter, i);
+    auto nextShape = factory.createNext(parameter, i);
     ASSERT_NE(nullptr, nextShape);
     auto next_sh = dynamic_pointer_cast<fiber>(nextShape);
     ASSERT_NE(nullptr, next_sh);
@@ -103,7 +103,7 @@ TEST(FiberTest, fiber1)
     EXPECT_EQ(parameter.getParam<int>(1), next_sh->getHalvedAt());
   }
 
-  auto envelopeShape = factory.getEnvelope(parameter, 10);
+  auto envelopeShape = factory.createEnvelope(parameter, 10);
   EXPECT_NE(nullptr, envelopeShape);
 
   auto envelope_sh = dynamic_pointer_cast<fiber>(shape);
@@ -124,7 +124,7 @@ TEST(FiberTest, fiber2)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(fiber_id2);
+  auto parameter = factory.shapeParameter(fiber_id2);
 
   // lets create a stack of fibers of the following shape:
   //                     _
@@ -171,7 +171,7 @@ TEST(FiberTest, fiber2)
   corners.push_back({-6, 2.5, 0});
   corners.push_back({-5, 3.5, 0});
 
-  auto shape = factory.getVolume(parameter);
+  auto shape = factory.createVolume(parameter);
   EXPECT_EQ("fiber", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<fiber>(shape));
   auto fiber_sh = dynamic_pointer_cast<fiber>(shape);
@@ -186,7 +186,7 @@ TEST(FiberTest, fiber2)
   // still a bug until booleans are enabled
   parameter.setParam<point3D>(0, point3D{0, 0, 0} - (corners[0] - point3D{0, 0, 0}));
   for (size_t i = 1; i < 10; i++) {
-    auto nextShape = factory.getNext(parameter, i);
+    auto nextShape = factory.createNext(parameter, i);
     ASSERT_NE(nullptr, nextShape);
     auto next_sh = dynamic_pointer_cast<fiber>(nextShape);
     ASSERT_NE(nullptr, next_sh);
@@ -204,7 +204,7 @@ TEST(FiberTest, fiber2)
     EXPECT_EQ(parameter.getParam<int>(1), next_sh->getHalvedAt());
   }
 
-  auto envelopeShape = factory.getEnvelope(parameter, 10);
+  auto envelopeShape = factory.createEnvelope(parameter, 10);
   EXPECT_NE(nullptr, envelopeShape);
 
   auto envelope_sh = dynamic_pointer_cast<fiber>(shape);
@@ -227,7 +227,7 @@ TEST(FiberTest, parameter)
 
   // fiber 1
   {
-    auto parameter = factory.getShapeParameter(fiber_id1);
+    auto parameter = factory.shapeParameter(fiber_id1);
 
     EXPECT_EQ("fiber", parameter.getName());
     EXPECT_EQ(fiber_id1, parameter.getId());
@@ -249,7 +249,7 @@ TEST(FiberTest, parameter)
 
   // fiber 2
   {
-    auto parameter = factory.getShapeParameter(fiber_id2);
+    auto parameter = factory.shapeParameter(fiber_id2);
 
     EXPECT_EQ("fiber", parameter.getName());
     EXPECT_EQ(fiber_id2, parameter.getId());

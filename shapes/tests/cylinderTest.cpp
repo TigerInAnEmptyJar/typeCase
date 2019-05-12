@@ -18,15 +18,15 @@ TEST(CylinderTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(cylinder_id));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(cylinder_id));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(cylinder_id));
 
-  auto parameter = factory.getShapeParameter(cylinder_id);
+  auto parameter = factory.shapeParameter(cylinder_id);
 
   parameter.setParam<point3D>(0, {0, 0, 0});
   parameter.setParam<vector3D>(0, {0, 0, 1});
   parameter.setParam<float>(0, 10.1f);
 
-  auto shape = factory.getVolume(parameter);
+  auto shape = factory.createVolume(parameter);
   EXPECT_EQ("cylinder", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<cylinder>(shape));
   auto cylinder_sh = dynamic_pointer_cast<cylinder>(shape);
@@ -36,10 +36,10 @@ TEST(CylinderTest, provider)
   EXPECT_EQ(parameter.getParam<float>(0), cylinder_sh->getRadius());
 
   // for cylinders no series generation or envelope is defined
-  auto nextShape = factory.getNext(parameter, 2);
+  auto nextShape = factory.createNext(parameter, 2);
   EXPECT_EQ(nullptr, nextShape);
 
-  auto envelopeShape = factory.getEnvelope(parameter, 2);
+  auto envelopeShape = factory.createEnvelope(parameter, 2);
   EXPECT_EQ(nullptr, envelopeShape);
 
   Shape::removeShapesFromFactory(factory);
@@ -50,7 +50,7 @@ TEST(CylinderTest, parameter)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(cylinder_id);
+  auto parameter = factory.shapeParameter(cylinder_id);
 
   EXPECT_EQ("cylinder", parameter.getName());
   EXPECT_EQ(cylinder_id, parameter.getId());

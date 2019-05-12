@@ -20,9 +20,9 @@ TEST(RingTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(ring_id1));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(ring_id1));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(ring_id1));
   ASSERT_TRUE(factory.isShapeDefined(ring_id2));
-  EXPECT_EQ(ShapeType::VolumeShape, factory.getShapeType(ring_id2));
+  EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(ring_id2));
 
   Shape::removeShapesFromFactory(factory);
 }
@@ -32,7 +32,7 @@ TEST(RingTest, ring1)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(ring_id1);
+  auto parameter = factory.shapeParameter(ring_id1);
 
   // let's create a stack of 10 rings totalling to a ring with outer radius 11.
 
@@ -48,7 +48,7 @@ TEST(RingTest, ring1)
   parameter.setParam<float>(1, 1.f);
   parameter.setParam<float>(2, 1.f);
 
-  auto shape = factory.getVolume(parameter);
+  auto shape = factory.createVolume(parameter);
   EXPECT_EQ("ring", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<ring>(shape));
   auto ring_sh = dynamic_pointer_cast<ring>(shape);
@@ -60,7 +60,7 @@ TEST(RingTest, ring1)
   EXPECT_EQ(parameter.getParam<float>(2), ring_sh->getThickness());
 
   for (size_t i = 1; i < 10; i++) {
-    auto nextShape = factory.getNext(parameter, i);
+    auto nextShape = factory.createNext(parameter, i);
     ASSERT_NE(nullptr, nextShape);
     auto next_sh = dynamic_pointer_cast<ring>(nextShape);
     ASSERT_NE(nullptr, next_sh);
@@ -75,7 +75,7 @@ TEST(RingTest, ring1)
   }
 
   {
-    auto envelopeShape = factory.getEnvelope(parameter, 10);
+    auto envelopeShape = factory.createEnvelope(parameter, 10);
     EXPECT_NE(nullptr, envelopeShape);
     EXPECT_EQ("ring", envelopeShape->getName());
 
@@ -98,7 +98,7 @@ TEST(RingTest, ring2)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(ring_id2);
+  auto parameter = factory.shapeParameter(ring_id2);
 
   // let's create a stack of 10 rings totalling to a ring with a thickness of 10.
 
@@ -108,7 +108,7 @@ TEST(RingTest, ring2)
   parameter.setParam<float>(1, 1.f);
   parameter.setParam<float>(2, 1.f);
 
-  auto shape = factory.getVolume(parameter);
+  auto shape = factory.createVolume(parameter);
   EXPECT_EQ("ring", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<ring>(shape));
   auto ring_sh = dynamic_pointer_cast<ring>(shape);
@@ -120,7 +120,7 @@ TEST(RingTest, ring2)
   EXPECT_EQ(parameter.getParam<float>(2), ring_sh->getThickness());
 
   for (size_t i = 1; i < 10; i++) {
-    auto nextShape = factory.getNext(parameter, i);
+    auto nextShape = factory.createNext(parameter, i);
     ASSERT_NE(nullptr, nextShape);
     auto next_sh = dynamic_pointer_cast<ring>(nextShape);
     ASSERT_NE(nullptr, next_sh);
@@ -136,7 +136,7 @@ TEST(RingTest, ring2)
   }
 
   {
-    auto envelopeShape = factory.getEnvelope(parameter, 10);
+    auto envelopeShape = factory.createEnvelope(parameter, 10);
     EXPECT_NE(nullptr, envelopeShape);
     EXPECT_EQ("ring", envelopeShape->getName());
 
@@ -160,7 +160,7 @@ TEST(RingTest, parameter)
   Shape::addShapesToFactory(factory);
   // ring type 1
   {
-    auto parameter = factory.getShapeParameter(ring_id1);
+    auto parameter = factory.shapeParameter(ring_id1);
 
     EXPECT_EQ("ring", parameter.getName());
     EXPECT_EQ(ring_id1, parameter.getId());
@@ -178,7 +178,7 @@ TEST(RingTest, parameter)
   }
   // ring type 2
   {
-    auto parameter = factory.getShapeParameter(ring_id2);
+    auto parameter = factory.shapeParameter(ring_id2);
 
     EXPECT_EQ("ring", parameter.getName());
     EXPECT_EQ(ring_id2, parameter.getId());

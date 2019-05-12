@@ -7,8 +7,8 @@ namespace {
 const boost::uuids::uuid strawtube_id = {{0x29, 0x9f, 0x85, 0x46, 0x11, 0xf6, 0x11, 0xe9, 0xab,
                                           0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct StrawtubeShapeProvider : public FactoryShapeProvider,
+                                public std::enable_shared_from_this<StrawtubeShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
@@ -35,12 +35,13 @@ struct ShapeProvider : public FactoryShapeProvider,
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
 };
-std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<StrawtubeShapeProvider> prov = [] {
+  auto r = std::make_shared<StrawtubeShapeProvider>();
   r->install();
   return r;
 }();
 }
+
 strawTube::strawTube() : cylinder()
 {
   shift = vector3D(0, 1, 1) * sqrt(2.);

@@ -14,6 +14,7 @@ target_include_directories(lib${PROJECT_NAME}
 target_link_libraries(lib${PROJECT_NAME}
     PUBLIC libparameter
     PUBLIC libshapebasic
+    PUBLIC libbasic
     PUBLIC Boost::uuid
 )
 

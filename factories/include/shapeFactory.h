@@ -46,21 +46,21 @@ public:
    * \brief get a list of defined shapes
    * \return a list of all defined shapes
    */
-  std::vector<shape_parameter> getDefinedShapes() const;
+  std::vector<shape_parameter> definedShapes() const;
 
   /*!
    * \brief get a shapeParameter of a defined shape
    * \param id the id of the shape to return the parameter
    * \return a shapeParameter for the specified id.
    */
-  shape_parameter getShapeParameter(boost::uuids::uuid id) const;
+  shape_parameter shapeParameter(boost::uuids::uuid id) const;
 
   /*!
    * \brief get the type of a defined shape
    * \param id the id of the shape to query
    * \return the ShapeType of the queried shape.
    */
-  ShapeType getShapeType(boost::uuids::uuid id) const;
+  ShapeType shapeType(boost::uuids::uuid id) const;
 
   /*!
    * \brief is a shape defined by this factory
@@ -80,7 +80,7 @@ public:
    * \param shape the description of the shape to generate.
    * \return a shared-pointer to the newly created volume.
    */
-  std::shared_ptr<volumeShape> getVolume(shape_parameter const& shape) const;
+  std::shared_ptr<volumeShape> createVolume(shape_parameter const& shape) const;
 
   /*!
    * \brief series generation of volumes
@@ -91,7 +91,7 @@ public:
    * \param num the ordinal of the shape to create.
    * \return a shared-pointer to the newly created volume.
    */
-  std::shared_ptr<volumeShape> getNext(shape_parameter const& first_element, size_t num) const;
+  std::shared_ptr<volumeShape> createNext(shape_parameter const& first_element, size_t num) const;
 
   /*!
    * \brief envelope generation of volumes
@@ -102,7 +102,8 @@ public:
    * \param num the numer of shapes the envelope shall contain.
    * \return a shared-pointer to the newly created volume.
    */
-  std::shared_ptr<volumeShape> getEnvelope(shape_parameter const& first_element, size_t num) const;
+  std::shared_ptr<volumeShape> createEnvelope(shape_parameter const& first_element,
+                                              size_t num) const;
 
   /*!
    * \brief planeShape generation
@@ -111,7 +112,7 @@ public:
    * \param shape the description of the shape to generate.
    * \return a shared-pointer to the newly created planar shape.
    */
-  std::shared_ptr<planeShape> getPlane(shape_parameter const& shape) const;
+  std::shared_ptr<planeShape> createPlane(shape_parameter const& shape) const;
 
   /*!
    * \brief any shape generation
@@ -120,7 +121,7 @@ public:
    * \param shape the description of the shape to generate.
    * \return a shared-pointer to the newly created shape.
    */
-  std::shared_ptr<base_shape> getShape(shape_parameter const& shape) const;
+  std::shared_ptr<base_shape> createShape(shape_parameter const& shape) const;
   //! \}
 
   //! \name Management

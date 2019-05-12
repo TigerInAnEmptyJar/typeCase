@@ -18,9 +18,9 @@ TEST(QuadrangleTest, provider)
   Shape::addShapesToFactory(factory);
 
   ASSERT_TRUE(factory.isShapeDefined(quadrangle_id));
-  EXPECT_EQ(ShapeType::PlanarShape, factory.getShapeType(quadrangle_id));
+  EXPECT_EQ(ShapeType::PlanarShape, factory.shapeType(quadrangle_id));
 
-  auto parameter = factory.getShapeParameter(quadrangle_id);
+  auto parameter = factory.shapeParameter(quadrangle_id);
   parameter.setParam<point3D>(0, {0, 0, 0});
   parameter.setParam<point3D>(1, {1, 1, 0});
   parameter.setParam<point3D>(2, {1, -1, 0});
@@ -28,7 +28,7 @@ TEST(QuadrangleTest, provider)
   parameter.setParam<point3D>(4, {-1, 1, 0});
   auto normal = vector3D{0, 0, -1};
 
-  auto shape = factory.getPlane(parameter);
+  auto shape = factory.createPlane(parameter);
   EXPECT_EQ("quadrangle", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<quadrangle>(shape));
 
@@ -40,10 +40,10 @@ TEST(QuadrangleTest, provider)
   EXPECT_EQ(parameter.getParam<point3D>(3), quadrangle_sh->C());
   EXPECT_EQ(parameter.getParam<point3D>(4), quadrangle_sh->D());
 
-  auto nextShape = factory.getNext(parameter, 2);
+  auto nextShape = factory.createNext(parameter, 2);
   EXPECT_EQ(nullptr, nextShape);
 
-  auto envelopeShape = factory.getEnvelope(parameter, 2);
+  auto envelopeShape = factory.createEnvelope(parameter, 2);
   EXPECT_EQ(nullptr, envelopeShape);
 
   Shape::removeShapesFromFactory(factory);
@@ -54,7 +54,7 @@ TEST(QuadrangleTest, parameter)
   ShapeFactory factory;
   Shape::addShapesToFactory(factory);
 
-  auto parameter = factory.getShapeParameter(quadrangle_id);
+  auto parameter = factory.shapeParameter(quadrangle_id);
 
   EXPECT_EQ("quadrangle", parameter.getName());
   EXPECT_EQ(quadrangle_id, parameter.getId());

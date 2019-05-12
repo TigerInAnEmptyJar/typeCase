@@ -216,7 +216,7 @@ void tofAnalysis::defineDetectors(vector<detector_parameter>& dets)
     Detectors[i]->setStackType(dets[id].getStackType());
     anaLog << "define detector shape " << dets[id].getShape().getName();
     shape_parameter s = dets[id].getShape();
-    auto shape = shapeFactory.getVolume(dets[id].getShape());
+    auto shape = shapeFactory.createVolume(dets[id].getShape());
     shape->setMaxDistance(dets[id].getMaxDistance());
     anaLog << "... setShape";
     Detectors[i]->setShapeFirstElement(shape);
@@ -241,7 +241,7 @@ void tofAnalysis::defineReaction(reaction_parameter col)
   b2.setParticle(mom);
   shape_parameter s = col.getTargetShape();
   auto& shapeFactory = ShapeFactory::getInstance();
-  auto sh1 = shapeFactory.getVolume(s);
+  auto sh1 = shapeFactory.createVolume(s);
   anaLog << "end define setup" << endli;
   isInitS = true;
   mom.setPM(vector3D(0, 0, 0), Eparticles::getMass("proton"));
