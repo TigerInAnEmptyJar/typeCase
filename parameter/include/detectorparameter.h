@@ -12,22 +12,15 @@ using namespace std;
  */
 class detector_parameter : public base_parameter
 {
-private:
-  int numberOfElements;
-  float maxDist;
-  shape_parameter shape;
-  int stackType;
-  int fmaterial;
-  int ID;
-  bool circular;
-  material_parameter* mat;
-
 public:
   /*!
    * \brief detector_parameter
    *  Default constructor.
    */
   detector_parameter();
+
+  detector_parameter(detector_parameter const& other) = default;
+  detector_parameter(detector_parameter&& other) = default;
 
   /*!
    * \brief Destructor
@@ -137,6 +130,22 @@ public:
   int getMaterial() const;
 
   /*!
+   * \brief setMaterialId
+   * Set the uuid for the material the detector is made up.
+   * Use this for persistency, when the actual material is not yet available.
+   * \param id the id of the detector's material.
+   */
+  void setMaterialId(boost::uuids::uuid id);
+
+  /*!
+   * \brief getMaterialId
+   * Returns the uuid of the material the detector is made up.
+   * Use this for persistency, when the actual material is not yet available.
+   * \return the id of the detector's material.
+   */
+  boost::uuids::uuid getMaterialId() const;
+
+  /*!
    * \brief material
    *  Returns the pointer to the material-parameter used for this detector.
    * \return
@@ -155,7 +164,7 @@ public:
    *   Copy operator.
    * \param d
    */
-  void operator=(const detector_parameter& d);
+  detector_parameter& operator=(const detector_parameter& d) = default;
 
   /*!
    * \brief operator ==
@@ -164,6 +173,17 @@ public:
    * \return true if the parameters are identical.
    */
   bool operator==(detector_parameter const& other) const;
+
+private:
+  int numberOfElements;
+  float maxDist;
+  shape_parameter shape;
+  int stackType;
+  int fmaterial;
+  boost::uuids::uuid _materialId;
+  int ID;
+  bool circular;
+  material_parameter* mat;
 };
 
 /*!
@@ -187,14 +207,6 @@ istream& operator>>(istream& i, detector_parameter& d);
  */
 class reaction_parameter : public base_parameter
 {
-private:
-  bool twoBeams;
-  int firstMat;
-  int secMat;
-  float firstMom;
-  float secMom;
-  shape_parameter targetShape;
-
 public:
   /*!
    * \brief reaction_parameter
@@ -277,6 +289,22 @@ public:
   void setMaterial(int num, int mat);
 
   /*!
+   * \brief setMaterialId
+   * Sets the material uuid of the interacting materials.
+   * \param num the index of the beam(s)/target,
+   * \param id the material used for the beam(s)/target.
+   */
+  void setMaterialId(int num, boost::uuids::uuid id);
+
+  /*!
+   * \brief getMaterialId
+   * Returns the material's uuid of one of the interacting materials.
+   * \param num the index of the beam(s)/target.
+   * \return the id of the material used for the beam(s)/target.
+   */
+  boost::uuids::uuid getMaterialId(int num) const;
+
+  /*!
    * \brief setTargetMaterial
    *  Sets the material number of the target if a target is defined.
    * \param mat
@@ -313,6 +341,16 @@ public:
    * \param s
    */
   void setTargetShape(const shape_parameter& s);
+
+private:
+  bool twoBeams;
+  int firstMat;
+  int secMat;
+  boost::uuids::uuid _firstMaterialId;
+  boost::uuids::uuid _secondMaterialId;
+  float firstMom;
+  float secMom;
+  shape_parameter targetShape;
 };
 
 /*!

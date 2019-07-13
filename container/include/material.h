@@ -1,5 +1,4 @@
-#ifndef MATERIAL
-#define MATERIAL
+#pragma once
 #include "TBase.h"
 #include "geometry.h"
 #include <string>
@@ -222,4 +221,3 @@ public:
    */
   bool isDefined();
 };
-#endif

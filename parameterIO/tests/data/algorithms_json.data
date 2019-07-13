@@ -1,0 +1,78 @@
+{
+    "algorithms": [
+        {
+            "base::description": "This is a test algorithm.",
+            "base::id": "00000000-0000-0000-0000-000000000000",
+            "base::name": "testAlgorithm 1",
+            "category": 1,
+            "id": 10,
+            "level": 0,
+            "parameter": [
+                {
+                    "parameterName": "param1",
+                    "parameterType": 1,
+                    "parameterValue": 0
+                },
+                {
+                    "parameterName": "param2",
+                    "parameterType": 1,
+                    "parameterValue": 10
+                },
+                {
+                    "parameterName": "param3",
+                    "parameterType": 2,
+                    "parameterValue": 5.5
+                },
+                {
+                    "parameterName": "param4",
+                    "parameterType": 6,
+                    "parameterValue": "foo"
+                },
+                {
+                    "parameterName": "param5",
+                    "parameterType": 7,
+                    "parameterValue": "0,1,2,3,4,5,6"
+                },
+                {
+                    "parameterName": "param6",
+                    "parameterType": 8,
+                    "parameterValue": "0.7,1.45,5.7"
+                }
+            ],
+            "parameterType": "ALGORITHM",
+            "used": true
+        },
+        {
+            "base::description": "This is a new test algorithm.",
+            "base::id": "00000000-0000-0000-0000-000000000000",
+            "base::name": "testAlgorithm 2",
+            "category": 2,
+            "id": 34,
+            "level": 5,
+            "parameter": [
+                {
+                    "parameterName": "param-1",
+                    "parameterType": 0,
+                    "parameterValue": false
+                },
+                {
+                    "parameterName": "param-2",
+                    "parameterType": 0,
+                    "parameterValue": true
+                },
+                {
+                    "parameterName": "param-3",
+                    "parameterType": 4,
+                    "parameterValue": "1,2,3"
+                },
+                {
+                    "parameterName": "param-4",
+                    "parameterType": 5,
+                    "parameterValue": "4,5,6"
+                }
+            ],
+            "parameterType": "ALGORITHM",
+            "used": false
+        }
+    ]
+}

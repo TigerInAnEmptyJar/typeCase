@@ -194,6 +194,18 @@ logger& logger::operator<<(const unsigned int& val)
   return *this;
 }
 
+logger& logger::operator<<(const size_t& val)
+{
+  if (newLine) {
+    doNewLine();
+    newLine = false;
+  }
+  *output << setw(8) << val;
+  output->flush();
+  emit textAdded(string_number(static_cast<unsigned int>(val)));
+  return *this;
+}
+
 logger& logger::operator<<(const float& val)
 {
   if (newLine) {

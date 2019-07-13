@@ -210,6 +210,7 @@ std::shared_ptr<base_parameter> ParameterReader2::readSingleDetector(istream& in
   auto shape = *dynamic_cast<shape_parameter*>(sh.get());
 
   d.setShape(shape);
+  d.setMaterialId(boost::uuids::nil_uuid());
   return std::make_shared<detector_parameter>(d);
 }
 

@@ -14,6 +14,7 @@ class ParameterValue
 public:
   enum class ValueType
   {
+    BOOLEAN,
     INT,
     FLOAT,
     DOUBLE,
@@ -62,8 +63,9 @@ public:
   bool isDefined() const;
 
 private:
-  using Type = std::variant<int, float, double, point3D, vector3D, std::string, std::vector<int>,
-                            std::vector<float>, std::vector<double>, std::vector<std::string>>;
+  using Type =
+      std::variant<bool, int, float, double, point3D, vector3D, std::string, std::vector<int>,
+                   std::vector<float>, std::vector<double>, std::vector<std::string>>;
   Type _value;
 };
 
@@ -110,7 +112,7 @@ public:
    * \param s
    * \return
    */
-  single_parameter& operator=(const single_parameter& s);
+  single_parameter& operator=(const single_parameter& s) = default;
 
   /*!
    * \brief operator ==

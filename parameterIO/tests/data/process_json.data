@@ -1,0 +1,543 @@
+{
+    "algorithms": [
+        {
+            "base::description": "This is a test algorithm.",
+            "base::id": "00000000-0000-0000-0000-000000000000",
+            "base::name": "testAlgorithm 1",
+            "category": 1,
+            "id": 10,
+            "level": 0,
+            "parameter": [
+                {
+                    "parameterName": "param1",
+                    "parameterType": 1,
+                    "parameterValue": 0
+                },
+                {
+                    "parameterName": "param2",
+                    "parameterType": 1,
+                    "parameterValue": 10
+                },
+                {
+                    "parameterName": "param3",
+                    "parameterType": 2,
+                    "parameterValue": 5.5
+                },
+                {
+                    "parameterName": "param4",
+                    "parameterType": 6,
+                    "parameterValue": "foo"
+                },
+                {
+                    "parameterName": "param5",
+                    "parameterType": 7,
+                    "parameterValue": "0,1,2,3,4,5,6"
+                },
+                {
+                    "parameterName": "param6",
+                    "parameterType": 8,
+                    "parameterValue": "0.7,1.45,5.7"
+                }
+            ],
+            "parameterType": "ALGORITHM",
+            "used": true
+        },
+        {
+            "base::description": "This is a new test algorithm.",
+            "base::id": "00000000-0000-0000-0000-000000000000",
+            "base::name": "testAlgorithm 2",
+            "category": 2,
+            "id": 34,
+            "level": 5,
+            "parameter": [
+                {
+                    "parameterName": "param-1",
+                    "parameterType": 0,
+                    "parameterValue": false
+                },
+                {
+                    "parameterName": "param-2",
+                    "parameterType": 0,
+                    "parameterValue": true
+                },
+                {
+                    "parameterName": "param-3",
+                    "parameterType": 4,
+                    "parameterValue": "1,2,3"
+                },
+                {
+                    "parameterName": "param-4",
+                    "parameterType": 5,
+                    "parameterValue": "4,5,6"
+                }
+            ],
+            "parameterType": "ALGORITHM",
+            "used": false
+        }
+    ],
+    "beamtimes": [
+        {
+            "base::description": "This is a test beamtime.",
+            "base::id": "90f1ad6a-8adb-4601-8add-6e7f7ee15f96",
+            "base::name": "beamtime 1",
+            "calibrationFile": [
+                "data/calibration1.data",
+                "data/calibration2.data",
+                "data/calibration3.data",
+                "data/calibration4.data"
+            ],
+            "month": 12,
+            "parameterType": "BEAMTIME",
+            "runFile": "data/run1.data",
+            "setupFile": "data/setup1.data",
+            "year": 2015
+        },
+        {
+            "base::description": "This is another test beamtime.",
+            "base::id": "3efe0e4d-d4f3-4e7a-9ee9-5b15103850bb",
+            "base::name": "beamtime 2",
+            "calibrationFile": [
+                "data/calibration5.data",
+                "data/calibration6.data",
+                "data/calibration7.data",
+                "data/calibration8.data"
+            ],
+            "month": 1,
+            "parameterType": "BEAMTIME",
+            "runFile": "data/run2.data",
+            "setupFile": "data/setup2.data",
+            "year": 2015
+        }
+    ],
+    "detectors": [
+        {
+            "base::description": "This is a test detector.",
+            "base::id": "eb5adef0-1285-44bd-8e7b-18772df9939d",
+            "base::name": "testDetector 1",
+            "detectorNumber": 10,
+            "isCircular": true,
+            "materialId": "18e58660-6dcb-4b86-9f3d-16fc66b4b11e",
+            "maxDistance": 10.5,
+            "numberOfElements": 100,
+            "parameterType": "DETECTOR",
+            "shape": {
+                "base::description": "This is a test shape.",
+                "base::id": "00000000-0000-0000-0000-000000000000",
+                "base::name": "testShape 1",
+                "parameter": [
+                    {
+                        "parameterName": "param1",
+                        "parameterType": 1,
+                        "parameterValue": 10
+                    },
+                    {
+                        "parameterName": "param2",
+                        "parameterType": 1,
+                        "parameterValue": 26
+                    },
+                    {
+                        "parameterName": "param3",
+                        "parameterType": 2,
+                        "parameterValue": 123.5
+                    },
+                    {
+                        "parameterName": "param4",
+                        "parameterType": 4,
+                        "parameterValue": "1,2,3"
+                    },
+                    {
+                        "parameterName": "param5",
+                        "parameterType": 4,
+                        "parameterValue": "4,5,6"
+                    },
+                    {
+                        "parameterName": "param6",
+                        "parameterType": 5,
+                        "parameterValue": "1,3,5"
+                    },
+                    {
+                        "parameterName": "param7",
+                        "parameterType": 5,
+                        "parameterValue": "11,22,33"
+                    }
+                ],
+                "parameterType": "SHAPE"
+            },
+            "stackType": 5
+        },
+        {
+            "base::description": "This is a second test detector.",
+            "base::id": "a6327313-61ea-4b47-b97f-1536ec8cfe13",
+            "base::name": "testDetector 2",
+            "detectorNumber": 15,
+            "isCircular": false,
+            "materialId": "04c70987-6ab8-482e-ae7d-2bd3483979f6",
+            "maxDistance": 1.5,
+            "numberOfElements": 150,
+            "parameterType": "DETECTOR",
+            "shape": {
+                "base::description": "This is yet another test shape.",
+                "base::id": "00000000-0000-0000-0000-000000000000",
+                "base::name": "testShape 2",
+                "parameter": [
+                    {
+                        "parameterName": "param-1",
+                        "parameterType": 1,
+                        "parameterValue": 10
+                    },
+                    {
+                        "parameterName": "param-2",
+                        "parameterType": 2,
+                        "parameterValue": 26.25
+                    },
+                    {
+                        "parameterName": "param-3",
+                        "parameterType": 2,
+                        "parameterValue": 123.5
+                    },
+                    {
+                        "parameterName": "param-4",
+                        "parameterType": 6,
+                        "parameterValue": "foo"
+                    },
+                    {
+                        "parameterName": "param-5",
+                        "parameterType": 6,
+                        "parameterValue": "bar"
+                    }
+                ],
+                "parameterType": "SHAPE"
+            },
+            "stackType": 1
+        }
+    ],
+    "materials": [
+        {
+            "base::description": "This is a test material.",
+            "base::id": "04c70987-6ab8-482e-ae7d-2bd3483979f6",
+            "base::name": "testMaterial 1",
+            "density": 13.670000076293945,
+            "elements": [
+                {
+                    "charge": 1,
+                    "mass": 0.9380000233650208,
+                    "weight": -1
+                },
+                {
+                    "charge": 1,
+                    "mass": 0.9380000233650208,
+                    "weight": -1
+                }
+            ],
+            "energyloss": [
+                1.2000000476837158,
+                2.200000047683716,
+                3.200000047683716
+            ],
+            "isActive": true,
+            "parameterType": "MATERIAL",
+            "radiationLength": 101.5,
+            "speedOfLight": 0.75
+        },
+        {
+            "base::description": "This is yet another test material.",
+            "base::id": "18e58660-6dcb-4b86-9f3d-16fc66b4b11e",
+            "base::name": "testMaterial 2",
+            "density": 19.1200008392334,
+            "elements": [
+                {
+                    "charge": 1,
+                    "mass": 0.9380000233650208,
+                    "weight": -1
+                }
+            ],
+            "energyloss": [
+                19.200000762939453,
+                0.20000000298023224
+            ],
+            "isActive": false,
+            "parameterType": "MATERIAL",
+            "radiationLength": 10.5,
+            "speedOfLight": 0.8799999952316284
+        }
+    ],
+    "reactions": [
+        {
+            "base::description": "",
+            "base::id": "00000000-0000-0000-0000-000000000000",
+            "base::name": "",
+            "beamMaterialId": "00000000-0000-0000-0000-000000000000",
+            "beamMomentum1": 1000,
+            "beamMomentum2": -1,
+            "parameterType": "REACTION",
+            "targetMaterialId": "00000000-0000-0000-0000-000000000000",
+            "targetShape": {
+                "base::description": "This is a test shape.",
+                "base::id": "00000000-0000-0000-0000-000000000000",
+                "base::name": "testShape 1",
+                "parameter": [
+                    {
+                        "parameterName": "param1",
+                        "parameterType": 1,
+                        "parameterValue": 10
+                    },
+                    {
+                        "parameterName": "param2",
+                        "parameterType": 1,
+                        "parameterValue": 26
+                    },
+                    {
+                        "parameterName": "param3",
+                        "parameterType": 2,
+                        "parameterValue": 123.5
+                    },
+                    {
+                        "parameterName": "param4",
+                        "parameterType": 4,
+                        "parameterValue": "1,2,3"
+                    },
+                    {
+                        "parameterName": "param5",
+                        "parameterType": 4,
+                        "parameterValue": "4,5,6"
+                    },
+                    {
+                        "parameterName": "param6",
+                        "parameterType": 5,
+                        "parameterValue": "1,3,5"
+                    },
+                    {
+                        "parameterName": "param7",
+                        "parameterType": 5,
+                        "parameterValue": "11,22,33"
+                    }
+                ],
+                "parameterType": "SHAPE"
+            },
+            "twoBeams": false
+        }
+    ],
+    "runs": [
+        {
+            "base::description": "This is a test run of beamtime 1.",
+            "base::id": "2ce70499-86e4-48a8-9608-d62c9d2f584b",
+            "base::name": "run 1-1",
+            "files": [
+                {
+                    "fileName": "data/datafile1_1.data",
+                    "fileType": 4
+                }
+            ],
+            "parameterType": "RUN",
+            "parent": "90f1ad6a-8adb-4601-8add-6e7f7ee15f96",
+            "runNumber": 1000,
+            "runType": 3,
+            "start": {
+                "day": 1,
+                "hour": 12,
+                "minute": 0,
+                "month": 12,
+                "second": 0,
+                "year": 115
+            },
+            "stop": {
+                "day": 1,
+                "hour": 13,
+                "minute": 0,
+                "month": 12,
+                "second": 0,
+                "year": 115
+            }
+        },
+        {
+            "base::description": "This is a second test run of beamtime 1.",
+            "base::id": "05bb72e0-f610-406e-bbb6-7be6da69f269",
+            "base::name": "run 1-2",
+            "files": [
+                {
+                    "fileName": "data/datafile1_2.data",
+                    "fileType": 7
+                }
+            ],
+            "parameterType": "RUN",
+            "parent": "90f1ad6a-8adb-4601-8add-6e7f7ee15f96",
+            "runNumber": 1001,
+            "runType": 2,
+            "start": {
+                "day": 1,
+                "hour": 14,
+                "minute": 0,
+                "month": 12,
+                "second": 0,
+                "year": 115
+            },
+            "stop": {
+                "day": 1,
+                "hour": 15,
+                "minute": 0,
+                "month": 12,
+                "second": 0,
+                "year": 115
+            }
+        },
+        {
+            "base::description": "This is a test run of beamtime 2.",
+            "base::id": "ee46e77f-5655-4d05-97e6-e1c46becd341",
+            "base::name": "run 2-1",
+            "calibrationFile": [
+                "data/calibration7.data"
+            ],
+            "files": [
+                {
+                    "fileName": "data/datafile2_1-1.data",
+                    "fileType": 4
+                },
+                {
+                    "fileName": "data/datafile2_1-2.data",
+                    "fileType": 8
+                }
+            ],
+            "ownCalibration": false,
+            "parameterType": "RUN",
+            "parent": "3efe0e4d-d4f3-4e7a-9ee9-5b15103850bb",
+            "runNumber": 2000,
+            "runType": 0,
+            "start": {
+                "day": 1,
+                "hour": 12,
+                "minute": 0,
+                "month": 1,
+                "second": 0,
+                "year": 115
+            },
+            "stop": {
+                "day": 1,
+                "hour": 13,
+                "minute": 0,
+                "month": 1,
+                "second": 0,
+                "year": 115
+            }
+        },
+        {
+            "base::description": "This is a second test run of beamtime 2.",
+            "base::id": "25fdd37e-b79b-41df-86e1-df8438d3dc91",
+            "base::name": "run 2-2",
+            "calibrationFile": [
+                "data/calibration8.data",
+                "data/calibration9.data",
+                "data/calibration10.data"
+            ],
+            "files": [
+                {
+                    "fileName": "data/datafile2_2-1.data",
+                    "fileType": 4
+                },
+                {
+                    "fileName": "data/datafile2_2-2.data",
+                    "fileType": 8
+                }
+            ],
+            "ownCalibration": true,
+            "parameterType": "RUN",
+            "parent": "3efe0e4d-d4f3-4e7a-9ee9-5b15103850bb",
+            "runNumber": 2000,
+            "runType": 1,
+            "setupFile": "data/ownSetup2_2.data",
+            "start": {
+                "day": 1,
+                "hour": 12,
+                "minute": 0,
+                "month": 1,
+                "second": 0,
+                "year": 115
+            },
+            "stop": {
+                "day": 1,
+                "hour": 13,
+                "minute": 0,
+                "month": 1,
+                "second": 0,
+                "year": 115
+            }
+        }
+    ],
+    "shapes": [
+        {
+            "base::description": "This is a test shape.",
+            "base::id": "00000000-0000-0000-0000-000000000000",
+            "base::name": "testShape 1",
+            "parameter": [
+                {
+                    "parameterName": "param1",
+                    "parameterType": 1,
+                    "parameterValue": 10
+                },
+                {
+                    "parameterName": "param2",
+                    "parameterType": 1,
+                    "parameterValue": 26
+                },
+                {
+                    "parameterName": "param3",
+                    "parameterType": 2,
+                    "parameterValue": 123.5
+                },
+                {
+                    "parameterName": "param4",
+                    "parameterType": 4,
+                    "parameterValue": "1,2,3"
+                },
+                {
+                    "parameterName": "param5",
+                    "parameterType": 4,
+                    "parameterValue": "4,5,6"
+                },
+                {
+                    "parameterName": "param6",
+                    "parameterType": 5,
+                    "parameterValue": "1,3,5"
+                },
+                {
+                    "parameterName": "param7",
+                    "parameterType": 5,
+                    "parameterValue": "11,22,33"
+                }
+            ],
+            "parameterType": "SHAPE"
+        },
+        {
+            "base::description": "This is yet another test shape.",
+            "base::id": "00000000-0000-0000-0000-000000000000",
+            "base::name": "testShape 2",
+            "parameter": [
+                {
+                    "parameterName": "param-1",
+                    "parameterType": 1,
+                    "parameterValue": 10
+                },
+                {
+                    "parameterName": "param-2",
+                    "parameterType": 2,
+                    "parameterValue": 26.25
+                },
+                {
+                    "parameterName": "param-3",
+                    "parameterType": 2,
+                    "parameterValue": 123.5
+                },
+                {
+                    "parameterName": "param-4",
+                    "parameterType": 6,
+                    "parameterValue": "foo"
+                },
+                {
+                    "parameterName": "param-5",
+                    "parameterType": 6,
+                    "parameterValue": "bar"
+                }
+            ],
+            "parameterType": "SHAPE"
+        }
+    ]
+}

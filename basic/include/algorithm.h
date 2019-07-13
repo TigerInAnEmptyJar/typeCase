@@ -1,5 +1,4 @@
-#ifndef ALGORITHM
-#define ALGORITHM
+#pragma once
 #include <QtCore/QObject>
 #include <string>
 #include <vector>
@@ -105,4 +104,3 @@ private:
  * \return
  */
 string toString(const QString& str);
-#endif

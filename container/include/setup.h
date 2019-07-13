@@ -1,9 +1,8 @@
+#pragma once
+#include "TBase.h"
 #include "detector.h"
 #include "geometry.h"
 #include "planeShape.h"
-#ifndef SETUP
-#define SETUP
-#include "TBase.h"
 
 #include <memory>
 
@@ -412,5 +411,3 @@ public:
    */
   void operator=(const TSetup& s);
 };
-
-#endif

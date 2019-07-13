@@ -1,5 +1,4 @@
-#ifndef DETECTOR
-#define DETECTOR
+#pragma once
 #include "TBase.h"
 #include "material.h"
 #include "volumeShape.h"
@@ -165,4 +164,3 @@ private:
   TMaterial* mat;
   bool defined;
 };
-#endif

@@ -3,8 +3,9 @@
 #include "ABetheBloch.h"
 #include "Eparticles.h"
 #include "logger.h"
-#include "parameterManager.h"
+#include "parameterio.h"
 #include "shapeFactory.h"
+#include "versions.h"
 
 #include <QtCore/QDateTime>
 void tofAnalysis::createSetup(vector<std::shared_ptr<detector_parameter>>& dets,
@@ -28,63 +29,37 @@ void tofAnalysis::createSetup(vector<std::shared_ptr<detector_parameter>>& dets,
 
 void tofAnalysis::defineMaterials(const string& setupFileName, const string& materialFileName)
 {
-  reaction_parameter col;
-  vector<detector_parameter> dparams;
-  ioLog << "read setup from file " << setupFileName << endli << incD;
-  //     ifstream input;
-  //     ioLog<<"open file"<<endli;
-  anaLog << "read setup from file \"" << setupFileName << "\" "
-         << (parameterManager::readDetectorParameter_ascii(setupFileName, dparams, col)
-                 ? "successfull"
-                 : "failed")
-         << endli;
-  //     input.open(setupFileName.data());
-  //     int nDetectors;
-  //     ioLog<<"read beam(s) and target"<<endli;
-  //     input >> col;
-  //     input >> nDetectors;
-  //     ioLog<< "read detector parameter";
-  //     for(int i=0;i<nDetectors;i++)
-  //     {
-  // 	ioLog<<"#";
-  // 	detector_parameter d;
-  // 	input >> d;
-  // 	dparams.push_back(d);
-  //     }
-  //     ioLog<<endli;
-  //     ioLog<<"close file"<<endli;
-  //     input.close();
-  //     ioLog<<decD;
-  vector<material_parameter> mparams;
-  anaLog << "read materials from file \"" << materialFileName << "\" "
-         << (parameterManager::readMaterialParameter_ascii(materialFileName, mparams)
-                 ? "successfull"
-                 : "failed")
-         << endli;
-  //     int nMats;
-  //     ioLog<<"read materials from file "<<materialFileName<<endli<<incD;
-  //     ifstream input1;
-  //     ioLog<<"open file"<<endli;
-  //     input.open(materialFileName.data());
-  //     input1 >> nMats;
-  //     ioLog<< "read material parameter: ";
-  //     for(int i=0;i<nMats;i++)
-  //     {
-  // 	ioLog<<"#";
-  // 	material_parameter m;
-  // 	input1 >> m;
-  // 	mparams.push_back(m);
-  //     }
-  //     ioLog<<endli;
-  //     ioLog<<"close file"<<endli;
-  //     input1.close();
-  //    ioLog<<decD;
+  parameter::IO::ParameterIO io;
+  io.setup();
+  auto materials = io.readParameter(materialFileName, parameter::IO::version_2,
+                                    parameter::IO::ParameterIO::FileType::MATERIAL);
+  auto detectors = io.readParameter(setupFileName, parameter::IO::version_2,
+                                    parameter::IO::ParameterIO::FileType::DETECTOR);
+
+  anaLog << "read setup from file \"" << setupFileName << "\" " << detectors.size() << endli;
+  anaLog << "read materials from file \"" << materialFileName << "\" " << materials.size() << endli;
+
   vector<std::shared_ptr<material_parameter>> mats;
   vector<std::shared_ptr<detector_parameter>> dets;
-  std::transform(mparams.begin(), mparams.end(), std::back_inserter(mats),
-                 [](auto element) { return std::make_shared<material_parameter>(element); });
-  std::transform(dparams.begin(), dparams.end(), std::back_inserter(dets),
-                 [](auto element) { return std::make_shared<detector_parameter>(element); });
+  std::transform(materials.begin(), materials.end(), std::back_inserter(mats), [](auto element) {
+    return std::dynamic_pointer_cast<material_parameter>(element);
+  });
+  std::transform(
+      detectors.begin(), detectors.end(), std::back_inserter(dets), [&materials](auto element) {
+        auto detector = std::dynamic_pointer_cast<detector_parameter>(element);
+        auto material = std::find_if(
+            materials.begin(), materials.end(), [id = detector->getMaterialId()](auto item) {
+              if (auto material = std::dynamic_pointer_cast<material_parameter>(item)) {
+                return id == material->id();
+              }
+              return false;
+            });
+        if (material != materials.end()) {
+          detector->setMaterial(std::dynamic_pointer_cast<material_parameter>(*material).get());
+        }
+
+        return detector;
+      });
 
   defineMaterials(mats, dets);
 }
@@ -146,36 +121,19 @@ void tofAnalysis::defineMaterials(vector<std::shared_ptr<material_parameter>>& m
 
 void tofAnalysis::defineDetectors(const string& fileName)
 {
-  reaction_parameter col;
-  vector<detector_parameter> dparams;
-  anaLog << "read setup from file " << fileName << "\":"
-         << (parameterManager::readDetectorParameter_ascii(fileName, dparams, col) ? "successfull"
-                                                                                   : "failed")
-         << endli << incD;
-  //     ifstream input;
-  //     ioLog<<"open file"<<endli;
-  //     input.open(fileName.data());
-  //     int nDetectors;
-  //     ioLog<<"read beam(s) and target"<<endli;
-  //     input >> col;
-  //     input >> nDetectors;
-  //     ioLog<< "read detector parameter";
-  //     for(int i=0;i<nDetectors;i++)
-  //     {
-  // 	ioLog<<"#";
-  // 	detector_parameter d;
-  // 	input >> d;
-  // 	dparams.push_back(d);
-  //     }
-  //     ioLog<<endli;
-  //     ioLog<<"close file"<<endli;
-  //     input.close();
-  //     ioLog<<decD;
+  parameter::IO::ParameterIO io;
+  io.setup();
+  auto detectors = io.readParameter(fileName, parameter::IO::version_2,
+                                    parameter::IO::ParameterIO::FileType::DETECTOR);
+
+  anaLog << "read setup from file \"" << fileName << "\" " << detectors.size() << endli;
+
   vector<std::shared_ptr<detector_parameter>> dets;
-  std::transform(dparams.begin(), dparams.end(), std::back_inserter(dets),
-                 [](auto element) { return std::make_shared<detector_parameter>(element); });
+  std::transform(detectors.begin(), detectors.end(), std::back_inserter(dets), [](auto element) {
+    auto detector = std::dynamic_pointer_cast<detector_parameter>(element);
+    return detector;
+  });
   defineDetectors(dets);
-  //    defineReaction(col);
 }
 
 void tofAnalysis::defineDetectors(vector<std::shared_ptr<detector_parameter>>& dets)

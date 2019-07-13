@@ -1,0 +1,52 @@
+{
+    "materials": [
+        {
+            "base::description": "This is a test material.",
+            "base::id": "04c70987-6ab8-482e-ae7d-2bd3483979f6",
+            "base::name": "testMaterial 1",
+            "density": 13.670000076293945,
+            "elements": [
+                {
+                    "charge": 1,
+                    "mass": 0.9380000233650208,
+                    "weight": -1
+                },
+                {
+                    "charge": 1,
+                    "mass": 0.9380000233650208,
+                    "weight": -1
+                }
+            ],
+            "energyloss": [
+                1.2000000476837158,
+                2.200000047683716,
+                3.200000047683716
+            ],
+            "isActive": true,
+            "parameterType": "MATERIAL",
+            "radiationLength": 101.5,
+            "speedOfLight": 0.75
+        },
+        {
+            "base::description": "This is yet another test material.",
+            "base::id": "18e58660-6dcb-4b86-9f3d-16fc66b4b11e",
+            "base::name": "testMaterial 2",
+            "density": 19.1200008392334,
+            "elements": [
+                {
+                    "charge": 1,
+                    "mass": 0.9380000233650208,
+                    "weight": -1
+                }
+            ],
+            "energyloss": [
+                19.200000762939453,
+                0.20000000298023224
+            ],
+            "isActive": false,
+            "parameterType": "MATERIAL",
+            "radiationLength": 10.5,
+            "speedOfLight": 0.8799999952316284
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "beamtimes": [
+        {
+            "base::description": "This is a test beamtime.",
+            "base::id": "90f1ad6a-8adb-4601-8add-6e7f7ee15f96",
+            "base::name": "beamtime 1",
+            "calibrationFile": [
+                "data/calibration1.data",
+                "data/calibration2.data",
+                "data/calibration3.data",
+                "data/calibration4.data"
+            ],
+            "month": 12,
+            "parameterType": "BEAMTIME",
+            "runFile": "data/run1.data",
+            "setupFile": "data/setup1.data",
+            "year": 2015
+        },
+        {
+            "base::description": "This is another test beamtime.",
+            "base::id": "3efe0e4d-d4f3-4e7a-9ee9-5b15103850bb",
+            "base::name": "beamtime 2",
+            "calibrationFile": [
+                "data/calibration5.data",
+                "data/calibration6.data",
+                "data/calibration7.data",
+                "data/calibration8.data"
+            ],
+            "month": 1,
+            "parameterType": "BEAMTIME",
+            "runFile": "data/run2.data",
+            "setupFile": "data/setup2.data",
+            "year": 2015
+        }
+    ]
+}

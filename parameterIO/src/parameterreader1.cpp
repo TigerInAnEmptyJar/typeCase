@@ -429,6 +429,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleDetector(std::istrea
   recoverShapeId(shape);
   sh.setId(shape->id());
   d.setShape(sh);
+  d.setMaterialId(boost::uuids::nil_uuid());
   return std::make_shared<detector_parameter>(d);
 }
 

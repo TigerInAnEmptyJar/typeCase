@@ -65,6 +65,7 @@ material_parameter::material_parameter(const material_parameter& m) : base_param
 {
   setName(m.getName());
   setDescription(m.getDescription());
+  setId(m.id());
   active = m.IsActive();
   density = m.Density();
   speed = m.Speed();
@@ -79,6 +80,7 @@ material_parameter& material_parameter::operator=(const material_parameter& m)
 {
   setName(m.getName());
   setDescription(m.getDescription());
+  setId(m.id());
   active = m.IsActive();
   density = m.Density();
   speed = m.Speed();

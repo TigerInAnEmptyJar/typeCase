@@ -44,9 +44,20 @@ ostream& operator<<(ostream& o, const detector_parameter& d)
 void detector_parameter::setMaterial(int matIn) { fmaterial = matIn; }
 
 int detector_parameter::getMaterial() const { return fmaterial; }
+
+void detector_parameter::setMaterialId(boost::uuids::uuid id) { _materialId = id; }
+
+boost::uuids::uuid detector_parameter::getMaterialId() const { return _materialId; }
+
 material_parameter* detector_parameter::material() { return mat; }
 
-void detector_parameter::setMaterial(material_parameter* matIn) { mat = matIn; }
+void detector_parameter::setMaterial(material_parameter* matIn)
+{
+  mat = matIn;
+  if (matIn != nullptr) {
+    _materialId = matIn->id();
+  }
+}
 
 bool detector_parameter::isCircular() const { return circular; }
 void detector_parameter::setCircular(bool circ) { circular = circ; }
@@ -82,27 +93,15 @@ istream& operator>>(istream& i, detector_parameter& d)
   return i;
 }
 
-void detector_parameter::operator=(const detector_parameter& d)
-{
-  setId(d.id());
-  setName(d.getName());
-  setDescription(d.getDescription());
-  setNumberOfElements(d.getNumberOfElements());
-  setStackType(d.getStackType());
-  setShape(d.getShape());
-  setMaterial(d.getMaterial());
-  //    setMaterial(d.material());
-  setID(d.getID());
-  setCircular(d.isCircular());
-}
-
 bool detector_parameter::operator==(detector_parameter const& other) const
 {
   bool matEqual = true;
-  if (other.mat == nullptr || mat == nullptr) {
+  if (other.mat != nullptr && mat != nullptr) {
+    matEqual = (other.mat->id() == mat->id());
+  } else if (_materialId.is_nil() || other._materialId.is_nil()) {
     matEqual = (other.fmaterial == fmaterial);
   } else {
-    matEqual = (other.mat == mat);
+    matEqual = (other._materialId == _materialId);
   }
   return other.numberOfElements == numberOfElements && matEqual && other.ID == ID &&
          other.maxDist == maxDist && other.circular == circular && other.stackType == stackType &&
@@ -184,6 +183,25 @@ void reaction_parameter::setMaterial(int num, int mat)
     firstMat = mat;
   else if (num == 1)
     secMat = mat;
+}
+
+void reaction_parameter::setMaterialId(int num, boost::uuids::uuid id)
+{
+  if (num == 0) {
+    _firstMaterialId = id;
+  } else if (num == 1) {
+    _secondMaterialId = id;
+  }
+}
+
+boost::uuids::uuid reaction_parameter::getMaterialId(int num) const
+{
+  if (num == 0) {
+    return _firstMaterialId;
+  } else if (num == 1) {
+    return _secondMaterialId;
+  }
+  return {};
 }
 
 void reaction_parameter::setTargetMaterial(int mat)

@@ -1,7 +1,12 @@
 using namespace std;
 #ifndef LOGGER
 #define LOGGER
-#include "parameterManager.h"
+#include "algorithmparameter.h"
+#include "beamtimeparameter.h"
+#include "detectorparameter.h"
+#include "geometry.h"
+#include "materialparameter.h"
+
 #include <QtCore/QObject>
 #include <fstream>
 #include <iomanip>
@@ -51,6 +56,7 @@ public:
   logger& operator<<(const char* text);
   logger& operator<<(const int& val);
   logger& operator<<(const unsigned int& val);
+  logger& operator<<(const size_t& val);
   logger& operator<<(const float& val);
   logger& operator<<(const double& val);
   logger& operator<<(const void* ptr);

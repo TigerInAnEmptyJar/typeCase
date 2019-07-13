@@ -13,4 +13,5 @@ target_include_directories(lib${PROJECT_NAME}
 )
 target_link_libraries(lib${PROJECT_NAME}
     PUBLIC libalgorithm
+    PUBLIC libparameterIO
 )

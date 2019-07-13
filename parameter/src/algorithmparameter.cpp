@@ -28,14 +28,6 @@ bool single_parameter<X>::operator==(const string& s) const
 }
 
 template <class X>
-single_parameter<X>& single_parameter<X>::operator=(const single_parameter& s)
-{
-  data = s.getData();
-  name = s.getName();
-  return *this;
-}
-
-template <class X>
 string single_parameter<X>::getName() const
 {
   return name;

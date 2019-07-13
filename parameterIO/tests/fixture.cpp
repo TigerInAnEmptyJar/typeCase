@@ -99,7 +99,10 @@ void ParameterIoTest::appendSomeMaterials(std::vector<std::shared_ptr<base_param
 void ParameterIoTest::appendSomeDetectors(std::vector<std::shared_ptr<base_parameter>>& items)
 {
   appendSomeShapes(items);
+  const auto mat_start = items.size();
   appendSomeMaterials(items);
+  auto mat1 = items[mat_start];
+  auto mat2 = items[mat_start + 1];
 
   // when writing setup, not only the detector is important, but also the reaction description.
   reaction_parameter reaction;
@@ -109,6 +112,7 @@ void ParameterIoTest::appendSomeDetectors(std::vector<std::shared_ptr<base_param
   reaction.setTwoBeams(false);
   reaction.setBeamMomentum(1000.f);
   reaction.setTargetMaterial(0);
+  reaction.setMaterialId(0, items[mat_start]->id());
   reaction.setTargetShape(*std::dynamic_pointer_cast<shape_parameter>(items[0]));
   items.insert(items.begin() + 2, std::make_shared<reaction_parameter>(reaction));
 
@@ -119,7 +123,7 @@ void ParameterIoTest::appendSomeDetectors(std::vector<std::shared_ptr<base_param
   detector1.setID(10);
   detector1.setCircular(true);
   detector1.setMaterial(1);
-  detector1.setMaterial(std::dynamic_pointer_cast<material_parameter>(items[3]).get());
+  detector1.setMaterial(std::dynamic_pointer_cast<material_parameter>(mat2).get());
   detector1.setStackType(5);
   detector1.setMaxDistance(10.5f);
   detector1.setNumberOfElements(100);
@@ -133,7 +137,7 @@ void ParameterIoTest::appendSomeDetectors(std::vector<std::shared_ptr<base_param
   detector2.setID(15);
   detector2.setCircular(false);
   detector2.setMaterial(0);
-  detector2.setMaterial(std::dynamic_pointer_cast<material_parameter>(items[2]).get());
+  detector2.setMaterial(std::dynamic_pointer_cast<material_parameter>(mat1).get());
   detector2.setStackType(1);
   detector2.setMaxDistance(1.5f);
   detector2.setNumberOfElements(150);
@@ -155,6 +159,7 @@ void ParameterIoTest::appendSomeDatabase(std::vector<std::shared_ptr<base_parame
   beamtime1.addCalibrationFile("data/calibration3.data");
   beamtime1.addCalibrationFile("data/calibration4.data");
   items.push_back(std::make_shared<beamTime_parameter>(beamtime1));
+  auto bt1 = items.back();
 
   beamTime_parameter beamtime2;
   beamtime2.setName("beamtime 2");
@@ -168,14 +173,15 @@ void ParameterIoTest::appendSomeDatabase(std::vector<std::shared_ptr<base_parame
   beamtime2.addCalibrationFile("data/calibration7.data");
   beamtime2.addCalibrationFile("data/calibration8.data");
   items.push_back(std::make_shared<beamTime_parameter>(beamtime2));
+  auto bt2 = items.back();
 
   run_parameter run1_1;
   run1_1.setName("run 1-1");
   run1_1.setDescription("This is a test run of beamtime 1.");
   run1_1.setId(boost::uuids::random_generator()());
   run1_1.setType(run_parameter::RunType::BACKGROUND);
-  run1_1.setParent(std::dynamic_pointer_cast<beamTime_parameter>(items[0]));
-  run1_1.setParentNumber(items[0]->id());
+  run1_1.setParent(std::dynamic_pointer_cast<beamTime_parameter>(bt1));
+  run1_1.setParentNumber(bt1->id());
   run1_1.setRunNumber(1000);
   run1_1.setStartTime(2015, 12, 1, 12, 0, 0);
   run1_1.setStopTime(2015, 12, 1, 13, 0, 0);
@@ -189,8 +195,8 @@ void ParameterIoTest::appendSomeDatabase(std::vector<std::shared_ptr<base_parame
   run1_2.setDescription("This is a second test run of beamtime 1.");
   run1_2.setId(boost::uuids::random_generator()());
   run1_2.setType(run_parameter::RunType::ELASTIC);
-  run1_2.setParent(std::dynamic_pointer_cast<beamTime_parameter>(items[0]));
-  run1_2.setParentNumber(items[0]->id());
+  run1_2.setParent(std::dynamic_pointer_cast<beamTime_parameter>(bt1));
+  run1_2.setParentNumber(bt1->id());
   run1_2.setRunNumber(1001);
   run1_2.setStartTime(2015, 12, 1, 14, 0, 0);
   run1_2.setStopTime(2015, 12, 1, 15, 0, 0);
@@ -204,8 +210,8 @@ void ParameterIoTest::appendSomeDatabase(std::vector<std::shared_ptr<base_parame
   run2_1.setDescription("This is a test run of beamtime 2.");
   run2_1.setId(boost::uuids::random_generator()());
   run2_1.setType(run_parameter::RunType::REGULAR);
-  run2_1.setParent(std::dynamic_pointer_cast<beamTime_parameter>(items[1]));
-  run2_1.setParentNumber(items[1]->id());
+  run2_1.setParent(std::dynamic_pointer_cast<beamTime_parameter>(bt2));
+  run2_1.setParentNumber(bt2->id());
   run2_1.setRunNumber(2000);
   run2_1.setStartTime(2015, 1, 1, 12, 0, 0);
   run2_1.setStopTime(2015, 1, 1, 13, 0, 0);
@@ -221,8 +227,8 @@ void ParameterIoTest::appendSomeDatabase(std::vector<std::shared_ptr<base_parame
   run2_2.setDescription("This is a second test run of beamtime 2.");
   run2_2.setId(boost::uuids::random_generator()());
   run2_2.setType(run_parameter::RunType::CALIBRATION);
-  run2_2.setParent(std::dynamic_pointer_cast<beamTime_parameter>(items[1]));
-  run2_2.setParentNumber(items[1]->id());
+  run2_2.setParent(std::dynamic_pointer_cast<beamTime_parameter>(bt2));
+  run2_2.setParentNumber(bt2->id());
   run2_2.setRunNumber(2000);
   run2_2.setStartTime(2015, 1, 1, 12, 0, 0);
   run2_2.setStopTime(2015, 1, 1, 13, 0, 0);

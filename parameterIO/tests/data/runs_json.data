@@ -1,0 +1,147 @@
+{
+    "runs": [
+        {
+            "base::description": "This is a test run of beamtime 1.",
+            "base::id": "2ce70499-86e4-48a8-9608-d62c9d2f584b",
+            "base::name": "run 1-1",
+            "files": [
+                {
+                    "fileName": "data/datafile1_1.data",
+                    "fileType": 4
+                }
+            ],
+            "parameterType": "RUN",
+            "parent": "90f1ad6a-8adb-4601-8add-6e7f7ee15f96",
+            "runNumber": 1000,
+            "runType": 3,
+            "start": {
+                "day": 1,
+                "hour": 12,
+                "minute": 0,
+                "month": 12,
+                "second": 0,
+                "year": 115
+            },
+            "stop": {
+                "day": 1,
+                "hour": 13,
+                "minute": 0,
+                "month": 12,
+                "second": 0,
+                "year": 115
+            }
+        },
+        {
+            "base::description": "This is a second test run of beamtime 1.",
+            "base::id": "05bb72e0-f610-406e-bbb6-7be6da69f269",
+            "base::name": "run 1-2",
+            "files": [
+                {
+                    "fileName": "data/datafile1_2.data",
+                    "fileType": 7
+                }
+            ],
+            "parameterType": "RUN",
+            "parent": "90f1ad6a-8adb-4601-8add-6e7f7ee15f96",
+            "runNumber": 1001,
+            "runType": 2,
+            "start": {
+                "day": 1,
+                "hour": 14,
+                "minute": 0,
+                "month": 12,
+                "second": 0,
+                "year": 115
+            },
+            "stop": {
+                "day": 1,
+                "hour": 15,
+                "minute": 0,
+                "month": 12,
+                "second": 0,
+                "year": 115
+            }
+        },
+        {
+            "base::description": "This is a test run of beamtime 2.",
+            "base::id": "ee46e77f-5655-4d05-97e6-e1c46becd341",
+            "base::name": "run 2-1",
+            "calibrationFile": [
+                "data/calibration7.data"
+            ],
+            "files": [
+                {
+                    "fileName": "data/datafile2_1-1.data",
+                    "fileType": 4
+                },
+                {
+                    "fileName": "data/datafile2_1-2.data",
+                    "fileType": 8
+                }
+            ],
+            "ownCalibration": false,
+            "parameterType": "RUN",
+            "parent": "3efe0e4d-d4f3-4e7a-9ee9-5b15103850bb",
+            "runNumber": 2000,
+            "runType": 0,
+            "start": {
+                "day": 1,
+                "hour": 12,
+                "minute": 0,
+                "month": 1,
+                "second": 0,
+                "year": 115
+            },
+            "stop": {
+                "day": 1,
+                "hour": 13,
+                "minute": 0,
+                "month": 1,
+                "second": 0,
+                "year": 115
+            }
+        },
+        {
+            "base::description": "This is a second test run of beamtime 2.",
+            "base::id": "25fdd37e-b79b-41df-86e1-df8438d3dc91",
+            "base::name": "run 2-2",
+            "calibrationFile": [
+                "data/calibration8.data",
+                "data/calibration9.data",
+                "data/calibration10.data"
+            ],
+            "files": [
+                {
+                    "fileName": "data/datafile2_2-1.data",
+                    "fileType": 4
+                },
+                {
+                    "fileName": "data/datafile2_2-2.data",
+                    "fileType": 8
+                }
+            ],
+            "ownCalibration": true,
+            "parameterType": "RUN",
+            "parent": "3efe0e4d-d4f3-4e7a-9ee9-5b15103850bb",
+            "runNumber": 2000,
+            "runType": 1,
+            "setupFile": "data/ownSetup2_2.data",
+            "start": {
+                "day": 1,
+                "hour": 12,
+                "minute": 0,
+                "month": 1,
+                "second": 0,
+                "year": 115
+            },
+            "stop": {
+                "day": 1,
+                "hour": 13,
+                "minute": 0,
+                "month": 1,
+                "second": 0,
+                "year": 115
+            }
+        }
+    ]
+}

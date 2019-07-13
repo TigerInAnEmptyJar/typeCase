@@ -661,6 +661,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleDetector(istream& in
   recoverShapeId(tmp);
   sh.setId(tmp->id());
   d.setShape(sh);
+  d.setMaterialId(boost::uuids::nil_uuid());
   return std::make_shared<detector_parameter>(d);
 }
 

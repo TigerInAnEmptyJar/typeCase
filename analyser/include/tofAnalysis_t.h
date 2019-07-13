@@ -3,9 +3,10 @@
 #include "TFile.h"
 #include "TH1.h"
 #include "algorithm.h"
+#include "beamtimeparameter.h"
 #include "container.h"
+#include "detectorparameter.h"
 #include "fitAlgorithm.h"
-#include "parameterManager.h"
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <TTree.h>
