@@ -39,9 +39,9 @@ public slots:
   virtual void newInput(run_parameter& r);
   virtual void newInput(ifstream* in);
 signals:
-  virtual void inputError();
-  virtual void eventRead(int, int, int);
-  virtual void newRun(ifstream*);
+  void inputError();
+  void eventRead(int, int, int);
+  void newRun(ifstream*);
 public slots:
   virtual void newEvent(int evtNr, int count, int trigger);
 };

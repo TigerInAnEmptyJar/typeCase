@@ -21,9 +21,16 @@ shape_parameter::shape_parameter(const shape_parameter& sp)
 
 shape_parameter::~shape_parameter() {}
 
-boost::uuids::uuid shape_parameter::getId() const { return id; }
+bool shape_parameter::operator==(shape_parameter const& other) const
+{
+  return getName() == other.getName() && getDescription() == other.getDescription() &&
+         integers == other.integers && floats == other.floats && points == other.points &&
+         vectors == other.vectors && strings_ == other.strings_;
+}
 
-void shape_parameter::setId(boost::uuids::uuid newId) { id = newId; }
+boost::uuids::uuid shape_parameter::getId() const { return base_parameter::id(); }
+
+void shape_parameter::setId(boost::uuids::uuid newId) { base_parameter::setId(newId); }
 
 template <class T>
 T shape_parameter::getParam(int i) const
@@ -358,69 +365,6 @@ ostream& operator<<(ostream& o, const shape_parameter& sh)
   }
   return o;
 }
-// #include <TClass.h>
-// void shape_parameter::Streamer(TBuffer &b)
-// {
-//     if(b.IsWriting())
-//     {
-// 	shape_parameter::Class()->WriteBuffer(b, this);
-// 	b<<points.size();
-// 	for(unsigned int i=0;i<points.size();i++)
-// 	    b<<points[i].getData().X()<<points[i].getData().Y()<<points[i].getData().Z()<<points[i].getName().data();
-// 	b<<vectors.size();
-// 	for(unsigned int i=0;i<vectors.size();i++)
-// 	    b<<vectors[i].getData().X()<<vectors[i].getData().Y()<<vectors[i].getData().Z()<<vectors[i].getName().data();
-// 	b<<integers.size();
-// 	for(unsigned int i=0;i<integers.size();i++)
-// 	    b<<integers[i].getData()<<integers[i].getName().data();
-// 	b<<floats.size();
-// 	for(unsigned int i=0;i<floats.size();i++)
-// 	    b<<floats[i].getData()<<floats[i].getName().data();
-// 	b<<strings_.size();
-// 	for(unsigned int i=0;i<strings_.size();i++)
-// 	    b<<strings_[i].getData().data()<<strings_[i].getName().data();
-
-//     }
-//     else
-//     {
-// 	shape_parameter::Class()->ReadBuffer(b, this);
-// 	char* line=0;
-// 	int inum,inum2=0;
-// 	float fnum,fnum2,fnum3;
-// 	b<<inum2;
-// 	for(int i=0;i<inum2;i++)
-// 	{
-// 	    b>>fnum>>fnum2>>fnum3>>line;
-// 	    points.push_back(single_parameter<point3D>(string(line),point3D(fnum,fnum2,fnum3)));
-// 	}
-// 	b<<inum2;
-// 	for(int i=0;i<inum2;i++)
-// 	{
-// 	    b>>fnum>>fnum2>>fnum3>>line;
-// 	    vectors.push_back(single_parameter<vector3D>(string(line),vector3D(fnum,fnum2,fnum3)));
-// 	}
-// 	b<<inum2;
-// 	for(int i=0;i<inum2;i++)
-// 	{
-// 	    b>>inum>>line;
-// 	    integers.push_back(single_parameter<int>(string(line),inum));
-// 	}
-// 	b<<inum2;
-// 	for(int i=0;i<inum2;i++)
-// 	{
-// 	    b>>fnum>>line;
-// 	    floats.push_back(single_parameter<float>(string(line),fnum));
-// 	}
-// 	b<<inum2;
-// 	char *l1=0;
-// 	for(int i=0;i<inum2;i++)
-// 	{
-// 	    b>>line;
-// 	    b>>l1;
-// 	    strings_.push_back(single_parameter<string>(string(l1),string(line)));
-// 	}
-//     }
-// }
 
 template void shape_parameter::setParam<bool>(int i, const bool& p);
 template void shape_parameter::addParam<bool>(bool p, string n);

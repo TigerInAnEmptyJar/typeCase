@@ -58,7 +58,7 @@ ABarrelPixel::ABarrelPixel(int maxPixelsIn, int IDIn, int& numPixels, TPixel** p
   for (int i = 0; i < numParams; i++)
     for (int j = 0; j < numRanges; j++)
       range[i][j] = 0;
-// done
+      // done
 
 #ifdef DEBUGBARRELPIXEL
   TFile* f = new TFile("barrelpixel.root", "recreate");
@@ -223,17 +223,17 @@ void ABarrelPixel::onNewRun(run_parameter& rp)
   vector<CommonCalibrationParser*> Parser;
   vector<CommonCalibrationParser*> tmp;
   if (rp.hasOwnCalibration() && !rp.hasAdditionalCalibration())
-    for (int i = 0; i < rp.getNumberOfCalibrationFiles(); i++) {
+    for (size_t i = 0; i < rp.getNumberOfCalibrationFiles(); i++) {
       CommonCalibrationParser::getFileContent(rp.getCalibrationFile(i), tmp);
     }
   else {
     if (rp.hasAdditionalCalibration()) {
-      for (int i = 0; i < rp.getNumberOfCalibrationFiles(); i++) {
+      for (size_t i = 0; i < rp.getNumberOfCalibrationFiles(); i++) {
         CommonCalibrationParser::getFileContent(rp.getCalibrationFile(i), tmp);
       }
     }
     if (rp.getParent() != NULL) {
-      for (int i = 0; i < rp.getParent()->getNumberOfCalibrationFiles(); i++) {
+      for (size_t i = 0; i < rp.getParent()->getNumberOfCalibrationFiles(); i++) {
         CommonCalibrationParser::getFileContent(rp.getParent()->getCalibrationFile(i), tmp);
       }
     }

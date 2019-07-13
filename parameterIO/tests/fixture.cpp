@@ -1,0 +1,262 @@
+#include "fixture.h"
+#include <boost/uuid/random_generator.hpp>
+
+void ParameterIoTest::appendSomeAlgorithms(std::vector<std::shared_ptr<base_parameter>>& items)
+{
+  algorithm_parameter algo1;
+  algo1.setID(10);
+  algo1.setUse(true);
+  algo1.setLevel(0);
+  algo1.setCategory(1);
+  algo1.setId(_algorithm1_id);
+  algo1.setName("testAlgorithm 1");
+  algo1.setDescription("This is a test algorithm.");
+  algo1.addParam(single_parameter<int>("param1", 0));
+  algo1.addParam(single_parameter<int>("param2", 10));
+  algo1.addParam(single_parameter<float>("param3", 5.5));
+  algo1.addParam(single_parameter<std::string>("param4", "foo"));
+  algo1.addParam(
+      single_parameter<std::vector<int>>("param5", std::vector<int>{0, 1, 2, 3, 4, 5, 6}));
+  algo1.addParam(
+      single_parameter<std::vector<float>>("param6", std::vector<float>{0.7, 1.45, 5.7}));
+  items.push_back(std::make_shared<algorithm_parameter>(algo1));
+
+  algorithm_parameter algo2;
+  algo2.setID(34);
+  algo2.setUse(false);
+  algo2.setLevel(5);
+  algo2.setCategory(2);
+  algo2.setId(_algorithm2_id);
+  algo2.setName("testAlgorithm 2");
+  algo2.setDescription("This is a new test algorithm.");
+  algo2.addParam(single_parameter<bool>("param-1", false));
+  algo2.addParam(single_parameter<bool>("param-2", true));
+  algo2.addParam(single_parameter<point3D>("param-3", point3D(1, 2, 3)));
+  algo2.addParam(single_parameter<vector3D>("param-4", vector3D(4, 5, 6)));
+  items.push_back(std::make_shared<algorithm_parameter>(algo2));
+}
+
+void ParameterIoTest::appendSomeShapes(std::vector<std::shared_ptr<base_parameter>>& items)
+{
+  shape_parameter shape1;
+  shape1.setId(_shape1_id);
+  shape1.setName("testShape 1");
+  shape1.setDescription("This is a test shape.");
+  shape1.setCompleteWrite(true);
+  shape1.addParam<int>(10, "param1");
+  shape1.addParam<int>(26, "param2");
+  shape1.addParam<float>(123.5f, "param3");
+  shape1.addParam<point3D>(point3D(1, 2, 3), "param4");
+  shape1.addParam<point3D>(point3D(4, 5, 6), "param5");
+  shape1.addParam<vector3D>(vector3D(1, 3, 5), "param6");
+  shape1.addParam<vector3D>(vector3D(11, 22, 33), "param7");
+  items.push_back(std::make_shared<shape_parameter>(shape1));
+
+  shape_parameter shape2;
+  shape2.setId(_shape2_id);
+  shape2.setName("testShape 2");
+  shape2.setDescription("This is yet another test shape.");
+  shape2.setCompleteWrite(true);
+  shape2.addParam<int>(10, "param-1");
+  shape2.addParam<float>(26.25, "param-2");
+  shape2.addParam<float>(123.5f, "param-3");
+  shape2.addParam<std::string>("foo", "param-4");
+  shape2.addParam<std::string>("bar", "param-5");
+  items.push_back(std::make_shared<shape_parameter>(shape2));
+}
+
+void ParameterIoTest::appendSomeMaterials(std::vector<std::shared_ptr<base_parameter>>& items)
+{
+  material_parameter material1;
+  material1.setId(boost::uuids::random_generator()());
+  material1.setName("testMaterial 1");
+  material1.setDescription("This is a test material.");
+  material1.setRadiationLength(101.5);
+  material1.setSpeed(0.75);
+  material1.setActive(true);
+  material1.setDensity(13.67f);
+  material1.addElement({});
+  material1.addElement({});
+  material1.setEnergyLoss(0, 1.2);
+  material1.setEnergyLoss(1, 2.2);
+  material1.setEnergyLoss(2, 3.2);
+  items.push_back(std::make_shared<material_parameter>(material1));
+
+  material_parameter material2;
+  material2.setId(boost::uuids::random_generator()());
+  material2.setName("testMaterial 2");
+  material2.setDescription("This is yet another test material.");
+  material2.setRadiationLength(10.5);
+  material2.setSpeed(0.88);
+  material2.setActive(false);
+  material2.setDensity(19.12f);
+  material2.addElement({});
+  material2.setEnergyLoss(0, 19.2);
+  material2.setEnergyLoss(1, 0.2);
+  items.push_back(std::make_shared<material_parameter>(material2));
+}
+
+void ParameterIoTest::appendSomeDetectors(std::vector<std::shared_ptr<base_parameter>>& items)
+{
+  appendSomeShapes(items);
+  appendSomeMaterials(items);
+
+  // when writing setup, not only the detector is important, but also the reaction description.
+  reaction_parameter reaction;
+  reaction.setName("Reaction description");
+  reaction.setId(boost::uuids::random_generator()());
+  reaction.setDescription("This is a reaction description.");
+  reaction.setTwoBeams(false);
+  reaction.setBeamMomentum(1000.f);
+  reaction.setTargetMaterial(0);
+  reaction.setTargetShape(*std::dynamic_pointer_cast<shape_parameter>(items[0]));
+  items.insert(items.begin() + 2, std::make_shared<reaction_parameter>(reaction));
+
+  detector_parameter detector1;
+  detector1.setName("testDetector 1");
+  detector1.setDescription("This is a test detector.");
+  detector1.setId(boost::uuids::random_generator()());
+  detector1.setID(10);
+  detector1.setCircular(true);
+  detector1.setMaterial(1);
+  detector1.setMaterial(std::dynamic_pointer_cast<material_parameter>(items[3]).get());
+  detector1.setStackType(5);
+  detector1.setMaxDistance(10.5f);
+  detector1.setNumberOfElements(100);
+  detector1.setShape(*std::dynamic_pointer_cast<shape_parameter>(items[0]));
+  items.insert(items.begin() + 3, std::make_shared<detector_parameter>(detector1));
+
+  detector_parameter detector2;
+  detector2.setName("testDetector 2");
+  detector2.setDescription("This is a second test detector.");
+  detector2.setId(boost::uuids::random_generator()());
+  detector2.setID(15);
+  detector2.setCircular(false);
+  detector2.setMaterial(0);
+  detector2.setMaterial(std::dynamic_pointer_cast<material_parameter>(items[2]).get());
+  detector2.setStackType(1);
+  detector2.setMaxDistance(1.5f);
+  detector2.setNumberOfElements(150);
+  detector2.setShape(*std::dynamic_pointer_cast<shape_parameter>(items[1]));
+  items.insert(items.begin() + 4, std::make_shared<detector_parameter>(detector2));
+}
+
+void ParameterIoTest::appendSomeDatabase(std::vector<std::shared_ptr<base_parameter>>& items)
+{
+  beamTime_parameter beamtime1;
+  beamtime1.setName("beamtime 1");
+  beamtime1.setDescription("This is a test beamtime.");
+  beamtime1.setId(boost::uuids::random_generator()());
+  beamtime1.setData(12, 2015);
+  beamtime1.setFileName("data/run1.data");
+  beamtime1.setSetupFile("data/setup1.data");
+  beamtime1.addCalibrationFile("data/calibration1.data");
+  beamtime1.addCalibrationFile("data/calibration2.data");
+  beamtime1.addCalibrationFile("data/calibration3.data");
+  beamtime1.addCalibrationFile("data/calibration4.data");
+  items.push_back(std::make_shared<beamTime_parameter>(beamtime1));
+
+  beamTime_parameter beamtime2;
+  beamtime2.setName("beamtime 2");
+  beamtime2.setDescription("This is another test beamtime.");
+  beamtime2.setId(boost::uuids::random_generator()());
+  beamtime2.setData(1, 2015);
+  beamtime2.setFileName("data/run2.data");
+  beamtime2.setSetupFile("data/setup2.data");
+  beamtime2.addCalibrationFile("data/calibration5.data");
+  beamtime2.addCalibrationFile("data/calibration6.data");
+  beamtime2.addCalibrationFile("data/calibration7.data");
+  beamtime2.addCalibrationFile("data/calibration8.data");
+  items.push_back(std::make_shared<beamTime_parameter>(beamtime2));
+
+  run_parameter run1_1;
+  run1_1.setName("run 1-1");
+  run1_1.setDescription("This is a test run of beamtime 1.");
+  run1_1.setId(boost::uuids::random_generator()());
+  run1_1.setType(run_parameter::RunType::BACKGROUND);
+  run1_1.setParent(std::dynamic_pointer_cast<beamTime_parameter>(items[0]));
+  run1_1.setParentNumber(items[0]->id());
+  run1_1.setRunNumber(1000);
+  run1_1.setStartTime(2015, 12, 1, 12, 0, 0);
+  run1_1.setStopTime(2015, 12, 1, 13, 0, 0);
+  run1_1.setOwnCalibration(false);
+  run1_1.setAdditionalCalibration(false);
+  run1_1.addFile("data/datafile1_1.data", 4);
+  items.push_back(std::make_shared<run_parameter>(run1_1));
+
+  run_parameter run1_2;
+  run1_2.setName("run 1-2");
+  run1_2.setDescription("This is a second test run of beamtime 1.");
+  run1_2.setId(boost::uuids::random_generator()());
+  run1_2.setType(run_parameter::RunType::ELASTIC);
+  run1_2.setParent(std::dynamic_pointer_cast<beamTime_parameter>(items[0]));
+  run1_2.setParentNumber(items[0]->id());
+  run1_2.setRunNumber(1001);
+  run1_2.setStartTime(2015, 12, 1, 14, 0, 0);
+  run1_2.setStopTime(2015, 12, 1, 15, 0, 0);
+  run1_2.setOwnCalibration(false);
+  run1_2.setAdditionalCalibration(false);
+  run1_2.addFile("data/datafile1_2.data", 7);
+  items.push_back(std::make_shared<run_parameter>(run1_2));
+
+  run_parameter run2_1;
+  run2_1.setName("run 2-1");
+  run2_1.setDescription("This is a test run of beamtime 2.");
+  run2_1.setId(boost::uuids::random_generator()());
+  run2_1.setType(run_parameter::RunType::REGULAR);
+  run2_1.setParent(std::dynamic_pointer_cast<beamTime_parameter>(items[1]));
+  run2_1.setParentNumber(items[1]->id());
+  run2_1.setRunNumber(2000);
+  run2_1.setStartTime(2015, 1, 1, 12, 0, 0);
+  run2_1.setStopTime(2015, 1, 1, 13, 0, 0);
+  run2_1.setOwnCalibration(false);
+  run2_1.setAdditionalCalibration(true);
+  run2_1.addCalibrationFile("data/calibration7.data");
+  run2_1.addFile("data/datafile2_1-1.data", 4);
+  run2_1.addFile("data/datafile2_1-2.data", 8);
+  items.push_back(std::make_shared<run_parameter>(run2_1));
+
+  run_parameter run2_2;
+  run2_2.setName("run 2-2");
+  run2_2.setDescription("This is a second test run of beamtime 2.");
+  run2_2.setId(boost::uuids::random_generator()());
+  run2_2.setType(run_parameter::RunType::CALIBRATION);
+  run2_2.setParent(std::dynamic_pointer_cast<beamTime_parameter>(items[1]));
+  run2_2.setParentNumber(items[1]->id());
+  run2_2.setRunNumber(2000);
+  run2_2.setStartTime(2015, 1, 1, 12, 0, 0);
+  run2_2.setStopTime(2015, 1, 1, 13, 0, 0);
+  run2_2.setOwnCalibration(true);
+  run2_2.setAdditionalCalibration(true);
+  run2_2.addCalibrationFile("data/calibration8.data");
+  run2_2.addCalibrationFile("data/calibration9.data");
+  run2_2.addCalibrationFile("data/calibration10.data");
+  run2_2.addFile("data/datafile2_2-1.data", 4);
+  run2_2.addFile("data/datafile2_2-2.data", 8);
+  run2_2.setOwnSetup(true);
+  run2_2.setSetupFile("data/ownSetup2_2.data");
+  items.push_back(std::make_shared<run_parameter>(run2_2));
+}
+
+void ParameterIoTest::installRecovery()
+{
+  _shape1_id = boost::uuids::random_generator()();
+  _shape2_id = boost::uuids::random_generator()();
+  _algorithm1_id = boost::uuids::random_generator()();
+  _algorithm2_id = boost::uuids::random_generator()();
+
+  io.setShapeIdRecoveryFunction([this](std::shared_ptr<base_parameter>& item) {
+    if (item->getName() == "testShape 1") {
+      item->setId(_shape1_id);
+    } else if (item->getName() == "testShape 2") {
+      item->setId(_shape2_id);
+    }
+  });
+  io.setAlgorithmIdRecoveryFunction([this](std::shared_ptr<base_parameter>& item) {
+    if (item->getName() == "testAlgorithm 1") {
+      item->setId(_algorithm1_id);
+    } else if (item->getName() == "testAlgorithm 2") {
+      item->setId(_algorithm2_id);
+    }
+  });
+}

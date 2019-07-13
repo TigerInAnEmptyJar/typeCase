@@ -226,12 +226,11 @@ ACompareToGIN::~ACompareToGIN()
 algorithm_parameter ACompareToGIN::getDescription()
 {
   algorithm_parameter ret("Compare tracks to GIN", 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm reads track information, like direction");
-  des.push_back("momenta, vertex from a GIN-format-file and compares this");
-  des.push_back("to the tracks reconstructed in the analysis. The assignment");
-  des.push_back("of the tracks to the GIN-tracks is done via minimum angle");
-  des.push_back("between the tracks and the GIN-tracks.");
+  string des = "This algorithm reads track information, like direction "
+               "momenta, vertex from a GIN-format-file and compares this "
+               "to the tracks reconstructed in the analysis. The assignment "
+               "of the tracks to the GIN-tracks is done via minimum angle "
+               "between the tracks and the GIN-tracks.";
   ret.setDescription(des);
   vector<int> tmp;
   ret.addParam<string>(single_parameter<string>("GIN-file", ""));

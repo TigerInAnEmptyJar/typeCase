@@ -84,6 +84,7 @@ istream& operator>>(istream& i, detector_parameter& d)
 
 void detector_parameter::operator=(const detector_parameter& d)
 {
+  setId(d.id());
   setName(d.getName());
   setDescription(d.getDescription());
   setNumberOfElements(d.getNumberOfElements());
@@ -93,6 +94,20 @@ void detector_parameter::operator=(const detector_parameter& d)
   //    setMaterial(d.material());
   setID(d.getID());
   setCircular(d.isCircular());
+}
+
+bool detector_parameter::operator==(detector_parameter const& other) const
+{
+  bool matEqual = true;
+  if (other.mat == nullptr || mat == nullptr) {
+    matEqual = (other.fmaterial == fmaterial);
+  } else {
+    matEqual = (other.mat == mat);
+  }
+  return other.numberOfElements == numberOfElements && matEqual && other.ID == ID &&
+         other.maxDist == maxDist && other.circular == circular && other.stackType == stackType &&
+         other.shape == shape && other.id() == id() && other.getName() == getName() &&
+         other.getDescription() == getDescription();
 }
 
 reaction_parameter::reaction_parameter(const shape_parameter& target, bool twoBeamIn, int first,
@@ -133,6 +148,12 @@ reaction_parameter& reaction_parameter::operator=(const reaction_parameter& r)
   }
   targetShape = r.getTargetShape();
   return *this;
+}
+
+bool reaction_parameter::operator==(reaction_parameter const& other) const
+{
+  return twoBeams == other.twoBeams && firstMat == other.firstMat && firstMom == other.firstMom &&
+         targetShape == other.targetShape && secMat == other.secMat && secMom == other.secMom;
 }
 
 reaction_parameter::~reaction_parameter() {}
@@ -199,11 +220,7 @@ ostream& operator<<(ostream& o, const reaction_parameter& d)
   if (d.hasTwoBeams())
     o << " " << d.getBeamMomentum(1);
   o << d.getName().data() << endl;
-  o << d.getDescription().size();
-  if (d.getDescription().size() == 0)
-    o << " ";
-  for (unsigned int i = 0; i < d.getDescription().size(); i++)
-    o << d.getDescription(i).data() << endl;
+  o << d.getDescription() << endl;
   shape_parameter sh;
   sh = d.getTargetShape();
   o << sh;
@@ -265,12 +282,8 @@ istream& operator>>(istream& i, reaction_parameter& d)
   char li[250];
   i.getline(li, 250);
   d.setName(string(li));
-  i >> zahl;
-  vector<string> lis;
-  for (int I = 0; I < zahl; I++) {
-    i.getline(li, 250);
-    lis.push_back(string(li));
-  }
+  string lis;
+  std::getline(i, lis);
   d.setDescription(lis);
   shape_parameter sh;
   i >> sh;

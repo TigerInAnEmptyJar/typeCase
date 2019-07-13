@@ -11,31 +11,30 @@ class trackVertexTrack;
 algorithm_parameter AVLineTrackSearch::getDescription()
 {
   algorithm_parameter ret("V-Line Track search", 0, 0);
-  vector<string> des;
-  des.push_back("This is a track search algorithm in a detector");
-  des.push_back("without magnetic field, with thin detectors");
-  des.push_back("for decays of neutral particles.");
-  des.push_back("The algorithm assumes a prompt neutral track");
-  des.push_back("that decays and causes hits in two stop detectors");
-  des.push_back("=>two stop pixels/clusters.");
-  des.push_back("Out of momentum-conservation reasons, the tracks");
-  des.push_back("all lie in the plane defined by the target and the");
-  des.push_back("two pixel centers.");
-  des.push_back("Here there are pixels/clusters searched that are");
-  des.push_back("close to the plane. Out of these pixels tracks are");
-  des.push_back("searched with a secondary vertex point close to the ");
-  des.push_back("plane. ");
-  des.push_back("The angles of the tracks have to be able to add ");
-  des.push_back("up to the primary track.");
-  des.push_back("As for the assignment of the hits in the detector");
-  des.push_back("to the track, two modes are possible:");
-  des.push_back("-If the enveloping shape of the detector-elements");
-  des.push_back(" in the detector is regular, hits around a suspect");
-  des.push_back(" element (taken from volumeShape::suspect()) are");
-  des.push_back(" taken.");
-  des.push_back("-Every hit element of the detector is checked.");
-  des.push_back(" If the assumed line is close enough this element");
-  des.push_back(" is used. This method is slower than the other one!");
+  string des = "This is a track search algorithm in a detector"
+               "without magnetic field, with thin detectors"
+               "for decays of neutral particles."
+               "The algorithm assumes a prompt neutral track"
+               "that decays and causes hits in two stop detectors"
+               "=>two stop pixels/clusters."
+               "Out of momentum-conservation reasons, the tracks"
+               "all lie in the plane defined by the target and the"
+               "two pixel centers."
+               "Here there are pixels/clusters searched that are"
+               "close to the plane. Out of these pixels tracks are"
+               "searched with a secondary vertex point close to the "
+               "plane. "
+               "The angles of the tracks have to be able to add "
+               "up to the primary track."
+               "As for the assignment of the hits in the detector"
+               "to the track, two modes are possible:"
+               "-If the enveloping shape of the detector-elements"
+               " in the detector is regular, hits around a suspect"
+               " element (taken from volumeShape::suspect()) are"
+               " taken."
+               "-Every hit element of the detector is checked."
+               " If the assumed line is close enough this element"
+               " is used. This method is slower than the other one!";
   ret.setDescription(des);
   ret.addParam<int>(single_parameter<int>("max number of elements in 2 tracks", 2));
   ret.addParam<int>(single_parameter<int>("min # elements on track-vertex-track", 7));
@@ -1140,7 +1139,7 @@ bool AVLineTrackSearch::checkPlane(int planenum, int l, int k)
 #endif
   switch (l * 2 + k) {
   case 0: {
-    TPixel *pix1 = (TPixel *)planePoints[planenum][0], *pix2 = (TPixel *)planePoints[planenum][1];
+    TPixel *pix1 = (TPixel*)planePoints[planenum][0], *pix2 = (TPixel*)planePoints[planenum][1];
     for (int i = 0; i < pix1->getNumberOfActualElements(); i++)
       for (int j = 0; j < pix2->getNumberOfActualElements(); j++)
         if (&pix1->getElementr(i) == &pix2->getElementr(j))

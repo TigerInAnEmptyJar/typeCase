@@ -121,16 +121,4 @@ ostream& operator<<(ostream& o, const paint_parameter& p);
  */
 istream& operator>>(istream& i, paint_parameter& p);
 
-/*!
- *
- */
-template <>
-bool takeItemFromVector<paint_parameter>(vector<paint_parameter>& vect, paint_parameter& item);
-
-/*!
- *
- */
-template <>
-bool moveItemToPosVector<paint_parameter>(vector<paint_parameter>& vect, paint_parameter& item,
-                                          int pos);
 #endif

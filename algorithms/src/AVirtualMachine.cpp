@@ -165,7 +165,8 @@ int AVirtualMachine::searchADetector(int detNum, int detID, vector3D& distance, 
       return ret;
     }
     if (abs(backside - ret) > detector->getNumberOfElements() / 2.) {
-      if (abs(abs(backside - ret) - detector->getNumberOfElements()) > maxHitPerTrack[detNum]) {
+      if (abs(static_cast<int>(abs(backside - ret) - detector->getNumberOfElements()) >
+              maxHitPerTrack[detNum])) {
         // cout<<"AVirtualMachine::searchADetector():done"<<endl;
         return ret;
       }
@@ -326,32 +327,21 @@ void* AVirtualMachine::process(void* ptr)
 algorithm_parameter AVirtualMachine::getDescription()
 {
   algorithm_parameter ret("Virtual detector tracking", 0, 0);
-  vector<string> des;
-  //     des.push_back("This algorithm uses the definition of the setup to
-  //     create");
-  //     des.push_back("a virtual detector and track the particles, generated
-  //     ");
-  //     des.push_back("elsewhere, generating their signal in the detector.");
-  //     des.push_back("Hits are generated including timing and energy
-  //     information.");
-  //     des.push_back("The TDC is the time, the signal leaves the detector.");
-  //     des.push_back("Energy loss will slow the particles down but it
-  //     won\'t");
-  //     des,push_back("change the particles direction, since it is only
-  //     calculated");
-  //     des.push_back("by simple energy-loss-calculations.");
-  //     des.push_back("Only straight tracks are assumed, no magnetic field will
-  //     be");
-  //     des.push_back("taken into account. Therefor, the stepwidth outside a
-  //     ");
-  //     des.push_back("detector area is from detector to detector element and
-  //     ");
-  //     des.push_back("inside the material 1mm.");
-  //     des.push_back("Some detectors share the same volume, here the energy
-  //     will");
-  //     des.push_back("be distributed according to the path to the read-out.");
-  //     des.push_back("Noise and smearing of the signals will be
-  //     implemented.");
+  std::string des = "This algorithm uses the definition of the setup to create"
+                    "a virtual detector and track the particles, generated"
+                    "elsewhere, generating their signal in the detector."
+                    "Hits are generated including timing and energy information."
+                    "The TDC is the time, the signal leaves the detector."
+                    "Energy loss will slow the particles down but it won\'t"
+                    "change the particles direction, since it is only calculated"
+                    "by simple energy-loss-calculations."
+                    "Only straight tracks are assumed, no magnetic field will be"
+                    "taken into account. Therefor, the stepwidth outside a"
+                    "detector area is from detector to detector element and"
+                    "inside the material 1mm."
+                    "Some detectors share the same volume, here the energy will"
+                    "be distributed according to the path to the read-out."
+                    "Noise and smearing of the signals will be implemented.";
   ret.setDescription(des);
   ret.setCategory(1);
   ret.addParam<bool>(single_parameter<bool>("Use common Start", false));

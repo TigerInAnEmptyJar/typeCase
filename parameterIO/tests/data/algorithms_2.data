@@ -1,0 +1,20 @@
+########## algorithm parameter ####### file version :1 #######
+2 ===== testAlgorithm 1 =====
+#10 1 testAlgorithm 1
+#1 0 
+DThis is a test algorithm.
+I0 param1
+I10 param2
+F5.5 param3
+Sfoo
+param4
+N7 0 1 2 3 4 5 6 param5
+T3 0.7 1.45 5.7 param6
+===== testAlgorithm 2 =====
+#34 0 testAlgorithm 2
+#2 5 
+DThis is a new test algorithm.
+B0 param-1
+B1 param-2
+P1 2 3 param-3
+V4 5 6 param-4

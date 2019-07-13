@@ -1464,7 +1464,7 @@ void AReadFromSimpleTree::getNewRun(run_parameter& rp)
   int type[nFiles];
   //   vector<string> files;
   //   vector<int> type;
-  for (int i = 0; i < rp.getNumberOfFiles(); i++) {
+  for (size_t i = 0; i < rp.getNumberOfFiles(); i++) {
     files[i] = rp.getFile(i);    //.push_back(rp.getFile(i));
     type[i] = rp.getFileType(i); //.push_back(rp.getFileType(i));
   }

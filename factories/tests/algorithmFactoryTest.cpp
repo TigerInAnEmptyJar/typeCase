@@ -23,22 +23,23 @@ class messenger
 public:
   MOCK_METHOD3(create, void(algorithm_parameter const&, TEvent&, TSetup const&));
 };
-}
+} // namespace test
 
 class AlgorithmFactoryUnitTest : public testing::Test
 {
 public:
   void SetUp() override
   {
-    description1.setUuid(algo_id1);
-    description2.setUuid(algo_id2);
+    description1.setId(algo_id1);
+    description2.setId(algo_id2);
   }
 
   void installAlgo1(AlgorithmFactory& factory)
   {
     EXPECT_TRUE(factory.addAlgorithmToFactory(
-        description1, AlgorithmType::Input, [this](algorithm_parameter const& p, TEvent& e,
-                                                   TSetup const& s) -> std::shared_ptr<AAlgorithm> {
+        description1, AlgorithmType::Input,
+        [this](algorithm_parameter const& p, TEvent& e,
+               TSetup const& s) -> std::shared_ptr<AAlgorithm> {
           algo1_messenger.create(p, e, s);
           return std::shared_ptr<AAlgorithm>(new test::TestAlgorithm("Algo1"));
         }));
@@ -92,7 +93,7 @@ TEST_F(AlgorithmFactoryUnitTest, installTest)
     EXPECT_FALSE(factory.isAlgorithmDefined(algo_id2));
     EXPECT_EQ(AlgorithmType::Input, factory.algorithmType(algo_id1));
     ASSERT_EQ(size_t{1}, factory.definedAlgorithms().size());
-    EXPECT_EQ(algo_id1, factory.definedAlgorithms()[0].uuid());
+    EXPECT_EQ(algo_id1, factory.definedAlgorithms()[0].id());
     // algo2 is not available
     EXPECT_EQ(nullptr, factory.create(description2, event, setup));
   }
@@ -107,7 +108,7 @@ TEST_F(AlgorithmFactoryUnitTest, installTest)
     EXPECT_TRUE(factory.isAlgorithmDefined(algo_id2));
     EXPECT_EQ(AlgorithmType::Processing, factory.algorithmType(algo_id2));
     ASSERT_EQ(size_t{1}, factory.definedAlgorithms().size());
-    EXPECT_EQ(algo_id2, factory.definedAlgorithms()[0].uuid());
+    EXPECT_EQ(algo_id2, factory.definedAlgorithms()[0].id());
     // algo1 is not available
     EXPECT_EQ(nullptr, factory.create(description1, event, setup));
   }

@@ -100,10 +100,10 @@ void ATeufelCorrection::onNewRum(run_parameter& r)
   anaLog << "ATeufelCorrection::noNewRun" << endli;
   vector<string> tmp;
   if (r.getParent() != NULL)
-    for (int i = 0; i < r.getParent()->getNumberOfCalibrationFiles(); i++)
+    for (size_t i = 0; i < r.getParent()->getNumberOfCalibrationFiles(); i++)
       tmp.push_back(r.getParent()->getCalibrationFile(i));
   if (r.hasAdditionalCalibration())
-    for (int i = 0; i < r.getNumberOfCalibrationFiles(); i++)
+    for (size_t i = 0; i < r.getNumberOfCalibrationFiles(); i++)
       tmp.push_back(r.getCalibrationFile(i));
   getFromFile(tmp);
 }

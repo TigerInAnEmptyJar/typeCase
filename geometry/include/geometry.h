@@ -108,7 +108,7 @@ public:
    * Returns a string representation of the geometrical object.
    * \return
    */
-  virtual string toString() const;
+  virtual string toString(int pt = -1) const;
 };
 
 /*****Base point class - for points in n dimensional space*/
@@ -120,9 +120,9 @@ class point : public geomObject
 {
 protected:
   /*!
- * \brief dimension
- * dimension of the space the point is located in
- */
+   * \brief dimension
+   * dimension of the space the point is located in
+   */
   int dimension;
 
   /*!
@@ -135,7 +135,7 @@ protected:
    * \brief v
    * values for dimension 0-20
    */
-  double v[20];  //[20]
+  double v[20]; //[20]
 
   /*!
    * \brief value
@@ -339,7 +339,7 @@ public:
    * Returns a cartesic string representation of the point.
    * \return
    */
-  virtual string toString() const;
+  virtual string toString(int pt = -1) const;
 };
 
 /*!
@@ -515,7 +515,7 @@ public:
    * Returns a string representation of the vector.
    * \return
    */
-  virtual string toString() const;
+  virtual string toString(int pt = -1) const;
 };
 
 /*!
@@ -827,34 +827,34 @@ class vector2D : public point2D, public Vector
 {
 protected:
   /*!
- * \brief Zero
- * Sets the state of the objet to _zero_.
- */
-  virtual void Zero() { point2D::Zero(); }
+   * \brief Zero
+   * Sets the state of the objet to _zero_.
+   */
+  void Zero() override { point2D::Zero(); }
 
   /*!
- * \brief Infinite
- * Sets the state of the objet to _infinite_.
- */
-  virtual void Infinite() { point2D::Infinite(); }
+   * \brief Infinite
+   * Sets the state of the objet to _infinite_.
+   */
+  void Infinite() override { point2D::Infinite(); }
 
   /*!
- * \brief Undefined
- * Sets the state of the objet to _undefined_.
- */
-  virtual void Undefined() { point2D::Undefined(); }
+   * \brief Undefined
+   * Sets the state of the objet to _undefined_.
+   */
+  void Undefined() override { point2D::Undefined(); }
 
   /*!
- * \brief Regular
- * Sets the state of the objet to _regular_.
- */
-  virtual void Regular() { point2D::Regular(); }
+   * \brief Regular
+   * Sets the state of the objet to _regular_.
+   */
+  void Regular() override { point2D::Regular(); }
 
 public:
   /*!
- * \brief vector2D
- * Default constructor
- */
+   * \brief vector2D
+   * Default constructor
+   */
   vector2D() : point2D(), Vector(0) {}
 
   /*!
@@ -900,7 +900,7 @@ public:
    * \param x
    * \param y
    */
-  virtual void setValues(double x, double y) { point2D::setValues(x, y); }
+  void setValues(double x, double y) override { point2D::setValues(x, y); }
 
   /*!
    * \brief setValue
@@ -908,13 +908,13 @@ public:
    * \param pos
    * \param valueIn
    */
-  virtual void setValue(int pos, double valueIn) { point2D::setValue(pos, valueIn); }
+  void setValue(int pos, double valueIn) override { point2D::setValue(pos, valueIn); }
 
   /*!
    * \brief normalize
    * Normalizes the vector. Each component in cartesic coordinates is devided by the vectors length.
    */
-  virtual void normalize()
+  void normalize() override
   {
     if (point2D::f_r == 0)
       return;
@@ -926,7 +926,7 @@ public:
    * Returns the length of the vector.
    * \return
    */
-  virtual double length() const { return point2D::f_r; }
+  virtual double length() const override { return point2D::f_r; }
 
   /*!
    * \brief getState
@@ -934,7 +934,7 @@ public:
    * _zero_.
    * \return
    */
-  virtual geomState getState() const { return point2D::getState(); }
+  geomState getState() const override { return point2D::getState(); }
 
   /*!
    * \brief getValue
@@ -942,14 +942,14 @@ public:
    * \param pos
    * \return
    */
-  virtual double getValue(int pos) const { return point2D::getValue(pos); }
+  double getValue(int pos) const override { return point2D::getValue(pos); }
 
   /*!
    * \brief getDimension
    * Returns the dimension of the vector which is 2.
    * \return
    */
-  virtual int getDimension() const { return 2; }
+  int getDimension() const override { return 2; }
 
   /*!
    * \brief operator =
@@ -1038,7 +1038,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double operator[](int pos) const { return point2D::getValue(pos); }
+  double operator[](int pos) const override { return point2D::getValue(pos); }
 
   /*!
    * \brief operator !
@@ -1060,7 +1060,7 @@ public:
    * \param pt
    * \return
    */
-  virtual string toString(int pt = -1) const;
+  string toString(int pt = -1) const override;
 };
 
 /*!
@@ -1312,7 +1312,7 @@ public:
    * Returns the point's dimension which is 3.
    * \return
    */
-  virtual int getDimension() const { return 3; }
+  int getDimension() const override { return 3; }
 
   /*!
    * \brief getValue
@@ -1320,7 +1320,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double getValue(int pos) const
+  double getValue(int pos) const override
   {
     switch (pos) {
     case 0:
@@ -1339,7 +1339,7 @@ public:
    * \param pos
    * \param valueIn
    */
-  virtual void setValue(int pos, double valueIn);
+  void setValue(int pos, double valueIn) override;
 
   /*!
    * \brief getRep
@@ -1375,7 +1375,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double operator[](int pos) const
+  double operator[](int pos) const override
   {
     switch (pos) {
     case 0:
@@ -1431,7 +1431,7 @@ public:
    * \param pt
    * \return
    */
-  virtual string toString(int pt = -1) const;
+  string toString(int pt = -1) const override;
 };
 
 // vector3D operator-(const point3D &p, const point3D &q);
@@ -1455,34 +1455,34 @@ class vector3D : public point3D, public Vector
 {
 protected:
   /*!
- * \brief Zero
- * Sets the state of the objet to _zero_.
- */
-  virtual void Zero() { point3D::Zero(); }
+   * \brief Zero
+   * Sets the state of the objet to _zero_.
+   */
+  void Zero() override { point3D::Zero(); }
 
   /*!
- * \brief Infinite
- * Sets the state of the objet to _infinite_.
- */
-  virtual void Infinite() { point3D::Infinite(); }
+   * \brief Infinite
+   * Sets the state of the objet to _infinite_.
+   */
+  void Infinite() override { point3D::Infinite(); }
 
   /*!
- * \brief Undefined
- * Sets the state of the objet to _undefined_.
- */
-  virtual void Undefined() { point3D::Undefined(); }
+   * \brief Undefined
+   * Sets the state of the objet to _undefined_.
+   */
+  void Undefined() override { point3D::Undefined(); }
 
   /*!
- * \brief Regular
- * Sets the state of the objet to _regular_.
- */
-  virtual void Regular() { point3D::Regular(); }
+   * \brief Regular
+   * Sets the state of the objet to _regular_.
+   */
+  void Regular() override { point3D::Regular(); }
 
 public:
   /*!
- * \brief vector3D
- * Default constructor.
- */
+   * \brief vector3D
+   * Default constructor.
+   */
   vector3D() : point3D(), Vector(0) {}
 
   /*!
@@ -1538,7 +1538,7 @@ public:
    * \param y
    * \param z
    */
-  virtual void setValues(double x, double y, double z) { point3D::setValues(x, y, z); }
+  void setValues(double x, double y, double z) override { point3D::setValues(x, y, z); }
 
   /*!
    * \brief getValue
@@ -1546,7 +1546,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double getValue(int pos) const { return point3D::getValue(pos); }
+  double getValue(int pos) const override { return point3D::getValue(pos); }
 
   /*!
    * \brief setValue
@@ -1554,7 +1554,7 @@ public:
    * \param pos
    * \param valueIn
    */
-  virtual void setValue(int pos, double valueIn) { point3D::setValue(pos, valueIn); }
+  void setValue(int pos, double valueIn) override { point3D::setValue(pos, valueIn); }
 
   /*!
    * \brief getState
@@ -1562,13 +1562,13 @@ public:
    * _zero_.
    * \return
    */
-  virtual geomState getState() const { return point3D::getState(); }
+  geomState getState() const override { return point3D::getState(); }
 
   /*!
    * \brief normalize
    * Set the length of the vector to 1.
    */
-  virtual void normalize()
+  void normalize() override
   {
     if (point3D::f_r == 0)
       return;
@@ -1581,14 +1581,14 @@ public:
    * Return the length of the vector.
    * \return
    */
-  virtual double length() const { return point3D::f_r; }
+  double length() const override { return point3D::f_r; }
 
   /*!
    * \brief getDimension
    * Return the vectors dimension which is 3.
    * \return
    */
-  virtual int getDimension() const { return 3; }
+  int getDimension() const override { return 3; }
 
   /*!
    * \brief operator =
@@ -1703,7 +1703,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double operator[](int pos) const { return point3D::getValue(pos); }
+  double operator[](int pos) const override { return point3D::getValue(pos); }
 
   /*!
    * \brief operator !
@@ -1735,7 +1735,7 @@ public:
    * \param pt
    * \return
    */
-  virtual string toString(int pt = -1) const;
+  string toString(int pt = -1) const override;
 };
 
 /*!
@@ -1904,7 +1904,7 @@ public:
    * \param pos
    * \param valueIn
    */
-  virtual void setValue(int pos, double valueIn)
+  void setValue(int pos, double valueIn) override
   {
     switch (pos) {
     case 0:
@@ -1927,7 +1927,7 @@ public:
    * Returns the point's dimension which is 4.
    * \return
    */
-  virtual int getDimension() const { return 4; }
+  int getDimension() const override { return 4; }
 
   /*!
    * \brief getValue
@@ -1935,7 +1935,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double getValue(int pos) const
+  double getValue(int pos) const override
   {
     switch (pos) {
     case 0:
@@ -2122,7 +2122,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double operator[](int pos) const
+  double operator[](int pos) const override
   {
     switch (pos) {
     case 0:
@@ -2145,7 +2145,7 @@ public:
    * \param pt
    * \return
    */
-  virtual string toString(int pt = -1) const;
+  string toString(int pt = -1) const override;
 };
 
 /*!
@@ -2165,34 +2165,34 @@ class vector4D : public point4D, public Vector
 {
 protected:
   /*!
- * \brief Zero
- * Sets the state of the objet to _zero_.
- */
-  virtual void Zero() { point4D::Zero(); }
+   * \brief Zero
+   * Sets the state of the objet to _zero_.
+   */
+  void Zero() override { point4D::Zero(); }
 
   /*!
- * \brief Infinite
- * Sets the state of the objet to _infinite_.
- */
-  virtual void Infinite() { point4D::Infinite(); }
+   * \brief Infinite
+   * Sets the state of the objet to _infinite_.
+   */
+  void Infinite() override { point4D::Infinite(); }
 
   /*!
- * \brief Undefined
- * Sets the state of the objet to _undefined_.
- */
-  virtual void Undefined() { point4D::Undefined(); }
+   * \brief Undefined
+   * Sets the state of the objet to _undefined_.
+   */
+  void Undefined() override { point4D::Undefined(); }
 
   /*!
- * \brief Regular
- * Sets the state of the objet to _regular_.
- */
-  virtual void Regular() { point4D::Regular(); }
+   * \brief Regular
+   * Sets the state of the objet to _regular_.
+   */
+  void Regular() override { point4D::Regular(); }
 
 public:
   /*!
- * \brief vector4D
- * Default constructor.
- */
+   * \brief vector4D
+   * Default constructor.
+   */
   vector4D() : point4D(), Vector(0) {}
 
   /*!
@@ -2265,7 +2265,10 @@ public:
    * \param z
    * \param w
    */
-  virtual void setValues(double x, double y, double z, double w) { point4D::setValues(x, y, z, w); }
+  void setValues(double x, double y, double z, double w) override
+  {
+    point4D::setValues(x, y, z, w);
+  }
 
   /*!
    * \brief setValues
@@ -2274,7 +2277,7 @@ public:
    * \param y
    * \param z
    */
-  virtual void setValues(double x, double y, double z) { point4D::setValues(x, y, z); }
+  void setValues(double x, double y, double z) override { point4D::setValues(x, y, z); }
 
   /*!
    * \brief setValue
@@ -2282,7 +2285,7 @@ public:
    * \param pos
    * \param valueIn
    */
-  virtual void setValue(int pos, double valueIn) { point4D::setValue(pos, valueIn); }
+  void setValue(int pos, double valueIn) override { point4D::setValue(pos, valueIn); }
 
   /*!
    * \brief getValue
@@ -2290,7 +2293,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double getValue(int pos) const { return point4D::getValue(pos); }
+  double getValue(int pos) const override { return point4D::getValue(pos); }
 
   /*!
    * \brief getState
@@ -2298,20 +2301,20 @@ public:
    * _zero_.
    * \return
    */
-  virtual geomState getState() const { return point4D::getState(); }
+  geomState getState() const override { return point4D::getState(); }
 
   /*!
    * \brief getDimension
    * Returns the vector's dimension which s 4.
    * \return
    */
-  virtual int getDimension() const { return 4; }
+  int getDimension() const override { return 4; }
 
   /*!
    * \brief normalize
    * Sets the length of the vector to 1.
    */
-  virtual void normalize()
+  void normalize() override
   {
     double t = length();
     if (t == 0)
@@ -2324,8 +2327,7 @@ public:
    * Returns the length of the vector.
    * \return
    */
-  virtual double length() const
-
+  double length() const override
   {
     return sqrt(point4D::f_r * point4D::f_r + point4D::value4 * point4D::value4);
   }
@@ -2405,7 +2407,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double operator[](int pos) const { return point4D::operator[](pos); }
+  double operator[](int pos) const override { return point4D::operator[](pos); }
 
   /*!
    * \brief toString
@@ -2415,7 +2417,7 @@ public:
    * \param pt
    * \return
    */
-  virtual string toString(int pt = -1) const;
+  string toString(int pt = -1) const override;
 };
 
 /*!
@@ -2435,9 +2437,9 @@ class momentum4D : public vector4D
 {
 protected:
   /*!
- * \brief velocity
- * Velocity vector of the particle.
- */
+   * \brief velocity
+   * Velocity vector of the particle.
+   */
   vector3D velocity;
 
   /*!
@@ -2543,7 +2545,7 @@ public:
    * \param z
    * \param e
    */
-  void setValues(double x, double y, double z, double e) { setPE(vector3D(x, y, z), e); }
+  void setValues(double x, double y, double z, double e) override { setPE(vector3D(x, y, z), e); }
 
   /*!
    * \brief Energy
@@ -2894,7 +2896,7 @@ public:
    * \param pos
    * \return
    */
-  virtual double operator[](int pos) const { return vector4D::operator[](pos); }
+  double operator[](int pos) const override { return vector4D::operator[](pos); }
 
   /*!
    * \brief toString
@@ -2907,7 +2909,7 @@ pt3D can be eigther _cartesic3_, _cylindric_, _spheric_ or in the momentum's own
    * \param pt
    * \return
    */
-  virtual string toString(int pt = -1) const;
+  string toString(int pt = -1) const override;
 };
 
 /*!
@@ -2959,19 +2961,19 @@ protected:
    * \brief Infinite
    * Sets the state of the object to _infinite_.
    */
-  void Infinite();
+  void Infinite() override;
 
   /*!
    * \brief Undefined
    * Sets the state of the object to _undefined_.
    */
-  void Undefined();
+  void Undefined() override;
 
   /*!
    * \brief Regular
    * Sets the state of the object to _regular_.
    */
-  void Regular();
+  void Regular() override;
 
 public:
   /*!
@@ -3081,7 +3083,7 @@ public:
    * _zero_.
    * \return
    */
-  geomState getState() const { return geomObject::getState(); }
+  geomState getState() const override { return geomObject::getState(); }
 
   /*!
    * \brief getDimension
@@ -3094,7 +3096,7 @@ public:
    * \brief Zero
    * Sets the state of the object to _regular_.
    */
-  void Zero()
+  void Zero() override
   {
     geomObject::Zero();
     d.setValues(0, 0);
@@ -3124,7 +3126,7 @@ public:
    * \param l
    * \return
    */
-  double operator&(const sLine2D& l) const;   // distance of two lines
+  double operator&(const sLine2D& l) const; // distance of two lines
 
   /*!
    * \brief operator -
@@ -3133,7 +3135,7 @@ public:
    * \param l
    * \return
    */
-  lLine2D operator-(const sLine2D& l) const;  // closest approach of 2 lines
+  lLine2D operator-(const sLine2D& l) const; // closest approach of 2 lines
 
   /*!
    * \brief operator -
@@ -3143,7 +3145,7 @@ public:
    * \param l
    * \return
    */
-  lLine2D operator-(const lLine2D& l) const;  // closest approach of 2 lines
+  lLine2D operator-(const lLine2D& l) const; // closest approach of 2 lines
 
   /*!
    * \brief operator =
@@ -3159,7 +3161,7 @@ public:
    * \param pt
    * \return
    */
-  virtual string toString(int pt = -1) const;
+  string toString(int pt = -1) const override;
 };
 
 /*!
@@ -3187,19 +3189,19 @@ protected:
    * \brief Infinite
    * Sets the state of the object to _infinite_.
    */
-  void Infinite() { geomObject::Infinite(); }
+  void Infinite() override { geomObject::Infinite(); }
 
   /*!
    * \brief Undefined
    * Sets the state of the object to _undefined_.
    */
-  void Undefined() { geomObject::Undefined(); }
+  void Undefined() override { geomObject::Undefined(); }
 
   /*!
    * \brief Regular
    * Sets the state of the object to _regular_.
    */
-  void Regular() { geomObject::Regular(); }
+  void Regular() override { geomObject::Regular(); }
 
 public:
   /*!
@@ -3306,7 +3308,7 @@ public:
    * _zero_.
    * \return
    */
-  geomState getState() const { return geomObject::getState(); }
+  geomState getState() const override { return geomObject::getState(); }
 
   /*!
    * \brief getDimension
@@ -3319,7 +3321,7 @@ public:
    * \brief Zero
    * Sets the state of the object to _zero_.
    */
-  void Zero()
+  void Zero() override
   {
     geomObject::Zero();
     pPoint.Zero();
@@ -3378,7 +3380,7 @@ public:
    * \param pt
    * \return
    */
-  virtual string toString(int pt = -1) const;
+  string toString(int pt = -1) const override;
 };
 
 /*!
@@ -3408,13 +3410,13 @@ protected:
    * \brief Infinite
    * Sets the state of the object to _infinite_.
    */
-  void Infinite() { geomObject::Infinite(); }
+  void Infinite() override { geomObject::Infinite(); }
 
   /*!
    * \brief Undefined
    * Sets the state of the object to _undefined_.
    */
-  void Undefined()
+  void Undefined() override
   {
     geomObject::Undefined();
     foot = point3D();
@@ -3425,7 +3427,7 @@ protected:
    * \brief Regular
    * Sets the state of the object to _regular_.
    */
-  void Regular() { geomObject::Regular(); }
+  void Regular() override { geomObject::Regular(); }
 
 public:
   /*!
@@ -3539,7 +3541,7 @@ public:
    * _zero_.
    * \return
    */
-  geomState getState() const { return geomObject::getState(); }
+  geomState getState() const override { return geomObject::getState(); }
 
   /*!
    * \brief getDimension
@@ -3552,7 +3554,7 @@ public:
    * \brief Zero
    * Sets the state of the object to _zero_.
    */
-  void Zero()
+  void Zero() override
   {
     geomObject::Zero();
     d.setValues(0, 0, 0);
@@ -3586,7 +3588,7 @@ public:
    * \param l
    * \return
    */
-  double operator&(const sLine3D& l) const;   // distance of two lines
+  double operator&(const sLine3D& l) const; // distance of two lines
 
   /*!
    * \brief operator -
@@ -3595,7 +3597,7 @@ public:
    * \param l
    * \return
    */
-  lLine3D operator-(const sLine3D& l) const;  // closest approach of 2 lines
+  lLine3D operator-(const sLine3D& l) const; // closest approach of 2 lines
 
   /*!
    * \brief operator -
@@ -3604,7 +3606,7 @@ public:
    * \param l
    * \return
    */
-  lLine3D operator-(const lLine3D& l) const;  // closest approach of 2 lines
+  lLine3D operator-(const lLine3D& l) const; // closest approach of 2 lines
 
   /*!
    * \brief operator =
@@ -3621,7 +3623,7 @@ public:
    * \param pt
    * \return
    */
-  virtual string toString(int pt = -1) const;
+  string toString(int pt = -1) const override;
 };
 
 /*!
@@ -4030,7 +4032,7 @@ public:
    * \param l
    * \return
    */
-  point3D operator-(const sLine3D& l) const;  // hit point line-plane
+  point3D operator-(const sLine3D& l) const; // hit point line-plane
 
   /*!
    * \brief operator -
@@ -4038,7 +4040,7 @@ public:
    * \param l
    * \return
    */
-  point3D operator-(const lLine3D& l) const;  // hit point line-plane
+  point3D operator-(const lLine3D& l) const; // hit point line-plane
 
   /*!
    * \brief operator -
@@ -4046,7 +4048,7 @@ public:
    * \param p
    * \return
    */
-  sLine3D operator-(const plane3D& p) const;  // two planes hitting->straight line
+  sLine3D operator-(const plane3D& p) const; // two planes hitting->straight line
 
   /*!
    * \brief toString
@@ -4178,7 +4180,7 @@ public:
    * \brief Zero
    *  Sets the state of the object to _zero_.
    */
-  void Zero();
+  void Zero() override;
 
   /*!
    * \brief Unity
@@ -4273,14 +4275,14 @@ public:
    *  Transposition operator. Returns the transposed matrix. This matrix is left unchanged.
    * \return
    */
-  matrix3D operator!() const;                 // transpose
+  matrix3D operator!() const; // transpose
 
   /*!
    * \brief operator -
    *  Inversion operator. Return the inverse of this matrix. This matrix is left unchanged.
    * \return
    */
-  matrix3D operator-() const;                 // invert
+  matrix3D operator-() const; // invert
 
   /*!
    * \brief operator []
@@ -4296,7 +4298,7 @@ public:
    *  Returns a string representation of the matrix. Contains line breaks.
    * \return
    */
-  virtual string toString() const;
+  virtual string toString(int pt = -1) const override;
 };
 
 /*!
@@ -4600,7 +4602,7 @@ public:
    *  Returns a string representation of the matrix. Note this contains line breaks.
    * \return
    */
-  virtual string toString() const;
+  virtual string toString(int pt = -1) const override;
 };
 
 /*!

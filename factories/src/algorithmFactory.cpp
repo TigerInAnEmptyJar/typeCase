@@ -37,7 +37,7 @@ bool AlgorithmFactory::isAlgorithmDefined(boost::uuids::uuid id) const
 std::shared_ptr<AAlgorithm> AlgorithmFactory::create(const algorithm_parameter& description,
                                                      TEvent& event, const TSetup& setup) const
 {
-  auto theAlgorithm = _installed_algorithms.find(description.uuid());
+  auto theAlgorithm = _installed_algorithms.find(description.id());
   if (theAlgorithm == _installed_algorithms.end()) {
     return nullptr;
   }
@@ -49,14 +49,14 @@ bool AlgorithmFactory::addAlgorithmToFactory(const algorithm_parameter& descript
                                              AlgorithmType algorithmType,
                                              AlgorithmFactory::AlgorithmCreation_t creationFunction)
 {
-  if (isAlgorithmDefined(description.uuid())) {
+  if (isAlgorithmDefined(description.id())) {
     return false;
   }
 
   Configuration element{creationFunction, description, algorithmType};
-  _installed_algorithms.insert(std::make_pair(description.uuid(), element));
+  _installed_algorithms.insert(std::make_pair(description.id(), element));
 
-  _algorithmAdded(description.uuid());
+  _algorithmAdded(description.id());
 
   return true;
 }

@@ -1,0 +1,32 @@
+########## detector parameter ####### file version :2 #######
+0 0 0 1000 1 
+
+testShape 1
+P1 2 3 param4
+P4 5 6 param5
+v32.3115 71.5651 5.91608 param6
+v36.6992 63.4349 41.1582 param7
+F123.5 param3
+I10 param1
+I26 param2
+=
+2 100 5 10 1 10.5testDetector 1
+testShape 1
+P1 2 3 param4
+P4 5 6 param5
+v32.3115 71.5651 5.91608 param6
+v36.6992 63.4349 41.1582 param7
+F123.5 param3
+I10 param1
+I26 param2
+=
+150 1 15 0 1.5testDetector 2
+testShape 2
+F26.25 param-2
+F123.5 param-3
+I10 param-1
+Sfoo
+param-4
+Sbar
+param-5
+=

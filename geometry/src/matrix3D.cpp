@@ -169,7 +169,7 @@ matrix3D matrix3D::operator-() const
   return ret; //*(1/det);
 } // invert
 //#ifdef USEQT
-string matrix3D::toString() const
+string matrix3D::toString(int pt) const
 {
   string ret = "(";
   ret += string_number(getValue(0, 0)) + ", " + string_number(getValue(0, 1)) + ", " +

@@ -340,11 +340,10 @@ AMultipleTreeOutput::~AMultipleTreeOutput()
 algorithm_parameter AMultipleTreeOutput::getDescription()
 {
   algorithm_parameter ret("", 0, 0);
-  vector<string> lst;
-  lst.push_back("This is a output algorithm for track data.");
-  lst.push_back("It generates track information containing vertex, direction,");
-  lst.push_back("beta, energy, momentum, particleID and information of hits ");
-  lst.push_back("in the detector (max 30!). This is written to root-file.");
+  string lst = "This is a output algorithm for track data."
+               "It generates track information containing vertex, direction,"
+               "beta, energy, momentum, particleID and information of hits "
+               "in the detector (max 30!). This is written to root-file.";
   ret.setDescription(lst);
   ret.addParam<bool>(single_parameter<bool>("begin new file at end of run", true));
   ret.addParam<bool>(single_parameter<bool>("use local directory", true));

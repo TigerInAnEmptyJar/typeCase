@@ -50,9 +50,8 @@ void* AHitTreeOutput::process(void* ptr)
 algorithm_parameter AHitTreeOutput::getDescription()
 {
   algorithm_parameter ret("Writes Hits to Tree", 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm writes calibrated hits to a root tree.");
-  des.push_back("It only writes calibrated valid hits.");
+  string des = "This algorithm writes calibrated hits to a root tree. "
+               "It only writes calibrated valid hits.";
   ret.setDescription(des);
   ret.addParam<string>(single_parameter<string>("file name", ""));
   ret.addParam<bool>(single_parameter<bool>(string("use local directory"), true));

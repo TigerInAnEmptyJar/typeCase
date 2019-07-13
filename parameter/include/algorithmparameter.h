@@ -129,18 +129,6 @@ public:
   virtual void setID(int id);
 
   /*!
-   * \brief access the algorithms uuid
-   * \return the algorithms uuid.
-   */
-  boost::uuids::uuid uuid() const;
-
-  /*!
-   * \brief set the uuid of the algorithm
-   * \param id the new uuid of the algorithm.
-   */
-  void setUuid(boost::uuids::uuid id);
-
-  /*!
    * Template method. Changes the parameter with name nameof the specified type (bool, int,
    * float,QString, point3D, vector3D, vector, vector, vector, algorithm_parameter). It gets a new
    * value.
@@ -234,7 +222,7 @@ public:
    * \param p
    * \return
    */
-  bool operator==(const algorithm_parameter& p);
+  bool operator==(const algorithm_parameter& p) const;
 
   /*!
    * \brief operator <=

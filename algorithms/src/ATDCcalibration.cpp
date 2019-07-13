@@ -356,12 +356,14 @@ ATDCcalibration::ATDCcalibration(int& evtnr, int& rnr, TTrack** trIn, TPixel*** 
       if (!readFile) {
         elTree = new TTree("elastic", "elastic");
         elTree->Branch("eventNumber", &evtNr, "eventNumber/I");
-        elTree->Branch("t0", &outtrack[0], "pointz[10]/F:tdc[10]/F:qdc[10]/"
-                                           "F:beta/F:theta/F:phi/F:el[10]/"
-                                           "I:vt[3]/F");
-        elTree->Branch("t1", &outtrack[1], "pointz[10]/F:tdc[10]/F:qdc[10]/"
-                                           "F:beta/F:theta/F:phi/F:el[10]/"
-                                           "I:vt[3]/F");
+        elTree->Branch("t0", &outtrack[0],
+                       "pointz[10]/F:tdc[10]/F:qdc[10]/"
+                       "F:beta/F:theta/F:phi/F:el[10]/"
+                       "I:vt[3]/F");
+        elTree->Branch("t1", &outtrack[1],
+                       "pointz[10]/F:tdc[10]/F:qdc[10]/"
+                       "F:beta/F:theta/F:phi/F:el[10]/"
+                       "I:vt[3]/F");
       } else {
         elTree = (TTree*)outFile->Get("elastic");
         elTree->SetBranchStatus("*", 1);
@@ -481,14 +483,13 @@ void ATDCcalibration::defineWalkStuff(bool justClean, bool redefine, bool mkehis
       for (int j = 0; j < numElements[i]; j++) {
         s[3] = string(" det:") + string_number(detectors[i]) + " el" + string_number(j);
         if (redefine || (histoptt & 1) > 0)
-          walkHistos[i][j] = new TH2F(
-              (s[0] + s[3]).data(), (s[0] + s[3]).data(), 50, mimaqdc[2 * i], mimaqdc[2 * i + 1],
-              50,
-              mm -
-                  meanOff[i * 2 + 1] * (0.3 + (twoSided[i] == measuresAgainst[i] ? 1 : 0) * rngmod),
-              mm +
-                  meanOff[i * 2 + 1] *
-                      (0.3 + (twoSided[i] == measuresAgainst[i] ? 1 : 0) * rngmod));
+          walkHistos[i][j] =
+              new TH2F((s[0] + s[3]).data(), (s[0] + s[3]).data(), 50, mimaqdc[2 * i],
+                       mimaqdc[2 * i + 1], 50,
+                       mm - meanOff[i * 2 + 1] *
+                                (0.3 + (twoSided[i] == measuresAgainst[i] ? 1 : 0) * rngmod),
+                       mm + meanOff[i * 2 + 1] *
+                                (0.3 + (twoSided[i] == measuresAgainst[i] ? 1 : 0) * rngmod));
         if (redefine || (histoptt & 2) > 0)
           walkHistos[i][j + numElements[i]] = new TH1F((s[1] + s[3]).data(), (s[1] + s[3]).data(),
                                                        100, mimaqdc[2 * i], mimaqdc[2 * i + 1]);
@@ -1084,34 +1085,23 @@ TTree* ATDCcalibration::tree(string treename)
 algorithm_parameter ATDCcalibration::getDescription()
 {
   algorithm_parameter ret("Calibration algorithm", -1, 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm does the calibration of detector- and beam "
-                "geometry and ");
-  des.push_back("calibration of TDC walk and offsets. ");
-  des.push_back("For geometry calibration some pixels are taken for reference "
-                "producing a ");
-  des.push_back("line when connected to the target. The distance of this line "
-                "to the hit ");
-  des.push_back("element is plotted versus the element number. This gives "
-                "information about ");
-  des.push_back("the in plane shift of the detector center and the z-position. ");
-  des.push_back("Beam geometry takes all 2-track events, plotting the angle of "
-                "the assumed ");
-  des.push_back("beam with the plane the two tracks define. ");
-  des.push_back("Walk plotts the tdc-difference of defined pixel elements "
-                "versus the qdc ");
-  des.push_back("of the element. This is done iteratively. Here also some offsets are ");
-  des.push_back("determined to nivellize before plotting.");
-  des.push_back("Offset determination is done as last, moving all tdcs to the "
-                "same mean ");
-  des.push_back("value for one detector (starts at 500). The offset between "
-                "detectors is");
-  des.push_back("calculated using elastics, where the TOF can be calculated.");
-  des.push_back("Note: beam-, Walk- and offset calibration need tracking, "
-                "while geometry");
-  des.push_back("calibration is essential for tracking. If you select geometry "
-                "all other");
-  des.push_back("types are switched off!");
+  string des = "This algorithm does the calibration of detector- and beam geometry and "
+               "calibration of TDC walk and offsets. "
+               "For geometry calibration some pixels are taken for reference producing a "
+               "line when connected to the target. The distance of this line to the hit "
+               "element is plotted versus the element number. This gives information about "
+               "the in plane shift of the detector center and the z-position. "
+               "Beam geometry takes all 2-track events, plotting the angle of the assumed "
+               "beam with the plane the two tracks define. "
+               "Walk plotts the tdc-difference of defined pixel elements versus the qdc "
+               "of the element. This is done iteratively. Here also some offsets are "
+               "determined to nivellize before plotting."
+               "Offset determination is done as last, moving all tdcs to the same mean "
+               "value for one detector (starts at 500). The offset between detectors is"
+               "calculated using elastics, where the TOF can be calculated."
+               "Note: beam-, Walk- and offset calibration need tracking, while geometry"
+               "calibration is essential for tracking. If you select geometry all other"
+               "types are switched off!";
   ret.setDescription(des);
   ret.addParam<bool>(single_parameter<bool>("do geometry calibration", false));
   ret.addParam<bool>(single_parameter<bool>("do beam calibration", false));
@@ -1173,10 +1163,10 @@ void ATDCcalibration::searchParser(const run_parameter& rp)
   vector<CommonCalibrationParser*> tmp;
   vector<string> files;
   if (rp.hasOwnCalibration() || rp.getParent() == NULL || rp.hasAdditionalCalibration())
-    for (int i = 0; i < rp.getNumberOfCalibrationFiles(); i++)
+    for (size_t i = 0; i < rp.getNumberOfCalibrationFiles(); i++)
       files.push_back(rp.getCalibrationFile(i));
   if (rp.getParent() != NULL && (!rp.hasOwnCalibration() || rp.hasAdditionalCalibration()))
-    for (int i = 0; i < rp.getParent()->getNumberOfCalibrationFiles(); i++)
+    for (size_t i = 0; i < rp.getParent()->getNumberOfCalibrationFiles(); i++)
       files.push_back(rp.getParent()->getCalibrationFile(i));
   for (unsigned int i = 0; i < files.size(); i++)
     CommonCalibrationParser::getFileContent(files[i], tmp);
@@ -1356,9 +1346,8 @@ float ATDCcalibration::getCalibratedTDC(const TRawHit& h, int dn, const point3D&
     tdc = tdc + wal;
   volumeShape* sh = setup.getDetectorr(detectors[dn]).getShape(el);
   if (p.getState() != _undefined_ && sh != NULL && h.getDetector() != 6 && h.getDetector() != 7)
-    tdc = tdc +
-          getLightWay(sh, p, false) /
-              setup.getDetectorr(detectors[dn]).getMaterial()->getSpeedOfLight() / 299.792;
+    tdc = tdc + getLightWay(sh, p, false) /
+                    setup.getDetectorr(detectors[dn]).getMaterial()->getSpeedOfLight() / 299.792;
   return tdc;
 }
 void ATDCcalibration::fillPixTree()
@@ -2392,8 +2381,8 @@ void ATDCcalibration::doCalibrationOffset()
         if (fun != NULL) {
           for (int k = 0; k < numElements[j]; k++)
             for (int i = 0; i < noffsetRanges; i++)
-              offsetParser[j][i].setParameter(k, 0, offsetParser[j][i].getParameter(k, 0) -
-                                                        (fun->GetParameter(1) + add[j]));
+              offsetParser[j][i].setParameter(
+                  k, 0, offsetParser[j][i].getParameter(k, 0) - (fun->GetParameter(1) + add[j]));
         }
       }
   }
@@ -2407,8 +2396,8 @@ void ATDCcalibration::doCalibrationOffset()
       if (fun != NULL) {
         for (int k = 0; k < numElements[j]; k++)
           for (int i = 0; i < noffsetRanges; i++)
-            offsetParser[j][i].setParameter(k, 0, offsetParser[j][i].getParameter(k, 0) -
-                                                      (fun->GetParameter(1) + add[j]));
+            offsetParser[j][i].setParameter(
+                k, 0, offsetParser[j][i].getParameter(k, 0) - (fun->GetParameter(1) + add[j]));
       }
     }
   }
@@ -2823,12 +2812,12 @@ TH1* ATDCcalibration::getProfile(TH2* histo, string functionName, int parnum)
 void ATDCcalibration::fitTheHisto(TH2* h2d, TH1* h1d, TF1* fitfunc, CommonCalibrationParser* output,
                                   int element, bool fixAtMax, int ptt, string opt)
 {
-  TH1* tmp =
-      (ptt == -1 ? ((TH2*)h2d)->ProfileX() : getProfile(h2d, "gaus",
-                                                        1)); //(ptt>0?project2DHistogram((TH2*)
-                                                             // h2d,ptt):((TH2*)h2d)->ProfileX());
-  float ffmin = h2d->GetXaxis()->GetXmin();                  // *1.1;
-  float ffmax = h2d->GetXaxis()->GetXmax();                  // *0.9;
+  TH1* tmp = (ptt == -1 ? ((TH2*)h2d)->ProfileX()
+                        : getProfile(h2d, "gaus",
+                                     1));   //(ptt>0?project2DHistogram((TH2*)
+                                            // h2d,ptt):((TH2*)h2d)->ProfileX());
+  float ffmin = h2d->GetXaxis()->GetXmin(); // *1.1;
+  float ffmax = h2d->GetXaxis()->GetXmax(); // *0.9;
   if (ptt == 0)
     ffmin = ffmin;
   if (h1d != NULL) {
@@ -2989,15 +2978,13 @@ float ATDCcalibration::calculateWALK(int detectorNumber, int ElementNumber, floa
 {
   if (calibPos[0][detectorNumber] < 0)
     return 0;
-  return (
-      outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(ElementNumber, 0) /
-          (qdc -
-           outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(ElementNumber, 1)) +
-      outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(ElementNumber, 2) *
-          log(abs(qdc -
-                  outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(ElementNumber,
-                                                                                      3))) +
-      outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(ElementNumber, 4));
+  return (outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(ElementNumber, 0) /
+              (qdc - outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(
+                         ElementNumber, 1)) +
+          outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(ElementNumber, 2) *
+              log(abs(qdc - outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(
+                                ElementNumber, 3))) +
+          outParser[detectorNumber][calibPos[0][detectorNumber]].getParameter(ElementNumber, 4));
   // [0]/(x-[1])+[2]*log(abs(x-[3]))+[4]  [0]/(x-[1])+[2]*log(abs(x-[3]))+[4]
   // [0]/(x-[1])+[2]*log(abs(x-[3]))+[4]
 }

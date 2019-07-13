@@ -7,8 +7,9 @@
 #include "shapeFactory.h"
 
 #include <QtCore/QDateTime>
-void tofAnalysis::createSetup(vector<detector_parameter>& dets, vector<material_parameter>& mats,
-                              reaction_parameter col)
+void tofAnalysis::createSetup(vector<std::shared_ptr<detector_parameter>>& dets,
+                              vector<std::shared_ptr<material_parameter>>& mats,
+                              std::shared_ptr<reaction_parameter> col)
 {
   if (!Eparticles::IsInit())
     Eparticles::init();
@@ -78,12 +79,18 @@ void tofAnalysis::defineMaterials(const string& setupFileName, const string& mat
   //     ioLog<<"close file"<<endli;
   //     input1.close();
   //    ioLog<<decD;
+  vector<std::shared_ptr<material_parameter>> mats;
+  vector<std::shared_ptr<detector_parameter>> dets;
+  std::transform(mparams.begin(), mparams.end(), std::back_inserter(mats),
+                 [](auto element) { return std::make_shared<material_parameter>(element); });
+  std::transform(dparams.begin(), dparams.end(), std::back_inserter(dets),
+                 [](auto element) { return std::make_shared<detector_parameter>(element); });
 
-  defineMaterials(mparams, dparams);
+  defineMaterials(mats, dets);
 }
 
-void tofAnalysis::defineMaterials(vector<material_parameter>& mats,
-                                  vector<detector_parameter>& dets)
+void tofAnalysis::defineMaterials(vector<std::shared_ptr<material_parameter>>& mats,
+                                  vector<std::shared_ptr<detector_parameter>>& dets)
 {
   anaLog << "define materials" << endli;
   vector<int> numM;
@@ -91,7 +98,7 @@ void tofAnalysis::defineMaterials(vector<material_parameter>& mats,
   int n;
   for (unsigned int i = 0; i < dets.size(); i++) {
     isIn = false;
-    n = dets[i].getMaterial();
+    n = dets[i]->getMaterial();
     for (int j = 0; j < (int)numM.size(); j++) {
       if (numM[j] == n) {
         isIn = true;
@@ -110,27 +117,27 @@ void tofAnalysis::defineMaterials(vector<material_parameter>& mats,
     // 	    Materials[i]=new TMaterial("none", 1,0,0,0);
     // 	    continue;
     // 	}
-    Vector parameter(2 + mats[i].NumberOfElements() * 3);
-    parameter.setValue(1, mats[i /*numM[i]*/].RadiationLength());
-    parameter.setValue(0, mats[i /*numM[i]*/].Density());
+    Vector parameter(2 + mats[i]->NumberOfElements() * 3);
+    parameter.setValue(1, mats[i /*numM[i]*/]->RadiationLength());
+    parameter.setValue(0, mats[i /*numM[i]*/]->Density());
     Materials[i] = new TMaterial(
-        mats[i /*numM[i]*/].getName(), mats[i /*numM[i]*/].NumberOfElements(),
-        mats[i /*numM[i]*/].Element(0).getMass(), mats[i /*numM[i]*/].Element(0).getCharge(),
-        mats[i /*numM[i]*/].Element(0).getWeight());
-    parameter.setValue(2, mats[i /*numM[i]*/].Element(0).getMass());
-    parameter.setValue(3, mats[i /*numM[i]*/].Element(0).getCharge());
+        mats[i /*numM[i]*/]->getName(), mats[i /*numM[i]*/]->NumberOfElements(),
+        mats[i /*numM[i]*/]->Element(0).getMass(), mats[i /*numM[i]*/]->Element(0).getCharge(),
+        mats[i /*numM[i]*/]->Element(0).getWeight());
+    parameter.setValue(2, mats[i /*numM[i]*/]->Element(0).getMass());
+    parameter.setValue(3, mats[i /*numM[i]*/]->Element(0).getCharge());
     parameter.setValue(4, Materials[i]->getWeight(0));
-    for (int j = 1; j < mats[i /*numM[i]*/].NumberOfElements(); j++) {
-      Materials[i]->addElement(mats[i /*numM[i]*/].Element(j).getMass(),
-                               mats[i /*numM[i]*/].Element(j).getCharge(),
-                               mats[i /*numM[i]*/].Element(j).getWeight());
-      parameter.setValue(j * 3 + 2, mats[i /*numM[i]*/].Element(j).getMass());
-      parameter.setValue(j * 3 + 3, mats[i /*numM[i]*/].Element(j).getCharge());
+    for (int j = 1; j < mats[i /*numM[i]*/]->NumberOfElements(); j++) {
+      Materials[i]->addElement(mats[i /*numM[i]*/]->Element(j).getMass(),
+                               mats[i /*numM[i]*/]->Element(j).getCharge(),
+                               mats[i /*numM[i]*/]->Element(j).getWeight());
+      parameter.setValue(j * 3 + 2, mats[i /*numM[i]*/]->Element(j).getMass());
+      parameter.setValue(j * 3 + 3, mats[i /*numM[i]*/]->Element(j).getCharge());
       parameter.setValue(j * 3 + 4, Materials[i]->getWeight(j));
     }
-    Materials[i]->setRadiationLength(mats[i /*numM[i]*/].RadiationLength());
-    Materials[i]->setDensity(mats[i /*numM[i]*/].Density());
-    Materials[i]->setSpeedOfLight(mats[i /*numM[i]*/].Speed());
+    Materials[i]->setRadiationLength(mats[i /*numM[i]*/]->RadiationLength());
+    Materials[i]->setDensity(mats[i /*numM[i]*/]->Density());
+    Materials[i]->setSpeedOfLight(mats[i /*numM[i]*/]->Speed());
     ABetheBloch* elossAlgo = new ABetheBloch();
     elossAlgo->setParameters(parameter);
     Materials[i]->setAlgorithm(elossAlgo);
@@ -164,16 +171,19 @@ void tofAnalysis::defineDetectors(const string& fileName)
   //     ioLog<<"close file"<<endli;
   //     input.close();
   //     ioLog<<decD;
-  defineDetectors(dparams);
+  vector<std::shared_ptr<detector_parameter>> dets;
+  std::transform(dparams.begin(), dparams.end(), std::back_inserter(dets),
+                 [](auto element) { return std::make_shared<detector_parameter>(element); });
+  defineDetectors(dets);
   //    defineReaction(col);
 }
 
-void tofAnalysis::defineDetectors(vector<detector_parameter>& dets)
+void tofAnalysis::defineDetectors(vector<std::shared_ptr<detector_parameter>>& dets)
 {
   int maxID = 0;
   for (unsigned int i = 0; i < dets.size(); i++) {
-    if (dets[i].getID() > maxID)
-      maxID = dets[i].getID();
+    if (dets[i]->getID() > maxID)
+      maxID = dets[i]->getID();
   }
   if (Setup.getMaxDetectors() < maxID)
     NumberOfDetectors = Setup.getMaxDetectors();
@@ -190,11 +200,11 @@ void tofAnalysis::defineDetectors(vector<detector_parameter>& dets)
     n = 0;
     id = -1;
     for (unsigned int j = 0; j < dets.size(); j++) {
-      if (i == dets[j].getID())
+      if (i == dets[j]->getID())
         id = j;
     }
     if (id == -1) {
-      Detectors[i] = new TDetector(/**Materials[n]*/ *((TMaterial*)0), dets[id].getID());
+      Detectors[i] = new TDetector(/**Materials[n]*/ *((TMaterial*)0), dets[id]->getID());
       Setup.addDetector(*Detectors[i]);
       continue;
     }
@@ -203,21 +213,21 @@ void tofAnalysis::defineDetectors(vector<detector_parameter>& dets)
     // 	    if(dets[id].getMaterial()==j)
     // 		n=j;
     // 	}
-    n = dets[id].getMaterial();
+    n = dets[id]->getMaterial();
     if (n > NumberOfMaterials)
       n = -1;
     anaLog << "new Detector " << i;
     if (n == -1) {
-      Detectors[i] = new TDetector(/**Materials[n]*/ *((TMaterial*)0), dets[id].getID());
+      Detectors[i] = new TDetector(/**Materials[n]*/ *((TMaterial*)0), dets[id]->getID());
     } else {
-      Detectors[i] = new TDetector(*Materials[n], dets[id].getID());
+      Detectors[i] = new TDetector(*Materials[n], dets[id]->getID());
     }
-    Detectors[i]->setNumberOfElements(dets[id].getNumberOfElements());
-    Detectors[i]->setStackType(dets[id].getStackType());
-    anaLog << "define detector shape " << dets[id].getShape().getName();
-    shape_parameter s = dets[id].getShape();
-    auto shape = shapeFactory.createVolume(dets[id].getShape());
-    shape->setMaxDistance(dets[id].getMaxDistance());
+    Detectors[i]->setNumberOfElements(dets[id]->getNumberOfElements());
+    Detectors[i]->setStackType(dets[id]->getStackType());
+    anaLog << "define detector shape " << dets[id]->getShape().getName();
+    shape_parameter s = dets[id]->getShape();
+    auto shape = shapeFactory.createVolume(dets[id]->getShape());
+    shape->setMaxDistance(dets[id]->getMaxDistance());
     anaLog << "... setShape";
     Detectors[i]->setShapeFirstElement(shape);
     anaLog << "... add detector to Setup" << endli;
@@ -229,24 +239,24 @@ void tofAnalysis::defineDetectors(vector<detector_parameter>& dets)
   anaLog << endli;
 }
 
-void tofAnalysis::defineReaction(reaction_parameter col)
+void tofAnalysis::defineReaction(std::shared_ptr<reaction_parameter> col)
 {
   anaLog << "define beams and targets" << endli;
   TBeam b1;
   momentum4D mom;
-  mom.setPM(vector3D(0, 0, col.getBeamMomentum(0)), Eparticles::getMass("proton"));
+  mom.setPM(vector3D(0, 0, col->getBeamMomentum(0)), Eparticles::getMass("proton"));
   b1.setParticle(mom);
   TBeam b2;
-  mom.setPM(vector3D(0, 0, col.getBeamMomentum(1)), Eparticles::getMass("proton"));
+  mom.setPM(vector3D(0, 0, col->getBeamMomentum(1)), Eparticles::getMass("proton"));
   b2.setParticle(mom);
-  shape_parameter s = col.getTargetShape();
+  shape_parameter s = col->getTargetShape();
   auto& shapeFactory = ShapeFactory::getInstance();
   auto sh1 = shapeFactory.createVolume(s);
   anaLog << "end define setup" << endli;
   isInitS = true;
   mom.setPM(vector3D(0, 0, 0), Eparticles::getMass("proton"));
   TTarget t(mom, sh1);
-  Setup.setNumberOfBeams(((col.hasTwoBeams()) ? 2 : 1));
+  Setup.setNumberOfBeams(((col->hasTwoBeams()) ? 2 : 1));
   Setup.setBeam(b1, 0);
   Setup.setBeam(b2, 1);
   Setup.setTarget(t);

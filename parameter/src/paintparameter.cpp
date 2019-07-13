@@ -67,6 +67,3 @@ istream& operator>>(istream& i, paint_parameter& p)
   p.setName(s);
   return i;
 }
-// void paint_parameter::Streamer(TBuffer &b)
-// {
-// }

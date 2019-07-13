@@ -72,10 +72,10 @@ void AapplyLRC::onNewRun(run_parameter& rp)
   vector<CommonCalibrationParser*> tmp;
   vector<string> files;
   if (rp.hasOwnCalibration() || rp.getParent() == NULL || rp.hasAdditionalCalibration())
-    for (int i = 0; i < rp.getNumberOfCalibrationFiles(); i++)
+    for (size_t i = 0; i < rp.getNumberOfCalibrationFiles(); i++)
       files.push_back(rp.getCalibrationFile(i));
   if (rp.getParent() != NULL && (!rp.hasOwnCalibration() || rp.hasAdditionalCalibration()))
-    for (int i = 0; i < rp.getParent()->getNumberOfCalibrationFiles(); i++)
+    for (size_t i = 0; i < rp.getParent()->getNumberOfCalibrationFiles(); i++)
       files.push_back(rp.getParent()->getCalibrationFile(i));
   //  int n=0;
   for (unsigned int i = 0; i < files.size(); i++) {
@@ -399,17 +399,16 @@ point3D AapplyLRC::getOnPoint(volumeShape* sh, const sLine3D& path)
 algorithm_parameter AapplyLRC::getDescription()
 {
   algorithm_parameter ret("Light run correction", -1, 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm applies a light-run-correction to the tdc of some hit. ");
-  des.push_back("There are several possibilities:");
-  des.push_back("Apply a simple light run correction, ");
-  des.push_back("path_of_signal_to_common_point * speed_of_signal_in_detector, ");
-  des.push_back("with type \"1\"");
-  des.push_back("With type \"10\" the algorithm applies also a theta dependent offset, ");
-  des.push_back("a 4th-degree-polynom with the coefficients getting from a");
-  des.push_back(" common-calibration-data-base of parameter-ID-8. Type \"100\" "
-                "does the ");
-  des.push_back("same thing but in orders of path_of_signal_to_common_point.");
+  string des = "This algorithm applies a light-run-correction to the tdc of some hit.\n"
+               "There are several possibilities:\n"
+               "Apply a simple light run correction, "
+               "path_of_signal_to_common_point * speed_of_signal_in_detector, "
+               "with type \"1\""
+               "With type \"10\" the algorithm applies also a theta dependent offset, "
+               "a 4th-degree-polynom with the coefficients getting from a "
+               " common-calibration-data-base of parameter-ID-8. Type \"100\" "
+               "does the "
+               "same thing but in orders of path_of_signal_to_common_point.";
   ret.setDescription(des);
   vector<int> tmp;
   ret.addParam<vector<int>>(single_parameter<vector<int>>("detectors to apply", tmp));

@@ -852,9 +852,10 @@ void AGenerateOutput::getMCTree(string mcFile)
   for (int i = 0; i < 5; i++) {
     string s = "Track";
     s = s + string_number(i + 1);
-    mcTree->Branch(s.data(), &trackIn[i], "phi/D:theta:beta:ID/I:nEl:ss[17]/I:qdc[17]/F:tdc[17]/"
-                                          "F:vertex[3]/D:phiIn/D:thetaIn:betaIn:nElIn/I:ssIn[17]/"
-                                          "I:vertexIn[3]/D:momentum/D");
+    mcTree->Branch(s.data(), &trackIn[i],
+                   "phi/D:theta:beta:ID/I:nEl:ss[17]/I:qdc[17]/F:tdc[17]/"
+                   "F:vertex[3]/D:phiIn/D:thetaIn:betaIn:nElIn/I:ssIn[17]/"
+                   "I:vertexIn[3]/D:momentum/D");
   }
   ifstream mcfile;
   mcfile.open(mcFile.data());
@@ -1331,7 +1332,7 @@ void AGenerateOutput::OnNewRun(run_parameter& r)
     return;
   vector<string> files;
   vector<int> filetypes;
-  for (int i = 0; i < r.getNumberOfFiles(); i++) {
+  for (size_t i = 0; i < r.getNumberOfFiles(); i++) {
     files.push_back(r.getFile(i));
     filetypes.push_back(r.getFileType(i));
   }

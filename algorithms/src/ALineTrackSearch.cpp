@@ -268,8 +268,9 @@ bool ALineTrackSearch::searchATrack(int tracknum, int stopI, TBase* pix, TBase* 
                   away[(offset + stopI) * numDetectors + pos])
                 tmpTracks[tracknum]->addCalibSrc(hits[tak2[i]][j]);
               else if (det->isCircular()) {
-                if (abs(abs(hits[tak2[i]][j]->getElement() - suspect) -
-                        det->getNumberOfElements()) <=
+                if (abs(static_cast<int>(
+                        abs(static_cast<int>(hits[tak2[i]][j]->getElement() - suspect)) -
+                        det->getNumberOfElements())) <=
                     away[(offset + stopI) * numDetectors + pos]) {
 #ifdef DEBUGSEARCH
                   cout << "circular detector: element taken " << hits[tak2[i]][j]->getElement()
@@ -398,11 +399,13 @@ bool ALineTrackSearch::searchATrack(int tracknum, int stopI, TBase* pix, TBase* 
                 if (abs(hits[detectorIDs[i]][j]->getElement() - suspect) <=
                     away[(offset + stopI) * numDetectors + i])
                   tmpTracks[tracknum]->addCalibSrc(hits[detectorIDs[i]][j]);
-                else if (abs(abs(hits[detectorIDs[i]][j]->getElement() - suspect) -
-                             det->getNumberOfElements()) <=
+                else if (abs(static_cast<int>(
+                             abs(static_cast<int>(hits[detectorIDs[i]][j]->getElement() -
+                                                  suspect)) -
+                             det->getNumberOfElements())) <=
                          away[(offset + stopI) * numDetectors + i])
                   tmpTracks[tracknum]->addCalibSrc(hits[detectorIDs[i]][j]);
-              } else if (abs(hits[detectorIDs[i]][j]->getElement() - suspect) <=
+              } else if (abs(static_cast<int>(hits[detectorIDs[i]][j]->getElement() - suspect)) <=
                          away[(offset + stopI) * numDetectors + i])
                 tmpTracks[tracknum]->addCalibSrc(hits[detectorIDs[i]][j]);
             }
@@ -717,23 +720,22 @@ void* ALineTrackSearch::process(void* ptr)
 algorithm_parameter ALineTrackSearch::getDescription()
 {
   algorithm_parameter ret("Line Track search", 0, 0);
-  vector<string> des;
-  des.push_back("This is a track search algorithm in a detector");
-  des.push_back("without magnetic field, with thin detectors.");
-  des.push_back("The tracks can be searched in two modes:");
-  des.push_back("-with the target as vertex and a pixel center");
-  des.push_back(" as source for prompt tracks");
-  des.push_back("-taking two pixel center as bias for possibly ");
-  des.push_back(" secondary tracks.");
-  des.push_back("As for the assignment of the hits in the detector");
-  des.push_back("to the track, two modes are possible:");
-  des.push_back("-If the enveloping shape of the detector-elements");
-  des.push_back(" in the detector is regular, hits around a suspect");
-  des.push_back(" element (taken from volumeShape::suspect()) are");
-  des.push_back(" taken.");
-  des.push_back("-Every hit element of the detector is checked.");
-  des.push_back(" If the assumed line is close enough this element");
-  des.push_back(" is used. This method is slower than the other one!");
+  string des = "This is a track search algorithm in a detector "
+               "without magnetic field, with thin detectors. "
+               "The tracks can be searched in two modes: \n"
+               "-with the target as vertex and a pixel center "
+               " as source for prompt tracks \n"
+               "-taking two pixel center as bias for possibly "
+               " secondary tracks.\n"
+               "As for the assignment of the hits in the detector "
+               "to the track, two modes are possible: \n"
+               "-If the enveloping shape of the detector-elements "
+               " in the detector is regular, hits around a suspect "
+               " element (taken from volumeShape::suspect()) are "
+               " taken.\n"
+               "-Every hit element of the detector is checked. "
+               " If the assumed line is close enough this element "
+               " is used. This method is slower than the other one!";
   ret.setDescription(des);
   ret.addParam<bool>(single_parameter<bool>("use vertex as start", true));
   ret.addParam<bool>(single_parameter<bool>("use angular distance", true));

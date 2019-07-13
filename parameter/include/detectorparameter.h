@@ -156,6 +156,14 @@ public:
    * \param d
    */
   void operator=(const detector_parameter& d);
+
+  /*!
+   * \brief operator ==
+   * Comparison operator.
+   * \param other the parameter to compare to.
+   * \return true if the parameters are identical.
+   */
+  bool operator==(detector_parameter const& other) const;
 };
 
 /*!
@@ -219,6 +227,14 @@ public:
    * \return
    */
   reaction_parameter& operator=(const reaction_parameter& r);
+
+  /*!
+   * \brief operator ==
+   * Comparison operator.
+   * \param other the parameter to compare to.
+   * \return true if the two parameters are identical.
+   */
+  bool operator==(reaction_parameter const& other) const;
 
   /*!
    * \brief hasTwoBeams
@@ -315,31 +331,4 @@ ostream& operator<<(ostream& o, const reaction_parameter& d);
  */
 istream& operator>>(istream& i, reaction_parameter& d);
 
-/*!
- *
- */
-template <>
-bool takeItemFromVector<detector_parameter>(vector<detector_parameter>& vect,
-                                            detector_parameter& item);
-
-/*!
- *
- */
-template <>
-bool moveItemToPosVector<detector_parameter>(vector<detector_parameter>& vect,
-                                             detector_parameter& item, int pos);
-
-/*!
- *
- */
-template <>
-bool takeItemFromVector<reaction_parameter>(vector<reaction_parameter>& vect,
-                                            reaction_parameter& item);
-
-/*!
- *
- */
-template <>
-bool moveItemToPosVector<reaction_parameter>(vector<reaction_parameter>& vect,
-                                             reaction_parameter& item, int pos);
 #endif

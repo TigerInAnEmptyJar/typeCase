@@ -8,10 +8,9 @@ extern bool existing(string strFilename);
 algorithm_parameter AHitTreeInput::getDescription()
 {
   algorithm_parameter ret("Read Hits from Tree", 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm reads calibrated hits from a root tree and");
-  des.push_back("requests the hit shapes from the setup.");
-  des.push_back("The hits are considered as calibrated and valid.");
+  string des = "This algorithm reads calibrated hits from a root tree and "
+               "requests the hit shapes from the setup. "
+               "The hits are considered as calibrated and valid.";
   ret.addParam<bool>(single_parameter<bool>(string("search for event"), true));
   ret.addParam<bool>(single_parameter<bool>(string("use as event input list"), true));
   ret.addParam<bool>(single_parameter<bool>(string("use local directory"), true));
@@ -276,7 +275,7 @@ void AHitTreeInput::newRun(run_parameter& r)
   anaLog << "AHitTreeInput::newRun()" << endli;
   clearTree();
   vector<string> filenames;
-  for (int i = 0; i < r.getNumberOfFiles(); i++) {
+  for (size_t i = 0; i < r.getNumberOfFiles(); i++) {
     if (r.getFileType(i) == 257) {
       if (existing(r.getFile(i)))
         filenames.push_back(r.getFile(i));

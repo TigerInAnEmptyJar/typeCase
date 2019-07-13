@@ -142,13 +142,12 @@ algorithm_parameter APixelTreeWriteOut::getDescription()
   ret.addParam<vector<int>>(single_parameter<vector<int>>("pix made up of", tmp));
   ret.addParam<string>(single_parameter<string>("file name", "tmp.root"));
   ret.addParam<string>(single_parameter<string>("tree name", "pixelTree"));
-  vector<string> des;
-  des.push_back("This algorithm produces a tree output for pixel position ");
-  des.push_back("information meant for geometry calibration purposes. Each ");
-  des.push_back("pixel has here information about element number of elements ");
-  des.push_back("it consists of, ID, z-Position in Detector, center-of-envelope ");
-  des.push_back("of the pixel forming detectors and the distances of the ");
-  des.push_back("pixel-center from the center-of-envelope.");
+  string des = "This algorithm produces a tree output for pixel position "
+               "information meant for geometry calibration purposes. Each "
+               "pixel has here information about element number of elements "
+               "it consists of, ID, z-Position in Detector, center-of-envelope "
+               "of the pixel forming detectors and the distances of the "
+               "pixel-center from the center-of-envelope.";
   ret.setDescription(des);
   return ret;
 }

@@ -22,7 +22,7 @@ element_parameter& element_parameter::operator=(const element_parameter& e)
   weight = e.getWeight();
   return *this;
 }
-bool element_parameter::operator==(const element_parameter& e)
+bool element_parameter::operator==(const element_parameter& e) const
 {
   if (e.getMass() != mass)
     return false;
@@ -58,10 +58,6 @@ ostream& operator<<(ostream& o, const element_parameter& ep)
   }
   return o;
 }
-
-// void element_parameter::Streamer(TBuffer &b)
-// {
-// }
 
 material_parameter::material_parameter() {}
 
@@ -183,7 +179,7 @@ bool material_parameter::operator>(const material_parameter& p)
   return (getName() > p.getName());
 }
 
-bool material_parameter::operator==(const material_parameter& p)
+bool material_parameter::operator==(const material_parameter& p) const
 {
   return (getName() == p.getName());
 }
@@ -269,6 +265,3 @@ ostream& operator<<(ostream& o, const material_parameter& m)
   // o<<"\n";
   return o;
 }
-// void material_parameter::Streamer(TBuffer &b)
-// {
-// }

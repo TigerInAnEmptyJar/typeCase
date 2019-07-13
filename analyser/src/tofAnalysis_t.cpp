@@ -169,9 +169,12 @@ bool tofAnalysis::process()
       anaLog << "file finished at event: " << count << endli;
       anaLog << ((int)(runs.size())) << " still to read. ";
       if (runs.size() != 0) {
-        emit newRun(runs.back(), bts[runs.back().getParentNumber()]);
+        auto bt = std::find_if(bts.begin(), bts.end(), [this](auto element) {
+          return element->id() == runs.back()->getParentNumber();
+        });
+        emit newRun(*runs.back(), **bt);
         for (int i = 0; i < nThreads; i++)
-          Event[i].setRunNumber(runs.back().getRunNumber());
+          Event[i].setRunNumber(runs.back()->getRunNumber());
         readInValid = true;
         runs.pop_back();
       }
@@ -225,8 +228,8 @@ bool tofAnalysis::step(int num)
       anaLog << "file read ";
       if (runs.size() != 0) {
         for (int ii = 0; ii < nThreads; ii++)
-          Event[ii].setRunNumber(runs.back().getRunNumber());
-        emit newRun(runs.back(), *runs.back().getParent());
+          Event[ii].setRunNumber(runs.back()->getRunNumber());
+        emit newRun(*runs.back(), *runs.back()->getParent());
         anaLog << "continue analysis" << endli;
         runs.pop_back();
       }
@@ -262,10 +265,12 @@ void tofAnalysis::endStep()
   anaLog << "done" << endli;
   killSetup();
 }
-void tofAnalysis::initStep(const vector<algorithm_parameter>& p,
-                           vector<beamTime_parameter>& beamParam, vector<run_parameter>& runParam,
-                           vector<detector_parameter>& dets, vector<material_parameter>& mats,
-                           reaction_parameter col)
+void tofAnalysis::initStep(const vector<std::shared_ptr<algorithm_parameter>>& p,
+                           vector<std::shared_ptr<beamTime_parameter>>& beamParam,
+                           vector<std::shared_ptr<run_parameter>>& runParam,
+                           vector<std::shared_ptr<detector_parameter>>& dets,
+                           vector<std::shared_ptr<material_parameter>>& mats,
+                           std::shared_ptr<reaction_parameter> col)
 {
   if (p.size() < 4)
     showFrequency = 10000;
@@ -276,15 +281,15 @@ void tofAnalysis::initStep(const vector<algorithm_parameter>& p,
   anaLog << "begin complete init" << incD << endli;
   anaLog << "copy run and beamtime parameter" << endli;
   for (unsigned int i = 0; i < runParam.size(); i++) {
-    run_parameter r = runParam[runParam.size() - 1 - i];
+    auto r = runParam[runParam.size() - 1 - i];
     runs.push_back(r);
   }
   for (unsigned int i = 0; i < beamParam.size(); i++) {
-    beamTime_parameter b = beamParam[i];
+    auto b = beamParam[i];
     bts.push_back(b);
     for (unsigned int j = 0; j < runParam.size(); j++) {
-      if (runs[j].getParent() == &beamParam[i]) {
-        runs[j].setParent(&bts.back());
+      if (runs[j]->getParent() == beamParam[i]) {
+        runs[j]->setParent(bts.back());
       }
     }
   }
@@ -299,12 +304,12 @@ void tofAnalysis::initStep(const vector<algorithm_parameter>& p,
   emit initStateChanged("init algorithms");
   initAlgorithms(p, runs.back());
   for (int i = 0; i < nThreads; i++)
-    Event[i].setRunNumber(runs.back().getRunNumber());
+    Event[i].setRunNumber(runs.back()->getRunNumber());
   emit initStateChanged(
-      (string("algorithms done \n emitting newRun-SIGNAL :") + runs.back().getName()).data());
-  emit initStateChanged((string(" parent name:") + runs.back().getParent()->getName()).data());
-  run_parameter rp(runs.back());
-  emit newRun(rp, *runs.back().getParent());
+      (string("algorithms done \n emitting newRun-SIGNAL :") + runs.back()->getName()).data());
+  emit initStateChanged((string(" parent name:") + runs.back()->getParent()->getName()).data());
+  run_parameter rp(*runs.back());
+  emit newRun(rp, *runs.back()->getParent());
   runs.pop_back();
   readInID = 9;
   emit initStateChanged("init complete");
@@ -315,7 +320,7 @@ void tofAnalysis::addRun(run_parameter& rp)
     return;
   if (runs.size() > 0 || readInValid) {
     run_parameter r = rp;
-    runs.push_back(r);
+    runs.push_back(std::make_shared<run_parameter>(r));
   } else {
     for (int ii = 0; ii < nThreads; ii++)
       Event[ii].setRunNumber(rp.getRunNumber());
@@ -326,11 +331,9 @@ void tofAnalysis::removeRun(run_parameter& rp)
 {
   if (!isInitA)
     return;
-  for (unsigned int i = 0; i < runs.size(); i++) {
-    if (rp.getName() == runs[i].getName()) {
-      takeItemFromVector(runs, runs[i]);
-    }
-  }
+  runs.erase(std::remove_if(runs.begin(), runs.end(),
+                            [rp](auto element) { return element->id() == rp.id(); }),
+             runs.end());
 }
 int tofAnalysis::stopAnalysis()
 {
@@ -343,7 +346,7 @@ void tofAnalysis::showNewRun(run_parameter& run)
 {
   anaLog << "emit newRun-Signal: " << run << endli;
   if (run.hasAdditionalCalibration())
-    for (int i = 0; i < run.getParent()->getNumberOfCalibrationFiles(); i++)
+    for (size_t i = 0; i < run.getParent()->getNumberOfCalibrationFiles(); i++)
       anaLog << "C" << run.getParent()->getCalibrationFile(i) << endli;
   if (!run.hasOwnSetup())
     anaLog << "S" << run.getParent()->getSetupFile() << endli;

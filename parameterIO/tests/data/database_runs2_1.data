@@ -1,0 +1,12 @@
+2 0 0 2000 0 0run 2-1
+1This is a test run of beamtime 2.
+ 2 4 -1 data/datafile2_1-1.data
+8 -1 data/datafile2_1-2.data
+1 0 2000 1 1run 2-2
+1This is a second test run of beamtime 2.
+ 2 4 -1 data/datafile2_2-1.data
+8 -1 data/datafile2_2-2.data
+data/ownSetup2_2.data
+3 data/calibration8.data
+data/calibration9.data
+data/calibration10.data

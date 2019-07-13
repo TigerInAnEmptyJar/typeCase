@@ -38,5 +38,5 @@ public slots:
   virtual void getAddPoint(Vector& data);
   virtual float fit();
 signals:
-  virtual void fitted(float chi, Vector& result);
+  void fitted(float chi, Vector& result);
 };

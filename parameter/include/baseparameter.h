@@ -1,17 +1,71 @@
-#ifndef __BASEPARAM
-#define __BASEPARAM
+#pragma once
+
+#include "geometry.h"
+
+#include <boost/uuid/uuid.hpp>
 
 #include <iostream>
 #include <string>
+#include <variant>
 #include <vector>
 
-using namespace std;
+class ParameterValue
+{
+public:
+  enum class ValueType
+  {
+    INT,
+    FLOAT,
+    DOUBLE,
+    POINT3D,
+    VECTOR3D,
+    STRING,
+    VECTOR_INT,
+    VECTOR_FLOAT,
+    VECTOR_DOUBLE,
+    VECTOR_STRING,
+    UNDEFINED,
+  };
 
-template <class X>
-bool takeItemFromVector(vector<X>&, X&);
+  ParameterValue() = default;
+  ParameterValue(ParameterValue const&) = default;
+  ParameterValue(ParameterValue&&) = default;
+  ParameterValue& operator=(ParameterValue const&) = default;
+  ParameterValue& operator=(ParameterValue&&) = default;
+  bool operator==(ParameterValue const& other);
 
-template <class X>
-bool moveItemToPosVector(vector<X>&, X&, int);
+  template <typename T>
+  ParameterValue(T value) : _value(value)
+  {
+  }
+  template <typename T>
+  ParameterValue& operator=(T value)
+  {
+    _value = value;
+    return *this;
+  }
+
+  template <typename T>
+  bool contains()
+  {
+    return std::holds_alternative<T>(_value);
+  }
+
+  template <typename T>
+  T const& value()
+  {
+    return std::get<T>(_value);
+  }
+
+  ValueType valueType() const;
+
+  bool isDefined() const;
+
+private:
+  using Type = std::variant<int, float, double, point3D, vector3D, std::string, std::vector<int>,
+                            std::vector<float>, std::vector<double>, std::vector<std::string>>;
+  Type _value;
+};
 
 /*!
  *
@@ -20,7 +74,7 @@ template <class X>
 class single_parameter
 {
 private:
-  string name; //!
+  std::string name; //!
   X data;
 
 public:
@@ -28,7 +82,7 @@ public:
    * \brief single_parameter
    * Default constructor.
    */
-  single_parameter();
+  single_parameter() = default;
 
   /*!
    * \brief single_parameter
@@ -36,19 +90,19 @@ public:
    * \param Name
    * \param Data
    */
-  single_parameter(const string& Name, X Data);
+  single_parameter(const std::string& Name, X Data);
 
   /*!
    * \brief single_parameter
    *  Copy operator.
    * \param sp
    */
-  single_parameter(const single_parameter& sp);
+  single_parameter(const single_parameter& sp) = default;
 
   /*!
    * \brief Destructor
    */
-  ~single_parameter();
+  ~single_parameter() = default;
 
   /*!
    * \brief operator =
@@ -64,7 +118,7 @@ public:
    * \param s
    * \return
    */
-  bool operator==(const single_parameter& s) const;
+  bool operator==(const single_parameter& s) const { return s.data == data && s.name == name; }
 
   /*!
    * \brief operator ==
@@ -72,21 +126,21 @@ public:
    * \param s
    * \return
    */
-  bool operator==(const string& s) const;
+  bool operator==(const std::string& s) const;
 
   /*!
    * \brief getName
    *  Returns the parameters name.
    * \return
    */
-  string getName() const;
+  std::string getName() const;
 
   /*!
    * \brief setName
    *  Sets the parameters name.
    * \param n
    */
-  void setName(const string& n);
+  void setName(const std::string& n);
 
   /*!
    * \brief getData
@@ -108,80 +162,55 @@ public:
  */
 class base_parameter
 {
-private:
-  string name;                //!
-  vector<string> description; //!
 public:
   /*!
    * \brief base_parameter
    *  Default constructor.
    */
-  base_parameter();
-
-  /*!
-   * \brief ~base_parameter
-   */
-  virtual ~base_parameter();
+  base_parameter() = default;
+  virtual ~base_parameter() = default;
 
   /*!
    * \brief setName
    *  Set the name.
    * \param n
    */
-  void setName(const string& n);
+  void setName(std::string const& n);
 
   /*!
    * \brief setDescription
    *  Set the description.
    * \param d
    */
-  void setDescription(vector<string> d);
-
-  /*!
-   * \brief setDescription
-   *  Set the lineth description line to d.
-   * \param d
-   * \param line
-   */
-  void setDescription(const string& d, int line);
+  void setDescription(std::string const& d);
 
   /*!
    * \brief getName
-   *  Returns the anem of the parameter.
+   *  Returns the name of the parameter.
    * \return
    */
-  string getName() const;
-
-  /*!
-   * \brief getDescription
-   *  Returns the lineth description line of the parameter.
-   * \param line
-   * \return
-   */
-  string getDescription(int line) const;
+  std::string getName() const;
 
   /*!
    * \brief getDescription
    *  Returns the description of the parameter.
    * \return
    */
-  vector<string> getDescription() const;
+  std::string getDescription() const;
 
   /*!
-   * \brief operator <
-   *  Comparison operator. Returns true if the name of the parameter is smaller than one of p.
-   * \param p
-   * \return
+   * \brief setId
+   * Sets the id of the parameter.
+   * \param id the new id of the parameter.
    */
-  bool operator<(base_parameter p);
+  void setId(boost::uuids::uuid const& id);
 
   /*!
-   * \brief operator >
-   *  Comparison operator. Returns true if the name of the parameter is larger than the one of p.
-   * \param p
-   * \return
+   * \brief id
+   * Returns the unique id of the parameter.
+   * \return the id of the parameter.
    */
-  bool operator>(base_parameter p);
+  boost::uuids::uuid id() const;
 
   /*!
    * \brief operator ==
@@ -191,23 +220,8 @@ public:
    */
   bool operator==(base_parameter p);
 
-  /*!
-   * \brief operator <=
-   *  Comparison operator. Returns true if the name of the parameter is smaller or equal to the one
-   * of p.
-   * \param p
-   * \return
-   */
-  bool operator<=(base_parameter p);
-
-  /*!
-   * \brief operator >=
-   *  Comparison operator. Returns true if the name of the parameter is larger or equal to the one
-   * of p.
-   * \param p
-   * \return
-   */
-  bool operator>=(base_parameter p);
+private:
+  std::string _name;
+  std::string _description;
+  boost::uuids::uuid _id;
 };
-
-#endif

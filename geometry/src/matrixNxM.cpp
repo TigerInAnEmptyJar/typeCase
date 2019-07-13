@@ -569,7 +569,7 @@ matrixNxM matrixNxM::operator!() const
   return ret;
 }
 //#ifdef USEQT
-string matrixNxM::toString() const
+string matrixNxM::toString(int /*pt*/) const
 {
   string ret = "(";
   for (int i = 0; i < Lines(); i++) {

@@ -1,0 +1,19 @@
+########## shape parameter ####### file version :1 #######
+2 testShape 1
+P1 2 3 param4
+P4 5 6 param5
+v32.7754 70.56 6.66033 param6
+v36.6992 63.4349 41.1582 param7
+F123.456 param3
+I10 param1
+I26 param2
+=
+testShape 2
+F26.7 param-2
+F123.456 param-3
+I10 param-1
+Sfoo
+param-4
+Sbar
+param-5
+=

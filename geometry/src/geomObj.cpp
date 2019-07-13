@@ -37,7 +37,7 @@
 //     status = _regular_;
 // }
 //#ifdef USEQT
-string geomObject::toString() const
+string geomObject::toString(int) const
 {
   switch (status) {
   case _regular_:

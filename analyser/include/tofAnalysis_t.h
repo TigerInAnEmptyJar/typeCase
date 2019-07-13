@@ -81,8 +81,8 @@ private:
   int numOfHitsInEvent;
   int readInID;
   vector<string> inputParameter;
-  vector<run_parameter> runs;
-  vector<beamTime_parameter> bts;
+  vector<std::shared_ptr<run_parameter>> runs;
+  vector<std::shared_ptr<beamTime_parameter>> bts;
   int showFrequency;
   bool single;
   bool readInValid;
@@ -139,9 +139,12 @@ public:
    * \param mats
    * \param col
    */
-  void initStep(const vector<algorithm_parameter>& p, vector<beamTime_parameter>& beamParam,
-                vector<run_parameter>& runParam, vector<detector_parameter>& dets,
-                vector<material_parameter>& mats, reaction_parameter col);
+  void initStep(const vector<std::shared_ptr<algorithm_parameter>>& p,
+                vector<std::shared_ptr<beamTime_parameter>>& beamParam,
+                vector<std::shared_ptr<run_parameter>>& runParam,
+                vector<std::shared_ptr<detector_parameter>>& dets,
+                vector<std::shared_ptr<material_parameter>>& mats,
+                std::shared_ptr<reaction_parameter> col);
 
   /*!
    * \brief step
@@ -165,7 +168,8 @@ public:
    * \param p
    * \param runParam
    */
-  void initAlgorithms(const vector<algorithm_parameter>& p, const run_parameter& runParam);
+  void initAlgorithms(const vector<std::shared_ptr<algorithm_parameter>>& p,
+                      const std::shared_ptr<run_parameter>& runParam);
 
   /*!
    * \brief killAlgorithms
@@ -202,7 +206,8 @@ public:
    * \param mats
    * \param dets
    */
-  void defineMaterials(vector<material_parameter>& mats, vector<detector_parameter>& dets);
+  void defineMaterials(vector<std::shared_ptr<material_parameter>>& mats,
+                       vector<std::shared_ptr<detector_parameter>>& dets);
 
   /*!
    * \brief defineDetectors
@@ -217,14 +222,14 @@ public:
    * Defines the detectors as described by dets.
    * \param dets
    */
-  void defineDetectors(vector<detector_parameter>& dets);
+  void defineDetectors(vector<std::shared_ptr<detector_parameter>>& dets);
 
   /*!
    * \brief defineReaction
    * Defines the reaction properties according to the reaction parameter col.
    * \param col
    */
-  void defineReaction(reaction_parameter col);
+  void defineReaction(std::shared_ptr<reaction_parameter> col);
 
   /*!
    * \brief createSetup
@@ -234,8 +239,9 @@ public:
    * \param mats
    * \param col
    */
-  void createSetup(vector<detector_parameter>& dets, vector<material_parameter>& mats,
-                   reaction_parameter col);
+  void createSetup(vector<std::shared_ptr<detector_parameter>>& dets,
+                   vector<std::shared_ptr<material_parameter>>& mats,
+                   std::shared_ptr<reaction_parameter> col);
 
   /*!
    * \brief createSetup

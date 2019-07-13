@@ -250,7 +250,7 @@ void AReadFromTade::newInput(run_parameter& r)
 {
   anaLog << "AReadFromTade::newInput()" << endli;
   string filename = "", actualFileName = "";
-  for (int i = 0; i < r.getNumberOfFiles(); i++)
+  for (size_t i = 0; i < r.getNumberOfFiles(); i++)
     if (r.getFileType(i) == 0) {
       filename = r.getFile(i);
       break;

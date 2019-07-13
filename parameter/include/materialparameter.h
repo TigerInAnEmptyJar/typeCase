@@ -51,7 +51,7 @@ public:
    * \param e
    * \return
    */
-  bool operator==(const element_parameter& e);
+  bool operator==(const element_parameter& e) const;
 
   /*!
    * \brief getMass
@@ -298,7 +298,7 @@ public:
    * \param p
    * \return
    */
-  bool operator==(const material_parameter& p);
+  bool operator==(const material_parameter& p) const;
 
   /*!
    * \brief operator <=
@@ -335,31 +335,4 @@ istream& operator>>(istream& i, material_parameter& m);
  */
 ostream& operator<<(ostream& o, const material_parameter& m);
 
-/*!
- *
- */
-template <>
-bool takeItemFromVector<element_parameter>(vector<element_parameter>& vect,
-                                           element_parameter& item);
-
-/*!
- *
- */
-template <>
-bool moveItemToPosVector<element_parameter>(vector<element_parameter>& vect,
-                                            element_parameter& item, int pos);
-
-/*!
- *
- */
-template <>
-bool takeItemFromVector<material_parameter>(vector<material_parameter>& vect,
-                                            material_parameter& item);
-
-/*!
- *
- */
-template <>
-bool moveItemToPosVector<material_parameter>(vector<material_parameter>& vect,
-                                             material_parameter& item, int pos);
 #endif

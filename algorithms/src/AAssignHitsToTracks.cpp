@@ -94,9 +94,11 @@ void* AAssignHitsToTracks::process(void* ptr)
             eldis = (int)abs(hits[detectorIDs[j]][k]->getElement() - elem);
             closest = k;
           } else if (det->isCircular()) {
-            if (abs(abs(hits[detectorIDs[j]][k]->getElement() - elem) -
-                    det->getNumberOfElements())) {
-              eldis = (int)abs(hits[detectorIDs[j]][k]->getElement() - elem);
+            if (abs(static_cast<int>(
+                    abs(static_cast<int>(hits[detectorIDs[j]][k]->getElement() - elem)) -
+                    det->getNumberOfElements()))) {
+              eldis = static_cast<int>(
+                  abs(static_cast<int>(hits[detectorIDs[j]][k]->getElement() - elem)));
               closest = k;
             }
           }
@@ -157,19 +159,18 @@ void* AAssignHitsToTracks::process(void* ptr)
 algorithm_parameter AAssignHitsToTracks::getDescription()
 {
   algorithm_parameter ret("Assign hits to defined tracks", 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm uses defined tracks and assigns hits");
-  des.push_back("in the given detectors to this track. There are two different");
-  des.push_back("ways of searching the corresponding detector elements: check");
-  des.push_back("on each hit or do the suspect for the detector envelope. For");
-  des.push_back("each detector you can specify the search mode for prompt and");
-  des.push_back("secondary tracks. first bit is prompt second is secondary");
-  des.push_back("tracks and set means use suspect search (3: all tracks suspect");
-  des.push_back("search, 1: prompt do suspect secondary do conventional).");
-  des.push_back("The secondary tracks are defined by distance of the track");
-  des.push_back("to the origin.");
-  des.push_back("You may take the track directions as given or do an additional");
-  des.push_back("line fit.");
+  string des = "This algorithm uses defined tracks and assigns hits "
+               "in the given detectors to this track. There are two different "
+               "ways of searching the corresponding detector elements: check "
+               "on each hit or do the suspect for the detector envelope. For "
+               "each detector you can specify the search mode for prompt and "
+               "secondary tracks. first bit is prompt second is secondary"
+               "tracks and set means use suspect search (3: all tracks suspect "
+               "search, 1: prompt do suspect secondary do conventional).\n"
+               "The secondary tracks are defined by distance of the track "
+               "to the origin.\n"
+               "You may take the track directions as given or do an additional "
+               "line fit.";
   ret.setDescription(des);
   ret.addParam<bool>(single_parameter<bool>("Refit track directions", false));
   ret.addParam<float>(single_parameter<float>("maximum chi-squared for refit", 1));

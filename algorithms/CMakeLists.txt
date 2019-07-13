@@ -128,4 +128,5 @@ target_link_libraries(lib${PROJECT_NAME}
     PUBLIC libshape
     PUBLIC libbasic
     PUBLIC pthread
+    PUBLIC ROOT::Core
 )

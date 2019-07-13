@@ -1591,7 +1591,7 @@ void AReadReactionFromRoot::OnNewRun(run_parameter& r)
     while (!Rfiles[i].empty())
       Rfiles[i].pop_back();
   string s;
-  for (int i = 0; i < r.getNumberOfFiles(); i++) {
+  for (size_t i = 0; i < r.getNumberOfFiles(); i++) {
     s = r.getFile(i);
     switch (r.getFileType(i)) {
     case 6: // hits

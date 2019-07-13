@@ -19,7 +19,6 @@ private:
   vector<single_parameter<float>> floats;     //!
   vector<single_parameter<string>> strings_;  //!
   bool fcompleteWrite;                        //!
-  boost::uuids::uuid id;
 
 public:
   /*!
@@ -39,6 +38,8 @@ public:
    * \brief Destructor
    */
   ~shape_parameter();
+
+  bool operator==(shape_parameter const& other) const;
 
   /*!
    * \brief get the id of the shape
@@ -139,16 +140,4 @@ istream& operator>>(istream& i, shape_parameter& sh);
  */
 ostream& operator<<(ostream& o, const shape_parameter& sh);
 
-/*!
- *
- */
-template <>
-bool takeItemFromVector<shape_parameter>(vector<shape_parameter>& vect, shape_parameter& item);
-
-/*!
- *
- */
-template <>
-bool moveItemToPosVector<shape_parameter>(vector<shape_parameter>& vect, shape_parameter& item,
-                                          int pos);
 #endif

@@ -32,8 +32,8 @@ int tofAnalysis::getAlgorithm(const algorithm_parameter& param, const run_parame
   }
   return sum;
 }
-void tofAnalysis::initAlgorithms(const vector<algorithm_parameter>& p,
-                                 const run_parameter& runParam)
+void tofAnalysis::initAlgorithms(const vector<std::shared_ptr<algorithm_parameter>>& p,
+                                 const std::shared_ptr<run_parameter>& runParam)
 {
   QTime timer;
   timer.start();
@@ -42,7 +42,7 @@ void tofAnalysis::initAlgorithms(const vector<algorithm_parameter>& p,
   anaLog << "init algorithms:" << incD << endli;
   vector<algorithm_parameter> ap;
   for (unsigned int i = 0; i < p.size(); i++) {
-    algorithm_parameter aptemp(p[i]);
+    algorithm_parameter aptemp(*p[i]);
     ap.push_back(aptemp);
   }
   callEventSearch = false;
@@ -273,7 +273,7 @@ void tofAnalysis::initAlgorithms(const vector<algorithm_parameter>& p,
     emit initStateChanged((string("init algorithm ") + ap[i].getName()).data());
     emit algorithmInit(i);
 
-    j += getAlgorithm(ap[i], runParam, j, jfit, nF);
+    j += getAlgorithm(ap[i], *runParam, j, jfit, nF);
     jfit += nF;
     emit algorithmInited(i);
   }
@@ -871,10 +871,10 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     int detID;
     vector<string> calibrationFiles;
     if (firstRun.hasOwnCalibration() || firstRun.hasAdditionalCalibration())
-      for (int iii = 0; iii < firstRun.getNumberOfCalibrationFiles(); iii++)
+      for (size_t iii = 0; iii < firstRun.getNumberOfCalibrationFiles(); iii++)
         calibrationFiles.push_back(firstRun.getCalibrationFile(iii));
     if (!firstRun.hasAdditionalCalibration())
-      for (int iii = 0; iii < firstRun.getParent()->getNumberOfCalibrationFiles(); iii++)
+      for (size_t iii = 0; iii < firstRun.getParent()->getNumberOfCalibrationFiles(); iii++)
         calibrationFiles.push_back(firstRun.getParent()->getCalibrationFile(iii));
     for (unsigned int ii = 0; ii < param.getParam<vector<int>>(0).getData().size(); ii++) {
       anaLog << "#" << ii;
@@ -1169,7 +1169,7 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     (*out) = new AAlgorithm*[nAlgos];
     vector<int> tmp = param.getParam<vector<int>>(0).getData();
     vector<string> tmps;
-    for (int iii = 0; iii < firstRun.getNumberOfCalibrationFiles(); iii++)
+    for (size_t iii = 0; iii < firstRun.getNumberOfCalibrationFiles(); iii++)
       tmps.push_back(firstRun.getCalibrationFile(iii));
     int id;
     for (unsigned int iii = 0; iii < param.getParam<vector<int>>(0).getData().size(); iii++) {

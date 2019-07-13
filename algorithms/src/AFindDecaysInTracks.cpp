@@ -162,14 +162,13 @@ void* AFindDecayInTracks::process(void* ptr)
 algorithm_parameter AFindDecayInTracks::getDescription()
 {
   algorithm_parameter ret("Find decays in tracks", 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm takes a set of tracks and defines for ");
-  des.push_back("each track if it is a prompt or secondary track. Criterium ");
-  des.push_back("here is the distance to the target [mm]. Then the point of ");
-  des.push_back("closest approach of any two tracks is calculated and if it ");
-  des.push_back("is below a certain limit, these two tracks are to have a ");
-  des.push_back("common vertex point. For both primary and secondary ");
-  des.push_back("vertex you can separately decide to do a vertex fit.");
+  string des = "This algorithm takes a set of tracks and defines for "
+               "each track if it is a prompt or secondary track. Criterium "
+               "here is the distance to the target [mm]. Then the point of "
+               "closest approach of any two tracks is calculated and if it "
+               "is below a certain limit, these two tracks are to have a "
+               "common vertex point. For both primary and secondary "
+               "vertex you can separately decide to do a vertex fit.";
   ret.setDescription(des);
   ret.addParam<bool>(single_parameter<bool>("fit primary vertex", true));
   ret.addParam<bool>(single_parameter<bool>("fit secondary vertices", true));

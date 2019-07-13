@@ -114,9 +114,8 @@ void APixelTracking::eliminateDoubleTracks(int& n1, TTrack** array1, int& n2, TT
   for (int i = 0; i < n1; i++) {
     for (int j = 0; j < n2; j++) {
       elnum = nElementsInCommon(array1[i], array2[j]);
-      if (elnum > max ||
-          acos(array1[i]->getPath().Direction() * array2[j]->getPath().Direction()) <
-              2 * M_PI / 180.) {
+      if (elnum > max || acos(array1[i]->getPath().Direction() * array2[j]->getPath().Direction()) <
+                             2 * M_PI / 180.) {
         if (array1[i]->getNumberOfCalibHits() /*ChiSquared()<*/ >
             array2[j]->getNumberOfCalibHits() /*ChiSquared()*/) {
           ttmp = array2[j];
@@ -173,7 +172,7 @@ void APixelTracking::sortAndCopyPrompt(int& n, TTrack** array)
 #endif
   if (n <= 0)
     return;
-  // sort by chi²
+  // sort by chi-squared
   float values[n];
   for (int i = 0; i < n; i++)
     values[i] = array[i]->getChiSquared();
@@ -824,7 +823,7 @@ void* APixelTracking::process(void* ptr)
             // ";
             // 		      cout<<")"<<endl;
             if (!(chi >= 0 && chi < maxChiDecay[trackID])) {
-              // cout<<"\tbad chi²:"<<chi<<" "<<distance.R()<<endl;
+              // cout<<"\tbad chi-squared:"<<chi<<" "<<distance.R()<<endl;
               continue;
             }
             if ((trackID < 2 && nPoints < 8) || (trackID >= 2 && nPoints < 7)) {
@@ -833,7 +832,7 @@ void* APixelTracking::process(void* ptr)
             }
             if (tmptracks[tmpNum]->getNumberOfCalibHits(21) > 0 &&
                 tmptracks[tmpNum]->getNumberOfCalibHits(22) > 0) {
-              // cout<<"\tboth µ-strip found "<<distance.R()<<endl;
+              // cout<<"\tboth mu-strip found "<<distance.R()<<endl;
               continue;
             }
             decayTracks[ndecaytracks++] = tmptracks[tmpNum];
@@ -1060,13 +1059,12 @@ APixelTracking::~APixelTracking()
 algorithm_parameter APixelTracking::getDescription()
 {
   algorithm_parameter ret("Pixel Tracking", 0);
-  vector<string> des;
-  des.push_back("This Algorithm is a very simple tracking algorithm to");
-  des.push_back("produce out of any 2 pixels in the hodoscopes a");
-  des.push_back("track. Stop pixel is requested.");
-  des.push_back("Searches prompt tracks and decay tracks. decay tracks are ");
-  des.push_back("assembled to vees. A check for coplanarity with target is");
-  des.push_back("performed.");
+  string des = "This Algorithm is a very simple tracking algorithm to"
+               "produce out of any 2 pixels in the hodoscopes a"
+               "track. Stop pixel is requested."
+               "Searches prompt tracks and decay tracks. decay tracks are "
+               "assembled to vees. A check for coplanarity with target is"
+               "performed.";
   ret.setDescription(des);
   ret.addParam<int>(single_parameter<int>("max Prompt Equal", 0));
   ret.addParam<int>(single_parameter<int>("max Vee Equal", 0));

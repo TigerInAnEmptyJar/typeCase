@@ -181,10 +181,9 @@ void* ATofPixCorrection::process(void* ptr)
         if (calib)
           tdc += (calibrations7[pt][actualRange7[pt]]->getParameter(
                       pix->getElementr(k).getElement(), pixpos) +
-                  (use9[pt]
-                       ? calibrations9[pt][actualRange9[pt]]->getParameter(
-                             pix->getElementr(k).getElement(), pixpos)
-                       : 0)) /
+                  (use9[pt] ? calibrations9[pt][actualRange9[pt]]->getParameter(
+                                  pix->getElementr(k).getElement(), pixpos)
+                            : 0)) /
                  10.;
         if (runTime)
           tdc += lightWay / CinSzinti[pt] / 299.792;
@@ -326,10 +325,10 @@ void ATofPixCorrection::setNewRun(run_parameter& run)
 {
   vector<string> tmp;
   if (run.hasOwnCalibration())
-    for (int i = 0; i < run.getNumberOfCalibrationFiles(); i++)
+    for (size_t i = 0; i < run.getNumberOfCalibrationFiles(); i++)
       tmp.push_back(run.getCalibrationFile(i));
   else if (run.getParent() != NULL)
-    for (int i = 0; i < run.getParent()->getNumberOfCalibrationFiles(); i++)
+    for (size_t i = 0; i < run.getParent()->getNumberOfCalibrationFiles(); i++)
       tmp.push_back(run.getParent()->getCalibrationFile(i));
   getParameterFromFiles(tmp);
 }

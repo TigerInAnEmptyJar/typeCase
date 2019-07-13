@@ -114,7 +114,7 @@ void AMultipleTreeInput::cleanUp()
 void AMultipleTreeInput::OnNewRun(run_parameter& rp)
 {
   string filename = "";
-  for (int i = 0; i < rp.getNumberOfFiles(); i++) {
+  for (size_t i = 0; i < rp.getNumberOfFiles(); i++) {
     if (rp.getFileType(i) == 129)
       filename = rp.getFile(i);
   }
@@ -176,8 +176,8 @@ void AMultipleTreeInput::setTree(const string& filename)
       for (int l = 0; l < nTracksPerTree; l++) {
         for (int m = 0; m <= j; m++) {
           leaves[j][m * nTrees[j] * nTracksPerTree + (l + nTracksPerTree * k)][0] =
-              trees[j]
-                   [k]->FindLeaf((string("Track") + pre[m * j] + string_number(l) + ".ID").data());
+              trees[j][k]->FindLeaf(
+                  (string("Track") + pre[m * j] + string_number(l) + ".ID").data());
           leaves[j][m * nTrees[j] * nTracksPerTree + (l + nTracksPerTree * k)][1] =
               trees[j][k]->FindLeaf(
                   (string("Track") + pre[m * j] + string_number(l) + ".beta").data());
@@ -185,20 +185,20 @@ void AMultipleTreeInput::setTree(const string& filename)
               trees[j][k]->FindLeaf(
                   (string("Track") + pre[m * j] + string_number(l) + ".theta").data());
           leaves[j][m * nTrees[j] * nTracksPerTree + (l + nTracksPerTree * k)][3] =
-              trees[j]
-                   [k]->FindLeaf((string("Track") + pre[m * j] + string_number(l) + ".phi").data());
+              trees[j][k]->FindLeaf(
+                  (string("Track") + pre[m * j] + string_number(l) + ".phi").data());
           leaves[j][m * nTrees[j] * nTracksPerTree + (l + nTracksPerTree * k)][4] =
               trees[j][k]->FindLeaf(
                   (string("Track") + pre[m * j] + string_number(l) + ".vertex").data());
           leaves[j][m * nTrees[j] * nTracksPerTree + (l + nTracksPerTree * k)][5] =
-              trees[j]
-                   [k]->FindLeaf((string("Track") + pre[m * j] + string_number(l) + ".nEl").data());
+              trees[j][k]->FindLeaf(
+                  (string("Track") + pre[m * j] + string_number(l) + ".nEl").data());
           leaves[j][m * nTrees[j] * nTracksPerTree + (l + nTracksPerTree * k)][6] =
-              trees[j]
-                   [k]->FindLeaf((string("Track") + pre[m * j] + string_number(l) + ".det").data());
+              trees[j][k]->FindLeaf(
+                  (string("Track") + pre[m * j] + string_number(l) + ".det").data());
           leaves[j][m * nTrees[j] * nTracksPerTree + (l + nTracksPerTree * k)][7] =
-              trees[j]
-                   [k]->FindLeaf((string("Track") + pre[m * j] + string_number(l) + ".el").data());
+              trees[j][k]->FindLeaf(
+                  (string("Track") + pre[m * j] + string_number(l) + ".el").data());
           leaves[j][m * nTrees[j] * nTracksPerTree + (l + nTracksPerTree * k)][8] =
               trees[j][k]->FindLeaf(
                   (string("Track") + pre[m * j] + string_number(l) + ".energy").data());
@@ -390,19 +390,18 @@ algorithm_parameter AMultipleTreeInput::getDescription()
   ret.addParam<bool>(single_parameter<bool>("Search for read event", false));
   ret.addParam<bool>(single_parameter<bool>("use local directory", true));
   ret.addParam<string>(single_parameter<string>("Local directory", ""));
-  vector<string> des;
-  des.push_back("This algorithm reads track information from a root tree file.");
-  des.push_back("There is one tree stearing the read in for the other ones, ");
-  des.push_back("containing the event- and runnumber, the trigger and the entry-");
-  des.push_back("numbers for the other trees to form one event.");
-  des.push_back("The other trees come in three packages: prompt tracks, kink tracks");
-  des.push_back("and vees.");
-  des.push_back("Each track has information about the vertex, the direction, beta,");
-  des.push_back("energy and ID of the particle and the hit detectors.");
-  des.push_back("It doesn't read in hits, but you can read the hits with another");
-  des.push_back("algorithm and switch the \"search for read event\"-parameter on, so");
-  des.push_back("the current event will be searched (if not found, the event is not");
-  des.push_back("skipped, but the number of tracks is set to zero).");
+  string des = "This algorithm reads track information from a root tree file."
+               "There is one tree stearing the read in for the other ones, "
+               "containing the event- and runnumber, the trigger and the entry-"
+               "numbers for the other trees to form one event."
+               "The other trees come in three packages: prompt tracks, kink tracks"
+               "and vees.\n"
+               "Each track has information about the vertex, the direction, beta,"
+               "energy and ID of the particle and the hit detectors."
+               "It doesn't read in hits, but you can read the hits with another"
+               "algorithm and switch the \"search for read event\"-parameter on, so"
+               "the current event will be searched (if not found, the event is not"
+               "skipped, but the number of tracks is set to zero).";
   ret.setDescription(des);
   return ret;
 }

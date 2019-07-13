@@ -456,10 +456,9 @@ void ATrackTreeInput::clearTree()
 algorithm_parameter ATrackTreeInput::getDescription()
 {
   algorithm_parameter ret("Read Tracks from Tree", 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm reads tracks from a root tree and");
-  des.push_back("requests the hits from the setup.");
-  des.push_back("It does so for prompt, kink and vee tracks separately.");
+  string des = "This algorithm reads tracks from a root tree and"
+               "requests the hits from the setup."
+               "It does so for prompt, kink and vee tracks separately.";
   ret.setDescription(des);
   ret.addParam<bool>(single_parameter<bool>(string("search for event"), true));
   ret.addParam<bool>(single_parameter<bool>(string("use as event input list"), true));
@@ -476,7 +475,7 @@ void ATrackTreeInput::onNewRun(run_parameter& run)
   readWriteLog << "ATrackTreeInput::onNewRun()" << endli;
   clearTree();
   string filename = "";
-  for (int i = 0; i < run.getNumberOfFiles(); i++) {
+  for (size_t i = 0; i < run.getNumberOfFiles(); i++) {
     //      cout<<run.getFileType(i)<<" "<<run.getFile(i).data()<<endl;
     if (run.getFileType(i) == 513 && existing(run.getFile(i)))
       filename = run.getFile(i);

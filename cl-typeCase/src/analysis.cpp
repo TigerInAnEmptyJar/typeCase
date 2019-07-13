@@ -6,7 +6,6 @@
 #include <boost/program_options.hpp>
 #include <fstream>
 #include <iostream>
-#include <iostream>
 #include <signal.h>
 #include <stdlib.h>
 #include <time.h>
@@ -44,10 +43,13 @@ struct parameters_t
   bool showParams;
 };
 
-int modAlgos(vector<algorithm_parameter>& ap, vector<run_parameter>& rp, parameters_t& param);
-void writeAnalysisParameter(vector<algorithm_parameter> ap, vector<run_parameter> rp,
-                            vector<detector_parameter> dp, vector<material_parameter> mp,
-                            reaction_parameter react);
+int modAlgos(vector<std::shared_ptr<algorithm_parameter>>& ap,
+             vector<std::shared_ptr<run_parameter>>& rp, parameters_t& param);
+void writeAnalysisParameter(vector<std::shared_ptr<algorithm_parameter>> ap,
+                            vector<std::shared_ptr<run_parameter>> rp,
+                            vector<std::shared_ptr<detector_parameter>> dp,
+                            vector<std::shared_ptr<material_parameter>> mp,
+                            std::shared_ptr<reaction_parameter> react);
 void setAllowedOptions(po::options_description& desc, parameters_t& param);
 bool checkOptions(po::options_description& desc, po::variables_map& vam, parameters_t& param);
 
@@ -72,12 +74,12 @@ int main(int argc, char** argv)
   po::notify(vm);
   if (!checkOptions(description, vm, parameter))
     return 1;
-  vector<algorithm_parameter> aparams;
-  vector<beamTime_parameter> bparams;
-  vector<run_parameter> rparams;
-  vector<detector_parameter> dparams;
-  reaction_parameter react;
-  vector<material_parameter> mparams;
+  vector<std::shared_ptr<algorithm_parameter>> aparams;
+  vector<std::shared_ptr<beamTime_parameter>> bparams;
+  vector<std::shared_ptr<run_parameter>> rparams;
+  vector<std::shared_ptr<detector_parameter>> dparams;
+  std::shared_ptr<reaction_parameter> react;
+  vector<std::shared_ptr<material_parameter>> mparams;
 
   if (!parameter.rootD) {
     if (parameter.completeDataInput) {
@@ -95,11 +97,11 @@ int main(int argc, char** argv)
           if (rret[i].getName() == parameter.runNames[j] ||
               rret[i].getParent()->getName() == parameter.runNames[j]) {
             if (rret[i].getParent()->getName() == parameter.runNames[j]) {
-              if (rret[i].getNumberOfCalibrationFiles() < 1)
+              if (bret[i].getNumberOfCalibrationFiles() < 1)
                 continue;
               hasH = false;
               hasT = false;
-              for (int k = 0; k < rret[i].getNumberOfFiles(); k++) {
+              for (size_t k = 0; k < rret[i].getNumberOfFiles(); k++) {
                 if (rret[i].getFileType(k) == 257)
                   hasH = true;
                 if (rret[i].getFileType(k) == 513)
@@ -108,26 +110,30 @@ int main(int argc, char** argv)
               if (!(hasH && hasT))
                 continue;
             }
-            rparams.push_back(rret[i]);
-            int num = -1;
-            for (unsigned int k = 0; k < bparams.size(); k++)
-              if (bparams[k].getName() == rret[i].getParent()->getName())
-                num = k;
-            if (num < 0) {
-              num = bparams.size();
-              beamTime_parameter tmp(*rret[i].getParent());
-              bparams.push_back(tmp);
+            rparams.push_back(std::make_shared<run_parameter>(rret[i]));
+            auto it = std::find_if(bparams.begin(), bparams.end(), [&rparams](auto element) {
+              return element->id() == rparams.back()->getParentNumber();
+            });
+            if (it == bparams.end()) {
+              auto other = std::find_if(bret.begin(), bret.end(), [&rparams](auto element) {
+                return element.id() == rparams.back()->getParentNumber();
+              });
+              if (other != bret.end()) {
+                bparams.push_back(std::make_shared<beamTime_parameter>(*other));
+                rparams.back()->setParent(bparams.back());
+              }
+            } else {
+              rparams.back()->setParent(*it);
             }
-            rparams.back().setParent(&bparams[num]);
           }
         }
       }
       if (rparams.size() > 0) {
         if (!parameter.showParams)
           for (unsigned int i = 0; i < rparams.size(); i++)
-            cout << "use run " << rparams[i].getName().data() << " from beamtime "
-                 << rparams[i].getParent()->getName().data() << endl;
-        parameter.runName = rparams[0].getName();
+            cout << "use run " << rparams[i]->getName().data() << " from beamtime "
+                 << rparams[i]->getParent()->getName().data() << endl;
+        parameter.runName = rparams[0]->getName();
         // 	      for(int i=0;i<rparams[0].getNumberOfFiles();i++)
         // 		{
         // 		  if(rparams[0].getFileType(i)==0)
@@ -151,24 +157,34 @@ int main(int argc, char** argv)
     }
   }
   // Read Setup from File
-  if (rparams[0].hasOwnSetup())
-    parameter.setupFile = rparams[0].getSetupFile();
+  if (rparams[0]->hasOwnSetup())
+    parameter.setupFile = rparams[0]->getSetupFile();
   else
-    parameter.setupFile = rparams[0].getParent()->getSetupFile();
+    parameter.setupFile = rparams[0]->getParent()->getSetupFile();
   cout << "read setup file \"" << parameter.setupFile.data() << "\""
        << existing(parameter.setupFile) << endl;
-  if (!parameter.rootS)
-    if (!parameterManager::readDetectorParameter_ascii(parameter.setupFile, dparams, react)) {
+  if (!parameter.rootS) {
+    std::vector<detector_parameter> dret;
+    reaction_parameter rret;
+    if (!parameterManager::readDetectorParameter_ascii(parameter.setupFile, dret, rret)) {
       cerr << "could not read setup file:\"" << parameter.setupFile.data() << "\"" << endl;
       return 0;
     }
+    std::transform(dret.begin(), dret.end(), std::back_inserter(dparams),
+                   [](auto element) { return std::make_shared<detector_parameter>(element); });
+    react = std::make_shared<reaction_parameter>(rret);
+  }
   cout << "read setup file \"" << parameter.matFile.data() << "\"" << existing(parameter.matFile)
        << endl;
-  if (!parameter.rootM)
-    if (!parameterManager::readMaterialParameter_ascii(parameter.matFile, mparams)) {
+  if (!parameter.rootM) {
+    std::vector<material_parameter> mret;
+    if (!parameterManager::readMaterialParameter_ascii(parameter.matFile, mret)) {
       cerr << "could not read material file:\"" << parameter.matFile.data() << "\"" << endl;
       return 0;
     }
+    std::transform(mret.begin(), mret.end(), std::back_inserter(mparams),
+                   [](auto element) { return std::make_shared<material_parameter>(element); });
+  }
   if (!parameter.showParams)
     cout << dparams.size() << " detectors read from file " << parameter.setupFile.data() << endl;
   if (!parameter.showParams)
@@ -176,11 +192,15 @@ int main(int argc, char** argv)
   if (!parameter.showParams)
     cout << "read algorithms from file: \"" << parameter.algoFile.data() << "\"" << endl;
   // Read algorithms from file
-  if (!parameter.rootA)
-    if (!parameterManager::readUsedAlgorithmParameter_ascii(parameter.algoFile, aparams)) {
+  if (!parameter.rootA) {
+    std::vector<algorithm_parameter> aret;
+    if (!parameterManager::readUsedAlgorithmParameter_ascii(parameter.algoFile, aret)) {
       cerr << "could not read algorithm file:\"" << parameter.algoFile.data() << "\"" << endl;
       return 0;
     }
+    std::transform(aret.begin(), aret.end(), std::back_inserter(aparams),
+                   [](auto element) { return std::make_shared<algorithm_parameter>(element); });
+  }
   if (!parameter.showParams)
     cout << aparams.size() << " algorithms read " << endl;
   // modify analysis-parameter according to command-line-options
@@ -188,21 +208,21 @@ int main(int argc, char** argv)
                                                   // runName, outpath,local,bPar,sPar);
   if (parameter.showParams) {
     for (unsigned int i = 0; i < aparams.size(); i++) {
-      if (!aparams[i].IsUsed())
+      if (!aparams[i]->IsUsed())
         continue;
-      cout << aparams[i].getName().data();
-      cout << " " << aparams[i].getNumberOfParam<algorithm_parameter>() << endl;
-      for (int j = 0; j < aparams[i].getNumberOfParam<algorithm_parameter>(); j++)
-        cout << "  " << aparams[i].getParam<algorithm_parameter>(j).getName().data() << endl;
-      if (aparams[i].getID() == 34)
-        cout << "  to file:" << aparams[i].getParam<string>(1).getData().data() << endl;
+      cout << aparams[i]->getName();
+      cout << " " << aparams[i]->getNumberOfParam<algorithm_parameter>() << endl;
+      for (int j = 0; j < aparams[i]->getNumberOfParam<algorithm_parameter>(); j++)
+        cout << "  " << aparams[i]->getParam<algorithm_parameter>(j).getName() << endl;
+      if (aparams[i]->getID() == 34)
+        cout << "  to file:" << aparams[i]->getParam<string>(1).getData() << endl;
       cout << "------------" << endl;
     }
   }
   cout << QTime::currentTime().toString().data() << " " << getenv("HOSTNAME") << endl;
   // start analysis;
   loggingClass logg(string("/dev/shm/") + getenv("USER") + "/");
-  logg.setData(aparams[aparams.size() - 1].getParam<string>(1).getData());
+  logg.setData(aparams[aparams.size() - 1]->getParam<string>(1).getData());
   if (parameter.shiftEvent)
     logg.setStartingEvent(parameter.EventShift);
   if (nE == -1 || rparams.size() > 1)
@@ -257,7 +277,8 @@ int main(int argc, char** argv)
   }
 }
 
-int modAlgos(vector<algorithm_parameter>& ap, vector<run_parameter>& rp,
+int modAlgos(vector<std::shared_ptr<algorithm_parameter>>& ap,
+             vector<std::shared_ptr<run_parameter>>& rp,
              parameters_t& param) // bool cdi, bool sE, int eS, string rN,
                                   // string oP,bool localDir,
                                   // bool *bp, string* sp)
@@ -269,104 +290,104 @@ int modAlgos(vector<algorithm_parameter>& ap, vector<run_parameter>& rp,
   int trackoutCount = 0;
   int count = 0;
   for (unsigned int i = 0; i < ap.size(); i++)
-    if (ap[i].getID() == 63)
+    if (ap[i]->getID() == 63)
       count++;
   for (unsigned int i = 0; i < ap.size(); i++) {
-    if (ap[i].getID() == 9) {
+    if (ap[i]->getID() == 9) {
       if (param.completeDataInput) {
-        for (int j = 0; j < rp[0].getNumberOfFiles(); j++)
-          if (rp[0].getFileType(j) == 0)
-            ap[i].changeParam<string>(string("input file"), rp[0].getFile(j));
+        for (size_t j = 0; j < rp[0]->getNumberOfFiles(); j++)
+          if (rp[0]->getFileType(j) == 0)
+            ap[i]->changeParam<string>(string("input file"), rp[0]->getFile(j));
       }
-    } else if (ap[i].getID() == 40) // read from simple Tree
+    } else if (ap[i]->getID() == 40) // read from simple Tree
     {
       ret = 0;
-      int bas = 0;
-      if (ap[i].getParam<bool>(3).getData())
+      size_t bas = 0;
+      if (ap[i]->getParam<bool>(3).getData())
         bas = 6;
-      else if (ap[i].getParam<bool>(0).getData())
+      else if (ap[i]->getParam<bool>(0).getData())
         bas = 34;
       for (unsigned int k = 0; k < rp.size(); k++) {
-        for (int j = 0; j < rp[k].getNumberOfFiles(); j++)
-          if (rp[k].getFileType(j) == bas)
-            ret += rp[k].getFileEvents(j);
+        for (size_t j = 0; j < rp[k]->getNumberOfFiles(); j++)
+          if (rp[k]->getFileType(j) == bas)
+            ret += rp[k]->getFileEvents(j);
       }
       string fn;
-      for (int j = 0; j < rp[0].getNumberOfFiles(); j++)
-        if (rp[0].getFileType(j) == 6)
-          fn = rp[0].getFile(j);
-      ap[i].changeParam<string>(ap[i].getParam<string>(5).getName(), fn);
-      for (int j = 0; j < rp[0].getNumberOfFiles(); j++)
-        if (rp[0].getFileType(j) == 34)
-          fn = rp[0].getFile(j);
-      ap[i].changeParam<string>(ap[i].getParam<string>(2).getName(), fn);
-      ap[i].changeParam<bool>(ap[i].getParam<bool>(6).getName(), param.local);
+      for (size_t j = 0; j < rp[0]->getNumberOfFiles(); j++)
+        if (rp[0]->getFileType(j) == 6)
+          fn = rp[0]->getFile(j);
+      ap[i]->changeParam<string>(ap[i]->getParam<string>(5).getName(), fn);
+      for (size_t j = 0; j < rp[0]->getNumberOfFiles(); j++)
+        if (rp[0]->getFileType(j) == 34)
+          fn = rp[0]->getFile(j);
+      ap[i]->changeParam<string>(ap[i]->getParam<string>(2).getName(), fn);
+      ap[i]->changeParam<bool>(ap[i]->getParam<bool>(6).getName(), param.local);
       if (param.shiftEvent) {
-        ap[i].changeParam<bool>(ap[i].getParam<bool>(5).getName(), true);
-        ap[i].changeParam<int>(ap[i].getParam<int>(0).getName(), param.EventShift);
+        ap[i]->changeParam<bool>(ap[i]->getParam<bool>(5).getName(), true);
+        ap[i]->changeParam<int>(ap[i]->getParam<int>(0).getName(), param.EventShift);
       }
-    } else if (ap[i].getID() == 34) {
+    } else if (ap[i]->getID() == 34) {
       if (param.outpath != "")
-        ap[i].changeParam<string>(string("Output file"),
-                                  param.outpath + remove(rp[0].getName(), ' '));
+        ap[i]->changeParam<string>(string("Output file"),
+                                   param.outpath + remove(rp[0]->getName(), ' '));
       else {
         int n = -1;
-        for (int j = 0; j < ap[i].getNumberOfParam<string>(); j++)
-          if (ap[i].getParam<string>(j).getName() == "Output file")
+        for (int j = 0; j < ap[i]->getNumberOfParam<string>(); j++)
+          if (ap[i]->getParam<string>(j).getName() == "Output file")
             n = j;
         if (n == -1)
           continue;
-        ap[i].changeParam<string>(
+        ap[i]->changeParam<string>(
             string("Output file"),
-            remove(ap[i].getParam<string>(n).getData() + rp[0].getName(), ' '));
+            remove(ap[i]->getParam<string>(n).getData() + rp[0]->getName(), ' '));
       }
-      ap[i].changeParam<bool>(ap[i].getParam<bool>(8).getName(), param.local);
-    } else if (ap[i].getID() == 54) {
+      ap[i]->changeParam<bool>(ap[i]->getParam<bool>(8).getName(), param.local);
+    } else if (ap[i]->getID() == 54) {
       if (param.outpath != "") {
-        if (ap[i].getParam<bool>(0).getData())
-          ap[i].changeParam<string>(string("File-pattern"), param.outpath);
+        if (ap[i]->getParam<bool>(0).getData())
+          ap[i]->changeParam<string>(string("File-pattern"), param.outpath);
         else
-          ap[i].changeParam<string>(string("File-pattern"),
-                                    param.outpath + remove(rp[0].getName(), ' '));
+          ap[i]->changeParam<string>(string("File-pattern"),
+                                     param.outpath + remove(rp[0]->getName(), ' '));
       } else {
         int n = -1;
-        for (int j = 0; j < ap[i].getNumberOfParam<string>(); j++)
-          if (ap[i].getParam<string>(j).getName() == "File-pattern")
+        for (int j = 0; j < ap[i]->getNumberOfParam<string>(); j++)
+          if (ap[i]->getParam<string>(j).getName() == "File-pattern")
             n = j;
         if (n == -1)
           continue;
-        if (ap[i].getParam<bool>(0).getData())
-          ap[i].changeParam<string>(string("File-pattern"), ap[i].getParam<string>(n).getData());
+        if (ap[i]->getParam<bool>(0).getData())
+          ap[i]->changeParam<string>(string("File-pattern"), ap[i]->getParam<string>(n).getData());
         else
-          ap[i].changeParam<string>(string("File-pattern"), ap[i].getParam<string>(n).getData() +
-                                                                remove(rp[0].getName(), ' '));
+          ap[i]->changeParam<string>(string("File-pattern"), ap[i]->getParam<string>(n).getData() +
+                                                                 remove(rp[0]->getName(), ' '));
       }
-      ap[i].changeParam<bool>(ap[i].getParam<bool>(1).getName(), param.local);
-    } else if (ap[i].getID() == 57) {
-      ap[i].changeParam<bool>(string("read from file"), false);
+      ap[i]->changeParam<bool>(ap[i]->getParam<bool>(1).getName(), param.local);
+    } else if (ap[i]->getID() == 57) {
+      ap[i]->changeParam<bool>(string("read from file"), false);
       if (param.recalibration)
         if (existing(param.recalibrationFile)) {
-          ap[i].changeParam<bool>(string("read from file"), param.recalibration);
-          ap[i].changeParam<string>(string("filename"), param.recalibrationFile);
+          ap[i]->changeParam<bool>(string("read from file"), param.recalibration);
+          ap[i]->changeParam<string>(string("filename"), param.recalibrationFile);
         }
-    } else if (ap[i].getID() == 61) // hit tree output
+    } else if (ap[i]->getID() == 61) // hit tree output
     {
-      ap[i].changeParam<bool>("Use local directory", param.local);
+      ap[i]->changeParam<bool>("Use local directory", param.local);
       if (param.localDirectory != "")
-        ap[i].changeParam<string>("local directory", param.localDirectory);
+        ap[i]->changeParam<string>("local directory", param.localDirectory);
       if (param.outpath != "") {
         //  	      if(rp.size()==1&&!hasA(param.runName,"fifo")&&!hasA(param.runName,"evt"))
         //  		ap[i].changeParam<string>(string("file
         //  path"),param.outpath+remove(param.runName,' '));
         //  	      else
-        ap[i].changeParam<string>(string("file path"),
-                                  param.outpath + remove(rp[0].getName(), ' '));
+        ap[i]->changeParam<string>(string("file path"),
+                                   param.outpath + remove(rp[0]->getName(), ' '));
       }
-    } else if (ap[i].getID() == 63) // track tree output
+    } else if (ap[i]->getID() == 63) // track tree output
     {
-      ap[i].changeParam<bool>("Use local directory", param.local);
+      ap[i]->changeParam<bool>("Use local directory", param.local);
       if (param.localDirectory != "")
-        ap[i].changeParam<string>("local directory", param.localDirectory);
+        ap[i]->changeParam<string>("local directory", param.localDirectory);
       if (param.outpath != "") {
         //  	      if(rp.size()==1&&!hasA(sp[4],"fifo"))
         //  		ap[i].changeParam<string>(string("file
@@ -391,19 +412,19 @@ int modAlgos(vector<algorithm_parameter>& ap, vector<run_parameter>& rp,
             pattern = pattern + string_number(trackoutCount);
             break;
           }
-        ap[i].changeParam<string>(string("file path"), pattern + remove(rp[0].getName(), ' '));
+        ap[i]->changeParam<string>(string("file path"), pattern + remove(rp[0]->getName(), ' '));
         trackoutCount++;
       }
-    } else if (ap[i].getID() == 60) // hit tree input
+    } else if (ap[i]->getID() == 60) // hit tree input
     {
-      ap[i].changeParam<bool>("Use local directory", param.local);
+      ap[i]->changeParam<bool>("Use local directory", param.local);
       if (param.localDirectory != "")
-        ap[i].changeParam<string>("local directory", param.localDirectory);
-    } else if (ap[i].getID() == 62 || ap[i].getID() == 60) // track tree input
+        ap[i]->changeParam<string>("local directory", param.localDirectory);
+    } else if (ap[i]->getID() == 62 || ap[i]->getID() == 60) // track tree input
     {
-      ap[i].changeParam<bool>("Use local directory", param.local);
+      ap[i]->changeParam<bool>("Use local directory", param.local);
       if (param.localDirectory != "")
-        ap[i].changeParam<string>("local directory", param.localDirectory);
+        ap[i]->changeParam<string>("local directory", param.localDirectory);
     }
   }
   return ret;
@@ -588,12 +609,14 @@ void setAllowedOptions(po::options_description& desc, parameters_t& param)
 {
   desc.add_options()("help", "produce help message")("n", po::value<string>(),
                                                      "set the number of events to analyse")(
-      "a", po::value<string>(), "specify a file which contains the algorithms "
-                                "to use and their parameters, ascii version")
+      "a", po::value<string>(),
+      "specify a file which contains the algorithms "
+      "to use and their parameters, ascii version")
       //    ("s",po::value<string>(),"specify a setup file, ascii version")
       ("m", po::value<string>(), "specify a file containing the used materials, ascii version")(
-          "d", po::value<string>(), "specify a file which Contains the description of the data and "
-                                    "their calibration, ascii version")
+          "d", po::value<string>(),
+          "specify a file which Contains the description of the data and "
+          "their calibration, ascii version")
       //    ("A",po::value<string>(),"specify a file which contains the
       //    algorithms to use and their
       //    parameters, ROOT version")
@@ -609,15 +632,16 @@ void setAllowedOptions(po::options_description& desc, parameters_t& param)
        "If it is the name of a beam-time, all runs having both filetypes (257, "
        "513) will be used")("runs", po::value<string>(),
                             "specify a file with names of runs to analyse")(
-          "o", po::value<string>(), "output path. This parameter is passed to "
-                                    "output-algorithms that allow this "
-                                    "feature.")(
-          "j", po::value<int>(),
-          "the number of threads to use (default 1) Note: do not use more "
-          "threads, than your machine has processors, there my be problems "
-          "else")("l", po::value<int>(), "begin with event number other than 0. This is only "
-                                         "possible if input-algorithms with this feature are "
-                                         "used.")("local", "analysis on local directory")(
+          "o", po::value<string>(),
+          "output path. This parameter is passed to "
+          "output-algorithms that allow this "
+          "feature.")("j", po::value<int>(),
+                      "the number of threads to use (default 1) Note: do not use more "
+                      "threads, than your machine has processors, there my be problems "
+                      "else")("l", po::value<int>(),
+                              "begin with event number other than 0. This is only "
+                              "possible if input-algorithms with this feature are "
+                              "used.")("local", "analysis on local directory")(
           "local-directory", po::value<string>(),
           "directory to use for local copy of in- and output-files")("nonLocal",
                                                                      "no local directory")(

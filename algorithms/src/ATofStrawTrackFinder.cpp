@@ -105,32 +105,22 @@ void* ATofStrawTrackFinder::process(void* ptr)
 algorithm_parameter ATofStrawTrackFinder::getDescription()
 {
   algorithm_parameter ret("TOF straw-track-finder", 0, 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm is the interface to the straw track finder implemented ");
-  des.push_back("by Ralph Castelijns at the Forschungszentrum Juelich for the "
-                "COSY-TOF-Detector. ");
-  des.push_back("The adjustments made are tiny and do not extend so far as the "
-                "tofStraw-library.");
-  des.push_back("The geometry used for this library is quite fixed though I "
-                "tried to widen the ");
-  des.push_back("possibilities a bit.");
-  des.push_back("Assumptions are: the straws come in planar double-layers. The "
-                "layers can be ");
-  des.push_back("tilted with respect to each other around some axis. Though "
-                "there is some axis ");
-  des.push_back("you can specify as rotation axis I hope, the z-axis (as used "
-                "for the COSY-TOF-");
-  des.push_back("Detector) is not hard coded. There are three possible angular "
-                "alignments, a tilt ");
-  des.push_back("of 60deg each (give here 1.047 == pi/3 as rotation angle), "
-                "again I don't know ");
-  des.push_back("whether other alignments, peraps as pentagram or so, would work.");
-  des.push_back("The documentation for this trackfinder is given in ");
-  des.push_back("http://www.fz-juelich.de/ikp/COSY-TOF/manuals/Manuals/straws/"
-                "html/index.html, ");
-  des.push_back("but try also my version ");
-  des.push_back("http://www.pit.physik.uni-tuebingen.de/~ehrhardt/KTOF/classes/"
-                "ATofStrawTrackFinder.html.");
+  string des =
+      "This algorithm is the interface to the straw track finder implemented "
+      "by Ralph Castelijns at the Forschungszentrum Juelich for the COSY-TOF-Detector. "
+      "The adjustments made are tiny and do not extend so far as the tofStraw-library."
+      "The geometry used for this library is quite fixed though I tried to widen the "
+      "possibilities a bit.\n"
+      "Assumptions are: the straws come in planar double-layers. The layers can be "
+      "tilted with respect to each other around some axis. Though there is some axis "
+      "you can specify as rotation axis I hope, the z-axis (as used for the COSY-TOF-"
+      "Detector) is not hard coded. There are three possible angular alignments, a tilt "
+      "of 60deg each (give here 1.047 == pi/3 as rotation angle), again I don't know "
+      "whether other alignments, peraps as pentagram or so, would work."
+      "The documentation for this trackfinder is given in "
+      "http://www.fz-juelich.de/ikp/COSY-TOF/manuals/Manuals/straws/html/index.html, "
+      "but try also my version "
+      "http://www.pit.physik.uni-tuebingen.de/~ehrhardt/KTOF/classes/ATofStrawTrackFinder.html.";
   ret.setDescription(des);
   ret.addParam<bool>(single_parameter<bool>("start with numberOfTracks=0", true));
   ret.addParam<float>(single_parameter<float>("rotation angle", 1.047197551196597631));

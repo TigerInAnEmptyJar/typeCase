@@ -1,0 +1,16 @@
+2 12 2015beamtime 1
+1 This is a test beamtime.
+data/run1.data
+data/setup1.data
+4 data/calibration1.data
+data/calibration2.data
+data/calibration3.data
+data/calibration4.data
+1 2015beamtime 2
+1 This is another test beamtime.
+data/run2.data
+data/setup2.data
+4 data/calibration5.data
+data/calibration6.data
+data/calibration7.data
+data/calibration8.data

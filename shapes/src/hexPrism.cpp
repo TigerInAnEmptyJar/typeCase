@@ -92,7 +92,9 @@ struct ShapeProvider : public FactoryShapeProvider,
           itemInLine++;
         }
       } else {
-        centerOfLine = centerOfLine - lineStack * abs(abs(stacki) * 2 - 2 - lineNumber);
+        centerOfLine =
+            centerOfLine -
+            lineStack * abs(static_cast<int>(abs(static_cast<int>(stacki)) * 2 - 2 - lineNumber));
       }
       result.setParam<point3D>(0,
                                centerOfLine + nextLine * lineNumber + lineStack * itemInLine * 2);
@@ -123,7 +125,9 @@ struct ShapeProvider : public FactoryShapeProvider,
       if (static_cast<int>(lineNumber) < stacki - 1) {
         centerOfLine = centerOfLine - lineStack * lineNumber;
       } else {
-        centerOfLine = centerOfLine - lineStack * abs(abs(stacki) * 2 - 2 - lineNumber);
+        centerOfLine =
+            centerOfLine -
+            lineStack * abs(static_cast<int>(abs(static_cast<int>(stacki)) * 2 - 2 - lineNumber));
       }
       result.setParam<point3D>(0,
                                centerOfLine + nextLine * lineNumber + lineStack * itemInLine * 2);
@@ -169,7 +173,7 @@ volatile static std::shared_ptr<ShapeProvider> prov = [] {
   r->install();
   return r;
 }();
-}
+} // namespace
 
 hexPrism::hexPrism(point3D c, vector3D thickness, vector3D toFirstPoint, vector3D keyWidth, int st)
     : volumeShape("hexPrism")

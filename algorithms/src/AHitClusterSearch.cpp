@@ -178,19 +178,18 @@ void* AHitClusterSearch::process(void* ptr)
 algorithm_parameter AHitClusterSearch::getDescription()
 {
   algorithm_parameter ap("HitCluster search", 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm can be used instead of or in addition to");
-  des.push_back("a pixel-cluster-search. Intuitutionally, a cluster search");
-  des.push_back("is done on pixels, but it can also be done prior to pixel");
-  des.push_back("calculation for the hits themselves generating hitCluster");
-  des.push_back("instead of cluster. It searches all elements of one detector,");
-  des.push_back("looking for neighbouring elements (element numbers). The");
-  des.push_back("timing of a hit-cluster and the volumeShape are the one");
-  des.push_back("of the element with the largest adc-value in the bundle;");
-  des.push_back("the adc is added up. Circular detectors are taken into");
-  des.push_back("account.");
-  des.push_back("Give the algorithm a vector of detector IDs, containing");
-  des.push_back("the hits that should be morved to clusters.");
+  string des = "This algorithm can be used instead of or in addition to "
+               "a pixel-cluster-search. Intuitutionally, a cluster search "
+               "is done on pixels, but it can also be done prior to pixel "
+               "calculation for the hits themselves generating hitCluster "
+               "instead of cluster. It searches all elements of one detector, "
+               "looking for neighbouring elements (element numbers). The "
+               "timing of a hit-cluster and the volumeShape are the one "
+               "of the element with the largest adc-value in the bundle; "
+               "the adc is added up. Circular detectors are taken into "
+               "account.\n"
+               "Give the algorithm a vector of detector IDs, containing "
+               "the hits that should be morved to clusters. ";
   ap.setDescription(des);
   vector<int> tmp;
   ap.addParam<vector<int>>(single_parameter<vector<int>>("detector IDs", tmp));

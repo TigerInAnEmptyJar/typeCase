@@ -1,297 +1,171 @@
-#ifndef __BEAMRUNPARAM
-#define __BEAMRUNPARAM
+#pragma once
 #include "baseparameter.h"
+
+#include <chrono>
+#include <filesystem>
+#include <map>
 #include <vector>
-using namespace std;
 
 /*!
  * \brief The beamTime_parameter class
+ * This class contains information about a single beam-time. Starting with the
+ * name and description, this class also hosts information about setup and
+ * calibration to be used for analyzing data from this period of data-taking.
+ * Additionally it contains two numbers, identifying year and month: the date
+ * the data-taking took place.
  */
 class beamTime_parameter : public base_parameter
 {
-private:
-  string fileName;  //!
-  string setupFile; //!
-  vector<string> calibFileNames;
-  vector<vector<string>> calibFileNames1;
-  vector<bool> hasQ;
-  vector<bool> hasT;
-  vector<vector<bool>> hasA;
-  int month;
-  int year;
-
 public:
   /*!
    * \brief beamTime_parameter
    *  Constructor. Creates a beam-time with name n.
-   * \param n
+   * \param n the name of the new beam-time.
    */
-  beamTime_parameter(string n = string());
+  beamTime_parameter(std::string n = std::string());
+
+  beamTime_parameter(beamTime_parameter const& other) = default;
+  beamTime_parameter(beamTime_parameter&& other) = default;
+  beamTime_parameter& operator=(beamTime_parameter const& b) = default;
+  beamTime_parameter& operator=(beamTime_parameter&& b) = default;
+  ~beamTime_parameter() = default;
 
   /*!
-   * \brief ~beamTime_parameter
+   * \brief operator ==
+   * Comparison operator.
+   * \param other the parameter to compare to.
+   * \return true if the parameters are identical.
    */
-  virtual ~beamTime_parameter();
+  bool operator==(beamTime_parameter const& other) const;
 
   /*!
    * \brief getFileName
    *  Returns the file, where all runs for this beam-time are stored.
-   * \return
+   * \return the file with the content of the beam-time.
    */
-  string getFileName() const;
+  std::filesystem::path getFileName() const;
 
   /*!
    * \brief setFileName
    *  Sets the file where all runs for this beam-time are stored.
-   * \param fn
+   * \param fn the file with the content of the beam-time.
    */
-  void setFileName(string fn);
+  void setFileName(std::filesystem::path fn);
 
   /*!
    * \brief getSetupFile
    *  Returns the setup file. In this file, the detector setup is described.
-   * \return
+   * \return the file with the detector setup of the beam-time.
    */
-  string getSetupFile() const;
+  std::filesystem::path getSetupFile() const;
 
   /*!
    * \brief setSetupFile
    *  Sets the setup file. In this file, the detector setup is described.
-   * \param fn
+   * \param fn the file with the detector setup of the beam-time.
    */
-  void setSetupFile(string fn);
+  void setSetupFile(std::filesystem::path fn);
 
   /*!
    * \brief getCalibrationFile
    *  Return the numth calibration file.
-   * \param num
-   * \return
+   * \param num the index of the calibration file to return.
+   * \return one of the calibration files
    */
-  string getCalibrationFile(int num) const;
+  std::filesystem::path getCalibrationFile(size_t num) const;
 
   /*!
-   * \brief getCalibrationFile
-   *  obsolete Return the numth calibration file for detector d.
-   * \param num
-   * \param d
-   * \return
+   * \brief removeCalibrationFile
+   * Removes one calibration file from the list of files.
+   * \param num the index of the calibration file to remove.
    */
-  string getCalibrationFile(int num, int d) const;
-
-  /*!
-   * \brief setCalibrationFile
-   *  Set the numth calibration file.
-   * \param num
-   * \param filename
-   */
-  void setCalibrationFile(int num, string filename);
+  void removeCalibrationFile(size_t num);
 
   /*!
    * \brief getNumberOfCalibrationFiles
    *  Returns the number of calibration files.
-   * \return
+   * \return the number of calibration files.
    */
-  int getNumberOfCalibrationFiles() const;
+  size_t getNumberOfCalibrationFiles() const;
 
   /*!
    * \brief addCalibrationFile
    *  Adds a file to the list of calibration files.
-   * \param filename
+   * \param filename the file to add to the list of calibration files.
    */
-  void addCalibrationFile(string filename);
+  void addCalibrationFile(std::filesystem::path filename);
 
   /*!
    * \brief clearCalibrationFiles
-   *  Clears/removes all calibration files.
+   *  Clears/removes all calibration files from the list. The files are not
+   * removed from disk!
    */
   void clearCalibrationFiles();
 
   /*!
-   * \brief setCalibrationFile
-   *  obsolete Sets the calibration file for detector det of type typ.
-   * \param det
-   * \param typ
-   * \param fn
-   */
-  void setCalibrationFile(int det, int typ, string fn);
-
-  /*!
-   * \brief addDetectorCalibration
-   *  obsolete. Adds a calibration type detector.
-   * \param fn
-   */
-  virtual void addDetectorCalibration(vector<string> fn = vector<string>());
-
-  /*!
-   * \brief popDetectorCalibration
-   *  obsolete. Removes the last calibration type detector.
-   */
-  virtual void popDetectorCalibration();
-
-  /*!
-   * \brief addTypCalibration
-   *  obsolete. Adds a calibration type.
-   * \param fn
-   */
-  virtual void addTypCalibration(vector<string> fn = vector<string>());
-
-  /*!
-   * \brief popTypCalibration
-   *  obsolete. Removes the last calibration type.
-   */
-  virtual void popTypCalibration();
-
-  /*!
-   * \brief hasACalib
-   *  obsolete. Returns true if the calibration type t for detector d should be used.
-   * \param d
-   * \param t
-   * \return
-   */
-  bool hasACalib(int d, int t) const;
-
-  /*!
-   * \brief setHasACalib
-   *  obsolete. Sets if the calibration type t for detector d should be used.
-   * \param d
-   * \param t
-   * \param us
-   */
-  void setHasACalib(int d, int t, bool us = true);
-
-  /*!
-   * \brief getNumCalibDets
-   *  obsolete Returns the number of calibration detectors.
-   * \return
-   */
-  int getNumCalibDets() const;
-
-  /*!
-   * \brief getNumCalibTypes
-   *  obsolete Returns the number of calibration types.
-   * \return
-   */
-  int getNumCalibTypes() const;
-
-  /*!
-
-   * \brief getNumberOfDetectors
-   *  Returns the number of detectors defined in this beamtime.
-   * \return
-   */
-  int getNumberOfDetectors() const;
-
-  /*!
-   * \brief setNumberOfDetectors
-   *  Sets the number of detectors defined in this beamtime.
-   * \param num
-   */
-  void setNumberOfDetectors(int num);
-
-  /*!
-   * \brief setDetector
-   *  Sets weather the numth detector has tdc (timing information) or qdc (energy information).
-   * \param num
-   * \param hasqdc
-   * \param hastdc
-   */
-  void setDetector(int num, bool hasqdc, bool hastdc);
-
-  /*!
-   * \brief hasQDC
-   *  For a given detector num it returns true, if there should be a qdc (energy information for
-   * hits).
-   * \param num
-   * \return
-   */
-  bool hasQDC(int num) const;
-
-  /*!
-   * \brief hasTDC
-   *  For a given detector num it returns true, if there should be a tdc (timing information for
-   * hits).
-   * \param num
-   * \return
-   */
-  bool hasTDC(int num) const;
-
-  /*!
    * \brief getMonth
    *  Returns the month the beam-time took place.
-   * \return
+   * \return the month of the beam-time.
    */
   int getMonth() const;
 
   /*!
    * \brief getYear
    *  Returns the year, the beam-time took place.
-   * \return
+   * \return the year of the beam-time.
    */
   int getYear() const;
 
   /*!
    * \brief setData
    *  Sets the date, the beam-time took place.
-   * \param m
-   * \param y
+   * \param m the month the beam-time took place,
+   * \param y the year the beam-time took place.
    */
   void setData(int m, int y);
 
-  /*!
-   * \brief operator =
-   *  Copy operator.
-   * \param b
-   */
-  void operator=(const beamTime_parameter& b);
+private:
+  std::filesystem::path fileName;
+  std::filesystem::path setupFile;
+  std::vector<std::filesystem::path> calibFileNames;
+  int month = 0;
+  int year = 1900;
 };
 
 /*!
  * \brief operator <<
- * \param o
- * \param d
- * \return
+ * Streaming operator for debugging purposes.
+ * \param o output stream,
+ * \param d the parameter to stream.
+ * \return the output stream.
  */
-ostream& operator<<(ostream& o, const beamTime_parameter& d);
-
-/*!
- * \brief operator >>
- * \param i
- * \param d
- * \return
- */
-istream& operator>>(istream& i, beamTime_parameter& d);
-
-//#define USE_QT
-#ifdef USE_QT
-#include <qdatetime.h>
-#else
-#include <time.h>
-#endif
+std::ostream& operator<<(std::ostream& o, const beamTime_parameter& d);
 
 /*!
  * \brief The run_parameter class
  */
 class run_parameter : public beamTime_parameter
 {
-private:
-  int type;
-  int parent;
-  bool setup;
-  bool calib;
-  bool addiC;
-  vector<vector<bool>> enabeles;
-  int runNumber;
-  beamTime_parameter* par;
-  vector<string> files;  //! can have more than one file to read from
-  vector<int> fileTypes; //! 2^0 TADE/root, 2^1 simpe, 2^2 H, 2^3 P, 2^4 C, 2^5 T
-  vector<long> events;   //! 2^0 TADE/root, 2^1 simpe, 2^2 H, 2^3 P, 2^4 C, 2^5 T
-#ifdef USE_QT
-  QDateTime startingTime; //!
-  QDateTime stopingTime;  //!
-#else
-  tm startingTime; //!
-  tm stopingTime;  //!
-#endif
+public:
+  enum class RunType
+  {
+    REGULAR,
+    CALIBRATION,
+    ELASTIC,
+    BACKGROUND,
+    OTHER,
+  };
+  enum class FileType : uint8_t
+  {
+    TADE_TYPE = 0x00,
+    ROOT_TYPE = 0x02,
+    HIT_TYPE = 0x04,
+    PIXEL_TYPE = 0x08,
+    CLUSTER_TYPE = 0x10,
+    TRACKS_TYPE = 0x20,
+    REACTION_TYPE = 0x40,
+  };
+
 public:
   /*!
    * \brief run_parameter
@@ -299,26 +173,20 @@ public:
    * \param parent
    * \param pn
    */
-  run_parameter(beamTime_parameter& parent, int pn);
-
-  /*!
-   * \brief run_parameter
-   *  Copy constructor.
-   * \param r
-   */
-  run_parameter(const run_parameter& r);
+  run_parameter(std::shared_ptr<beamTime_parameter> parent, boost::uuids::uuid pn);
 
   /*!
    * \brief run_parameter
    *  Default constructor. Sets the name of the run.
    * \param n
    */
-  run_parameter(string n = string());
+  run_parameter(std::string n = std::string());
 
-  /*!
-   * \brief ~run_parameter
-   */
-  virtual ~run_parameter();
+  run_parameter(run_parameter const& r) = default;
+  run_parameter(run_parameter&& r) = default;
+  run_parameter& operator=(run_parameter const& r) = default;
+  run_parameter& operator=(run_parameter&& r) = default;
+  ~run_parameter() = default;
 
   /*!
    * \brief getType
@@ -326,42 +194,42 @@ public:
    * else.
    * \return
    */
-  int getType() const;
+  RunType getType() const;
 
   /*!
    * \brief setType
    *  Sets the run type. A run can be a regular data run or a variety of calibration runs, or else.
    * \param t
    */
-  void setType(int t);
+  void setType(RunType t);
 
   /*!
    * \brief getParentNumber
    *  Returns the parenting beam-times number.
    * \return
    */
-  int getParentNumber() const;
+  boost::uuids::uuid getParentNumber() const;
 
   /*!
    * \brief setParentNumber
    *  Sets the parenting beam-times number.
    * \param p
    */
-  void setParentNumber(int p);
+  void setParentNumber(boost::uuids::uuid p);
 
   /*!
    * \brief getParent
    *  Returns a pointer to the parenting beam-time. s
    * \return
    */
-  beamTime_parameter* getParent() const;
+  std::shared_ptr<beamTime_parameter> getParent() const;
 
   /*!
    * \brief setParent
    *  Sets the pointer to the parenting beam-time.
    * \param p
    */
-  void setParent(beamTime_parameter* p);
+  void setParent(std::shared_ptr<beamTime_parameter> p);
 
   /*!
    * \brief hasOwnSetup
@@ -412,51 +280,6 @@ public:
   void setAdditionalCalibration(bool c = true);
 
   /*!
-   * \brief addDetectorCalibration
-   *  obsolete Adds a detector for calibration along with the files.
-   * \param fn
-   */
-  virtual void addDetectorCalibration(vector<string> fn = vector<string>());
-
-  /*!
-   * \brief popDetectorCalibration
-   *  obsolete Removes the last calibration detector.
-   */
-  virtual void popDetectorCalibration();
-
-  /*!
-   * \brief addTypCalibration
-   *  obsolete Adds a calibration type.
-   * \param fn
-   */
-  virtual void addTypCalibration(vector<string> fn = vector<string>());
-
-  /*!
-   * \brief popTypCalibration
-   *  obsolete Removes the last calibration type.
-   */
-  virtual void popTypCalibration();
-
-  /*!
-   * \brief useOwn
-   *  obsolete Returns true if the calibration type t for detector d is defined separately for this
-   * run.
-   * \param d
-   * \param t
-   * \return
-   */
-  bool useOwn(int d, int t) const;
-
-  /*!
-   * \brief setUseOwn
-   *  obsolete Sets if the calibration type t for detector d is used separately for this run.
-   * \param d
-   * \param t
-   * \param us
-   */
-  void setUseOwn(int d, int t, bool us = true);
-
-  /*!
    * \brief getRunNumber
    *  Returns the run number.
    * \return
@@ -472,15 +295,20 @@ public:
 
   /*!
    * \brief addFile
-   *  Adds a file of type type to the list of files. As file types there are actually available: 0:
-   * for tade files. 2: for root files: 4: for hit files 8: for pixel files 16: for cluster files
-   * 32: for track files 64: for reaction files You may add these bits if you have e.g. a root hit
-   * file you'll have file type 6.
+   *  Adds a file of type type to the list of files. See the enum \a FileType for
+   * help here. You can concat the types with OR.
    * \param filename
    * \param type
    * \param fileEvents
    */
-  void addFile(string filename, int type, long fileEvents = -1);
+  void addFile(std::filesystem::path filename, size_t type, long fileEvents = -1);
+
+  /*!
+   * \brief removeFile
+   *  Removes a file from the list of files.
+   * \param num the index of the file to remove.
+   */
+  void removeFile(size_t num);
 
   /*!
    * \brief clearFiles
@@ -493,7 +321,7 @@ public:
    *  Returns the number of files.
    * \return
    */
-  int getNumberOfFiles() const;
+  size_t getNumberOfFiles() const;
 
   /*!
    * \brief getFile
@@ -501,7 +329,7 @@ public:
    * \param num
    * \return
    */
-  string getFile(int num) const;
+  std::filesystem::path getFile(size_t num) const;
 
   /*!
    * \brief getFileType
@@ -512,18 +340,7 @@ public:
    * \param num
    * \return
    */
-  int getFileType(int num) const;
-
-  /*!
-   * \brief setFileType
-   *  Sets the file-type for file num. ?As file types there are actually available: ?0: for tade
-   * files. ?2: for root files: 4: for hit files 8: for pixel files 16: for cluster files 32: for
-   * track files 64: for reaction files You may add these bits if you have e.g. a root hit file
-   * you'll have file type 6.
-   * \param num
-   * \param type
-   */
-  void setFileType(int num, int type);
+  size_t getFileType(size_t num) const;
 
   /*!
    * \brief getFileEvents
@@ -532,15 +349,7 @@ public:
    * \param num
    * \return
    */
-  long getFileEvents(int num) const;
-
-  /*!
-   * \brief setFileEvents
-   *  Sets the number of events in file num. This number is not cross checked.
-   * \param num
-   * \param fileEvents
-   */
-  void setFileEvents(int num, long fileEvents);
+  long getFileEvents(size_t num) const;
 
   /*!
    * \brief setStartTime
@@ -565,36 +374,6 @@ public:
    * \param second
    */
   void setStopTime(int year, int month, int day, int hour, int minute, int second);
-#ifdef USE_QT
-
-  /*!
-   * \brief setStartTime
-   *  Sets the start time of the run.
-   * \param time
-   */
-  void setStartTime(const QDateTime& time);
-
-  /*!
-   * \brief setStopTime
-   *  Sets the stop time of the run.
-   * \param time
-   */
-  void setStopTime(const QDateTime& time);
-
-  /*!
-   * \brief getStartTime
-   *  Returns the start time of the run (see standard header file "time.h").
-   * \return
-   */
-  QDateTime getStartTime() const;
-
-  /*!
-   * \brief getStopTime
-   *  Returns the stop time of the run (see standard header file "time.h").
-   * \return
-   */
-  QDateTime getStopTime() const;
-#else
 
   /*!
    * \brief setStartTime
@@ -621,7 +400,6 @@ public:
    * \return
    */
   tm getStopTime() const;
-#endif
 
   /*!
    * \brief getTime
@@ -629,41 +407,35 @@ public:
    */
   int getTime() const;
 
-  /*!
-   * \brief operator =
-   *  Copy operator.
-   * \param r
-   */
-  void operator=(const run_parameter& r);
+private:
+  RunType _type{RunType::REGULAR};
+  boost::uuids::uuid _parentId;
+  bool _hasSetup{false};
+  bool _hasCalib{false};
+  bool _hasAdditionalCalib{false};
+  std::vector<std::vector<bool>> enabeles;
+  int _runNumber;
+  std::shared_ptr<beamTime_parameter> _parent;
+
+  struct FileContainer
+  {
+    std::filesystem::path file;
+    size_t fileType;
+    long events;
+  };
+  std::vector<FileContainer> _files;
+
+  // In C++-20 this will most probably be replaced by time_of_day and
+  // year_month_day, but until we support C++-20, we'll have to stick with tm.
+  tm _startingTime;
+  tm _stopingTime;
 };
 
 /*!
  * \brief operator <<
- * \param o
- * \param d
- * \return
+ * Streaming operator for debugging purposes.
+ * \param o the output stream,
+ * \param d the parameter to stream.
+ * \return the output stream.
  */
-ostream& operator<<(ostream& o, const run_parameter& d);
-
-/*!
- * \brief operator >>
- * \param i
- * \param d
- * \return
- */
-istream& operator>>(istream& i, run_parameter& d);
-
-/*!
- * \brief expandPath
- * \param inp
- * \return
- */
-string expandPath(string inp);
-
-/*!
- * \brief contractPath
- * \param inp
- * \return
- */
-string contractPath(string inp);
-#endif
+std::ostream& operator<<(std::ostream& o, const run_parameter& d);

@@ -555,11 +555,9 @@ void* ATrackTreeOutput::process(void* ptr)
 algorithm_parameter ATrackTreeOutput::getDescription()
 {
   algorithm_parameter ret("Track Tree output", 0, 0);
-  vector<string> des;
-  des.push_back("");
-  des.push_back("This Algorithm writes track information to a root tree.");
-  des.push_back("This track information isdynamical in size and complete");
-  des.push_back("in information.");
+  string des = "This Algorithm writes track information to a root tree."
+               "This track information isdynamical in size and complete"
+               "in information.";
   ret.setDescription(des);
   ret.addParam<string>(single_parameter<string>("file name", ""));
   ret.addParam<bool>(single_parameter<bool>(string("use local directory"), true));

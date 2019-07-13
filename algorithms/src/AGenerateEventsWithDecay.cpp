@@ -97,17 +97,16 @@ bool AGenerateEventsWithDecay::accept(sLine3D* trajectories)
 algorithm_parameter AGenerateEventsWithDecay::getDescription()
 {
   algorithm_parameter ret("Generate Events with decay", 0, 0);
-  vector<string> des;
-  des.push_back("This algorithm generates events with the ROOT");
-  des.push_back("Phase-Space-Generator. You specify the generated ");
-  des.push_back("particles by their GEANT-ID and which of these");
-  des.push_back("particles decayed off primary ones. A decay parameter");
-  des.push_back("of -1 means a primary particle, otherwise it decayed");
-  des.push_back("off the particle with the specified number. For each");
-  des.push_back("decay a modification from phase-space can be given.");
-  des.push_back("There can be given some trigger conditions for some");
-  des.push_back("tracks (charged (+) or charged+uncharged(-)) to ");
-  des.push_back("simulate acceptance.");
+  string des = "This algorithm generates events with the ROOT "
+               "Phase-Space-Generator. You specify the generated "
+               "particles by their GEANT-ID and which of these "
+               "particles decayed off primary ones. A decay parameter "
+               "of -1 means a primary particle, otherwise it decayed "
+               "off the particle with the specified number. For each "
+               "decay a modification from phase-space can be given.\n"
+               "There can be given some trigger conditions for some "
+               "tracks (charged (+) or charged+uncharged(-)) to "
+               "simulate acceptance.";
   ret.setDescription(des);
   vector<int> tmp;
   vector<string> tmps;

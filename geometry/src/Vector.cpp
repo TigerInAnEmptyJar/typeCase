@@ -47,7 +47,7 @@ Vector::Vector(const Vector& w) : point(0) // v.getDimension())
     Undefined();
 }
 //#ifdef USEQT
-string Vector::toString() const
+string Vector::toString(int) const
 {
   string ret = point::toString();
   if (!kind)

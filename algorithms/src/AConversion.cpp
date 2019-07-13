@@ -11,12 +11,12 @@ AConversion::AConversion(const string& filename, TEvent& ev, void* input_mutexIn
   //  convertedData->SetBranchAddress("Event",&event);
 }
 
-AConversion::~AConversion() { delete convertedData; }
+AConversion::~AConversion() {} // delete convertedData; }
 
 void* AConversion::Process(void* ptr)
 {
-  if (actualEvent + 1 >= convertedData->GetEntries())
-    validInput = false;
+  //  if (actualEvent + 1 >= convertedData->GetEntries())
+  validInput = false;
   //  convertedData->GetEntry(actualEvent);
   actualEvent++;
   emit eventRead();

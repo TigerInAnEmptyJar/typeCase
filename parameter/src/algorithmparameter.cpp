@@ -16,26 +16,10 @@ template class single_parameter<float>;
 template class single_parameter<algorithm_parameter>;
 #endif
 template <class X>
-single_parameter<X>::single_parameter()
-{
-}
-
-template <class X>
 single_parameter<X>::single_parameter(const string& Name, X Data)
 {
   data = Data;
   name = Name;
-}
-template <class X>
-single_parameter<X>::single_parameter(const single_parameter& sp)
-{
-  data = sp.getData();
-  name = sp.getName();
-}
-template <class X>
-bool single_parameter<X>::operator==(const single_parameter& s) const
-{
-  return (name == s.getName());
 }
 template <class X>
 bool single_parameter<X>::operator==(const string& s) const
@@ -49,10 +33,6 @@ single_parameter<X>& single_parameter<X>::operator=(const single_parameter& s)
   data = s.getData();
   name = s.getName();
   return *this;
-}
-template <class X>
-single_parameter<X>::~single_parameter()
-{
 }
 
 template <class X>
@@ -218,10 +198,6 @@ int algorithm_parameter::getID() const { return ID; }
 
 void algorithm_parameter::setID(int id) { ID = id; }
 
-boost::uuids::uuid algorithm_parameter::uuid() const { return _id; }
-
-void algorithm_parameter::setUuid(boost::uuids::uuid id) { _id = id; }
-
 algorithm_parameter::algorithm_parameter(string n, bool u, int cat, int lev, int id)
 {
   ID = id;
@@ -237,7 +213,7 @@ algorithm_parameter::algorithm_parameter(const algorithm_parameter& p) : base_pa
   inUse = p.IsUsed();
   category = p.getCategory();
   level = p.getLevel();
-  _id = p.uuid();
+  base_parameter::setId(p.id());
   setDescription(p.getDescription());
   for (int i = 0; i < p.getNumberOfParam<int>(); i++)
     addParam<int>(p.getParam<int>(i));
@@ -711,7 +687,7 @@ void algorithm_parameter::operator=(const algorithm_parameter& p)
   inUse = p.IsUsed();
   category = p.getCategory();
   level = p.getLevel();
-  _id = p.uuid();
+  base_parameter::setId(p.id());
   setDescription(p.getDescription());
   while (!(integers.empty()))
     integers.pop_back();
@@ -759,7 +735,7 @@ void algorithm_parameter::operator=(const algorithm_parameter& p)
     addParam<algorithm_parameter>(p.getParam<algorithm_parameter>(i));
 }
 
-bool algorithm_parameter::operator==(const algorithm_parameter& ap)
+bool algorithm_parameter::operator==(const algorithm_parameter& ap) const
 {
   if (ID != ap.getID())
     return false;
@@ -810,7 +786,7 @@ istream& operator>>(istream& i, algorithm_parameter& a)
   a.setLevel(zahl);
   i.getline(_tmp, 100);
   i.get(c);
-  vector<string> d;
+  string d;
   //     while(c=='D')
   //       {
   // 	i.getline(_tmp,100);
@@ -824,7 +800,7 @@ istream& operator>>(istream& i, algorithm_parameter& a)
     {
       i.getline(_tmp, 100);
       i.get(c);
-      d.push_back(_tmp);
+      d += string(_tmp);
       break;
     }
     case 'B': // bool
@@ -1056,9 +1032,7 @@ ostream& operator<<(ostream& o, const algorithm_parameter& a)
     for (int i = 0; i < a.getNumberOfParam<algorithm_parameter>(); i++)
       o << "  " << a.getParam<algorithm_parameter>(i).getData() << endl;
     o << " description:" << endl;
-    for (unsigned int j = 0; j < a.getDescription().size(); j++) {
-      o << "  " << a.getDescription(j).data() << endl;
-    }
+    o << "  " << a.getDescription() << endl;
   } else {
     o << "===== " << a.getName().data() << " =====" << endl;
     o << "#" << a.getID() << " ";
@@ -1066,9 +1040,7 @@ ostream& operator<<(ostream& o, const algorithm_parameter& a)
     o << a.getName().data() << endl;
     o << "#" << a.getCategory() << " ";
     o << a.getLevel() << " " << endl;
-    for (unsigned int j = 0; j < a.getDescription().size(); j++) {
-      o << "D" << a.getDescription(j).data() << endl;
-    }
+    o << "D" << a.getDescription() << endl;
     //      o<<a.getNumberOfParam<bool>() <<" ";
     for (int i = 0; i < a.getNumberOfParam<bool>(); i++)
       o << "B" << (a.getParam<bool>(i).getData() ? "1" : "0") << " "

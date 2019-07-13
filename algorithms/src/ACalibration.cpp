@@ -175,15 +175,15 @@ void ACalibration::getNewRun(run_parameter& r) //, beamTime_parameter &b)
   anaLog << "ACalibration::getNewRun()" << endli;
   vector<string> filenames;
   if (r.hasOwnCalibration() && !r.hasAdditionalCalibration()) {
-    for (int iii = 0; iii < r.getNumberOfCalibrationFiles(); iii++)
+    for (size_t iii = 0; iii < r.getNumberOfCalibrationFiles(); iii++)
       filenames.push_back(r.getCalibrationFile(iii));
   } else if (r.hasAdditionalCalibration()) {
-    for (int iii = 0; iii < r.getParent()->getNumberOfCalibrationFiles(); iii++)
+    for (size_t iii = 0; iii < r.getParent()->getNumberOfCalibrationFiles(); iii++)
       filenames.push_back(r.getParent()->getCalibrationFile(iii));
-    for (int iii = 0; iii < r.getNumberOfCalibrationFiles(); iii++)
+    for (size_t iii = 0; iii < r.getNumberOfCalibrationFiles(); iii++)
       filenames.push_back(r.getCalibrationFile(iii));
   } else {
-    for (int iii = 0; iii < r.getParent()->getNumberOfCalibrationFiles(); iii++)
+    for (size_t iii = 0; iii < r.getParent()->getNumberOfCalibrationFiles(); iii++)
       filenames.push_back(r.getParent()->getCalibrationFile(iii));
   }
   getFromFiles(filenames);
@@ -199,7 +199,7 @@ void ACalibration::getFromFiles(const vector<string>& calibrationFiles)
   } else
     parameter = new CommonCalibrationParser**[6];
   CommonCalibrationParser* tmpParser;
-  vector<CommonCalibrationParser *> tmp, tmp1;
+  vector<CommonCalibrationParser*> tmp, tmp1;
   for (int i = 0; i < 6; i++)
     numberOfRanges[i] = 0;
   for (unsigned int i = 0; i < calibrationFiles.size(); i++) {

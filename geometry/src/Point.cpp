@@ -270,7 +270,7 @@ void point::operator=(const point& p)
       infinityPos = i;
 }
 //#ifdef USEQT
-string point::toString() const
+string point::toString(int) const
 {
   if (getState() == _undefined_ || getState() == _infinite_)
     return geomObject::toString();
