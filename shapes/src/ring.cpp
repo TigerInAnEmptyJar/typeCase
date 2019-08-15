@@ -12,37 +12,54 @@ const boost::uuids::uuid ring_id1 = {{0x9b, 0xe4, 0xd8, 0x92, 0x11, 0xef, 0x11, 
 const boost::uuids::uuid ring_id2 = {{0xa0, 0xa9, 0x51, 0xf0, 0x11, 0xef, 0x11, 0xe9, 0xab, 0x14,
                                       0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct RingShapeProvider : public FactoryShapeProvider,
+                           public std::enable_shared_from_this<RingShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
     auto shapeCreation = [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
-      return std::shared_ptr<volumeShape>(new ring(
-          param.getParam<point3D>(0), param.getParam<vector3D>(0), param.getParam<float>(0),
-          param.getParam<float>(0) + param.getParam<float>(1), param.getParam<float>(2)));
+      if (!checkParameter(param)) {
+        return {};
+      }
+      return std::shared_ptr<volumeShape>(
+          new ring(param.value(0).value<point3D>(), param.value(1).value<vector3D>(),
+                   param.value(2).value<float>(),
+                   param.value(2).value<float>() + param.value(3).value<float>(),
+                   param.value(4).value<float>()));
     };
     auto next1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       auto result = parameter;
-      result.setParam<float>(0,
-                             parameter.getParam<float>(0) + times * parameter.getParam<float>(1));
+      result.value(2) =
+          parameter.value(2).value<float>() + times * parameter.value(3).value<float>();
       return result;
     };
     auto next2 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       auto result = parameter;
-      result.setParam<point3D>(0, parameter.getParam<point3D>(0) -
-                                      parameter.getParam<vector3D>(0) *
-                                          parameter.getParam<float>(2) * times);
+      result.value(0) =
+          parameter.value(0).value<point3D>() -
+          parameter.value(1).value<vector3D>() * parameter.value(3).value<float>() * times;
       return result;
     };
     auto envelope1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       auto result = parameter;
-      result.setParam<float>(1, parameter.getParam<float>(1) * times);
+      result.value(3) = parameter.value(3).value<float>() * times;
       return result;
     };
     auto envelope2 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       auto result = parameter;
-      result.setParam<float>(2, parameter.getParam<float>(2) * times);
+      result.value(4) = parameter.value(4).value<float>() * times;
       return result;
     };
 
@@ -57,9 +74,20 @@ struct ShapeProvider : public FactoryShapeProvider,
     factory.removeShapeFromFactory(ring_id2);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 5) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::FLOAT ||
+             param.value(3).valueType() != ParameterValue::ValueType::FLOAT ||
+             param.value(4).valueType() != ParameterValue::ValueType::FLOAT);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<RingShapeProvider> prov = [] {
+  auto r = std::make_shared<RingShapeProvider>();
   r->install();
   return r;
 }();
@@ -92,15 +120,15 @@ ring::ring(const shape_parameter& description) : volumeShape("ring")
 {
   if (description.getName() != "ring")
     return;
-  if (description.NumberOfParams<point3D>() < 1 || description.NumberOfParams<vector3D>() < 1 ||
-      description.NumberOfParams<float>() < 3)
+  if (!RingShapeProvider::checkParameter(description)) {
     return;
-  center = description.getParam<point3D>(0);
-  normal = description.getParam<vector3D>(0);
+  }
+  center = description.value(0).value<point3D>();
+  normal = description.value(1).value<vector3D>();
   normal.normalize();
-  innerR = description.getParam<float>(0);
-  outerR = description.getParam<float>(1) + description.getParam<float>(0);
-  thickness = description.getParam<float>(2);
+  innerR = description.value(2).value<float>();
+  outerR = description.value(3).value<float>() + description.value(2).value<float>();
+  thickness = description.value(4).value<float>();
 }
 
 ring::~ring() {}
@@ -505,11 +533,11 @@ shape_parameter ring::description() const
   shape_parameter sh;
   sh.setName("ring");
   sh.setId(ring_id1);
-  sh.addParam<point3D>(center, "center");
-  sh.addParam<vector3D>(normal, "normal");
-  sh.addParam<float>(innerR, "inner radius");
-  sh.addParam<float>(outerR - innerR, "delta radius");
-  sh.addParam<float>(thickness, "thickness");
+  sh.addValue("center", center);
+  sh.addValue("normal", normal);
+  sh.addValue("inner radius", innerR);
+  sh.addValue("delta radius", outerR - innerR);
+  sh.addValue("thickness", thickness);
   sh.setCompleteWrite(true);
   return sh;
 }
@@ -518,11 +546,11 @@ shape_parameter ring::getDescription()
   shape_parameter sh;
   sh.setName("ring");
   sh.setId(ring_id1);
-  sh.addParam<point3D>(point3D(), "center");
-  sh.addParam<vector3D>(vector3D(), "normal");
-  sh.addParam<float>(0, "inner radius");
-  sh.addParam<float>(0, "delta radius");
-  sh.addParam<float>(0, "thickness");
+  sh.addValue("center", point3D());
+  sh.addValue("normal", vector3D());
+  sh.addValue("inner radius", static_cast<float>(0));
+  sh.addValue("delta radius", static_cast<float>(0));
+  sh.addValue("thickness", static_cast<float>(0));
   sh.setCompleteWrite(false);
   return sh;
 }

@@ -161,41 +161,43 @@ void ParameterWriter1::writeSingleDetector(std::ostream& output,
          << detector->getName().data() << "\n";
   shape_parameter sh;
   sh = detector->getShape();
-  int zahl = sh.NumberOfParams<point3D>();
-  output << (zahl) << " ";
-  zahl = sh.NumberOfParams<vector3D>();
-  output << zahl << " ";
-  zahl = sh.NumberOfParams<int>();
-  output << zahl << " ";
-  zahl = sh.NumberOfParams<float>();
-  output << zahl << " ";
-  zahl = sh.NumberOfParams<string>();
-  output << zahl;
-  output << sh.getName().data();
-  output << "\n";
+  std::map<ParameterValue::ValueType, std::vector<std::pair<std::string, ParameterValue>>> paramMap;
+  for (size_t i = 0; i < sh.numberOfValues(); i++) {
+    paramMap[sh.value(i).valueType()].push_back(std::make_pair(sh.valueName(i), sh.value(i)));
+  }
+  output << paramMap[ParameterValue::ValueType::POINT3D].size() << " ";
+  output << paramMap[ParameterValue::ValueType::VECTOR3D].size() << " ";
+  output << paramMap[ParameterValue::ValueType::INT].size() << " ";
+  output << paramMap[ParameterValue::ValueType::FLOAT].size() << " ";
+  output << paramMap[ParameterValue::ValueType::STRING].size() << sh.getName().data() << "\n";
   point3D p;
   vector3D v;
   auto pec = output.precision();
   output.precision(10);
-  for (int k = 0; k < sh.NumberOfParams<point3D>(); k++) {
-    p = sh.getParam<point3D>(k);
-    output << p.X() << " " << p.Y() << " " << p.Z() << sh.getParamName<point3D>(k).data() << "\n";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::POINT3D].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::POINT3D][k];
+    p = v.second.value<point3D>();
+    output << p.X() << " " << p.Y() << " " << p.Z() << v.first << "\n";
   }
-  for (int k = 0; k < sh.NumberOfParams<vector3D>(); k++) {
-    v = sh.getParam<vector3D>(k);
-    output << v.Theta() << " " << v.Phi() << " " << v.R() << sh.getParamName<vector3D>(k).data()
-           << "\n";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR3D].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::VECTOR3D][k];
+    auto vv = v.second.value<vector3D>();
+    output << vv.Theta() << " " << vv.Phi() << " " << vv.R() << v.first << "\n";
   }
-  for (int k = 0; k < sh.NumberOfParams<int>(); k++) {
-    output << sh.getParam<int>(k) << sh.getParamName<int>(k).data() << "\n";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::INT].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::INT][k];
+    output << v.second.value<int>() << v.first << "\n";
   }
-  for (int k = 0; k < sh.NumberOfParams<float>(); k++) {
-    output << sh.getParam<float>(k) << sh.getParamName<float>(k).data() << "\n";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::FLOAT].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::FLOAT][k];
+    output << v.second.value<float>() << v.first << "\n";
   }
-  for (int k = 0; k < sh.NumberOfParams<string>(); k++) {
-    output << sh.getParam<string>(k).data() << "\n" << sh.getParamName<string>(k).data() << "\n";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::STRING].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::STRING][k];
+    output << v.second.value<string>() << "\n" << v.first << "\n";
   }
   output.precision(pec);
+  output.flush();
 }
 
 void ParameterWriter1::writeSingleShape(std::ostream& output,
@@ -206,39 +208,51 @@ void ParameterWriter1::writeSingleShape(std::ostream& output,
   if (!shape) {
     return;
   }
+  std::map<ParameterValue::ValueType, std::vector<std::pair<std::string, ParameterValue>>> paramMap;
+  for (size_t i = 0; i < shape->numberOfValues(); i++) {
+    paramMap[shape->value(i).valueType()].push_back(
+        std::make_pair(shape->valueName(i), shape->value(i)));
+  }
   output << shape->getName().data() << "\n";
   if (shape->completeWrite()) {
-    for (int k = 0; k < shape->NumberOfParams<point3D>(); k++)
-      output << "P" << shape->getParam<point3D>(k).x() << " " << shape->getParam<point3D>(k).y()
-             << " " << shape->getParam<point3D>(k).z() << " "
-             << shape->getParamName<point3D>(k).data() << "\n";
-    for (int k = 0; k < shape->NumberOfParams<vector3D>(); k++)
-      output << "v" << shape->getParam<vector3D>(k).Theta() * 180. / M_PI << " "
-             << shape->getParam<vector3D>(k).Phi() * 180. / M_PI << " "
-             << shape->getParam<vector3D>(k).R() << " " << shape->getParamName<vector3D>(k).data()
-             << "\n";
-    for (int k = 0; k < shape->NumberOfParams<float>(); k++)
-      output << "F" << shape->getParam<float>(k) << " " << shape->getParamName<float>(k).data()
-             << "\n";
-    for (int k = 0; k < shape->NumberOfParams<int>(); k++)
-      output << "I" << shape->getParam<int>(k) << " " << shape->getParamName<int>(k).data() << "\n";
-    for (int k = 0; k < shape->NumberOfParams<string>(); k++)
-      output << "S" << shape->getParam<string>(k) << "\n"
-             << shape->getParamName<string>(k).data() << "\n";
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::POINT3D].size(); k++) {
+      auto v = paramMap[ParameterValue::ValueType::POINT3D][k];
+      output << "P" << v.second.value<point3D>().x() << " " << v.second.value<point3D>().y() << " "
+             << v.second.value<point3D>().z() << " " << v.first << "\n";
+    }
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR3D].size(); k++) {
+      auto v = paramMap[ParameterValue::ValueType::VECTOR3D][k];
+      output << "v" << v.second.value<vector3D>().Theta() * 180. / M_PI << " "
+             << v.second.value<vector3D>().Phi() * 180. / M_PI << " "
+             << v.second.value<vector3D>().R() << " " << v.first << "\n";
+    }
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::INT].size(); k++) {
+      auto v = paramMap[ParameterValue::ValueType::INT][k];
+      output << "I" << v.second.value<int>() << " " << v.first << "\n";
+    }
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::FLOAT].size(); k++) {
+      auto v = paramMap[ParameterValue::ValueType::FLOAT][k];
+      output << "F" << v.second.value<float>() << " " << v.first << "\n";
+    }
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::STRING].size(); k++) {
+      auto v = paramMap[ParameterValue::ValueType::STRING][k];
+      output << "S" << v.second.value<string>() << "\n" << v.first << "\n";
+    }
   } else {
-    for (int k = 0; k < shape->NumberOfParams<point3D>(); k++)
-      output << "P " << shape->getParamName<point3D>(k).data() << "\n";
-    for (int k = 0; k < shape->NumberOfParams<vector3D>(); k++)
-      output << "V " << shape->getParamName<vector3D>(k).data() << "\n";
-    for (int k = 0; k < shape->NumberOfParams<float>(); k++)
-      output << "F " << shape->getParamName<float>(k).data() << "\n";
-    for (int k = 0; k < shape->NumberOfParams<int>(); k++)
-      output << "I " << shape->getParamName<int>(k).data() << "\n";
-    for (int k = 0; k < shape->NumberOfParams<string>(); k++)
-      output << "S " << shape->getParamName<string>(k).data() << "\n";
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::POINT3D].size(); k++)
+      output << "P " << paramMap[ParameterValue::ValueType::POINT3D][k].first << "\n";
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR3D].size(); k++)
+      output << "V " << paramMap[ParameterValue::ValueType::VECTOR3D][k].first << "\n";
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::INT].size(); k++)
+      output << "I " << paramMap[ParameterValue::ValueType::INT][k].first << "\n";
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::FLOAT].size(); k++)
+      output << "F " << paramMap[ParameterValue::ValueType::FLOAT][k].first << "\n";
+    for (size_t k = 0; k < paramMap[ParameterValue::ValueType::STRING].size(); k++)
+      output << "S " << paramMap[ParameterValue::ValueType::STRING][k].first << "\n";
   }
   output << "="
-         << "\n";
+         << "\n"
+         << std::flush;
 }
 
 string ParameterWriter1::getVersionString(BaseParameterWriter::FileType filetype) const

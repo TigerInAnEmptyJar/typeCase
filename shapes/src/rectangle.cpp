@@ -7,28 +7,40 @@ namespace {
 const boost::uuids::uuid rectangle_id = {{0x38, 0x9e, 0x9e, 0x10, 0x11, 0xec, 0x11, 0xe9, 0xab,
                                           0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct RectangleShapeProvider : public FactoryShapeProvider,
+                                public std::enable_shared_from_this<RectangleShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
-    factory.addShapeToFactory(rectangle::getDescription(), ShapeType::PlanarShape,
-                              [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
-                                return std::shared_ptr<planeShape>(new rectangle(
-                                    param.getParam<point3D>(0), param.getParam<point3D>(1),
-                                    param.getParam<vector3D>(0), param.getParam<float>(0)));
-                              },
-                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
-                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+    factory.addShapeToFactory(
+        rectangle::getDescription(), ShapeType::PlanarShape,
+        [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
+          if (!checkParameter(param)) {
+            return {};
+          }
+          return std::shared_ptr<planeShape>(new rectangle(param));
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
   }
   void removeFromFactory(ShapeFactory& factory) const override
   {
     factory.removeShapeFromFactory(rectangle_id);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 4) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(3).valueType() != ParameterValue::ValueType::POINT3D);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<RectangleShapeProvider> prov = [] {
+  auto r = std::make_shared<RectangleShapeProvider>();
   r->install();
   return r;
 }();
@@ -68,16 +80,16 @@ rectangle::rectangle(const shape_parameter& description) : planeShape("rectangle
 {
   if (description.getName() != "rectangle")
     return;
-  if (description.NumberOfParams<point3D>() < 4)
+  if (!RectangleShapeProvider::checkParameter(description))
     return;
-  left.newLine(description.getParam<point3D>(0), description.getParam<point3D>(1));
-  right.newLine(description.getParam<point3D>(2), description.getParam<point3D>(3));
+  left.newLine(description.value(0).value<point3D>(), description.value(1).value<point3D>());
+  right.newLine(description.value(3).value<point3D>(), description.value(2).value<point3D>());
   center = left.Mid() + (right.Mid() - left.Mid()) * 0.5;
-  normal = (description.getParam<point3D>(0) - description.getParam<point3D>(1)) ^
-           (description.getParam<point3D>(0) - description.getParam<point3D>(2));
+  normal = (description.value(0).value<point3D>() - description.value(3).value<point3D>()) ^
+           (description.value(0).value<point3D>() - description.value(1).value<point3D>());
   normal.normalize();
-  vector3D v1(description.getParam<point3D>(0) - center),
-      v2(description.getParam<point3D>(1) - center);
+  vector3D v1(description.value(0).value<point3D>() - center),
+      v2(description.value(1).value<point3D>() - center);
   circRadius = v1.R();
   if (v2.R() > circRadius)
     circRadius = v2.R();
@@ -206,19 +218,7 @@ vector3D rectangle::distancePlane(const plane3D& p)
   return v[m];
 }
 int rectangle::getNumberOfPoints() const { return 4; }
-extern void DrawPoints(int nPoints, point3D* points, const point3D& eye, const plane3D& plane,
-                       vector4D* boundingBox, TObject** ident, int lColor, int fColor, int fStyle);
-void rectangle::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox,
-                     TObject** ident, int lColor, int fColor, int fStyle) const
-{
-  point3D ps[4] = {getPoint(0), getPoint(1), getPoint(2), getPoint(3)};
-  DrawPoints(4, ps, eye, plane, boundingBox, ident, lColor, fColor, fStyle);
-}
-void rectangle::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, int lColor,
-                     int fColor, int fStyle) const
-{
-  Draw(eye, plane, boundingBox, NULL, lColor, fColor, fStyle);
-}
+
 vector3D rectangle::distance(const sLine3D& line)
 {
   point3D hit(getPlane() - line);
@@ -250,10 +250,10 @@ shape_parameter rectangle::description() const
   sh.setName("rectangle");
   sh.setId(rectangle_id);
   sh.setCompleteWrite(true);
-  sh.addParam<point3D>(left.P(), "A");
-  sh.addParam<point3D>(left.Q(), "B");
-  sh.addParam<point3D>(right.Q(), "C");
-  sh.addParam<point3D>(right.P(), "D");
+  sh.addValue("A", left.P());
+  sh.addValue("B", left.Q());
+  sh.addValue("C", right.Q());
+  sh.addValue("D", right.P());
   return sh;
 }
 shape_parameter rectangle::getDescription()
@@ -261,10 +261,10 @@ shape_parameter rectangle::getDescription()
   shape_parameter sh;
   sh.setName("rectangle");
   sh.setId(rectangle_id);
-  sh.addParam<point3D>(point3D(), "A");
-  sh.addParam<point3D>(point3D(), "B");
-  sh.addParam<point3D>(point3D(), "C");
-  sh.addParam<point3D>(point3D(), "D");
+  sh.addValue("A", point3D());
+  sh.addValue("B", point3D());
+  sh.addValue("C", point3D());
+  sh.addValue("D", point3D());
   sh.setCompleteWrite(false);
   return sh;
 }

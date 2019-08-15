@@ -23,7 +23,8 @@ public:
    */
   enum class ValueType
   {
-    BOOLEAN,
+    UNDEFINED = -1,
+    BOOLEAN = 0,
     INT,
     FLOAT,
     DOUBLE,
@@ -34,7 +35,6 @@ public:
     VECTOR_FLOAT,
     VECTOR_DOUBLE,
     VECTOR_STRING,
-    UNDEFINED,
   };
 
   ParameterValue() = default;
@@ -49,7 +49,22 @@ public:
    * \param other the value to compare to.
    * \return true if the values are equal.
    */
-  bool operator==(ParameterValue const& other);
+  bool operator==(ParameterValue const& other) const;
+
+  /*!
+   * \brief operator ==
+   * Comparison operator.
+   * \param other the value to compare to.
+   * \return true if the values are equal.
+   */
+  template <typename T>
+  bool operator==(T const& other) const
+  {
+    if (!std::holds_alternative<T>(_value)) {
+      return false;
+    }
+    return std::get<T>(_value) == other;
+  }
 
   /*!
    * \brief Constructor.
@@ -91,7 +106,17 @@ public:
    * \return the value the object holds.
    */
   template <typename T>
-  T const& value()
+  T const& value() const
+  {
+    return std::get<T>(_value);
+  }
+
+  /*!
+   * \brief Get the held value.
+   * \return the value the object holds.
+   */
+  template <typename T>
+  T& value()
   {
     return std::get<T>(_value);
   }
@@ -114,6 +139,8 @@ private:
                    std::vector<float>, std::vector<double>, std::vector<std::string>>;
   Type _value;
 };
+
+std::ostream& operator<<(std::ostream& o, ParameterValue const& v);
 
 /*!
  *
@@ -266,7 +293,7 @@ public:
    * \param p
    * \return
    */
-  bool operator==(base_parameter p);
+  bool operator==(base_parameter const& p) const;
 
 private:
   std::string _name;
@@ -288,6 +315,7 @@ public:
   values_parameter(values_parameter&&) = default;
   values_parameter& operator=(values_parameter const&) = default;
   values_parameter& operator=(values_parameter&&) = default;
+  bool operator==(values_parameter const&) const;
 
   /*!
    * \brief numberOfValues

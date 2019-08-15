@@ -10,42 +10,52 @@ namespace {
 const boost::uuids::uuid spiral_id = {{0x6d, 0x8e, 0xdc, 0x56, 0x11, 0xf2, 0x11, 0xe9, 0xab, 0x14,
                                        0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct SpiralShapeProvider : public FactoryShapeProvider,
+                             public std::enable_shared_from_this<SpiralShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
     factory.addShapeToFactory(
         spiral::getDescription(), ShapeType::VolumeShape,
         [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
-          return std::shared_ptr<volumeShape>(new spiral(
-              param.getParam<float>(0), param.getParam<float>(1), param.getParam<float>(4),
-              param.getParam<float>(2), param.getParam<float>(3), param.getParam<point3D>(0),
-              param.getParam<vector3D>(0), param.getParam<vector3D>(1)));
+          if (!checkParameter(param)) {
+            return {};
+          }
+          return std::shared_ptr<volumeShape>(
+              new spiral(param.value(3).value<float>(), param.value(4).value<float>(),
+                         param.value(7).value<float>(), param.value(5).value<float>(),
+                         param.value(6).value<float>(), param.value(0).value<point3D>(),
+                         param.value(1).value<vector3D>(), param.value(2).value<vector3D>()));
         },
         [](shape_parameter const& parameter, size_t times) -> shape_parameter {
-          matrix3D turn(parameter.getParam<vector3D>(0),
-                        static_cast<double>(parameter.getParam<float>(2) * times));
-          vector3D tmp = turn * parameter.getParam<vector3D>(1);
+          if (!checkParameter(parameter)) {
+            return {};
+          }
+          matrix3D turn(parameter.value(1).value<vector3D>(),
+                        static_cast<double>(parameter.value(5).value<float>() * times));
+          vector3D tmp = turn * parameter.value(2).value<vector3D>();
 
           auto result = parameter;
-          result.setParam<vector3D>(1, tmp);
+          result.value(2) = tmp;
 
           return result;
         },
         [](shape_parameter const& parameter, size_t times) -> shape_parameter {
-          double totalAngle = static_cast<double>(parameter.getParam<float>(2)) * times;
+          if (!checkParameter(parameter)) {
+            return {};
+          }
+          double totalAngle = static_cast<double>(parameter.value(5).value<float>()) * times;
           if (totalAngle - M_PI * 2 < -0.1 * M_PI) {
             auto result = parameter;
-            result.setParam<float>(2, static_cast<double>(totalAngle));
+            result.value(5) = static_cast<float>(totalAngle);
             return result;
           }
           auto result = ring::getDescription();
-          result.setParam<point3D>(0, parameter.getParam<point3D>(0));
-          result.setParam<vector3D>(0, parameter.getParam<vector3D>(0));
-          result.setParam<float>(0, parameter.getParam<float>(0));
-          result.setParam<float>(1, parameter.getParam<float>(1) - parameter.getParam<float>(0));
-          result.setParam<float>(2, parameter.getParam<float>(3));
+          result.value(0) = parameter.value(0).value<point3D>();
+          result.value(1) = parameter.value(1).value<vector3D>();
+          result.value(3) = parameter.value(3).value<float>();
+          result.value(4) = parameter.value(4).value<float>() - parameter.value(3).value<float>();
+          result.value(5) = parameter.value(6).value<float>();
           return result;
         });
   }
@@ -54,9 +64,23 @@ struct ShapeProvider : public FactoryShapeProvider,
     factory.removeShapeFromFactory(spiral_id);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 8) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(3).valueType() != ParameterValue::ValueType::FLOAT ||
+             param.value(4).valueType() != ParameterValue::ValueType::FLOAT ||
+             param.value(5).valueType() != ParameterValue::ValueType::FLOAT ||
+             param.value(6).valueType() != ParameterValue::ValueType::FLOAT ||
+             param.value(7).valueType() != ParameterValue::ValueType::FLOAT);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<SpiralShapeProvider> prov = [] {
+  auto r = std::make_shared<SpiralShapeProvider>();
   r->install();
   return r;
 }();
@@ -114,18 +138,18 @@ spiral::spiral(const shape_parameter& description) : volumeShape("spiral")
 {
   if (description.getName() != "spiral")
     return;
-  if (description.NumberOfParams<point3D>() < 1 || description.NumberOfParams<vector3D>() < 2 ||
-      description.NumberOfParams<float>() < 5)
+  if (!SpiralShapeProvider::checkParameter(description)) {
     return;
-  innerR = description.getParam<float>(0);
-  outerR = description.getParam<float>(1);
-  bending = description.getParam<float>(4);
-  dphi = description.getParam<float>(2);
-  thickness = description.getParam<float>(3);
-  center = description.getParam<point3D>(0);
-  normal = description.getParam<vector3D>(0);
+  }
+  innerR = description.value(3).value<float>();
+  outerR = description.value(4).value<float>();
+  bending = description.value(7).value<float>();
+  dphi = description.value(5).value<float>();
+  thickness = description.value(6).value<float>();
+  center = description.value(0).value<point3D>();
+  normal = description.value(1).value<vector3D>();
+  lpe = description.value(2).value<vector3D>();
   normal.normalize();
-  lpe = description.getParam<vector3D>(1);
   hpe = matrix3D(normal, dphi) * lpe;
 }
 
@@ -805,14 +829,14 @@ shape_parameter spiral::description() const
   shape_parameter sh;
   sh.setName("spiral");
   sh.setId(spiral_id);
-  sh.addParam<point3D>(center, "center");
-  sh.addParam<vector3D>(normal, "normal");
-  sh.addParam<vector3D>(lpe, "lower phi edge");
-  sh.addParam<float>(innerR, "inner radius");
-  sh.addParam<float>(outerR, "outer radius");
-  sh.addParam<float>(dphi, "angle between edges");
-  sh.addParam<float>(thickness, "thickness");
-  sh.addParam<float>(bending, "bending");
+  sh.addValue("center", center);
+  sh.addValue("normal", normal);
+  sh.addValue("lower phi edge", lpe);
+  sh.addValue("inner radius", innerR);
+  sh.addValue("outer radius", outerR);
+  sh.addValue("angle between edges", dphi);
+  sh.addValue("thickness", thickness);
+  sh.addValue("bending", bending);
   sh.setCompleteWrite(false);
   return sh;
 }
@@ -821,14 +845,14 @@ shape_parameter spiral::getDescription()
   shape_parameter sh;
   sh.setName("spiral");
   sh.setId(spiral_id);
-  sh.addParam<point3D>(point3D(), "center");
-  sh.addParam<vector3D>(vector3D(), "normal");
-  sh.addParam<vector3D>(vector3D(), "lower phi edge");
-  sh.addParam<float>(0, "inner radius");
-  sh.addParam<float>(0, "outer radius");
-  sh.addParam<float>(0, "angle between edges");
-  sh.addParam<float>(0, "thickness");
-  sh.addParam<float>(0, "bending");
+  sh.addValue("center", point3D());
+  sh.addValue("normal", vector3D());
+  sh.addValue("lower phi edge", vector3D());
+  sh.addValue("inner radius", static_cast<float>(0));
+  sh.addValue("outer radius", static_cast<float>(0));
+  sh.addValue("angle between edges", static_cast<float>(0));
+  sh.addValue("thickness", static_cast<float>(0));
+  sh.addValue("bending", static_cast<float>(0));
   sh.setCompleteWrite(false);
   return sh;
 }

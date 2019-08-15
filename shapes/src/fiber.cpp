@@ -11,135 +11,142 @@ const boost::uuids::uuid fiber_id = {{0xff, 0x39, 0x63, 0x7e, 0x11, 0xd9, 0x11, 
 const boost::uuids::uuid fiber_id2 = {{0x06, 0x45, 0x30, 0xbc, 0x11, 0xda, 0x11, 0xe9, 0xab, 0x14,
                                        0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct FiberShapeProvider : public FactoryShapeProvider,
+                            public std::enable_shared_from_this<FiberShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
     auto fiberCreation = [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
-      vector3D shift =
-          0.5 * param.getParam<vector3D>(0) +
-          param.getParam<vector3D>(1) * (param.getParam<int>(1) + 0.5 * param.getParam<int>(0));
-      auto corner = (param.getParam<bool>(0) ? param.getParam<point3D>(0)
-                                             : param.getParam<point3D>(0) - shift);
-      std::cout << "Fiber creation: " << shift << " " << corner << param.getParam<vector3D>(0)
-                << param.getParam<vector3D>(1) << std::endl;
+      if (!checkParameter(param)) {
+        return {};
+      }
+      vector3D shift = 0.5 * param.value(1).value<vector3D>() +
+                       param.value(2).value<vector3D>() *
+                           (param.value(5).value<int>() + 0.5 * param.value(4).value<int>());
+      auto corner = (param.value(6).value<bool>() ? param.value(0).value<point3D>()
+                                                  : param.value(0).value<point3D>() - shift);
+      std::cout << "Fiber creation: " << shift << " " << corner << param.value(1).value<vector3D>()
+                << param.value(2).value<vector3D>() << std::endl;
       return std::shared_ptr<volumeShape>(
-          new fiber(corner, param.getParam<vector3D>(0), param.getParam<vector3D>(1),
-                    param.getParam<vector3D>(2), param.getParam<int>(0), param.getParam<int>(1)));
+          new fiber(corner, param.value(1).value<vector3D>(), param.value(2).value<vector3D>(),
+                    param.value(3).value<vector3D>(), param.value(4).value<int>(),
+                    param.value(5).value<int>()));
     };
 
     auto fiberNext2 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       auto result = parameter;
-      result.setParam<bool>(0, true);
-      auto halvedAt = static_cast<size_t>(parameter.getParam<int>(1));
-      auto numberOfHalvedElements = static_cast<size_t>(parameter.getParam<int>(0));
-      auto corner = parameter.getParam<point3D>(0);
-      auto dir1 = parameter.getParam<vector3D>(0);
-      auto dir2 = parameter.getParam<vector3D>(1);
-      if (!parameter.getParam<bool>(0)) {
-        vector3D shift = 0.5 * parameter.getParam<vector3D>(0) +
-                         parameter.getParam<vector3D>(1) *
-                             (parameter.getParam<int>(1) + 0.5 * parameter.getParam<int>(0));
+      result.value(6) = true;
+      auto halvedAt = static_cast<size_t>(parameter.value(5).value<int>());
+      auto numberOfHalvedElements = static_cast<size_t>(parameter.value(4).value<int>());
+      auto corner = parameter.value(0).value<point3D>();
+      auto dir1 = parameter.value(1).value<vector3D>();
+      auto dir2 = parameter.value(2).value<vector3D>();
+      if (!parameter.value(6).value<bool>()) {
+        vector3D shift = 0.5 * dir1 + dir2 * (halvedAt + 0.5 * numberOfHalvedElements);
         corner = corner - shift;
       }
 
       if (times < halvedAt) {
-        result.setParam<point3D>(0, corner + (dir2 * times));
+        result.value(0) = corner + (dir2 * times);
       } else if (times >= 2 * numberOfHalvedElements + halvedAt) {
-        result.setParam<point3D>(0, corner + (dir2 * (times - numberOfHalvedElements)));
+        result.value(0) = corner + (dir2 * (times - numberOfHalvedElements));
       } else {
         if (times < halvedAt + numberOfHalvedElements) {
-          result.setParam<point3D>(0, corner + (dir2 * times));
+          result.value(0) = corner + (dir2 * times);
         } else {
-          result.setParam<point3D>(0,
-                                   corner + dir1 * 0.5 + dir2 * (times - numberOfHalvedElements));
+          result.value(0) = corner + dir1 * 0.5 + dir2 * (times - numberOfHalvedElements);
         }
-        result.setParam<vector3D>(0, dir1 * 0.5);
+        result.value(1) = dir1 * 0.5;
       }
       return result;
     };
     auto fiberNext17 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       auto result = parameter;
-      result.setParam<bool>(0, true);
-      auto halvedAt = static_cast<size_t>(parameter.getParam<int>(1));
-      auto numberOfHalvedElements = static_cast<size_t>(parameter.getParam<int>(0));
-      auto corner = parameter.getParam<point3D>(0);
-      auto dir1 = parameter.getParam<vector3D>(0);
-      auto dir2 = parameter.getParam<vector3D>(1);
-      if (!parameter.getParam<bool>(0)) {
-        vector3D shift = 0.5 * parameter.getParam<vector3D>(0) +
-                         parameter.getParam<vector3D>(1) *
-                             (parameter.getParam<int>(1) + 0.5 * parameter.getParam<int>(0));
+      result.value(6) = true;
+      auto halvedAt = static_cast<size_t>(parameter.value(5).value<int>());
+      auto numberOfHalvedElements = static_cast<size_t>(parameter.value(4).value<int>());
+      auto corner = parameter.value(0).value<point3D>();
+      auto dir1 = parameter.value(1).value<vector3D>();
+      auto dir2 = parameter.value(2).value<vector3D>();
+      if (!parameter.value(6).value<bool>()) {
+        vector3D shift = 0.5 * dir1 + dir2 * (halvedAt + 0.5 * numberOfHalvedElements);
         corner = corner - shift;
       }
 
       if (times < halvedAt) {
         auto dr1 = dir1 * ((dir1.R() + dir2.R() * times * 2) / dir1.R());
-        result.setParam<point3D>(0, corner + dir2 * times + (dir1 - dr1) * 0.5);
-        result.setParam<vector3D>(0, dr1);
+        result.value(0) = corner + dir2 * times + (dir1 - dr1) * 0.5;
+        result.value(1) = dr1;
       } else if (times < halvedAt + numberOfHalvedElements) {
         auto dr1 =
             dir1 * ((dir1.R() + dir2.R() * (halvedAt * 2 + numberOfHalvedElements - times) * 2) /
                     dir1.R());
-        result.setParam<point3D>(0, corner + (dir2 * (times - numberOfHalvedElements)) +
-                                        (dir1 - dr1) * 0.5);
-        result.setParam<vector3D>(0, dr1);
+        result.value(0) = corner + (dir2 * (times - numberOfHalvedElements)) + (dir1 - dr1) * 0.5;
+        result.value(1) = dr1;
       } else {
         auto dr1 =
             dir1 * ((dir1.R() * 0.5 + dir2.R() * (times - numberOfHalvedElements)) / dir1.R());
-        result.setParam<point3D>(0, corner + dir1 * 0.5 - dr1 +
-                                        (dir2 * (times - numberOfHalvedElements)));
-        result.setParam<vector3D>(0, dr1);
+        result.value(0) = corner + dir1 * 0.5 - dr1 + (dir2 * (times - numberOfHalvedElements));
+        result.value(1) = dr1;
       }
       return result;
     };
     auto fiberEnvelope2 = [](shape_parameter const& parameter, size_t number) -> shape_parameter {
+      if (!checkParameter((parameter))) {
+        return {};
+      }
       auto result = parameter;
-      result.setParam<bool>(0, true);
-      auto halvedAt = static_cast<size_t>(parameter.getParam<int>(1));
-      auto numberOfHalvedElements = static_cast<size_t>(parameter.getParam<int>(0));
-      auto dir2 = parameter.getParam<vector3D>(1);
-      if (!parameter.getParam<bool>(0)) {
-        vector3D shift = 0.5 * parameter.getParam<vector3D>(0) +
-                         parameter.getParam<vector3D>(1) *
-                             (parameter.getParam<int>(1) + 0.5 * parameter.getParam<int>(0));
-        auto corner = parameter.getParam<point3D>(0) - shift;
-        result.setParam<point3D>(0, parameter.getParam<point3D>(0) - shift);
+      result.value(6) = true;
+      auto halvedAt = static_cast<size_t>(parameter.value(5).value<int>());
+      auto numberOfHalvedElements = static_cast<size_t>(parameter.value(4).value<int>());
+      auto corner = parameter.value(0).value<point3D>();
+      auto dir1 = parameter.value(1).value<vector3D>();
+      auto dir2 = parameter.value(2).value<vector3D>();
+      if (!parameter.value(6).value<bool>()) {
+        vector3D shift = 0.5 * dir1 + dir2 * (halvedAt + 0.5 * numberOfHalvedElements);
+        result.value(0) = parameter.value(0).value<point3D>() - shift;
       }
 
       if (number > halvedAt) {
-        result.setParam<vector3D>(1, dir2 * (number - numberOfHalvedElements));
+        result.value(2) = dir2 * (number - numberOfHalvedElements);
       } else {
-        result.setParam<vector3D>(1, dir2 * number);
+        result.value(2) = dir2 * number;
       }
-      std::cout << number << " " << result.getParam<vector3D>(1) << " " << halvedAt << std::endl;
+      std::cout << number << " " << result.value(2).value<vector3D>() << " " << halvedAt
+                << std::endl;
       return result;
     };
     auto fiberEnvelope17 = [](shape_parameter const& parameter, size_t number) -> shape_parameter {
-      auto halvedAt = static_cast<size_t>(parameter.getParam<int>(1));
-      auto numberOfHalvedElements = static_cast<size_t>(parameter.getParam<int>(0));
-      auto corner = parameter.getParam<point3D>(0);
-      auto dir1 = parameter.getParam<vector3D>(0);
-      auto dir2 = parameter.getParam<vector3D>(1);
-      if (!parameter.getParam<bool>(0)) {
-        vector3D shift = 0.5 * parameter.getParam<vector3D>(0) +
-                         parameter.getParam<vector3D>(1) *
-                             (parameter.getParam<int>(1) + 0.5 * parameter.getParam<int>(0));
+      if (!checkParameter(parameter)) {
+        return {};
+      }
+      auto halvedAt = static_cast<size_t>(parameter.value(5).value<int>());
+      auto numberOfHalvedElements = static_cast<size_t>(parameter.value(4).value<int>());
+      auto corner = parameter.value(0).value<point3D>();
+      auto dir1 = parameter.value(1).value<vector3D>();
+      auto dir2 = parameter.value(2).value<vector3D>();
+      if (!parameter.value(6).value<bool>()) {
+        vector3D shift = 0.5 * dir1 + dir2 * (halvedAt + 0.5 * numberOfHalvedElements);
         corner = corner - shift;
       }
 
       // well, the envelope of this shape-stack is a hexPrism
       auto keyWidth = dir2 * (halvedAt + 0.5 * numberOfHalvedElements);
       auto centerOfFront = corner + 0.5 * dir1 + keyWidth;
-      auto thickness = parameter.getParam<vector3D>(2);
+      auto thickness = parameter.value(3).value<vector3D>();
       auto toFirstPoint = corner - centerOfFront;
 
       auto result = hexPrism::getDescription();
-      result.setParam<point3D>(0, centerOfFront);
-      result.setParam<vector3D>(0, thickness);
-      result.setParam<vector3D>(1, toFirstPoint);
-      result.setParam<vector3D>(2, keyWidth);
+      result.value(0) = centerOfFront;
+      result.value(1) = thickness;
+      result.value(2) = toFirstPoint;
+      result.value(3) = keyWidth;
       return result;
     };
     auto description = fiber::getDescription();
@@ -155,9 +162,22 @@ struct ShapeProvider : public FactoryShapeProvider,
     factory.removeShapeFromFactory(fiber_id2);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 7) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(3).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(4).valueType() != ParameterValue::ValueType::INT ||
+             param.value(5).valueType() != ParameterValue::ValueType::INT ||
+             param.value(6).valueType() != ParameterValue::ValueType::BOOLEAN);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<FiberShapeProvider> prov = [] {
+  auto r = std::make_shared<FiberShapeProvider>();
   r->install();
   return r;
 }();
@@ -234,15 +254,15 @@ fiber::fiber(const shape_parameter& description) : volumeShape("fiber")
 {
   if (description.getName() != "fiber")
     return;
-  if (description.NumberOfParams<point3D>() < 1 || description.NumberOfParams<vector3D>() < 3 ||
-      description.NumberOfParams<int>() < 2)
+  if (!FiberShapeProvider::checkParameter(description)) {
     return;
-  dir1 = description.getParam<vector3D>(0);
-  dir2 = description.getParam<vector3D>(1);
-  dir3 = description.getParam<vector3D>(2);
-  numberOfHalvedElements = description.getParam<int>(0);
-  halvedAt = description.getParam<int>(1);
-  corner = description.getParam<point3D>(0) - dir1 * 0.5 -
+  }
+  dir1 = description.value(1).value<vector3D>();
+  dir2 = description.value(2).value<vector3D>();
+  dir3 = description.value(3).value<vector3D>();
+  numberOfHalvedElements = description.value(4).value<int>();
+  halvedAt = description.value(5).value<int>();
+  corner = description.value(0).value<point3D>() - dir1 * 0.5 -
            dir2 * (halvedAt + (numberOfHalvedElements % 2) * 0.5 + numberOfHalvedElements);
 }
 void fiber::operator=(const volumeShape& s)
@@ -1147,15 +1167,15 @@ shape_parameter fiber::description() const
 {
   shape_parameter sh;
   sh.setName("fiber");
-  sh.addParam<point3D>(
-      corner + dir1 * 0.5 +
-          dir2 * (halvedAt + (numberOfHalvedElements % 2) * 0.5 + numberOfHalvedElements),
-      "center of envelope");
-  sh.addParam<vector3D>(dir1, "length");
-  sh.addParam<vector3D>(dir2, "width");
-  sh.addParam<vector3D>(dir3, "thickness");
-  sh.addParam<int>(numberOfHalvedElements, "number of halved elements");
-  sh.addParam<int>(halvedAt, "halved at");
+  sh.addValue("center of envelope",
+              corner + dir1 * 0.5 +
+                  dir2 * (halvedAt + (numberOfHalvedElements % 2) * 0.5 + numberOfHalvedElements));
+  sh.addValue("length", dir1);
+  sh.addValue("width", dir2);
+  sh.addValue("thickness", dir3);
+  sh.addValue("number of halved elements", numberOfHalvedElements);
+  sh.addValue("halved at", halvedAt);
+  sh.addValue("useCorner", false);
   sh.setCompleteWrite(true);
   return sh;
 }
@@ -1164,13 +1184,13 @@ shape_parameter fiber::getDescription()
   shape_parameter sh;
   sh.setName("fiber");
   sh.setId(fiber_id);
-  sh.addParam<point3D>(point3D(), "center of envelope");
-  sh.addParam<vector3D>(vector3D(), "length");
-  sh.addParam<vector3D>(vector3D(), "width");
-  sh.addParam<vector3D>(vector3D(), "thickness");
-  sh.addParam<int>(0, "number of halved elements");
-  sh.addParam<int>(0, "halved at");
+  sh.addValue("center of envelope", point3D());
+  sh.addValue("length", vector3D());
+  sh.addValue("width", vector3D());
+  sh.addValue("thickness", vector3D());
+  sh.addValue("number of halved elements", static_cast<int>(0));
+  sh.addValue("halved at", static_cast<int>(0));
+  sh.addValue("useCorner", false);
   sh.setCompleteWrite(false);
-  sh.addParam<bool>(false, "useCorner");
   return sh;
 }

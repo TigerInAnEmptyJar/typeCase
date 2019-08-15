@@ -187,42 +187,6 @@ public:
   void operator=(const sphericTriangle& t);
 
   /*!
-   * \brief Draw
-   *  This function is used for drawing a shape to a root-TCanvas. It will draw a projection of the
-   * 3D shape from the eye-point to a plane. The corners of the drawn shape in canvas coordinates
-   * are stored in boundingBox. It is drawn using lColor as line color, fColor as fill color and
-   * fStyle as fill style. See root-colors and -styles.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, int lColor,
-                    int fColor = 8, int fStyle = 1001) const;
-
-  /*!
-   * \brief Draw
-   *  This function is used for drawing a triangle to a root- TCanvas. It will draw a projection of
-   * the 3D shape from the eye-point to a plane. The corners of the drawn shape in canvas
-   * coordinates are stored in boundingBox. It is drawn using lColor as line color, fColor as fill
-   * color and fStyle as fill style. See root-colors and -styles. The parameter ident will return a
-   * pointer to the drawn root-primitive to provide the distance-to-primitive functionality.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param ident
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye = point3D(0, 0, 0),
-                    const plane3D& plane = plane3D(point3D(0, 0, 1), vector3D(0, 0, 1)),
-                    vector4D* boundingBox = NULL, TObject** ident = NULL, int lColor = 1,
-                    int fColor = 8, int fStyle = 1001) const;
-
-  /*!
    * \brief description
    *  Returns a description of this triangle.
    * \return
@@ -478,42 +442,6 @@ public:
   void operator=(const sphericTriangle& t);
 
   /*!
-   * \brief Draw
-   *  This function is used for drawing a shape to a root-TCanvas. It will draw a projection of the
-   * 3D shape from the eye-point to a plane. The corners of the drawn shape in canvas coordinates
-   * are stored in boundingBox. It is drawn using lColor as line color, fColor as fill color and
-   * fStyle as fill style. See root-colors and -styles.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, int lColor,
-                    int fColor = 8, int fStyle = 1001) const;
-
-  /*!
-   * \brief Draw
-   *  This function is used for drawing a shape to a root-TCanvas. It will draw a projection of the
-   * 3D shape from the eye-point to a plane. The corners of the drawn shape in canvas coordinates
-   * are stored in boundingBox. It is drawn using lColor as line color, fColor as fill color and
-   * fStyle as fill style. See root-colors and -styles. The parameter ident will return a pointer to
-   * the drawn root-primitive to provide the distance-to-primitive functionality.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param ident
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye = point3D(0, 0, 0),
-                    const plane3D& plane = plane3D(point3D(0, 0, 1), vector3D(0, 0, 1)),
-                    vector4D* boundingBox = NULL, TObject** ident = NULL, int lColor = 1,
-                    int fColor = 8, int fStyle = 1001) const;
-
-  /*!
    * \brief description
    *  Returns a description of this spheric triangle.
    * \return
@@ -742,42 +670,6 @@ public:
   void operator=(const rectangle& r);
 
   /*!
-   * \brief Draw
-   *  This function is used for drawing a shape to a root-TCanvas. It will draw a projection of the
-   * 3D shape from the eye-point to a plane. The corners of the drawn shape in canvas coordinates
-   * are stored in boundingBox. It is drawn using lColor as line color, fColor as fill color and
-   * fStyle as fill style. See root-colors and -styles.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, int lColor,
-                    int fColor = 8, int fStyle = 1001) const;
-
-  /*!
-   * \brief Draw
-   *  This function is used for drawing a shape to a root-TCanvas. It will draw a projection of the
-   * 3D shape from the eye-point to a plane. The corners of the drawn shape in canvas coordinates
-   * are stored in boundingBox. It is drawn using lColor as line color, fColor as fill color and
-   * fStyle as fill style. See root-colors and -styles. The parameter ident will return a pointer to
-   * the drawn root-primitive to provide the distance-to-primitive functionality.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param ident
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye = point3D(0, 0, 0),
-                    const plane3D& plane = plane3D(point3D(0, 0, 1), vector3D(0, 0, 1)),
-                    vector4D* boundingBox = NULL, TObject** ident = NULL, int lColor = 1,
-                    int fColor = 8, int fStyle = 1001) const;
-
-  /*!
    * \brief description
    *  Returns a description of this rectangle.
    * \return
@@ -1000,42 +892,6 @@ public:
    * \param h
    */
   void operator=(const hexagon& h);
-
-  /*!
-   * \brief Draw
-   *  This function is used for drawing a shape to a root-TCanvas. It will draw a projection of the
-   * 3D shape from the eye-point to a plane. The corners of the drawn shape in canvas coordinates
-   * are stored in boundingBox. It is drawn using lColor as line color, fColor as fill color and
-   * fStyle as fill style. See root-colors and -styles.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, int lColor,
-                    int fColor = 8, int fStyle = 1001) const;
-
-  /*!
-   * \brief Draw
-   *  This function is used for drawing a shape to a root-TCanvas. It will draw a projection of the
-   * 3D shape from the eye-point to a plane. The corners of the drawn shape in canvas coordinates
-   * are stored in boundingBox. It is drawn using lColor as line color, fColor as fill color and
-   * fStyle as fill style. See root-colors and -styles. The parameter ident will return a pointer to
-   * the drawn root-primitive to provide the distance-to-primitive functionality.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param ident
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye = point3D(0, 0, 0),
-                    const plane3D& plane = plane3D(point3D(0, 0, 1), vector3D(0, 0, 1)),
-                    vector4D* boundingBox = NULL, TObject** ident = NULL, int lColor = 1,
-                    int fColor = 8, int fStyle = 1001) const;
 
   /*!
    * \brief description

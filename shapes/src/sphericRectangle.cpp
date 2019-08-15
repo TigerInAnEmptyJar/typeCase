@@ -7,28 +7,44 @@ namespace {
 const boost::uuids::uuid sphericRectangle_id = {{0xb6, 0x58, 0x46, 0x6c, 0x11, 0xec, 0x11, 0xe9,
                                                  0xab, 0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct SphericRectangleShapeProvider
+    : public FactoryShapeProvider,
+      public std::enable_shared_from_this<SphericRectangleShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
-    factory.addShapeToFactory(sphericRectangle::getDescription(), ShapeType::PlanarShape,
-                              [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
-                                return std::shared_ptr<planeShape>(new sphericRectangle(
-                                    param.getParam<point3D>(1), param.getParam<point3D>(2),
-                                    param.getParam<point3D>(3), param.getParam<point3D>(4)));
-                              },
-                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
-                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+    factory.addShapeToFactory(
+        sphericRectangle::getDescription(), ShapeType::PlanarShape,
+        [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
+          if (!checkParameter(param)) {
+            return {};
+          }
+          return std::shared_ptr<planeShape>(new sphericRectangle(
+              param.value(1).value<point3D>(), param.value(2).value<point3D>(),
+              param.value(3).value<point3D>(), param.value(4).value<point3D>()));
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
   }
   void removeFromFactory(ShapeFactory& factory) const override
   {
     factory.removeShapeFromFactory(sphericRectangle_id);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 5) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(3).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(4).valueType() != ParameterValue::ValueType::POINT3D);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<SphericRectangleShapeProvider> prov = [] {
+  auto r = std::make_shared<SphericRectangleShapeProvider>();
   r->install();
   return r;
 }();
@@ -124,13 +140,14 @@ sphericRectangle::sphericRectangle(const shape_parameter& description)
 {
   if (description.getName() != "sphericRectangle")
     return;
-  if (description.NumberOfParams<point3D>() < 5)
+  if (!SphericRectangleShapeProvider::checkParameter(description)) {
     return;
-  center = description.getParam<point3D>(0);
-  A_ = description.getParam<point3D>(0);
-  B_ = description.getParam<point3D>(1);
-  C_ = description.getParam<point3D>(2);
-  D_ = description.getParam<point3D>(3);
+  }
+  center = description.value(0).value<point3D>();
+  A_ = description.value(1).value<point3D>();
+  B_ = description.value(2).value<point3D>();
+  C_ = description.value(3).value<point3D>();
+  D_ = description.value(4).value<point3D>();
   vector3D lp = B_ - A_;
   vector3D hp = C_ - D_;
   lp.normalize();
@@ -449,11 +466,11 @@ shape_parameter sphericRectangle::description() const
   sh.setName("sphericRectangle");
   sh.setCompleteWrite(true);
   sh.setId(sphericRectangle_id);
-  sh.addParam<point3D>(center, "center");
-  sh.addParam<point3D>(A_, "A");
-  sh.addParam<point3D>(B_, "B");
-  sh.addParam<point3D>(C_, "C");
-  sh.addParam<point3D>(D_, "D");
+  sh.addValue("center", center);
+  sh.addValue("A", A_);
+  sh.addValue("B", B_);
+  sh.addValue("C", C_);
+  sh.addValue("D", D_);
   return sh;
 }
 shape_parameter sphericRectangle::getDescription()
@@ -461,11 +478,11 @@ shape_parameter sphericRectangle::getDescription()
   shape_parameter sh;
   sh.setName("sphericRectangle");
   sh.setId(sphericRectangle_id);
-  sh.addParam<point3D>(point3D(), "center");
-  sh.addParam<point3D>(point3D(), "A");
-  sh.addParam<point3D>(point3D(), "B");
-  sh.addParam<point3D>(point3D(), "C");
-  sh.addParam<point3D>(point3D(), "D");
+  sh.addValue("center", point3D());
+  sh.addValue("A", point3D());
+  sh.addValue("B", point3D());
+  sh.addValue("C", point3D());
+  sh.addValue("D", point3D());
   sh.setCompleteWrite(false);
   return sh;
 }

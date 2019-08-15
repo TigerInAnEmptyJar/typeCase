@@ -8,29 +8,44 @@ namespace {
 const boost::uuids::uuid quadrangle_id = {{0xeb, 0xc6, 0x86, 0x98, 0x11, 0xeb, 0x11, 0xe9, 0xab,
                                            0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct QuadrangleShapeProvider : public FactoryShapeProvider,
+                                 public std::enable_shared_from_this<QuadrangleShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
-    factory.addShapeToFactory(quadrangle::getDescription(), ShapeType::PlanarShape,
-                              [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
-                                return std::shared_ptr<planeShape>(new quadrangle(
-                                    param.getParam<point3D>(0), param.getParam<point3D>(1),
-                                    param.getParam<point3D>(2), param.getParam<point3D>(3),
-                                    param.getParam<point3D>(4)));
-                              },
-                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
-                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+    factory.addShapeToFactory(
+        quadrangle::getDescription(), ShapeType::PlanarShape,
+        [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
+          if (!checkParameter(param)) {
+            return {};
+          }
+          return std::shared_ptr<planeShape>(
+              new quadrangle(param.value(0).value<point3D>(), param.value(1).value<point3D>(),
+                             param.value(2).value<point3D>(), param.value(3).value<point3D>(),
+                             param.value(4).value<point3D>()));
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
   }
   void removeFromFactory(ShapeFactory& factory) const override
   {
     factory.removeShapeFromFactory(quadrangle_id);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 5) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(3).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(4).valueType() != ParameterValue::ValueType::POINT3D);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<QuadrangleShapeProvider> prov = [] {
+  auto r = std::make_shared<QuadrangleShapeProvider>();
   r->install();
   return r;
 }();
@@ -59,17 +74,20 @@ quadrangle::quadrangle(const shape_parameter& description) : planeShape("quadran
 {
   if (description.getName() != "quadrangle")
     return;
-  if (description.NumberOfParams<point3D>() < 5)
+  if (!QuadrangleShapeProvider::checkParameter(description)) {
     return;
-  center = description.getParam<point3D>(0);
-  A_ = description.getParam<point3D>(1);
-  B_ = description.getParam<point3D>(2);
+  }
+  if (description.numberOfValues() < 5)
+    return;
+  center = description.value(0).value<point3D>();
+  A_ = description.value(1).value<point3D>();
+  B_ = description.value(2).value<point3D>();
   normal = (A_ - center) ^ (B_ - center);
   normal.normalize();
-  C_ = center + ((description.getParam<point3D>(3) - center) -
-                 (normal * ((description.getParam<point3D>(3) - center) * normal)));
-  D_ = center + ((description.getParam<point3D>(4) - center) -
-                 (normal * ((description.getParam<point3D>(4) - center) * normal)));
+  C_ = center + ((description.value(3).value<point3D>() - center) -
+                 (normal * ((description.value(3).value<point3D>() - center) * normal)));
+  D_ = center + ((description.value(4).value<point3D>() - center) -
+                 (normal * ((description.value(4).value<point3D>() - center) * normal)));
   vector3D v1(A_ - center), v2(B_ - center), v3(C_ - center), v4(D_ - center);
   circRadius = v1.R();
   if (v2.R() > circRadius)
@@ -249,30 +267,18 @@ vector3D quadrangle::distance(const sLine3D& line)
     return (cc + dd) * 0.5;
   return (dd + aa) * 0.5;
 }
-extern void DrawPoints(int nPoints, point3D* points, const point3D& eye, const plane3D& plane,
-                       vector4D* boundingBox, TObject** ident, int lColor, int fColor, int fStyle);
-void quadrangle::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox,
-                      TObject** ident, int lColor, int fColor, int fStyle) const
-{
-  point3D ps[4] = {getPoint(0), getPoint(1), getPoint(2), getPoint(3)};
-  DrawPoints(4, ps, eye, plane, boundingBox, ident, lColor, fColor, fStyle);
-}
-void quadrangle::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, int lColor,
-                      int fColor, int fStyle) const
-{
-  Draw(eye, plane, boundingBox, NULL, lColor, fColor, fStyle);
-}
+
 shape_parameter quadrangle::description() const
 {
   shape_parameter sh;
   sh.setName("quadrangle");
   sh.setId(quadrangle_id);
   sh.setCompleteWrite(true);
-  sh.addParam<point3D>(center, "center");
-  sh.addParam<point3D>(A_, "A");
-  sh.addParam<point3D>(B_, "B");
-  sh.addParam<point3D>(C_, "C");
-  sh.addParam<point3D>(D_, "D");
+  sh.addValue("center", center);
+  sh.addValue("A", A_);
+  sh.addValue("B", B_);
+  sh.addValue("C", C_);
+  sh.addValue("D", D_);
   return sh;
 }
 shape_parameter quadrangle::getDescription()
@@ -280,11 +286,11 @@ shape_parameter quadrangle::getDescription()
   shape_parameter sh;
   sh.setName("quadrangle");
   sh.setId(quadrangle_id);
-  sh.addParam<point3D>(point3D(), "center");
-  sh.addParam<point3D>(point3D(), "A");
-  sh.addParam<point3D>(point3D(), "B");
-  sh.addParam<point3D>(point3D(), "C");
-  sh.addParam<point3D>(point3D(), "D");
+  sh.addValue("center", point3D());
+  sh.addValue("A", point3D());
+  sh.addValue("B", point3D());
+  sh.addValue("C", point3D());
+  sh.addValue("D", point3D());
   sh.setCompleteWrite(false);
   return sh;
 }

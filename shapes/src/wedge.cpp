@@ -13,33 +13,38 @@ const boost::uuids::uuid wedge_id1 = {{0x2e, 0x50, 0x1b, 0x2e, 0x11, 0xf5, 0x11,
 const boost::uuids::uuid wedge_id2 = {{0x33, 0x2c, 0xf4, 0x8c, 0x11, 0xf5, 0x11, 0xe9, 0xab, 0x14,
                                        0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct WedgeShapeProvider : public FactoryShapeProvider,
+                            public std::enable_shared_from_this<WedgeShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
     auto shapeCreation = [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
-      if (param.NumberOfParams<float>() > 4)
-        return std::shared_ptr<volumeShape>(new wedge(
-            param.getParam<float>(0), param.getParam<float>(1), param.getParam<float>(2),
-            param.getParam<float>(3), param.getParam<point3D>(0), param.getParam<vector3D>(0),
-            param.getParam<vector3D>(1), param.getParam<float>(4)));
+      if (!checkParameter(param)) {
+        return {};
+      }
+      if (param.numberOfValues() > 7)
+        return std::shared_ptr<volumeShape>(
+            new wedge(param.value(3).value<float>(), param.value(4).value<float>(),
+                      param.value(5).value<float>(), param.value(6).value<float>(),
+                      param.value(0).value<point3D>(), param.value(1).value<vector3D>(),
+                      param.value(2).value<vector3D>(), param.value(7).value<float>()));
       return std::shared_ptr<volumeShape>(
-          new wedge(param.getParam<float>(0), param.getParam<float>(1), param.getParam<float>(2),
-                    param.getParam<float>(3), param.getParam<point3D>(0),
-                    param.getParam<vector3D>(0), param.getParam<vector3D>(1), -1));
+          new wedge(param.value(3).value<float>(), param.value(4).value<float>(),
+                    param.value(5).value<float>(), param.value(6).value<float>(),
+                    param.value(0).value<point3D>(), param.value(1).value<vector3D>(),
+                    param.value(2).value<vector3D>(), -1));
     };
 
     //! \todo there is still the wedge-cone stuff to do
     //        else if (sp.getName() == "wedge-cone") {
-    //            point3D centerOfBase = sp.getParam<point3D>(0);
-    //            vector3D symmetryAxis = sp.getParam<vector3D>(0);
-    //            vector3D lpOnBase = sp.getParam<vector3D>(1);
-    //            float baseRadius = sp.getParam<float>(0);
-    //            float topRadius = sp.getParam<float>(1);
-    //            float length = sp.getParam<float>(2);
-    //            float dp = sp.getParam<float>(3);
-    //            float thickness = sp.getParam<float>(4);
+    //            point3D centerOfBase = sp.value(0).value<point3D>();
+    //            vector3D symmetryAxis = sp.value(1).value<vector3D>();
+    //            vector3D lpOnBase = sp.value(2).value<vector3D>();
+    //            float baseRadius = sp.value(3).value<float>();
+    //            float topRadius = sp.value(4).value<float>();
+    //            float length = sp.value(7).value<float>();
+    //            float dp = sp.value(5).value<float>();
+    //            float thickness = sp.value(6).value<float>();
     //            float Ro, Ri, z = length * baseRadius / (baseRadius - topRadius);
     //            Ro = sqrt(z * z + baseRadius * baseRadius);
     //            Ri = Ro * topRadius / baseRadius;
@@ -55,22 +60,28 @@ struct ShapeProvider : public FactoryShapeProvider,
     //          }
 
     auto next1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
-      matrix3D turn(parameter.getParam<vector3D>(0),
-                    static_cast<double>(parameter.getParam<float>(2) * times));
-      vector3D tmp = turn * parameter.getParam<vector3D>(1);
+      if (!checkParameter(parameter)) {
+        return {};
+      }
+      matrix3D turn(parameter.value(1).value<vector3D>(),
+                    static_cast<double>(parameter.value(5).value<float>() * times));
+      vector3D tmp = turn * parameter.value(2).value<vector3D>();
 
       auto result = parameter;
-      result.setParam<vector3D>(1, tmp);
+      result.value(2) = tmp;
 
       return result;
     };
     auto next2 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       auto result = parameter;
-      auto outerR = static_cast<double>(parameter.getParam<float>(1));
-      auto distBarrel = static_cast<double>(parameter.getParam<float>(4));
-      auto lpe = parameter.getParam<vector3D>(1);
-      auto dphi = parameter.getParam<float>(2);
-      auto normal = parameter.getParam<vector3D>(0);
+      auto outerR = static_cast<double>(parameter.value(4).value<float>());
+      auto distBarrel = static_cast<double>(parameter.value(7).value<float>());
+      auto lpe = parameter.value(2).value<vector3D>();
+      auto dphi = parameter.value(5).value<float>();
+      auto normal = parameter.value(1).value<vector3D>();
       double l = sqrt(outerR * outerR - distBarrel * distBarrel);
       vector3D rot_vec = vector3D(0, 0, -1);
       vector3D lpeBase = lpe - rot_vec * (lpe * rot_vec);
@@ -83,23 +94,26 @@ struct ShapeProvider : public FactoryShapeProvider,
           distBarrel * lpeBase + rot_vec * sqrt(outerR * outerR - distBarrel * distBarrel);
       lpeNew.normalize();
 
-      result.setParam<vector3D>(0, rotm * normal);
-      result.setParam<vector3D>(1, lpeNew);
+      result.value(1) = rotm * normal;
+      result.value(2) = lpeNew;
       return result;
     };
     auto envelope1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
-      double totalAngle = static_cast<double>(parameter.getParam<float>(2)) * times;
+      if (!checkParameter(parameter)) {
+        return {};
+      }
+      double totalAngle = static_cast<double>(parameter.value(5).value<float>()) * times;
       if (totalAngle - M_PI * 2 < 0) {
         auto result = parameter;
-        result.setParam<float>(2, static_cast<float>(totalAngle));
+        result.value(5) = static_cast<float>(totalAngle);
         return result;
       }
       auto result = ring::getDescription();
-      result.setParam<point3D>(0, parameter.getParam<point3D>(0));
-      result.setParam<vector3D>(0, parameter.getParam<vector3D>(0));
-      result.setParam<float>(0, parameter.getParam<float>(0));
-      result.setParam<float>(1, parameter.getParam<float>(1) - parameter.getParam<float>(0));
-      result.setParam<float>(2, parameter.getParam<float>(3));
+      result.value(0) = parameter.value(0).value<point3D>();
+      result.value(1) = parameter.value(1).value<vector3D>();
+      result.value(2) = parameter.value(3).value<float>();
+      result.value(3) = parameter.value(4).value<float>() - parameter.value(3).value<float>();
+      result.value(4) = parameter.value(6).value<float>();
       return result;
     };
     auto envelope2 = [](shape_parameter const&, size_t) -> shape_parameter {
@@ -119,9 +133,26 @@ struct ShapeProvider : public FactoryShapeProvider,
     factory.removeShapeFromFactory(wedge_id2);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 7 && param.numberOfValues() != 8) {
+      return false;
+    }
+    if (param.numberOfValues() == 8 &&
+        param.value(7).valueType() != ParameterValue::ValueType::FLOAT) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(3).valueType() != ParameterValue::ValueType::FLOAT ||
+             param.value(4).valueType() != ParameterValue::ValueType::FLOAT ||
+             param.value(5).valueType() != ParameterValue::ValueType::FLOAT ||
+             param.value(6).valueType() != ParameterValue::ValueType::FLOAT);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<WedgeShapeProvider> prov = [] {
+  auto r = std::make_shared<WedgeShapeProvider>();
   r->install();
   return r;
 }();
@@ -159,18 +190,18 @@ wedge::wedge(const shape_parameter& description) : volumeShape("wedge")
 {
   if (description.getName() != "wedge")
     return;
-  if (description.NumberOfParams<point3D>() < 1 || description.NumberOfParams<vector3D>() < 2 ||
-      description.NumberOfParams<float>() < 5)
+  if (!WedgeShapeProvider::checkParameter(description)) {
     return;
-  innerR = description.getParam<float>(0);
-  outerR = description.getParam<float>(1);
-  distBarrel = description.getParam<float>(4);
-  dphi = description.getParam<float>(2);
-  thickness = description.getParam<float>(3);
-  center = description.getParam<point3D>(0);
-  normal = description.getParam<vector3D>(0);
+  }
+  innerR = description.value(3).value<float>();
+  outerR = description.value(4).value<float>();
+  distBarrel = description.value(7).value<float>();
+  dphi = description.value(5).value<float>();
+  thickness = description.value(6).value<float>();
+  center = description.value(0).value<point3D>();
+  normal = description.value(1).value<vector3D>();
+  lpe = description.value(2).value<vector3D>();
   normal.normalize();
-  lpe = description.getParam<vector3D>(1);
   hpe = matrix3D(normal, dphi) * lpe; //-
   if (distBarrel > 0) {
     double l = sqrt(outerR * outerR - distBarrel * distBarrel);
@@ -1240,14 +1271,14 @@ shape_parameter wedge::description() const
   shape_parameter sh;
   sh.setName("wedge");
   sh.setId(wedge_id1);
-  sh.addParam<point3D>(center, "center");
-  sh.addParam<vector3D>(normal, "normal");
-  sh.addParam<vector3D>(lpe, "lower phi edge");
-  sh.addParam<float>(innerR, "inner radius");
-  sh.addParam<float>(outerR, "outer radius");
-  sh.addParam<float>(dphi, "angle between edges");
-  sh.addParam<float>(thickness, "thickness");
-  sh.addParam<float>(distBarrel, "distance to barrel center");
+  sh.addValue("center", center);
+  sh.addValue("normal", normal);
+  sh.addValue("lower phi edge", lpe);
+  sh.addValue("inner radius", innerR);
+  sh.addValue("outer radius", outerR);
+  sh.addValue("angle between edges", dphi);
+  sh.addValue("thickness", thickness);
+  sh.addValue("distance to barrel center", distBarrel);
   sh.setCompleteWrite(false);
   return sh;
 }
@@ -1256,14 +1287,14 @@ shape_parameter wedge::getDescription()
   shape_parameter sh;
   sh.setName("wedge");
   sh.setId(wedge_id1);
-  sh.addParam<point3D>(point3D(), "center");
-  sh.addParam<vector3D>(vector3D(), "normal");
-  sh.addParam<vector3D>(vector3D(), "lower phi edge");
-  sh.addParam<float>(0, "inner radius");
-  sh.addParam<float>(0, "outer radius");
-  sh.addParam<float>(0, "angle between edges");
-  sh.addParam<float>(0, "thickness");
-  sh.addParam<float>(0, "distance to barrel center");
+  sh.addValue("center", point3D());
+  sh.addValue("normal", vector3D());
+  sh.addValue("lower phi edge", vector3D());
+  sh.addValue("inner radius", static_cast<float>(0));
+  sh.addValue("outer radius", static_cast<float>(0));
+  sh.addValue("angle between edges", static_cast<float>(0));
+  sh.addValue("thickness", static_cast<float>(0));
+  sh.addValue("distance to barrel center", static_cast<float>(0));
   sh.setCompleteWrite(false);
   return sh;
 }

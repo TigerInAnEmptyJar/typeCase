@@ -40,21 +40,21 @@ TEST(HexprismTest, hexprism1)
 
   // let's create a stack of 10 spirals .
 
-  parameter.setParam<point3D>(0, {0, 0, 0});
-  parameter.setParam<vector3D>(0, {0, 0, -1});
-  parameter.setParam<vector3D>(1, matrix3D{{0, 0, -1}, 60. * M_PI / 180.} * vector3D{1, 0, 0});
-  parameter.setParam<vector3D>(2, {1, 0, 0});
-  parameter.setParam<int>(0, 1);
+  parameter.value(0) = point3D{0, 0, 0};
+  parameter.value(1) = vector3D{0, 0, -1};
+  parameter.value(2) = vector3D{matrix3D{{0, 0, -1}, 60. * M_PI / 180.} * vector3D{1, 0, 0}};
+  parameter.value(3) = vector3D{1, 0, 0};
+  parameter.value(4) = static_cast<int>(1);
 
   auto shape = factory.createVolume(parameter);
   EXPECT_EQ("hexPrism", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<hexPrism>(shape));
   auto hexprism_sh = dynamic_pointer_cast<hexPrism>(shape);
 
-  EXPECT_EQ(parameter.getParam<point3D>(0), hexprism_sh->getCenter());
-  EXPECT_EQ(parameter.getParam<vector3D>(0), hexprism_sh->getDirection(0));
-  EXPECT_EQ(parameter.getParam<vector3D>(1), hexprism_sh->getDirection(1));
-  EXPECT_EQ(parameter.getParam<vector3D>(2), hexprism_sh->getDirection(2));
+  EXPECT_EQ(parameter.value(0).value<point3D>(), hexprism_sh->getCenter());
+  EXPECT_EQ(parameter.value(1).value<vector3D>(), hexprism_sh->getDirection(0));
+  EXPECT_EQ(parameter.value(2).value<vector3D>(), hexprism_sh->getDirection(1));
+  EXPECT_EQ(parameter.value(3).value<vector3D>(), hexprism_sh->getDirection(2));
 
   for (size_t i = 1; i < 10; i++) {
     auto nextShape = factory.createNext(parameter, i);
@@ -62,11 +62,11 @@ TEST(HexprismTest, hexprism1)
     auto next_sh = dynamic_pointer_cast<hexPrism>(nextShape);
     ASSERT_NE(nullptr, next_sh);
 
-    EXPECT_EQ(parameter.getParam<point3D>(0) + i * parameter.getParam<vector3D>(2),
+    EXPECT_EQ(parameter.value(0).value<point3D>() + i * parameter.value(3).value<vector3D>(),
               next_sh->getCenter());
-    EXPECT_EQ(parameter.getParam<vector3D>(0), next_sh->getDirection(0));
-    EXPECT_EQ(parameter.getParam<vector3D>(1), next_sh->getDirection(1));
-    EXPECT_EQ(parameter.getParam<vector3D>(2), next_sh->getDirection(2));
+    EXPECT_EQ(parameter.value(1).value<vector3D>(), next_sh->getDirection(0));
+    EXPECT_EQ(parameter.value(2).value<vector3D>(), next_sh->getDirection(1));
+    EXPECT_EQ(parameter.value(3).value<vector3D>(), next_sh->getDirection(2));
   }
 
   {
@@ -77,10 +77,10 @@ TEST(HexprismTest, hexprism1)
     auto envelope_sh = dynamic_pointer_cast<hexPrism>(envelopeShape);
     ASSERT_NE(nullptr, envelope_sh);
     EXPECT_EQ(point3D(0, 0, 0), envelope_sh->getCenter());
-    EXPECT_EQ(parameter.getParam<point3D>(0), envelope_sh->getCenter());
-    EXPECT_EQ(parameter.getParam<vector3D>(0), envelope_sh->getDirection(0));
-    EXPECT_EQ(parameter.getParam<vector3D>(1), envelope_sh->getDirection(1));
-    EXPECT_EQ(parameter.getParam<vector3D>(2) * 10, envelope_sh->getDirection(2));
+    EXPECT_EQ(parameter.value(0).value<point3D>(), envelope_sh->getCenter());
+    EXPECT_EQ(parameter.value(1).value<vector3D>(), envelope_sh->getDirection(0));
+    EXPECT_EQ(parameter.value(2).value<vector3D>(), envelope_sh->getDirection(1));
+    EXPECT_EQ(parameter.value(3).value<vector3D>() * 10, envelope_sh->getDirection(2));
   }
 
   Shape::removeShapesFromFactory(factory);
@@ -98,18 +98,14 @@ TEST(HexprismTest, parameter)
     auto parameter = factory.shapeParameter(hexPrism_id1);
 
     EXPECT_EQ("hexPrism", parameter.getName());
-    EXPECT_EQ(hexPrism_id1, parameter.getId());
+    EXPECT_EQ(hexPrism_id1, parameter.id());
 
-    ASSERT_EQ(1, parameter.NumberOfParams<point3D>());
-    ASSERT_EQ(3, parameter.NumberOfParams<vector3D>());
-    EXPECT_EQ(1, parameter.NumberOfParams<int>());
-    ASSERT_EQ(0, parameter.NumberOfParams<float>());
-    EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
-    EXPECT_EQ("center of front", parameter.getParamName<point3D>(0));
-    EXPECT_EQ("thickness vector", parameter.getParamName<vector3D>(0));
-    EXPECT_EQ("vector to first point", parameter.getParamName<vector3D>(1));
-    EXPECT_EQ("key width vector", parameter.getParamName<vector3D>(2));
-    EXPECT_EQ("stack parameter", parameter.getParamName<int>(0));
+    ASSERT_EQ(5, parameter.numberOfValues());
+    EXPECT_EQ("center of front", parameter.valueName(0));
+    EXPECT_EQ("thickness vector", parameter.valueName(1));
+    EXPECT_EQ("vector to first point", parameter.valueName(2));
+    EXPECT_EQ("key width vector", parameter.valueName(3));
+    EXPECT_EQ("stack parameter", parameter.valueName(4));
   }
 
   // hexprism type 2
@@ -117,18 +113,14 @@ TEST(HexprismTest, parameter)
     auto parameter = factory.shapeParameter(hexPrism_id3);
 
     EXPECT_EQ("hexPrism", parameter.getName());
-    EXPECT_EQ(hexPrism_id3, parameter.getId());
+    EXPECT_EQ(hexPrism_id3, parameter.id());
 
-    ASSERT_EQ(1, parameter.NumberOfParams<point3D>());
-    ASSERT_EQ(3, parameter.NumberOfParams<vector3D>());
-    EXPECT_EQ(1, parameter.NumberOfParams<int>());
-    ASSERT_EQ(0, parameter.NumberOfParams<float>());
-    EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
-    EXPECT_EQ("center of front", parameter.getParamName<point3D>(0));
-    EXPECT_EQ("thickness vector", parameter.getParamName<vector3D>(0));
-    EXPECT_EQ("vector to first point", parameter.getParamName<vector3D>(1));
-    EXPECT_EQ("key width vector", parameter.getParamName<vector3D>(2));
-    EXPECT_EQ("stack parameter", parameter.getParamName<int>(0));
+    ASSERT_EQ(5, parameter.numberOfValues());
+    EXPECT_EQ("center of front", parameter.valueName(0));
+    EXPECT_EQ("thickness vector", parameter.valueName(1));
+    EXPECT_EQ("vector to first point", parameter.valueName(2));
+    EXPECT_EQ("key width vector", parameter.valueName(3));
+    EXPECT_EQ("stack parameter", parameter.valueName(4));
   }
 
   // hexprism type 3
@@ -136,18 +128,14 @@ TEST(HexprismTest, parameter)
     auto parameter = factory.shapeParameter(hexPrism_id3);
 
     EXPECT_EQ("hexPrism", parameter.getName());
-    EXPECT_EQ(hexPrism_id3, parameter.getId());
+    EXPECT_EQ(hexPrism_id3, parameter.id());
 
-    ASSERT_EQ(1, parameter.NumberOfParams<point3D>());
-    ASSERT_EQ(3, parameter.NumberOfParams<vector3D>());
-    EXPECT_EQ(1, parameter.NumberOfParams<int>());
-    ASSERT_EQ(0, parameter.NumberOfParams<float>());
-    EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
-    EXPECT_EQ("center of front", parameter.getParamName<point3D>(0));
-    EXPECT_EQ("thickness vector", parameter.getParamName<vector3D>(0));
-    EXPECT_EQ("vector to first point", parameter.getParamName<vector3D>(1));
-    EXPECT_EQ("key width vector", parameter.getParamName<vector3D>(2));
-    EXPECT_EQ("stack parameter", parameter.getParamName<int>(0));
+    ASSERT_EQ(5, parameter.numberOfValues());
+    EXPECT_EQ("center of front", parameter.valueName(0));
+    EXPECT_EQ("thickness vector", parameter.valueName(1));
+    EXPECT_EQ("vector to first point", parameter.valueName(2));
+    EXPECT_EQ("key width vector", parameter.valueName(3));
+    EXPECT_EQ("stack parameter", parameter.valueName(4));
   }
 
   Shape::removeShapesFromFactory(factory);

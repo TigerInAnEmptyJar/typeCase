@@ -8,16 +8,20 @@ namespace {
 const boost::uuids::uuid triangle_id{{0xf2, 0x04, 0x0a, 0xb6, 0x14, 0x3f, 0x11, 0xe9, 0xab, 0x14,
                                       0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct TriangleShapeProvider : public FactoryShapeProvider,
+                               public std::enable_shared_from_this<TriangleShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
     factory.addShapeToFactory(
         triangle::getDescription(), ShapeType::PlanarShape,
         [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
-          return std::shared_ptr<planeShape>(new triangle(
-              param.getParam<point3D>(0), param.getParam<point3D>(1), param.getParam<point3D>(2)));
+          if (!checkParameter(param)) {
+            return {};
+          }
+          return std::shared_ptr<planeShape>(new triangle(param.value(0).value<point3D>(),
+                                                          param.value(1).value<point3D>(),
+                                                          param.value(2).value<point3D>()));
         },
         [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
         [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
@@ -27,9 +31,18 @@ struct ShapeProvider : public FactoryShapeProvider,
     factory.removeShapeFromFactory(triangle_id);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 3) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::POINT3D);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<TriangleShapeProvider> prov = [] {
+  auto r = std::make_shared<TriangleShapeProvider>();
   r->install();
   return r;
 }();
@@ -79,11 +92,11 @@ triangle::triangle(const shape_parameter& description) : planeShape("triangle")
 {
   if (description.getName() != "triangle")
     return;
-  if (description.NumberOfParams<point3D>() < 3)
+  if (TriangleShapeProvider::checkParameter(description))
     return;
-  A_ = description.getParam<point3D>(0);
-  B_ = description.getParam<point3D>(1);
-  C_ = description.getParam<point3D>(2);
+  A_ = description.value(0).value<point3D>();
+  B_ = description.value(1).value<point3D>();
+  C_ = description.value(2).value<point3D>();
   point3D H = A_ + ((B_ - A_) * 0.5);
   center = H + ((C_ - H) * (1 / 3.0));
   normal = (A_ - B_) ^ (B_ - C_);
@@ -106,17 +119,6 @@ float triangle::area() const
   float height = ((C_ - A_) * sin(acos(cosAlpha))).length();
   return 0.5 * base * height;
 }
-
-// plane3D planeShape::getPlane()const
-//{
-//  return plane3D();//getCenter(),getNormal());
-//}
-
-// void planeShape::setPlane(const plane3D &p)
-//{
-//  setCenter(p.Foot());
-// normal=p.Normal();
-//}
 
 triangle::~triangle() {}
 
@@ -337,50 +339,18 @@ vector3D triangle::distance(const sLine3D& line)
     return (aa + cc) * 0.5;
   return (aa + bb) * 0.5;
 }
-// #include <TClass.h>
-// void triangle::Streamer(TBuffer &b)
-// {
-//     if(b.IsWriting())
-//     {
-// 	triangle::Class()->WriteBuffer(b, this);
-// 	b<<A_.X()<<A_.Y()<<A_.Z();
-// 	b<<B_.X()<<B_.Y()<<B_.Z();
-// 	b<<C_.X()<<C_.Y()<<C_.Z();
-//     }
-//     else
-//     {
-// 	triangle::Class()->ReadBuffer(b, this);
-// 	float f1,f2,f3,f4,f5,f6,f7,f8,f9;
-// 	b>>f1>>f2>>f3>>f4>>f5>>f6>>f7>>f8>>f9;
-// 	A_.setValues(f1,f2,f3);
-// 	B_.setValues(f4,f5,f6);
-// 	C_.setValues(f7,f8,f9);
-//     }
-// }
+
 int triangle::getNumberOfPoints() const { return 3; }
-//#include <TPolyLine.h>
-extern void DrawPoints(int nPoints, point3D* points, const point3D& eye, const plane3D& plane,
-                       vector4D* boundingBox, TObject** ident, int lColor, int fColor, int fStyle);
-void triangle::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox,
-                    TObject** ident, int lColor, int fColor, int fStyle) const
-{
-  point3D ps[3] = {getPoint(0), getPoint(1), getPoint(2)};
-  DrawPoints(3, ps, eye, plane, boundingBox, ident, lColor, fColor, fStyle);
-}
-void triangle::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, int lColor,
-                    int fColor, int fStyle) const
-{
-  Draw(eye, plane, boundingBox, NULL, lColor, fColor, fStyle);
-}
+
 shape_parameter triangle::description() const
 {
   shape_parameter sh;
   sh.setName("triangle");
   sh.setId(triangle_id);
   sh.setCompleteWrite(true);
-  sh.addParam<point3D>(A_, "A");
-  sh.addParam<point3D>(B_, "B");
-  sh.addParam<point3D>(C_, "C");
+  sh.addValue("A", A_);
+  sh.addValue("B", B_);
+  sh.addValue("C", C_);
   return sh;
 }
 shape_parameter triangle::getDescription()
@@ -388,9 +358,9 @@ shape_parameter triangle::getDescription()
   shape_parameter sh;
   sh.setName("triangle");
   sh.setId(triangle_id);
-  sh.addParam<point3D>(point3D(), "A");
-  sh.addParam<point3D>(point3D(), "B");
-  sh.addParam<point3D>(point3D(), "C");
+  sh.addValue("A", point3D());
+  sh.addValue("B", point3D());
+  sh.addValue("C", point3D());
   sh.setCompleteWrite(false);
   return sh;
 }

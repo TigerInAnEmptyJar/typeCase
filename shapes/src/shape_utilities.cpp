@@ -238,36 +238,36 @@ float getLightWay(volumeShape* sh, point3D onPoint, bool from)
   }
   return -1;
 }
-extern base_shape* getShape(const shape_parameter& sp);
 float getLightWay(shape_parameter& sp, sLine3D& path, bool from)
 {
-  if (sp.getName() == "wedge" || sp.getName() == "spiral") {
-    plane3D pl(sp.getParam<point3D>(0), sp.getParam<vector3D>(0));
-    point3D p = pl - path;
-    vector3D v = p - pl.Foot();
-    return sp.getParam<float>(1) - v.R();
-  } else if (sp.getName() == "fiber") {
-    vector3D shift = 0.5 * sp.getParam<vector3D>(0) +
-                     sp.getParam<vector3D>(1) * (sp.getParam<int>(1) + 0.5 * sp.getParam<int>(0));
-    sLine3D middleLine(sp.getParam<point3D>(0) + shift, sp.getParam<vector3D>(0));
-    lLine3D poca = middleLine - path;
-    return (poca.Q() - (sp.getParam<point3D>(0) + shift)).R();
-  } else if (sp.getName() == "wedge-cone") {
-    float z = sp.getParam<float>(2) * sp.getParam<float>(0) /
-              (sp.getParam<float>(0) - sp.getParam<float>(1));
-    float oR = sqrt(z * z + sp.getParam<float>(0) * sp.getParam<float>(0));
-    float alpha = atan(abs(sp.getParam<float>(0) - sp.getParam<float>(1)) / sp.getParam<float>(2));
-    float lrp = (z * sin(path.Direction().Theta()) / sin(M_PI - alpha - path.Direction().Theta()));
-    return oR - lrp;
-  } else {
-    volumeShape* sh = (volumeShape*)getShape(sp);
-    if (sh == NULL)
-      return -1;
-    point3D op = sh->entrance(path);
-    float ret = getLightWay(sh, op, from);
-    delete sh;
-    return ret;
-  }
+  //  if (sp.getName() == "wedge" || sp.getName() == "spiral") {
+  //    plane3D pl(sp.getParam<point3D>(0), sp.getParam<vector3D>(0));
+  //    point3D p = pl - path;
+  //    vector3D v = p - pl.Foot();
+  //    return sp.getParam<float>(1) - v.R();
+  //  } else if (sp.getName() == "fiber") {
+  //    vector3D shift = 0.5 * sp.getParam<vector3D>(0) +
+  //                     sp.getParam<vector3D>(1) * (sp.getParam<int>(1) + 0.5 *
+  //                     sp.getParam<int>(0));
+  //    sLine3D middleLine(sp.getParam<point3D>(0) + shift, sp.getParam<vector3D>(0));
+  //    lLine3D poca = middleLine - path;
+  //    return (poca.Q() - (sp.getParam<point3D>(0) + shift)).R();
+  //  } else if (sp.getName() == "wedge-cone") {
+  //    float z = sp.getParam<float>(2) * sp.getParam<float>(0) /
+  //              (sp.getParam<float>(0) - sp.getParam<float>(1));
+  //    float oR = sqrt(z * z + sp.getParam<float>(0) * sp.getParam<float>(0));
+  //    float alpha = atan(abs(sp.getParam<float>(0) - sp.getParam<float>(1)) /
+  //    sp.getParam<float>(2)); float lrp = (z * sin(path.Direction().Theta()) / sin(M_PI - alpha -
+  //    path.Direction().Theta())); return oR - lrp;
+  //  } else {
+  //    volumeShape* sh = (volumeShape*)getShape(sp);
+  //    if (sh == NULL)
+  //      return -1;
+  //    point3D op = sh->entrance(path);
+  //    float ret = getLightWay(sh, op, from);
+  //    delete sh;
+  //    return ret;
+  //  }
   return -1;
 }
 float getLightWay(volumeShape* sh, const sLine3D& path, bool from)

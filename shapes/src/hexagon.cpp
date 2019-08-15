@@ -7,16 +7,20 @@ namespace {
 const boost::uuids::uuid hexagon_id = {{0x49, 0xde, 0xdb, 0xfa, 0x11, 0xeb, 0x11, 0xe9, 0xab, 0x14,
                                         0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct HexagonShapeProvider : public FactoryShapeProvider,
+                              public std::enable_shared_from_this<HexagonShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
     factory.addShapeToFactory(
         hexagon::getDescription(), ShapeType::PlanarShape,
         [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
-          return std::shared_ptr<planeShape>(new hexagon(
-              param.getParam<point3D>(0), param.getParam<point3D>(1), param.getParam<vector3D>(0)));
+          if (!checkParameter(param)) {
+            return {};
+          }
+          return std::shared_ptr<planeShape>(new hexagon(param.value(0).value<point3D>(),
+                                                         param.value(1).value<point3D>(),
+                                                         param.value(2).value<vector3D>()));
         },
         [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
         [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
@@ -26,9 +30,18 @@ struct ShapeProvider : public FactoryShapeProvider,
     factory.removeShapeFromFactory(hexagon_id);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 3) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::VECTOR3D);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<HexagonShapeProvider> prov = [] {
+  auto r = std::make_shared<HexagonShapeProvider>();
   r->install();
   return r;
 }();
@@ -52,12 +65,13 @@ hexagon::hexagon(const shape_parameter& description) : planeShape("hexagon")
 {
   if (description.getName() != "hexagon")
     return;
-  if (description.NumberOfParams<point3D>() < 2 || description.NumberOfParams<vector3D>() < 1)
+  if (!HexagonShapeProvider::checkParameter(description)) {
     return;
-  center = description.getParam<point3D>(0);
-  normal = description.getParam<vector3D>(0);
+  }
+  center = description.value(0).value<point3D>();
+  normal = description.value(2).value<vector3D>();
   normal.normalize();
-  A_ = description.getParam<point3D>(1);
+  A_ = description.value(1).value<point3D>();
   circRadius = (A_ - center).R();
 }
 int hexagon::getNumberOfPoints() const { return 6; }
@@ -227,27 +241,14 @@ vector3D hexagon::distance(const sLine3D& line)
   return l;
 }
 
-extern void DrawPoints(int nPoints, point3D* points, const point3D& eye, const plane3D& plane,
-                       vector4D* boundingBox, TObject** ident, int lColor, int fColor, int fStyle);
-void hexagon::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, TObject** ident,
-                   int lColor, int fColor, int fStyle) const
-{
-  point3D ps[6] = {getPoint(0), getPoint(1), getPoint(2), getPoint(3), getPoint(4), getPoint(5)};
-  DrawPoints(6, ps, eye, plane, boundingBox, ident, lColor, fColor, fStyle);
-}
-void hexagon::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, int lColor,
-                   int fColor, int fStyle) const
-{
-  Draw(eye, plane, boundingBox, NULL, lColor, fColor, fStyle);
-}
 shape_parameter hexagon::description() const
 {
   shape_parameter sh;
   sh.setName("hexagon");
   sh.setId(hexagon_id);
-  sh.addParam<point3D>(center, "center");
-  sh.addParam<point3D>(A_, "A");
-  sh.addParam<vector3D>(normal, "normal");
+  sh.addValue("center", center);
+  sh.addValue("A", A_);
+  sh.addValue("normal", normal);
   sh.setCompleteWrite(true);
   return sh;
 }
@@ -256,9 +257,9 @@ shape_parameter hexagon::getDescription()
   shape_parameter sh;
   sh.setName("hexagon");
   sh.setId(hexagon_id);
-  sh.addParam<point3D>(point3D(), "center");
-  sh.addParam<point3D>(point3D(), "A");
-  sh.addParam<vector3D>(vector3D(), "normal");
+  sh.addValue("center", point3D());
+  sh.addValue("A", point3D());
+  sh.addValue("normal", vector3D());
   sh.setCompleteWrite(false);
   return sh;
 }

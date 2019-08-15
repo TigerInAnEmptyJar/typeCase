@@ -26,103 +26,59 @@ public:
   boost::uuids::uuid _algorithm2_id;
 };
 
+MATCHER_P(IsValueEqual, value1, "")
+{
+  auto& v1 = static_cast<ParameterValue const&>(value1);
+  auto& v2 = static_cast<ParameterValue const&>(arg);
+  EXPECT_EQ(v1.valueType(), v2.valueType());
+  if (v1.valueType() == v2.valueType()) {
+    switch (v1.valueType()) {
+    case ParameterValue::ValueType::BOOLEAN:
+    case ParameterValue::ValueType::INT:
+    case ParameterValue::ValueType::FLOAT:
+    case ParameterValue::ValueType::DOUBLE:
+    case ParameterValue::ValueType::POINT3D:
+    case ParameterValue::ValueType::STRING:
+    case ParameterValue::ValueType::VECTOR_INT:
+    case ParameterValue::ValueType::VECTOR_FLOAT:
+    case ParameterValue::ValueType::VECTOR_DOUBLE:
+    case ParameterValue::ValueType::VECTOR_STRING:
+      EXPECT_EQ(v1, v2);
+      break;
+    case ParameterValue::ValueType::VECTOR3D:
+      EXPECT_GE(0.0001, (v1.value<vector3D>() - v2.value<vector3D>()).length());
+      break;
+    default:
+      break;
+    }
+  }
+  return v1.valueType() == v2.valueType();
+}
+
 MATCHER_P(IsShapeEqual, shape1, "")
 {
   auto& sh1 = static_cast<shape_parameter const&>(shape1);
   auto& sh2 = static_cast<shape_parameter const&>(arg);
-  bool pointsEqual = (sh1.NumberOfParams<point3D>() == sh2.NumberOfParams<point3D>());
-  if (pointsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<point3D>(); i++) {
-      if ((!(sh1.getParam<point3D>(i) == sh2.getParam<point3D>(i))) ||
-          sh1.getParamName<point3D>(i) != sh2.getParamName<point3D>(i)) {
-        return false;
-      }
-    }
+  if (sh1.numberOfValues() != sh2.numberOfValues()) {
+    return false;
   }
-  bool vectorsEqual = (sh1.NumberOfParams<vector3D>() == sh2.NumberOfParams<vector3D>());
-  if (vectorsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<vector3D>(); i++) {
-      if ((sh1.getParam<vector3D>(i) - sh2.getParam<vector3D>(i)).length() > 0.0001 ||
-          sh1.getParamName<vector3D>(i) != sh2.getParamName<vector3D>(i)) {
-        return false;
-      }
-    }
+  for (size_t i = 0; i < sh1.numberOfValues(); i++) {
+    EXPECT_EQ(sh1.valueName(i), sh2.valueName(i));
+    EXPECT_THAT(sh1.value(i), IsValueEqual(sh2.value(i)));
   }
-  bool intsEqual = (sh1.NumberOfParams<int>() == sh2.NumberOfParams<int>());
-  if (intsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<int>(); i++) {
-      if ((!(sh1.getParam<int>(i) == sh2.getParam<int>(i))) ||
-          sh1.getParamName<int>(i) != sh2.getParamName<int>(i)) {
-        return false;
-      }
-    }
-  }
-  bool floatsEqual = (sh1.NumberOfParams<float>() == sh2.NumberOfParams<float>());
-  if (floatsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<float>(); i++) {
-      if ((!(sh1.getParam<float>(i) == sh2.getParam<float>(i))) ||
-          sh1.getParamName<float>(i) != sh2.getParamName<float>(i)) {
-        return false;
-      }
-    }
-  }
-  bool stringsEqual = (sh1.NumberOfParams<std::string>() == sh2.NumberOfParams<std::string>());
-  if (stringsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<std::string>(); i++) {
-      if ((!(sh1.getParam<std::string>(i) == sh2.getParam<std::string>(i))) ||
-          sh1.getParamName<std::string>(i) != sh2.getParamName<std::string>(i)) {
-        return false;
-      }
-    }
-  }
-  return shape1.getName() == arg.getName() && pointsEqual && vectorsEqual && intsEqual &&
-         floatsEqual && stringsEqual;
+  return shape1.getName() == arg.getName();
 }
 
 MATCHER_P(IsShapeEqual_0, shape1, "")
 {
   auto& sh1 = static_cast<shape_parameter const&>(shape1);
   auto& sh2 = static_cast<shape_parameter const&>(arg);
-  bool pointsEqual = (sh1.NumberOfParams<point3D>() == sh2.NumberOfParams<point3D>());
-  if (pointsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<point3D>(); i++) {
-      if (sh1.getParamName<point3D>(i) != sh2.getParamName<point3D>(i)) {
-        return false;
-      }
-    }
+  if (sh1.numberOfValues() != sh2.numberOfValues()) {
+    return false;
   }
-  bool vectorsEqual = (sh1.NumberOfParams<vector3D>() == sh2.NumberOfParams<vector3D>());
-  if (vectorsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<vector3D>(); i++) {
-      if (sh1.getParamName<vector3D>(i) != sh2.getParamName<vector3D>(i)) {
-        return false;
-      }
-    }
+  for (size_t i = 0; i < sh1.numberOfValues(); i++) {
+    EXPECT_EQ(sh1.valueName(i), sh2.valueName(i));
+    EXPECT_EQ(sh1.value(i).valueType(), sh2.value(i).valueType());
   }
-  bool intsEqual = (sh1.NumberOfParams<int>() == sh2.NumberOfParams<int>());
-  if (intsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<int>(); i++) {
-      if (sh1.getParamName<int>(i) != sh2.getParamName<int>(i)) {
-        return false;
-      }
-    }
-  }
-  bool floatsEqual = (sh1.NumberOfParams<float>() == sh2.NumberOfParams<float>());
-  if (floatsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<float>(); i++) {
-      if (sh1.getParamName<float>(i) != sh2.getParamName<float>(i)) {
-        return false;
-      }
-    }
-  }
-  bool stringsEqual = (sh1.NumberOfParams<std::string>() == sh2.NumberOfParams<std::string>());
-  if (stringsEqual) {
-    for (int i = 0; i < sh1.NumberOfParams<std::string>(); i++) {
-      if (sh1.getParamName<std::string>(i) != sh2.getParamName<std::string>(i)) {
-        return false;
-      }
-    }
-  }
-  return shape1.getName() == arg.getName() && pointsEqual && vectorsEqual && intsEqual &&
-         floatsEqual && stringsEqual;
+  return shape1.getName() == arg.getName();
 }

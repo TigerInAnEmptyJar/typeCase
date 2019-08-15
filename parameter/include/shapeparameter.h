@@ -1,5 +1,4 @@
-#ifndef __SHAPEPARAM
-#define __SHAPEPARAM
+#pragma once
 #include "baseparameter.h"
 #include "geometry.h"
 
@@ -10,103 +9,25 @@ using namespace std;
 /*!
  * \brief The shape_parameter class
  */
-class shape_parameter : public base_parameter
+class shape_parameter : public values_parameter
 {
-private:
-  vector<single_parameter<point3D>> points;   //!
-  vector<single_parameter<vector3D>> vectors; //!
-  vector<single_parameter<int>> integers;     //!
-  vector<single_parameter<float>> floats;     //!
-  vector<single_parameter<string>> strings_;  //!
-  bool fcompleteWrite;                        //!
-
 public:
-  /*!
-   * \brief shape_parameter
-   *  Default constructor.
-   */
-  shape_parameter();
+  using values_parameter::values_parameter;
+  shape_parameter() = default;
+  shape_parameter(shape_parameter const&) = default;
+  shape_parameter(shape_parameter&&) = default;
+  ~shape_parameter() = default;
+
+  shape_parameter& operator=(shape_parameter const&) = default;
+  shape_parameter& operator=(shape_parameter&&) = default;
 
   /*!
-   * \brief shape_parameter
-   *  Copy constructor.
-   * \param sp
+   * \brief operator ==
+   * Comparison operator.
+   * \param other the parameter to compare to.
+   * \return true if both parameter are equal.
    */
-  shape_parameter(const shape_parameter& sp);
-
-  /*!
-   * \brief Destructor
-   */
-  ~shape_parameter();
-
   bool operator==(shape_parameter const& other) const;
-
-  /*!
-   * \brief get the id of the shape
-   * \return the id of the shape.
-   */
-  boost::uuids::uuid getId() const;
-
-  /*!
-   * \brief set the id of the shape
-   * \param newId the new id of the shape
-   */
-  void setId(boost::uuids::uuid newId);
-
-  /*!
-   * Template method. Returns the ith parameters value stored for the specified type. This can be
-   * int, float, point3D, vector3D or QString.
-   */
-  template <class T>
-  T getParam(int i) const;
-
-  /*!
-   * Template method. Returns the ith parameters name stored for the specified type. This can be
-   * int, float, point3D, vector3D or QString.
-   */
-  template <class T>
-  string getParamName(int i) const;
-
-  /*!
-   * Template method. Sets the ith parameters value of the specified type. This can be int, float,
-   * point3D, vector3D or QString.
-   */
-  template <class T>
-  void setParam(int i, const T& p);
-
-  /*!
-   * Template method. Sets the ith parameters name stored for the specified type. This can be int,
-   * float, point3D, vector3D or QString.
-   */
-  template <class T>
-  void setParamName(int i, string n);
-
-  /*!
-   * Template method. Adds a parameter to the list of parameters stored for the specified type. This
-   * can be int, float, point3D, vector3D or QString.
-   */
-  template <class T>
-  void addParam(T p, string n);
-
-  /*!
-   * Template method. Returns the number of parameters stored for the specified type. This can be
-   * int, float, point3D, vector3D or QString.
-   */
-  template <class T>
-  int NumberOfParams() const;
-
-  /*!
-   * \brief clearProperties
-   *  Empties all parameters.
-   */
-  void clearProperties();
-
-  /*!
-   * \brief operator =
-   *  Copy operator.
-   * \param sh
-   */
-  void operator=(const shape_parameter& sh);
 
   /*!
    * \brief completeWrite
@@ -122,15 +43,10 @@ public:
    * \param value
    */
   void setCompleteWrite(bool value = true);
-};
 
-/*!
- * \brief operator >>
- * \param i
- * \param sh
- * \return
- */
-istream& operator>>(istream& i, shape_parameter& sh);
+private:
+  bool _completeWrite;
+};
 
 /*!
  * \brief operator <<
@@ -139,5 +55,3 @@ istream& operator>>(istream& i, shape_parameter& sh);
  * \return
  */
 ostream& operator<<(ostream& o, const shape_parameter& sh);
-
-#endif

@@ -414,32 +414,32 @@ std::shared_ptr<base_parameter> JsonParameterReader::toShape(QJsonObject const& 
         result.insert(std::make_pair(
             ParameterValue::ValueType::INT,
             [](QJsonObject const& o, std::shared_ptr<shape_parameter> a, std::string const& n) {
-              a->addParam(o.value(Keys::pValue).toInt(-1), n);
+              a->addValue(n, o.value(Keys::pValue).toInt(-1));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::FLOAT,
             [](QJsonObject const& o, std::shared_ptr<shape_parameter> a, std::string const& n) {
-              a->addParam(static_cast<float>(o.value(Keys::pValue).toDouble(-1)), n);
+              a->addValue(n, static_cast<float>(o.value(Keys::pValue).toDouble(-1)));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::DOUBLE,
             [](QJsonObject const& o, std::shared_ptr<shape_parameter> a, std::string const& n) {
-              a->addParam(static_cast<float>(o.value(Keys::pValue).toDouble(-1)), n);
+              a->addValue(n, static_cast<float>(o.value(Keys::pValue).toDouble(-1)));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::STRING,
             [](QJsonObject const& o, std::shared_ptr<shape_parameter> a, std::string const& n) {
-              a->addParam(o.value(Keys::pValue).toString().toStdString(), n);
+              a->addValue(n, o.value(Keys::pValue).toString().toStdString());
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::POINT3D,
             [](QJsonObject const& o, std::shared_ptr<shape_parameter> a, std::string const& n) {
-              a->addParam(toPoint(o.value(Keys::pValue).toString().toStdString()), n);
+              a->addValue(n, toPoint(o.value(Keys::pValue).toString().toStdString()));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::VECTOR3D,
             [](QJsonObject const& o, std::shared_ptr<shape_parameter> a, std::string const& n) {
-              a->addParam(toVector(o.value(Keys::pValue).toString().toStdString()), n);
+              a->addValue(n, toVector(o.value(Keys::pValue).toString().toStdString()));
             }));
         return result;
       }();

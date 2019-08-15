@@ -38,18 +38,19 @@ void ParameterIoTest::appendSomeAlgorithms(std::vector<std::shared_ptr<base_para
 
 void ParameterIoTest::appendSomeShapes(std::vector<std::shared_ptr<base_parameter>>& items)
 {
+  using namespace std::string_literals;
   shape_parameter shape1;
   shape1.setId(_shape1_id);
   shape1.setName("testShape 1");
   shape1.setDescription("This is a test shape.");
   shape1.setCompleteWrite(true);
-  shape1.addParam<int>(10, "param1");
-  shape1.addParam<int>(26, "param2");
-  shape1.addParam<float>(123.5f, "param3");
-  shape1.addParam<point3D>(point3D(1, 2, 3), "param4");
-  shape1.addParam<point3D>(point3D(4, 5, 6), "param5");
-  shape1.addParam<vector3D>(vector3D(1, 3, 5), "param6");
-  shape1.addParam<vector3D>(vector3D(11, 22, 33), "param7");
+  shape1.addValue("param4", point3D(1, 2, 3));
+  shape1.addValue("param5", point3D(4, 5, 6));
+  shape1.addValue("param6", vector3D(1, 3, 5));
+  shape1.addValue("param7", vector3D(11, 22, 33));
+  shape1.addValue("param1", static_cast<int>(10));
+  shape1.addValue("param2", static_cast<int>(26));
+  shape1.addValue("param3", 123.5f);
   items.push_back(std::make_shared<shape_parameter>(shape1));
 
   shape_parameter shape2;
@@ -57,11 +58,11 @@ void ParameterIoTest::appendSomeShapes(std::vector<std::shared_ptr<base_paramete
   shape2.setName("testShape 2");
   shape2.setDescription("This is yet another test shape.");
   shape2.setCompleteWrite(true);
-  shape2.addParam<int>(10, "param-1");
-  shape2.addParam<float>(26.25, "param-2");
-  shape2.addParam<float>(123.5f, "param-3");
-  shape2.addParam<std::string>("foo", "param-4");
-  shape2.addParam<std::string>("bar", "param-5");
+  shape2.addValue("param-1", static_cast<int>(10));
+  shape2.addValue("param-2", 26.25f);
+  shape2.addValue("param-3", 123.5f);
+  shape2.addValue("param-4", "foo"s);
+  shape2.addValue("param-5", "bar"s);
   items.push_back(std::make_shared<shape_parameter>(shape2));
 }
 

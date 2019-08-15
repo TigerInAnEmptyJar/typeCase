@@ -22,18 +22,18 @@ TEST(CylinderTest, provider)
 
   auto parameter = factory.shapeParameter(cylinder_id);
 
-  parameter.setParam<point3D>(0, {0, 0, 0});
-  parameter.setParam<vector3D>(0, {0, 0, 1});
-  parameter.setParam<float>(0, 10.1f);
+  parameter.value(0) = point3D{0, 0, 0};
+  parameter.value(1) = vector3D{0, 0, 1};
+  parameter.value(2) = static_cast<float>(10.1f);
 
   auto shape = factory.createVolume(parameter);
   EXPECT_EQ("cylinder", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<cylinder>(shape));
   auto cylinder_sh = dynamic_pointer_cast<cylinder>(shape);
 
-  EXPECT_EQ(parameter.getParam<point3D>(0), cylinder_sh->getCenter());
-  EXPECT_EQ(parameter.getParam<vector3D>(0), cylinder_sh->getDirection());
-  EXPECT_EQ(parameter.getParam<float>(0), cylinder_sh->getRadius());
+  EXPECT_EQ(parameter.value(0).value<point3D>(), cylinder_sh->getCenter());
+  EXPECT_EQ(parameter.value(1).value<vector3D>(), cylinder_sh->getDirection());
+  EXPECT_EQ(parameter.value(2).value<float>(), cylinder_sh->getRadius());
 
   // for cylinders no series generation or envelope is defined
   auto nextShape = factory.createNext(parameter, 2);
@@ -53,16 +53,12 @@ TEST(CylinderTest, parameter)
   auto parameter = factory.shapeParameter(cylinder_id);
 
   EXPECT_EQ("cylinder", parameter.getName());
-  EXPECT_EQ(cylinder_id, parameter.getId());
+  EXPECT_EQ(cylinder_id, parameter.id());
 
-  ASSERT_EQ(1, parameter.NumberOfParams<point3D>());
-  ASSERT_EQ(1, parameter.NumberOfParams<vector3D>());
-  EXPECT_EQ(0, parameter.NumberOfParams<int>());
-  ASSERT_EQ(1, parameter.NumberOfParams<float>());
-  EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
-  EXPECT_EQ("center", parameter.getParamName<point3D>(0));
-  EXPECT_EQ("direction", parameter.getParamName<vector3D>(0));
-  EXPECT_EQ("radius", parameter.getParamName<float>(0));
+  ASSERT_EQ(3, parameter.numberOfValues());
+  EXPECT_EQ("center", parameter.valueName(0));
+  EXPECT_EQ("direction", parameter.valueName(1));
+  EXPECT_EQ("radius", parameter.valueName(2));
 
   Shape::removeShapesFromFactory(factory);
 }

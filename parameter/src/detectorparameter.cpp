@@ -61,37 +61,6 @@ void detector_parameter::setMaterial(material_parameter* matIn)
 
 bool detector_parameter::isCircular() const { return circular; }
 void detector_parameter::setCircular(bool circ) { circular = circ; }
-istream& operator>>(istream& i, detector_parameter& d)
-{
-  //    int zahl1,zahl2,zahl3,zahl4,zahl5,zahl;
-  int zahl;
-  float value1; //,value2,value3;
-  char c;
-  string s;
-  i >> zahl;
-  d.setNumberOfElements(zahl);
-  i >> zahl;
-  d.setStackType(zahl);
-  i >> zahl;
-  d.setID(zahl);
-  i >> zahl;
-  d.setMaterial(zahl);
-  i >> value1;
-  d.setMaxDistance(value1);
-  s = "";
-  i.get(c);
-  while (c != '\n' && !i.eof()) {
-    s = s + c;
-    i.get(c);
-  }
-  //  i.getline(li,100);
-  d.setName(s);
-  shape_parameter sh;
-  i >> sh;
-
-  d.setShape(sh);
-  return i;
-}
 
 bool detector_parameter::operator==(detector_parameter const& other) const
 {
@@ -243,68 +212,4 @@ ostream& operator<<(ostream& o, const reaction_parameter& d)
   sh = d.getTargetShape();
   o << sh;
   return o;
-  int zahl = sh.NumberOfParams<point3D>();
-  o << (zahl) << " ";
-  zahl = sh.NumberOfParams<vector3D>();
-  o << zahl << " ";
-  zahl = sh.NumberOfParams<int>();
-  o << zahl << " ";
-  zahl = sh.NumberOfParams<float>();
-  o << zahl << " ";
-  zahl = sh.NumberOfParams<string>();
-  o << zahl;
-  o << sh.getName().data();
-  o << endl;
-  point3D p;
-  vector3D v;
-  int pec = o.precision();
-  o.precision(10);
-  for (int k = 0; k < sh.NumberOfParams<point3D>(); k++) {
-    p = sh.getParam<point3D>(k);
-    o << p.X() << " " << p.Y() << " " << p.Z() << sh.getParamName<point3D>(k).data() << endl;
-  }
-  for (int k = 0; k < sh.NumberOfParams<vector3D>(); k++) {
-    v = sh.getParam<vector3D>(k);
-    o << v.Theta() << " " << v.Phi() << " " << v.R() << sh.getParamName<vector3D>(k).data() << endl;
-  }
-  for (int k = 0; k < sh.NumberOfParams<int>(); k++) {
-    o << sh.getParam<int>(k) << sh.getParamName<int>(k).data() << endl;
-  }
-  for (int k = 0; k < sh.NumberOfParams<float>(); k++) {
-    o << sh.getParam<float>(k) << sh.getParamName<float>(k).data() << endl;
-  }
-  for (int k = 0; k < sh.NumberOfParams<string>(); k++) {
-    o << sh.getParam<string>(k).data() << "\n" << sh.getParamName<string>(k).data() << endl;
-  }
-  o.precision(pec);
-  //    o<<d.getTargetShape()<<endl;
-  return o;
-}
-
-istream& operator>>(istream& i, reaction_parameter& d)
-{
-  int zahl;
-  float z;
-  i >> zahl;
-  d.setTwoBeams(zahl == 1);
-  i >> zahl;
-  d.setMaterial(0, zahl);
-  i >> zahl;
-  d.setMaterial(1, zahl);
-  i >> z;
-  d.setBeamMomentum(z);
-  if (d.hasTwoBeams()) {
-    i >> z;
-    d.setBeamMomentum(z, 1);
-  }
-  char li[250];
-  i.getline(li, 250);
-  d.setName(string(li));
-  string lis;
-  std::getline(i, lis);
-  d.setDescription(lis);
-  shape_parameter sh;
-  i >> sh;
-  d.setTargetShape(sh);
-  return i;
 }

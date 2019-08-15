@@ -40,7 +40,7 @@ bool ShapeFactory::isShapeDefined(boost::uuids::uuid const& id) const
 
 std::shared_ptr<volumeShape> ShapeFactory::createVolume(shape_parameter const& shape) const
 {
-  auto theShape = installed_shapes.find(shape.getId());
+  auto theShape = installed_shapes.find(shape.id());
   if (theShape == installed_shapes.end()) {
     return nullptr;
   }
@@ -54,7 +54,7 @@ std::shared_ptr<volumeShape> ShapeFactory::createVolume(shape_parameter const& s
 std::shared_ptr<volumeShape> ShapeFactory::createNext(shape_parameter const& first_element,
                                                       size_t num) const
 {
-  auto theShape = installed_shapes.find(first_element.getId());
+  auto theShape = installed_shapes.find(first_element.id());
   if (theShape == installed_shapes.end()) {
     return nullptr;
   }
@@ -69,7 +69,7 @@ std::shared_ptr<volumeShape> ShapeFactory::createNext(shape_parameter const& fir
 std::shared_ptr<volumeShape> ShapeFactory::createEnvelope(shape_parameter const& first_element,
                                                           size_t num) const
 {
-  auto theShape = installed_shapes.find(first_element.getId());
+  auto theShape = installed_shapes.find(first_element.id());
   if (theShape == installed_shapes.end()) {
     return nullptr;
   }
@@ -83,7 +83,7 @@ std::shared_ptr<volumeShape> ShapeFactory::createEnvelope(shape_parameter const&
 
 std::shared_ptr<planeShape> ShapeFactory::createPlane(shape_parameter const& shape) const
 {
-  auto theShape = installed_shapes.find(shape.getId());
+  auto theShape = installed_shapes.find(shape.id());
   if (theShape == installed_shapes.end()) {
     return nullptr;
   }
@@ -96,7 +96,7 @@ std::shared_ptr<planeShape> ShapeFactory::createPlane(shape_parameter const& sha
 
 std::shared_ptr<base_shape> ShapeFactory::createShape(shape_parameter const& shape) const
 {
-  auto theShape = installed_shapes.find(shape.getId());
+  auto theShape = installed_shapes.find(shape.id());
   if (theShape == installed_shapes.end()) {
     return nullptr;
   }
@@ -109,14 +109,14 @@ bool ShapeFactory::addShapeToFactory(shape_parameter const& shape, ShapeType sha
                                      ShapeFactory::SeriesCreation_t seriesCreation,
                                      ShapeFactory::EnvelopeCreation_t envelopeCreation)
 {
-  if (isShapeDefined(shape.getId())) {
+  if (isShapeDefined(shape.id())) {
     return false;
   }
 
   Configuration element{creationFunction, seriesCreation, envelopeCreation, shape, shapeType};
-  installed_shapes.insert(std::make_pair(shape.getId(), element));
+  installed_shapes.insert(std::make_pair(shape.id(), element));
 
-  shapeAdded(shape.getId());
+  shapeAdded(shape.id());
 
   return true;
 }

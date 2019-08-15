@@ -46,23 +46,33 @@ auto calculateLine2(size_t& currentLine, size_t currentLineSize, size_t remainin
                        stacki);
 }
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct HexprismShapeProvider : public FactoryShapeProvider,
+                               public std::enable_shared_from_this<HexprismShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
     auto shapeCreation = [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
-      return std::shared_ptr<volumeShape>(new hexPrism(
-          param.getParam<point3D>(0), param.getParam<vector3D>(0), param.getParam<vector3D>(1),
-          param.getParam<vector3D>(2), param.getParam<int>(0)));
+      if (!checkParameter(param)) {
+        return {};
+      }
+      return std::shared_ptr<volumeShape>(
+          new hexPrism(param.value(0).value<point3D>(), param.value(1).value<vector3D>(),
+                       param.value(2).value<vector3D>(), param.value(3).value<vector3D>(),
+                       param.value(4).value<int>()));
     };
     auto next1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
-      vector3D stDir = parameter.getParam<vector3D>(2) * (2 * times);
+      if (!checkParameter(parameter)) {
+        return {};
+      }
+      vector3D stDir = parameter.value(3).value<vector3D>() * (2 * times);
       auto result = parameter;
-      result.setParam<point3D>(0, result.getParam<point3D>(0) + stDir);
+      result.value(0) = result.value(0).value<point3D>() + stDir;
       return result;
     };
     auto next2 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       // in this case we have a stacking in zig-zags:
       // each line is stacked along dir3,
       // in the first line there are stacki elements, in the second (stacki +1), etc.
@@ -70,10 +80,10 @@ struct ShapeProvider : public FactoryShapeProvider,
       // in line stacki the middle element is left out
       // from there on there the next lines have one element less each.
       auto result = parameter;
-      auto center = parameter.getParam<point3D>(0);
-      auto lineStack = parameter.getParam<vector3D>(2);
-      auto nextLine = parameter.getParam<vector3D>(1);
-      auto stacki = parameter.getParam<int>(0);
+      auto center = parameter.value(0).value<point3D>();
+      auto lineStack = parameter.value(3).value<vector3D>();
+      auto nextLine = parameter.value(2).value<vector3D>();
+      auto stacki = parameter.value(4).value<int>();
 
       auto total = static_cast<size_t>(3 * abs(stacki) * (abs(stacki) - 1) - 3);
       if (times > total) {
@@ -96,11 +106,13 @@ struct ShapeProvider : public FactoryShapeProvider,
             centerOfLine -
             lineStack * abs(static_cast<int>(abs(static_cast<int>(stacki)) * 2 - 2 - lineNumber));
       }
-      result.setParam<point3D>(0,
-                               centerOfLine + nextLine * lineNumber + lineStack * itemInLine * 2);
+      result.value(0) = centerOfLine + nextLine * lineNumber + lineStack * itemInLine * 2;
       return result;
     };
     auto next3 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       // in this case we have a stacking in zig-zags:
       // each line is stacked along dir3,
       // in the first line there are stacki elements, in the second (stacki +1), etc.
@@ -108,10 +120,10 @@ struct ShapeProvider : public FactoryShapeProvider,
       // in line stacki the middle element is not left out
       // from there on there the next lines have one element less each.
       auto result = parameter;
-      auto center = parameter.getParam<point3D>(0);
-      auto lineStack = parameter.getParam<vector3D>(2);
-      auto nextLine = parameter.getParam<vector3D>(1);
-      auto stacki = parameter.getParam<int>(0);
+      auto center = parameter.value(0).value<point3D>();
+      auto lineStack = parameter.value(3).value<vector3D>();
+      auto nextLine = parameter.value(2).value<vector3D>();
+      auto stacki = parameter.value(4).value<int>();
 
       auto total = static_cast<size_t>(3 * abs(stacki) * (abs(stacki) - 1) - 3);
       if (times > total) {
@@ -129,25 +141,30 @@ struct ShapeProvider : public FactoryShapeProvider,
             centerOfLine -
             lineStack * abs(static_cast<int>(abs(static_cast<int>(stacki)) * 2 - 2 - lineNumber));
       }
-      result.setParam<point3D>(0,
-                               centerOfLine + nextLine * lineNumber + lineStack * itemInLine * 2);
+      result.value(0) = centerOfLine + nextLine * lineNumber + lineStack * itemInLine * 2;
       return result;
     };
     auto envelope1 = [](shape_parameter const& parameter, size_t times) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       auto result = parameter;
-      result.setParam<vector3D>(2, times * parameter.getParam<vector3D>(2));
+      result.value(3) = times * parameter.value(3).value<vector3D>();
       return result;
     };
     auto envelope2 = [](shape_parameter const& parameter, size_t) -> shape_parameter {
+      if (!checkParameter(parameter)) {
+        return {};
+      }
       auto result = parameter;
-      auto center = parameter.getParam<point3D>(0);
-      auto lineStack = parameter.getParam<vector3D>(2);
-      auto nextLine = parameter.getParam<vector3D>(1);
-      auto stacki = parameter.getParam<int>(0);
+      auto center = parameter.value(0).value<point3D>();
+      auto lineStack = parameter.value(3).value<vector3D>();
+      auto nextLine = parameter.value(2).value<vector3D>();
+      auto stacki = parameter.value(4).value<int>();
 
-      result.setParam<point3D>(0, center + 1.5 * stacki * nextLine + 1.5 * stacki * lineStack);
-      result.setParam<vector3D>(1, 3 * abs(stacki) * nextLine);
-      result.setParam<vector3D>(2, 3 * abs(stacki) * lineStack);
+      result.value(0) = center + 1.5 * stacki * nextLine + 1.5 * stacki * lineStack;
+      result.value(2) = 3 * abs(stacki) * nextLine;
+      result.value(3) = 3 * abs(stacki) * lineStack;
       return result;
     };
 
@@ -167,9 +184,20 @@ struct ShapeProvider : public FactoryShapeProvider,
   }
 
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 5) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(3).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(4).valueType() != ParameterValue::ValueType::INT);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<HexprismShapeProvider> prov = [] {
+  auto r = std::make_shared<HexprismShapeProvider>();
   r->install();
   return r;
 }();
@@ -198,14 +226,14 @@ hexPrism::hexPrism(const shape_parameter& description) : volumeShape("hexPrism")
 {
   if (description.getName() != "hexPrism")
     return;
-  if (description.NumberOfParams<point3D>() < 1 || description.NumberOfParams<int>() < 1 ||
-      description.NumberOfParams<vector3D>() < 3)
+  if (!HexprismShapeProvider::checkParameter(description)) {
     return;
-  center = description.getParam<point3D>(0);
-  dir1 = description.getParam<vector3D>(0);
-  dir2 = description.getParam<vector3D>(1);
-  dir3 = description.getParam<vector3D>(2);
-  stacki = description.getParam<int>(0);
+  }
+  center = description.value(0).value<point3D>();
+  dir1 = description.value(1).value<vector3D>();
+  dir2 = description.value(2).value<vector3D>();
+  dir3 = description.value(3).value<vector3D>();
+  stacki = description.value(4).value<int>();
 }
 
 volumeShape* hexPrism::getNext(int times, int stackType)
@@ -994,11 +1022,11 @@ shape_parameter hexPrism::description() const
   shape_parameter sh;
   sh.setName("hexPrism");
   sh.setCompleteWrite(true);
-  sh.addParam<point3D>(center, "center of front");
-  sh.addParam<vector3D>(dir1, "thickness vector");
-  sh.addParam<vector3D>(dir2, "vector to first point");
-  sh.addParam<vector3D>(dir3, "key width vector");
-  sh.addParam<int>(stacki, "stack parameter");
+  sh.addValue("center of front", center);
+  sh.addValue("thickness vector", dir1);
+  sh.addValue("vector to first point", dir2);
+  sh.addValue("key width vector", dir3);
+  sh.addValue("stack parameter", stacki);
   return sh;
 }
 shape_parameter hexPrism::getDescription()
@@ -1007,10 +1035,10 @@ shape_parameter hexPrism::getDescription()
   sh.setName("hexPrism");
   sh.setCompleteWrite(true);
   sh.setId(hexPrism_id1);
-  sh.addParam<point3D>(point3D(), "center of front");
-  sh.addParam<vector3D>(vector3D(), "thickness vector");
-  sh.addParam<vector3D>(vector3D(), "vector to first point");
-  sh.addParam<vector3D>(vector3D(), "key width vector");
-  sh.addParam<int>(0, "stack parameter");
+  sh.addValue("center of front", point3D());
+  sh.addValue("thickness vector", vector3D());
+  sh.addValue("vector to first point", vector3D());
+  sh.addValue("key width vector", vector3D());
+  sh.addValue("stack parameter", static_cast<int>(0));
   return sh;
 }

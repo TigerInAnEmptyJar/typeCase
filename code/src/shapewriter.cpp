@@ -321,9 +321,6 @@ istream& operator>>(istream& o, shapeWriter& wr)
     o.get(c);
   if (o.eof())
     return o;
-  shape_parameter pa;
-  o >> pa;
-  wr.setParameter(pa);
   o.get(c);
   while (!(c == '\n' || o.eof()))
     o.get(c);

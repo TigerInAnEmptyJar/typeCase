@@ -32,28 +32,28 @@ TEST(SpiralTest, spiral)
 
   // let's create a stack of 10 spirals .
 
-  parameter.setParam<point3D>(0, {0, 0, 0});
-  parameter.setParam<vector3D>(0, {0, 0, 1});
-  parameter.setParam<vector3D>(1, {1, 0, 0});
-  parameter.setParam<float>(0, 1.f);
-  parameter.setParam<float>(1, 10.f);
-  parameter.setParam<float>(2, static_cast<float>(30. * M_PI / 180.));
-  parameter.setParam<float>(3, 1.f);
-  parameter.setParam<float>(4, 1.f);
+  parameter.value(0) = point3D{0, 0, 0};
+  parameter.value(1) = vector3D{0, 0, 1};
+  parameter.value(2) = vector3D{1, 0, 0};
+  parameter.value(3) = static_cast<float>(1.f);
+  parameter.value(4) = static_cast<float>(10.f);
+  parameter.value(5) = static_cast<float>(30. * M_PI / 180.);
+  parameter.value(6) = static_cast<float>(1.f);
+  parameter.value(7) = static_cast<float>(1.f);
 
   auto shape = factory.createVolume(parameter);
   EXPECT_EQ("spiral", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<spiral>(shape));
   auto spiral_sh = dynamic_pointer_cast<spiral>(shape);
 
-  EXPECT_EQ(parameter.getParam<point3D>(0), spiral_sh->getCenter());
-  EXPECT_EQ(parameter.getParam<vector3D>(0), spiral_sh->getNormal());
-  EXPECT_EQ(parameter.getParam<vector3D>(1), spiral_sh->getLowerPhiEdge());
-  EXPECT_EQ(parameter.getParam<float>(0), spiral_sh->getInnerRadius());
-  EXPECT_EQ(parameter.getParam<float>(1), spiral_sh->getOuterRadius());
-  EXPECT_EQ(parameter.getParam<float>(2), spiral_sh->getPhiRange());
-  EXPECT_EQ(parameter.getParam<float>(3), spiral_sh->getThickness());
-  EXPECT_EQ(parameter.getParam<float>(4), spiral_sh->getBending());
+  EXPECT_EQ(parameter.value(0).value<point3D>(), spiral_sh->getCenter());
+  EXPECT_EQ(parameter.value(1).value<vector3D>(), spiral_sh->getNormal());
+  EXPECT_EQ(parameter.value(2).value<vector3D>(), spiral_sh->getLowerPhiEdge());
+  EXPECT_EQ(parameter.value(3).value<float>(), spiral_sh->getInnerRadius());
+  EXPECT_EQ(parameter.value(4).value<float>(), spiral_sh->getOuterRadius());
+  EXPECT_EQ(parameter.value(5).value<float>(), spiral_sh->getPhiRange());
+  EXPECT_EQ(parameter.value(6).value<float>(), spiral_sh->getThickness());
+  EXPECT_EQ(parameter.value(7).value<float>(), spiral_sh->getBending());
 
   std::vector<float> angles;
   angles.push_back(0);
@@ -77,13 +77,13 @@ TEST(SpiralTest, spiral)
 
     EXPECT_THAT(static_cast<float>(acos(next_sh->getLowerPhiEdge() * vector3D(1, 0, 0))),
                 testing::FloatNear(angles[i], 0.0001));
-    EXPECT_EQ(parameter.getParam<point3D>(0), next_sh->getCenter());
-    EXPECT_EQ(parameter.getParam<vector3D>(0), next_sh->getNormal());
-    EXPECT_EQ(parameter.getParam<float>(0), next_sh->getInnerRadius());
-    EXPECT_EQ(parameter.getParam<float>(1), next_sh->getOuterRadius());
-    EXPECT_EQ(parameter.getParam<float>(2), next_sh->getPhiRange());
-    EXPECT_EQ(parameter.getParam<float>(3), next_sh->getThickness());
-    EXPECT_EQ(parameter.getParam<float>(4), next_sh->getBending());
+    EXPECT_EQ(parameter.value(0).value<point3D>(), next_sh->getCenter());
+    EXPECT_EQ(parameter.value(1).value<vector3D>(), next_sh->getNormal());
+    EXPECT_EQ(parameter.value(3).value<float>(), next_sh->getInnerRadius());
+    EXPECT_EQ(parameter.value(4).value<float>(), next_sh->getOuterRadius());
+    EXPECT_EQ(parameter.value(5).value<float>(), next_sh->getPhiRange());
+    EXPECT_EQ(parameter.value(6).value<float>(), next_sh->getThickness());
+    EXPECT_EQ(parameter.value(7).value<float>(), next_sh->getBending());
   }
 
   {
@@ -94,12 +94,12 @@ TEST(SpiralTest, spiral)
     auto envelope_sh = dynamic_pointer_cast<spiral>(envelopeShape);
     ASSERT_NE(nullptr, envelope_sh);
     EXPECT_EQ(point3D(0, 0, 0), envelope_sh->getCenter());
-    EXPECT_EQ(parameter.getParam<point3D>(0), envelope_sh->getCenter());
-    EXPECT_EQ(parameter.getParam<vector3D>(0), envelope_sh->getNormal());
-    EXPECT_EQ(parameter.getParam<float>(0), envelope_sh->getInnerRadius());
-    EXPECT_EQ(parameter.getParam<float>(1), envelope_sh->getOuterRadius());
-    EXPECT_EQ(parameter.getParam<float>(2) * 10, envelope_sh->getPhiRange());
-    EXPECT_EQ(parameter.getParam<float>(3), envelope_sh->getThickness());
+    EXPECT_EQ(parameter.value(0).value<point3D>(), envelope_sh->getCenter());
+    EXPECT_EQ(parameter.value(1).value<vector3D>(), envelope_sh->getNormal());
+    EXPECT_EQ(parameter.value(3).value<float>(), envelope_sh->getInnerRadius());
+    EXPECT_EQ(parameter.value(4).value<float>(), envelope_sh->getOuterRadius());
+    EXPECT_EQ(parameter.value(5).value<float>() * 10, envelope_sh->getPhiRange());
+    EXPECT_EQ(parameter.value(6).value<float>(), envelope_sh->getThickness());
   }
 
   Shape::removeShapesFromFactory(factory);
@@ -113,21 +113,17 @@ TEST(SpiralTest, parameter)
   auto parameter = factory.shapeParameter(spiral_id);
 
   EXPECT_EQ("spiral", parameter.getName());
-  EXPECT_EQ(spiral_id, parameter.getId());
+  EXPECT_EQ(spiral_id, parameter.id());
 
-  ASSERT_EQ(1, parameter.NumberOfParams<point3D>());
-  ASSERT_EQ(2, parameter.NumberOfParams<vector3D>());
-  EXPECT_EQ(0, parameter.NumberOfParams<int>());
-  ASSERT_EQ(5, parameter.NumberOfParams<float>());
-  EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
-  EXPECT_EQ("center", parameter.getParamName<point3D>(0));
-  EXPECT_EQ("normal", parameter.getParamName<vector3D>(0));
-  EXPECT_EQ("lower phi edge", parameter.getParamName<vector3D>(1));
-  EXPECT_EQ("inner radius", parameter.getParamName<float>(0));
-  EXPECT_EQ("outer radius", parameter.getParamName<float>(1));
-  EXPECT_EQ("angle between edges", parameter.getParamName<float>(2));
-  EXPECT_EQ("thickness", parameter.getParamName<float>(3));
-  EXPECT_EQ("bending", parameter.getParamName<float>(4));
+  ASSERT_EQ(8, parameter.numberOfValues());
+  EXPECT_EQ("center", parameter.valueName(0));
+  EXPECT_EQ("normal", parameter.valueName(1));
+  EXPECT_EQ("lower phi edge", parameter.valueName(2));
+  EXPECT_EQ("inner radius", parameter.valueName(3));
+  EXPECT_EQ("outer radius", parameter.valueName(4));
+  EXPECT_EQ("angle between edges", parameter.valueName(5));
+  EXPECT_EQ("thickness", parameter.valueName(6));
+  EXPECT_EQ("bending", parameter.valueName(7));
 
   Shape::removeShapesFromFactory(factory);
 }

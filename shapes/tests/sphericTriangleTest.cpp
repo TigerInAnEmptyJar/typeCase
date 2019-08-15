@@ -22,22 +22,22 @@ TEST(SphericTriangleTest, provider)
 
   auto parameter = factory.shapeParameter(sphericTriangle_id);
 
-  parameter.setParam<point3D>(0, {0, 0, 0});
-  parameter.setParam<point3D>(1, {1, 0, 0});
-  parameter.setParam<point3D>(2, {2, 0, 0});
-  parameter.setParam<point3D>(3, {1.5, 0.5, 0});
-  parameter.setParam<int>(0, 3);
+  parameter.value(0) = point3D{0, 0, 0};
+  parameter.value(1) = point3D{1, 0, 0};
+  parameter.value(2) = point3D{2, 0, 0};
+  parameter.value(3) = point3D{1.5, 0.5, 0};
+  parameter.value(7) = static_cast<int>(3);
   auto normal = vector3D{0, 0, 1};
 
   auto shape = factory.createPlane(parameter);
   EXPECT_EQ("spheric triangle", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<sphericTriangle>(shape));
   auto sphericTriangle_sh = dynamic_pointer_cast<sphericTriangle>(shape);
-  EXPECT_EQ(parameter.getParam<point3D>(0), sphericTriangle_sh->getCenter());
+  EXPECT_EQ(parameter.value(0).value<point3D>(), sphericTriangle_sh->getCenter());
   EXPECT_EQ(normal, sphericTriangle_sh->getNormal());
-  EXPECT_EQ(parameter.getParam<point3D>(1), sphericTriangle_sh->A());
-  EXPECT_EQ(parameter.getParam<point3D>(2), sphericTriangle_sh->B());
-  EXPECT_EQ(parameter.getParam<point3D>(3), sphericTriangle_sh->C());
+  EXPECT_EQ(parameter.value(1).value<point3D>(), sphericTriangle_sh->A());
+  EXPECT_EQ(parameter.value(2).value<point3D>(), sphericTriangle_sh->B());
+  EXPECT_EQ(parameter.value(3).value<point3D>(), sphericTriangle_sh->C());
   EXPECT_TRUE(sphericTriangle_sh->getNumberOfPoints());
   EXPECT_EQ(geomState::_undefined_, sphericTriangle_sh->D().getState());
   EXPECT_EQ(geomState::_undefined_, sphericTriangle_sh->E().getState());
@@ -60,22 +60,18 @@ TEST(SphericTriangleTest, parameter)
   auto parameter = factory.shapeParameter(sphericTriangle_id);
 
   EXPECT_EQ("sphericTriangle", parameter.getName());
-  EXPECT_EQ(sphericTriangle_id, parameter.getId());
+  EXPECT_EQ(sphericTriangle_id, parameter.id());
 
-  ASSERT_EQ(7, parameter.NumberOfParams<point3D>());
-  ASSERT_EQ(0, parameter.NumberOfParams<vector3D>());
-  EXPECT_EQ(1, parameter.NumberOfParams<int>());
-  EXPECT_EQ(0, parameter.NumberOfParams<float>());
-  EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
+  ASSERT_EQ(8, parameter.numberOfValues());
 
-  EXPECT_EQ("center", parameter.getParamName<point3D>(0));
-  EXPECT_EQ("A", parameter.getParamName<point3D>(1));
-  EXPECT_EQ("B", parameter.getParamName<point3D>(2));
-  EXPECT_EQ("C", parameter.getParamName<point3D>(3));
-  EXPECT_EQ("D", parameter.getParamName<point3D>(4));
-  EXPECT_EQ("E", parameter.getParamName<point3D>(5));
-  EXPECT_EQ("F", parameter.getParamName<point3D>(6));
-  EXPECT_EQ("number of points", parameter.getParamName<int>(0));
+  EXPECT_EQ("center", parameter.valueName(0));
+  EXPECT_EQ("A", parameter.valueName(1));
+  EXPECT_EQ("B", parameter.valueName(2));
+  EXPECT_EQ("C", parameter.valueName(3));
+  EXPECT_EQ("D", parameter.valueName(4));
+  EXPECT_EQ("E", parameter.valueName(5));
+  EXPECT_EQ("F", parameter.valueName(6));
+  EXPECT_EQ("number of points", parameter.valueName(7));
 
   Shape::removeShapesFromFactory(factory);
 }

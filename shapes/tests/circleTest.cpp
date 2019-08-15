@@ -22,18 +22,18 @@ TEST(CircleTest, provider)
 
   auto parameter = factory.shapeParameter(circle_id);
 
-  parameter.setParam<point3D>(0, {0, 0, 0});
-  parameter.setParam<vector3D>(0, {0, 0, 1});
-  parameter.setParam<float>(0, 101.1f);
+  parameter.value(0) = point3D{0, 0, 0};
+  parameter.value(1) = vector3D{0, 0, 1};
+  parameter.value(2) = static_cast<float>(101.1f);
 
   auto shape = factory.createPlane(parameter);
   EXPECT_EQ("circle", shape->getName());
   ASSERT_NE(nullptr, dynamic_pointer_cast<circle>(shape));
   auto circle_sh = dynamic_pointer_cast<circle>(shape);
 
-  EXPECT_EQ(parameter.getParam<point3D>(0), circle_sh->getCenter());
-  EXPECT_EQ(parameter.getParam<vector3D>(0), circle_sh->getNormal());
-  EXPECT_EQ(parameter.getParam<float>(0), circle_sh->radius());
+  EXPECT_EQ(parameter.value(0).value<point3D>(), circle_sh->getCenter());
+  EXPECT_EQ(parameter.value(1).value<vector3D>(), circle_sh->getNormal());
+  EXPECT_EQ(parameter.value(2).value<float>(), circle_sh->radius());
 
   auto nextShape = factory.createNext(parameter, 2);
   EXPECT_EQ(nullptr, nextShape);
@@ -52,16 +52,12 @@ TEST(CircleTest, parameter)
   auto parameter = factory.shapeParameter(circle_id);
 
   EXPECT_EQ("circle", parameter.getName());
-  EXPECT_EQ(circle_id, parameter.getId());
+  EXPECT_EQ(circle_id, parameter.id());
 
-  ASSERT_EQ(1, parameter.NumberOfParams<point3D>());
-  ASSERT_EQ(1, parameter.NumberOfParams<vector3D>());
-  EXPECT_EQ(0, parameter.NumberOfParams<int>());
-  ASSERT_EQ(1, parameter.NumberOfParams<float>());
-  EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
-  EXPECT_EQ("center", parameter.getParamName<point3D>(0));
-  EXPECT_EQ("normal", parameter.getParamName<vector3D>(0));
-  EXPECT_EQ("radius", parameter.getParamName<float>(0));
+  ASSERT_EQ(3, parameter.numberOfValues());
+  EXPECT_EQ("center", parameter.valueName(0));
+  EXPECT_EQ("normal", parameter.valueName(1));
+  EXPECT_EQ("radius", parameter.valueName(2));
 
   Shape::removeShapesFromFactory(factory);
 }

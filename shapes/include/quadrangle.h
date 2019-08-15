@@ -152,41 +152,6 @@ public:
   void setD(point3D p);
 
   /*!
-   * \brief Draw
-   *  Projects and draws the quadrangle using the root-Draw functions to a root-TCanvas. The
-   * projection plane is plane, the eye-point is eye. You can provide line color, fill color and
-   * fill style. Supplying a suitable pointer for the bounding-box returns the size of the shape on
-   * the canvas.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox, int lColor,
-                    int fColor = 8, int fStyle = 1001) const;
-
-  /*!
-   * \brief Draw
-   *  Projects and draws the quadrangle using the root-Draw functions to a root-TCanvas. The
-   * projection plane is plane, the eye-point is eye. You can provide line color, fill color and
-   * fill style. Supplying a suitable pointer for the bounding-box returns the size of the shape on
-   * the canvas. Ident can hold a pointer to the TPolyLine that was drawn to canvas.
-   * \param eye
-   * \param plane
-   * \param boundingBox
-   * \param ident
-   * \param lColor
-   * \param fColor
-   * \param fStyle
-   */
-  virtual void Draw(const point3D& eye = point3D(0, 0, 0),
-                    const plane3D& plane = plane3D(point3D(0, 0, 1), vector3D(0, 0, 1)),
-                    vector4D* boundingBox = NULL, TObject** ident = NULL, int lColor = 1,
-                    int fColor = 8, int fStyle = 1001) const;
-
-  /*!
    * \brief description
    *  Returns a description of this quadrangle.
    * \return

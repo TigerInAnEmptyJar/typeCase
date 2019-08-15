@@ -68,6 +68,50 @@ QString fromVector(std::vector<std::string> const& v)
   return s;
 }
 
+QJsonObject makeParameter(ParameterValue const& param, std::string const& name)
+{
+  QJsonObject result;
+  result.insert(Keys::pName, QString::fromStdString(name));
+  result.insert(Keys::pType, static_cast<int>(param.valueType()));
+  switch (param.valueType()) {
+  case ParameterValue::ValueType::BOOLEAN:
+    result.insert(Keys::pValue, param.value<bool>());
+    break;
+  case ParameterValue::ValueType::INT:
+    result.insert(Keys::pValue, param.value<int>());
+    break;
+  case ParameterValue::ValueType::FLOAT:
+    result.insert(Keys::pValue, static_cast<double>(param.value<float>()));
+    break;
+  case ParameterValue::ValueType::DOUBLE:
+    result.insert(Keys::pValue, param.value<double>());
+    break;
+  case ParameterValue::ValueType::POINT3D:
+    result.insert(Keys::pValue, ::fromPoint(param.value<point3D>()));
+    break;
+  case ParameterValue::ValueType::VECTOR3D:
+    result.insert(Keys::pValue, ::fromVector(param.value<vector3D>()));
+    break;
+  case ParameterValue::ValueType::STRING:
+    result.insert(Keys::pValue, QString::fromStdString(param.value<std::string>()));
+    break;
+  case ParameterValue::ValueType::VECTOR_INT:
+    result.insert(Keys::pValue, ::fromVector(param.value<std::vector<int>>()));
+    break;
+  case ParameterValue::ValueType::VECTOR_FLOAT:
+    result.insert(Keys::pValue, ::fromVector(param.value<std::vector<float>>()));
+    break;
+  case ParameterValue::ValueType::VECTOR_DOUBLE:
+    result.insert(Keys::pValue, ::fromVector(param.value<std::vector<double>>()));
+    break;
+  case ParameterValue::ValueType::VECTOR_STRING:
+    result.insert(Keys::pValue, ::fromVector(param.value<std::vector<std::string>>()));
+    break;
+  default:
+    break;
+  }
+  return result;
+}
 template <typename T>
 QJsonObject makeParameter(T const& param, std::string const& name, ParameterValue::ValueType tpe)
 {
@@ -351,26 +395,8 @@ QJsonObject JsonParameterWriter::fromShape(std::shared_ptr<base_parameter> const
 
   ::addBaseParameter(input, result);
   QJsonArray parameter;
-  for (int i = 0; i < shape->NumberOfParams<int>(); i++) {
-    parameter.append(::makeParameter(shape->getParam<int>(i), shape->getParamName<int>(i),
-                                     ParameterValue::ValueType::INT));
-  }
-  for (int i = 0; i < shape->NumberOfParams<float>(); i++) {
-    parameter.append(::makeParameter(shape->getParam<float>(i), shape->getParamName<float>(i),
-                                     ParameterValue::ValueType::FLOAT));
-  }
-  for (int i = 0; i < shape->NumberOfParams<std::string>(); i++) {
-    parameter.append(::makeParameter(shape->getParam<std::string>(i),
-                                     shape->getParamName<std::string>(i),
-                                     ParameterValue::ValueType::STRING));
-  }
-  for (int i = 0; i < shape->NumberOfParams<point3D>(); i++) {
-    parameter.append(::makeParameter(shape->getParam<point3D>(i), shape->getParamName<point3D>(i),
-                                     ParameterValue::ValueType::POINT3D));
-  }
-  for (int i = 0; i < shape->NumberOfParams<vector3D>(); i++) {
-    parameter.append(::makeParameter(shape->getParam<vector3D>(i), shape->getParamName<vector3D>(i),
-                                     ParameterValue::ValueType::VECTOR3D));
+  for (size_t i = 0; i < shape->numberOfValues(); i++) {
+    parameter.append(::makeParameter(shape->value(i), shape->valueName(i)));
   }
   result.insert(Keys::parameter, parameter);
 

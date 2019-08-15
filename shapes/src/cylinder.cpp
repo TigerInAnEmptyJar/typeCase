@@ -9,16 +9,20 @@ namespace {
 const boost::uuids::uuid cylinder_id = {{0xea, 0x32, 0xc9, 0x4c, 0x11, 0xc1, 0x11, 0xe9, 0xab, 0x14,
                                          0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct CylinderShapeProvider : public FactoryShapeProvider,
+                               public std::enable_shared_from_this<CylinderShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
     factory.addShapeToFactory(
         cylinder::getDescription(), ShapeType::VolumeShape,
         [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
-          return std::shared_ptr<volumeShape>(new cylinder(
-              param.getParam<point3D>(0), param.getParam<vector3D>(0), param.getParam<float>(0)));
+          if (!checkParameter(param)) {
+            return {};
+          }
+          return std::shared_ptr<volumeShape>(new cylinder(param.value(0).value<point3D>(),
+                                                           param.value(1).value<vector3D>(),
+                                                           param.value(2).value<float>()));
         },
         [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
         [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
@@ -28,9 +32,18 @@ struct ShapeProvider : public FactoryShapeProvider,
     factory.removeShapeFromFactory(cylinder_id);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 3) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::FLOAT);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<CylinderShapeProvider> prov = [] {
+  auto r = std::make_shared<CylinderShapeProvider>();
   r->install();
   return r;
 }();
@@ -62,22 +75,17 @@ cylinder::cylinder(const volumeShape& s) : volumeShape("cylinder")
     direction = ((spiral)s).getNormal();
     radius = ((spiral)s).getOuterRadius();
   }
-  //     else if(s.getName()=="circular")
-  //     {
-  // 	direction=((circular_envelope)s).getNormal();
-  // 	radius=((circular_envelope)s).getOuterRadius();
-  //     }
 }
 cylinder::cylinder(const shape_parameter& description) : volumeShape("cylinder")
 {
   if (description.getName() != "cylinder")
     return;
-  if (description.NumberOfParams<point3D>() < 1 || description.NumberOfParams<vector3D>() < 1 ||
-      description.NumberOfParams<float>() < 1)
+  if (!CylinderShapeProvider::checkParameter(description)) {
     return;
-  center = description.getParam<point3D>(0);
-  direction = description.getParam<vector3D>(0);
-  radius = description.getParam<float>(0);
+  }
+  center = description.value(0).value<point3D>();
+  direction = description.value(1).value<vector3D>();
+  radius = description.value(2).value<float>();
 }
 
 void cylinder::operator=(const volumeShape& s)
@@ -441,9 +449,9 @@ shape_parameter cylinder::description() const
   sh.setName("cylinder");
   sh.setId(cylinder_id);
   sh.setCompleteWrite(true);
-  sh.addParam<point3D>(center, "center");
-  sh.addParam<vector3D>(direction, "direction");
-  sh.addParam<float>(radius, "radius");
+  sh.addValue("center", center);
+  sh.addValue("direction", direction);
+  sh.addValue("radius", radius);
   return sh;
 }
 shape_parameter cylinder::getDescription()
@@ -451,9 +459,9 @@ shape_parameter cylinder::getDescription()
   shape_parameter sh;
   sh.setName("cylinder");
   sh.setId(cylinder_id);
-  sh.addParam<point3D>(point3D(), "center");
-  sh.addParam<vector3D>(vector3D(), "direction");
-  sh.addParam<float>(0, "radius");
+  sh.addValue("center", point3D{});
+  sh.addValue("direction", vector3D{});
+  sh.addValue("radius", static_cast<float>(0));
   sh.setCompleteWrite(false);
   return sh;
 }

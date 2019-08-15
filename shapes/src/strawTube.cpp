@@ -12,28 +12,45 @@ struct StrawtubeShapeProvider : public FactoryShapeProvider,
 {
   void addToFactory(ShapeFactory& factory) const override
   {
-    factory.addShapeToFactory(strawTube::getDescription(), ShapeType::VolumeShape,
-                              [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
-                                return std::shared_ptr<volumeShape>(new strawTube(
-                                    param.getParam<point3D>(0), param.getParam<vector3D>(0),
-                                    param.getParam<float>(0), param.getParam<vector3D>(1),
-                                    param.getParam<vector3D>(2), param.getParam<float>(1),
-                                    param.getParam<int>(0), param.getParam<int>(1)));
-                              },
-                              [](shape_parameter const&, size_t) -> shape_parameter {
-                                //! \todo implement me
-                                return {};
-                              },
-                              [](shape_parameter const&, size_t) -> shape_parameter {
-                                //! \todo implement me
-                                return {};
-                              });
+    factory.addShapeToFactory(
+        strawTube::getDescription(), ShapeType::VolumeShape,
+        [](shape_parameter const& param) -> std::shared_ptr<volumeShape> {
+          if (!checkParameter(param)) {
+            return {};
+          }
+          return std::shared_ptr<volumeShape>(
+              new strawTube(param.value(0).value<point3D>(), param.value(1).value<vector3D>(),
+                            param.value(6).value<float>(), param.value(2).value<vector3D>(),
+                            param.value(3).value<vector3D>(), param.value(6).value<float>(),
+                            param.value(4).value<int>(), param.value(5).value<int>()));
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter {
+          //! \todo implement me
+          return {};
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter {
+          //! \todo implement me
+          return {};
+        });
   }
   void removeFromFactory(ShapeFactory& factory) const override
   {
     factory.removeShapeFromFactory(strawtube_id);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 7) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(3).valueType() != ParameterValue::ValueType::VECTOR3D ||
+             param.value(4).valueType() != ParameterValue::ValueType::INT ||
+             param.value(5).valueType() != ParameterValue::ValueType::INT ||
+             param.value(6).valueType() != ParameterValue::ValueType::FLOAT);
+  }
 };
 volatile static std::shared_ptr<StrawtubeShapeProvider> prov = [] {
   auto r = std::make_shared<StrawtubeShapeProvider>();
@@ -72,16 +89,16 @@ strawTube::strawTube(point3D centerIn, vector3D lineDirection, float rad, vector
 }
 strawTube::strawTube(const shape_parameter& description)
 {
-  if (description.NumberOfParams<point3D>() < 1 || description.NumberOfParams<vector3D>() < 3 ||
-      description.NumberOfParams<float>() < 1 || description.NumberOfParams<int>() < 2)
+  if (!StrawtubeShapeProvider::checkParameter(description)) {
     return;
-  center = description.getParam<point3D>(0);
-  direction = description.getParam<vector3D>(0);
-  stackingDirection = description.getParam<vector3D>(1);
-  shift = description.getParam<vector3D>(2);
-  radius = description.getParam<float>(0);
-  halvedAt = description.getParam<int>(1);
-  nHalvedElements = description.getParam<int>(0);
+  }
+  center = description.value(0).value<point3D>();
+  direction = description.value(1).value<vector3D>();
+  stackingDirection = description.value(2).value<vector3D>();
+  shift = description.value(3).value<vector3D>();
+  radius = description.value(6).value<float>();
+  halvedAt = description.value(5).value<int>();
+  nHalvedElements = description.value(4).value<int>();
 }
 strawTube::~strawTube() {}
 
@@ -261,13 +278,13 @@ shape_parameter strawTube::description() const
   shape_parameter sh;
   sh.setName("strawTube");
   sh.setId(strawtube_id);
-  sh.addParam<point3D>(center, "center");
-  sh.addParam<vector3D>(direction, "direction");
-  sh.addParam<vector3D>(stackingDirection, "stacking direction");
-  sh.addParam<vector3D>(shift, "shift");
-  sh.addParam<float>(radius, "radius");
-  sh.addParam<int>(nHalvedElements, "number of halved elements");
-  sh.addParam<int>(halvedAt, "halved at");
+  sh.addValue("center", center);
+  sh.addValue("direction", direction);
+  sh.addValue("stacking direction", stackingDirection);
+  sh.addValue("shift", shift);
+  sh.addValue("number of halved elements", nHalvedElements);
+  sh.addValue("halved at", halvedAt);
+  sh.addValue("radius", radius);
   sh.setCompleteWrite(true);
   return sh;
 }
@@ -276,13 +293,13 @@ shape_parameter strawTube::getDescription()
   shape_parameter sh;
   sh.setName("strawTube");
   sh.setId(strawtube_id);
-  sh.addParam<point3D>(point3D(), "center");
-  sh.addParam<vector3D>(vector3D(), "direction");
-  sh.addParam<vector3D>(vector3D(), "stacking direction");
-  sh.addParam<vector3D>(vector3D(), "shift");
-  sh.addParam<float>(0, "radius");
-  sh.addParam<int>(0, "number of halved elements");
-  sh.addParam<int>(0, "halved at");
+  sh.addValue("center", point3D());
+  sh.addValue("direction", vector3D());
+  sh.addValue("stacking direction", vector3D());
+  sh.addValue("shift", vector3D());
+  sh.addValue("number of halved elements", static_cast<int>(0));
+  sh.addValue("halved at", static_cast<int>(0));
+  sh.addValue("radius", static_cast<float>(0));
   sh.setCompleteWrite(false);
   return sh;
 }

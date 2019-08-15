@@ -21,9 +21,9 @@ TEST(TriangleTest, provider)
   EXPECT_EQ(ShapeType::PlanarShape, factory.shapeType(triangle_id));
 
   auto parameter = factory.shapeParameter(triangle_id);
-  parameter.setParam<point3D>(0, {1, 1, 0});
-  parameter.setParam<point3D>(1, {1, -1, 0});
-  parameter.setParam<point3D>(2, {-1, -1, 0});
+  parameter.value(0) = point3D{1, 1, 0};
+  parameter.value(1) = point3D{1, -1, 0};
+  parameter.value(2) = point3D{-1, -1, 0};
   auto normal = vector3D{0, 0, -1};
 
   auto shape = factory.createPlane(parameter);
@@ -32,9 +32,9 @@ TEST(TriangleTest, provider)
 
   auto triangle_sh = dynamic_pointer_cast<triangle>(shape);
   EXPECT_EQ(normal, triangle_sh->getNormal());
-  EXPECT_EQ(parameter.getParam<point3D>(0), triangle_sh->A());
-  EXPECT_EQ(parameter.getParam<point3D>(1), triangle_sh->B());
-  EXPECT_EQ(parameter.getParam<point3D>(2), triangle_sh->C());
+  EXPECT_EQ(parameter.value(0).value<point3D>(), triangle_sh->A());
+  EXPECT_EQ(parameter.value(1).value<point3D>(), triangle_sh->B());
+  EXPECT_EQ(parameter.value(2).value<point3D>(), triangle_sh->C());
 
   auto nextShape = factory.createNext(parameter, 2);
   EXPECT_EQ(nullptr, nextShape);
@@ -53,17 +53,13 @@ TEST(TriangleTest, parameter)
   auto parameter = factory.shapeParameter(triangle_id);
 
   EXPECT_EQ("triangle", parameter.getName());
-  EXPECT_EQ(triangle_id, parameter.getId());
+  EXPECT_EQ(triangle_id, parameter.id());
 
-  ASSERT_EQ(3, parameter.NumberOfParams<point3D>());
-  EXPECT_EQ(0, parameter.NumberOfParams<vector3D>());
-  EXPECT_EQ(0, parameter.NumberOfParams<int>());
-  EXPECT_EQ(0, parameter.NumberOfParams<float>());
-  EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
+  ASSERT_EQ(3, parameter.numberOfValues());
 
-  EXPECT_EQ("A", parameter.getParamName<point3D>(0));
-  EXPECT_EQ("B", parameter.getParamName<point3D>(1));
-  EXPECT_EQ("C", parameter.getParamName<point3D>(2));
+  EXPECT_EQ("A", parameter.valueName(0));
+  EXPECT_EQ("B", parameter.valueName(1));
+  EXPECT_EQ("C", parameter.valueName(2));
 
   Shape::removeShapesFromFactory(factory);
 }

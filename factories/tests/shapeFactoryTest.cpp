@@ -111,7 +111,7 @@ TEST_F(ShapeFactoryUnitTest, installTest)
     EXPECT_FALSE(factory.isShapeDefined(volume_id));
     EXPECT_EQ(ShapeType::PlanarShape, factory.shapeType(plane_id));
     ASSERT_EQ(size_t{1}, factory.definedShapes().size());
-    EXPECT_EQ(plane_id, factory.definedShapes()[0].getId());
+    EXPECT_EQ(plane_id, factory.definedShapes()[0].id());
     // volume is not available
     EXPECT_EQ(nullptr, factory.createVolume(volumeDescription));
     EXPECT_EQ(nullptr, factory.createPlane(volumeDescription));
@@ -128,7 +128,7 @@ TEST_F(ShapeFactoryUnitTest, installTest)
     EXPECT_TRUE(factory.isShapeDefined(volume_id));
     EXPECT_EQ(ShapeType::VolumeShape, factory.shapeType(volume_id));
     ASSERT_EQ(size_t{1}, factory.definedShapes().size());
-    EXPECT_EQ(volume_id, factory.definedShapes()[0].getId());
+    EXPECT_EQ(volume_id, factory.definedShapes()[0].id());
     // plane is not available
     EXPECT_EQ(nullptr, factory.createVolume(planeDescription));
     EXPECT_EQ(nullptr, factory.createPlane(planeDescription));

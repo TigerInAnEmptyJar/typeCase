@@ -392,13 +392,14 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleDetector(std::istrea
   sh.setName(string(li));
   point3D p;
   vector3D v;
+  std::map<ParameterValue::ValueType, std::vector<std::pair<std::string, ParameterValue>>> paramMap;
   for (int k = 0; k < zahl1; k++) {
     input >> value1;
     input >> value2;
     input >> value3;
     p.setValues(value1, value2, value3);
     input.getline(li, 100);
-    sh.addParam<point3D>(p, string(li));
+    paramMap[ParameterValue::ValueType::POINT3D].push_back(std::make_pair(std::string{li}, p));
   }
   for (int k = 0; k < zahl2; k++) {
     input >> value1;
@@ -407,23 +408,44 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleDetector(std::istrea
     input.getline(li, 100);
     v.setValues(sin(value1) * cos(value2) * value3, sin(value1) * sin(value2) * value3,
                 cos(value1) * value3);
-    sh.addParam<vector3D>(v, string(li));
+    paramMap[ParameterValue::ValueType::VECTOR3D].push_back(std::make_pair(std::string{li}, v));
   }
   for (int k = 0; k < zahl3; k++) {
     input >> zahl;
     input.getline(li, 100);
-    sh.addParam<int>(zahl, string(li));
+    paramMap[ParameterValue::ValueType::INT].push_back(std::make_pair(std::string{li}, zahl));
   }
   for (int k = 0; k < zahl4; k++) {
     input >> value1;
     input.getline(li, 100);
-    sh.addParam<float>(value1, string(li));
+    paramMap[ParameterValue::ValueType::FLOAT].push_back(std::make_pair(std::string{li}, value1));
   }
   char li1[100];
   for (int k = 0; k < zahl5; k++) {
     input.getline(li, 100);
     input.getline(li1, 100);
-    sh.addParam<string>(string(li), string(li1));
+    paramMap[ParameterValue::ValueType::STRING].push_back(
+        std::make_pair(std::string{li1}, std::string{li}));
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::POINT3D].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::POINT3D][i].first,
+                paramMap[ParameterValue::ValueType::POINT3D][i].second);
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::VECTOR3D].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::VECTOR3D][i].first,
+                paramMap[ParameterValue::ValueType::VECTOR3D][i].second);
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::INT].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::INT][i].first,
+                paramMap[ParameterValue::ValueType::INT][i].second);
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::FLOAT].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::FLOAT][i].first,
+                paramMap[ParameterValue::ValueType::FLOAT][i].second);
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::STRING].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::STRING][i].first,
+                paramMap[ParameterValue::ValueType::STRING][i].second);
   }
   auto shape = std::make_shared<base_parameter>(sh);
   recoverShapeId(shape);
@@ -456,6 +478,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleShape(std::istream& 
   string s = getALine(input);
   sh.setName(s);
   input.get(c);
+  std::map<ParameterValue::ValueType, std::vector<std::pair<std::string, ParameterValue>>> paramMap;
   while (c != '=' && !input.eof()) {
     input.get(ch);
     switch (c) {
@@ -469,7 +492,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleShape(std::istream& 
         sh.setCompleteWrite(true);
       }
       s = getALine(input);
-      sh.addParam<point3D>(p, s);
+      paramMap[ParameterValue::ValueType::POINT3D].push_back(std::make_pair(s, p));
       break;
     }
     case 'V': {
@@ -482,7 +505,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleShape(std::istream& 
         sh.setCompleteWrite(true);
       }
       s = getALine(input);
-      sh.addParam<vector3D>(p, s);
+      paramMap[ParameterValue::ValueType::VECTOR3D].push_back(std::make_pair(s, p));
       break;
     }
     case 'v': {
@@ -497,18 +520,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleShape(std::istream& 
         sh.setCompleteWrite(true);
       }
       s = getALine(input);
-      sh.addParam<vector3D>(p, s);
-      break;
-    }
-    case 'F': {
-      float p = 0;
-      if (ch != ' ') {
-        input.unget();
-        input >> p;
-        sh.setCompleteWrite(true);
-      }
-      s = getALine(input);
-      sh.addParam<float>(p, s);
+      paramMap[ParameterValue::ValueType::VECTOR3D].push_back(std::make_pair(s, p));
       break;
     }
     case 'I': {
@@ -519,7 +531,18 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleShape(std::istream& 
         sh.setCompleteWrite(true);
       }
       s = getALine(input);
-      sh.addParam<int>(p, s);
+      paramMap[ParameterValue::ValueType::INT].push_back(std::make_pair(s, p));
+      break;
+    }
+    case 'F': {
+      float p = 0;
+      if (ch != ' ') {
+        input.unget();
+        input >> p;
+        sh.setCompleteWrite(true);
+      }
+      s = getALine(input);
+      paramMap[ParameterValue::ValueType::FLOAT].push_back(std::make_pair(s, p));
       break;
     }
     case 'S': {
@@ -530,7 +553,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleShape(std::istream& 
         sh.setCompleteWrite(true);
       }
       s = getALine(input);
-      sh.addParam<std::string>(p, s);
+      paramMap[ParameterValue::ValueType::STRING].push_back(std::make_pair(s, p));
       break;
     }
     }
@@ -539,6 +562,26 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleShape(std::istream& 
   input.get(c);
   while (c != '\n' && !input.eof()) {
     input.get(c);
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::POINT3D].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::POINT3D][i].first,
+                paramMap[ParameterValue::ValueType::POINT3D][i].second);
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::VECTOR3D].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::VECTOR3D][i].first,
+                paramMap[ParameterValue::ValueType::VECTOR3D][i].second);
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::INT].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::INT][i].first,
+                paramMap[ParameterValue::ValueType::INT][i].second);
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::FLOAT].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::FLOAT][i].first,
+                paramMap[ParameterValue::ValueType::FLOAT][i].second);
+  }
+  for (size_t i = 0; i < paramMap[ParameterValue::ValueType::STRING].size(); i++) {
+    sh.addValue(paramMap[ParameterValue::ValueType::STRING][i].first,
+                paramMap[ParameterValue::ValueType::STRING][i].second);
   }
   return std::make_shared<shape_parameter>(sh);
 }

@@ -195,14 +195,6 @@ private:
 ostream& operator<<(ostream& o, const detector_parameter& d);
 
 /*!
- * \brief operator >>
- * \param i
- * \param d
- * \return
- */
-istream& operator>>(istream& i, detector_parameter& d);
-
-/*!
  * \brief The reaction_parameter class
  */
 class reaction_parameter : public base_parameter
@@ -360,13 +352,5 @@ private:
  * \return
  */
 ostream& operator<<(ostream& o, const reaction_parameter& d);
-
-/*!
- * \brief operator >>
- * \param i
- * \param d
- * \return
- */
-istream& operator>>(istream& i, reaction_parameter& d);
 
 #endif

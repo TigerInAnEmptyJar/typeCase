@@ -669,10 +669,6 @@ TEST_F(ParameterIoTest, setup_read_json)
   std::vector<std::shared_ptr<base_parameter>> parameters;
   appendSomeShapes(parameters);
 
-  for (auto element : result) {
-    std::cout << element->getName() << std::endl;
-  }
-
   ASSERT_THAT(result, testing::SizeIs(5));
   auto a = std::dynamic_pointer_cast<detector_parameter>(result[3]);
   ASSERT_NE(nullptr, a);
@@ -778,45 +774,49 @@ TEST_F(ParameterIoTest, shape_read_json)
   ASSERT_NE(nullptr, a);
   EXPECT_EQ(true, a->completeWrite());
   EXPECT_EQ("testShape 1", a->getName());
-  ASSERT_EQ(2, a->NumberOfParams<int>());
-  ASSERT_EQ(1, a->NumberOfParams<float>());
-  ASSERT_EQ(0, a->NumberOfParams<std::string>());
-  EXPECT_EQ(2, a->NumberOfParams<point3D>());
-  EXPECT_EQ(2, a->NumberOfParams<vector3D>());
-  EXPECT_EQ(10, a->getParam<int>(0));
-  EXPECT_EQ(26, a->getParam<int>(1));
-  EXPECT_EQ(123.5f, a->getParam<float>(0));
-  EXPECT_EQ(point3D(1, 2, 3), a->getParam<point3D>(0));
-  EXPECT_EQ(point3D(4, 5, 6), a->getParam<point3D>(1));
-  EXPECT_GE(0.0001, (vector3D(1, 3, 5) - a->getParam<vector3D>(0)).length());
-  EXPECT_GE(0.0001, (vector3D(11, 22, 33) - a->getParam<vector3D>(1)).length());
-  EXPECT_EQ("param1", a->getParamName<int>(0));
-  EXPECT_EQ("param2", a->getParamName<int>(1));
-  EXPECT_EQ("param3", a->getParamName<float>(0));
-  EXPECT_EQ("param4", a->getParamName<point3D>(0));
-  EXPECT_EQ("param5", a->getParamName<point3D>(1));
-  EXPECT_EQ("param6", a->getParamName<vector3D>(0));
-  EXPECT_EQ("param7", a->getParamName<vector3D>(1));
+  ASSERT_EQ(7, a->numberOfValues());
+  ASSERT_EQ(ParameterValue::ValueType::INT, a->value(0).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::INT, a->value(1).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::FLOAT, a->value(2).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::POINT3D, a->value(3).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::POINT3D, a->value(4).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::VECTOR3D, a->value(5).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::VECTOR3D, a->value(6).valueType());
+  EXPECT_EQ("param1", a->valueName(0));
+  EXPECT_EQ("param2", a->valueName(1));
+  EXPECT_EQ("param3", a->valueName(2));
+  EXPECT_EQ("param4", a->valueName(3));
+  EXPECT_EQ("param5", a->valueName(4));
+  EXPECT_EQ("param6", a->valueName(5));
+  EXPECT_EQ("param7", a->valueName(6));
+  EXPECT_EQ(10, a->value<int>(0));
+  EXPECT_EQ(26, a->value<int>(1));
+  EXPECT_EQ(123.5f, a->value<float>(2));
+  EXPECT_EQ(point3D(1, 2, 3), a->value<point3D>(3));
+  EXPECT_EQ(point3D(4, 5, 6), a->value<point3D>(4));
+  EXPECT_GE(0.0001, (vector3D(1, 3, 5) - a->value<vector3D>(5)).length());
+  EXPECT_GE(0.0001, (vector3D(11, 22, 33) - a->value<vector3D>(6)).length());
 
   auto b = std::dynamic_pointer_cast<shape_parameter>(result[1]);
   ASSERT_NE(nullptr, b);
   EXPECT_EQ(true, b->completeWrite());
   EXPECT_EQ("testShape 2", b->getName());
-  ASSERT_EQ(1, b->NumberOfParams<int>());
-  ASSERT_EQ(2, b->NumberOfParams<float>());
-  ASSERT_EQ(2, b->NumberOfParams<std::string>());
-  EXPECT_EQ(0, b->NumberOfParams<point3D>());
-  EXPECT_EQ(0, b->NumberOfParams<vector3D>());
-  EXPECT_EQ(10, b->getParam<int>(0));
-  EXPECT_EQ(26.25f, b->getParam<float>(0));
-  EXPECT_EQ(123.5f, b->getParam<float>(1));
-  EXPECT_EQ("foo", b->getParam<std::string>(0));
-  EXPECT_EQ("bar", b->getParam<std::string>(1));
-  EXPECT_EQ("param-1", b->getParamName<int>(0));
-  EXPECT_EQ("param-2", b->getParamName<float>(0));
-  EXPECT_EQ("param-3", b->getParamName<float>(1));
-  EXPECT_EQ("param-4", b->getParamName<std::string>(0));
-  EXPECT_EQ("param-5", b->getParamName<std::string>(1));
+  ASSERT_EQ(5, b->numberOfValues());
+  ASSERT_EQ(ParameterValue::ValueType::INT, b->value(0).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::FLOAT, b->value(1).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::FLOAT, b->value(2).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::STRING, b->value(3).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::STRING, b->value(4).valueType());
+  EXPECT_EQ(10, b->value<int>(0));
+  EXPECT_EQ(26.25f, b->value<float>(1));
+  EXPECT_EQ(123.5f, b->value<float>(2));
+  EXPECT_EQ("foo", b->value<std::string>(3));
+  EXPECT_EQ("bar", b->value<std::string>(4));
+  EXPECT_EQ("param-1", b->valueName(0));
+  EXPECT_EQ("param-2", b->valueName(1));
+  EXPECT_EQ("param-3", b->valueName(2));
+  EXPECT_EQ("param-4", b->valueName(3));
+  EXPECT_EQ("param-5", b->valueName(4));
 }
 
 TEST_F(ParameterIoTest, DISABLED_write_all_json)

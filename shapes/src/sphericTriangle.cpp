@@ -7,28 +7,47 @@ namespace {
 const boost::uuids::uuid sphericTriangle_id = {{0x17, 0x1f, 0x0f, 0x58, 0x11, 0xed, 0x11, 0xe9,
                                                 0xab, 0x14, 0xd6, 0x63, 0xbd, 0x87, 0x3d, 0x93}};
 
-struct ShapeProvider : public FactoryShapeProvider,
-                       public std::enable_shared_from_this<ShapeProvider>
+struct SphericTriangleShapeProvider
+    : public FactoryShapeProvider,
+      public std::enable_shared_from_this<SphericTriangleShapeProvider>
 {
   void addToFactory(ShapeFactory& factory) const override
   {
-    factory.addShapeToFactory(sphericTriangle::getDescription(), ShapeType::PlanarShape,
-                              [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
-                                return std::shared_ptr<planeShape>(new sphericTriangle(
-                                    param.getParam<point3D>(0), param.getParam<point3D>(1),
-                                    param.getParam<point3D>(2), param.getParam<point3D>(3)));
-                              },
-                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
-                              [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
+    factory.addShapeToFactory(
+        sphericTriangle::getDescription(), ShapeType::PlanarShape,
+        [](shape_parameter const& param) -> std::shared_ptr<planeShape> {
+          if (!checkParameter(param)) {
+            return {};
+          }
+          return std::shared_ptr<planeShape>(new sphericTriangle(
+              param.value(0).value<point3D>(), param.value(1).value<point3D>(),
+              param.value(2).value<point3D>(), param.value(3).value<point3D>()));
+        },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; },
+        [](shape_parameter const&, size_t) -> shape_parameter { return {}; });
   }
   void removeFromFactory(ShapeFactory& factory) const override
   {
     factory.removeShapeFromFactory(sphericTriangle_id);
   }
   void install() { Shape::innerShapeProviders.push_back(shared_from_this()); }
+  static bool checkParameter(shape_parameter const& param)
+  {
+    if (param.numberOfValues() != 8) {
+      return false;
+    }
+    return !(param.value(0).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(1).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(2).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(3).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(4).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(5).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(6).valueType() != ParameterValue::ValueType::POINT3D ||
+             param.value(7).valueType() != ParameterValue::ValueType::INT);
+  }
 };
-volatile static std::shared_ptr<ShapeProvider> prov = [] {
-  auto r = std::make_shared<ShapeProvider>();
+volatile static std::shared_ptr<SphericTriangleShapeProvider> prov = [] {
+  auto r = std::make_shared<SphericTriangleShapeProvider>();
   r->install();
   return r;
 }();
@@ -87,19 +106,19 @@ sphericTriangle::sphericTriangle(const shape_parameter& description)
 {
   if (description.getName() != "sphericTriangle")
     return;
-  if (description.NumberOfParams<point3D>() < 7 || description.NumberOfParams<int>() < 1)
+  if (!SphericTriangleShapeProvider::checkParameter(description))
     return;
-  A_ = description.getParam<point3D>(1);
-  B_ = description.getParam<point3D>(2);
-  C_ = description.getParam<point3D>(3);
-  D_ = description.getParam<point3D>(4);
-  E_ = description.getParam<point3D>(5);
-  F_ = description.getParam<point3D>(6);
-  if (description.getParam<int>(0) == 3)
+  A_ = description.value(1).value<point3D>();
+  B_ = description.value(2).value<point3D>();
+  C_ = description.value(3).value<point3D>();
+  D_ = description.value(4).value<point3D>();
+  E_ = description.value(5).value<point3D>();
+  F_ = description.value(6).value<point3D>();
+  if (description.value(7).value<int>() == 3)
     realTriangle = true;
   else
     realTriangle = false;
-  center = description.getParam<point3D>(0);
+  center = description.value(0).value<point3D>();
   normal = (A_ - B_) ^ (B_ - C_);
   normal.normalize();
   if (realTriangle) {
@@ -513,22 +532,6 @@ int sphericTriangle::getNumberOfPoints() const
   return 6;
 }
 
-extern void DrawPoints(int nPoints, point3D* points, const point3D& eye, const plane3D& plane,
-                       vector4D* boundingBox, TObject** ident, int lColor, int fColor, int fStyle);
-void sphericTriangle::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox,
-                           TObject** ident, int lColor, int fColor, int fStyle) const
-{
-  int num = (realTriangle ? 3 : 6);
-  point3D pts[num];
-  for (int i = 0; i < num; i++)
-    pts[i] = getPoint(i);
-  DrawPoints(num, pts, eye, plane, boundingBox, ident, lColor, fColor, fStyle);
-}
-void sphericTriangle::Draw(const point3D& eye, const plane3D& plane, vector4D* boundingBox,
-                           int lColor, int fColor, int fStyle) const
-{
-  Draw(eye, plane, boundingBox, NULL, lColor, fColor, fStyle);
-}
 vector3D sphericTriangle::distance(const sLine3D& line)
 {
   point3D hit(getPlane() - line);
@@ -556,14 +559,14 @@ shape_parameter sphericTriangle::description() const
   sh.setName("sphericTriangle");
   sh.setCompleteWrite(true);
   sh.setId(sphericTriangle_id);
-  sh.addParam<point3D>(center, "center");
-  sh.addParam<point3D>(A_, "A");
-  sh.addParam<point3D>(B_, "B");
-  sh.addParam<point3D>(C_, "C");
-  sh.addParam<point3D>(D_, "D");
-  sh.addParam<point3D>(E_, "E");
-  sh.addParam<point3D>(F_, "F");
-  sh.addParam<int>((realTriangle ? 3 : 6), "number of points");
+  sh.addValue("center", center);
+  sh.addValue("A", A_);
+  sh.addValue("B", B_);
+  sh.addValue("C", C_);
+  sh.addValue("D", D_);
+  sh.addValue("E", E_);
+  sh.addValue("F", F_);
+  sh.addValue("number of points", static_cast<int>(realTriangle ? 3 : 6));
   return sh;
 }
 shape_parameter sphericTriangle::getDescription()
@@ -571,14 +574,14 @@ shape_parameter sphericTriangle::getDescription()
   shape_parameter sh;
   sh.setName("sphericTriangle");
   sh.setId(sphericTriangle_id);
-  sh.addParam<point3D>(point3D(), "center");
-  sh.addParam<point3D>(point3D(), "A");
-  sh.addParam<point3D>(point3D(), "B");
-  sh.addParam<point3D>(point3D(), "C");
-  sh.addParam<point3D>(point3D(), "D");
-  sh.addParam<point3D>(point3D(), "E");
-  sh.addParam<point3D>(point3D(), "F");
-  sh.addParam<int>(3, "number of points");
+  sh.addValue("center", point3D());
+  sh.addValue("A", point3D());
+  sh.addValue("B", point3D());
+  sh.addValue("C", point3D());
+  sh.addValue("D", point3D());
+  sh.addValue("E", point3D());
+  sh.addValue("F", point3D());
+  sh.addValue("number of points", static_cast<int>(3));
   sh.setCompleteWrite(false);
   return sh;
 }

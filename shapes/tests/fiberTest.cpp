@@ -52,12 +52,12 @@ TEST(FiberTest, fiber1)
   //   |___________________________________
   //         -5          0           5
 
-  parameter.setParam<point3D>(0, {0, 0, 0});
-  parameter.setParam<vector3D>(0, {10, 0, 0});
-  parameter.setParam<vector3D>(1, {0, 1, 0});
-  parameter.setParam<vector3D>(2, {0, 0, 1});
-  parameter.setParam<int>(0, 1);
-  parameter.setParam<int>(1, 4);
+  parameter.value(0) = point3D{0, 0, 0};
+  parameter.value(1) = vector3D{10, 0, 0};
+  parameter.value(2) = vector3D{0, 1, 0};
+  parameter.value(3) = vector3D{0, 0, 1};
+  parameter.value(4) = static_cast<int>(1);
+  parameter.value(5) = static_cast<int>(4);
 
   std::vector<point3D> corners;
   corners.push_back({-5, -4.5, 0});
@@ -77,14 +77,14 @@ TEST(FiberTest, fiber1)
   auto fiber_sh = dynamic_pointer_cast<fiber>(shape);
 
   EXPECT_EQ(corners[0], fiber_sh->getCorner());
-  EXPECT_EQ(parameter.getParam<vector3D>(0), fiber_sh->getDirection(0));
-  EXPECT_EQ(parameter.getParam<vector3D>(1), fiber_sh->getDirection(1));
-  EXPECT_EQ(parameter.getParam<vector3D>(2), fiber_sh->getDirection(2));
-  EXPECT_EQ(parameter.getParam<int>(0), fiber_sh->getHalved());
-  EXPECT_EQ(parameter.getParam<int>(1), fiber_sh->getHalvedAt());
+  EXPECT_EQ(parameter.value(1).value<vector3D>(), fiber_sh->getDirection(0));
+  EXPECT_EQ(parameter.value(2).value<vector3D>(), fiber_sh->getDirection(1));
+  EXPECT_EQ(parameter.value(3).value<vector3D>(), fiber_sh->getDirection(2));
+  EXPECT_EQ(parameter.value(4).value<int>(), fiber_sh->getHalved());
+  EXPECT_EQ(parameter.value(5).value<int>(), fiber_sh->getHalvedAt());
 
   // still a bug until booleans are enabled
-  parameter.setParam<point3D>(0, point3D{0, 0, 0} - (corners[0] - point3D{0, 0, 0}));
+  parameter.value(0) = point3D{0, 0, 0} - (corners[0] - point3D{0, 0, 0});
   for (size_t i = 1; i < 10; i++) {
     auto nextShape = factory.createNext(parameter, i);
     ASSERT_NE(nullptr, nextShape);
@@ -93,14 +93,14 @@ TEST(FiberTest, fiber1)
 
     EXPECT_EQ(corners[i], next_sh->getCorner());
     if (i == 4 || i == 5) {
-      EXPECT_EQ(parameter.getParam<vector3D>(0) * 0.5, next_sh->getDirection(0));
+      EXPECT_EQ(parameter.value(1).value<vector3D>() * 0.5, next_sh->getDirection(0));
     } else {
-      EXPECT_EQ(parameter.getParam<vector3D>(0), next_sh->getDirection(0));
+      EXPECT_EQ(parameter.value(1).value<vector3D>(), next_sh->getDirection(0));
     }
-    EXPECT_EQ(parameter.getParam<vector3D>(1), next_sh->getDirection(1));
-    EXPECT_EQ(parameter.getParam<vector3D>(2), next_sh->getDirection(2));
-    EXPECT_EQ(parameter.getParam<int>(0), next_sh->getHalved());
-    EXPECT_EQ(parameter.getParam<int>(1), next_sh->getHalvedAt());
+    EXPECT_EQ(parameter.value(2).value<vector3D>(), next_sh->getDirection(1));
+    EXPECT_EQ(parameter.value(3).value<vector3D>(), next_sh->getDirection(2));
+    EXPECT_EQ(parameter.value(4).value<int>(), next_sh->getHalved());
+    EXPECT_EQ(parameter.value(5).value<int>(), next_sh->getHalvedAt());
   }
 
   auto envelopeShape = factory.createEnvelope(parameter, 10);
@@ -108,13 +108,13 @@ TEST(FiberTest, fiber1)
 
   auto envelope_sh = dynamic_pointer_cast<fiber>(shape);
   ASSERT_NE(nullptr, envelope_sh);
-  auto envelopeCorner = parameter.getParam<point3D>(0) - vector3D{10, 9, 0};
+  auto envelopeCorner = parameter.value(0).value<point3D>() - vector3D{10, 9, 0};
   EXPECT_EQ(envelopeCorner, envelope_sh->getCorner());
-  EXPECT_EQ(parameter.getParam<vector3D>(0), envelope_sh->getDirection(0));
-  //    EXPECT_EQ(parameter.getParam<vector3D>(1) *9, envelope_sh->getDirection(1));
-  EXPECT_EQ(parameter.getParam<vector3D>(2), envelope_sh->getDirection(2));
-  EXPECT_EQ(parameter.getParam<int>(0), envelope_sh->getHalved());
-  EXPECT_EQ(parameter.getParam<int>(1), envelope_sh->getHalvedAt());
+  EXPECT_EQ(parameter.value(1).value<vector3D>(), envelope_sh->getDirection(0));
+  //    EXPECT_EQ(parameter.value(2).value<vector3D>() *9, envelope_sh->getDirection(1));
+  EXPECT_EQ(parameter.value(3).value<vector3D>(), envelope_sh->getDirection(2));
+  EXPECT_EQ(parameter.value(4).value<int>(), envelope_sh->getHalved());
+  EXPECT_EQ(parameter.value(5).value<int>(), envelope_sh->getHalvedAt());
 
   Shape::removeShapesFromFactory(factory);
 }
@@ -152,12 +152,12 @@ TEST(FiberTest, fiber2)
   //   |___________________________________
   //         -5          0           5
 
-  parameter.setParam<point3D>(0, {0, 0, 0});
-  parameter.setParam<vector3D>(0, {10, 0, 0});
-  parameter.setParam<vector3D>(1, {0, 1, 0});
-  parameter.setParam<vector3D>(2, {0, 0, 1});
-  parameter.setParam<int>(0, 1);
-  parameter.setParam<int>(1, 4);
+  parameter.value(0) = point3D{0, 0, 0};
+  parameter.value(1) = vector3D{10, 0, 0};
+  parameter.value(2) = vector3D{0, 1, 0};
+  parameter.value(3) = vector3D{0, 0, 1};
+  parameter.value(4) = static_cast<int>(1);
+  parameter.value(5) = static_cast<int>(4);
 
   std::vector<point3D> corners;
   corners.push_back({-5, -4.5, 0});
@@ -177,14 +177,14 @@ TEST(FiberTest, fiber2)
   auto fiber_sh = dynamic_pointer_cast<fiber>(shape);
 
   EXPECT_EQ(corners[0], fiber_sh->getCorner());
-  EXPECT_EQ(parameter.getParam<vector3D>(0), fiber_sh->getDirection(0));
-  EXPECT_EQ(parameter.getParam<vector3D>(1), fiber_sh->getDirection(1));
-  EXPECT_EQ(parameter.getParam<vector3D>(2), fiber_sh->getDirection(2));
-  EXPECT_EQ(parameter.getParam<int>(0), fiber_sh->getHalved());
-  EXPECT_EQ(parameter.getParam<int>(1), fiber_sh->getHalvedAt());
+  EXPECT_EQ(parameter.value(1).value<vector3D>(), fiber_sh->getDirection(0));
+  EXPECT_EQ(parameter.value(2).value<vector3D>(), fiber_sh->getDirection(1));
+  EXPECT_EQ(parameter.value(3).value<vector3D>(), fiber_sh->getDirection(2));
+  EXPECT_EQ(parameter.value(4).value<int>(), fiber_sh->getHalved());
+  EXPECT_EQ(parameter.value(5).value<int>(), fiber_sh->getHalvedAt());
 
   // still a bug until booleans are enabled
-  parameter.setParam<point3D>(0, point3D{0, 0, 0} - (corners[0] - point3D{0, 0, 0}));
+  parameter.value(0) = point3D{0, 0, 0} - (corners[0] - point3D{0, 0, 0});
   for (size_t i = 1; i < 10; i++) {
     auto nextShape = factory.createNext(parameter, i);
     ASSERT_NE(nullptr, nextShape);
@@ -198,10 +198,10 @@ TEST(FiberTest, fiber2)
     //        }else{
     //            EXPECT_EQ(parameter.getParam<vector3D>(0), next_sh->getDirection(0));
     //        }
-    EXPECT_EQ(parameter.getParam<vector3D>(1), next_sh->getDirection(1));
-    EXPECT_EQ(parameter.getParam<vector3D>(2), next_sh->getDirection(2));
-    EXPECT_EQ(parameter.getParam<int>(0), next_sh->getHalved());
-    EXPECT_EQ(parameter.getParam<int>(1), next_sh->getHalvedAt());
+    EXPECT_EQ(parameter.value(2).value<vector3D>(), next_sh->getDirection(1));
+    EXPECT_EQ(parameter.value(3).value<vector3D>(), next_sh->getDirection(2));
+    EXPECT_EQ(parameter.value(4).value<int>(), next_sh->getHalved());
+    EXPECT_EQ(parameter.value(5).value<int>(), next_sh->getHalvedAt());
   }
 
   auto envelopeShape = factory.createEnvelope(parameter, 10);
@@ -209,13 +209,13 @@ TEST(FiberTest, fiber2)
 
   auto envelope_sh = dynamic_pointer_cast<fiber>(shape);
   ASSERT_NE(nullptr, envelope_sh);
-  auto envelopeCorner = parameter.getParam<point3D>(0) - vector3D{10, 9, 0};
+  auto envelopeCorner = parameter.value(0).value<point3D>() - vector3D{10, 9, 0};
   EXPECT_EQ(envelopeCorner, envelope_sh->getCorner());
-  EXPECT_EQ(parameter.getParam<vector3D>(0), envelope_sh->getDirection(0));
-  //    EXPECT_EQ(parameter.getParam<vector3D>(1) *9, envelope_sh->getDirection(1));
-  EXPECT_EQ(parameter.getParam<vector3D>(2), envelope_sh->getDirection(2));
-  EXPECT_EQ(parameter.getParam<int>(0), envelope_sh->getHalved());
-  EXPECT_EQ(parameter.getParam<int>(1), envelope_sh->getHalvedAt());
+  EXPECT_EQ(parameter.value(1).value<vector3D>(), envelope_sh->getDirection(0));
+  //    EXPECT_EQ(parameter.value(2).value<vector3D>() *9, envelope_sh->getDirection(1));
+  EXPECT_EQ(parameter.value(3).value<vector3D>(), envelope_sh->getDirection(2));
+  EXPECT_EQ(parameter.value(4).value<int>(), envelope_sh->getHalved());
+  EXPECT_EQ(parameter.value(5).value<int>(), envelope_sh->getHalvedAt());
 
   Shape::removeShapesFromFactory(factory);
 }
@@ -230,21 +230,16 @@ TEST(FiberTest, parameter)
     auto parameter = factory.shapeParameter(fiber_id1);
 
     EXPECT_EQ("fiber", parameter.getName());
-    EXPECT_EQ(fiber_id1, parameter.getId());
+    EXPECT_EQ(fiber_id1, parameter.id());
 
-    ASSERT_EQ(1, parameter.NumberOfParams<point3D>());
-    ASSERT_EQ(3, parameter.NumberOfParams<vector3D>());
-    EXPECT_EQ(2, parameter.NumberOfParams<int>());
-    ASSERT_EQ(0, parameter.NumberOfParams<float>());
-    EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
-    //        EXPECT_EQ(1, parameter.NumberOfParams<bool>());
-    EXPECT_EQ("center of envelope", parameter.getParamName<point3D>(0));
-    EXPECT_EQ("length", parameter.getParamName<vector3D>(0));
-    EXPECT_EQ("width", parameter.getParamName<vector3D>(1));
-    EXPECT_EQ("thickness", parameter.getParamName<vector3D>(2));
-    EXPECT_EQ("number of halved elements", parameter.getParamName<int>(0));
-    EXPECT_EQ("halved at", parameter.getParamName<int>(1));
-    //        EXPECT_EQ("useCorner", parameter.getParamName<bool>(0));
+    ASSERT_EQ(7, parameter.numberOfValues());
+    EXPECT_EQ("center of envelope", parameter.valueName(0));
+    EXPECT_EQ("length", parameter.valueName(1));
+    EXPECT_EQ("width", parameter.valueName(2));
+    EXPECT_EQ("thickness", parameter.valueName(3));
+    EXPECT_EQ("number of halved elements", parameter.valueName(4));
+    EXPECT_EQ("halved at", parameter.valueName(5));
+    EXPECT_EQ("useCorner", parameter.valueName(6));
   }
 
   // fiber 2
@@ -252,21 +247,16 @@ TEST(FiberTest, parameter)
     auto parameter = factory.shapeParameter(fiber_id2);
 
     EXPECT_EQ("fiber", parameter.getName());
-    EXPECT_EQ(fiber_id2, parameter.getId());
+    EXPECT_EQ(fiber_id2, parameter.id());
 
-    ASSERT_EQ(1, parameter.NumberOfParams<point3D>());
-    ASSERT_EQ(3, parameter.NumberOfParams<vector3D>());
-    EXPECT_EQ(2, parameter.NumberOfParams<int>());
-    ASSERT_EQ(0, parameter.NumberOfParams<float>());
-    EXPECT_EQ(0, parameter.NumberOfParams<std::string>());
-    //        EXPECT_EQ(1, parameter.NumberOfParams<bool>());
-    EXPECT_EQ("center of envelope", parameter.getParamName<point3D>(0));
-    EXPECT_EQ("length", parameter.getParamName<vector3D>(0));
-    EXPECT_EQ("width", parameter.getParamName<vector3D>(1));
-    EXPECT_EQ("thickness", parameter.getParamName<vector3D>(2));
-    EXPECT_EQ("number of halved elements", parameter.getParamName<int>(0));
-    EXPECT_EQ("halved at", parameter.getParamName<int>(1));
-    //        EXPECT_EQ("useCorner", parameter.getParamName<bool>(0));
+    ASSERT_EQ(7, parameter.numberOfValues());
+    EXPECT_EQ("center of envelope", parameter.valueName(0));
+    EXPECT_EQ("length", parameter.valueName(1));
+    EXPECT_EQ("width", parameter.valueName(2));
+    EXPECT_EQ("thickness", parameter.valueName(3));
+    EXPECT_EQ("number of halved elements", parameter.valueName(4));
+    EXPECT_EQ("halved at", parameter.valueName(5));
+    EXPECT_EQ("useCorner", parameter.valueName(6));
   }
 
   Shape::removeShapesFromFactory(factory);
