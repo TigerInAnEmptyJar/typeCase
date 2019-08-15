@@ -8,12 +8,12 @@ extern float getLightWay(volumeShape* sh, point3D onPoint, bool from);
 AqdcRadialPolCalibration::AqdcRadialPolCalibration(TEvent& eventIn, TSetup& setup,
                                                    algorithm_parameter& descr)
     : AAlgorithm("Generate qdcRadialPol calibration"), event(eventIn),
-      minEntriesPerHisto(descr.getParam<int>(0).getData())
+      minEntriesPerHisto(descr.value(0).value<int>())
 {
-  vector<int> tmp(descr.getParam<vector<int>>(0).getData());
-  vector<int> tmp1(descr.getParam<vector<int>>(1).getData());
-  vector<int> tmp3(descr.getParam<vector<int>>(2).getData());
-  getReactions(descr.getParam<vector<string>>(0).getData());
+  vector<int> tmp(descr.value(5).value<vector<int>>());
+  vector<int> tmp1(descr.value(6).value<vector<int>>());
+  vector<int> tmp3(descr.value(7).value<vector<int>>());
+  getReactions(descr.value(8).value<vector<string>>());
   numberOfDetectors = tmp.size();
   detectorIDs = new int[numberOfDetectors];
   numberOfElements = new int[numberOfDetectors];
@@ -25,15 +25,11 @@ AqdcRadialPolCalibration::AqdcRadialPolCalibration(TEvent& eventIn, TSetup& setu
   for (unsigned int i = 0; i < tmp1.size(); i++)
     startDetectors[i] = tmp1[i];
   int xmin = 0, xmax = 1000;
-  if (descr.getNumberOfParam<int>() > 1)
-    xmin = descr.getParam<int>(1).getData();
-  if (descr.getNumberOfParam<int>() > 2)
-    xmax = descr.getParam<int>(2).getData();
+  xmin = descr.value(1).value<int>();
+  xmax = descr.value(2).value<int>();
   int ymin = -100, ymax = -100;
-  if (descr.getNumberOfParam<int>() > 3)
-    xmin = descr.getParam<int>(3).getData();
-  if (descr.getNumberOfParam<int>() > 4)
-    xmax = descr.getParam<int>(4).getData();
+  ymin = descr.value(3).value<int>();
+  ymax = descr.value(4).value<int>();
   eventStart = 0;
   string nn;
   for (int i = 0; i < numberOfDetectors; i++) {

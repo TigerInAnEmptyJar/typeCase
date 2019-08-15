@@ -9,24 +9,10 @@ AFindDecayInTracks::AFindDecayInTracks(TSetup& setupIn, int& numberOfTracksIn, T
   vertexFitDecay = true;
   maxDistanceToTarget = 1;
   maxDistanceToCommon = 10;
-  switch (descr.getNumberOfParam<bool>()) {
-  default:
-  case 2:
-    vertexFitDecay = descr.getParam<bool>(1).getData();
-  case 1:
-    vertexFitTarget = descr.getParam<bool>(0).getData();
-  case 0:
-    break;
-  }
-  switch (descr.getNumberOfParam<float>()) {
-  default:
-  case 2:
-    maxDistanceToCommon = descr.getParam<float>(1).getData();
-  case 1:
-    maxDistanceToTarget = descr.getParam<float>(0).getData();
-  case 0:
-    break;
-  }
+  vertexFitDecay = descr.value(1).value<bool>();
+  vertexFitTarget = descr.value(0).value<bool>();
+  maxDistanceToCommon = descr.value(3).value<float>();
+  maxDistanceToTarget = descr.value(2).value<float>();
 }
 AFindDecayInTracks::~AFindDecayInTracks() {}
 void* AFindDecayInTracks::process(void* ptr)
@@ -170,9 +156,9 @@ algorithm_parameter AFindDecayInTracks::getDescription()
                "common vertex point. For both primary and secondary "
                "vertex you can separately decide to do a vertex fit.";
   ret.setDescription(des);
-  ret.addParam<bool>(single_parameter<bool>("fit primary vertex", true));
-  ret.addParam<bool>(single_parameter<bool>("fit secondary vertices", true));
-  ret.addParam<float>(single_parameter<float>("max distance to target volume", 1));
-  ret.addParam<float>(single_parameter<float>("max dist of lines: sec vertex", 10));
+  ret.addValue("fit primary vertex", true);
+  ret.addValue("fit secondary vertices", true);
+  ret.addValue("max distance to target volume", 1.f);
+  ret.addValue("max dist of lines: sec vertex", 10.f);
   return ret;
 }

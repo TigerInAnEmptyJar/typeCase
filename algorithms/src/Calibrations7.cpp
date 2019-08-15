@@ -8,19 +8,19 @@ TPixel tmpPixel_7;
 AtdcRadialPixCalibration::AtdcRadialPixCalibration(TEvent& eventIn, TSetup& setup,
                                                    algorithm_parameter& descr)
     : AAlgorithm("Generate tdcRadialPix calibration"), event(eventIn),
-      minEntriesPerHisto(descr.getParam<int>(0).getData())
+      minEntriesPerHisto(descr.value(1).value<int>())
 {
   eventStart = 0;
-  vector<int> tmp(descr.getParam<vector<int>>(0).getData());
-  vector<int> tmp4(descr.getParam<vector<int>>(4).getData());
+  vector<int> tmp(descr.value(4).value<vector<int>>());
+  vector<int> tmp4(descr.value(8).value<vector<int>>());
   numberOfDetectors = tmp.size();
   detectorIDs = new int[numberOfDetectors];
   for (int i = 0; i < numberOfDetectors; i++)
     detectorIDs[i] = tmp[i];
   ///////////////////////////////
-  vector<int> tmp1(descr.getParam<vector<int>>(1).getData());
-  vector<int> tmp2(descr.getParam<vector<int>>(2).getData());
-  vector<int> tmp3(descr.getParam<vector<int>>(3).getData());
+  vector<int> tmp1(descr.value(5).value<vector<int>>());
+  vector<int> tmp2(descr.value(6).value<vector<int>>());
+  vector<int> tmp3(descr.value(7).value<vector<int>>());
   CinSzinti = new float[numberOfDetectors];
   innerReadOut = new bool[numberOfDetectors];
   for (int i = 0; i < numberOfDetectors; i++) {
@@ -41,10 +41,8 @@ AtdcRadialPixCalibration::AtdcRadialPixCalibration(TEvent& eventIn, TSetup& setu
   pixelIDs = new int[numberOfPixels];
   for (int i = 0; i < numberOfPixels; i++)
     pixelIDs[i] = tmp2[i];
-  postScriptHistos = false;
-  if (descr.getNumberOfParam<bool>() > 0)
-    postScriptHistos = descr.getParam<bool>(0).getData();
-  getReactions(descr.getParam<vector<string>>(0).getData());
+  postScriptHistos = descr.value(0).value<bool>();
+  getReactions(descr.value(9).value<vector<string>>());
   //////////////////////////////////
   numberOfElements = new int[numberOfDetectors];
   pixelpoints = new int[numberOfDetectors];
@@ -56,10 +54,8 @@ AtdcRadialPixCalibration::AtdcRadialPixCalibration(TEvent& eventIn, TSetup& setu
       numberOfElements[i] = 0;
   }
   int xmin = -100, xmax = -100;
-  if (descr.getNumberOfParam<int>() > 1)
-    xmin = descr.getParam<int>(1).getData();
-  if (descr.getNumberOfParam<int>() > 2)
-    xmax = descr.getParam<int>(2).getData();
+  xmin = descr.value(2).value<int>();
+  xmax = descr.value(3).value<int>();
   string nn1 = "\\Delta tdc: detID-";
   qdcHistograms = new TH1***[numberOfDetectors];
   for (int i = 0; i < numberOfDetectors; i++) {

@@ -8,6 +8,7 @@ add_library(lib${PROJECT_NAME} STATIC
     include/detectorparameter.h
     include/materialparameter.h
     include/baseparameter.h
+    include/valuesparameter.h
     src/algorithmparameter.cpp
     src/beamtimeparameter.cpp
     src/materialparameter.cpp
@@ -15,6 +16,7 @@ add_library(lib${PROJECT_NAME} STATIC
     src/detectorparameter.cpp
     src/paintparameter.cpp
     src/shapeparameter.cpp
+    src/valuesparameter.cpp
 )
 
 target_include_directories(lib${PROJECT_NAME}

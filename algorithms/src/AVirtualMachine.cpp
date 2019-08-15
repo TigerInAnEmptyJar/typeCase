@@ -13,54 +13,28 @@ AVirtualMachine::AVirtualMachine(TTrack** tracksIn, TCalibHit*** hitsIn, TSetup&
   hits = hitsIn;
   numberOfHits = numberOfHitsIn;
   numberOfDetectors = setup.getNumberOfDetectors();
-  if (descr.getNumberOfParam<vector<int>>() >= 2)
-    numberOfDetectors = descr.getParam<vector<int>>(0).getData().size();
+  numberOfDetectors = descr.value(4).value<vector<int>>().size();
   detectorIDs = new int[numberOfDetectors];
   mode = new int[numberOfDetectors];
   maxHitPerTrack = new int[numberOfDetectors];
-  promptThetaRange[0] = descr.getParam<float>(0).getData();
-  promptThetaRange[1] = descr.getParam<float>(1).getData();
+  promptThetaRange[0] = descr.value(2).value<float>();
+  promptThetaRange[1] = descr.value(3).value<float>();
   // mode bits:
   // 1: do suspect on any
   // 2: do suspect on primary
   // 4: do suspect on secondary
-  if (descr.getNumberOfParam<vector<int>>() > 2) {
-    for (int i = 0; i < numberOfDetectors; i++) {
-      detectorIDs[i] = descr.getParam<vector<int>>(0).getData().at(i);
-      if ((int)descr.getParam<vector<int>>(1).getData().size() > i)
-        mode[i] = descr.getParam<vector<int>>(1).getData().at(i);
-      if ((int)descr.getParam<vector<int>>(2).getData().size() > i)
-        maxHitPerTrack[i] = descr.getParam<vector<int>>(2).getData().at(i);
-    }
-  } else if (descr.getNumberOfParam<vector<int>>() >= 2) {
-    for (int i = 0; i < numberOfDetectors; i++) {
-      detectorIDs[i] = descr.getParam<vector<int>>(0).getData().at(i);
-      maxHitPerTrack[i] = 2;
-      if ((int)descr.getParam<vector<int>>(1).getData().size() > i)
-        mode[i] = descr.getParam<vector<int>>(1).getData().at(i);
-    }
-  } else if (descr.getNumberOfParam<vector<int>>() == 1) {
-    for (int i = 0; i < numberOfDetectors; i++) {
-      detectorIDs[i] = descr.getParam<vector<int>>(0).getData().at(i);
-      maxHitPerTrack[i] = 2;
-      mode[i] = 1;
-    }
-  } else {
-    for (int i = 0; i < numberOfDetectors; i++) {
-      detectorIDs[i] = i;
-      maxHitPerTrack[i] = 2;
-      mode[i] = 1;
-    }
+  for (int i = 0; i < numberOfDetectors; i++) {
+    detectorIDs[i] = descr.value(4).value<vector<int>>().at(i);
+    if ((int)descr.value(5).value<vector<int>>().size() > i)
+      mode[i] = descr.value(5).value<vector<int>>().at(i);
+    if ((int)descr.value(6).value<vector<int>>().size() > i)
+      maxHitPerTrack[i] = descr.value(6).value<vector<int>>().at(i);
   }
-  if (descr.getNumberOfParam<vector<int>>() >= 3) {
-    for (unsigned int i = 0; i < descr.getParam<vector<int>>(3).getData().size(); i++)
-      particleID[i] = descr.getParam<vector<int>>(3).getData().at(i);
-  }
+  for (unsigned int i = 0; i < descr.value(7).value<vector<int>>().size(); i++)
+    particleID[i] = descr.value(7).value<vector<int>>().at(i);
   commonStart = false;
-  if (descr.getNumberOfParam<bool>() > 0)
-    commonStart = descr.getParam<bool>(0).getData();
-  if (descr.getNumberOfParam<int>() > 0)
-    startTDC = descr.getParam<int>(0).getData();
+  commonStart = descr.value(0).value<bool>();
+  startTDC = descr.value(1).value<int>();
 }
 AVirtualMachine::~AVirtualMachine()
 {
@@ -344,15 +318,14 @@ algorithm_parameter AVirtualMachine::getDescription()
                     "Noise and smearing of the signals will be implemented.";
   ret.setDescription(des);
   ret.setCategory(1);
-  ret.addParam<bool>(single_parameter<bool>("Use common Start", false));
-  ret.addParam<int>(single_parameter<int>("TDC at trigger", 200));
+  ret.addValue("Use common Start", false);
+  ret.addValue("TDC at trigger", static_cast<int>(200));
+  ret.addValue("minimum theta of detector", 0.f);
+  ret.addValue("maximum theta of detector", static_cast<float>(M_PI));
   vector<int> tmp;
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("use detectors", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("detector mode", tmp));
-  ret.addParam<vector<int>>(
-      single_parameter<vector<int>>("max el. per det and passing particle", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("particle IDs of tracks", tmp));
-  ret.addParam<float>(single_parameter<float>("minimum theta of detector", 0));
-  ret.addParam<float>(single_parameter<float>("maximum theta of detector", M_PI));
+  ret.addValue("use detectors", tmp);
+  ret.addValue("detector mode", tmp);
+  ret.addValue("max el. per det and passing particle", tmp);
+  ret.addValue("particle IDs of tracks", tmp);
   return ret;
 }

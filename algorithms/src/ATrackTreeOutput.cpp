@@ -227,23 +227,20 @@ ATrackTreeOutput::ATrackTreeOutput(TEvent& eventIn, TTrack** trackIn, int& nTrac
   tracks = trackIn;
   trackTree = NULL;
   pklTree = NULL;
-  outFile = param.getParam<string>(0).getData() + "T.root";
+  outFile = param.value(2).value<string>() + "T.root";
   int numReactions = 1;
   referReact = new RbaseReaction*[numReactions];
   string nme = "pp-pkl-pkppi";
   referReact[0] = getReactionFromName(nme);
   localDirectory = false;
-  if (param.getNumberOfParam<bool>() > 3 && param.getNumberOfParam<string>() > 1) {
-    localDirectory = param.getParam<bool>(3).getData();
-    directory = param.getParam<string>(1).getData();
-  }
-  if (param.getNumberOfParam<bool>() > 4 && param.getNumberOfParam<vector<int>>() > 0) {
-    writePattern = param.getParam<bool>(4).getData();
-    nPattern = param.getParam<vector<int>>(0).getData().size() / 3;
-    pattern = new int[nPattern * 3];
-    for (int i = 0; i < 3 * nPattern; i++)
-      pattern[i] = param.getParam<vector<int>>(0).getData().at(i);
-  }
+  localDirectory = param.value(0).value<bool>();
+  directory = param.value(3).value<string>();
+
+  writePattern = param.value(1).value<bool>();
+  nPattern = param.value(4).value<vector<int>>().size() / 3;
+  pattern = new int[nPattern * 3];
+  for (int i = 0; i < 3 * nPattern; i++)
+    pattern[i] = param.value(4).value<vector<int>>().at(i);
   copyFile = "";
   initialize(outFile);
 }
@@ -559,8 +556,10 @@ algorithm_parameter ATrackTreeOutput::getDescription()
                "This track information isdynamical in size and complete"
                "in information.";
   ret.setDescription(des);
-  ret.addParam<string>(single_parameter<string>("file name", ""));
-  ret.addParam<bool>(single_parameter<bool>(string("use local directory"), true));
-  ret.addParam<string>(single_parameter<string>(string("local directory"), string("")));
+  ret.addValue(string("use local directory"), true);
+  ret.addValue(string("do write pattern"), false);
+  ret.addValue("file name", std::string{});
+  ret.addValue(string("local directory"), std::string{});
+  ret.addValue("pattern", std::vector<int>{});
   return ret;
 }

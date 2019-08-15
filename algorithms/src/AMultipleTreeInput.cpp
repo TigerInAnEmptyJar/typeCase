@@ -360,7 +360,7 @@ AMultipleTreeInput::AMultipleTreeInput(int& eventNumber, int& runNumber, int& tr
   countTree = NULL;
   entryNumber = NULL;
   inputFile = NULL;
-  read_given_event = param.getParam<bool>(0).getData();
+  read_given_event = param.value(0).value<bool>();
 #ifdef TDC_OUTPUT
   TFile* f_output = new TFile("tdcoutput.root", "recreate");
   f_output->cd();
@@ -387,9 +387,9 @@ AMultipleTreeInput::~AMultipleTreeInput()
 algorithm_parameter AMultipleTreeInput::getDescription()
 {
   algorithm_parameter ret("Read Tracks from multiple trees", 0, 0);
-  ret.addParam<bool>(single_parameter<bool>("Search for read event", false));
-  ret.addParam<bool>(single_parameter<bool>("use local directory", true));
-  ret.addParam<string>(single_parameter<string>("Local directory", ""));
+  ret.addValue("Search for read event", false);
+  ret.addValue("use local directory", true);
+  ret.addValue("Local directory", std::string{});
   string des = "This algorithm reads track information from a root tree file."
                "There is one tree stearing the read in for the other ones, "
                "containing the event- and runnumber, the trigger and the entry-"

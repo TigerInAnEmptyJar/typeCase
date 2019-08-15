@@ -187,67 +187,81 @@ void ParameterWriter0::writeSingleAlgorithm(std::ostream& output,
   output << alg->getLevel() << " ";
   output << (alg->IsUsed() ? 1 : 0) << " ";
   output << alg->getID() << " ";
-  output << alg->getNumberOfParam<bool>() << " ";
-  for (int i = 0; i < alg->getNumberOfParam<bool>(); i++)
-    output << (alg->getParam<bool>(i).getData() ? "1" : "0") << " "
-           << (alg->getParam<bool>(i).getName().data()) << "\n";
-  output << alg->getNumberOfParam<point3D>() << " ";
-  for (int i = 0; i < alg->getNumberOfParam<point3D>(); i++) {
-    point3D tmpP = alg->getParam<point3D>(i).getData();
-    output << tmpP.X() << " " << tmpP.Y() << " " << tmpP.Z() << " "
-           << alg->getParam<point3D>(i).getName().data() << "\n";
-  }
-  output << alg->getNumberOfParam<vector3D>() << " ";
-  for (int i = 0; i < alg->getNumberOfParam<vector3D>(); i++) {
-    vector3D tmpP = alg->getParam<vector3D>(i).getData();
-    output << tmpP.X() << " " << tmpP.Y() << " " << tmpP.Z() << " "
-           << alg->getParam<vector3D>(i).getName().data() << "\n";
-  }
-  output << alg->getNumberOfParam<int>() << " ";
-  for (int i = 0; i < alg->getNumberOfParam<int>(); i++)
-    output << alg->getParam<int>(i).getData() << " " << alg->getParam<int>(i).getName().data()
-           << "\n";
-  output << alg->getNumberOfParam<float>() << " ";
-  for (int i = 0; i < alg->getNumberOfParam<float>(); i++)
-    output << alg->getParam<float>(i).getData() << " " << alg->getParam<float>(i).getName().data()
-           << "\n";
-  output << alg->getNumberOfParam<string>() << " ";
-  for (int i = 0; i < alg->getNumberOfParam<string>(); i++)
-    output << alg->getParam<string>(i).getData().data() << "\n"
-           << alg->getParam<string>(i).getName().data() << "\n";
-  output << alg->getNumberOfParam<vector<int>>() << " ";
-  for (int j = 0; j < alg->getNumberOfParam<vector<int>>(); j++) {
-    alg->getParam<vector<int>>(j).getData();
-    output << alg->getParam<vector<int>>(j).getData().size() << " ";
-    for (unsigned int k = 0; k < alg->getParam<vector<int>>(j).getData().size(); k++) {
-      output << alg->getParam<vector<int>>(j).getData().at(k) << " ";
-    }
-    output << alg->getParam<vector<int>>(j).getName().data() << "\n";
-  }
-  output << alg->getNumberOfParam<vector<float>>() << " ";
-  for (int j = 0; j < alg->getNumberOfParam<vector<float>>(); j++) {
-    alg->getParam<vector<float>>(j).getData();
-    output << alg->getParam<vector<float>>(j).getData().size() << " ";
-    for (unsigned int k = 0; k < alg->getParam<vector<float>>(j).getData().size(); k++) {
-      output << alg->getParam<vector<float>>(j).getData().at(k) << " ";
-    }
-    output << alg->getParam<vector<float>>(j).getName().data() << "\n";
-  }
-  output << alg->getNumberOfParam<vector<string>>() << " ";
-  for (int j = 0; j < alg->getNumberOfParam<vector<string>>(); j++) {
-    alg->getParam<vector<string>>(j).getData();
-    output << alg->getParam<vector<string>>(j).getData().size() << " ";
-    for (unsigned int k = 0; k < alg->getParam<vector<string>>(j).getData().size(); k++) {
-      output << alg->getParam<vector<string>>(j).getData().at(k).data() << "\n";
-    }
-    output << alg->getParam<vector<string>>(j).getName().data() << "\n";
-  }
-  output << alg->getNumberOfParam<algorithm_parameter>() << " ";
-  for (int i = 0; i < alg->getNumberOfParam<algorithm_parameter>(); i++)
-    output << alg->getParam<algorithm_parameter>(i).getData() << " "
-           << (alg->getParam<algorithm_parameter>(i).getName().data()) << "\n";
 
-  if (alg->getNumberOfParam<algorithm_parameter>() != 0)
+  std::map<ParameterValue::ValueType, std::vector<std::pair<std::string, ParameterValue>>> paramMap;
+  for (size_t i = 0; i < alg->numberOfValues(); i++) {
+    paramMap[alg->value(i).valueType()].push_back(std::make_pair(alg->valueName(i), alg->value(i)));
+  }
+  output << paramMap[ParameterValue::ValueType::BOOLEAN].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::BOOLEAN].size(); k++) {
+    auto p = paramMap[ParameterValue::ValueType::BOOLEAN][k].second.value<bool>();
+    output << (p ? "1" : "0") << " " << paramMap[ParameterValue::ValueType::BOOLEAN][k].first
+           << "\n";
+  }
+  output << paramMap[ParameterValue::ValueType::POINT3D].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::POINT3D].size(); k++) {
+    auto p = paramMap[ParameterValue::ValueType::POINT3D][k].second.value<point3D>();
+    output << p.x() << " " << p.y() << " " << p.z() << " "
+           << paramMap[ParameterValue::ValueType::POINT3D][k].first << "\n";
+  }
+  output << paramMap[ParameterValue::ValueType::VECTOR3D].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR3D].size(); k++) {
+    auto p = paramMap[ParameterValue::ValueType::VECTOR3D][k].second.value<vector3D>();
+    output << p.x() << " " << p.y() << " " << p.z() << " "
+           << paramMap[ParameterValue::ValueType::VECTOR3D][k].first << "\n";
+  }
+  output << paramMap[ParameterValue::ValueType::INT].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::INT].size(); k++) {
+    auto p = paramMap[ParameterValue::ValueType::INT][k].second.value<int>();
+    output << p << " " << paramMap[ParameterValue::ValueType::INT][k].first << "\n";
+  }
+  output << paramMap[ParameterValue::ValueType::FLOAT].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::FLOAT].size(); k++) {
+    auto p = paramMap[ParameterValue::ValueType::FLOAT][k].second.value<float>();
+    output << p << " " << paramMap[ParameterValue::ValueType::FLOAT][k].first << "\n";
+  }
+  output << paramMap[ParameterValue::ValueType::STRING].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::STRING].size(); k++) {
+    auto p = paramMap[ParameterValue::ValueType::STRING][k].second.value<std::string>();
+    output << p << "\n" << paramMap[ParameterValue::ValueType::STRING][k].first << "\n";
+  }
+  output << paramMap[ParameterValue::ValueType::VECTOR_INT].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR_INT].size(); k++) {
+    auto p = paramMap[ParameterValue::ValueType::VECTOR_INT][k].second.value<std::vector<int>>();
+    output << p.size() << " ";
+    for (auto e : p) {
+      output << e << " ";
+    }
+    output << paramMap[ParameterValue::ValueType::VECTOR_INT][k].first << "\n";
+  }
+  output << paramMap[ParameterValue::ValueType::VECTOR_FLOAT].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR_FLOAT].size(); k++) {
+    auto p =
+        paramMap[ParameterValue::ValueType::VECTOR_FLOAT][k].second.value<std::vector<float>>();
+    output << p.size() << " ";
+    for (auto e : p) {
+      output << e << " ";
+    }
+    output << paramMap[ParameterValue::ValueType::VECTOR_FLOAT][k].first << "\n";
+  }
+  output << paramMap[ParameterValue::ValueType::VECTOR_STRING].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR_STRING].size(); k++) {
+    auto p =
+        paramMap[ParameterValue::ValueType::VECTOR_STRING][k].second.value<std::vector<float>>();
+    output << p.size() << " ";
+    for (auto e : p) {
+      output << e << "\n";
+    }
+    output << paramMap[ParameterValue::ValueType::VECTOR_STRING][k].first << "\n";
+  }
+  output << paramMap[ParameterValue::ValueType::ALGORITHM].size() << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::ALGORITHM].size(); k++) {
+    writeSingleAlgorithm(output, paramMap[ParameterValue::ValueType::ALGORITHM][k]
+                                     .second.value<std::shared_ptr<algorithm_parameter>>());
+    output << " " << paramMap[ParameterValue::ValueType::ALGORITHM][k].first << "\n";
+  }
+
+  if (paramMap[ParameterValue::ValueType::ALGORITHM].size() != 0)
     output << " ";
   output << alg->getName().data() << "\n";
   output << 1 << " ";

@@ -121,89 +121,6 @@ QJsonObject makeParameter(T const& param, std::string const& name, ParameterValu
   result.insert(Keys::pValue, param);
   return result;
 }
-template <>
-QJsonObject makeParameter<float>(float const& param, std::string const& name,
-                                 ParameterValue::ValueType tpe)
-{
-  QJsonObject result;
-  result.insert(Keys::pName, QString::fromStdString(name));
-  result.insert(Keys::pType, static_cast<int>(tpe));
-  result.insert(Keys::pValue, static_cast<double>(param));
-  return result;
-}
-template <>
-QJsonObject makeParameter<std::string>(std::string const& param, std::string const& name,
-                                       ParameterValue::ValueType tpe)
-{
-  QJsonObject result;
-  result.insert(Keys::pName, QString::fromStdString(name));
-  result.insert(Keys::pType, static_cast<int>(tpe));
-  result.insert(Keys::pValue, QString::fromStdString(param));
-  return result;
-}
-template <>
-QJsonObject makeParameter<point3D>(point3D const& param, std::string const& name,
-                                   ParameterValue::ValueType tpe)
-{
-  QJsonObject result;
-  result.insert(Keys::pName, QString::fromStdString(name));
-  result.insert(Keys::pType, static_cast<int>(tpe));
-  result.insert(Keys::pValue, ::fromPoint(param));
-  return result;
-}
-template <>
-QJsonObject makeParameter<vector3D>(vector3D const& param, std::string const& name,
-                                    ParameterValue::ValueType tpe)
-{
-  QJsonObject result;
-  result.insert(Keys::pName, QString::fromStdString(name));
-  result.insert(Keys::pType, static_cast<int>(tpe));
-  result.insert(Keys::pValue, ::fromVector(param));
-  return result;
-}
-template <>
-QJsonObject makeParameter<std::vector<float>>(std::vector<float> const& param,
-                                              std::string const& name,
-                                              ParameterValue::ValueType tpe)
-{
-  QJsonObject result;
-  result.insert(Keys::pName, QString::fromStdString(name));
-  result.insert(Keys::pType, static_cast<int>(tpe));
-  result.insert(Keys::pValue, ::fromVector(param));
-  return result;
-}
-template <>
-QJsonObject makeParameter<std::vector<int>>(std::vector<int> const& param, std::string const& name,
-                                            ParameterValue::ValueType tpe)
-{
-  QJsonObject result;
-  result.insert(Keys::pName, QString::fromStdString(name));
-  result.insert(Keys::pType, static_cast<int>(tpe));
-  result.insert(Keys::pValue, ::fromVector(param));
-  return result;
-}
-template <>
-[[maybe_unused]] QJsonObject makeParameter<std::vector<double>>(std::vector<double> const& param,
-                                                                std::string const& name,
-                                                                ParameterValue::ValueType tpe)
-{
-  QJsonObject result;
-  result.insert(Keys::pName, QString::fromStdString(name));
-  result.insert(Keys::pType, static_cast<int>(tpe));
-  result.insert(Keys::pValue, ::fromVector(param));
-  return result;
-}
-template <>
-QJsonObject makeParameter<std::vector<std::string>>(std::vector<std::string> const& param,
-                                                    std::string const& name,
-                                                    ParameterValue::ValueType tpe)
-{
-  QJsonObject result;
-  result.insert(Keys::pName, QString::fromStdString(name));
-  result.insert(Keys::pType, static_cast<int>(tpe));
-  result.insert(Keys::pValue, ::fromVector(param));
-  return result;
-}
 } // namespace
 
 namespace parameter {
@@ -331,52 +248,8 @@ QJsonObject JsonParameterWriter::fromAlgorithm(std::shared_ptr<base_parameter> c
   result.insert(Keys::category, algorithm->getCategory());
   result.insert(Keys::id_number, algorithm->getID());
   QJsonArray parameter;
-  for (int i = 0; i < algorithm->getNumberOfParam<bool>(); i++) {
-    parameter.append(::makeParameter(algorithm->getParam<bool>(i).getData(),
-                                     algorithm->getParam<bool>(i).getName(),
-                                     ParameterValue::ValueType::BOOLEAN));
-  }
-  for (int i = 0; i < algorithm->getNumberOfParam<int>(); i++) {
-    std::cout << input->getName() << " algorithm int parameter "
-              << algorithm->getParam<int>(i).getName() << std::endl;
-    parameter.append(::makeParameter(algorithm->getParam<int>(i).getData(),
-                                     algorithm->getParam<int>(i).getName(),
-                                     ParameterValue::ValueType::INT));
-  }
-  for (int i = 0; i < algorithm->getNumberOfParam<float>(); i++) {
-    parameter.append(::makeParameter(algorithm->getParam<float>(i).getData(),
-                                     algorithm->getParam<float>(i).getName(),
-                                     ParameterValue::ValueType::FLOAT));
-  }
-  for (int i = 0; i < algorithm->getNumberOfParam<std::string>(); i++) {
-    parameter.append(::makeParameter(algorithm->getParam<std::string>(i).getData(),
-                                     algorithm->getParam<std::string>(i).getName(),
-                                     ParameterValue::ValueType::STRING));
-  }
-  for (int i = 0; i < algorithm->getNumberOfParam<point3D>(); i++) {
-    parameter.append(::makeParameter(algorithm->getParam<point3D>(i).getData(),
-                                     algorithm->getParam<point3D>(i).getName(),
-                                     ParameterValue::ValueType::POINT3D));
-  }
-  for (int i = 0; i < algorithm->getNumberOfParam<vector3D>(); i++) {
-    parameter.append(::makeParameter(algorithm->getParam<vector3D>(i).getData(),
-                                     algorithm->getParam<vector3D>(i).getName(),
-                                     ParameterValue::ValueType::VECTOR3D));
-  }
-  for (int i = 0; i < algorithm->getNumberOfParam<std::vector<int>>(); i++) {
-    parameter.append(::makeParameter(algorithm->getParam<std::vector<int>>(i).getData(),
-                                     algorithm->getParam<std::vector<int>>(i).getName(),
-                                     ParameterValue::ValueType::VECTOR_INT));
-  }
-  for (int i = 0; i < algorithm->getNumberOfParam<std::vector<float>>(); i++) {
-    parameter.append(::makeParameter(algorithm->getParam<std::vector<float>>(i).getData(),
-                                     algorithm->getParam<std::vector<float>>(i).getName(),
-                                     ParameterValue::ValueType::VECTOR_FLOAT));
-  }
-  for (int i = 0; i < algorithm->getNumberOfParam<std::vector<std::string>>(); i++) {
-    parameter.append(::makeParameter(algorithm->getParam<std::vector<std::string>>(i).getData(),
-                                     algorithm->getParam<std::vector<std::string>>(i).getName(),
-                                     ParameterValue::ValueType::VECTOR_STRING));
+  for (size_t i = 0; i < algorithm->numberOfValues(); i++) {
+    parameter.append(::makeParameter(algorithm->value(i), algorithm->valueName(i)));
   }
   //    for (int i = 0; i < algorithm->getNumberOfParam<vector3D>(); i++) {
   //        parameter.append(::makeParameter(algorithm->getParam<vector3D>(i).getData(),

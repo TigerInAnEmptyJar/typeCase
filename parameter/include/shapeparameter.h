@@ -1,6 +1,6 @@
 #pragma once
-#include "baseparameter.h"
 #include "geometry.h"
+#include "valuesparameter.h"
 
 #include <boost/uuid/uuid.hpp>
 #include <vector>

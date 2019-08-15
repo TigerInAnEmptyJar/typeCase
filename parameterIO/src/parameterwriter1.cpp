@@ -49,66 +49,70 @@ void ParameterWriter1::writeSingleAlgorithm(std::ostream& output,
   output << algorithm->getLevel() << " "
          << "\n";
   output << "D" << algorithm->getDescription() << "\n";
-  //      o<<a.getNumberOfParam<bool>() <<" ";
-  for (int i = 0; i < algorithm->getNumberOfParam<bool>(); i++)
-    output << "B" << (algorithm->getParam<bool>(i).getData() ? "1" : "0") << " "
-           << (algorithm->getParam<bool>(i).getName().data()) << "\n";
-  // o<<a.getNumberOfParam<point3D>()<<" ";
-  for (int i = 0; i < algorithm->getNumberOfParam<point3D>(); i++) {
-    point3D tmpP = algorithm->getParam<point3D>(i).getData();
-    output << "P" << tmpP.X() << " " << tmpP.Y() << " " << tmpP.Z() << " "
-           << algorithm->getParam<point3D>(i).getName().data() << "\n";
+  std::map<ParameterValue::ValueType, std::vector<std::pair<std::string, ParameterValue>>> paramMap;
+  for (size_t i = 0; i < algorithm->numberOfValues(); i++) {
+    paramMap[algorithm->value(i).valueType()].push_back(
+        std::make_pair(algorithm->valueName(i), algorithm->value(i)));
   }
-  // o<<a.getNumberOfParam<vector3D>()<<" ";
-  for (int i = 0; i < algorithm->getNumberOfParam<vector3D>(); i++) {
-    vector3D tmpP = algorithm->getParam<vector3D>(i).getData();
-    output << "V" << tmpP.X() << " " << tmpP.Y() << " " << tmpP.Z() << " "
-           << algorithm->getParam<vector3D>(i).getName().data() << "\n";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::BOOLEAN].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::BOOLEAN][k];
+    output << "B" << (v.second.value<bool>() ? "1" : "0") << " " << v.first << "\n";
   }
-  // o<<a.getNumberOfParam<int>()<<" ";
-  for (int i = 0; i < algorithm->getNumberOfParam<int>(); i++)
-    output << "I" << algorithm->getParam<int>(i).getData() << " "
-           << algorithm->getParam<int>(i).getName().data() << "\n";
-  // o<<a.getNumberOfParam<float>()<<" ";
-  for (int i = 0; i < algorithm->getNumberOfParam<float>(); i++)
-    output << "F" << algorithm->getParam<float>(i).getData() << " "
-           << algorithm->getParam<float>(i).getName().data() << "\n";
-  // o<<a.getNumberOfParam<string>()<<" ";
-  for (int i = 0; i < algorithm->getNumberOfParam<string>(); i++)
-    output << "S" << algorithm->getParam<string>(i).getData().data() << "\n"
-           << algorithm->getParam<string>(i).getName().data() << "\n";
-  // o<< a.getNumberOfParam<vector<int> >()<<" ";
-  for (int j = 0; j < algorithm->getNumberOfParam<vector<int>>(); j++) {
-    algorithm->getParam<vector<int>>(j).getData();
-    output << "N" << algorithm->getParam<vector<int>>(j).getData().size() << " ";
-    for (unsigned int k = 0; k < algorithm->getParam<vector<int>>(j).getData().size(); k++) {
-      output << algorithm->getParam<vector<int>>(j).getData().at(k) << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::POINT3D].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::POINT3D][k];
+    output << "P" << v.second.value<point3D>().x() << " " << v.second.value<point3D>().y() << " "
+           << v.second.value<point3D>().z() << " " << v.first << "\n";
+  }
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR3D].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::VECTOR3D][k];
+    output << "V" << v.second.value<vector3D>().x() << " " << v.second.value<vector3D>().y() << " "
+           << v.second.value<vector3D>().z() << " " << v.first << "\n";
+  }
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::INT].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::INT][k];
+    output << "I" << v.second.value<int>() << " " << v.first << "\n";
+  }
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::FLOAT].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::FLOAT][k];
+    output << "F" << v.second.value<float>() << " " << v.first << "\n";
+  }
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::STRING].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::STRING][k];
+    output << "S" << v.second.value<std::string>() << "\n" << v.first << "\n";
+  }
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR_INT].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::VECTOR_INT][k];
+    auto p = v.second.value<std::vector<int>>();
+    output << "N" << p.size() << " ";
+    for (auto e : p) {
+      output << e << " ";
     }
-    output << algorithm->getParam<vector<int>>(j).getName().data() << "\n";
+    output << v.first << "\n";
   }
-  // o<< a.getNumberOfParam<vector<float> >()<<" ";
-  for (int j = 0; j < algorithm->getNumberOfParam<vector<float>>(); j++) {
-    algorithm->getParam<vector<float>>(j).getData();
-    output << "T" << algorithm->getParam<vector<float>>(j).getData().size() << " ";
-    for (unsigned int k = 0; k < algorithm->getParam<vector<float>>(j).getData().size(); k++) {
-      output << algorithm->getParam<vector<float>>(j).getData().at(k) << " ";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR_FLOAT].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::VECTOR_FLOAT][k];
+    auto p = v.second.value<std::vector<float>>();
+    output << "T" << p.size() << " ";
+    for (auto e : p) {
+      output << e << " ";
     }
-    output << algorithm->getParam<vector<float>>(j).getName().data() << "\n";
+    output << v.first << "\n";
   }
-  // o<< a.getNumberOfParam<vector<string> >()<<" ";
-  for (int j = 0; j < algorithm->getNumberOfParam<vector<string>>(); j++) {
-    algorithm->getParam<vector<string>>(j).getData();
-    output << "R" << algorithm->getParam<vector<string>>(j).getData().size() << " ";
-    for (unsigned int k = 0; k < algorithm->getParam<vector<string>>(j).getData().size(); k++) {
-      output << algorithm->getParam<vector<string>>(j).getData().at(k) << "\n";
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::VECTOR_STRING].size(); k++) {
+    auto v = paramMap[ParameterValue::ValueType::VECTOR_STRING][k];
+    auto p = v.second.value<std::vector<std::string>>();
+    output << "R" << p.size() << " ";
+    for (auto e : p) {
+      output << e << "\n";
     }
-    output << algorithm->getParam<vector<string>>(j).getName().data() << "\n";
+    output << v.first << "\n";
   }
   // o<<a.getNumberOfParam<algorithm_parameter>() <<" ";
-  for (int i = 0; i < algorithm->getNumberOfParam<algorithm_parameter>(); i++) {
+  for (size_t k = 0; k < paramMap[ParameterValue::ValueType::ALGORITHM].size(); k++) {
     output << "A";
-    writeSingleAlgorithm(output, std::make_shared<algorithm_parameter>(
-                                     algorithm->getParam<algorithm_parameter>(i).getData()));
+    writeSingleAlgorithm(output, paramMap[ParameterValue::ValueType::ALGORITHM][k]
+                                     .second.value<std::shared_ptr<algorithm_parameter>>());
+    output << " " << paramMap[ParameterValue::ValueType::ALGORITHM][k].first << "\n";
   }
 }
 

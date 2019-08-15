@@ -1349,16 +1349,16 @@ AReadReactionFromRoot::AReadReactionFromRoot(TSetup& setupIn, TEvent& eventIn, b
       maxClu(eventIn.getMaxNumber<TCluster>()), maxTra(eventIn.getMaxNumber<TTrack>()),
       validInput(validInputIn)
 {
-  readHits = param.getParam<bool>(0).getData();
-  readPixel = param.getParam<bool>(1).getData();
-  readCluster = param.getParam<bool>(2).getData();
-  readTracks = param.getParam<bool>(3).getData();
-  reconstructHits = param.getParam<bool>(4).getData();
-  readMinimum = param.getParam<bool>(5).getData();
-  NRea = param.getParam<vector<string>>(0).getData().size();
+  readHits = param.value(0).value<bool>();
+  readPixel = param.value(1).value<bool>();
+  readCluster = param.value(2).value<bool>();
+  readTracks = param.value(3).value<bool>();
+  reconstructHits = param.value(4).value<bool>();
+  readMinimum = param.value(5).value<bool>();
+  NRea = param.value(6).value<vector<string>>().size();
   reactionNames = new string[NRea];
   for (int i = 0; i < NRea; i++)
-    reactionNames[i] = param.getParam<vector<string>>(0).getData().at(i);
+    reactionNames[i] = param.value(6).value<vector<string>>().at(i);
   init();
 }
 AReadReactionFromRoot::AReadReactionFromRoot(TSetup& setupIn, TEvent& eventIn, bool& validInputIn,

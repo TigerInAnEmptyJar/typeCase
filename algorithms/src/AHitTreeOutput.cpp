@@ -10,12 +10,10 @@ AHitTreeOutput::AHitTreeOutput(TCalibHit*** hitIn, int** nHits, int& evtNr, int&
   numberOfHits = nHits;
   hits = hitIn;
   hitTree = NULL;
-  outFile = param.getParam<string>(0).getData() + "H.root";
+  outFile = param.value(1).value<string>() + "H.root";
   localDirectory = false;
-  if (param.getNumberOfParam<bool>() > 0 && param.getNumberOfParam<string>() > 1) {
-    localDirectory = param.getParam<bool>(0).getData();
-    directory = param.getParam<string>(1).getData();
-  }
+  localDirectory = param.value(0).value<bool>();
+  directory = param.value(2).value<string>();
   copyFile = "";
   initialize(outFile);
 }
@@ -53,9 +51,9 @@ algorithm_parameter AHitTreeOutput::getDescription()
   string des = "This algorithm writes calibrated hits to a root tree. "
                "It only writes calibrated valid hits.";
   ret.setDescription(des);
-  ret.addParam<string>(single_parameter<string>("file name", ""));
-  ret.addParam<bool>(single_parameter<bool>(string("use local directory"), true));
-  ret.addParam<string>(single_parameter<string>(string("local directory"), string("")));
+  ret.addValue(string("use local directory"), true);
+  ret.addValue("file name", "");
+  ret.addValue(string("local directory"), string(""));
   return ret;
 }
 void AHitTreeOutput::initialize(const string& filename)

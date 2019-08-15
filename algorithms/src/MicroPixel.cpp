@@ -16,18 +16,18 @@ AMicroPixel::AMicroPixel(int maxPixelIn, int& numPixel, TPixel** pixelsIn, int**
                          const algorithm_parameter& ap)
     : AAlgorithm("micro strip pixels"), maxPixel(maxPixelIn), numberOfPixels(numPixel)
 {
-  ID = ap.getParam<int>(0).getData();
+  ID = ap.value(1).value<int>();
   pixels = pixelsIn;
-  if (ap.getParam<bool>(0).getData()) {
-    hits1 = (TCalibHit**)hc[ap.getParam<int>(1).getData()];
-    hits2 = (TCalibHit**)hc[ap.getParam<int>(2).getData()];
-    numHits1 = numHitC[ap.getParam<int>(1).getData()];
-    numHits2 = numHitC[ap.getParam<int>(2).getData()];
+  if (ap.value(0).value<bool>()) {
+    hits1 = (TCalibHit**)hc[ap.value(2).value<int>()];
+    hits2 = (TCalibHit**)hc[ap.value(3).value<int>()];
+    numHits1 = numHitC[ap.value(2).value<int>()];
+    numHits2 = numHitC[ap.value(3).value<int>()];
   } else {
-    hits1 = hits[ap.getParam<int>(1).getData()];
-    hits2 = hits[ap.getParam<int>(2).getData()];
-    numHits1 = numHit[ap.getParam<int>(1).getData()];
-    numHits2 = numHit[ap.getParam<int>(2).getData()];
+    hits1 = hits[ap.value(2).value<int>()];
+    hits2 = hits[ap.value(3).value<int>()];
+    numHits1 = numHit[ap.value(2).value<int>()];
+    numHits2 = numHit[ap.value(3).value<int>()];
   }
   for (int i = 0; i < maxPixel; i++)
     pixels[i]->setID(ID);

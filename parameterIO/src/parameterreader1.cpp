@@ -202,7 +202,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       input.get(c);
       input.getline(_tmp, 100);
       input.get(c);
-      a.addParam<bool>(single_parameter<bool>(_tmp, (zahl == 1)));
+      a.addValue(_tmp, (zahl == 1));
       break;
     }
     case 'P': // point3D
@@ -211,7 +211,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       input.get(c);
       input.getline(_tmp, 100);
       input.get(c);
-      a.addParam<point3D>(single_parameter<point3D>(_tmp, point3D(fz1, fz2, fz3)));
+      a.addValue(_tmp, point3D(fz1, fz2, fz3));
       break;
     }
     case 'V': // vector3D
@@ -220,7 +220,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       input.get(c);
       input.getline(_tmp, 100);
       input.get(c);
-      a.addParam<vector3D>(single_parameter<vector3D>(_tmp, vector3D(fz1, fz2, fz3)));
+      a.addValue(_tmp, vector3D(fz1, fz2, fz3));
       break;
     }
     case 'I': // integer
@@ -229,7 +229,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       input.get(c);
       input.getline(_tmp, 100);
       input.get(c);
-      a.addParam<int>(single_parameter<int>(_tmp, zahl));
+      a.addValue(_tmp, static_cast<int>(zahl));
       break;
     }
     case 'F': // float
@@ -238,7 +238,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       input.get(c);
       input.getline(_tmp, 100);
       input.get(c);
-      a.addParam<float>(single_parameter<float>(_tmp, fz1));
+      a.addValue(_tmp, static_cast<float>(fz1));
       break;
     }
     case 'S': // string
@@ -246,7 +246,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       input.getline(_tmp, 100);
       input.getline(_tmp2, 100);
       input.get(c);
-      a.addParam<string>(single_parameter<string>(_tmp2, _tmp));
+      a.addValue(_tmp2, std::string(_tmp));
       break;
     }
     case 'N': // vector<int>
@@ -260,7 +260,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       input.get(c);
       input.getline(_tmp, 100);
       input.get(c);
-      a.addParam<vector<int>>(single_parameter<vector<int>>(_tmp, tmp));
+      a.addValue(_tmp, tmp);
       break;
     }
     case 'T': // vector<float>
@@ -274,7 +274,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       input.get(c);
       input.getline(_tmp, 100);
       input.get(c);
-      a.addParam<vector<float>>(single_parameter<vector<float>>(_tmp, tmp));
+      a.addValue(_tmp, tmp);
       break;
     }
     case 'R': // vector<string>
@@ -288,7 +288,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       }
       input.getline(_tmp, 100);
       input.get(c);
-      a.addParam<vector<string>>(single_parameter<vector<string>>(_tmp, tmp));
+      a.addValue(_tmp, tmp);
       break;
     }
     case 'A': // algorithm
@@ -296,8 +296,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
       auto ap = readSingleAlgorithm(input);
       recoverAlgorithmId(ap);
       input.get(c);
-      a.addParam<algorithm_parameter>(single_parameter<algorithm_parameter>(
-          ap->getName(), *std::dynamic_pointer_cast<algorithm_parameter>(ap)));
+      a.addValue(ap->getName(), std::dynamic_pointer_cast<algorithm_parameter>(ap));
       break;
     }
     case '=':

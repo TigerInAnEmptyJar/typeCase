@@ -11,11 +11,11 @@ algorithm_parameter AHitTreeInput::getDescription()
   string des = "This algorithm reads calibrated hits from a root tree and "
                "requests the hit shapes from the setup. "
                "The hits are considered as calibrated and valid.";
-  ret.addParam<bool>(single_parameter<bool>(string("search for event"), true));
-  ret.addParam<bool>(single_parameter<bool>(string("use as event input list"), true));
-  ret.addParam<bool>(single_parameter<bool>(string("use local directory"), true));
-  ret.addParam<bool>(single_parameter<bool>(string("use all 257 hit files in chain"), true));
-  ret.addParam<string>(single_parameter<string>(string("local directory"), string("")));
+  ret.addValue(string("search for event"), true);
+  ret.addValue(string("use as event input list"), true);
+  ret.addValue(string("use local directory"), true);
+  ret.addValue(string("use all 257 hit files in chain"), true);
+  ret.addValue(string("local directory"), string(""));
   ret.setDescription(des);
   return ret;
 }
@@ -27,14 +27,10 @@ AHitTreeInput::AHitTreeInput(TSetup& setupIn, TCalibHit*** hitsIn, int** nH, int
 {
   hits = hitsIn;
   numberOfHits = nH;
-  searchForEvent = false;
-  if (param.getNumberOfParam<bool>() > 0)
-    searchForEvent = param.getParam<bool>(0).getData();
+  searchForEvent = param.value(0).value<bool>();
   localDirectory = false;
-  if (param.getNumberOfParam<bool>() > 2 && param.getNumberOfParam<string>() > 0) {
-    localDirectory = param.getParam<bool>(2).getData();
-    directory = param.getParam<string>(0).getData();
-  }
+  localDirectory = param.value(2).value<bool>();
+  directory = param.value(4).value<string>();
   hitTree = NULL;
   hitChain = NULL;
   tdcRLeaf = NULL;
@@ -50,8 +46,7 @@ AHitTreeInput::AHitTreeInput(TSetup& setupIn, TCalibHit*** hitsIn, int** nH, int
   currentEntry = -1;
   valid = false;
   useChain = false;
-  if (param.getNumberOfParam<bool>() > 3)
-    useChain = param.getParam<bool>(3).getData();
+  useChain = param.value(3).value<bool>();
   if (useChain)
     hitChain = new TChain("hits", "hits");
 }

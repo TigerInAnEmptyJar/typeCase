@@ -137,7 +137,7 @@ vector<string> algorithmWriter::iomakeFileCall()
 string algorithmWriter::getFrequency()
 {
   string fs = "";
-  int n = -1;
+  //  int n = -1;
   switch (ffrequency) {
   case 0:
     fs = "1";
@@ -148,27 +148,27 @@ string algorithmWriter::getFrequency()
   case 2:
     fs = "NumberOfDetectors";
     break;
-  case 3: {
-    fs = string("param.getParam<vector<");
-    if (ffrequency_string < fparameter.getNumberOfParam<vector<int>>()) {
-      fs += "int";
-      n = ffrequency_string;
-    } else if (ffrequency_string < fparameter.getNumberOfParam<vector<float>>() +
-                                       fparameter.getNumberOfParam<vector<int>>()) {
-      fs += "float";
-      n = ffrequency_string - fparameter.getNumberOfParam<vector<int>>();
-    } else if (ffrequency_string < fparameter.getNumberOfParam<vector<string>>() +
-                                       fparameter.getNumberOfParam<vector<float>>() +
-                                       fparameter.getNumberOfParam<vector<int>>()) {
-      fs += "string";
-      n = ffrequency_string - fparameter.getNumberOfParam<vector<float>>() -
-          fparameter.getNumberOfParam<vector<int>>();
-    } else
-      fs = "1";
-    if (n >= 0)
-      fs += string("> >(") + string_number(n) + ").size()";
-    break;
-  }
+    //  case 3: {
+    //    fs = string("param.getParam<vector<");
+    //    if (ffrequency_string < fparameter.getNumberOfParam<vector<int>>()) {
+    //      fs += "int";
+    //      n = ffrequency_string;
+    //    } else if (ffrequency_string < fparameter.getNumberOfParam<vector<float>>() +
+    //                                       fparameter.getNumberOfParam<vector<int>>()) {
+    //      fs += "float";
+    //      n = ffrequency_string - fparameter.getNumberOfParam<vector<int>>();
+    //    } else if (ffrequency_string < fparameter.getNumberOfParam<vector<string>>() +
+    //                                       fparameter.getNumberOfParam<vector<float>>() +
+    //                                       fparameter.getNumberOfParam<vector<int>>()) {
+    //      fs += "string";
+    //      n = ffrequency_string - fparameter.getNumberOfParam<vector<float>>() -
+    //          fparameter.getNumberOfParam<vector<int>>();
+    //    } else
+    //      fs = "1";
+    //    if (n >= 0)
+    //      fs += string("> >(") + string_number(n) + ").size()";
+    //    break;
+    //  }
   }
   return fs;
 }
@@ -742,7 +742,7 @@ istream& operator>>(istream& o, algorithmWriter& wr)
   if (o.eof())
     return o;
   algorithm_parameter pa;
-  o >> pa;
+  //  o >> pa;
   wr.setParameter(pa);
   o.get(c);
   while (!(c == '\n' || o.eof()))

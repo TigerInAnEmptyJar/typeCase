@@ -52,30 +52,27 @@ TEST_F(ParameterIoTest, algorithm_read_json)
   EXPECT_EQ(1, a->getCategory());
   EXPECT_EQ("testAlgorithm 1", a->getName());
   EXPECT_EQ("This is a test algorithm.", a->getDescription());
-  ASSERT_EQ(2, a->getNumberOfParam<int>());
-  ASSERT_EQ(1, a->getNumberOfParam<float>());
-  ASSERT_EQ(1, a->getNumberOfParam<std::string>());
-  ASSERT_EQ(1, a->getNumberOfParam<std::vector<int>>());
-  ASSERT_EQ(1, a->getNumberOfParam<std::vector<float>>());
-  EXPECT_EQ(0, a->getNumberOfParam<std::vector<std::string>>());
-  EXPECT_EQ(0, a->getNumberOfParam<point3D>());
-  EXPECT_EQ(0, a->getNumberOfParam<vector3D>());
-  EXPECT_EQ(0, a->getNumberOfParam<bool>());
-  EXPECT_EQ(0, a->getNumberOfParam<algorithm_parameter>());
-  EXPECT_EQ(0, a->getParam<int>(0).getData());
-  EXPECT_EQ(10, a->getParam<int>(1).getData());
-  EXPECT_EQ(5.5, a->getParam<float>(0).getData());
-  EXPECT_EQ("foo", a->getParam<std::string>(0).getData());
-  EXPECT_THAT(a->getParam<std::vector<int>>(0).getData(),
+  ASSERT_EQ(6, a->numberOfValues());
+  ASSERT_EQ(ParameterValue::ValueType::INT, a->value(0).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::INT, a->value(1).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::FLOAT, a->value(2).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::STRING, a->value(3).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::VECTOR_INT, a->value(4).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::VECTOR_FLOAT, a->value(5).valueType());
+  EXPECT_EQ(0, a->value(0).value<int>());
+  EXPECT_EQ(10, a->value(1).value<int>());
+  EXPECT_EQ(5.5, a->value(2).value<float>());
+  EXPECT_EQ("foo", a->value(3).value<std::string>());
+  EXPECT_THAT(a->value(4).value<std::vector<int>>(),
               testing::ContainerEq(std::vector<int>{0, 1, 2, 3, 4, 5, 6}));
-  EXPECT_THAT(a->getParam<std::vector<float>>(0).getData(),
+  EXPECT_THAT(a->value(5).value<std::vector<float>>(),
               testing::ContainerEq(std::vector<float>{0.7, 1.45, 5.7}));
-  EXPECT_EQ("param1", a->getParam<int>(0).getName());
-  EXPECT_EQ("param2", a->getParam<int>(1).getName());
-  EXPECT_EQ("param3", a->getParam<float>(0).getName());
-  EXPECT_EQ("param4", a->getParam<std::string>(0).getName());
-  EXPECT_EQ("param5", a->getParam<std::vector<int>>(0).getName());
-  EXPECT_EQ("param6", a->getParam<std::vector<float>>(0).getName());
+  EXPECT_EQ("param1", a->valueName(0));
+  EXPECT_EQ("param2", a->valueName(1));
+  EXPECT_EQ("param3", a->valueName(2));
+  EXPECT_EQ("param4", a->valueName(3));
+  EXPECT_EQ("param5", a->valueName(4));
+  EXPECT_EQ("param6", a->valueName(5));
 
   auto b = std::dynamic_pointer_cast<algorithm_parameter>(result[1]);
   ASSERT_NE(nullptr, b);
@@ -85,20 +82,19 @@ TEST_F(ParameterIoTest, algorithm_read_json)
   EXPECT_EQ(2, b->getCategory());
   EXPECT_EQ("testAlgorithm 2", b->getName());
   EXPECT_EQ("This is a new test algorithm.", b->getDescription());
-  ASSERT_EQ(0, b->getNumberOfParam<int>());
-  ASSERT_EQ(0, b->getNumberOfParam<float>());
-  ASSERT_EQ(0, b->getNumberOfParam<std::string>());
-  ASSERT_EQ(0, b->getNumberOfParam<std::vector<int>>());
-  ASSERT_EQ(0, b->getNumberOfParam<std::vector<float>>());
-  ASSERT_EQ(0, b->getNumberOfParam<std::vector<std::string>>());
-  ASSERT_EQ(1, b->getNumberOfParam<point3D>());
-  ASSERT_EQ(1, b->getNumberOfParam<vector3D>());
-  ASSERT_EQ(2, b->getNumberOfParam<bool>());
-  ASSERT_EQ(0, b->getNumberOfParam<algorithm_parameter>());
-  EXPECT_EQ(false, b->getParam<bool>(0).getData());
-  EXPECT_EQ(true, b->getParam<bool>(1).getData());
-  EXPECT_EQ(point3D(1, 2, 3), b->getParam<point3D>(0).getData());
-  EXPECT_EQ(vector3D(4, 5, 6), b->getParam<vector3D>(0).getData());
+  ASSERT_EQ(4, b->numberOfValues());
+  ASSERT_EQ(ParameterValue::ValueType::BOOLEAN, b->value(0).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::BOOLEAN, b->value(1).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::POINT3D, b->value(2).valueType());
+  ASSERT_EQ(ParameterValue::ValueType::VECTOR3D, b->value(3).valueType());
+  EXPECT_EQ(false, b->value(0).value<bool>());
+  EXPECT_EQ(true, b->value(1).value<bool>());
+  EXPECT_EQ(point3D(1, 2, 3), b->value(2).value<point3D>());
+  EXPECT_EQ(vector3D(4, 5, 6), b->value(3).value<vector3D>());
+  EXPECT_EQ("param-1", b->valueName(0));
+  EXPECT_EQ("param-2", b->valueName(1));
+  EXPECT_EQ("param-3", b->valueName(2));
+  EXPECT_EQ("param-4", b->valueName(3));
 }
 
 /*!

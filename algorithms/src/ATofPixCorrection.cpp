@@ -8,7 +8,7 @@ ATofPixCorrection::ATofPixCorrection(int& eventNr, int& runNr, TTrack** tracksIn
                                      const algorithm_parameter& descr,
                                      const vector<string>& calibrationFiles)
     : AAlgorithm("TDC correction pixel wise"), numberOfTracks(numberOfTracksIn),
-      numPixelTypes(descr.getParam<vector<int>>(0).getData().size()), EventNumber(eventNr),
+      numPixelTypes(descr.value(2).value<vector<int>>().size()), EventNumber(eventNr),
       RunNumber(runNr)
 {
   tracks = tracksIn;
@@ -22,7 +22,7 @@ ATofPixCorrection::ATofPixCorrection(int& eventNr, int& runNr, TTrack** tracksIn
   calibrations9 = new CommonCalibrationParser**[numPixelTypes];
   CinSzinti = new float[numPixelTypes];
   for (int i = 0; i < numPixelTypes; i++) {
-    pixelTypes[i] = descr.getParam<vector<int>>(0).getData().at(i);
+    pixelTypes[i] = descr.value(2).value<vector<int>>().at(i);
     numRanges7[i] = 0;
     numRanges9[i] = 0;
     use9[i] = false;
@@ -35,14 +35,8 @@ ATofPixCorrection::ATofPixCorrection(int& eventNr, int& runNr, TTrack** tracksIn
         use9[i] = true;
   }
   getParameterFromFiles(calibrationFiles);
-  if (descr.getNumberOfParam<bool>() > 0)
-    runTime = descr.getParam<bool>(0).getData();
-  else
-    runTime = true;
-  if (descr.getNumberOfParam<bool>() > 1)
-    calib = descr.getParam<bool>(1).getData();
-  else
-    calib = true;
+  runTime = descr.value(0).value<bool>();
+  calib = descr.value(1).value<bool>();
   //   for(int i=0;i<numPixelTypes;i++)
   //     cout<<"light velocity in detector: "<<pixelTypes[i]<<":
   //     "<<CinSzinti[i]<<endl;

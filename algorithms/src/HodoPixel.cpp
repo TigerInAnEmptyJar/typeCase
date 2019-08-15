@@ -16,38 +16,33 @@ AHodoPixel::AHodoPixel(int maxPix, int& numPix, TPixel** pixIn, int** numberOfHi
                        const algorithm_parameter& ap)
     : AAlgorithm("HodoPixel"), numPixel(numPix), maxPixel(maxPix), maxHits(2)
 {
-  ID = ap.getParam<int>(0).getData();
+  ID = ap.value(6).value<int>();
   Pixels = pixIn;
-  if (ap.getParam<bool>(0).getData()) {
-    hit1 = (TCalibHit**)hitClusters[ap.getParam<int>(1).getData()];
-    hit2 = (TCalibHit**)hitClusters[ap.getParam<int>(2).getData()];
-    numHits1 = numberOfHitClusters[ap.getParam<int>(1).getData()];
-    numHits2 = numberOfHitClusters[ap.getParam<int>(2).getData()];
+  if (ap.value(0).value<bool>()) {
+    hit1 = (TCalibHit**)hitClusters[ap.value(7).value<int>()];
+    hit2 = (TCalibHit**)hitClusters[ap.value(8).value<int>()];
+    numHits1 = numberOfHitClusters[ap.value(7).value<int>()];
+    numHits2 = numberOfHitClusters[ap.value(8).value<int>()];
   } else {
-    hit1 = hits[ap.getParam<int>(1).getData()];
-    hit2 = hits[ap.getParam<int>(2).getData()];
-    numHits1 = numberOfHits[ap.getParam<int>(1).getData()];
-    numHits2 = numberOfHits[ap.getParam<int>(2).getData()];
+    hit1 = hits[ap.value(7).value<int>()];
+    hit2 = hits[ap.value(8).value<int>()];
+    numHits1 = numberOfHits[ap.value(7).value<int>()];
+    numHits2 = numberOfHits[ap.value(8).value<int>()];
   }
-  maxChi = ap.getParam<float>(0).getData();
+  maxChi = ap.value(9).value<float>();
   for (int i = 0; i < maxPix; i++)
     Pixels[i]->setID(ID);
   planeNormal.setValues(0, 0, 1);
-  if (ap.getNumberOfParam<bool>() > 1) {
-    useMiddlePlane = ap.getParam<bool>(1).getData();
-    if (useMiddlePlane) {
-      projectionPoint = ap.getParam<point3D>(0).getData();
-      planePoint = ap.getParam<point3D>(1).getData();
-      planeNormal = ap.getParam<vector3D>(0).getData();
-    }
-  } else
-    useMiddlePlane = false;
-  modulationFunction = NULL;
-  if (ap.getNumberOfParam<bool>() > 2 && ap.getNumberOfParam<string>() > 0) {
-    useModulation = ap.getParam<bool>(2).getData();
-    if (useModulation)
-      modulationFunction = new TF1("mudulationFunction", ap.getParam<string>(0).getData().data());
+  useMiddlePlane = ap.value(1).value<bool>();
+  if (useMiddlePlane) {
+    projectionPoint = ap.value(3).value<point3D>();
+    planePoint = ap.value(4).value<point3D>();
+    planeNormal = ap.value(5).value<vector3D>();
   }
+  modulationFunction = NULL;
+  useModulation = ap.value(2).value<bool>();
+  if (useModulation)
+    modulationFunction = new TF1("mudulationFunction", ap.value(10).value<string>().data());
 }
 AHodoPixel::AHodoPixel(int IDIn, float maxChiIn, int maxPix, int& numPix, TPixel** pixIn,
                        int maxHit, int& numHit1, int& numHit2, TCalibHit** hits1, TCalibHit** hits2,

@@ -257,7 +257,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
     input >> z2;
     input.get(c);
     input.getline(_tmp, 100);
-    a.addParam<bool>(single_parameter<bool>(string(_tmp), z2 == 1));
+    a.addValue(string(_tmp), z2 == 1);
   }
   input >> zahl;
   //    cout<<"point3D:"<<zahl<<endl;
@@ -265,7 +265,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
     input >> fz1 >> fz2 >> fz3;
     input.get(c);
     input.getline(_tmp, 100);
-    a.addParam<point3D>(single_parameter<point3D>(string(_tmp), point3D(fz1, fz2, fz3)));
+    a.addValue(string(_tmp), point3D(fz1, fz2, fz3));
   }
   input >> zahl;
   //    cout<<"vector3D:"<<zahl<<endl;
@@ -274,8 +274,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
     input.get(c);
     input.getline(_tmp, 100);
     vector3D tmpVector(fz1, fz2, fz3);
-    a.addParam<vector3D>(
-        single_parameter<vector3D>(string(_tmp), tmpVector)); // vector3D(fz1,fz2,fz3)));
+    a.addValue(string(_tmp), tmpVector); // vector3D(fz1,fz2,fz3)));
   }
   input >> zahl;
   //    cout<<"int:"<<zahl<<endl;
@@ -283,7 +282,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
     input >> z2;
     input.get(c);
     input.getline(_tmp, 100);
-    a.addParam<int>(single_parameter<int>(string(_tmp), z2));
+    a.addValue(string(_tmp), static_cast<int>(z2));
   }
   input >> zahl;
   //    cout<<"float:"<<zahl<<endl;
@@ -291,7 +290,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
     input >> fz1;
     input.get(c);
     input.getline(_tmp, 100);
-    a.addParam<float>(single_parameter<float>(string(_tmp), fz1));
+    a.addValue(string(_tmp), static_cast<float>(fz1));
   }
   input >> zahl;
   //    cout<<"string:"<<zahl<<endl;
@@ -300,7 +299,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
   for (int j = 0; j < zahl; j++) {
     input.getline(_tmp2, 100);
     input.getline(_tmp, 100);
-    a.addParam<string>(single_parameter<string>(string(_tmp), string(_tmp2)));
+    a.addValue(string(_tmp), string(_tmp2));
   }
   input >> zahl;
   //    cout<<"vector<int>:"<<zahl<<endl;
@@ -313,7 +312,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
     }
     input.get(c);
     input.getline(_tmp, 100);
-    a.addParam<vector<int>>(single_parameter<vector<int>>(string(_tmp), tmp));
+    a.addValue(string(_tmp), tmp);
   }
   input >> zahl;
   //    cout<<"vector<float>:"<<zahl<<endl;
@@ -326,7 +325,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
     }
     input.get(c);
     input.getline(_tmp, 100);
-    a.addParam<vector<float>>(single_parameter<vector<float>>(string(_tmp), tmp));
+    a.addValue(string(_tmp), tmp);
   }
   input >> zahl;
   //    cout<<"vector<string>:"<<zahl<<endl;
@@ -340,7 +339,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
       tmp.push_back(string(tmp_s));
     }
     input.getline(_tmp, 100);
-    a.addParam<vector<string>>(single_parameter<vector<string>>(string(_tmp), tmp));
+    a.addValue(string(_tmp), tmp);
   }
   input >> zahl;
   for (int j = 0; j < zahl; j++) {
@@ -348,8 +347,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
     auto ap = readSingleAlgorithm(input);
     input.getline(_tmp, 100);
     recoverAlgorithmId(ap);
-    a.addParam<algorithm_parameter>(single_parameter<algorithm_parameter>(
-        ap->getName(), *std::dynamic_pointer_cast<algorithm_parameter>(ap)));
+    a.addValue(ap->getName(), std::dynamic_pointer_cast<algorithm_parameter>(ap));
   }
   input.get(c);
   input.getline(_tmp, 100);

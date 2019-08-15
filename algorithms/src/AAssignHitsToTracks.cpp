@@ -13,35 +13,21 @@ AAssignHitsToTracks::AAssignHitsToTracks(TSetup& setupIn, TTrack** tracksIn, TCa
   hits = hitIn;
   tracks = tracksIn;
   numberOfHits = numberOfHitsIn;
-  numberOfDetectors = 0;
-  if (descr.getNumberOfParam<vector<int>>() >= 1)
-    numberOfDetectors = descr.getParam<vector<int>>(0).getData().size();
+  numberOfDetectors = descr.value(4).value<vector<int>>().size();
   detectorIDs = new int[numberOfDetectors];
   mode = new int[numberOfDetectors];
   maxElementDistance = new int[numberOfDetectors];
   mustCheck = false;
   for (int i = 0; i < numberOfDetectors; i++) {
-    detectorIDs[i] = descr.getParam<vector<int>>(0).getData().at(i);
-    if (descr.getNumberOfParam<vector<int>>() > 1)
-      mode[i] = descr.getParam<vector<int>>(1).getData().at(i);
-    else
-      mode[i] = 3;
-    if (descr.getNumberOfParam<vector<int>>() > 2)
-      maxElementDistance[i] = descr.getParam<vector<int>>(3).getData().at(i);
-    else
-      maxElementDistance[i] = 0;
+    detectorIDs[i] = descr.value(4).value<vector<int>>().at(i);
+    mode[i] = descr.value(5).value<vector<int>>().at(i);
+    maxElementDistance[i] = descr.value(6).value<vector<int>>().at(i);
     mustCheck = (mustCheck && (mode[i] != 3 || mode != 0));
   }
-  doFit = false;
-  if (descr.getNumberOfParam<bool>() > 0)
-    doFit = descr.getParam<bool>(0).getData();
-  maxChi = 1;
-  if (descr.getNumberOfParam<float>() > 0)
-    maxChi = descr.getParam<float>(0).getData();
-  if (descr.getNumberOfParam<float>() > 1)
-    maxDistT = descr.getParam<float>(1).getData();
-  if (descr.getNumberOfParam<float>() > 2)
-    maxDistV = descr.getParam<float>(2).getData();
+  doFit = descr.value(0).value<bool>();
+  maxChi = descr.value(1).value<float>();
+  maxDistT = descr.value(2).value<float>();
+  maxDistV = descr.value(3).value<float>();
 }
 AAssignHitsToTracks::~AAssignHitsToTracks()
 {
@@ -172,13 +158,24 @@ algorithm_parameter AAssignHitsToTracks::getDescription()
                "You may take the track directions as given or do an additional "
                "line fit.";
   ret.setDescription(des);
-  ret.addParam<bool>(single_parameter<bool>("Refit track directions", false));
-  ret.addParam<float>(single_parameter<float>("maximum chi-squared for refit", 1));
-  ret.addParam<float>(single_parameter<float>("max dist prompt to origin", 10));
-  ret.addParam<float>(single_parameter<float>("max distance track-element", 1));
+  ret.addValue("Refit track directions", false);
+  ret.addValue("maximum chi-squared for refit", 1.f);
+  ret.addValue("max dist prompt to origin", 10.f);
+  ret.addValue("max distance track-element", 1.f);
   vector<int> tmp;
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("detector IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("search mode", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("max element distance", tmp));
+  ret.addValue("detector IDs", tmp);
+  ret.addValue("search mode", tmp);
+  ret.addValue("max element distance", tmp);
   return ret;
+}
+
+bool AAssignHitsToTracks::checkParameter(algorithm_parameter const& a)
+{
+  return a.numberOfValues() == 7 && a.value(0).valueType() == ParameterValue::ValueType::BOOLEAN &&
+         a.value(1).valueType() == ParameterValue::ValueType::FLOAT &&
+         a.value(2).valueType() == ParameterValue::ValueType::FLOAT &&
+         a.value(3).valueType() == ParameterValue::ValueType::FLOAT &&
+         a.value(4).valueType() == ParameterValue::ValueType::VECTOR_INT &&
+         a.value(5).valueType() == ParameterValue::ValueType::VECTOR_INT &&
+         a.value(6).valueType() == ParameterValue::ValueType::VECTOR_INT;
 }

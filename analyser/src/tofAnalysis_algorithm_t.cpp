@@ -185,7 +185,7 @@ void tofAnalysis::initAlgorithms(const vector<std::shared_ptr<algorithm_paramete
       numf = numf + 1;
       break;
     case 42:
-      numf = numf + ap[i].getParam<vector<int>>(0).getData().size();
+      numf = numf + ap[i].value(0).value<vector<int>>().size();
       break;
     case 43:
       numf = numf + 1;
@@ -476,9 +476,12 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
   case 2: {
     executeUpTo = 0;
     (*out) = new AAlgorithm*[nAlgos];
-    if (param.getNumberOfParam<int>() > 1 && param.getNumberOfParam<float>() > 0)
-      (*out)[0] = new AKinFit(param.getParam<int>(0).getData(), param.getParam<int>(1).getData(),
-                              param.getParam<float>(0).getData());
+    if (param.numberOfValues() >= 3 &&
+        param.value(0).valueType() == ParameterValue::ValueType::INT &&
+        param.value(1).valueType() == ParameterValue::ValueType::INT &&
+        param.value(2).valueType() == ParameterValue::ValueType::FLOAT)
+      (*out)[0] = new AKinFit(param.value(0).value<int>(), param.value(1).value<int>(),
+                              param.value(2).value<float>());
     else
       (*out)[0] = new AKinFit(400, 30, 0.00001);
     break;
@@ -540,24 +543,19 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     anaLog << "ring pixel calculation: ";
     (*out) = new AAlgorithm*[nAlgos];
     (*out)[0] = new ARingpixel(
-        param.getParam<bool>(0).getData(), param.getParam<bool>(1).getData(),
-        param.getParam<bool>(2).getData(), param.getParam<bool>(3).getData(),
-        param.getParam<bool>(4).getData(), param.getParam<bool>(5).getData(),
-        param.getParam<bool>(6).getData(), param.getParam<point3D>(0).getData(),
-        param.getParam<point3D>(1).getData(), param.getParam<vector3D>(0).getData(),
-        *detectors[param.getParam<int>(0).getData()], *detectors[param.getParam<int>(1).getData()],
-        *detectors[param.getParam<int>(2).getData()], param.getParam<int>(3).getData(),
-        param.getParam<int>(4).getData(), param.getParam<int>(5).getData(),
-        param.getParam<int>(6).getData(), param.getParam<int>(7).getData(),
-        param.getParam<float>(0).getData(), param.getParam<float>(1).getData(),
-        numberOfPixels[param.getParam<int>(7).getData()],
-        calibratedHits[param.getParam<int>(0).getData()],
-        calibratedHits[param.getParam<int>(1).getData()],
-        calibratedHits[param.getParam<int>(2).getData()],
-        *numberOfHits[param.getParam<int>(0).getData()],
-        *numberOfHits[param.getParam<int>(1).getData()],
-        *numberOfHits[param.getParam<int>(2).getData()], pixels[param.getParam<int>(7).getData()],
-        event.getMaxNumber<TPixel>());
+        param.value(0).value<bool>(), param.value(1).value<bool>(), param.value(2).value<bool>(),
+        param.value(3).value<bool>(), param.value(4).value<bool>(), param.value(5).value<bool>(),
+        param.value(6).value<bool>(), param.value(7).value<point3D>(),
+        param.value(8).value<point3D>(), param.value(9).value<vector3D>(),
+        *detectors[param.value(10).value<int>()], *detectors[param.value(11).value<int>()],
+        *detectors[param.value(12).value<int>()], param.value(13).value<int>(),
+        param.value(14).value<int>(), param.value(15).value<int>(), param.value(16).value<int>(),
+        param.value(17).value<int>(), param.value(18).value<float>(),
+        param.value(19).value<float>(), numberOfPixels[param.value(17).value<int>()],
+        calibratedHits[param.value(10).value<int>()], calibratedHits[param.value(11).value<int>()],
+        calibratedHits[param.value(12).value<int>()], *numberOfHits[param.value(10).value<int>()],
+        *numberOfHits[param.value(11).value<int>()], *numberOfHits[param.value(12).value<int>()],
+        pixels[param.value(17).value<int>()], event.getMaxNumber<TPixel>());
     anaLog << "done" << endli;
     break; // quirl/ringPixel
   }
@@ -733,11 +731,11 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     for (int ii = 0; ii < setup.getNumberOfDetectors(); ii++) {
       ut = false;
       ua = false;
-      for (unsigned int iii = 0; iii < param.getParam<vector<int>>(0).getData().size(); iii++)
-        if (param.getParam<vector<int>>(0).getData().at(iii) == ii)
+      for (unsigned int iii = 0; iii < param.value(0).value<vector<int>>().size(); iii++)
+        if (param.value(0).value<vector<int>>().at(iii) == ii)
           ua = true;
-      for (unsigned int iii = 0; iii < param.getParam<vector<int>>(1).getData().size(); iii++)
-        if (param.getParam<vector<int>>(1).getData().at(iii) == ii)
+      for (unsigned int iii = 0; iii < param.value(1).value<vector<int>>().size(); iii++)
+        if (param.value(1).value<vector<int>>().at(iii) == ii)
           ut = true;
       if ((ut || ua))
         n++;
@@ -750,11 +748,11 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     for (int ii = 0; ii < setup.getNumberOfDetectors(); ii++) {
       ut = false;
       ua = false;
-      for (unsigned int iii = 0; iii < param.getParam<vector<int>>(0).getData().size(); iii++)
-        if (param.getParam<vector<int>>(0).getData().at(iii) == ii)
+      for (unsigned int iii = 0; iii < param.value(0).value<vector<int>>().size(); iii++)
+        if (param.value(0).value<vector<int>>().at(iii) == ii)
           ua = true;
-      for (unsigned int iii = 0; iii < param.getParam<vector<int>>(1).getData().size(); iii++)
-        if (param.getParam<vector<int>>(1).getData().at(iii) == ii)
+      for (unsigned int iii = 0; iii < param.value(1).value<vector<int>>().size(); iii++)
+        if (param.value(1).value<vector<int>>().at(iii) == ii)
           ut = true;
       if (!(ut || ua))
         continue;
@@ -775,9 +773,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     (*out) = new AAlgorithm*[nAlgos];
     //	for(int ii=0;ii<param.getNumberOfParam<string>();ii++)
     // inputParameter.push_back(param.getParam<string>(ii).getData());
-    (*out)[0] =
-        new AReadFromRoot(param.getParam<string>(0).getData(), param.getParam<string>(1).getData(),
-                          "event", event, setup, readInID, 1000000000, NULL);
+    (*out)[0] = new AReadFromRoot(param.value(0).value<string>(), param.value(1).value<string>(),
+                                  "event", event, setup, readInID, 1000000000, NULL);
     // 	for(int ii=0;ii<nThreads;ii++)
     // 	  for(int jj=0;jj<nThreads;jj++)
     // 	    if(ii!=jj)
@@ -788,10 +785,10 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
   case 21: {
     anaLog << "hodo pixel calculation: ";
     (*out) = new AAlgorithm*[nAlgos];
-    (*out)[0] = new AHodoPixel(event.getMaxNumber<TPixel>(),
-                               *numberOfPixels[param.getParam<int>(0).getData()],
-                               pixels[param.getParam<int>(0).getData()], numberOfHits,
-                               calibratedHits, numberOfHitClusters, hitClusters, param);
+    (*out)[0] =
+        new AHodoPixel(event.getMaxNumber<TPixel>(), *numberOfPixels[param.value(0).value<int>()],
+                       pixels[param.value(0).value<int>()], numberOfHits, calibratedHits,
+                       numberOfHitClusters, hitClusters, param);
     anaLog << "done" << endli;
     break; // hodoPixel
   }
@@ -800,13 +797,11 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     (*out) = new AAlgorithm*[nAlgos];
     vector<string> tmp;
     (*out)[0] = new ABarrelPixel(
-        event.getMaxNumber<TPixel>(), param.getParam<int>(0).getData(),
-        *numberOfPixels[param.getParam<int>(0).getData()], pixels[param.getParam<int>(0).getData()],
-        *numberOfHits[param.getParam<int>(1).getData()],
-        *numberOfHits[param.getParam<int>(2).getData()],
-        calibratedHits[param.getParam<int>(1).getData()],
-        calibratedHits[param.getParam<int>(2).getData()],
-        detectors[param.getParam<int>(1).getData()], param.getParam<float>(0).getData(),
+        event.getMaxNumber<TPixel>(), param.value(0).value<int>(),
+        *numberOfPixels[param.value(0).value<int>()], pixels[param.value(0).value<int>()],
+        *numberOfHits[param.value(1).value<int>()], *numberOfHits[param.value(2).value<int>()],
+        calibratedHits[param.value(1).value<int>()], calibratedHits[param.value(2).value<int>()],
+        detectors[param.value(1).value<int>()], param.value(3).value<float>(),
         event.getEventNumber(), event.getRunNumber(), tmp);
     connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
             SLOT(onNewRun(run_parameter&)));
@@ -816,28 +811,28 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
   case 23: {
     anaLog << "micro strip pixel calculation: ";
     (*out) = new AAlgorithm*[nAlgos];
-    (*out)[0] = new AMicroPixel(event.getMaxNumber<TPixel>(),
-                                *numberOfPixels[param.getParam<int>(0).getData()],
-                                pixels[param.getParam<int>(0).getData()], numberOfHits,
-                                numberOfHitClusters, calibratedHits, hitClusters, param);
+    (*out)[0] =
+        new AMicroPixel(event.getMaxNumber<TPixel>(), *numberOfPixels[param.value(4).value<int>()],
+                        pixels[param.value(4).value<int>()], numberOfHits, numberOfHitClusters,
+                        calibratedHits, hitClusters, param);
     anaLog << "done" << endli;
     break; // microPixel
   }
   case 24: {
     anaLog << "write data to root file: ";
     (*out) = new AAlgorithm*[nAlgos];
-    (*out)[0] = new AWriteDataToRootFile(param.getParam<string>(0).getData(),
-                                         param.getParam<string>(1).getData(), "event", event, setup,
-                                         event.getMaxNumber<TTrack>(), true);
+    (*out)[0] =
+        new AWriteDataToRootFile(param.value(0).value<string>(), param.value(1).value<string>(),
+                                 "event", event, setup, event.getMaxNumber<TTrack>(), true);
     anaLog << "done" << endli;
     break; // write data to root file(s)
   }
   case 25: {
     anaLog << "write standard histos to root file: ";
     (*out) = new AAlgorithm*[nAlgos];
-    (*out)[0] = new AWriteHistogramsToRootFile(param.getParam<string>(0).getData(),
-                                               param.getParam<string>(1).getData(), event, setup,
-                                               param.getParam<string>(2).getData(), true, NULL);
+    (*out)[0] = new AWriteHistogramsToRootFile(param.value(0).value<string>(),
+                                               param.value(1).value<string>(), event, setup,
+                                               param.value(2).value<string>(), true, NULL);
     anaLog << "done" << endli;
     break; // write histos to root file
   }
@@ -865,7 +860,7 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
   //       }
   case 27: {
     anaLog << "puls height correction of QDC: ";
-    nAlgos = param.getParam<vector<int>>(0).getData().size();
+    nAlgos = param.value(0).value<vector<int>>().size();
     executeUpTo = nAlgos;
     (*out) = new AAlgorithm*[nAlgos];
     int detID;
@@ -876,9 +871,9 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     if (!firstRun.hasAdditionalCalibration())
       for (size_t iii = 0; iii < firstRun.getParent()->getNumberOfCalibrationFiles(); iii++)
         calibrationFiles.push_back(firstRun.getParent()->getCalibrationFile(iii));
-    for (unsigned int ii = 0; ii < param.getParam<vector<int>>(0).getData().size(); ii++) {
+    for (unsigned int ii = 0; ii < param.value(0).value<vector<int>>().size(); ii++) {
       anaLog << "#" << ii;
-      detID = param.getParam<vector<int>>(0).getData().at(ii);
+      detID = param.value(0).value<vector<int>>().at(ii);
       volumeShape* tmp = detectors[detID]->getShape(0);
       if (tmp->getName() == "wedge") {
         (*out)[ii] = new APulsHeightCorrectionWedge(tracks, *numberOfTracks, *detectors[detID],
@@ -949,9 +944,9 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
   case 29: {
     anaLog << "calculate particle speed: ";
     (*out) = new AAlgorithm*[nAlgos];
-    (*out)[0] = new ACalculateTrackProperties(
-        tracks, *numberOfTracks, event.getMaxNumber<TTrack>(),
-        *detectors[param.getParam<vector<int>>(0).getData()[0]], param);
+    (*out)[0] =
+        new ACalculateTrackProperties(tracks, *numberOfTracks, event.getMaxNumber<TTrack>(),
+                                      *detectors[param.value(6).value<vector<int>>()[0]], param);
     anaLog << "done" << endli;
     break; // calculate particle speed
   }
@@ -983,13 +978,12 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     // 	    *mutexer=initer;
     // 	  }
     (*out)[0] = new AGenerateOutput(
-        event, param.getParam<string>(0).getData(), param.getParam<string>(1).getData(),
-        param.getParam<string>(2).getData(), param.getParam<bool>(8).getData(), 100,
-        param.getParam<bool>(0).getData(), param.getParam<bool>(1).getData(),
-        param.getParam<bool>(2).getData(), param.getParam<bool>(3).getData(),
-        param.getParam<bool>(4).getData(), param.getParam<bool>(5).getData(),
-        param.getParam<vector<string>>(0).getData(), 0, param.getParam<bool>(6).getData(),
-        param.getParam<bool>(7).getData(), mutexer);
+        event, param.value(8).value<string>(), param.value(9).value<string>(),
+        param.value(10).value<string>(), param.value(8).value<bool>(), 100,
+        param.value(0).value<bool>(), param.value(1).value<bool>(), param.value(2).value<bool>(),
+        param.value(3).value<bool>(), param.value(4).value<bool>(), param.value(5).value<bool>(),
+        param.value(8).value<vector<string>>(), 0, param.value(6).value<bool>(),
+        param.value(7).value<bool>(), mutexer);
 
     // 	for(int ii=1;ii<nThreads;ii++)
     // 	  {
@@ -1013,8 +1007,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
   case 35: {
     anaLog << "calculate pixel in 3 layered hodo:";
     (*out) = new AAlgorithm*[nAlgos];
-    (*out)[0] = new AHodo3Pixel(pixels[param.getParam<int>(3).getData()],
-                                *numberOfPixels[param.getParam<int>(3).getData()],
+    (*out)[0] = new AHodo3Pixel(pixels[param.value(4).value<int>()],
+                                *numberOfPixels[param.value(4).value<int>()],
                                 event.getMaxNumber<TPixel>(), numberOfHits, numberOfHitClusters,
                                 calibratedHits, hitClusters, setup, param);
     anaLog << " done" << endli;
@@ -1023,11 +1017,11 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
   case 37: {
     anaLog << "simple Cluster search:";
     (*out) = new AAlgorithm*[nAlgos];
-    (*out)[0] = new AMicroCluster(
-        param.getParam<int>(0).getData(), *numberOfPixels[param.getParam<int>(1).getData()],
-        pixels[param.getParam<int>(1).getData()], event.getMaxNumber<TPixel>(),
-        *numberOfClusters[param.getParam<int>(0).getData()],
-        clusters[param.getParam<int>(0).getData()], param.getParam<int>(2).getData());
+    (*out)[0] =
+        new AMicroCluster(param.value(0).value<int>(), *numberOfPixels[param.value(1).value<int>()],
+                          pixels[param.value(1).value<int>()], event.getMaxNumber<TPixel>(),
+                          *numberOfClusters[param.value(0).value<int>()],
+                          clusters[param.value(0).value<int>()], param.value(2).value<int>());
     anaLog << " done" << endli;
     break;
   }
@@ -1036,12 +1030,17 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     int n = 0;
     AAlgorithm** tmpA;
     int ec;
-    if (param.getNumberOfParam<algorithm_parameter>() > 0)
-      n = getAlgorithm(&tmpA, ec, param.getParam<algorithm_parameter>(0).getData(), firstRun, event,
-                       setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters,
-                       numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels,
-                       clusters, materials, detectors, readValid, readInID, stearIt,
-                       eventRequesting);
+    std::vector<std::shared_ptr<algorithm_parameter>> algorithms;
+    for (size_t i = 0; i < param.numberOfValues(); i++) {
+      if (param.value(i).valueType() == ParameterValue::ValueType::ALGORITHM) {
+        algorithms.push_back(param.value(i).value<std::shared_ptr<algorithm_parameter>>());
+      }
+    }
+    if (algorithms.size() > 0)
+      n = getAlgorithm(&tmpA, ec, *algorithms[0], firstRun, event, setup, numberOfHits,
+                       numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws,
+                       calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors,
+                       readValid, readInID, stearIt, eventRequesting);
     else
       n = getAlgorithm(&tmpA, ec, algorithm_parameter("kin fit", 0, 0, 2), firstRun, event, setup,
                        numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters,
@@ -1055,14 +1054,14 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
       (*out)[i + 1] = tmpA[i];
     delete[] tmpA;
     vector<algorithm_parameter> tmp;
-    for (int i = 0; i < param.getNumberOfParam<algorithm_parameter>(); i++)
-      if (param.getParam<algorithm_parameter>(i).getData().getName() != "kinFit")
-        tmp.push_back(param.getParam<algorithm_parameter>(i).getData());
-    if (param.getNumberOfParam<algorithm_parameter>() > 0)
+    for (size_t i = 0; i < algorithms.size(); i++)
+      if (algorithms[i]->getName() != "kinFit")
+        tmp.push_back(*algorithms[i]);
+    if (tmp.size() > 0)
       (*out)[0] = new AReactionRecognition(setup, event, ((AFitAlgorithm*)(*out)[1]), tmp);
     else
       (*out)[0] = new AReactionRecognition(setup, event, ((AFitAlgorithm*)(*out)[1]),
-                                           param.getParam<string>(0).getData());
+                                           param.value(0).value<string>());
     anaLog << " done" << endli;
     break;
   }
@@ -1070,9 +1069,9 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     anaLog << "Event Generator:";
     (*out) = new AAlgorithm*[nAlgos];
     (*out)[0] = new AGenerateEvents(
-        tracks, *numberOfTracks, event.getEventNumber(), setup,
-        param.getParam<vector<int>>(0).getData(), param.getParam<string>(0).getData(),
-        param.getParam<vector<int>>(1).getData(), param.getParam<bool>(0).getData(), readValid);
+        tracks, *numberOfTracks, event.getEventNumber(), setup, param.value(2).value<vector<int>>(),
+        param.value(1).value<string>(), param.value(3).value<vector<int>>(),
+        param.value(0).value<bool>(), readValid);
     anaLog << " done" << endli;
     break;
   }
@@ -1086,15 +1085,14 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     // 	    (*inmutex)=initer;
     // 	  }
     (*out)[0] = new AReadFromSimpleTree(
-        param.getParam<string>(0).getData(), param.getParam<string>(1).getData(),
-        param.getParam<string>(6).getData(), param.getParam<bool>(6).getData(), tracks,
-        *numberOfTracks, event.getEventNumber(), event.getMaxNumber<TTrack>(), event, readInID,
-        &setup, param.getParam<bool>(0).getData(), param.getParam<bool>(1).getData(),
-        param.getParam<bool>(2).getData(), param.getParam<bool>(3).getData(),
-        param.getParam<string>(2).getData(), param.getParam<string>(3).getData(),
-        param.getParam<string>(4).getData(), param.getParam<string>(5).getData(),
-        param.getParam<bool>(4).getData(), param.getParam<bool>(5).getData(),
-        param.getParam<int>(0).getData(), readValid, inmutex);
+        param.value(8).value<string>(), param.value(9).value<string>(),
+        param.value(14).value<string>(), param.value(6).value<bool>(), tracks, *numberOfTracks,
+        event.getEventNumber(), event.getMaxNumber<TTrack>(), event, readInID, &setup,
+        param.value(0).value<bool>(), param.value(1).value<bool>(), param.value(2).value<bool>(),
+        param.value(3).value<bool>(), param.value(10).value<string>(),
+        param.value(11).value<string>(), param.value(12).value<string>(),
+        param.value(13).value<string>(), param.value(4).value<bool>(), param.value(5).value<bool>(),
+        param.value(7).value<int>(), readValid, inmutex);
     // 	for(int ii=0;ii<nThreads;ii++)
     // 	  {
     connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
@@ -1149,35 +1147,35 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     (*out) = new AAlgorithm*[nAlgos];
     // 	for(int i=0;i<n;i++)(*out)[i+1]=tmpA[i];
     // 	delete[]tmpA;
-    (*out)[0] = new AKinkSearch(
-        tracks, event.getMaxNumber<TTrack>(), *numberOfTracks, pixels, numberOfPixels, clusters,
-        numberOfClusters, calibratedHits, numberOfHits, param.getParam<vector<int>>(0).getData(),
-        param.getParam<vector<int>>(1).getData(), param.getParam<vector<int>>(2).getData(),
-        param.getParam<vector<int>>(3).getData(), param.getParam<vector<int>>(4).getData(),
-        param.getParam<vector<int>>(5).getData(), param.getParam<vector<int>>(6).getData(),
-        param.getParam<vector<int>>(7).getData(), param.getParam<vector<int>>(8).getData(),
-        param.getParam<int>(0).getData(), param.getParam<int>(1).getData(),
-        param.getParam<vector<int>>(9).getData(), param.getParam<vector<int>>(10).getData(),
-        param.getParam<float>(0).getData());
+    (*out)[0] =
+        new AKinkSearch(tracks, event.getMaxNumber<TTrack>(), *numberOfTracks, pixels,
+                        numberOfPixels, clusters, numberOfClusters, calibratedHits, numberOfHits,
+                        param.value(3).value<vector<int>>(), param.value(4).value<vector<int>>(),
+                        param.value(5).value<vector<int>>(), param.value(6).value<vector<int>>(),
+                        param.value(7).value<vector<int>>(), param.value(8).value<vector<int>>(),
+                        param.value(9).value<vector<int>>(), param.value(10).value<vector<int>>(),
+                        param.value(11).value<vector<int>>(), param.value(0).value<int>(),
+                        param.value(1).value<int>(), param.value(12).value<vector<int>>(),
+                        param.value(13).value<vector<int>>(), param.value(2).value<float>());
     anaLog << " done" << endli;
     break;
   }
   case 42: {
     anaLog << "Teufel correction:";
-    nAlgos = param.getParam<vector<int>>(0).getData().size();
+    nAlgos = param.value(1).value<vector<int>>().size();
     executeUpTo = nAlgos;
     (*out) = new AAlgorithm*[nAlgos];
-    vector<int> tmp = param.getParam<vector<int>>(0).getData();
+    vector<int> tmp = param.value(1).value<vector<int>>();
     vector<string> tmps;
     for (size_t iii = 0; iii < firstRun.getNumberOfCalibrationFiles(); iii++)
       tmps.push_back(firstRun.getCalibrationFile(iii));
     int id;
-    for (unsigned int iii = 0; iii < param.getParam<vector<int>>(0).getData().size(); iii++) {
-      id = param.getParam<vector<int>>(0).getData().at(iii);
+    for (unsigned int iii = 0; iii < param.value(1).value<vector<int>>().size(); iii++) {
+      id = param.value(1).value<vector<int>>().at(iii);
       anaLog << id;
       (*out)[iii] = new ATeufelCorrection(
           calibratedHits[id], *numberOfHits[id], id, detectors[id]->getNumberOfElements(),
-          event.getEventNumber(), event.getRunNumber(), tmps, param.getParam<string>(0).getData());
+          event.getEventNumber(), event.getRunNumber(), tmps, param.value(0).value<string>());
       connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[iii],
               SLOT(onNewRum(run_parameter&)));
     }
@@ -1189,12 +1187,18 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     int n = 0;
     AAlgorithm** tmpA;
     int ec;
-    if (param.getNumberOfParam<algorithm_parameter>() > 0)
-      n = getAlgorithm(&tmpA, ec, param.getParam<algorithm_parameter>(0).getData(), firstRun, event,
-                       setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters,
-                       numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels,
-                       clusters, materials, detectors, readValid, readInID, stearIt,
-                       eventRequesting);
+    std::shared_ptr<algorithm_parameter> fitAlgorithm;
+    for (size_t i = 0; i < param.numberOfValues(); i++) {
+      if (param.value(i).valueType() == ParameterValue::ValueType::ALGORITHM) {
+        fitAlgorithm = param.value(i).value<std::shared_ptr<algorithm_parameter>>();
+        break;
+      }
+    }
+    if (fitAlgorithm)
+      n = getAlgorithm(&tmpA, ec, *fitAlgorithm, firstRun, event, setup, numberOfHits,
+                       numberOfTracks, numberOfPixels, numberOfClusters, numberOfHitClusters, raws,
+                       calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors,
+                       readValid, readInID, stearIt, eventRequesting);
     else
       n = getAlgorithm(&tmpA, ec, algorithm_parameter("line fit", 0, 0, 0), firstRun, event, setup,
                        numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters,
@@ -1210,13 +1214,11 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     TFormula* form = new TFormula();
     (*out)[0] = new APromptHistoTracker(
         setup, tracks, *numberOfTracks, event.getMaxNumber<TTrack>(), calibratedHits, numberOfHits,
-        false, param.getParam<int>(0).getData(), false, 0., false, form,
-        ((AFitAlgorithm*)(*out)[1]), param.getParam<int>(1).getData(),
-        param.getParam<int>(2).getData(), param.getParam<float>(3).getData(),
-        param.getParam<float>(4).getData(), param.getParam<float>(1).getData(),
-        param.getParam<float>(2).getData(), param.getParam<bool>(0).getData(),
-        param.getParam<bool>(1).getData(), param.getParam<string>(0).getData(),
-        param.getParam<float>(0).getData());
+        false, param.value(2).value<int>(), false, 0., false, form, ((AFitAlgorithm*)(*out)[1]),
+        param.value(3).value<int>(), param.value(4).value<int>(), param.value(8).value<float>(),
+        param.value(9).value<float>(), param.value(6).value<float>(), param.value(7).value<float>(),
+        param.value(0).value<bool>(), param.value(1).value<bool>(), param.value(10).value<string>(),
+        param.value(5).value<float>());
     anaLog << " done" << endli;
     break;
   }
@@ -1370,8 +1372,9 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
                           setup.getNumberOfDetectors(), readValid, param);
     connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
             SLOT(newRun(run_parameter&)));
-    if (param.getNumberOfParam<bool>() > 1)
-      if (param.getParam<bool>(1).getData()) {
+    if (param.numberOfValues() > 1 &&
+        param.value(0).valueType() == ParameterValue::ValueType::BOOLEAN)
+      if (param.value(0).value<bool>()) {
         eventRequesting = true;
         connect(stearIt, SIGNAL(requestNextEvent()), (*out)[0], SLOT(prepareNextEntry()));
       }
@@ -1400,8 +1403,9 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
             SLOT(onNewRun(run_parameter&)));
     // cout<<"Read track tree "<<param.getNumberOfParam<bool>()<<"
     // "<<param.getParam<bool>(1).getData()<<endl;
-    if (param.getNumberOfParam<bool>() > 1)
-      if (param.getParam<bool>(1).getData()) {
+    if (param.numberOfValues() > 1 &&
+        param.value(0).valueType() == ParameterValue::ValueType::BOOLEAN)
+      if (param.value(0).value<bool>()) {
         eventRequesting = true;
         connect(stearIt, SIGNAL(requestNextEvent()), (*out)[0], SLOT(prepareNextEntry()));
       }

@@ -26,4 +26,5 @@ public:
   virtual ~AAssignHitsToTracks();
   virtual void* process(void* ptr);
   static algorithm_parameter getDescription();
+  static bool checkParameter(algorithm_parameter const& a);
 };

@@ -110,14 +110,14 @@ algorithm_parameter AGenerateEventsWithDecay::getDescription()
   ret.setDescription(des);
   vector<int> tmp;
   vector<string> tmps;
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("particles", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("decayed off", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("required Hits in detector", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("required Hits in OR- detector", tmp));
-  ret.addParam<vector<string>>(single_parameter<vector<string>>("functions for decay", tmps));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("parameters for functions", tmp));
-  ret.addParam<bool>(single_parameter<bool>("use Phase-Space", true));
-  ret.addParam<bool>(single_parameter<bool>("simulate acceptance", false));
+  ret.addValue("use Phase-Space", true);
+  ret.addValue("simulate acceptance", false);
+  ret.addValue("particles", tmp);
+  ret.addValue("decayed off", tmp);
+  ret.addValue("required Hits in detector", tmp);
+  ret.addValue("required Hits in OR- detector", tmp);
+  ret.addValue("parameters for functions", tmp);
+  ret.addValue("functions for decay", tmps);
   return ret;
 }
 AGenerateEventsWithDecay::AGenerateEventsWithDecay(TTrack** tracksIn, int& numberOfTracksIn,
@@ -131,9 +131,9 @@ AGenerateEventsWithDecay::AGenerateEventsWithDecay(TTrack** tracksIn, int& numbe
   valid = true;
   if (!Eparticles::IsInit())
     Eparticles::init();
-  PhaseSpace = descr.getParam<bool>(0).getData();
-  acceptance = descr.getParam<bool>(1).getData();
-  numberOfParticles = descr.getParam<vector<int>>(0).getData().size();
+  PhaseSpace = descr.value(0).value<bool>();
+  acceptance = descr.value(1).value<bool>();
+  numberOfParticles = descr.value(2).value<vector<int>>().size();
   particleID = new int[numberOfParticles];
   decayedOff = new int[numberOfParticles];
   masses = new double[numberOfParticles];
@@ -142,8 +142,8 @@ AGenerateEventsWithDecay::AGenerateEventsWithDecay(TTrack** tracksIn, int& numbe
   bool decays[numberOfParticles];
   bool pri[numberOfParticles];
   for (int i = 0; i < numberOfParticles; i++) {
-    particleID[i] = descr.getParam<vector<int>>(0).getData().at(i);
-    decayedOff[i] = descr.getParam<vector<int>>(1).getData().at(i);
+    particleID[i] = descr.value(2).value<vector<int>>().at(i);
+    decayedOff[i] = descr.value(3).value<vector<int>>().at(i);
     masses[i] = Eparticles::getMassG(particleID[i]);
     halfLife[i] = log(2.) * Eparticles::getLifeTimeG(particleID[i]);
     charge[i] = (int)Eparticles::getChargeG(particleID[i]);
@@ -212,11 +212,11 @@ AGenerateEventsWithDecay::AGenerateEventsWithDecay(TTrack** tracksIn, int& numbe
   // 	}
   //     }
   if (!PhaseSpace) {
-    nParameters = descr.getParam<vector<int>>(4).getData().size();
+    nParameters = descr.value(6).value<vector<int>>().size();
     parameters = new int[nParameters];
     for (int i = 0; i < nParameters; i++)
-      parameters[i] = descr.getParam<vector<int>>(4).getData().at(i);
-    function[0] = new TF1("FPri", descr.getParam<vector<string>>(0).getData().at(0).data());
+      parameters[i] = descr.value(6).value<vector<int>>().at(i);
+    function[0] = new TF1("FPri", descr.value(7).value<vector<string>>().at(0).data());
   }
   bool taken = false;
   int num;
@@ -252,7 +252,7 @@ AGenerateEventsWithDecay::AGenerateEventsWithDecay(TTrack** tracksIn, int& numbe
       }
     if (!PhaseSpace)
       function[j + 1] = new TF1((string("F") + string_number(j)).data(),
-                                descr.getParam<vector<string>>(0).getData().at(j + 1).data());
+                                descr.value(7).value<vector<string>>().at(j + 1).data());
     else
       function[j + 1] = NULL;
     generator[j + 1] = new TGenPhaseSpace();
@@ -334,12 +334,12 @@ AGenerateEventsWithDecay::AGenerateEventsWithDecay(TTrack** tracksIn, int& numbe
   }
   if (acceptance) {
     requiredHits = new int[setup.getNumberOfDetectors()];
-    for (unsigned int i = 0; i < descr.getParam<vector<int>>(2).getData().size(); i++)
+    for (unsigned int i = 0; i < descr.value(4).value<vector<int>>().size(); i++)
       if ((int)i < setup.getNumberOfDetectors())
-        requiredHits[i] = descr.getParam<vector<int>>(2).getData().at(i);
+        requiredHits[i] = descr.value(4).value<vector<int>>().at(i);
     vector<int> tmp;
-    for (unsigned int i = 0; i < descr.getParam<vector<int>>(3).getData().size(); i++)
-      tmp.push_back(descr.getParam<vector<int>>(3).getData().at(i));
+    for (unsigned int i = 0; i < descr.value(5).value<vector<int>>().size(); i++)
+      tmp.push_back(descr.value(5).value<vector<int>>().at(i));
     numSums = 0;
     for (unsigned int i = 0; i < tmp.size(); i++) {
       numSums++;

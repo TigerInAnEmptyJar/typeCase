@@ -13,7 +13,7 @@ AapplyLRC::AapplyLRC(TSetup& setup, TTrack** trackIn, int& numTracksIn, int& evt
       runNumber(rnr)
 {
   tracks = trackIn;
-  nCorrectingDets = descr.getParam<vector<int>>(0).getData().size();
+  nCorrectingDets = descr.value(0).value<vector<int>>().size();
   correctingDets = new int[nCorrectingDets];
   correctingType = new int[nCorrectingDets];
   parameters = new CommonCalibrationParser**[nCorrectingDets];
@@ -22,8 +22,8 @@ AapplyLRC::AapplyLRC(TSetup& setup, TTrack** trackIn, int& numTracksIn, int& evt
   speedOfLight = 299.792; // [mm/ns]
   speedInMaterial = new float[nCorrectingDets];
   for (int i = 0; i < nCorrectingDets; i++) {
-    correctingDets[i] = descr.getParam<vector<int>>(0).getData().at(i);
-    correctingType[i] = descr.getParam<vector<int>>(1).getData().at(i);
+    correctingDets[i] = descr.value(0).value<vector<int>>().at(i);
+    correctingType[i] = descr.value(1).value<vector<int>>().at(i);
     speedInMaterial[i] = setup.getDetectorr(correctingDets[i]).getMaterial()->getSpeedOfLight();
     parameters[i] = NULL;
     currentRange[i] = 0;
@@ -411,7 +411,7 @@ algorithm_parameter AapplyLRC::getDescription()
                "same thing but in orders of path_of_signal_to_common_point.";
   ret.setDescription(des);
   vector<int> tmp;
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("detectors to apply", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("type of calibration", tmp));
+  ret.addValue("detectors to apply", tmp);
+  ret.addValue("type of calibration", tmp);
   return ret;
 }

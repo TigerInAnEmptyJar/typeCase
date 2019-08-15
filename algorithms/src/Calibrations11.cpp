@@ -6,14 +6,14 @@ extern int getPixelPoint(TPixel* pix);
 AqdcRadialPixCalibration::AqdcRadialPixCalibration(TEvent& eventIn, TSetup& setup,
                                                    algorithm_parameter& descr)
     : AAlgorithm("Generate qdcRadialPix calibration"), event(eventIn),
-      minEntriesPerHisto(descr.getParam<int>(0).getData())
+      minEntriesPerHisto(descr.value(0).value<int>())
 {
-  vector<int> tmp(descr.getParam<vector<int>>(0).getData());
-  vector<int> tmp1(descr.getParam<vector<int>>(1).getData());
-  vector<int> tmp2(descr.getParam<vector<int>>(2).getData());
-  vector<int> tmp3(descr.getParam<vector<int>>(3).getData());
-  vector<int> tmp4(descr.getParam<vector<int>>(4).getData());
-  getReactions(descr.getParam<vector<string>>(0).getData());
+  vector<int> tmp(descr.value(3).value<vector<int>>());
+  vector<int> tmp1(descr.value(4).value<vector<int>>());
+  vector<int> tmp2(descr.value(5).value<vector<int>>());
+  vector<int> tmp3(descr.value(6).value<vector<int>>());
+  vector<int> tmp4(descr.value(7).value<vector<int>>());
+  getReactions(descr.value(8).value<vector<string>>());
   numberOfDetectors = tmp.size();
   detectorIDs = new int[numberOfDetectors];
   numberOfElements = new int[numberOfDetectors];
@@ -32,10 +32,8 @@ AqdcRadialPixCalibration::AqdcRadialPixCalibration(TEvent& eventIn, TSetup& setu
     pixelIDs[i] = tmp2[i];
   }
   int xmin = -100, xmax = -100;
-  if (descr.getNumberOfParam<int>() > 1)
-    xmin = descr.getParam<int>(1).getData();
-  if (descr.getNumberOfParam<int>() > 2)
-    xmax = descr.getParam<int>(2).getData();
+  xmin = descr.value(1).value<int>();
+  xmax = descr.value(2).value<int>();
   eventStart = 0;
   for (int i = 0; i < numberOfDetectors; i++) {
     detectorIDs[i] = tmp[i];

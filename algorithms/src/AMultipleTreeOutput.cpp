@@ -323,9 +323,9 @@ AMultipleTreeOutput::AMultipleTreeOutput(int max, int& evtNr, int& rnNr, int& tr
     trees[i] = new TTree*[maxtrees];
     trackOut[i] = new trackT*[maxtrees];
   }
-  nTracks_per_tree = param.getParam<int>(0).getData();
-  newFileEachRun = param.getParam<bool>(0).getData();
-  filePattern = param.getParam<string>(0).getData();
+  nTracks_per_tree = param.value(2).value<int>();
+  newFileEachRun = param.value(0).value<bool>();
+  filePattern = param.value(3).value<string>();
   if (!newFileEachRun) {
     outFile = new TFile((filePattern + "T.root").data(), "recreate");
     initNumTree();
@@ -345,10 +345,10 @@ algorithm_parameter AMultipleTreeOutput::getDescription()
                "beta, energy, momentum, particleID and information of hits "
                "in the detector (max 30!). This is written to root-file.";
   ret.setDescription(lst);
-  ret.addParam<bool>(single_parameter<bool>("begin new file at end of run", true));
-  ret.addParam<bool>(single_parameter<bool>("use local directory", true));
-  ret.addParam<int>(single_parameter<int>("Number of tracks per tree", 5));
-  ret.addParam<string>(single_parameter<string>("File-pattern", ""));
-  ret.addParam<string>(single_parameter<string>("Local directory", ""));
+  ret.addValue("begin new file at end of run", true);
+  ret.addValue("use local directory", true);
+  ret.addValue("Number of tracks per tree", static_cast<int>(5));
+  ret.addValue("File-pattern", std::string{});
+  ret.addValue("Local directory", std::string{});
   return ret;
 }

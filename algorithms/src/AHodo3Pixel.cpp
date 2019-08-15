@@ -21,11 +21,11 @@ AHodo3Pixel::AHodo3Pixel(TPixel** pixelIn, int& numberOfPixelsIn, int maxOfPixel
       maxOfPixels(maxOfPixelsIn)
 {
   int idx = 17, idy = 18, idd = 23, pid;
-  idd = ap.getParam<int>(0).getData();
-  idx = ap.getParam<int>(1).getData();
-  idy = ap.getParam<int>(2).getData();
-  pid = ap.getParam<int>(3).getData();
-  if (ap.getParam<bool>(0).getData()) {
+  idd = ap.value(1).value<int>();
+  idx = ap.value(2).value<int>();
+  idy = ap.value(3).value<int>();
+  pid = ap.value(4).value<int>();
+  if (ap.value(0).value<bool>()) {
     hitsX = (TCalibHit**)hitClusters[idx];
     hitsY = (TCalibHit**)hitClusters[idy];
     hitsD = (TCalibHit**)hitClusters[idd];

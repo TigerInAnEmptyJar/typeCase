@@ -36,36 +36,35 @@ algorithm_parameter AVLineTrackSearch::getDescription()
                " If the assumed line is close enough this element"
                " is used. This method is slower than the other one!";
   ret.setDescription(des);
-  ret.addParam<int>(single_parameter<int>("max number of elements in 2 tracks", 2));
-  ret.addParam<int>(single_parameter<int>("min # elements on track-vertex-track", 7));
-  ret.addParam<float>(single_parameter<float>("max Distance Vertex-Plane", 10));
-  ret.addParam<float>(single_parameter<float>("maximum chi-squared for track-vertex-track", 10));
-  ret.addParam<float>(single_parameter<float>("max angle diff pri to secondary", 0.05));
-  ret.addParam<float>(single_parameter<float>("max Distance pixel-plane", 10));
+  ret.addValue("", false);
+  ret.addValue("", false);
+  ret.addValue("max number of elements in 2 tracks", static_cast<int>(2));
+  ret.addValue("min # elements on track-vertex-track", static_cast<int>(7));
+  ret.addValue("max Distance Vertex-Plane", 10.f);
+  ret.addValue("maximum chi-squared for track-vertex-track", 10.f);
+  ret.addValue("max angle diff pri to secondary", 0.05f);
+  ret.addValue("max Distance pixel-plane", 10.f);
   vector<int> tmp;
   vector<float> tmp2;
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("pixel stop-IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("pixel min # elements on track", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("pixel: essential detector IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("cluster stop-IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("cluster min # elements on track", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("cluster: essential detector IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("pixel start-IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("cluster start-IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("min start objects per plane", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("detectors", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("element search mode", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("conventional search detector", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("must not detectors", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("max element distance", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("max element suspect-distance", tmp));
-  ret.addParam<vector<float>>(
-      single_parameter<vector<float>>("pixel: max chi squared for track", tmp2));
-  ret.addParam<vector<float>>(
-      single_parameter<vector<float>>("cluster: max chi squared for track", tmp2));
-  ret.addParam<vector<float>>(single_parameter<vector<float>>("max distance", tmp2));
-  ret.addParam<vector<float>>(
-      single_parameter<vector<float>>("vertex z-position from target", tmp2));
+  ret.addValue("pixel stop-IDs", tmp);
+  ret.addValue("pixel min # elements on track", tmp);
+  ret.addValue("pixel: essential detector IDs", tmp);
+  ret.addValue("cluster stop-IDs", tmp);
+  ret.addValue("cluster min # elements on track", tmp);
+  ret.addValue("cluster: essential detector IDs", tmp);
+  ret.addValue("pixel start-IDs", tmp);
+  ret.addValue("cluster start-IDs", tmp);
+  ret.addValue("min start objects per plane", tmp);
+  ret.addValue("detectors", tmp);
+  ret.addValue("element search mode", tmp);
+  ret.addValue("conventional search detector", tmp);
+  ret.addValue("must not detectors", tmp);
+  ret.addValue("max element distance", tmp);
+  ret.addValue("max element suspect-distance", tmp);
+  ret.addValue("pixel: max chi squared for track", tmp2);
+  ret.addValue("cluster: max chi squared for track", tmp2);
+  ret.addValue("max distance", tmp2);
+  ret.addValue("vertex z-position from target", tmp2);
   return ret;
 }
 void coutHitsInTrack(TTrack* tr, const char* separator)
@@ -178,7 +177,7 @@ AVLineTrackSearch::AVLineTrackSearch(TSetup& setupIn, TTrack** tracksIn, TCluste
   numberOfPixels = numberOfPixelsIn;
   numberOfClusters = numberOfClustersIn;
 
-  numStop = descr.getParam<vector<int>>(0).getData().size();
+  numStop = descr.value(8).value<vector<int>>().size();
   stopIDs = new int[numStop];
   numEssentials = new int[numStop];
   essentials = new int*[numStop];
@@ -186,16 +185,16 @@ AVLineTrackSearch::AVLineTrackSearch(TSetup& setupIn, TTrack** tracksIn, TCluste
   maxChi = new float[numStop];
   int j = 0;
   for (int i = 0; i < numStop; i++) {
-    stopIDs[i] = descr.getParam<vector<int>>(0).getData().at(i);
-    minElements[i] = descr.getParam<vector<int>>(1).getData().at(i);
-    maxChi[i] = descr.getParam<vector<float>>(0).getData().at(i);
-    numEssentials[i] = descr.getParam<vector<int>>(2).getData().at(j++);
+    stopIDs[i] = descr.value(8).value<vector<int>>().at(i);
+    minElements[i] = descr.value(9).value<vector<int>>().at(i);
+    maxChi[i] = descr.value(23).value<vector<float>>().at(i);
+    numEssentials[i] = descr.value(10).value<vector<int>>().at(j++);
     essentials[i] = new int[numEssentials[i]];
     for (int k = 0; k < numEssentials[i]; k++)
-      essentials[i][k] = descr.getParam<vector<int>>(2).getData().at(j++);
+      essentials[i][k] = descr.value(10).value<vector<int>>().at(j++);
   }
 
-  numStopCluster = descr.getParam<vector<int>>(3).getData().size();
+  numStopCluster = descr.value(11).value<vector<int>>().size();
   stopClusterIDs = new int[numStopCluster];
   numClusterEssentials = new int[numStopCluster];
   clusterEssentials = new int*[numStopCluster];
@@ -203,56 +202,56 @@ AVLineTrackSearch::AVLineTrackSearch(TSetup& setupIn, TTrack** tracksIn, TCluste
   maxClusterChi = new float[numStopCluster];
   j = 0;
   for (int i = 0; i < numStopCluster; i++) {
-    stopClusterIDs[i] = descr.getParam<vector<int>>(3).getData().at(i);
-    minClusterElements[i] = descr.getParam<vector<int>>(4).getData().at(i);
-    maxClusterChi[i] = descr.getParam<vector<float>>(1).getData().at(i);
-    numClusterEssentials[i] = descr.getParam<vector<int>>(5).getData().at(j++);
+    stopClusterIDs[i] = descr.value(11).value<vector<int>>().at(i);
+    minClusterElements[i] = descr.value(12).value<vector<int>>().at(i);
+    maxClusterChi[i] = descr.value(24).value<vector<float>>().at(i);
+    numClusterEssentials[i] = descr.value(13).value<vector<int>>().at(j++);
     clusterEssentials[i] = new int[numClusterEssentials[i]];
     for (int k = 0; k < numClusterEssentials[i]; k++)
-      clusterEssentials[i][k] = descr.getParam<vector<int>>(5).getData().at(j++);
+      clusterEssentials[i][k] = descr.value(13).value<vector<int>>().at(j++);
   }
   maxDistance = new float[numStop + numStopCluster];
   for (int i = 0; i < numStop; i++)
-    maxDistance[i] = descr.getParam<vector<float>>(2).getData().at(i);
+    maxDistance[i] = descr.value(25).value<vector<float>>().at(i);
   for (int i = 0; i < numStopCluster; i++)
-    maxDistance[i + numStop] = descr.getParam<vector<float>>(2).getData().at(i + numStop);
+    maxDistance[i + numStop] = descr.value(25).value<vector<float>>().at(i + numStop);
 
-  numStart = descr.getParam<vector<int>>(6).getData().size();
+  numStart = descr.value(14).value<vector<int>>().size();
   startIDs = new int[numStart];
   for (int i = 0; i < numStart; i++)
-    startIDs[i] = descr.getParam<vector<int>>(6).getData().at(i);
-  numStartCluster = descr.getParam<vector<int>>(7).getData().size();
+    startIDs[i] = descr.value(14).value<vector<int>>().at(i);
+  numStartCluster = descr.value(15).value<vector<int>>().size();
   startClusterIDs = new int[numStartCluster];
   for (int i = 0; i < numStartCluster; i++)
-    startClusterIDs[i] = descr.getParam<vector<int>>(7).getData().at(i);
+    startClusterIDs[i] = descr.value(15).value<vector<int>>().at(i);
   minStarts = new int[numStart + numStartCluster];
   for (int i = 0; i < numStart + numStartCluster; i++)
-    minStarts[i] = descr.getParam<vector<int>>(8).getData().at(i);
-  numDetectors = descr.getParam<vector<int>>(9).getData().size();
+    minStarts[i] = descr.value(16).value<vector<int>>().at(i);
+  numDetectors = descr.value(17).value<vector<int>>().size();
   detectorIDs = new int[numDetectors];
   conventional = new int[numDetectors];
   for (int i = 0; i < numDetectors; i++) {
-    detectorIDs[i] = descr.getParam<vector<int>>(9).getData().at(i);
-    conventional[i] = descr.getParam<vector<int>>(10).getData().at(i);
+    detectorIDs[i] = descr.value(17).value<vector<int>>().at(i);
+    conventional[i] = descr.value(18).value<vector<int>>().at(i);
   }
-  numNoGo = descr.getParam<vector<int>>(11).getData().size();
+  numNoGo = descr.value(19).value<vector<int>>().size();
   noGoDetectors = new int[numNoGo];
   for (int i = 0; i < numNoGo; i++)
-    noGoDetectors[i] = descr.getParam<vector<int>>(11).getData().at(i);
+    noGoDetectors[i] = descr.value(19).value<vector<int>>().at(i);
   away = new int[(numDetectors + numNoGo) * (numStop + numStopCluster)];
   for (int i = 0; i < (numDetectors + numNoGo) * (numStop + numStopCluster); i++)
-    away[i] = descr.getParam<vector<int>>(12).getData().at(i);
-  maxDistanceVertexPlane = descr.getParam<float>(0).getData();
-  maxVertexChi = descr.getParam<float>(1).getData();
-  maxAngle = descr.getParam<float>(2).getData();
-  minElementsPerVee = descr.getParam<int>(1).getData();
-  maxEqualElements = descr.getParam<int>(0).getData();
-  maxDistanceToPlane = descr.getParam<float>(3).getData();
-  numZDists = descr.getParam<vector<float>>(3).getData().size() / 2;
+    away[i] = descr.value(20).value<vector<int>>().at(i);
+  maxDistanceVertexPlane = descr.value(4).value<float>();
+  maxVertexChi = descr.value(5).value<float>();
+  maxAngle = descr.value(6).value<float>();
+  minElementsPerVee = descr.value(3).value<int>();
+  maxEqualElements = descr.value(2).value<int>();
+  maxDistanceToPlane = descr.value(7).value<float>();
+  numZDists = descr.value(26).value<vector<float>>().size() / 2;
   Zdists = new float[numZDists * 2];
   for (int i = 0; i < numZDists; i++) {
-    Zdists[i * 2] = descr.getParam<vector<float>>(3).getData().at(i * 2);
-    Zdists[i * 2 + 1] = descr.getParam<vector<float>>(3).getData().at(i * 2 + 1);
+    Zdists[i * 2] = descr.value(26).value<vector<float>>().at(i * 2);
+    Zdists[i * 2 + 1] = descr.value(26).value<vector<float>>().at(i * 2 + 1);
   }
 
   tmpTracks = new TTrack*[maxTracks];
@@ -284,7 +283,7 @@ AVLineTrackSearch::AVLineTrackSearch(TSetup& setupIn, TTrack** tracksIn, TCluste
   vee = new trackVertexTrack*[maxPlanes];
   for (int i = 0; i < maxPlanes; i++)
     vee[i] = new trackVertexTrack(100);
-  doAlternateSearch = descr.getParam<bool>(1).getData();
+  doAlternateSearch = descr.value(1).value<bool>();
   alternateDist = 0.8;
   maxEl = 200;
   nDet = setup.getNumberOfDetectors();
@@ -292,8 +291,8 @@ AVLineTrackSearch::AVLineTrackSearch(TSetup& setupIn, TTrack** tracksIn, TCluste
   chels = new TCalibHit**[nDet];
   for (int i = 0; i < nDet; i++)
     chels[i] = new TCalibHit*[maxEl];
-  checkForPromptElements = descr.getParam<bool>(0).getData();
-  maxPixelPrompt = descr.getParam<int>(2).getData();
+  checkForPromptElements = descr.value(0).value<bool>();
+//  maxPixelPrompt = descr.value(?).value<int>();
 #ifdef SHOWPARAMETER
   cout << "Plane defining points:" << endl;
   cout << "  pixels: " << flush;

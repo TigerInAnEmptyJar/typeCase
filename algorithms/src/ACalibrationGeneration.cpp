@@ -8,30 +8,17 @@ ACalibrationGeneration::ACalibrationGeneration(TEvent& eventIn, TSetup& setupIn,
                                                const algorithm_parameter& descr)
     : AAlgorithm("Generate calibration constants"), event(eventIn), setup(setupIn)
 {
-  author = "typeCase";
-  if (descr.getNumberOfParam<string>() > 0)
-    author = descr.getParam<string>(0).getData();
-  beamtime = "Oct_04";
-  if (descr.getNumberOfParam<string>() > 1)
-    beamtime = descr.getParam<string>(1).getData();
-  fromRun = 0;
-  uptoRun = 10000;
-  if (descr.getNumberOfParam<int>() > 0)
-    fromRun = descr.getParam<int>(0).getData();
-  if (descr.getNumberOfParam<int>() > 1)
-    uptoRun = descr.getParam<int>(1).getData();
-  useEventBase = false;
-  if (descr.getNumberOfParam<bool>() > 0)
-    useEventBase = descr.getParam<bool>(0).getData();
+  author = descr.value(4).value<string>();
+  beamtime = descr.value(5).value<string>();
+  fromRun = descr.value(1).value<int>();
+  uptoRun = descr.value(2).value<int>();
+  useEventBase = descr.value(0).value<bool>();
   if (useEventBase) {
     eventBase = 10000;
-    if (descr.getNumberOfParam<int>() > 2)
-      eventBase = descr.getParam<int>(2).getData();
+    eventBase = descr.value(3).value<int>();
     eventCounter = 0;
   }
-  outFileName = "testCal.data";
-  if (descr.getNumberOfParam<string>() > 2)
-    outFileName = descr.getParam<string>(2).getData();
+  outFileName = descr.value(6).value<string>();
   detectorNames.push_back("QUIRL_GERADE");
   detectorNames.push_back("QUIRL_LINKS");
   detectorNames.push_back("QUIRL_RECHTS");
@@ -142,65 +129,70 @@ void ACalibrationGeneration::declareCalibs(const algorithm_parameter& descr)
 {
   //  algorithm_parameter tmp;
   int algoNum = 0;
-  numberOfCalibrationAlgorithms = descr.getNumberOfParam<algorithm_parameter>();
+  std::vector<std::shared_ptr<algorithm_parameter>> algorithms;
+  for (size_t i = 0; i < descr.numberOfValues(); i++) {
+    if (descr.value(i).valueType() == ParameterValue::ValueType::ALGORITHM) {
+      algorithms.push_back(descr.value(i).value<std::shared_ptr<algorithm_parameter>>());
+    }
+  }
+  numberOfCalibrationAlgorithms = algorithms.size();
   calibrationAlgorithms = new AAlgorithm*[numberOfCalibrationAlgorithms];
   for (int i = 0; i < numberOfCalibrationAlgorithms; i++)
     calibrationAlgorithms[i] = NULL;
 
-  for (int i = 0; i < numberOfCalibrationAlgorithms; i++) {
+  for (size_t i = 0; i < algorithms.size(); i++) {
     calibrationAlgorithms[algoNum] = NULL;
-    algorithm_parameter tmp(descr.getParam<algorithm_parameter>(i).getData());
-    switch (tmp.getID()) {
+    switch (algorithms[i]->getID()) {
     case 100:
-      calibrationAlgorithms[algoNum] = new APedestalCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new APedestalCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 101:
-      calibrationAlgorithms[algoNum] = new AtdcFactorCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AtdcFactorCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 102:
-      calibrationAlgorithms[algoNum] = new AWalkCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AWalkCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 103:
-      calibrationAlgorithms[algoNum] = new ACutsCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new ACutsCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 104:
-      calibrationAlgorithms[algoNum] = new AqdcFactorCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AqdcFactorCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 105:
-      calibrationAlgorithms[algoNum] = new AtdcOffsetCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AtdcOffsetCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 106:
-      calibrationAlgorithms[algoNum] = new AzBarrelCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AzBarrelCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 107:
-      calibrationAlgorithms[algoNum] = new AtdcRadialPixCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AtdcRadialPixCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 108:
-      calibrationAlgorithms[algoNum] = new AtdcRadialPolCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AtdcRadialPolCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 109:
-      calibrationAlgorithms[algoNum] = new AtdcRadialPixCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AtdcRadialPixCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 110:
-      calibrationAlgorithms[algoNum] = new AtdcRadialPolCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AtdcRadialPolCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 111:
-      calibrationAlgorithms[algoNum] = new AqdcRadialPixCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AqdcRadialPixCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     case 112:
-      calibrationAlgorithms[algoNum] = new AqdcRadialPolCalibration(event, setup, tmp);
+      calibrationAlgorithms[algoNum] = new AqdcRadialPolCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
     }

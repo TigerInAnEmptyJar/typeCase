@@ -288,76 +288,60 @@ std::shared_ptr<base_parameter> JsonParameterReader::toAlgorithm(QJsonObject con
         result.insert(std::make_pair(
             ParameterValue::ValueType::BOOLEAN,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              single_parameter<bool> s(n, o.value(Keys::pValue).toBool(false));
-              a->addParam(s);
+              a->addValue(n, o.value(Keys::pValue).toBool(false));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::INT,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
               std::cout << "found int parameter" << n << " " << o.value(Keys::pValue).toInt()
                         << std::endl;
-              single_parameter<int> s(n, o.value(Keys::pValue).toInt(-1));
-              a->addParam(s);
+              a->addValue(n, o.value(Keys::pValue).toInt(-1));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::FLOAT,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              single_parameter<float> s(n, static_cast<float>(o.value(Keys::pValue).toDouble(-1)));
-              a->addParam(s);
+              a->addValue(n, static_cast<float>(o.value(Keys::pValue).toDouble(-1)));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::DOUBLE,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              single_parameter<float> s(n, o.value(Keys::pValue).toDouble(-1));
-              a->addParam(s);
+              a->addValue(n, o.value(Keys::pValue).toDouble(-1));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::STRING,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              single_parameter<std::string> s(n, o.value(Keys::pValue).toString().toStdString());
-              a->addParam(s);
+              a->addValue(n, o.value(Keys::pValue).toString().toStdString());
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::POINT3D,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
               auto pointString = o.value(Keys::pValue).toString().toStdString();
-              single_parameter<point3D> s(n, toPoint(pointString));
-              a->addParam(s);
+              a->addValue(n, toPoint(pointString));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::VECTOR3D,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              single_parameter<vector3D> s(
-                  n, toVector(o.value(Keys::pValue).toString().toStdString()));
-              a->addParam(s);
+              a->addValue(n, toVector(o.value(Keys::pValue).toString().toStdString()));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::VECTOR_INT,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              single_parameter<std::vector<int>> s(
-                  n, ::toIntList(o.value(Keys::pValue).toString().toStdString()));
-              a->addParam(s);
+              a->addValue(n, ::toIntList(o.value(Keys::pValue).toString().toStdString()));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::VECTOR_FLOAT,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              single_parameter<std::vector<float>> s(
-                  n, ::toFloatList(o.value(Keys::pValue).toString().toStdString()));
-              a->addParam(s);
+              a->addValue(n, ::toFloatList(o.value(Keys::pValue).toString().toStdString()));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::VECTOR_DOUBLE,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              single_parameter<std::vector<float>> s(
-                  n, ::toFloatList(o.value(Keys::pValue).toString().toStdString()));
-              a->addParam(s);
+              a->addValue(n, ::toFloatList(o.value(Keys::pValue).toString().toStdString()));
             }));
         result.insert(std::make_pair(
             ParameterValue::ValueType::VECTOR_STRING,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              single_parameter<std::vector<std::string>> s(
-                  n, ::toStringList(o.value(Keys::pValue).toString().toStdString()));
-              a->addParam(s);
+              a->addValue(n, ::toStringList(o.value(Keys::pValue).toString().toStdString()));
             }));
         // algorithm-list still missing
         return result;

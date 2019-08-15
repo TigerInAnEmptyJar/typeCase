@@ -23,25 +23,25 @@ APixelTreeWriteOut::APixelTreeWriteOut(TSetup& setup, int& eventNumberIn, int& r
     : AAlgorithm("Generate pixel information for calibration"), evtNr(eventNumberIn),
       rnNr(runNumberIn)
 {
-  nPixelTypes = param.getParam<vector<int>>(0).getData().size();
+  nPixelTypes = param.value(3).value<vector<int>>().size();
   PixelIDs = new int[nPixelTypes];
   pixOut = new pixelStruct*[nPixelTypes];
   pixels = new TPixel**[nPixelTypes];
   numberOfPixels = new int*[nPixelTypes];
-  maxPixelPerID = param.getParam<int>(0).getData();
+  maxPixelPerID = param.value(0).value<int>();
   nPixels = new Int_t[nPixelTypes];
   centerPoints = new point3D[nPixelTypes];
   int n = 0, m;
   for (int i = 0; i < nPixelTypes; i++) {
-    PixelIDs[i] = param.getParam<vector<int>>(0).getData().at(i);
+    PixelIDs[i] = param.value(3).value<vector<int>>().at(i);
     pixOut[i] = new pixelStruct[maxPixelPerID];
     pixels[i] = pixelsIn[PixelIDs[i]];
     numberOfPixels[i] = numberOfPixelsIn[PixelIDs[i]];
-    m = param.getParam<vector<int>>(1).getData().at(n++);
+    m = param.value(4).value<vector<int>>().at(n++);
     point3D cp[m];
     vector3D cc(0, 0, 0);
     for (int j = 0; j < m; j++) {
-      TDetector* det = &setup.getDetectorr(param.getParam<vector<int>>(1).getData().at(n++));
+      TDetector* det = &setup.getDetectorr(param.value(4).value<vector<int>>().at(n++));
       if (det->getNumberOfElements() <= 0) {
         centerPoints[i].setValues(0, 0, 0);
         break;
@@ -69,13 +69,8 @@ APixelTreeWriteOut::APixelTreeWriteOut(TSetup& setup, int& eventNumberIn, int& r
     }
     centerPoints[i] = point3D(cc * (1. / ((double)m)));
   }
-  outFile = new TFile(param.getParam<string>(0).getData().data(), "recreate");
-  outTree = NULL;
-  if (param.getNumberOfParam<string>() > 1)
-    outTree = new TTree(param.getParam<string>(1).getData().data(),
-                        param.getParam<string>(1).getData().data());
-  else
-    outTree = new TTree("pixelTree", "pixelTree");
+  outFile = new TFile(param.value(1).value<string>().data(), "recreate");
+  outTree = new TTree(param.value(2).value<string>().data(), param.value(2).value<string>().data());
   outTree->Branch("EventNumber", &eventNumber, "EventNumber/I");
   outTree->Branch("RunNumber", &runNumber, "RunNumber/I");
   outTree->Branch("numberOfPixels", nPixels,
@@ -137,11 +132,11 @@ algorithm_parameter APixelTreeWriteOut::getDescription()
 {
   algorithm_parameter ret("Pixel tree for calibration", 0, 0);
   vector<int> tmp;
-  ret.addParam<int>(single_parameter<int>("max Pixels per ID", 20));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("log pixel IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("pix made up of", tmp));
-  ret.addParam<string>(single_parameter<string>("file name", "tmp.root"));
-  ret.addParam<string>(single_parameter<string>("tree name", "pixelTree"));
+  ret.addValue("max Pixels per ID", static_cast<int>(20));
+  ret.addValue("file name", std::string{"tmp.root"});
+  ret.addValue("tree name", std::string{"pixelTree"});
+  ret.addValue("log pixel IDs", tmp);
+  ret.addValue("pix made up of", tmp);
   string des = "This algorithm produces a tree output for pixel position "
                "information meant for geometry calibration purposes. Each "
                "pixel has here information about element number of elements "

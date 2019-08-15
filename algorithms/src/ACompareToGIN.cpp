@@ -36,22 +36,20 @@ ACompareToGIN::ACompareToGIN(TTrack** tracksIn, int& numberOfTracksIn, int& even
   InTracks = new TTrack*[maxTracks];
   for (int i = 0; i < maxTracks; i++)
     InTracks[i] = new TTrack(1, 5); // no need for hit or pixel structures
-  maxAngularDist = descr.getParam<float>(0).getData();
-  numSepDet = descr.getParam<vector<int>>(0).getData().size();
+  maxAngularDist = descr.value(1).value<float>();
+  numSepDet = descr.value(4).value<vector<int>>().size();
   sepDets = new int[numSepDet];
   for (int i = 0; i < numSepDet; i++)
-    sepDets[i] = descr.getParam<vector<int>>(0).getData().at(i);
-  if (existing(descr.getParam<string>(0).getData())) {
+    sepDets[i] = descr.value(4).value<vector<int>>().at(i);
+  if (existing(descr.value(2).value<string>())) {
     input = new ifstream();
-    input->open(descr.getParam<string>(0).getData().data());
+    input->open(descr.value(2).value<string>().data());
   } else {
     cout << "Error!!! GIN-file not found" << endl;
     valid = false;
   }
-  toCout = false;
-  if (descr.getNumberOfParam<bool>() > 0)
-    toCout = descr.getParam<bool>(0).getData();
-  outFileName = descr.getParam<string>(1).getData();
+  toCout = descr.value(0).value<bool>();
+  outFileName = descr.value(3).value<string>();
   nHistos = 5 + numSepDet * 3;
   //   histos=new TH1*[nHistos];
   //   for(int i=0;i<nHistos;i++)histos[i]=NULL;
@@ -233,10 +231,11 @@ algorithm_parameter ACompareToGIN::getDescription()
                "between the tracks and the GIN-tracks.";
   ret.setDescription(des);
   vector<int> tmp;
-  ret.addParam<string>(single_parameter<string>("GIN-file", ""));
-  ret.addParam<string>(single_parameter<string>("comparison output file", "comparison.ps"));
-  ret.addParam<float>(single_parameter<float>("max angle between tracks", 0.05));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("separate by detectors", tmp));
+  ret.addValue("print to console", false);
+  ret.addValue("max angle between tracks", 0.05f);
+  ret.addValue("GIN-file", std::string{});
+  ret.addValue("comparison output file", std::string{"comparison.ps"});
+  ret.addValue("separate by detectors", tmp);
   return ret;
 }
 vector<string> ACompareToGIN::histogramNames()

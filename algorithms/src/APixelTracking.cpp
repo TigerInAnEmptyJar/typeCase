@@ -973,25 +973,25 @@ APixelTracking::APixelTracking(TSetup& setupIn, TTrack** tracksIn, TPixel*** pix
   for (int i = 0; i < maxTracks; i++)
     tmptracks[i] = new TTrack(10, setup.getNumberOfDetectors() + 2);
   target = new cylinder(point3D(0, 0, 0), vector3D(0, 0, 3), 2); //&setup.getTargetr().getShaper();
-  maxPromptEqual = param.getParam<int>(0).getData();
-  maxVeeCommon = param.getParam<int>(1).getData();
-  minPointsVee = param.getParam<int>(2).getData();
-  maxDecayStart = param.getParam<int>(3).getData();
-  maxTargetDist = param.getParam<float>(0).getData();
-  maxVeeTargetDist = param.getParam<float>(1).getData();
-  maxDistVee = param.getParam<float>(2).getData();
-  maxChiVee = param.getParam<float>(3).getData();
+  maxPromptEqual = param.value(0).value<int>();
+  maxVeeCommon = param.value(1).value<int>();
+  minPointsVee = param.value(2).value<int>();
+  maxDecayStart = param.value(3).value<int>();
+  maxTargetDist = param.value(4).value<float>();
+  maxVeeTargetDist = param.value(5).value<float>();
+  maxDistVee = param.value(6).value<float>();
+  maxChiVee = param.value(7).value<float>();
   maxDiff = new int[3];
   minPoints = new int[3];
   maxDistance = new float[3];
   maxChiPrompt = new float[3];
   maxChiDecay = new float[3];
   for (int i = 0; i < 3; i++) {
-    maxDiff[i] = param.getParam<vector<int>>(0).getData().at(i);
-    minPoints[i] = param.getParam<vector<int>>(1).getData().at(i);
-    maxDistance[i] = param.getParam<vector<float>>(0).getData().at(i);
-    maxChiPrompt[i] = param.getParam<vector<float>>(1).getData().at(i);
-    maxChiDecay[i] = param.getParam<vector<float>>(2).getData().at(i);
+    maxDiff[i] = param.value(8).value<vector<int>>().at(i);
+    minPoints[i] = param.value(9).value<vector<int>>().at(i);
+    maxDistance[i] = param.value(10).value<vector<float>>().at(i);
+    maxChiPrompt[i] = param.value(11).value<vector<float>>().at(i);
+    maxChiDecay[i] = param.value(12).value<vector<float>>().at(i);
   }
   nndetpos = 15;
   ndetpos = new int[nndetpos];
@@ -1066,21 +1066,21 @@ algorithm_parameter APixelTracking::getDescription()
                "assembled to vees. A check for coplanarity with target is"
                "performed.";
   ret.setDescription(des);
-  ret.addParam<int>(single_parameter<int>("max Prompt Equal", 0));
-  ret.addParam<int>(single_parameter<int>("max Vee Equal", 0));
-  ret.addParam<int>(single_parameter<int>("min Points Vee", 0));
-  ret.addParam<int>(single_parameter<int>("max Decay Start", 0));
-  ret.addParam<float>(single_parameter<float>("max Target Dist", 1));
-  ret.addParam<float>(single_parameter<float>("max Vee Target Dist", 1));
-  ret.addParam<float>(single_parameter<float>("max Dist Vee", 1));
-  ret.addParam<float>(single_parameter<float>("max Chi Vee", 1));
+  ret.addValue("max Prompt Equal", static_cast<int>(0));
+  ret.addValue("max Vee Equal", static_cast<int>(0));
+  ret.addValue("min Points Vee", static_cast<int>(0));
+  ret.addValue("max Decay Start", static_cast<int>(0));
+  ret.addValue("max Target Dist", 1.f);
+  ret.addValue("max Vee Target Dist", 1.f);
+  ret.addValue("max Dist Vee", 1.f);
+  ret.addValue("max Chi Vee", 1.f);
   vector<int> tmpi;
   vector<float> tmpf;
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("max Diff suspect", tmpi));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("min # Points", tmpi));
-  ret.addParam<vector<float>>(single_parameter<vector<float>>("max Distance", tmpf));
-  ret.addParam<vector<float>>(single_parameter<vector<float>>("max Chi Prompt", tmpf));
-  ret.addParam<vector<float>>(single_parameter<vector<float>>("max Chi Decay", tmpf));
+  ret.addValue("max Diff suspect", tmpi);
+  ret.addValue("min # Points", tmpi);
+  ret.addValue("max Distance", tmpf);
+  ret.addValue("max Chi Prompt", tmpf);
+  ret.addValue("max Chi Decay", tmpf);
   return ret;
 }
 #include "ring.h"

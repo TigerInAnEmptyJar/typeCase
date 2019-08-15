@@ -3,22 +3,21 @@
 
 void ParameterIoTest::appendSomeAlgorithms(std::vector<std::shared_ptr<base_parameter>>& items)
 {
+  using namespace std::string_literals;
   algorithm_parameter algo1;
   algo1.setID(10);
   algo1.setUse(true);
   algo1.setLevel(0);
   algo1.setCategory(1);
   algo1.setId(_algorithm1_id);
-  algo1.setName("testAlgorithm 1");
-  algo1.setDescription("This is a test algorithm.");
-  algo1.addParam(single_parameter<int>("param1", 0));
-  algo1.addParam(single_parameter<int>("param2", 10));
-  algo1.addParam(single_parameter<float>("param3", 5.5));
-  algo1.addParam(single_parameter<std::string>("param4", "foo"));
-  algo1.addParam(
-      single_parameter<std::vector<int>>("param5", std::vector<int>{0, 1, 2, 3, 4, 5, 6}));
-  algo1.addParam(
-      single_parameter<std::vector<float>>("param6", std::vector<float>{0.7, 1.45, 5.7}));
+  algo1.setName("testAlgorithm 1"s);
+  algo1.setDescription("This is a test algorithm."s);
+  algo1.addValue("param1"s, static_cast<int>(0));
+  algo1.addValue("param2"s, static_cast<int>(10));
+  algo1.addValue("param3"s, 5.5f);
+  algo1.addValue("param4"s, "foo"s);
+  algo1.addValue("param5"s, std::vector<int>{0, 1, 2, 3, 4, 5, 6});
+  algo1.addValue("param6"s, std::vector<float>{0.7, 1.45, 5.7});
   items.push_back(std::make_shared<algorithm_parameter>(algo1));
 
   algorithm_parameter algo2;
@@ -27,12 +26,12 @@ void ParameterIoTest::appendSomeAlgorithms(std::vector<std::shared_ptr<base_para
   algo2.setLevel(5);
   algo2.setCategory(2);
   algo2.setId(_algorithm2_id);
-  algo2.setName("testAlgorithm 2");
-  algo2.setDescription("This is a new test algorithm.");
-  algo2.addParam(single_parameter<bool>("param-1", false));
-  algo2.addParam(single_parameter<bool>("param-2", true));
-  algo2.addParam(single_parameter<point3D>("param-3", point3D(1, 2, 3)));
-  algo2.addParam(single_parameter<vector3D>("param-4", vector3D(4, 5, 6)));
+  algo2.setName("testAlgorithm 2"s);
+  algo2.setDescription("This is a new test algorithm."s);
+  algo2.addValue("param-1"s, false);
+  algo2.addValue("param-2"s, true);
+  algo2.addValue("param-3"s, point3D(1, 2, 3));
+  algo2.addValue("param-4"s, vector3D(4, 5, 6));
   items.push_back(std::make_shared<algorithm_parameter>(algo2));
 }
 

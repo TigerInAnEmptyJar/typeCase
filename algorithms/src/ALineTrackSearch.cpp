@@ -737,32 +737,27 @@ algorithm_parameter ALineTrackSearch::getDescription()
                " If the assumed line is close enough this element "
                " is used. This method is slower than the other one!";
   ret.setDescription(des);
-  ret.addParam<bool>(single_parameter<bool>("use vertex as start", true));
-  ret.addParam<bool>(single_parameter<bool>("use angular distance", true));
-  ret.addParam<int>(single_parameter<int>("max # equal elements in two tracks", 2));
+  ret.addValue("use vertex as start", true);
+  ret.addValue("use angular distance", true);
+  ret.addValue("max # equal elements in two tracks", static_cast<int>(2));
   vector<int> tmp;
   vector<float> tmp2;
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("stop-pixel IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("min # elements on track", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("essential detector IDs for Pixel", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("start-pixel IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("detectors", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("element search mode", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("max element distance", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("check pixel IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("stop-cluster IDs", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("min # elements on track cluster", tmp));
-  ret.addParam<vector<int>>(
-      single_parameter<vector<int>>("essential detector IDs for Cluster", tmp));
-  ret.addParam<vector<float>>(
-      single_parameter<vector<float>>("max chi squared for pixel track", tmp2));
-  ret.addParam<vector<float>>(
-      single_parameter<vector<float>>("theta restriction for pixel/cluster", tmp2));
-  ret.addParam<vector<float>>(
-      single_parameter<vector<float>>("phi restriction for pixel/cluster", tmp2));
-  ret.addParam<vector<float>>(single_parameter<vector<float>>("max distance", tmp2));
-  ret.addParam<vector<float>>(
-      single_parameter<vector<float>>("max chi squared for cluster track", tmp2));
+  ret.addValue("stop-pixel IDs", tmp);
+  ret.addValue("min # elements on track", tmp);
+  ret.addValue("essential detector IDs for Pixel", tmp);
+  ret.addValue("start-pixel IDs", tmp);
+  ret.addValue("detectors", tmp);
+  ret.addValue("element search mode", tmp);
+  ret.addValue("max element distance", tmp);
+  ret.addValue("check pixel IDs", tmp);
+  ret.addValue("stop-cluster IDs", tmp);
+  ret.addValue("min # elements on track cluster", tmp);
+  ret.addValue("essential detector IDs for Cluster", tmp);
+  ret.addValue("max chi squared for pixel track", tmp2);
+  ret.addValue("theta restriction for pixel/cluster", tmp2);
+  ret.addValue("phi restriction for pixel/cluster", tmp2);
+  ret.addValue("max distance", tmp2);
+  ret.addValue("max chi squared for cluster track", tmp2);
   return ret;
 }
 ALineTrackSearch::ALineTrackSearch(TSetup& setupIn, TTrack** tracksIn, TCluster*** clustersIn,
@@ -780,10 +775,10 @@ ALineTrackSearch::ALineTrackSearch(TSetup& setupIn, TTrack** tracksIn, TCluster*
   numberOfHits = numberOfHitsIn;
   numberOfPixels = numberOfPixelsIn;
   numberOfClusters = numberOfClustersIn;
-  useVertexAsStart = descr.getParam<bool>(0).getData();
-  angularDistance = descr.getParam<bool>(1).getData();
-  numStop = descr.getParam<vector<int>>(0).getData().size();
-  numStopCluster = descr.getParam<vector<int>>(8).getData().size();
+  useVertexAsStart = descr.value(0).value<bool>();
+  angularDistance = descr.value(1).value<bool>();
+  numStop = descr.value(3).value<vector<int>>().size();
+  numStopCluster = descr.value(11).value<vector<int>>().size();
   stopIDs = new int[numStop];
   stopClusterIDs = new int[numStopCluster];
   numEssentials = new int[numStop];
@@ -798,88 +793,66 @@ ALineTrackSearch::ALineTrackSearch(TSetup& setupIn, TTrack** tracksIn, TCluster*
   restrictionP = new float[(numStop + numStopCluster) * 2];
   maxDistance = new float[numStop + numStopCluster];
   int j = 0;
-  maxEqualElements = descr.getParam<int>(0).getData();
+  maxEqualElements = descr.value(2).value<int>();
   for (int i = 0; i < numStop; i++) {
-    stopIDs[i] = descr.getParam<vector<int>>(0).getData().at(i);
-    minElements[i] = descr.getParam<vector<int>>(1).getData().at(i);
-    maxChi[i] = descr.getParam<vector<float>>(0).getData().at(i);
-    restrictionT[i * 2] = descr.getParam<vector<float>>(1).getData().at(i * 2);
-    restrictionT[i * 2 + 1] = descr.getParam<vector<float>>(1).getData().at(i * 2 + 1);
-    restrictionP[i * 2] = descr.getParam<vector<float>>(2).getData().at(i * 2);
-    restrictionP[i * 2 + 1] = descr.getParam<vector<float>>(2).getData().at(i * 2 + 1);
-    maxDistance[i] = descr.getParam<vector<float>>(3).getData().at(i);
-    numEssentials[i] = descr.getParam<vector<int>>(2).getData().at(j);
+    stopIDs[i] = descr.value(3).value<vector<int>>().at(i);
+    minElements[i] = descr.value(4).value<vector<int>>().at(i);
+    maxChi[i] = descr.value(14).value<vector<float>>().at(i);
+    restrictionT[i * 2] = descr.value(15).value<vector<float>>().at(i * 2);
+    restrictionT[i * 2 + 1] = descr.value(15).value<vector<float>>().at(i * 2 + 1);
+    restrictionP[i * 2] = descr.value(16).value<vector<float>>().at(i * 2);
+    restrictionP[i * 2 + 1] = descr.value(16).value<vector<float>>().at(i * 2 + 1);
+    maxDistance[i] = descr.value(17).value<vector<float>>().at(i);
+    numEssentials[i] = descr.value(5).value<vector<int>>().at(j);
     j++;
     essentials[i] = new int[numEssentials[i]];
     for (int k = 0; k < numEssentials[i]; k++) {
-      essentials[i][k] = descr.getParam<vector<int>>(2).getData().at(j);
+      essentials[i][k] = descr.value(5).value<vector<int>>().at(j);
       j++;
     }
   }
   j = 0;
   for (int i = 0; i < numStopCluster; i++) {
-    stopClusterIDs[i] = descr.getParam<vector<int>>(8).getData().at(i);
-    minClusterElements[i] = descr.getParam<vector<int>>(9).getData().at(i);
-    maxClusterChi[i] = descr.getParam<vector<float>>(4).getData().at(i);
+    stopClusterIDs[i] = descr.value(11).value<vector<int>>().at(i);
+    minClusterElements[i] = descr.value(12).value<vector<int>>().at(i);
+    maxClusterChi[i] = descr.value(18).value<vector<float>>().at(i);
     restrictionT[numStop * 2 + i * 2] =
-        descr.getParam<vector<float>>(1).getData().at(numStop * 2 + i * 2);
+        descr.value(15).value<vector<float>>().at(numStop * 2 + i * 2);
     restrictionT[numStop * 2 + i * 2 + 1] =
-        descr.getParam<vector<float>>(1).getData().at(numStop * 2 + i * 2 + 1);
+        descr.value(15).value<vector<float>>().at(numStop * 2 + i * 2 + 1);
     restrictionP[numStop * 2 + i * 2] =
-        descr.getParam<vector<float>>(2).getData().at(numStop * 2 + i * 2);
+        descr.value(16).value<vector<float>>().at(numStop * 2 + i * 2);
     restrictionP[numStop * 2 + i * 2 + 1] =
-        descr.getParam<vector<float>>(2).getData().at(numStop * 2 + i * 2 + 1);
-    maxDistance[numStop + i] = descr.getParam<vector<float>>(3).getData().at(numStop + i);
-    numClusterEssentials[i] = descr.getParam<vector<int>>(10).getData().at(j);
+        descr.value(16).value<vector<float>>().at(numStop * 2 + i * 2 + 1);
+    maxDistance[numStop + i] = descr.value(17).value<vector<float>>().at(numStop + i);
+    numClusterEssentials[i] = descr.value(13).value<vector<int>>().at(j);
     j++;
     clusterEssentials[i] = new int[numClusterEssentials[i]];
     for (int k = 0; k < numClusterEssentials[i]; k++) {
-      clusterEssentials[i][k] = descr.getParam<vector<int>>(10).getData().at(j);
+      clusterEssentials[i][k] = descr.value(13).value<vector<int>>().at(j);
       j++;
     }
   }
-  numMid = descr.getParam<vector<int>>(7).getData().size();
+  numMid = descr.value(10).value<vector<int>>().size();
   midIDs = new int[numMid];
   for (int i = 0; i < numMid; i++) {
-    midIDs[i] = descr.getParam<vector<int>>(7).getData().at(i);
+    midIDs[i] = descr.value(10).value<vector<int>>().at(i);
   }
-  numStart = descr.getParam<vector<int>>(3).getData().size();
+  numStart = descr.value(6).value<vector<int>>().size();
   startIDs = new int[numStart];
   for (int i = 0; i < numStart; i++)
-    startIDs[i] = descr.getParam<vector<int>>(3).getData().at(i);
-  if (descr.getNumberOfParam<vector<int>>() < 5) {
-    numDetectors = 0;
-    for (int i = 0; i < setup.getNumberOfDetectors(); i++)
-      if (setup.getDetectorr(i).getNumberOfElements() > 0)
-        numDetectors++;
-    detectorIDs = new int[numDetectors];
-    conventional = new int[numDetectors];
-    numDetectors = 0;
-    for (int i = 0; i < setup.getNumberOfDetectors(); i++)
-      if (setup.getDetectorr(i).getNumberOfElements() > 0) {
-        detectorIDs[numDetectors] = i;
-        conventional[numDetectors] = 0;
-        numDetectors++;
-      }
-  } else {
-    numDetectors = descr.getParam<vector<int>>(4).getData().size();
-    detectorIDs = new int[numDetectors];
-    conventional = new int[numDetectors];
-    for (int i = 0; i < numDetectors; i++) {
-      detectorIDs[i] = descr.getParam<vector<int>>(4).getData().at(i);
-      if (descr.getNumberOfParam<vector<int>>() < 6)
-        conventional[i] = 0;
-      else
-        conventional[i] = descr.getParam<vector<int>>(5).getData().at(i);
-    }
+    startIDs[i] = descr.value(6).value<vector<int>>().at(i);
+  numDetectors = descr.value(7).value<vector<int>>().size();
+  detectorIDs = new int[numDetectors];
+  conventional = new int[numDetectors];
+  for (int i = 0; i < numDetectors; i++) {
+    detectorIDs[i] = descr.value(7).value<vector<int>>().at(i);
+    conventional[i] = descr.value(8).value<vector<int>>().at(i);
   }
+
   away = new int[numDetectors * (numStop + numStopCluster)];
-  if (descr.getNumberOfParam<vector<int>>() < 7)
-    for (int i = 0; i < numDetectors * (numStop + numStopCluster); i++)
-      away[i] = 1;
-  else
-    for (int i = 0; i < numDetectors * (numStop + numStopCluster); i++)
-      away[i] = descr.getParam<vector<int>>(6).getData().at(i);
+  for (int i = 0; i < numDetectors * (numStop + numStopCluster); i++)
+    away[i] = descr.value(9).value<vector<int>>().at(i);
   tmpTracks = new TTrack*[maxTracks];
   for (int i = 0; i < maxTracks; i++)
     tmpTracks[i] = new TTrack(20, tracks[0]->getNumberOfCalibHits(-2));

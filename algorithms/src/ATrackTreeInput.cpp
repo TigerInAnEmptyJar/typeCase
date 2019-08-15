@@ -75,26 +75,21 @@ ATrackTreeInput::ATrackTreeInput(int& evtNrIn, int& runNrIn, int& triIn, TTrack*
   numberOfCalibHits = numHitsIn;
   numberOfPixels = numPixIn;
   pixels = PixIn;
-  searchForEvent = false;
-  if (param.getNumberOfParam<bool>() > 0)
-    searchForEvent = param.getParam<bool>(0).getData();
+  searchForEvent = param.value(0).value<bool>();
   doPattern = false;
   numPattern = 0;
   pattern = NULL;
-  if (param.getNumberOfParam<bool>() > 2 && param.getNumberOfParam<vector<int>>() > 0)
-    doPattern = param.getParam<bool>(2).getData();
+  doPattern = param.value(1).value<bool>();
   if (doPattern) {
-    numPattern = param.getParam<vector<int>>(0).getData().size();
+    numPattern = param.value(4).value<vector<int>>().size();
     numPattern = numPattern / 3;
     pattern = new int[numPattern * 3];
     for (int i = 0; i < numPattern * 3; i++)
-      pattern[i] = param.getParam<vector<int>>(0).getData().at(i);
+      pattern[i] = param.value(4).value<vector<int>>().at(i);
   }
   localDirectory = false;
-  if (param.getNumberOfParam<bool>() > 3 && param.getNumberOfParam<string>() > 0) {
-    localDirectory = param.getParam<bool>(3).getData();
-    directory = param.getParam<string>(0).getData();
-  }
+  localDirectory = param.value(2).value<bool>();
+  directory = param.value(3).value<std::string>();
   copyFile = "";
 }
 ATrackTreeInput::~ATrackTreeInput()
@@ -460,13 +455,13 @@ algorithm_parameter ATrackTreeInput::getDescription()
                "requests the hits from the setup."
                "It does so for prompt, kink and vee tracks separately.";
   ret.setDescription(des);
-  ret.addParam<bool>(single_parameter<bool>(string("search for event"), true));
-  ret.addParam<bool>(single_parameter<bool>(string("use as event input list"), true));
-  ret.addParam<bool>(single_parameter<bool>(string("read only certain event pattern"), true));
-  ret.addParam<bool>(single_parameter<bool>(string("use local directory"), true));
-  ret.addParam<string>(single_parameter<string>(string("local directory"), string("")));
+  ret.addValue("search for event", true);
+  ret.addValue("use as event input list", true);
+  ret.addValue("read only certain event pattern", true);
+  ret.addValue("use local directory", true);
+  ret.addValue("local directory", string(""));
   vector<int> tmpI;
-  ret.addParam<vector<int>>(single_parameter<vector<int>>(string("event pattern"), tmpI));
+  ret.addValue("event pattern", tmpI);
   return ret;
 }
 extern bool existing(string filename);

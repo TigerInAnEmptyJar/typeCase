@@ -6,42 +6,22 @@ AHitClusterSearch::AHitClusterSearch(TSetup& setupIn, THitCluster*** clustersIn,
                                      const algorithm_parameter& ap)
     : AAlgorithm("Search hit-Clusters"), setup(setupIn)
 {
-  if (ap.getNumberOfParam<vector<int>>() == 0) {
-    numDets = 0;
-    for (int i = 0; i < setup.getNumberOfDetectors(); i++)
-      if (setup.getDetectorr(i).getNumberOfElements() > 0)
-        numDets++;
-  } else
-    numDets = ap.getParam<vector<int>>(0).getData().size();
+  auto ids = ap.value(0).value<std::vector<int>>();
+  numDets = ids.size();
   hits = new TCalibHit**[numDets];
   clusters = new THitCluster**[numDets];
   nClusters = new int*[numDets];
   nHits = new int*[numDets];
   circular = new bool[numDets];
   nEl = new int[numDets];
-  if (ap.getNumberOfParam<vector<int>>() == 0) {
-    numDets = 0;
-    for (int i = 0; i < setup.getNumberOfDetectors(); i++)
-      if (setup.getDetectorr(i).getNumberOfElements() > 0) {
-        hits[numDets] = hitsIn[i];
-        nHits[numDets] = numberOfHits[i];
-        nClusters[numDets] = numberOfCluster[i];
-        clusters[numDets] = clustersIn[i];
-        circular[numDets] = setup.getDetectorr(i).isCircular();
-        nEl[numDets] = setup.getDetectorr(i).getNumberOfElements();
-        numDets++;
-      }
-  } else {
-    for (unsigned int i = 0; i < ap.getParam<vector<int>>(0).getData().size(); i++) {
-      anaLog << ap.getParam<vector<int>>(0).getData().at(i) << ",";
-      hits[i] = hitsIn[ap.getParam<vector<int>>(0).getData().at(i)];
-      clusters[i] = clustersIn[ap.getParam<vector<int>>(0).getData().at(i)];
-      nHits[i] = numberOfHits[ap.getParam<vector<int>>(0).getData().at(i)];
-      nClusters[i] = numberOfCluster[ap.getParam<vector<int>>(0).getData().at(i)];
-      circular[i] = setup.getDetectorr(ap.getParam<vector<int>>(0).getData().at(i)).isCircular();
-      nEl[i] =
-          setup.getDetectorr(ap.getParam<vector<int>>(0).getData().at(i)).getNumberOfElements();
-    }
+  for (unsigned int i = 0; i < ids.size(); i++) {
+    anaLog << ids.at(i) << ",";
+    hits[i] = hitsIn[ids.at(i)];
+    clusters[i] = clustersIn[ids.at(i)];
+    nHits[i] = numberOfHits[ids.at(i)];
+    nClusters[i] = numberOfCluster[ids.at(i)];
+    circular[i] = setup.getDetectorr(ids.at(i)).isCircular();
+    nEl[i] = setup.getDetectorr(ids.at(i)).getNumberOfElements();
   }
 }
 AHitClusterSearch::~AHitClusterSearch()
@@ -192,6 +172,6 @@ algorithm_parameter AHitClusterSearch::getDescription()
                "the hits that should be morved to clusters. ";
   ap.setDescription(des);
   vector<int> tmp;
-  ap.addParam<vector<int>>(single_parameter<vector<int>>("detector IDs", tmp));
+  ap.addValue("detector IDs", tmp);
   return ap;
 }

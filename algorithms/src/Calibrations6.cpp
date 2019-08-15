@@ -3,24 +3,20 @@
 #include "wedge.h"
 AzBarrelCalibration::AzBarrelCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr)
     : AAlgorithm("Generate zBarrel calibration"), event(eventIn),
-      minEntriesPerHisto(descr.getParam<int>(0).getData())
+      minEntriesPerHisto(descr.value(0).value<int>())
 {
-  vector<int> tmp(descr.getParam<vector<int>>(0).getData());
+  vector<int> tmp(descr.value(5).value<vector<int>>());
   numberOfDetectors = tmp.size();
   detectorIDs = new int[numberOfDetectors];
   numberOfElements = new int[numberOfDetectors];
   histograms = new TH1**[numberOfDetectors];
   string nn;
   int xmin = 0, xmax = 10000;
-  if (descr.getNumberOfParam<int>() > 1)
-    xmin = descr.getParam<int>(1).getData();
-  if (descr.getNumberOfParam<int>() > 2)
-    xmax = descr.getParam<int>(2).getData();
+  xmin = descr.value(1).value<int>();
+  xmax = descr.value(2).value<int>();
   int ymin = 0, ymax = 10000;
-  if (descr.getNumberOfParam<int>() > 3)
-    xmin = descr.getParam<int>(3).getData();
-  if (descr.getNumberOfParam<int>() > 4)
-    xmax = descr.getParam<int>(4).getData();
+  xmin = descr.value(3).value<int>();
+  xmax = descr.value(4).value<int>();
   eventStart = 0;
   for (int i = 0; i < numberOfDetectors; i++) {
     detectorIDs[i] = tmp[i];

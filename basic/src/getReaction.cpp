@@ -40,10 +40,10 @@ RbaseReaction* getReaction(const algorithm_parameter& param, momentum4D m1, mome
   {
     //	anaLog<<"test pp-elastic "<<endli;
     ret = new Rppelastic(NULL, m1, m2);
-    ret->setChiLimit(param.getParam<float>(0).getData());
-    if (param.getNumberOfParam<float>() >= 3) {
-      ((Rppelastic*)ret)->setCoplanarityDifference(param.getParam<float>(1).getData());
-      ((Rppelastic*)ret)->setGammaDifference(param.getParam<float>(2).getData());
+    ret->setChiLimit(param.value(0).value<float>());
+    if (param.numberOfValues() >= 3) {
+      ((Rppelastic*)ret)->setCoplanarityDifference(param.value(1).value<float>());
+      ((Rppelastic*)ret)->setGammaDifference(param.value(2).value<float>());
     }
     break;
   }
@@ -51,11 +51,11 @@ RbaseReaction* getReaction(const algorithm_parameter& param, momentum4D m1, mome
   {
     //	anaLog<<"test pp-dpi+ "<<endli;
     ret = new Rpp_dpiPlus(NULL, m1, m2);
-    ret->setChiLimit(param.getParam<float>(0).getData());
-    if (param.getNumberOfParam<float>() >= 4) {
-      ((Rpp_dpiPlus*)ret)->setCoplanarityDifference(param.getParam<float>(1).getData());
-      ((Rpp_dpiPlus*)ret)->setAngleLimit(param.getParam<float>(2).getData());
-      ((Rpp_dpiPlus*)ret)->setCrossoverMomentum(param.getParam<float>(3).getData());
+    ret->setChiLimit(param.value(0).value<float>());
+    if (param.numberOfValues() >= 4) {
+      ((Rpp_dpiPlus*)ret)->setCoplanarityDifference(param.value(1).value<float>());
+      ((Rpp_dpiPlus*)ret)->setAngleLimit(param.value(2).value<float>());
+      ((Rpp_dpiPlus*)ret)->setCrossoverMomentum(param.value(3).value<float>());
     }
     break;
   }
@@ -63,31 +63,22 @@ RbaseReaction* getReaction(const algorithm_parameter& param, momentum4D m1, mome
   {
     //	anaLog<<"test pp- p-Kaon-Lambda "<<endli;
     ret = new Rpp_pkl_pkppi(NULL, m1, m2);
-    ret->setChiLimit(param.getParam<float>(3).getData());
-    ((Rpp_pkl_pkppi*)ret)->setMissingMassLimit(param.getParam<float>(0).getData());
-    ((Rpp_pkl_pkppi*)ret)->setAngleLimit(param.getParam<float>(1).getData());
-    ((Rpp_pkl_pkppi*)ret)->setExact(param.getParam<bool>(0).getData());
-    ((Rpp_pkl_pkppi*)ret)->setMultiLineFit(param.getParam<bool>(1).getData());
-    ((Rpp_pkl_pkppi*)ret)->setUseKinfit(param.getParam<bool>(2).getData());
-    ((Rpp_pkl_pkppi*)ret)->setMomentumLimit(param.getParam<float>(2).getData());
-    ((Rpp_pkl_pkppi*)ret)
-        ->setAngleRangesPK(param.getParam<vector<float>>(0).getData().at(0),
-                           param.getParam<vector<float>>(0).getData().at(1));
-    ((Rpp_pkl_pkppi*)ret)
-        ->setAngleRangesDecay(param.getParam<vector<float>>(0).getData().at(2),
-                              param.getParam<vector<float>>(0).getData().at(3));
-    ((Rpp_pkl_pkppi*)ret)->setMaximumProtonAngle(param.getParam<float>(4).getData());
-    ((Rpp_pkl_pkppi*)ret)->setUseDecay(param.getParam<bool>(3).getData());
-    ((Rpp_pkl_pkppi*)ret)
-        ->setTOFResolution(param.getParam<vector<float>>(1).getData().at(0),
-                           param.getParam<vector<float>>(1).getData().at(1),
-                           param.getParam<vector<float>>(1).getData().at(2),
-                           param.getParam<vector<float>>(1).getData().at(3));
-    ((Rpp_pkl_pkppi*)ret)
-        ->setRepresentation(param.getParam<vector<int>>(0).getData().at(0),
-                            param.getParam<vector<int>>(0).getData().at(1),
-                            param.getParam<vector<int>>(0).getData().at(2),
-                            param.getParam<vector<int>>(0).getData().at(3));
+    ((Rpp_pkl_pkppi*)ret)->setExact(param.value(0).value<bool>());
+    ((Rpp_pkl_pkppi*)ret)->setMultiLineFit(param.value(1).value<bool>());
+    ((Rpp_pkl_pkppi*)ret)->setUseKinfit(param.value(2).value<bool>());
+    ((Rpp_pkl_pkppi*)ret)->setUseDecay(param.value(3).value<bool>());
+    ret->setChiLimit(param.value(7).value<float>());
+    ((Rpp_pkl_pkppi*)ret)->setMissingMassLimit(param.value(4).value<float>());
+    ((Rpp_pkl_pkppi*)ret)->setAngleLimit(param.value(5).value<float>());
+    ((Rpp_pkl_pkppi*)ret)->setMomentumLimit(param.value(6).value<float>());
+    ((Rpp_pkl_pkppi*)ret)->setMaximumProtonAngle(param.value(8).value<float>());
+    auto p = param.value(10).value<std::vector<float>>();
+    ((Rpp_pkl_pkppi*)ret)->setAngleRangesPK(p.at(0), p.at(1));
+    ((Rpp_pkl_pkppi*)ret)->setAngleRangesDecay(p.at(2), p.at(3));
+    p = param.value(11).value<std::vector<float>>();
+    ((Rpp_pkl_pkppi*)ret)->setTOFResolution(p.at(0), p.at(1), p.at(2), p.at(3));
+    auto v = param.value(0).value<std::vector<int>>();
+    ((Rpp_pkl_pkppi*)ret)->setRepresentation(v.at(0), v.at(1), v.at(2), v.at(3));
     break;
   }
   }

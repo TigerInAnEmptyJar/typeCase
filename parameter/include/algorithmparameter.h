@@ -1,62 +1,32 @@
-#ifndef __ALGPARAM
-#define __ALGPARAM
-#include "baseparameter.h"
+#pragma once
 #include "geometry.h"
-
-#include <boost/uuid/uuid.hpp>
-
-using namespace std;
+#include "valuesparameter.h"
 
 /*!
  * \brief The algorithm_parameter class
  */
-class algorithm_parameter : public base_parameter
+class algorithm_parameter : public values_parameter
 {
-private:
-  bool inUse;
-  int category;
-  int level;
-  int ID;
-  vector<single_parameter<int>> integers;     //!
-  vector<single_parameter<float>> floats;     //!
-  vector<single_parameter<point3D>> points;   //!
-  vector<single_parameter<bool>> switches;    //!
-  vector<single_parameter<string>> stringes;  //!
-  vector<single_parameter<vector3D>> vectors; //!
-  //    vector<single_parameter<QBitArray> > bitmaps; //!
-  vector<single_parameter<vector<int>>> intVectors;       //!
-  vector<single_parameter<vector<float>>> floatVectors;   //!
-  vector<single_parameter<vector<string>>> stringVectors; //!
-  vector<single_parameter<algorithm_parameter>> algos;
-  boost::uuids::uuid _id;
-
 public:
-  /*!
-   * \brief algorithm_parameter
-   * Default constructor.
-   */
-  algorithm_parameter();
-
-  /*!
-   * \brief algorithm_parameter
-   *  Copy constructor.
-   * \param ap
-   */
-  algorithm_parameter(const algorithm_parameter& ap);
+  algorithm_parameter() = default;
+  algorithm_parameter(const algorithm_parameter& ap) = default;
+  algorithm_parameter(algorithm_parameter&& ap) = default;
+  algorithm_parameter& operator=(const algorithm_parameter& p) = default;
+  algorithm_parameter& operator=(algorithm_parameter&& p) = default;
 
   /*!
    * \brief algorithm_parameter
    *  Constructor. Sets the name and the ID of the algorithm.
    * \param id
    */
-  algorithm_parameter(string, int id);
+  algorithm_parameter(std::string, int id);
 
   /*!
    * \brief algorithm_parameter
    *  Constructor. Sets the algorithms name, level and category and its ID.
    * \param id
    */
-  algorithm_parameter(string, int, int, int id = -1);
+  algorithm_parameter(std::string, int, int, int id = -1);
 
   /*!
    * \brief algorithm_parameter
@@ -64,13 +34,16 @@ public:
    * (-1 by default).
    * \param id
    */
-  algorithm_parameter(string, bool, int, int, int id = -1);
+  algorithm_parameter(std::string, bool, int, int, int id = -1);
 
   /*!
-   * \brief ~algorithm_parameter
-   * Destructor
+   * \brief operator ==
+   *  Comparison operator. Returns true if the algorithms ID is equal the one of p. Needed for the
+   * sorting algorithm of the root-TObjArray-class.
+   * \param p
+   * \return
    */
-  virtual ~algorithm_parameter();
+  bool operator==(const algorithm_parameter& p) const;
 
   /*!
    * \brief setCategory
@@ -129,127 +102,6 @@ public:
   virtual void setID(int id);
 
   /*!
-   * Template method. Changes the parameter with name nameof the specified type (bool, int,
-   * float,QString, point3D, vector3D, vector, vector, vector, algorithm_parameter). It gets a new
-   * value.
-   */
-  template <class X>
-  void changeParam(string name, X data);
-
-  /*!
-   * Template method. Changes the posth parameter of the specified type (bool, int, float,QString,
-   * point3D, vector3D, vector, vector, vector, algorithm_parameter). It gets a new name and a new
-   * value. This only works for the template class QBitArray.
-   */
-  template <class X>
-  void changeParam(string name, const bool data[], int num);
-
-  /*!
-   * Template method. Changes the posth parameter of the specified type (bool, int, float,QString,
-   * point3D, vector3D, vector, vector, vector, algorithm_parameter). It gets a new name and a new
-   * value.
-   */
-  template <class X>
-  void changeParam(string name, X data, int pos);
-
-  /*!
-   * Template method. Removes the number of parameters of the specified type (bool, int,
-   * float,QString, point3D, vector3D, vector, vector, vector, algorithm_parameter).
-   */
-  template <class X>
-  int getNumberOfParam() const;
-
-  /*!
-   * Template method. Returns the ith parameter of the specified type (bool, int, float,QString,
-   * point3D, vector3D, vector, vector, vector, algorithm_parameter) from the list of parameters.
-   * Warning: no consistency check, breaks if i is larger than the number of parameters stored for
-   * this type.
-   */
-  template <class X>
-  single_parameter<X> getParam(int i) const;
-
-  /*!
-   * Returns the first parameter with name nme.
-   */
-  template <class X>
-  single_parameter<X> getParam(const string& nme) const;
-
-  /*!
-   * Template method. Adds a parameter of the specified type (bool, int, float,QString, point3D,
-   * vector3D, vector, vector, vector, algorithm_parameter) to the list of parameters.
-   */
-  template <class X>
-  void addParam(single_parameter<X> data);
-
-  /*!
-   * Template method. Removes the last parameter of the specified type (bool, int, float,QString,
-   * point3D, vector3D, vector, vector, vector, algorithm_parameter) from the list of parameters.
-   */
-  template <class X>
-  void popParam();
-
-  /*!
-   * \brief removeParam
-   *  Searches a parameter of that name in the parameter lists, starting with bool, int, float,
-   * point3D, vector3D, QString, vector, vector, vector, algorithm_parameter. If a parameter of that
-   * name is found, it is removed and it quits the method.
-   * \param paramName
-   */
-  void removeParam(const string& paramName);
-
-  /*!
-   * \brief operator <
-   *  Comparison operator. Returns true if the algorithms ID is smaller the one of p. Needed for the
-   * sorting algorithm of the root-TObjArray-class.
-   * \param p
-   * \return
-   */
-  bool operator<(algorithm_parameter p);
-
-  /*!
-   * \brief operator >
-   *  Comparison operator. Returns true if the algorithms ID is larger the one of p. Needed for the
-   * sorting algorithm of the root-TObjArray-class.
-   * \param p
-   * \return
-   */
-  bool operator>(algorithm_parameter p);
-
-  /*!
-   * \brief operator ==
-   *  Comparison operator. Returns true if the algorithms ID is equal the one of p. Needed for the
-   * sorting algorithm of the root-TObjArray-class.
-   * \param p
-   * \return
-   */
-  bool operator==(const algorithm_parameter& p) const;
-
-  /*!
-   * \brief operator <=
-   *  Comparison operator. Returns true if the algorithms ID is smaller or equal the one of p.
-   * Needed for the sorting algorithm of the root-TObjArray-class.
-   * \param p
-   * \return
-   */
-  bool operator<=(algorithm_parameter p);
-
-  /*!
-   * \brief operator >=
-   *  Comparison operator. Returns true if the algorithms ID is larger or equal the one of p. Needed
-   * for the sorting algorithm of the root-TObjArray-class.
-   * \param p
-   * \return
-   */
-  bool operator>=(algorithm_parameter p);
-
-  /*!
-   * \brief operator =
-   * Copy operator.
-   * \param p
-   */
-  void operator=(const algorithm_parameter& p);
-
-  /*!
    * \brief toString
    * Returns a string representation of the algorithms parameter, name description, etc. Contains
 line breaks.
@@ -262,15 +114,13 @@ In all modes the parameters are shown.
    * \return
    */
   string toString(int pattern = 1) const;
-};
 
-/*!
- * \brief operator >>
- * \param i
- * \param a
- * \return
- */
-istream& operator>>(istream& i, algorithm_parameter& a);
+private:
+  int category{-1};
+  int level{-1};
+  int ID{-1};
+  bool inUse{false};
+};
 
 /*!
  * \brief operator <<
@@ -279,4 +129,3 @@ istream& operator>>(istream& i, algorithm_parameter& a);
  * \return
  */
 ostream& operator<<(ostream& o, const algorithm_parameter& a);
-#endif

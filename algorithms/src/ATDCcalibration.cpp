@@ -36,17 +36,17 @@ ATDCcalibration::ATDCcalibration(int& evtnr, int& rnr, TTrack** trIn, TPixel*** 
   hits = hitIn;
   numberOfPixels = numPix;
   numberOfHits = numHits;
-  doGeometry = descr.getParam<bool>(0).getData();
-  doBeam = descr.getParam<bool>(1).getData();
-  doWalk = descr.getParam<bool>(2).getData();
-  doOffset = descr.getParam<bool>(3).getData();
-  doTwoSided = descr.getParam<bool>(4).getData();
-  eventBased = descr.getParam<bool>(5).getData();
-  killFileOnEnd = descr.getParam<bool>(6).getData();
-  readFile = descr.getParam<bool>(7).getData();
-  filename = descr.getParam<string>(2).getData();
-  sumEvents = descr.getParam<int>(0).getData();
-  printPattern = descr.getParam<int>(2).getData();
+  doGeometry = descr.value(0).value<bool>();
+  doBeam = descr.value(1).value<bool>();
+  doWalk = descr.value(2).value<bool>();
+  doOffset = descr.value(3).value<bool>();
+  doTwoSided = descr.value(4).value<bool>();
+  eventBased = descr.value(5).value<bool>();
+  killFileOnEnd = descr.value(6).value<bool>();
+  readFile = descr.value(7).value<bool>();
+  filename = descr.value(13).value<string>();
+  sumEvents = descr.value(8).value<int>();
+  printPattern = descr.value(10).value<int>();
   offsets = NULL;
   slopes = NULL;
   //   cout<<"print pattern: "<<printPattern<<" : "
@@ -72,8 +72,8 @@ ATDCcalibration::ATDCcalibration(int& evtnr, int& rnr, TTrack** trIn, TPixel*** 
     doWalk = false;
     doOffset = false;
   }
-  numberOfIterations = descr.getParam<int>(1).getData();
-  nCalibDets = descr.getParam<vector<int>>(0).getData().size();
+  numberOfIterations = descr.value(9).value<int>();
+  nCalibDets = descr.value(14).value<vector<int>>().size();
   numElements = new int[nCalibDets];
   detectors = new int[nCalibDets];
   pixelBased = new int[nCalibDets];
@@ -91,26 +91,26 @@ ATDCcalibration::ATDCcalibration(int& evtnr, int& rnr, TTrack** trIn, TPixel*** 
   hasPix = false;
   postscript = NULL;
   for (int i = 0; i < nCalibDets; i++) {
-    detectors[i] = descr.getParam<vector<int>>(0).getData().at(i);
+    detectors[i] = descr.value(14).value<vector<int>>().at(i);
     numElements[i] = setup.getDetectorr(detectors[i]).getNumberOfElements();
-    pixelBased[i] = descr.getParam<vector<int>>(1).getData().at(i);
-    measuresAgainst[i] = descr.getParam<vector<int>>(2).getData().at(i);
-    isStop[i] = (descr.getParam<vector<int>>(3).getData().at(i) == 1);
-    twoSided[i] = descr.getParam<vector<int>>(4).getData().at(i);
-    pixelDets[i] = descr.getParam<vector<int>>(5).getData().at(i);
-    referencesTo[i] = descr.getParam<vector<int>>(6).getData().at(i);
-    single[i] = descr.getParam<vector<int>>(7).getData().at(i);
-    doLRT[i] = (descr.getParam<vector<int>>(8).getData().at(i) == 1);
+    pixelBased[i] = descr.value(15).value<vector<int>>().at(i);
+    measuresAgainst[i] = descr.value(16).value<vector<int>>().at(i);
+    isStop[i] = (descr.value(17).value<vector<int>>().at(i) == 1);
+    twoSided[i] = descr.value(18).value<vector<int>>().at(i);
+    pixelDets[i] = descr.value(19).value<vector<int>>().at(i);
+    referencesTo[i] = descr.value(20).value<vector<int>>().at(i);
+    single[i] = descr.value(21).value<vector<int>>().at(i);
+    doLRT[i] = (descr.value(22).value<vector<int>>().at(i) == 1);
     if (pixelBased[i] >= 0)
       hasPix = true;
     else
       hasTrack = true;
-    meanOff[2 * i] = descr.getParam<vector<float>>(0).getData().at(2 * i);
-    meanOff[2 * i + 1] = descr.getParam<vector<float>>(0).getData().at(2 * i + 1);
-    mimaqdc[2 * i] = descr.getParam<vector<float>>(1).getData().at(2 * i);
-    mimaqdc[2 * i + 1] = descr.getParam<vector<float>>(1).getData().at(2 * i + 1);
-    min_maxLRP[2 * i] = descr.getParam<vector<float>>(2).getData().at(2 * i);
-    min_maxLRP[2 * i + 1] = descr.getParam<vector<float>>(2).getData().at(2 * i + 1);
+    meanOff[2 * i] = descr.value(24).value<vector<float>>().at(2 * i);
+    meanOff[2 * i + 1] = descr.value(24).value<vector<float>>().at(2 * i + 1);
+    mimaqdc[2 * i] = descr.value(25).value<vector<float>>().at(2 * i);
+    mimaqdc[2 * i + 1] = descr.value(25).value<vector<float>>().at(2 * i + 1);
+    min_maxLRP[2 * i] = descr.value(26).value<vector<float>>().at(2 * i);
+    min_maxLRP[2 * i + 1] = descr.value(26).value<vector<float>>().at(2 * i + 1);
   }
   ntrackElstructs = 0;
   for (int i = 0; i < nCalibDets; i++) {
@@ -136,12 +136,12 @@ ATDCcalibration::ATDCcalibration(int& evtnr, int& rnr, TTrack** trIn, TPixel*** 
     }
   }
 
-  nRefPix = descr.getParam<vector<int>>(9).getData().size();
+  nRefPix = descr.value(23).value<vector<int>>().size();
   refPixels = new int[nRefPix];
   for (int i = 0; i < nRefPix; i++)
-    refPixels[i] = descr.getParam<vector<int>>(9).getData().at(i);
-  calibrationOutputPath = descr.getParam<string>(0).getData();
-  author = descr.getParam<string>(1).getData();
+    refPixels[i] = descr.value(23).value<vector<int>>().at(i);
+  calibrationOutputPath = descr.value(11).value<string>();
+  author = descr.value(12).value<string>();
   params = new CommonCalibrationParser***[nCalibDets];
   numRanges = new int*[nCalibDets];
   numCalibrations = new int[nCalibDets];
@@ -1103,30 +1103,30 @@ algorithm_parameter ATDCcalibration::getDescription()
                "calibration is essential for tracking. If you select geometry all other"
                "types are switched off!";
   ret.setDescription(des);
-  ret.addParam<bool>(single_parameter<bool>("do geometry calibration", false));
-  ret.addParam<bool>(single_parameter<bool>("do beam calibration", false));
-  ret.addParam<bool>(single_parameter<bool>("do WALK calibration", true));
-  ret.addParam<bool>(single_parameter<bool>("do TDC-Offset calibration", true));
-  ret.addParam<bool>(single_parameter<bool>("do on event basis", false));
-  ret.addParam<int>(single_parameter<int>("n Events for cal", 100000));
-  ret.addParam<int>(single_parameter<int>("number of iterations", 4));
-  ret.addParam<int>(single_parameter<int>("print pattern", 0));
+  ret.addValue("do geometry calibration", false);
+  ret.addValue("do beam calibration", false);
+  ret.addValue("do WALK calibration", true);
+  ret.addValue("do TDC-Offset calibration", true);
+  ret.addValue("do on event basis", false);
+  ret.addValue("n Events for cal", static_cast<int>(100000));
+  ret.addValue("number of iterations", static_cast<int>(4));
+  ret.addValue("print pattern", static_cast<int>(0));
   vector<int> tmp;
   vector<float> tmpf;
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("detectors to calibrate", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("pixel based", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("measures against", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("is Stop pixel", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("has 2-sided readout", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("pixels dets", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("pixel det references to det", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("walk do only single iteration", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("do light run correction", tmp));
-  ret.addParam<vector<int>>(single_parameter<vector<int>>("reference pixels", tmp));
-  ret.addParam<vector<float>>(single_parameter<vector<float>>("mean, width for offset", tmpf));
-  ret.addParam<vector<float>>(single_parameter<vector<float>>("min, max for qdc", tmpf));
-  ret.addParam<string>(single_parameter<string>("calibration Output Path", ""));
-  ret.addParam<string>(single_parameter<string>("author", ""));
+  ret.addValue("calibration Output Path", std::string{});
+  ret.addValue("author", std::string{});
+  ret.addValue("detectors to calibrate", tmp);
+  ret.addValue("pixel based", tmp);
+  ret.addValue("measures against", tmp);
+  ret.addValue("is Stop pixel", tmp);
+  ret.addValue("has 2-sided readout", tmp);
+  ret.addValue("pixels dets", tmp);
+  ret.addValue("pixel det references to det", tmp);
+  ret.addValue("walk do only single iteration", tmp);
+  ret.addValue("do light run correction", tmp);
+  ret.addValue("reference pixels", tmp);
+  ret.addValue("mean, width for offset", tmpf);
+  ret.addValue("min, max for qdc", tmpf);
   return ret;
 }
 void ATDCcalibration::onNewRun(run_parameter& rp)

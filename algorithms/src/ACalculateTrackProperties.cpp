@@ -97,15 +97,15 @@ ACalculateTrackProperties::ACalculateTrackProperties(TTrack** t, int& numberOfTr
                                                      const TDetector& st,
                                                      const algorithm_parameter& descr)
     : AAlgorithm("Calculate track properties"), maxTracks(max), numberOfTracks(numberOfTracksIn),
-      numStart(descr.getParam<vector<int>>(0).getData().size()),
-      numStop(descr.getParam<vector<int>>(1).getData().size())
+      numStart(descr.value(6).value<vector<int>>().size()),
+      numStop(descr.value(7).value<vector<int>>().size())
 {
   startIDs = new int[numStart];
   for (int i = 0; i < numStart; i++)
-    startIDs[i] = descr.getParam<vector<int>>(0).getData().at(i);
+    startIDs[i] = descr.value(6).value<vector<int>>().at(i);
   stopIDs = new int[numStop];
   for (int i = 0; i < numStop; i++)
-    stopIDs[i] = descr.getParam<vector<int>>(1).getData().at(i);
+    stopIDs[i] = descr.value(7).value<vector<int>>().at(i);
 #ifdef SHOWPARAMS
   cout << "start detectors:" << flush;
   for (int i = 0; i < numStart; i++)
@@ -122,19 +122,10 @@ ACalculateTrackProperties::ACalculateTrackProperties(TTrack** t, int& numberOfTr
   volumeShape* sh;
   sh = st.getShape(0);
   start = plane3D(((wedge*)sh)->getCenter(), ((wedge*)sh)->getNormal());
-  if (descr.getNumberOfParam<bool>() > 0)
-    chargedPrompt = descr.getParam<bool>(0).getData();
-  else
-    chargedPrompt = true;
-  if (descr.getNumberOfParam<bool>() > 1)
-    neutralPrompt = descr.getParam<bool>(1).getData();
-  else
-    neutralPrompt = false;
+  chargedPrompt = descr.value(0).value<bool>();
+  neutralPrompt = descr.value(1).value<bool>();
   for (int i = 0; i < 4; i++)
-    if (descr.getNumberOfParam<bool>() > 2 + i)
-      secondary[i] = descr.getParam<bool>(2 + i).getData();
-    else
-      secondary[i] = false;
+    secondary[i] = descr.value(2 + i).value<bool>();
 #ifdef TWOTWO_out
   defineTwotwoTree();
 #endif

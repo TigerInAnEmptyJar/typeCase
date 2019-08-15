@@ -1,6 +1,9 @@
 #ifndef __MATPARAM
 #define __MATPARAM
 #include "baseparameter.h"
+
+#include <vector>
+
 using namespace std;
 
 /*!
