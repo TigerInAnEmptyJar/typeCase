@@ -30,7 +30,7 @@ public:
    * \param ptr ignored
    * \return nullptr
    */
-  virtual void* process(void* ptr);
+  void process() override;
 
   /*!
    * \brief energyLoss
@@ -140,7 +140,7 @@ public:
    * \brief getClone
    * \return
    */
-  virtual AELossAlgorithm* getClone() const;
+  virtual AELossAlgorithm* getClone() const = 0;
 };
 
 #endif

@@ -286,7 +286,7 @@ AReadFromSimpleTree::~AReadFromSimpleTree()
   }
 }
 
-void* AReadFromSimpleTree::process(void* ptr)
+void AReadFromSimpleTree::process()
 {
   //   TEvent *tev=event;
   //   int *tmpsav=eventNumber;
@@ -304,17 +304,17 @@ void* AReadFromSimpleTree::process(void* ptr)
     validInput = false;
     if (resetUnread)
       event->reset();
-    return ptr;
+    return;
   }
   if (inputmutex != NULL) {
     if (readHits && hasHit)
-      emit hitRead(numberOfHits);
+      _hitsReadSignal(numberOfHits);
     if (readPixels && hasPixel)
-      emit pixelRead(numberOfPixels);
+      _pixelsReadSignal(numberOfPixels);
     if (readClusters && hasCluster)
-      emit clusterRead(numberOfCluster);
+      _clustersReadSignal(numberOfCluster);
     if (readTracks && hasTrack)
-      emit trackRead(ntr);
+      _tracksReadSignal(ntr);
     pthread_mutex_unlock((pthread_mutex_t*)inputmutex);
   }
   (*eventNumber) = tmpevt;
@@ -336,7 +336,6 @@ void* AReadFromSimpleTree::process(void* ptr)
     readTrack(c1);
   // cout<<"done \nset event number "<<flush;
   event->setEventNumber(tmpevt);
-  return ptr;
 }
 int AReadFromSimpleTree::getCommonEvent(int& iT, bool& ht, int& iC, bool& hc, int& iP, bool& hp,
                                         int& iH, bool& hh)
@@ -1470,6 +1469,29 @@ void AReadFromSimpleTree::getNewRun(run_parameter& rp)
   }
   getNewInput(files, type, nFiles, true);
   validInput = true;
+}
+
+boost::signals2::connection AReadFromSimpleTree::connectHitRead(std::function<void(int)> subscriber)
+{
+  return _hitsReadSignal.connect(subscriber);
+}
+
+boost::signals2::connection AReadFromSimpleTree::connectPixelRead(
+    std::function<void(int)> subscriber)
+{
+  return _pixelsReadSignal.connect(subscriber);
+}
+
+boost::signals2::connection AReadFromSimpleTree::connectClusterRead(
+    std::function<void(int)> subscriber)
+{
+  return _clustersReadSignal.connect(subscriber);
+}
+
+boost::signals2::connection AReadFromSimpleTree::connectTrackRead(
+    std::function<void(int)> subscriber)
+{
+  return _tracksReadSignal.connect(subscriber);
 }
 void AReadFromSimpleTree::setHitStruct()
 {

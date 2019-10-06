@@ -7,7 +7,7 @@ extern logger readWriteLog;
 extern bool existing(string strFilename);
 algorithm_parameter AHitTreeInput::getDescription()
 {
-  algorithm_parameter ret("Read Hits from Tree", 0, 0);
+  algorithm_parameter ret("Read Hits from Tree", algorithm_parameter::Category::INPUT, 0);
   string des = "This algorithm reads calibrated hits from a root tree and "
                "requests the hit shapes from the setup. "
                "The hits are considered as calibrated and valid.";
@@ -56,7 +56,7 @@ AHitTreeInput::~AHitTreeInput()
   if (useChain)
     delete hitChain;
 }
-void* AHitTreeInput::process(void* ptr)
+void AHitTreeInput::process()
 {
   if (hitTree != NULL) {
     int max = (int)hitTree->GetEntries();
@@ -72,7 +72,6 @@ void* AHitTreeInput::process(void* ptr)
     } else
       valid = false;
   }
-  return ptr;
 }
 void AHitTreeInput::readEvent(int EvtNr)
 {
@@ -374,6 +373,11 @@ void AHitTreeInput::newRun(run_parameter& r)
     return;
   currentEntry = 0;
   valid = true;
+}
+
+boost::signals2::connection AHitTreeInput::connectEventRead(std::function<void(int)> subscriber)
+{
+  return _eventReadSignal.connect(subscriber);
 }
 
 void AHitTreeInput::getHeader()

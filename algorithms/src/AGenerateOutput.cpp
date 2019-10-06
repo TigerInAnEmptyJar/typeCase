@@ -530,7 +530,7 @@ AGenerateOutput::~AGenerateOutput()
   //  EndWriteOut();
   //  outFile.close();
 }
-void* AGenerateOutput::process(void* ptr)
+void AGenerateOutput::process()
 {
   eventNr++;
   valid = (numTr > 0 && numTr < 6 ? 1 : 0);
@@ -559,7 +559,6 @@ void* AGenerateOutput::process(void* ptr)
       write_Reactions();
     clearData();
   }
-  return ptr;
 }
 void AGenerateOutput::clearData()
 {

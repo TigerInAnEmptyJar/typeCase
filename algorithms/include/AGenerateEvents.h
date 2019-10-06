@@ -31,6 +31,6 @@ public:
   AGenerateEvents(TTrack** tracksIn, int& numberOfTracksIn, int& eventNumberIn, TSetup& setupIn,
                   vector<int> IDs, string functionIn, vector<int> parameter, bool useSAIDIN,
                   bool& validInIn);
-  virtual ~AGenerateEvents();
-  virtual void* process(void*);
+  ~AGenerateEvents() override;
+  void process() override;
 };

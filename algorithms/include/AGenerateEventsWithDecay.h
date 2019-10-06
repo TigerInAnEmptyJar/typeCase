@@ -46,7 +46,7 @@ private:
 public:
   AGenerateEventsWithDecay(TTrack** tracksIn, int& numberOfTracksIn, int& eventNumberIf,
                            TSetup& setupIn, bool& validInputIn, const algorithm_parameter& descr);
-  virtual ~AGenerateEventsWithDecay();
-  virtual void* process(void* ptr);
+  ~AGenerateEventsWithDecay() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

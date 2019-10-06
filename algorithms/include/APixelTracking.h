@@ -60,7 +60,7 @@ public:
   APixelTracking(TSetup& setupIn, TTrack** tracksIn, TPixel*** pixelsIn, TCluster*** clusterIn,
                  TCalibHit*** hitsIn, int& nTracksIn, int** nPixelsIn, int** nClusterIn,
                  int** nHitsIn, int maxTracksIn, const algorithm_parameter& param);
-  virtual ~APixelTracking();
-  virtual void* process(void* ptr);
+  ~APixelTracking() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

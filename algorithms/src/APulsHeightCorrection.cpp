@@ -80,7 +80,7 @@ APulsHeightCorrectionWedge::~APulsHeightCorrectionWedge()
   delete[] ranges;
 }
 
-void* APulsHeightCorrectionWedge::process(void* ptr)
+void APulsHeightCorrectionWedge::process()
 {
   bool rangeFound = false;
   if (!((runNr >= ranges[0][actualRange]) && (runNr <= ranges[1][actualRange]) &&
@@ -94,7 +94,7 @@ void* APulsHeightCorrectionWedge::process(void* ptr)
       }
     }
     if ((!rangeFound) && (numberOfRanges > 0)) {
-      return ptr;
+      return;
     }
   }
   TCalibHit* tmp = 0;
@@ -110,7 +110,6 @@ void* APulsHeightCorrectionWedge::process(void* ptr)
       tmp->setADC(tmp->getADC() * correctionFunction[tmp->getElement()][actualRange]->Eval(r));
     }
   }
-  return ptr;
 }
 
 APulsHeightCorrectionSpiral::APulsHeightCorrectionSpiral(TTrack** tracksIn, int& numberOfTracksIn,
@@ -141,7 +140,7 @@ APulsHeightCorrectionSpiral::~APulsHeightCorrectionSpiral()
   delete[] ranges;
 }
 
-void* APulsHeightCorrectionSpiral::process(void* ptr)
+void APulsHeightCorrectionSpiral::process()
 {
   bool rangeFound = false;
   if (!((runNr >= ranges[0][actualRange]) && (runNr <= ranges[1][actualRange]) &&
@@ -155,7 +154,7 @@ void* APulsHeightCorrectionSpiral::process(void* ptr)
       }
     }
     if ((!rangeFound) && (numberOfRanges > 0)) {
-      return ptr;
+      return;
     }
   }
   TCalibHit* tmp = 0;
@@ -171,7 +170,6 @@ void* APulsHeightCorrectionSpiral::process(void* ptr)
       tmp->setADC(tmp->getADC() * correctionFunction[tmp->getElement()][actualRange]->Eval(r));
     }
   }
-  return ptr;
 }
 
 APulsHeightCorrectionTube::APulsHeightCorrectionTube(TTrack** tracksIn, int& numberOfTracksIn,
@@ -202,7 +200,7 @@ APulsHeightCorrectionTube::~APulsHeightCorrectionTube()
   delete[] ranges;
 }
 
-void* APulsHeightCorrectionTube::process(void* ptr)
+void APulsHeightCorrectionTube::process()
 {
   bool rangeFound = false;
   if (!((runNr >= ranges[0][actualRange]) && (runNr <= ranges[1][actualRange]) &&
@@ -216,7 +214,7 @@ void* APulsHeightCorrectionTube::process(void* ptr)
       }
     }
     if ((!rangeFound) && (numberOfRanges > 0)) {
-      return ptr;
+      return;
     }
   }
   TCalibHit* tmp = 0;
@@ -230,7 +228,6 @@ void* APulsHeightCorrectionTube::process(void* ptr)
       tmp->setADC(tmp->getADC() * correctionFunction[tmp->getElement()][actualRange]->Eval(r));
     }
   }
-  return ptr;
 }
 
 void APulsHeightCorrectionWedge::getNewCalibration(vector<string>& calibrationFiles)

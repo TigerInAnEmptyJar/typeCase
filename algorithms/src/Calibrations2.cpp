@@ -1,7 +1,7 @@
 #include "Calibrations.h"
 
 AWalkCalibration::AWalkCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr)
-    : AAlgorithm("Generate walk calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate walk calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(0).value<int>())
 {
   vector<int> tmp(descr.value(5).value<vector<int>>());
@@ -33,7 +33,7 @@ AWalkCalibration::AWalkCalibration(TEvent& eventIn, TSetup& setup, algorithm_par
 }
 AWalkCalibration::AWalkCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                                    int minEntriesPerHistoIn)
-    : AAlgorithm("Generate tdcFactor calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate tdcFactor calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -71,7 +71,7 @@ AWalkCalibration::~AWalkCalibration()
   delete[] detectorIDs;
   delete[] numberOfElements;
 }
-void* AWalkCalibration::process(void* ptr)
+void AWalkCalibration::process()
 {
   int n;
   TCalibHit* th;
@@ -82,12 +82,11 @@ void* AWalkCalibration::process(void* ptr)
       histograms[i][n]->Fill(th->getRawADC(), th->getRawTDC());
     }
   }
-  return ptr;
 }
 void AWalkCalibration::toEvaluate()
 {
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 CommonCalibrationParser* AWalkCalibration::evaluate(int num)

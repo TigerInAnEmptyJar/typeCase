@@ -8,7 +8,6 @@ class beamTime_parameter;
 using namespace std;
 class ACalibration : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TCalibHit** hits;                     //![numberOfHits]->
   int& numberOfHits;                    //!
@@ -34,9 +33,9 @@ private:
 public:
   ACalibration(TCalibHit** hitsIn, int& numberOfHitsIn, const TDetector& det,
                const vector<string>& filenames, int& runNr, int& evtNr, bool cA, bool cT);
-  virtual ~ACalibration();
-  virtual void* process(void* ptr);
+  ~ACalibration() override;
+  void process() override;
   virtual bool checkRange();
-public slots:
   void getNewRun(run_parameter& r); //, beamTime_parameter &b);
+  static algorithm_parameter getDescription();
 };

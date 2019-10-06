@@ -33,7 +33,7 @@ ATofStrawTrackFinder::~ATofStrawTrackFinder()
   delete[] numberOfHits;
   delete[] planeCenter;
 }
-void* ATofStrawTrackFinder::process(void* ptr)
+void ATofStrawTrackFinder::process()
 {
   if (resetTrackNumber)
     numberOfTracks = 0;
@@ -99,12 +99,11 @@ void* ATofStrawTrackFinder::process(void* ptr)
       }
     }
   numberOfTracks = numberOfTracks + trackFinder->GetNumberOfTracks();
-  return ptr;
 }
 
 algorithm_parameter ATofStrawTrackFinder::getDescription()
 {
-  algorithm_parameter ret("TOF straw-track-finder", 0, 0, 0);
+  algorithm_parameter ret("TOF straw-track-finder", algorithm_parameter::Category::TRACKING, 0, 0);
   string des =
       "This algorithm is the interface to the straw track finder implemented "
       "by Ralph Castelijns at the Forschungszentrum Juelich for the COSY-TOF-Detector. "

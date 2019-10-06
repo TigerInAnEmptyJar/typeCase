@@ -3,7 +3,6 @@
 
 class AKinFit : public AFitAlgorithm
 {
-  Q_OBJECT
 private:
   float epsilon;
   const int maxParticles; // NPMX
@@ -25,18 +24,15 @@ private:
 
 public:
   AKinFit(int maxIterationIn, int maxParticlesIn, float epsilonIn);
-  virtual ~AKinFit();
-  virtual void* process(void* ptr);
-  virtual void add(Vector& data);
-  virtual void clear();
-  virtual Vector getResult();
+  ~AKinFit() override;
+  void process() override;
+  void add(Vector& data) override;
+  void clear() override;
+  Vector getResult() override;
   void setConstraints(int nCin, Vector masses);
-  virtual AFitAlgorithm* getClone();
+  AFitAlgorithm* getClone() override;
   int getOutInfo() const;
   //  virtual float fit();
-public slots:
-  virtual void getAddPoint(Vector& data);
-  virtual float fit();
-signals:
-  void fitted(float chi, Vector& result);
+  void getAddPoint(Vector& data) override;
+  float fit() override;
 };

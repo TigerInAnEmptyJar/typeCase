@@ -18,7 +18,7 @@ AHitTreeOutput::AHitTreeOutput(TCalibHit*** hitIn, int** nHits, int& evtNr, int&
   initialize(outFile);
 }
 AHitTreeOutput::~AHitTreeOutput() { finalize(); }
-void* AHitTreeOutput::process(void* ptr)
+void AHitTreeOutput::process()
 {
   Event = EventNumber;
   Run = RunNumber;
@@ -43,11 +43,10 @@ void* AHitTreeOutput::process(void* ptr)
   }
   if (nHit > 0)
     hitTree->Fill();
-  return ptr;
 }
 algorithm_parameter AHitTreeOutput::getDescription()
 {
-  algorithm_parameter ret("Writes Hits to Tree", 0, 0);
+  algorithm_parameter ret("Writes Hits to Tree", algorithm_parameter::Category::OUTPUT, 0);
   string des = "This algorithm writes calibrated hits to a root tree. "
                "It only writes calibrated valid hits.";
   ret.setDescription(des);

@@ -445,7 +445,7 @@ algorithm_parameter tofAnalysis::getAlgorithmParameter(int ID)
   case 64:
     return APixelTracking::getDescription();
   }
-  return algorithm_parameter("none", 0, 0);
+  return algorithm_parameter("none", algorithm_parameter::Category::ELSE, 0);
 }
 
 int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorithm_parameter& param,
@@ -513,8 +513,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     (*out)[0] = new AReadFromTade(raws, event.getEventNumber(), event.getTrigger(), numberOfHits,
                                   setup.getNumberOfDetectors(), event.getMaxNumber<TCalibHit>(),
                                   readInID, NULL, readValid);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(newInput(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(newInput(run_parameter&)));
     // 	for(int ii=0;ii<nThreads;ii++)
     // 	  {
     // 	    if(ii!=0)
@@ -760,8 +760,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
         anaLog << "#" << ii;
         (*out)[n] = new ACalibration(calibratedHits[ii], *numberOfHits[ii], *detectors[ii], tmp,
                                      event.getRunNumber(), event.getEventNumber(), ua, ut);
-        connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[n],
-                SLOT(getNewRun(run_parameter&)));
+        //        connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[n],
+        //                SLOT(getNewRun(run_parameter&)));
         n++;
       }
     }
@@ -803,8 +803,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
         calibratedHits[param.value(1).value<int>()], calibratedHits[param.value(2).value<int>()],
         detectors[param.value(1).value<int>()], param.value(3).value<float>(),
         event.getEventNumber(), event.getRunNumber(), tmp);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(onNewRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(onNewRun(run_parameter&)));
     anaLog << "done" << endli;
     break; // barrelPixel
   }
@@ -999,8 +999,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     // 	      connect(f[ii][position],SIGNAL(finalizeReactions(vector<TTree*>*)),
     // 		      f[0][position],SIGNAL(OnFinalizeReactions(vector<TTree*>*)));
     // 	  }
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(OnNewRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(OnNewRun(run_parameter&)));
     anaLog << "done" << endli;
     break; // generate output file with track data
   }
@@ -1042,11 +1042,11 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
                        calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors,
                        readValid, readInID, stearIt, eventRequesting);
     else
-      n = getAlgorithm(&tmpA, ec, algorithm_parameter("kin fit", 0, 0, 2), firstRun, event, setup,
-                       numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters,
-                       numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels,
-                       clusters, materials, detectors, readValid, readInID, stearIt,
-                       eventRequesting);
+      n = getAlgorithm(
+          &tmpA, ec, algorithm_parameter("kin fit", algorithm_parameter::Category::FITTING, 0, 2),
+          firstRun, event, setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters,
+          numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters,
+          materials, detectors, readValid, readInID, stearIt, eventRequesting);
     nAlgos = n + 1;
     executeUpTo = 1;
     (*out) = new AAlgorithm*[nAlgos];
@@ -1095,8 +1095,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
         param.value(7).value<int>(), readValid, inmutex);
     // 	for(int ii=0;ii<nThreads;ii++)
     // 	  {
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(getNewRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(getNewRun(run_parameter&)));
     // 	    for(int iii=ii+1;iii<nThreads;iii++)
     // 	      {
     // 		connect(f[ii][position],SIGNAL(hitRead(int)),
@@ -1176,8 +1176,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
       (*out)[iii] = new ATeufelCorrection(
           calibratedHits[id], *numberOfHits[id], id, detectors[id]->getNumberOfElements(),
           event.getEventNumber(), event.getRunNumber(), tmps, param.value(0).value<string>());
-      connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[iii],
-              SLOT(onNewRum(run_parameter&)));
+      //      connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[iii],
+      //              SLOT(onNewRum(run_parameter&)));
     }
     anaLog << " done" << endli;
     break;
@@ -1200,11 +1200,11 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
                        calibratedHits, hitClusters, tracks, pixels, clusters, materials, detectors,
                        readValid, readInID, stearIt, eventRequesting);
     else
-      n = getAlgorithm(&tmpA, ec, algorithm_parameter("line fit", 0, 0, 0), firstRun, event, setup,
-                       numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters,
-                       numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels,
-                       clusters, materials, detectors, readValid, readInID, stearIt,
-                       eventRequesting);
+      n = getAlgorithm(
+          &tmpA, ec, algorithm_parameter("line fit", algorithm_parameter::Category::FITTING, 0, 0),
+          firstRun, event, setup, numberOfHits, numberOfTracks, numberOfPixels, numberOfClusters,
+          numberOfHitClusters, raws, calibratedHits, hitClusters, tracks, pixels, clusters,
+          materials, detectors, readValid, readInID, stearIt, eventRequesting);
     nAlgos = n + 1;
     (*out) = new AAlgorithm*[nAlgos];
     for (int i = 0; i < n; i++)
@@ -1228,8 +1228,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     vector<string> tmp;
     (*out)[0] = new ATofPixCorrection(event.getEventNumber(), event.getRunNumber(), tracks,
                                       *numberOfTracks, setup, param, tmp);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(setNewRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(setNewRun(run_parameter&)));
     anaLog << " done" << endli;
     break;
   }
@@ -1237,8 +1237,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     anaLog << "Calibration Generation:";
     (*out) = new AAlgorithm*[nAlgos];
     (*out)[0] = new ACalibrationGeneration(event, setup, param);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(getNewRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(getNewRun(run_parameter&)));
     anaLog << " done" << endli;
     break;
   }
@@ -1246,8 +1246,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     anaLog << "Read reactions from root file";
     (*out) = new AAlgorithm*[nAlgos];
     (*out)[0] = new AReadReactionFromRoot(setup, event, readValid, param);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(OnNewRun(run_parameter&, beamTime_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(OnNewRun(run_parameter&, beamTime_parameter&)));
     anaLog << " done" << endli;
     break;
   }
@@ -1328,8 +1328,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     (*out)[0] = new AMultipleTreeInput(event.getEventNumber(), event.getRunNumber(),
                                        event.getTrigger(), numberOfHits, tracks, *numberOfTracks,
                                        calibratedHits, readValid, param);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(OnNewRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(OnNewRun(run_parameter&)));
     anaLog << " done" << endli;
     break;
   }
@@ -1347,8 +1347,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     (*out)[0] = new ATDCcalibration(event.getEventNumber(), event.getRunNumber(), tracks, pixels,
                                     calibratedHits, *numberOfTracks, numberOfPixels, numberOfHits,
                                     setup, param);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(onNewRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(onNewRun(run_parameter&)));
     anaLog << " done" << endli;
     break;
   }
@@ -1357,8 +1357,8 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
     (*out) = new AAlgorithm*[nAlgos];
     (*out)[0] = new AapplyLRC(setup, tracks, *numberOfTracks, event.getEventNumber(),
                               event.getRunNumber(), param);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(onNewRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(onNewRun(run_parameter&)));
     anaLog << " done" << endli;
     break;
   }
@@ -1370,13 +1370,13 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
         new AHitTreeInput(setup, calibratedHits, numberOfHits, event.getEventNumber(),
                           event.getRunNumber(), event.getTrigger(), event.getMaxNumber<TCalibHit>(),
                           setup.getNumberOfDetectors(), readValid, param);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(newRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(newRun(run_parameter&)));
     if (param.numberOfValues() > 1 &&
         param.value(0).valueType() == ParameterValue::ValueType::BOOLEAN)
       if (param.value(0).value<bool>()) {
         eventRequesting = true;
-        connect(stearIt, SIGNAL(requestNextEvent()), (*out)[0], SLOT(prepareNextEntry()));
+        //        connect(stearIt, SIGNAL(requestNextEvent()), (*out)[0], SLOT(prepareNextEntry()));
       }
     anaLog << " done" << endli;
     break;
@@ -1399,15 +1399,15 @@ int tofAnalysis::getAlgorithm(AAlgorithm*** out, int& executeUpTo, const algorit
         event.getEventNumber(), event.getRunNumber(), event.getTrigger(), tracks, *numberOfTracks,
         event.getMaxNumber<TTrack>(), setup.getNumberOfDetectors(), numberOfHits, calibratedHits,
         numberOfPixels, pixels, readValid, param);
-    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
-            SLOT(onNewRun(run_parameter&)));
+    //    connect(stearIt, SIGNAL(newRun(run_parameter&, beamTime_parameter&)), (*out)[0],
+    //            SLOT(onNewRun(run_parameter&)));
     // cout<<"Read track tree "<<param.getNumberOfParam<bool>()<<"
     // "<<param.getParam<bool>(1).getData()<<endl;
     if (param.numberOfValues() > 1 &&
         param.value(0).valueType() == ParameterValue::ValueType::BOOLEAN)
       if (param.value(0).value<bool>()) {
         eventRequesting = true;
-        connect(stearIt, SIGNAL(requestNextEvent()), (*out)[0], SLOT(prepareNextEntry()));
+        //        connect(stearIt, SIGNAL(requestNextEvent()), (*out)[0], SLOT(prepareNextEntry()));
       }
     anaLog << " done" << endli;
     break;

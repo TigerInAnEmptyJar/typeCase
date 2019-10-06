@@ -18,7 +18,7 @@ private:
 public:
   AFindDecayInTracks(TSetup& setupIn, int& numberOfTracksIn, TTrack** tracksIn,
                      const algorithm_parameter& descr);
-  virtual ~AFindDecayInTracks();
-  virtual void* process(void* ptr);
+  ~AFindDecayInTracks() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

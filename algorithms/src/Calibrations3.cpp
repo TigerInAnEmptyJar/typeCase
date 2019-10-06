@@ -1,6 +1,6 @@
 #include "Calibrations.h"
 ACutsCalibration::ACutsCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr)
-    : AAlgorithm("Generate CUTS calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate CUTS calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(0).value<int>())
 {
   vector<int> tmp(descr.value(3).value<vector<int>>());
@@ -29,7 +29,7 @@ ACutsCalibration::ACutsCalibration(TEvent& eventIn, TSetup& setup, algorithm_par
 }
 ACutsCalibration::ACutsCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                                    int minEntriesPerHistoIn)
-    : AAlgorithm("Generate CUTS calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate CUTS calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -66,19 +66,18 @@ ACutsCalibration::~ACutsCalibration()
   delete[] detectorIDs;
   delete[] numberOfElements;
 }
-void* ACutsCalibration::process(void* ptr)
+void ACutsCalibration::process()
 {
   for (int i = 0; i < numberOfDetectors; i++) {
     for (int j = 0; j < event.getNumberOfHits(detectorIDs[i]); j++)
       qdcHistograms[i][event.getHit(detectorIDs[i], j).getElement()]->Fill(
           event.getHit(detectorIDs[i], j).getRawADC());
   }
-  return ptr;
 }
 void ACutsCalibration::toEvaluate()
 {
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 CommonCalibrationParser* ACutsCalibration::evaluate(int num)

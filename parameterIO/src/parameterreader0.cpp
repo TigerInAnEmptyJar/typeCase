@@ -245,7 +245,7 @@ std::shared_ptr<base_parameter> ParameterReader0::readSingleAlgorithm(istream& i
   float fz1, fz2, fz3;
   char c, _tmp[100];
   input >> zahl;
-  a.setCategory(zahl);
+  a.setCategory(static_cast<algorithm_parameter::Category>(zahl));
   input >> zahl;
   a.setLevel(zahl);
   input >> zahl;

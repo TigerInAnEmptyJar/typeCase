@@ -45,7 +45,7 @@ void ParameterWriter1::writeSingleAlgorithm(std::ostream& output,
   output << "#" << algorithm->getID() << " ";
   output << (algorithm->IsUsed() ? 1 : 0) << " ";
   output << algorithm->getName().data() << "\n";
-  output << "#" << algorithm->getCategory() << " ";
+  output << "#" << static_cast<int>(algorithm->getCategory()) << " ";
   output << algorithm->getLevel() << " "
          << "\n";
   output << "D" << algorithm->getDescription() << "\n";

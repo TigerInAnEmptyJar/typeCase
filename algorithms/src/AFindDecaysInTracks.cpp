@@ -14,8 +14,8 @@ AFindDecayInTracks::AFindDecayInTracks(TSetup& setupIn, int& numberOfTracksIn, T
   maxDistanceToCommon = descr.value(3).value<float>();
   maxDistanceToTarget = descr.value(2).value<float>();
 }
-AFindDecayInTracks::~AFindDecayInTracks() {}
-void* AFindDecayInTracks::process(void* ptr)
+AFindDecayInTracks::~AFindDecayInTracks() = default;
+void AFindDecayInTracks::process()
 {
   bool isSecondary[numberOfTracks];
   int decayedOf[numberOfTracks];
@@ -143,11 +143,11 @@ void* AFindDecayInTracks::process(void* ptr)
     }
     numberOfTracks = numberOfTracks + nN;
   }
-  return ptr;
+  return;
 }
 algorithm_parameter AFindDecayInTracks::getDescription()
 {
-  algorithm_parameter ret("Find decays in tracks", 0, 0);
+  algorithm_parameter ret("Find decays in tracks", algorithm_parameter::Category::TRACKING, 0);
   string des = "This algorithm takes a set of tracks and defines for "
                "each track if it is a prompt or secondary track. Criterium "
                "here is the distance to the target [mm]. Then the point of "

@@ -9,7 +9,6 @@ using namespace std;
 
 class ABarrelPixel : public AAlgorithm
 {
-  Q_OBJECT
 private:
   const int maxPixels;
   int ID;
@@ -39,8 +38,7 @@ public:
                int& numHits2, TCalibHit** h1, TCalibHit** h2, TDetector* front, float pixelSizeIn,
                int& eventNr, int& runNr, const vector<string>& fileNames);
   virtual ~ABarrelPixel();
-  virtual void* process(void* ptr);
-public slots:
+  void process() override;
   void onNewRun(run_parameter& rp);
 };
 #endif

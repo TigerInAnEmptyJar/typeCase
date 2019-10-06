@@ -20,7 +20,7 @@ void* stepThread(void* ptr)
 {
   if (ptr == NULL)
     return NULL;
-  ((AAlgorithm*)ptr)->process(NULL);
+  ((AAlgorithm*)ptr)->process();
   return NULL;
 }
 
@@ -81,22 +81,22 @@ vector<vector<string>> tofAnalysis::getHistogramNames()
   vector<vector<string>> tmp;
   if (!isInitA)
     return vector<vector<string>>();
-  for (int i = 0; i < numAlgorithms; i++)
-    if (f[0][i] != NULL)
-      tmp.push_back(f[0][i]->histogramNames());
+  //  for (int i = 0; i < numAlgorithms; i++)
+  //    if (f[0][i] != NULL)
+  //      tmp.push_back(f[0][i]->histogramNames());
   return tmp;
 }
 TH1* tofAnalysis::getHisto(const string& name)
 {
   if (!isInitA)
     return NULL;
-  TH1* ht = NULL;
-  for (int i = 0; i < numAlgorithms; i++)
-    if (f[0][i] != NULL) {
-      ht = f[0][i]->histogram(name);
-      if (ht != NULL)
-        return ht;
-    }
+  //  TH1* ht = NULL;
+  //  for (int i = 0; i < numAlgorithms; i++)
+  //    if (f[0][i] != NULL) {
+  //      ht = f[0][i]->histogram(name);
+  //      if (ht != NULL)
+  //        return ht;
+  //    }
   return NULL;
 }
 vector<vector<string>> tofAnalysis::getTreeNames()
@@ -104,22 +104,22 @@ vector<vector<string>> tofAnalysis::getTreeNames()
   vector<vector<string>> tmp;
   if (!isInitA)
     return vector<vector<string>>();
-  for (int i = 0; i < numAlgorithms; i++)
-    if (f[0][i] != NULL)
-      tmp.push_back(f[0][i]->treeNames());
+  //  for (int i = 0; i < numAlgorithms; i++)
+  //    if (f[0][i] != NULL)
+  //      tmp.push_back(f[0][i]->treeNames());
   return tmp;
 }
 TTree* tofAnalysis::getTree(const string& name)
 {
   if (!isInitA)
     return NULL;
-  TTree* ht = NULL;
-  for (int i = 0; i < numAlgorithms; i++)
-    if (f[0][i] != NULL) {
-      ht = f[0][i]->tree(name);
-      if (ht != NULL)
-        return ht;
-    }
+  //  TTree* ht = NULL;
+  //  for (int i = 0; i < numAlgorithms; i++)
+  //    if (f[0][i] != NULL) {
+  //      ht = f[0][i]->tree(name);
+  //      if (ht != NULL)
+  //        return ht;
+  //    }
   return NULL;
 }
 
@@ -376,7 +376,7 @@ void* tofAnalysis::thread_run(void* ptr)
     Event[j].reset();
     for (int i = 0; i < numAlgorithms; i++) {
       // anaLog<<f[j][i]->getName().data()<<" "<<num<<" "<<endli;
-      f[j][i]->process(0);
+      f[j][i]->process();
       // cout<<f[j][i]->getName().data()<<endl;
     }
     // cout<<"Event:"<<Event[j].getEventNumber()<<endl;

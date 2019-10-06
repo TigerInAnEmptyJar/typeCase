@@ -1,6 +1,7 @@
 #include "ACalibrationGeneration.h"
 #include "Calibrations.h"
 #include "logger.h"
+#include <QObject>
 #include <fstream>
 #include <iostream>
 #include <qdatetime.h>
@@ -68,26 +69,35 @@ ACalibrationGeneration::~ACalibrationGeneration()
   for (int i = 0; i < numberOfCalibrationAlgorithms; i++)
     if (calibrationAlgorithms[i] != NULL) {
       //	((AtdcRadialPixCalibration*)calibrationAlgorithms[i])->toEvaluate();
-      disconnect(calibrationAlgorithms[i]);
       delete calibrationAlgorithms[i];
     }
   delete[] calibrationAlgorithms;
 }
-void* ACalibrationGeneration::process(void* ptr)
+
+void ACalibrationGeneration::toEvaluate()
+{
+  for (int i = 0; i < numberOfCalibrationAlgorithms; i++) {
+    if (calibrationAlgorithms[i] != nullptr) {
+      calibrationAlgorithms[i]->toEvaluate();
+      writeCalibrationToFile(calibrationAlgorithms[i]->getCalibration().get());
+    }
+  }
+}
+
+void ACalibrationGeneration::process()
 {
   for (int i = 0; i < numberOfCalibrationAlgorithms; i++)
     if (calibrationAlgorithms[i] != NULL)
-      calibrationAlgorithms[i]->process(ptr);
+      calibrationAlgorithms[i]->process();
   if (useEventBase) {
     if (eventCounter >= eventBase) {
-      emit toEvaluate();
+      toEvaluate();
       eventCounter = -1;
     }
     eventCounter++;
   }
-  return ptr;
 }
-void ACalibrationGeneration::getNewRun(run_parameter& r) { emit newRun(r); }
+void ACalibrationGeneration::getNewRun(run_parameter& r) {}
 void ACalibrationGeneration::writeCalibrationToFile(CommonCalibrationParser* parameter)
 {
   ofstream out;
@@ -136,7 +146,7 @@ void ACalibrationGeneration::declareCalibs(const algorithm_parameter& descr)
     }
   }
   numberOfCalibrationAlgorithms = algorithms.size();
-  calibrationAlgorithms = new AAlgorithm*[numberOfCalibrationAlgorithms];
+  calibrationAlgorithms = new CalibrationAlgorithm*[numberOfCalibrationAlgorithms];
   for (int i = 0; i < numberOfCalibrationAlgorithms; i++)
     calibrationAlgorithms[i] = NULL;
 
@@ -195,11 +205,6 @@ void ACalibrationGeneration::declareCalibs(const algorithm_parameter& descr)
       calibrationAlgorithms[algoNum] = new AqdcRadialPolCalibration(event, setup, *algorithms[i]);
       algoNum++;
       break;
-    }
-    if (calibrationAlgorithms[algoNum - 1] != NULL) {
-      connect(this, SIGNAL(toEvaluate()), calibrationAlgorithms[algoNum - 1], SLOT(toEvaluate()));
-      connect(calibrationAlgorithms[algoNum - 1], SIGNAL(evaluated(CommonCalibrationParser*)), this,
-              SLOT(writeCalibrationToFile(CommonCalibrationParser*)));
     }
   }
 }

@@ -1,7 +1,7 @@
 #include "Calibrations.h"
 APedestalCalibration::APedestalCalibration(TEvent& eventIn, TSetup& setup,
                                            algorithm_parameter& descr)
-    : AAlgorithm("Generate Pedestal calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate Pedestal calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(0).value<int>())
 {
   vector<int> tmp(descr.value(3).value<vector<int>>());
@@ -30,7 +30,7 @@ APedestalCalibration::APedestalCalibration(TEvent& eventIn, TSetup& setup,
 }
 APedestalCalibration::APedestalCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                                            int minEntriesPerHistoIn)
-    : AAlgorithm("Generate Pedestal calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate Pedestal calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -66,19 +66,18 @@ APedestalCalibration::~APedestalCalibration()
   delete[] detectorIDs;
   delete[] numberOfElements;
 }
-void* APedestalCalibration::process(void* ptr)
+void APedestalCalibration::process()
 {
   for (int i = 0; i < numberOfDetectors; i++) {
     for (int j = 0; j < event.getNumberOfHits(detectorIDs[i]); j++)
       qdcHistograms[i][event.getHit(detectorIDs[i], j).getElement()]->Fill(
           event.getHit(detectorIDs[i], j).getRawADC());
   }
-  return ptr;
 }
 void APedestalCalibration::toEvaluate()
 {
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 CommonCalibrationParser* APedestalCalibration::evaluate(int num)

@@ -59,6 +59,6 @@ public:
   virtual ~ARingpixel();
   planeShape* calculateCenter(int r, int l, int g, int dPhi, int rp);
   planeShape* triangleApprox(int r, int l, int g, int dPhi, int rp);
-  virtual void* process(void* ptr);
+  void process() override;
 };
 #endif

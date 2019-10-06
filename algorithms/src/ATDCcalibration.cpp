@@ -1025,11 +1025,11 @@ ATDCcalibration::~ATDCcalibration()
   delete[] actualRanges;
   // cout<<"parameter done"<<endl;
 }
-void* ATDCcalibration::process(void* ptr)
+void ATDCcalibration::process()
 {
   //  cout<<"process()"<<endl;
   if (readFile)
-    return ptr;
+    return;
   if (doGeometry)
     fillGeoHisto();
   if (doBeam)
@@ -1052,39 +1052,10 @@ void* ATDCcalibration::process(void* ptr)
     if (eventCounter >= sumEvents)
       finalAndReset();
   }
-  return ptr;
-}
-vector<string> ATDCcalibration::treeNames()
-{
-  vector<string> ret;
-  if (doOffset)
-    ret.push_back(elTree->GetName());
-  if (doWalk) {
-    if (hasPix)
-      ret.push_back(pixTree->GetName());
-    if (hasTrack)
-      ret.push_back(trackTree->GetName());
-  }
-  return ret;
-}
-TTree* ATDCcalibration::tree(string treename)
-{
-  if (doOffset)
-    if (treename == elTree->GetName())
-      return elTree;
-  if (doWalk) {
-    if (hasPix)
-      if (treename == pixTree->GetName())
-        return pixTree;
-    if (hasTrack)
-      if (treename == trackTree->GetName())
-        return trackTree;
-  }
-  return NULL;
 }
 algorithm_parameter ATDCcalibration::getDescription()
 {
-  algorithm_parameter ret("Calibration algorithm", -1, 0, 0);
+  algorithm_parameter ret("Calibration algorithm", algorithm_parameter::Category::ELSE, 0, 0);
   string des = "This algorithm does the calibration of detector- and beam geometry and "
                "calibration of TDC walk and offsets. "
                "For geometry calibration some pixels are taken for reference producing a "

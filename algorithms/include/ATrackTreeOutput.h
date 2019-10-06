@@ -124,7 +124,7 @@ private:
 public:
   ATrackTreeOutput(TEvent& eventIn, TTrack** trackIn, int& nTrack, int& evtNr, int& rnNr, int& trg,
                    int maxD, const algorithm_parameter& param);
-  virtual ~ATrackTreeOutput();
-  virtual void* process(void* ptr);
+  ~ATrackTreeOutput() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

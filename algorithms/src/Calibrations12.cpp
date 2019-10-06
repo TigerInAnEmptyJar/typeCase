@@ -7,7 +7,7 @@
 extern float getLightWay(volumeShape* sh, point3D onPoint, bool from);
 AqdcRadialPolCalibration::AqdcRadialPolCalibration(TEvent& eventIn, TSetup& setup,
                                                    algorithm_parameter& descr)
-    : AAlgorithm("Generate qdcRadialPol calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate qdcRadialPol calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(0).value<int>())
 {
   vector<int> tmp(descr.value(5).value<vector<int>>());
@@ -59,7 +59,7 @@ AqdcRadialPolCalibration::AqdcRadialPolCalibration(TEvent& eventIn, TSetup& setu
                                                    vector<int> readSide,
                                                    vector<string> reactionNames,
                                                    int minEntriesPerHistoIn)
-    : AAlgorithm("Generate qdcRadialPix calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate qdcRadialPix calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -118,17 +118,17 @@ AqdcRadialPolCalibration::~AqdcRadialPolCalibration()
   delete[] numberOfElements;
   delete[] startDetectors;
 }
-void* AqdcRadialPolCalibration::process(void* ptr)
+void AqdcRadialPolCalibration::process()
 {
   if (event.getNumberOfReactions() == 0)
-    return ptr;
+    return;
   // check for reactions:
   int found = -1;
   for (int i = 0; i < numberOfReactions; i++)
     if (reactions[i]->name() == event.getReaction(0)->name())
       found = i;
   if (found < 0)
-    return ptr;
+    return;
   RbaseReaction* react = event.getReaction(0);
   int num;
   TCalibHit* tmp;
@@ -176,12 +176,11 @@ void* AqdcRadialPolCalibration::process(void* ptr)
       qdcHistograms[j][num]->Fill(lightPath, tdcCalculated - tmp->getTDC());
     }
   }
-  return ptr;
 }
 void AqdcRadialPolCalibration::toEvaluate()
 {
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 CommonCalibrationParser* AqdcRadialPolCalibration::evaluate(int num)

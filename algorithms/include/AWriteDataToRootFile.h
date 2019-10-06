@@ -6,7 +6,6 @@
 
 class AWriteDataToRootFile : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TFile** rootFile;       //!
   TTree* tree;            //!
@@ -40,11 +39,8 @@ public:
                        TEvent& eventIn, TSetup& setupIn, int maxTracks, bool serv);
   AWriteDataToRootFile(TFile** rootFileIn, const string& directory, const string& treeName,
                        TEvent& eventIn, TSetup& setup, int maxTracks, bool serv);
-  virtual ~AWriteDataToRootFile();
-  virtual void* process(void* ptr);
+  ~AWriteDataToRootFile() override;
+  void process() override;
   TFile* getFile();
-signals:
-  void destroyer(TTree*);
-public slots:
-  virtual void getDestroyTree(TTree* tr);
+  void getDestroyTree(TTree* tr);
 };

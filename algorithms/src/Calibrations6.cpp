@@ -2,7 +2,7 @@
 #include "fiber.h"
 #include "wedge.h"
 AzBarrelCalibration::AzBarrelCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr)
-    : AAlgorithm("Generate zBarrel calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate zBarrel calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(0).value<int>())
 {
   vector<int> tmp(descr.value(5).value<vector<int>>());
@@ -34,7 +34,7 @@ AzBarrelCalibration::AzBarrelCalibration(TEvent& eventIn, TSetup& setup, algorit
 }
 AzBarrelCalibration::AzBarrelCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                                          int minEntriesPerHistoIn)
-    : AAlgorithm("Generate zBarrel calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate zBarrel calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -72,10 +72,10 @@ AzBarrelCalibration::~AzBarrelCalibration()
   delete[] detectorIDs;
   delete[] numberOfElements;
 }
-void* AzBarrelCalibration::process(void* ptr)
+void AzBarrelCalibration::process()
 {
   if (event.getNumberOfTracks() != 1)
-    return ptr;
+    return;
   TTrack* track = &event.getTrack(0);
   float theta = track->getPath().Direction().Theta(), phi = track->getPath().Direction().Phi();
   float thetaSearched = M_PI / 2 - theta;
@@ -114,12 +114,11 @@ void* AzBarrelCalibration::process(void* ptr)
           tmp->getRawTDC(), r); // should be tdc difference!!!
     }
   }
-  return ptr;
 }
 void AzBarrelCalibration::toEvaluate()
 {
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 

@@ -10,12 +10,12 @@ AGetTheShape::AGetTheShape(TCalibHit** calibIn, int* numIn, TDetector* detIn)
 
 AGetTheShape::~AGetTheShape() {}
 
-void* AGetTheShape::process(void* ptr)
+void AGetTheShape::process()
 {
   int nEl;
   int maxEl = det->getNumberOfElements();
   if (maxEl == 0)
-    return ptr;
+    return;
   for (int i = 0; i < *numberOfHits; i++) {
     nEl = calibs[i]->getElement();
     if ((nEl < 0) || (nEl >= maxEl) || (!(calibs[i]->isValid()))) {
@@ -30,5 +30,4 @@ void* AGetTheShape::process(void* ptr)
       calibs[i]->setValid(false);
     calibs[i]->setHitShape(tmp);
   }
-  return ptr;
 }

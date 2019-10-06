@@ -176,7 +176,7 @@ float AGenerateEvents::modifyWeight(momentum4D* parts)
   }
   return function->Eval(0);
 }
-void* AGenerateEvents::process(void* ptr)
+void AGenerateEvents::process()
 {
   eventNumber++;
   momentum4D ps[numberOfParticles * 2];
@@ -226,5 +226,4 @@ void* AGenerateEvents::process(void* ptr)
     tracks[i]->getParticler() = ps[pos];
     used[pos] = true;
   }
-  return ptr;
 }

@@ -15,6 +15,7 @@ namespace test {
 class TestAlgorithm : public AAlgorithm
 {
   using AAlgorithm::AAlgorithm;
+  void process() {}
 };
 
 /// Mock class to monitor the call to the installed functors

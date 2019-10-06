@@ -52,7 +52,7 @@ TEST_F(ParameterIoTest, algorithm_read_0)
   EXPECT_EQ(10, a->getID());
   EXPECT_EQ(true, a->IsUsed());
   EXPECT_EQ(0, a->getLevel());
-  EXPECT_EQ(1, a->getCategory());
+  EXPECT_EQ(algorithm_parameter::Category::OUTPUT, a->getCategory());
   EXPECT_EQ("testAlgorithm 1", a->getName());
   EXPECT_EQ("This is a test algorithm.", a->getDescription());
   ASSERT_EQ(6, a->numberOfValues());
@@ -82,7 +82,7 @@ TEST_F(ParameterIoTest, algorithm_read_0)
   EXPECT_EQ(34, b->getID());
   EXPECT_EQ(false, b->IsUsed());
   EXPECT_EQ(5, b->getLevel());
-  EXPECT_EQ(2, b->getCategory());
+  EXPECT_EQ(algorithm_parameter::Category::CALIBRATION, b->getCategory());
   EXPECT_EQ("testAlgorithm 2", b->getName());
   EXPECT_EQ("This is a new test algorithm.", b->getDescription());
   ASSERT_EQ(11, b->numberOfValues());
@@ -168,7 +168,7 @@ TEST_F(ParameterIoTest, algorithm_read_1)
   EXPECT_EQ(10, a->getID());
   EXPECT_EQ(true, a->IsUsed());
   EXPECT_EQ(0, a->getLevel());
-  EXPECT_EQ(1, a->getCategory());
+  EXPECT_EQ(algorithm_parameter::Category::OUTPUT, a->getCategory());
   EXPECT_EQ("testAlgorithm 1", a->getName());
   EXPECT_EQ("This is a test algorithm.", a->getDescription());
   ASSERT_EQ(6, a->numberOfValues());
@@ -198,7 +198,7 @@ TEST_F(ParameterIoTest, algorithm_read_1)
   EXPECT_EQ(34, b->getID());
   EXPECT_EQ(false, b->IsUsed());
   EXPECT_EQ(5, b->getLevel());
-  EXPECT_EQ(2, b->getCategory());
+  EXPECT_EQ(algorithm_parameter::Category::CALIBRATION, b->getCategory());
   EXPECT_EQ("testAlgorithm 2", b->getName());
   EXPECT_EQ("This is a new test algorithm.", b->getDescription());
   ASSERT_EQ(4, b->numberOfValues());
@@ -258,7 +258,7 @@ TEST_F(ParameterIoTest, algorithm_read_2)
   EXPECT_EQ(10, a->getID());
   EXPECT_EQ(true, a->IsUsed());
   EXPECT_EQ(0, a->getLevel());
-  EXPECT_EQ(1, a->getCategory());
+  EXPECT_EQ(algorithm_parameter::Category::OUTPUT, a->getCategory());
   EXPECT_EQ("testAlgorithm 1", a->getName());
   EXPECT_EQ("This is a test algorithm.", a->getDescription());
   ASSERT_EQ(6, a->numberOfValues());
@@ -288,7 +288,7 @@ TEST_F(ParameterIoTest, algorithm_read_2)
   EXPECT_EQ(34, b->getID());
   EXPECT_EQ(false, b->IsUsed());
   EXPECT_EQ(5, b->getLevel());
-  EXPECT_EQ(2, b->getCategory());
+  EXPECT_EQ(algorithm_parameter::Category::CALIBRATION, b->getCategory());
   EXPECT_EQ("testAlgorithm 2", b->getName());
   EXPECT_EQ("This is a new test algorithm.", b->getDescription());
   ASSERT_EQ(4, b->numberOfValues());

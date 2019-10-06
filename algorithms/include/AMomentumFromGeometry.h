@@ -12,6 +12,6 @@ private:
 
 public:
   AMomentumFromGeometry(TSetup& setup, TTrack** tracksIn, int& numberOfTracksIn);
-  virtual ~AMomentumFromGeometry();
-  virtual void* process(void* ptr);
+  ~AMomentumFromGeometry() override;
+  void process() override;
 };

@@ -27,11 +27,7 @@ AKinFit::~AKinFit()
   delete[] ain;
   delete[] p;
 }
-void* AKinFit::process(void* ptr)
-{
-  fit();
-  return ptr;
-}
+void AKinFit::process() { fit(); }
 
 void AKinFit::add(Vector& data)
 {
@@ -320,7 +316,7 @@ float AKinFit::fit()
 
     GB_1 = -GB;
     if (printMatrices)
-      cout << "GB^1:  GB*GB-¹:" << (GB_1 * GB).Determinant() << "\n" << GB_1 << endl;
+      cout << "GB^1:  GB*GB^-1:" << (GB_1 * GB).Determinant() << "\n" << GB_1 << endl;
     ;
     //      GB_P=GB;
     if (nUnmeasured > 0) {
@@ -400,7 +396,7 @@ float AKinFit::fit()
     for (int i = 0; i < nP; i++)
       ppx[i] = getMomentum(i, p[i]);
     if (printIterationInfo) {
-      cout << "new variables: chi²=" << chi2 << endl;
+      cout << "new variables: chi^2=" << chi2 << endl;
       for (int i = 0; i < nP; i++)
         cout << p[i] << ppx[i] << endl;
     }
@@ -458,8 +454,8 @@ float AKinFit::fit()
     if ((d < epsilon) || (abs(chi2 - chi2_prev) < 0.000001)) //||chi2<1)
     {
       if (printEventInfo)
-        cout << "regular break: d=" << d << " epsilon=" << epsilon << " chi²=" << chi2
-             << " chi²_prev=" << chi2_prev << endl;
+        cout << "regular break: d=" << d << " epsilon=" << epsilon << " chi^2=" << chi2
+             << " chi^2_prev=" << chi2_prev << endl;
       condition = false;
       outCode = iteration;
     }

@@ -299,12 +299,11 @@ void AMultipleTreeOutput::newRun(run_parameter& rp)
     initNumTree();
   }
 }
-void* AMultipleTreeOutput::process(void* ptr)
+void AMultipleTreeOutput::process()
 {
   if (outFile == NULL)
-    return ptr;
+    return;
   writeTracks();
-  return ptr;
 }
 AMultipleTreeOutput::AMultipleTreeOutput(int max, int& evtNr, int& rnNr, int& triggerIn,
                                          int& nTrack, TTrack** tracksIn,
@@ -339,7 +338,7 @@ AMultipleTreeOutput::~AMultipleTreeOutput()
 }
 algorithm_parameter AMultipleTreeOutput::getDescription()
 {
-  algorithm_parameter ret("", 0, 0);
+  algorithm_parameter ret("", algorithm_parameter::Category::OUTPUT, 0);
   string lst = "This is a output algorithm for track data."
                "It generates track information containing vertex, direction,"
                "beta, energy, momentum, particleID and information of hits "

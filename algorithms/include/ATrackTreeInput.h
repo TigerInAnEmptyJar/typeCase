@@ -12,7 +12,6 @@ using namespace std;
 
 class ATrackTreeInput : public AAlgorithm
 {
-  Q_OBJECT
 private:
   int numPattern;
   int* pattern;
@@ -53,12 +52,11 @@ public:
                   int maxTrackIn, int numDetsIn, int** numHitsIn, TCalibHit*** hitIn,
                   int** numPixIn, TPixel*** PixIn, bool& readInValid,
                   const algorithm_parameter& param);
-  virtual ~ATrackTreeInput();
-  virtual void* process(void* ptr);
+  ~ATrackTreeInput() override;
+  void process() override;
   static algorithm_parameter getDescription();
-public slots:
-  virtual void readEvent(int EvtNr);
-  virtual void onNewRun(run_parameter& run);
-  virtual void readEntry(int entry);
-  virtual void prepareNextEntry();
+  void readEvent(int EvtNr);
+  void onNewRun(run_parameter& run);
+  void readEntry(int entry);
+  void prepareNextEntry();
 };

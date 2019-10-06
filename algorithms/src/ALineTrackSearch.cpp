@@ -541,7 +541,7 @@ bool ALineTrackSearch::searchATrack(int tracknum, int stopI, TBase* pix, TBase* 
   return true;
 }
 
-void* ALineTrackSearch::process(void* ptr)
+void ALineTrackSearch::process()
 {
   /***********************************************
    *for any pixel/any two pixels
@@ -715,11 +715,10 @@ void* ALineTrackSearch::process(void* ptr)
     }
   }
 #endif
-  return ptr;
 }
 algorithm_parameter ALineTrackSearch::getDescription()
 {
-  algorithm_parameter ret("Line Track search", 0, 0);
+  algorithm_parameter ret("Line Track search", algorithm_parameter::Category::TRACKING, 0);
   string des = "This is a track search algorithm in a detector "
                "without magnetic field, with thin detectors. "
                "The tracks can be searched in two modes: \n"

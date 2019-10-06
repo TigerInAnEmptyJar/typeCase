@@ -34,7 +34,7 @@ AHitClusterSearch::~AHitClusterSearch()
   delete[] nEl;
 }
 
-void* AHitClusterSearch::process(void* ptr)
+void AHitClusterSearch::process()
 {
   int nCl;
   float weightedSum, sumOfWeights;
@@ -153,11 +153,10 @@ void* AHitClusterSearch::process(void* ptr)
     // cout<<nCl<<" hitClusters generated"<<endl;
   }
   // cout<<endl;
-  return ptr;
 }
 algorithm_parameter AHitClusterSearch::getDescription()
 {
-  algorithm_parameter ap("HitCluster search", 0, 0);
+  algorithm_parameter ap("HitCluster search", algorithm_parameter::Category::PIXEL, 0);
   string des = "This algorithm can be used instead of or in addition to "
                "a pixel-cluster-search. Intuitutionally, a cluster search "
                "is done on pixels, but it can also be done prior to pixel "

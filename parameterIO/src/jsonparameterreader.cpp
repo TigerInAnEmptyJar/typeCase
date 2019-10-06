@@ -356,7 +356,8 @@ std::shared_ptr<base_parameter> JsonParameterReader::toAlgorithm(QJsonObject con
   }
   result->setUse(input.value(Keys::use).toBool(false));
   result->setLevel(input.value(Keys::level).toInt(-1));
-  result->setCategory(input.value(Keys::category).toInt(-1));
+  result->setCategory(
+      static_cast<algorithm_parameter::Category>(input.value(Keys::category).toInt(-1)));
   result->setID(input.value(Keys::id_number).toInt(-1));
   // parameter []
   if (input.contains(Keys::parameter)) {

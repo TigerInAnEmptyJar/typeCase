@@ -39,7 +39,7 @@ private:
 public:
   APixelTreeWriteOut(TSetup& setup, int& eventNumberIn, int& runNumberIn, TPixel*** pixelsIn,
                      int** numberOfPixelsIn, const algorithm_parameter& param);
-  virtual ~APixelTreeWriteOut();
-  virtual void* process(void* ptr);
+  ~APixelTreeWriteOut() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

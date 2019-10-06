@@ -11,5 +11,5 @@ private:
 public:
   AGetTheShape(TCalibHit** calibIn, int* numIn, TDetector* detIn);
   virtual ~AGetTheShape();
-  virtual void* process(void* ptr);
+  void process() override;
 };

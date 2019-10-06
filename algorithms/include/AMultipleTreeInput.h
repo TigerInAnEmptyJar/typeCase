@@ -10,7 +10,6 @@ using namespace std;
 class run_parameter;
 class AMultipleTreeInput : public AAlgorithm
 {
-  Q_OBJECT
 private:
   int& numberOfTracks;
   int& eventNr; //!
@@ -39,9 +38,8 @@ public:
   AMultipleTreeInput(int& eventNumber, int& runNumber, int& trigger, int** numberOfHitsIn,
                      TTrack** tracksIn, int& numberOfTracksIn, TCalibHit*** hitsIn,
                      bool& readInValidIn, const algorithm_parameter& param);
-  virtual ~AMultipleTreeInput();
-  virtual void* process(void* ptr);
-public slots:
+  ~AMultipleTreeInput() override;
+  void process() override;
   void OnNewRun(run_parameter& rp);
 
 public:

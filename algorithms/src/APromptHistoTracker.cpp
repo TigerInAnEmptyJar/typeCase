@@ -278,7 +278,7 @@ APromptHistoTracker::~APromptHistoTracker()
     delete[] workHisto[i];
   delete[] workHisto;
 }
-void* APromptHistoTracker::process(void* ptr)
+void APromptHistoTracker::process()
 {
   //  cout<<"APromptHistoTracker::process()"<<endl;
   for (int i = 0; i < nbinsT; i++)
@@ -396,24 +396,8 @@ void* APromptHistoTracker::process(void* ptr)
           maxY = j;
         }
   }
-  return ptr;
 }
 
-vector<string> APromptHistoTracker::histogramNames()
-{
-  vector<string> tmp;
-  tmp.push_back(getName());
-  //  tmp.push_back(workHisto->GetName());
-  return tmp;
-}
-TH1* APromptHistoTracker::histogram(string histoName)
-{
-  if (histoName == "")
-    return NULL;
-  //   if(histoName==workHisto->GetName())
-  //     return workHisto;
-  return NULL;
-}
 // TH1C*getHistoFromFiber(fiber *f, point3D center, vector3D x, vector3D z)
 // {
 //   point3D corner=f->getCorner();

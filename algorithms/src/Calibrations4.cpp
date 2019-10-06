@@ -2,7 +2,7 @@
 #include "reactions.h"
 AqdcFactorCalibration::AqdcFactorCalibration(TEvent& eventIn, TSetup& setup,
                                              algorithm_parameter& descr)
-    : AAlgorithm("Generate qdcFactor calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate qdcFactor calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(0).value<int>())
 {
   vector<int> tmp(descr.value(3).value<vector<int>>());
@@ -31,7 +31,7 @@ AqdcFactorCalibration::AqdcFactorCalibration(TEvent& eventIn, TSetup& setup,
 }
 AqdcFactorCalibration::AqdcFactorCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                                              int minEntriesPerHistoIn)
-    : AAlgorithm("Generate qdcFactor calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate qdcFactor calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -67,17 +67,17 @@ AqdcFactorCalibration::~AqdcFactorCalibration()
   delete[] detectorIDs;
   delete[] numberOfElements;
 }
-void* AqdcFactorCalibration::process(void* ptr)
+void AqdcFactorCalibration::process()
 {
   if (event.getNumberOfReactions() == 0)
-    return ptr;
+    return;
   // check for reactions:
   int found = -1;
   //   for(int i=0;i<numberOfReactions;i++)
   //     if(reactions[i]->IsA()==event.getReaction(0)->IsA())
   //       found=i;
   if (found < 0)
-    return ptr;
+    return;
   RbaseReaction* react = event.getReaction(0);
   int pos, num;
   TCalibHit* tmp;
@@ -95,12 +95,11 @@ void* AqdcFactorCalibration::process(void* ptr)
         qdcHistograms[pos][num]->Fill(tmp->getRawADC()); // perhaps minus value of found reaction??
       }
   }
-  return ptr;
 }
 void AqdcFactorCalibration::toEvaluate()
 {
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 CommonCalibrationParser* AqdcFactorCalibration::evaluate(int num)

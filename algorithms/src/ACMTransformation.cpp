@@ -1,5 +1,8 @@
 #include "ACMTransformation.h"
+#include "algorithmparameter.h"
+
 #include <TH2.h>
+
 ACMTransformation::ACMTransformation(TSetup& setup, momentum4D** particles, int maxPart,
                                      int& numPart, TDirectory** rootfile, int& evNr, int& runNrIn)
     : AAlgorithm("calculate CM properties"), maxOutParticles(maxPart), numOutParticles(numPart),
@@ -91,7 +94,7 @@ ACMTransformation::~ACMTransformation()
 }
 
 #include <TLorentzVector.h>
-void* ACMTransformation::process(void* ptr)
+void ACMTransformation::process()
 {
   //   while (particleList->GetEntries()>0)
   //     {
@@ -166,5 +169,5 @@ void* ACMTransformation::process(void* ptr)
   //       angleTlab2=cos(angleTlab2);
   //     }
   //   outTree->Fill();
-  return ptr;
 }
+algorithm_parameter ACMTransformation::getDescription() { return {}; }

@@ -81,7 +81,7 @@ AHodoPixel::~AHodoPixel()
 #endif
 }
 
-void* AHodoPixel::process(void* ptr)
+void AHodoPixel::process()
 {
   // cout<<"HodoPixel "<<*numHits1<<" "<<*numHits2<<endl;
   numPixel = 0;
@@ -154,9 +154,8 @@ void* AHodoPixel::process(void* ptr)
         numPixel++;
       } else {
         anaLog << "Too many Pixels in Hodo" << endli;
-        return ptr;
+        return;
       }
     }
   }
-  return ptr;
 }

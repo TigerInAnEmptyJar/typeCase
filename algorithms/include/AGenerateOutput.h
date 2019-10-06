@@ -73,7 +73,6 @@ typedef struct
 #define AGENERATEOUTPUT
 class AGenerateOutput : public AAlgorithm
 {
-  Q_OBJECT
 private:
   float* outp;
   bool useMC;
@@ -164,15 +163,8 @@ public:
                   const string& localD, bool useLocalD, int maxt, bool umc, bool writeT,
                   bool writeC, bool writeP, bool writeH, bool writeR, vector<string> reacts,
                   int serverIn, bool addFileIn, bool exchangeFileIn, void* outmutexIn);
-  virtual ~AGenerateOutput();
-  virtual void* process(void* ptr);
-signals:
-  void finalizeTracks(vector<TTree*>* tTree, TTree* nTTree);
-  void finalizeCluster(vector<TTree*>* cTree, TTree* nCTree);
-  void finalizePixel(vector<TTree*>* pTree, TTree* nPTree);
-  void finalizeHits(vector<TTree*>* hTree, TTree* nHTree);
-  void finalizeReactions(vector<TTree*>* rTree);
-public slots:
+  ~AGenerateOutput() override;
+  void process() override;
   void OnFinalizeTracks(vector<TTree*>* tTree, TTree* nTTree);
   void OnFinalizeCluster(vector<TTree*>* cTree, TTree* nCTree);
   void OnFinalizePixel(vector<TTree*>* pTree, TTree* nPTree);

@@ -36,8 +36,6 @@ public:
                       AFitAlgorithm* fitIn, int binsP, int binsT, float minP, float minT,
                       float maxP, float maxT, bool readFromFile, bool writeToFile, string filename,
                       float macChiIn);
-  virtual ~APromptHistoTracker();
-  virtual void* process(void*);
-  virtual vector<string> histogramNames();
-  virtual TH1* histogram(string histoName);
+  ~APromptHistoTracker();
+  void process();
 };

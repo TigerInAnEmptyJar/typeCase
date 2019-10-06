@@ -1450,11 +1450,11 @@ AReadReactionFromRoot::~AReadReactionFromRoot()
       delete theReaction[i];
   delete[] theReaction;
 }
-void* AReadReactionFromRoot::process(void* ptr)
+void AReadReactionFromRoot::process()
 {
   getNextEvent();
   if (!validInput)
-    return ptr;
+    return;
   // cout<<"nextEvent()="<<event.getEventNumber()<<endl;
   int nextEventNumber = event.getEventNumber();
   TBranch *evtBranch, *numBranch;
@@ -1576,7 +1576,6 @@ void* AReadReactionFromRoot::process(void* ptr)
   }
   validInput = val;
   read_rea();
-  return ptr;
 }
 void AReadReactionFromRoot::OnNewRun(run_parameter& r)
 {

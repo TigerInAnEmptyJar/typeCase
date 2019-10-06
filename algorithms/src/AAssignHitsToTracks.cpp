@@ -35,7 +35,7 @@ AAssignHitsToTracks::~AAssignHitsToTracks()
   delete[] mode;
   delete[] maxElementDistance;
 }
-void* AAssignHitsToTracks::process(void* ptr)
+void AAssignHitsToTracks::process()
 {
   bool isPrompt, suspectmode;
   ;
@@ -139,12 +139,11 @@ void* AAssignHitsToTracks::process(void* ptr)
       }
     }
   }
-  return ptr;
 }
 
 algorithm_parameter AAssignHitsToTracks::getDescription()
 {
-  algorithm_parameter ret("Assign hits to defined tracks", 0, 0);
+  algorithm_parameter ret("Assign hits to defined tracks", algorithm_parameter::Category::INPUT, 0);
   string des = "This algorithm uses defined tracks and assigns hits "
                "in the given detectors to this track. There are two different "
                "ways of searching the corresponding detector elements: check "

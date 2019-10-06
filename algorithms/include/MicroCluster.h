@@ -18,7 +18,7 @@ private:
 public:
   AMicroCluster(int IDIn, int& numberOfPixelsIn, TPixel** pixelIn, int maxClusterIn,
                 int& numberOfClustersIn, TCluster** clusterIn, int patternIn);
-  virtual ~AMicroCluster();
-  virtual void* process(void* ptr);
+  ~AMicroCluster() override;
+  void process() override;
 };
 #endif

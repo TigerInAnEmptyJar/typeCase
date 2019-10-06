@@ -33,7 +33,6 @@ using namespace std;
  ***********************************************/
 class AReadReactionFromRoot : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TSetup& setup;
   TEvent& event;
@@ -125,8 +124,7 @@ public:
   AReadReactionFromRoot(TSetup& setupIn, TEvent& eventIn, bool& validInputIn, bool readH,
                         bool readP, bool readC, bool readT, bool minimum, bool reconstruct,
                         vector<string> Rnames);
-  ~AReadReactionFromRoot();
-  void* process(void* ptr);
-public slots:
+  ~AReadReactionFromRoot() override;
+  void process() override;
   void OnNewRun(run_parameter& r);
 };

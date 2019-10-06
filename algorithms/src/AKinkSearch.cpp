@@ -1,7 +1,7 @@
 #include "AKinkSearch.h"
 #include "algorithmparameter.h"
 #include "logger.h"
-void* AKinkSearch::process(void* ptr)
+void AKinkSearch::process()
 {
   point3D vertex(0, 0, 0);
   float maxDistanceLines = 10;
@@ -305,7 +305,6 @@ void* AKinkSearch::process(void* ptr)
   //   for(int i=0;i<maxTracks;i++)
   //     tmpTracks[i]=trackSave[i];
   //   *numTracks=tmpnum;
-  return ptr;
 }
 bool AKinkSearch::searchTrack(int trNum, int* dets, int numDets, void* p1, void* p2, int d1, int d2)
 {

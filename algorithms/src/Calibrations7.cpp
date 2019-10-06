@@ -7,7 +7,7 @@ void redefinePixels(TTrack* t);
 TPixel tmpPixel_7;
 AtdcRadialPixCalibration::AtdcRadialPixCalibration(TEvent& eventIn, TSetup& setup,
                                                    algorithm_parameter& descr)
-    : AAlgorithm("Generate tdcRadialPix calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate tdcRadialPix calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(1).value<int>())
 {
   eventStart = 0;
@@ -94,7 +94,7 @@ AtdcRadialPixCalibration::AtdcRadialPixCalibration(TEvent& eventIn, TSetup& setu
                                                    vector<int> pointsPerPixel,
                                                    vector<string> reactionNames,
                                                    int minEntriesPerHistoIn)
-    : AAlgorithm("Generate tdcRadialPix calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate tdcRadialPix calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   postScriptHistos = false;
@@ -177,19 +177,19 @@ AtdcRadialPixCalibration::~AtdcRadialPixCalibration()
   delete[] startDetectors;
   delete[] pixelpoints;
 }
-void* AtdcRadialPixCalibration::process(void* ptr)
+void AtdcRadialPixCalibration::process()
 {
   //  cout<<qdcHistograms[0][0][0]<<"
   //  "<<flush;cout<<qdcHistograms[0][0][0]->GetName()<<endl;
   if (event.getNumberOfReactions() == 0)
-    return ptr;
+    return;
   // check for reactions:
   int found = -1;
   for (int i = 0; i < numberOfReactions; i++)
     if (reactions[i]->name() == event.getReaction(0)->name())
       found = i;
   if (found < 0)
-    return ptr;
+    return;
   RbaseReaction* react = event.getReaction(0);
   int pos, num;
   TCalibHit* tmp;
@@ -263,19 +263,18 @@ void* AtdcRadialPixCalibration::process(void* ptr)
       }
     }
   }
-  return ptr;
 }
 void AtdcRadialPixCalibration::toEvaluate()
 {
   if (abs(eventStart - event.getEventNumber()) < 10)
     return;
-  CommonCalibrationParser* tmp;
-  for (int i = numberOfDetectors - 1; i >= 0; i--) {
-    //      cout<<"evaluate(int num="<<i<<")="<<flush;;
-    tmp = evaluate(i);
-    //      cout<<tmp<<endl;
-    emit evaluated(tmp);
-  }
+  //  CommonCalibrationParser* tmp;
+  //  for (int i = numberOfDetectors - 1; i >= 0; i--) {
+  //    //      cout<<"evaluate(int num="<<i<<")="<<flush;;
+  //    tmp = evaluate(i);
+  //    //      cout<<tmp<<endl;
+  ////    emit evaluated(tmp);
+  //  }
   eventStart = event.getEventNumber();
 }
 void AtdcRadialPixCalibration::getReactions(const vector<string>& names)

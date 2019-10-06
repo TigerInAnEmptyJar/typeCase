@@ -7,7 +7,6 @@
 
 class AWriteHistogramsToRootFile : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TFile** rootFile;             //!
   TDirectory* currentDirectory; //!
@@ -38,17 +37,14 @@ public:
                              TSetup& set, const string& option, bool serv, void* histo_mutexIn);
   AWriteHistogramsToRootFile(TFile** rootFileIn, const string& directory, TEvent& eventIn,
                              TSetup& set, const string& option, bool serv, void* histo_mutexIn);
-  virtual ~AWriteHistogramsToRootFile();
-  virtual void* process(void* ptr);
+  ~AWriteHistogramsToRootFile() override;
+  void process() override;
   TFile* getFile();
   TH1* getHisto(const string& name);
   TH1** getHistos1();
   TH2** getHistos2();
-  virtual vector<string> histogramNames();
-  virtual TH1* histogram(string histoName);
-signals:
-  void destroyer(TH1**, TH2**);
-public slots:
-  virtual void getDestroyHistos(TH1** ODH, TH2** TDH);
+  vector<string> histogramNames();
+  TH1* histogram(string histoName);
+  void getDestroyHistos(TH1** ODH, TH2** TDH);
   void setHistos(TH1** h1, TH2** h2);
 };

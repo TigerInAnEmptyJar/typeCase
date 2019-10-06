@@ -36,6 +36,7 @@ private:
 public:
   ACMTransformation(TSetup& setup, momentum4D** particles, int maxPart, int& numPart,
                     TDirectory** rootfile, int& evNr, int& runNrIn);
-  virtual ~ACMTransformation();
-  virtual void* process(void* ptr);
+  ~ACMTransformation() override;
+  void process() override;
+  static algorithm_parameter getDescription();
 };

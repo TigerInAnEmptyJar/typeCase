@@ -55,7 +55,7 @@ AMicroPixel::~AMicroPixel()
 #endif
 }
 
-void* AMicroPixel::process(void* ptr)
+void AMicroPixel::process()
 {
   numberOfPixels = 0;
   for (int i = 0; i < *numHits1; i++) {
@@ -113,11 +113,10 @@ void* AMicroPixel::process(void* ptr)
         }
       } else {
         anaLog << "Too many Pixels found in UStrip" << endli;
-        return 0;
+        return;
       }
     }
   }
-  return ptr;
 }
 // void AMicroPixel::Streamer(TBuffer &b)
 // {

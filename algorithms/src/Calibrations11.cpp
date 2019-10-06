@@ -5,7 +5,7 @@ extern float getLightWay(volumeShape* sh, point3D onPoint, bool from);
 extern int getPixelPoint(TPixel* pix);
 AqdcRadialPixCalibration::AqdcRadialPixCalibration(TEvent& eventIn, TSetup& setup,
                                                    algorithm_parameter& descr)
-    : AAlgorithm("Generate qdcRadialPix calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate qdcRadialPix calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(0).value<int>())
 {
   vector<int> tmp(descr.value(3).value<vector<int>>());
@@ -67,7 +67,7 @@ AqdcRadialPixCalibration::AqdcRadialPixCalibration(TEvent& eventIn, TSetup& setu
                                                    vector<int> pointsPerPixel,
                                                    vector<string> reactionNames,
                                                    int minEntriesPerHistoIn)
-    : AAlgorithm("Generate qdcRadialPix calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate qdcRadialPix calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -140,17 +140,17 @@ AqdcRadialPixCalibration::~AqdcRadialPixCalibration()
   delete[] startDetectors;
   delete[] pixelpoints;
 }
-void* AqdcRadialPixCalibration::process(void* ptr)
+void AqdcRadialPixCalibration::process()
 {
   if (event.getNumberOfReactions() == 0)
-    return ptr;
+    return;
   // check for reactions:
   int found = -1;
   for (int i = 0; i < numberOfReactions; i++)
     if (reactions[i]->name() == event.getReaction(0)->name())
       found = i;
   if (found < 0)
-    return ptr;
+    return;
   RbaseReaction* react = event.getReaction(0);
   int pos, num;
   TCalibHit* tmp;
@@ -213,14 +213,13 @@ void* AqdcRadialPixCalibration::process(void* ptr)
         }
       }
   }
-  return ptr;
 }
 void AqdcRadialPixCalibration::toEvaluate()
 {
   if (abs(eventStart - event.getEventNumber()) < 10)
     return;
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 void AqdcRadialPixCalibration::getReactions(const vector<string>& names)

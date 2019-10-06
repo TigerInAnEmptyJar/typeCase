@@ -7,7 +7,6 @@ using namespace std;
 class run_parameter;
 class ATofPixCorrection : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TTrack** tracks;     //!
   int& numberOfTracks; //!
@@ -32,10 +31,9 @@ public:
                     const vector<string>& calibrationFiles);
   ATofPixCorrection(int& eventNr, int& runNr, TTrack** tracksIn, int& numberOfTracksIn,
                     TSetup& setup, vector<int> pixelTypes, const vector<string>& calibrationFiles);
-  virtual ~ATofPixCorrection();
-  virtual void* process(void* ptr);
-  virtual void getParameterFromFiles(const vector<string>& calibrationFiles);
-  virtual bool checkRanges();
-public slots:
-  virtual void setNewRun(run_parameter& run);
+  ~ATofPixCorrection() override;
+  void process() override;
+  void getParameterFromFiles(const vector<string>& calibrationFiles);
+  bool checkRanges();
+  void setNewRun(run_parameter& run);
 };

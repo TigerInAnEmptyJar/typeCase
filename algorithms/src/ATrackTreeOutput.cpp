@@ -419,12 +419,12 @@ void ATrackTreeOutput::setKink(int num, TTrack* tr)
   }
 }
 extern vector3D solve(const vector3D&, const vector3D&, const vector3D&, const vector3D&);
-void* ATrackTreeOutput::process(void* ptr)
+void ATrackTreeOutput::process()
 {
   if (trackTree == NULL)
-    return ptr;
+    return;
   if (numberOfTracks == 0)
-    return ptr;
+    return;
   //  int maxDet=30;
   Event = EventNumber;
   Run = RunNumber;
@@ -547,11 +547,10 @@ void* ATrackTreeOutput::process(void* ptr)
       */
     }
   }
-  return ptr;
 }
 algorithm_parameter ATrackTreeOutput::getDescription()
 {
-  algorithm_parameter ret("Track Tree output", 0, 0);
+  algorithm_parameter ret("Track Tree output", algorithm_parameter::Category::OUTPUT, 0);
   string des = "This Algorithm writes track information to a root tree."
                "This track information isdynamical in size and complete"
                "in information.";

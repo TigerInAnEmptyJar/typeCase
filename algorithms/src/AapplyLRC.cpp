@@ -114,7 +114,7 @@ void AapplyLRC::onNewRun(run_parameter& rp)
 #include "shape_utilities.h"
 #include "spiral.h"
 #include "wedge.h"
-void* AapplyLRC::process(void* ptr)
+void AapplyLRC::process()
 {
   bool found;
   int closest, diff1, diff2, diff3, diff4;
@@ -363,7 +363,6 @@ void* AapplyLRC::process(void* ptr)
       }
     }
   }
-  return ptr;
 }
 #include "fiber.h"
 #include "ring.h"
@@ -398,7 +397,8 @@ point3D AapplyLRC::getOnPoint(volumeShape* sh, const sLine3D& path)
 }
 algorithm_parameter AapplyLRC::getDescription()
 {
-  algorithm_parameter ret("Light run correction", -1, 0, 0);
+  algorithm_parameter ret("Light run correction", algorithm_parameter::Category::POST_TRACKING, 0,
+                          0);
   string des = "This algorithm applies a light-run-correction to the tdc of some hit.\n"
                "There are several possibilities:\n"
                "Apply a simple light run correction, "

@@ -94,25 +94,23 @@ ATrackTreeInput::ATrackTreeInput(int& evtNrIn, int& runNrIn, int& triIn, TTrack*
 }
 ATrackTreeInput::~ATrackTreeInput()
 {
-  disconnect(this);
   clearTree();
   if (doPattern)
     delete[] pattern;
 }
-void* ATrackTreeInput::process(void* ptr)
+void ATrackTreeInput::process()
 {
   if (trackTree == NULL)
-    return ptr;
+    return;
   numberOfTracks = 0;
   if (trackTree->GetEntries() <= currentEntry)
-    return ptr;
+    return;
   if (currentEntry < 0)
-    return ptr;
+    return;
   if (searchForEvent)
     readEvent(eventNumber);
   else
     readEntry(currentEntry);
-  return ptr;
 }
 void ATrackTreeInput::prepareNextEntry()
 {
@@ -450,7 +448,7 @@ void ATrackTreeInput::clearTree()
 }
 algorithm_parameter ATrackTreeInput::getDescription()
 {
-  algorithm_parameter ret("Read Tracks from Tree", 0, 0);
+  algorithm_parameter ret("Read Tracks from Tree", algorithm_parameter::Category::INPUT, 0);
   string des = "This algorithm reads tracks from a root tree and"
                "requests the hits from the setup."
                "It does so for prompt, kink and vee tracks separately.";

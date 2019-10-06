@@ -19,7 +19,7 @@ ALineFitAlgorithm::~ALineFitAlgorithm()
   delete[] b_;
 }
 
-void* ALineFitAlgorithm::process(void* ptr) { return ptr; }
+void ALineFitAlgorithm::process() {}
 
 void ALineFitAlgorithm::clear() { numLines = 0; }
 void ALineFitAlgorithm::add(Vector& data)

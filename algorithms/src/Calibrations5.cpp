@@ -1,7 +1,7 @@
 #include "Calibrations.h"
 AtdcOffsetCalibration::AtdcOffsetCalibration(TEvent& eventIn, TSetup& setup,
                                              algorithm_parameter& descr)
-    : AAlgorithm("Generate tdcOffset calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate tdcOffset calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(0).value<int>())
 {
   vector<int> tmp(descr.value(3).value<vector<int>>());
@@ -31,7 +31,7 @@ AtdcOffsetCalibration::AtdcOffsetCalibration(TEvent& eventIn, TSetup& setup,
 
 AtdcOffsetCalibration::AtdcOffsetCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                                              int minEntriesPerHistoIn)
-    : AAlgorithm("Generate tdcOffset calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate tdcOffset calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -67,7 +67,7 @@ AtdcOffsetCalibration::~AtdcOffsetCalibration()
   delete[] detectorIDs;
   delete[] numberOfElements;
 }
-void* AtdcOffsetCalibration::process(void* ptr)
+void AtdcOffsetCalibration::process()
 {
   TPixel* pix;
   int pos, num;
@@ -93,13 +93,12 @@ void* AtdcOffsetCalibration::process(void* ptr)
       }
     }
   }
-  return ptr;
 }
 
 void AtdcOffsetCalibration::toEvaluate()
 {
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 CommonCalibrationParser* AtdcOffsetCalibration::evaluate(int num)

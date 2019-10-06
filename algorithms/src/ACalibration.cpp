@@ -34,10 +34,10 @@ ACalibration::~ACalibration()
   delete[] numberOfRanges;
 }
 #include <stdlib.h>
-void* ACalibration::process(void* ptr)
+void ACalibration::process()
 {
   if (!checkRange())
-    return ptr;
+    return;
   int numElem;
   int rawADC, rawTDC;
   int nv = 0;
@@ -131,7 +131,7 @@ void* ACalibration::process(void* ptr)
       hits[i]->setTDC(cTDC);
     nv++;
   }
-  return ptr;
+  return;
 }
 bool ACalibration::checkRange()
 {
@@ -243,3 +243,5 @@ void ACalibration::getFromFiles(const vector<string>& calibrationFiles)
   }
   anaLog << endli;
 }
+
+algorithm_parameter ACalibration::getDescription() { return {}; }

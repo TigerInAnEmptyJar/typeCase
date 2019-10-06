@@ -2,15 +2,27 @@
 #include "RbaseReaction.h"
 #include "TH2.h"
 #include "TProfile.h"
+#include "TTree.h"
 #include "algorithm.h"
 #include "algorithmparameter.h"
 #include "event.h"
 #include "setup.h"
-using namespace std;
 
-class APedestalCalibration : public AAlgorithm
+#include <memory>
+
+class CalibrationAlgorithm : public AAlgorithm
 {
-  Q_OBJECT
+public:
+  using AAlgorithm::AAlgorithm;
+  virtual void toEvaluate() = 0;
+  std::shared_ptr<CommonCalibrationParser> getCalibration();
+
+protected:
+  std::shared_ptr<CommonCalibrationParser> _parser;
+};
+
+class APedestalCalibration : public CalibrationAlgorithm
+{
 private:
   TEvent& event; //!
   int numberOfDetectors;
@@ -25,16 +37,13 @@ public:
   APedestalCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr);
   APedestalCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                        int minEntriesPerHisto);
-  virtual ~APedestalCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~APedestalCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class AtdcFactorCalibration : public AAlgorithm
+
+class AtdcFactorCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TEvent& event; //!
   int numberOfDetectors;
@@ -49,16 +58,13 @@ public:
   AtdcFactorCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr);
   AtdcFactorCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                         int minEntriesPerHisto);
-  virtual ~AtdcFactorCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~AtdcFactorCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class AWalkCalibration : public AAlgorithm
+
+class AWalkCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TEvent& event; //!
   int numberOfDetectors;
@@ -72,16 +78,13 @@ private:
 public:
   AWalkCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr);
   AWalkCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors, int minEntriesPerHisto);
-  virtual ~AWalkCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~AWalkCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class ACutsCalibration : public AAlgorithm
+
+class ACutsCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TEvent& event; //!
   int numberOfDetectors;
@@ -95,16 +98,13 @@ private:
 public:
   ACutsCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr);
   ACutsCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors, int minEntriesPerHisto);
-  virtual ~ACutsCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~ACutsCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class AqdcFactorCalibration : public AAlgorithm
+
+class AqdcFactorCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TEvent& event; //!
   int numberOfDetectors;
@@ -119,16 +119,13 @@ public:
   AqdcFactorCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr);
   AqdcFactorCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                         int minEntriesPerHisto);
-  virtual ~AqdcFactorCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~AqdcFactorCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class AtdcOffsetCalibration : public AAlgorithm
+
+class AtdcOffsetCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TEvent& event; //!
   int numberOfDetectors;
@@ -143,16 +140,13 @@ public:
   AtdcOffsetCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr);
   AtdcOffsetCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                         int minEntriesPerHisto);
-  virtual ~AtdcOffsetCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~AtdcOffsetCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class AzBarrelCalibration : public AAlgorithm
+
+class AzBarrelCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TEvent& event; //!
   int numberOfDetectors;
@@ -167,16 +161,13 @@ public:
   AzBarrelCalibration(TEvent& eventIn, TSetup& setup, algorithm_parameter& descr);
   AzBarrelCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                       int minEntriesPerHisto);
-  virtual ~AzBarrelCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~AzBarrelCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class AtdcRadialPixCalibration : public AAlgorithm
+
+class AtdcRadialPixCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TH1**** qdcHistograms;  //!
   TH1**** qdcHistograms1; //!
@@ -205,16 +196,13 @@ public:
                            vector<int>& Stdetectors, vector<int> pixIDs, vector<int> readSide,
                            vector<int> pointsPerPixel, vector<string> reactionNames,
                            int minEntriesPerHisto);
-  virtual ~AtdcRadialPixCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~AtdcRadialPixCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class AtdcRadialPolCalibration : public AAlgorithm
+
+class AtdcRadialPolCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TH1*** qdcHistograms;  //!
   TH1*** qdcHistograms1; //!
@@ -242,16 +230,13 @@ public:
   AtdcRadialPolCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                            vector<int>& Stdetectors, vector<int> readSide,
                            vector<string> reactionNames, int minEntriesPerHisto);
-  virtual ~AtdcRadialPolCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~AtdcRadialPolCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class AqdcRadialPixCalibration : public AAlgorithm
+
+class AqdcRadialPixCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TEvent& event; //!
   int numberOfDetectors;
@@ -278,16 +263,13 @@ public:
                            vector<int>& Stdetectors, vector<int> pixIDs, vector<int> readSide,
                            vector<int> pointsPerPixel, vector<string> reactionNamesw,
                            int minEntriesPerHisto);
-  virtual ~AqdcRadialPixCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~AqdcRadialPixCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };
-class AqdcRadialPolCalibration : public AAlgorithm
+
+class AqdcRadialPolCalibration : public CalibrationAlgorithm
 {
-  Q_OBJECT
 private:
   TEvent& event; //!
   int numberOfDetectors;
@@ -310,10 +292,7 @@ public:
   AqdcRadialPolCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                            vector<int>& Stdetectors, vector<int> readSide,
                            vector<string> reactionNames, int minEntriesPerHisto);
-  virtual ~AqdcRadialPolCalibration();
-  virtual void* process(void* ptr);
-signals:
-  void evaluated(CommonCalibrationParser*);
-public slots:
-  virtual void toEvaluate();
+  ~AqdcRadialPolCalibration() override;
+  void process() override;
+  void toEvaluate() override;
 };

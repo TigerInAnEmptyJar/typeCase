@@ -97,7 +97,7 @@ APixelTreeWriteOut::~APixelTreeWriteOut()
   delete[] numberOfPixels;
   delete[] centerPoints;
 }
-void* APixelTreeWriteOut::process(void* ptr)
+void APixelTreeWriteOut::process()
 {
   eventNumber = evtNr;
   runNumber = rnNr;
@@ -105,7 +105,7 @@ void* APixelTreeWriteOut::process(void* ptr)
   for (int i = 0; i < nPixelTypes; i++)
     nTot += (*(numberOfPixels[i]));
   if (nTot == 0)
-    return ptr;
+    return;
   for (int i = 0; i < nPixelTypes; i++) {
     nPixels[i] = (*(numberOfPixels[i]));
     if (nPixels[i] > maxPixelPerID)
@@ -126,11 +126,10 @@ void* APixelTreeWriteOut::process(void* ptr)
     }
   }
   outTree->Fill();
-  return ptr;
 }
 algorithm_parameter APixelTreeWriteOut::getDescription()
 {
-  algorithm_parameter ret("Pixel tree for calibration", 0, 0);
+  algorithm_parameter ret("Pixel tree for calibration", algorithm_parameter::Category::OUTPUT, 0);
   vector<int> tmp;
   ret.addValue("max Pixels per ID", static_cast<int>(20));
   ret.addValue("file name", std::string{"tmp.root"});

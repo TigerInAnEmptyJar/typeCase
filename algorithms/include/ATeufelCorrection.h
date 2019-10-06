@@ -6,7 +6,6 @@ class run_parameter;
 using namespace std;
 class ATeufelCorrection : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TCalibHit** hits;        //!
   const int& numberOfHits; //!
@@ -25,8 +24,7 @@ public:
   ATeufelCorrection(TCalibHit** hitsIn, const int& numberOfHitsIn, const int detID, int nElIn,
                     int& evtNrIn, int& runNrIn, vector<string> calibrationFiles,
                     string referencefile);
-  ~ATeufelCorrection();
-  void* process(void*);
-public slots:
+  ~ATeufelCorrection() override;
+  void process() override;
   void onNewRum(run_parameter& r);
 };

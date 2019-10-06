@@ -23,8 +23,8 @@ private:
 public:
   AAssignHitsToTracks(TSetup& setupIn, TTrack** tracksIn, TCalibHit*** hitIn, int** numberOfHitsIn,
                       int& numberOfTracksIn, const algorithm_parameter& descr);
-  virtual ~AAssignHitsToTracks();
-  virtual void* process(void* ptr);
+  ~AAssignHitsToTracks() override;
+  void process() override;
   static algorithm_parameter getDescription();
   static bool checkParameter(algorithm_parameter const& a);
 };

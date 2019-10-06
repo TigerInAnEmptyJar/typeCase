@@ -62,10 +62,10 @@ ATeufelCorrection::~ATeufelCorrection()
   }
 }
 
-void* ATeufelCorrection::process(void* ptr)
+void ATeufelCorrection::process()
 {
   if (numSranges < 0)
-    return ptr;
+    return;
   //   cout<<"check range"<<endl;
   if (!(evtNr < sranges[actualrange][1] && evtNr > sranges[actualrange][0] &&
         runNr <= sranges[actualrange][2] && runNr > sranges[actualrange][3])) {
@@ -74,7 +74,7 @@ void* ATeufelCorrection::process(void* ptr)
     while (evtNr < sranges[actualrange][0] || actualrange >= numSranges)
       actualrange++;
     if (actualrange >= numSranges)
-      return ptr;
+      return;
   }
   int adc, el;
   double adcC;
@@ -92,7 +92,6 @@ void* ATeufelCorrection::process(void* ptr)
     // have to set raw value because calibration takes raw values
     hits[i]->getRawADCr() = (int)adcC;
   }
-  return ptr;
 }
 
 void ATeufelCorrection::onNewRum(run_parameter& r)

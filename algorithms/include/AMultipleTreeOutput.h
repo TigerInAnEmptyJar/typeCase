@@ -21,7 +21,6 @@ using namespace std;
 
 class AMultipleTreeOutput : public AAlgorithm
 {
-  Q_OBJECT
 private:
   const int maxtrees;   //!
   TTrack** tracks;      //!
@@ -55,9 +54,8 @@ private:
 public:
   AMultipleTreeOutput(int max, int& evtNr, int& rnNr, int& triggerIn, int& nTrack,
                       TTrack** tracksIn, const algorithm_parameter& param);
-  virtual ~AMultipleTreeOutput();
-  virtual void* process(void* ptr);
+  ~AMultipleTreeOutput() override;
+  void process() override;
   static algorithm_parameter getDescription();
-public slots:
   void newRun(run_parameter& rp);
 };

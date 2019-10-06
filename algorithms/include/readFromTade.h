@@ -7,7 +7,6 @@ class run_parameter;
 using namespace std;
 class AReadFromTade : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TRawHit*** hit;     //! [maxDet][maxHit]->
   int** numberOfHits; //! [maxDet]->
@@ -33,15 +32,13 @@ public:
   AReadFromTade(TRawHit*** hitIn, int& eventNumberIn, int& triggerIn, int** numHits, int maxdet,
                 int maxhit, int& readID, void* input_mutexIn, bool& validInput);
   virtual ~AReadFromTade();
-  virtual void* process(void* ptr);
-public slots:
+  virtual void process() override;
   virtual void newInput(const string& filename);
   virtual void newInput(run_parameter& r);
   virtual void newInput(ifstream* in);
-signals:
-  void inputError();
-  void eventRead(int, int, int);
-  void newRun(ifstream*);
-public slots:
+  // signals:
+  //  void inputError();
+  //  void eventRead(int, int, int);
+  //  void newRun(ifstream*);
   virtual void newEvent(int evtNr, int count, int trigger);
 };

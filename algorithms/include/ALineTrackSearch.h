@@ -5,7 +5,6 @@
 #include "fittingRoutines.h"
 #include "setup.h"
 #include "track.h"
-using namespace std;
 
 class ALineTrackSearch : public AAlgorithm
 {
@@ -58,7 +57,7 @@ public:
                    int** numberOfClustersIn, int** numberOfPixelsIn, int** numberOfHitsIn,
                    const algorithm_parameter& descr);
   // ALineTrackSearch();
-  virtual ~ALineTrackSearch();
-  virtual void* process(void*);
+  ~ALineTrackSearch() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

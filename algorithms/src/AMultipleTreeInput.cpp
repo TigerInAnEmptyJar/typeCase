@@ -226,10 +226,10 @@ void AMultipleTreeInput::setTree(const string& filename)
 extern Int_t twotwoEvent;
 extern Int_t twotwoRun;
 #endif
-void* AMultipleTreeInput::process(void* ptr)
+void AMultipleTreeInput::process()
 {
   if (countTree == NULL)
-    return ptr;
+    return;
   if (read_given_event) {
     countTree->GetEntry(currentEntry);
     if (eventNr != evtNr) {
@@ -239,7 +239,7 @@ void* AMultipleTreeInput::process(void* ptr)
         readInValid = false;
       if (eventNr != evtNr) {
         // numberOfTracks=0;
-        return ptr;
+        return;
       }
     }
     for (int i = 0; i < 3; i++) {
@@ -343,7 +343,6 @@ void* AMultipleTreeInput::process(void* ptr)
     treeinput_out->Fill();
   }
 #endif
-  return ptr;
 }
 AMultipleTreeInput::AMultipleTreeInput(int& eventNumber, int& runNumber, int& trigger,
                                        int** numberOfHitsIn, TTrack** tracksIn,
@@ -386,7 +385,8 @@ AMultipleTreeInput::~AMultipleTreeInput()
 }
 algorithm_parameter AMultipleTreeInput::getDescription()
 {
-  algorithm_parameter ret("Read Tracks from multiple trees", 0, 0);
+  algorithm_parameter ret("Read Tracks from multiple trees", algorithm_parameter::Category::INPUT,
+                          0);
   ret.addValue("Search for read event", false);
   ret.addValue("use local directory", true);
   ret.addValue("Local directory", std::string{});

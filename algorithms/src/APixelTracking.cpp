@@ -610,7 +610,7 @@ bool APixelTracking::checkWithPrompt(TPixel* pix)
     return false;
   return true;
 }
-void* APixelTracking::process(void* ptr)
+void APixelTracking::process()
 {
 #ifdef DEBUGGING
   cout << "APixelTracking::process()" << endl;
@@ -951,7 +951,6 @@ cout<<endl;
 #ifdef DEBUGGING
   cout << "APixelTracking::process() done" << endl;
 #endif
-  return ptr;
 }
 #include "algorithmparameter.h"
 #include "cylinder.h"
@@ -1058,7 +1057,7 @@ APixelTracking::~APixelTracking()
 }
 algorithm_parameter APixelTracking::getDescription()
 {
-  algorithm_parameter ret("Pixel Tracking", 0);
+  algorithm_parameter ret("Pixel Tracking", algorithm_parameter::Category::TRACKING, 0);
   string des = "This Algorithm is a very simple tracking algorithm to"
                "produce out of any 2 pixels in the hodoscopes a"
                "track. Stop pixel is requested."

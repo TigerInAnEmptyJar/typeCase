@@ -1,5 +1,4 @@
-#ifndef FITALGORITHM
-#define FITALGORITHM
+#pragma once
 #include "algorithm.h"
 #include "geometry.h"
 /*!
@@ -8,31 +7,18 @@
  */
 class AFitAlgorithm : public AAlgorithm
 {
-  Q_OBJECT
 public:
   /*!
    * \brief AFitAlgorithm
    * Constructor. Sets the name of the algorithm.
    * \param name the name of the fit algorithm.
    */
-  AFitAlgorithm(const string& name = string());
+  AFitAlgorithm(const std::string& name = std::string());
 
   /*!
    * \brief Destructor
    */
   virtual ~AFitAlgorithm();
-
-  /*!
-   * \brief process
-   * Base functionality is defined here. In the analysis class, this method will be called
-   * once for every event, so plug in the functionality you want to provide with your
-   * algorithm here.
-   * For the fit algorithms, this method is not as important as for the other algorithms.
-   * But if you call in this method the fit-method, you can also use it.
-   * \param ptr ignored.
-   * \return nullptr
-   */
-  virtual void* process(void* ptr);
 
   /*!
    * \brief add
@@ -61,8 +47,7 @@ public:
    * you dispose it correctly after use (potential memory leak).
    * \return a clone of this fit algorithm.
    */
-  virtual AFitAlgorithm* getClone();
-public slots:
+  virtual AFitAlgorithm* getClone() = 0;
 
   /*!
    * \brief getAddPoint
@@ -80,13 +65,4 @@ public slots:
    * \return the chi-squared of the fit.
    */
   virtual float fit();
-signals:
-  /*!
-   * \brief fitted
-   * Signal emitted when a fit is done with the chi-squared value and the result of the fit.
-   * \param chi the quality of the fit.
-   * \param result the result of the fit.
-   */
-  virtual void fitted(float chi, Vector& result);
 };
-#endif

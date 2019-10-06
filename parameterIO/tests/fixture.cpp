@@ -8,7 +8,7 @@ void ParameterIoTest::appendSomeAlgorithms(std::vector<std::shared_ptr<base_para
   algo1.setID(10);
   algo1.setUse(true);
   algo1.setLevel(0);
-  algo1.setCategory(1);
+  algo1.setCategory(algorithm_parameter::Category::OUTPUT);
   algo1.setId(_algorithm1_id);
   algo1.setName("testAlgorithm 1"s);
   algo1.setDescription("This is a test algorithm."s);
@@ -24,7 +24,7 @@ void ParameterIoTest::appendSomeAlgorithms(std::vector<std::shared_ptr<base_para
   algo2.setID(34);
   algo2.setUse(false);
   algo2.setLevel(5);
-  algo2.setCategory(2);
+  algo2.setCategory(algorithm_parameter::Category::CALIBRATION);
   algo2.setId(_algorithm2_id);
   algo2.setName("testAlgorithm 2"s);
   algo2.setDescription("This is a new test algorithm."s);

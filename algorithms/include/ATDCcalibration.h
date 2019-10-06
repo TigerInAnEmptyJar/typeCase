@@ -73,7 +73,6 @@ typedef struct
 
 class ATDCcalibration : public AAlgorithm
 {
-  Q_OBJECT
 private:
   int& eventNumber;
   int& runNumber;
@@ -201,12 +200,9 @@ public:
   ATDCcalibration(int& evtnr, int& rnr, TTrack** trIn, TPixel*** pixIn, TCalibHit*** hitIn,
                   int& numTrack, int** numPix, int** numHits, TSetup& setin,
                   const algorithm_parameter& descr);
-  ~ATDCcalibration();
-  virtual void* process(void*);
-  virtual vector<string> treeNames();
-  virtual TTree* tree(string treename);
+  ~ATDCcalibration() override;
+  void process() override;
   static algorithm_parameter getDescription();
-public slots:
   virtual void onNewRun(run_parameter& rp);
 };
 #endif

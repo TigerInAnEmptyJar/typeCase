@@ -18,6 +18,6 @@ public:
               int& numHit2In, TCalibHit** h1, TCalibHit** h2);
   AMicroPixel(int maxPixelIn, int& numPixel, TPixel** pixelsIn, int** numHit, int** numHitC,
               TCalibHit*** hits, THitCluster*** hc, const algorithm_parameter& ap);
-  virtual ~AMicroPixel();
-  virtual void* process(void* ptr);
+  ~AMicroPixel() override;
+  void process() override;
 };

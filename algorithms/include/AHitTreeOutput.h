@@ -41,7 +41,7 @@ private:
 public:
   AHitTreeOutput(TCalibHit*** hitIn, int** nHits, int& evtNr, int& rnNr, int& trg, int maxD,
                  const algorithm_parameter& param);
-  virtual ~AHitTreeOutput();
-  virtual void* process(void* ptr);
+  ~AHitTreeOutput() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

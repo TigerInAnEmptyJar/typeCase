@@ -1,6 +1,6 @@
 #include "ACalibrationAlgorithm.h"
 
-ACalibrationAlgorithm::ACalibrationAlgorithm(string name, int NCalibs)
+ACalibrationAlgorithm::ACalibrationAlgorithm(std::string name, int NCalibs)
     : AAlgorithm(name), NCalTypes(NCalibs)
 {
   calTypes = new int[NCalTypes];

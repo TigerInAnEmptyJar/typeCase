@@ -10,7 +10,7 @@ class trackVertexTrack;
 
 algorithm_parameter AVLineTrackSearch::getDescription()
 {
-  algorithm_parameter ret("V-Line Track search", 0, 0);
+  algorithm_parameter ret("V-Line Track search", algorithm_parameter::Category::TRACKING, 0);
   string des = "This is a track search algorithm in a detector"
                "without magnetic field, with thin detectors"
                "for decays of neutral particles."
@@ -1398,7 +1398,7 @@ int AVLineTrackSearch::checkWithPrompt(TCluster* clu)
 // int pID[MAX];
 // point3D pts[MAX];
 // TBase *pto[MAX];
-void* AVLineTrackSearch::process(void* ptr)
+void AVLineTrackSearch::process()
 {
   /**********************************************************
    *
@@ -1569,7 +1569,7 @@ void* AVLineTrackSearch::process(void* ptr)
     cout << outcode << endl;
 #endif
   if (tmpNum <= 0)
-    return ptr;
+    return;
   int position[tmpNum];
   int pos;
   int tmp;
@@ -1711,7 +1711,6 @@ void* AVLineTrackSearch::process(void* ptr)
   cout << "done " << numberOfTracks << endl;
 #endif
   numberOfTracks = numberOfTracks + nums * 3;
-  return ptr;
 }
 int AVLineTrackSearch::alternatePlaneSearch()
 {

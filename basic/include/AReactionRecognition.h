@@ -38,12 +38,12 @@ public:
   /*!
    * \brief ~AReactionRecognition
    */
-  virtual ~AReactionRecognition();
+  ~AReactionRecognition() override;
 
   /*!
    * \brief process
    * \param ptr
    * \return
    */
-  virtual void* process(void* ptr);
+  void process() override;
 };

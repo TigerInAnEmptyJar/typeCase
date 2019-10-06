@@ -95,7 +95,7 @@ ABarrelPixel::~ABarrelPixel()
 #endif
 }
 
-void* ABarrelPixel::process(void* ptr)
+void ABarrelPixel::process()
 {
   numberOfPixels = 0;
   if (!((runNumber >= range[0][actualRange]) && (runNumber <= range[1][actualRange]) &&
@@ -110,7 +110,7 @@ void* ABarrelPixel::process(void* ptr)
     }
     if ((!rangeFound) && (numRanges > 0)) {
       cout << "range not found for zbarrel" << endl;
-      return 0;
+      return;
     }
   }
   planeShape* ttmp;
@@ -154,11 +154,10 @@ void* ABarrelPixel::process(void* ptr)
         }
       } else {
         anaLog << "Too many Pixels found in Barrel" << endli;
-        return 0;
+        return;
       }
     }
   }
-  return ptr;
 }
 
 planeShape* ABarrelPixel::getShape(int e, float tdcF, float tdcB)

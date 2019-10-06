@@ -103,7 +103,7 @@ public:
                     int** numberOfClustersIn, int** numberOfPixelsIn, int** numberOfHitsIn,
                     const algorithm_parameter& descr);
   // AVLineTrackSearch();
-  virtual ~AVLineTrackSearch();
-  virtual void* process(void*);
+  ~AVLineTrackSearch() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

@@ -223,7 +223,7 @@ ACompareToGIN::~ACompareToGIN()
 }
 algorithm_parameter ACompareToGIN::getDescription()
 {
-  algorithm_parameter ret("Compare tracks to GIN", 0, 0);
+  algorithm_parameter ret("Compare tracks to GIN", algorithm_parameter::Category::HISTOGRAMMING, 0);
   string des = "This algorithm reads track information, like direction "
                "momenta, vertex from a GIN-format-file and compares this "
                "to the tracks reconstructed in the analysis. The assignment "
@@ -304,10 +304,10 @@ TH1* ACompareToGIN::histogram(string histoName)
     return &histoNotFoundD;
   return NULL;
 }
-void* ACompareToGIN::process(void* ptr)
+void ACompareToGIN::process()
 {
   if (!valid)
-    return ptr;
+    return;
   int evtNr;
   int nt, n, m;
   float f[12];
@@ -326,7 +326,7 @@ void* ACompareToGIN::process(void* ptr)
   }
   if (evtNr != eventNumber) {
     //      (*input).unget(evtNr);
-    return ptr;
+    return;
   }
   ///////////sort in Prompt, Vees, Kinks//////////////
   int nPrompt = 0;
@@ -876,7 +876,7 @@ void* ACompareToGIN::process(void* ptr)
 #endif
         // can only reconstruct lambda decay between Microstrip and second Hodo
         if (pp.Z() < 26 || pp.Z() > 200)
-          return ptr;
+          return;
       }
     }
   }
@@ -905,7 +905,7 @@ void* ACompareToGIN::process(void* ptr)
   //   histoNotFoundN.Fill(nTrNFN);
   // //   cout<<histos[4+numSepDet*3]->GetName()<<endl;
   // //   histos[4+numSepDet*3]->Fill(nTracksNotFound);
-  return ptr;
+  return;
 }
 int getCorrespondingNumber(TTrack* compare, int nTo, TTrack** array, float maxDist, int mode)
 {

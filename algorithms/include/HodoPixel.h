@@ -31,5 +31,5 @@ public:
   AHodoPixel(int maxPix, int& numPix, TPixel** pixIn, int** numberOfHits, TCalibHit*** hits,
              int** numberOfHitsClusters, THitCluster*** hitClusters, const algorithm_parameter& ap);
   virtual ~AHodoPixel();
-  virtual void* process(void* ptr);
+  void process() override;
 };

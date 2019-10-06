@@ -16,7 +16,7 @@ logger calLog("calibrationGeneration.log", "calibration generation log");
 extern float getLightWay(volumeShape* sh, point3D onPoint, bool from);
 AtdcRadialPolCalibration::AtdcRadialPolCalibration(TEvent& eventIn, TSetup& setup,
                                                    algorithm_parameter& descr)
-    : AAlgorithm("Generate tdcRadialPol calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate tdcRadialPol calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(1).value<int>())
 {
   postScriptHistos = descr.value(0).value<bool>();
@@ -106,7 +106,7 @@ AtdcRadialPolCalibration::AtdcRadialPolCalibration(TEvent& eventIn, TSetup& setu
                                                    vector<int> readSide,
                                                    vector<string> reactionNames,
                                                    int minEntriesPerHistoIn)
-    : AAlgorithm("Generate tdcRadialPix calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate tdcRadialPix calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -202,10 +202,10 @@ AtdcRadialPolCalibration::~AtdcRadialPolCalibration()
   delete[] numberOfElements;
   delete[] startDetectors;
 }
-void* AtdcRadialPolCalibration::process(void* ptr)
+void AtdcRadialPolCalibration::process()
 {
   if (event.getNumberOfReactions() == 0)
-    return ptr;
+    return;
   // cout<<"AtdcRadialPolCalibration::process(void *ptr)
   // "<<(event.getReaction()->name()=="Rppelastic"?"1a":(event.getReaction()->name()=="Rpp_dpiPlus"?"2a":"no"))<<endl;
   // check for reactions:
@@ -215,10 +215,10 @@ void* AtdcRadialPolCalibration::process(void* ptr)
       found = i;
   // cout<<found<<endl;
   if (found < 0)
-    return ptr;
+    return;
   RbaseReaction* react = event.getReaction(0);
   if (react == NULL)
-    return ptr;
+    return;
   // calLog<<"reaction:"<<found<<endli;
   int num;
   TCalibHit* tmp;
@@ -318,14 +318,13 @@ void* AtdcRadialPolCalibration::process(void* ptr)
   //  cout<<"next"<<endl;
   //  cout<<event.getRunNumber()<<"-"<<event.getEventNumber()<<":
   //  "<<tree->GetEntries()<<endl;
-  return ptr;
 }
 void AtdcRadialPolCalibration::toEvaluate()
 {
   if (abs(eventStart - event.getEventNumber()) < 10)
     return;
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 #include <TCanvas.h>

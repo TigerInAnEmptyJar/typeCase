@@ -52,18 +52,22 @@ AReadFromRoot::~AReadFromRoot()
   }
 }
 
-void* AReadFromRoot::process(void* ptr)
+void AReadFromRoot::process()
 {
   if (whichID == 20) {
     pthread_mutex_lock((pthread_mutex_t*)input_mutex);
     if (accNum < evtNum || ((accNum < eventTree->GetEntries()) && (evtNum == -1))) {
       eventTree->GetEntry(accNum);
       accNum++;
-      emit eventRead();
+      _eventReadSignal();
     }
     pthread_mutex_unlock((pthread_mutex_t*)input_mutex);
   }
-  return ptr;
+}
+
+boost::signals2::connection AReadFromRoot::connectEventRead(std::function<void()> subscriber)
+{
+  return _eventReadSignal.connect(subscriber);
 }
 
 void AReadFromRoot::getNewFile(const string& filename, const string& directory,

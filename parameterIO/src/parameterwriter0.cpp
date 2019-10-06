@@ -183,7 +183,7 @@ void ParameterWriter0::writeSingleAlgorithm(std::ostream& output,
   if (!alg) {
     return;
   }
-  output << alg->getCategory() << " ";
+  output << static_cast<int>(alg->getCategory()) << " ";
   output << alg->getLevel() << " ";
   output << (alg->IsUsed() ? 1 : 0) << " ";
   output << alg->getID() << " ";

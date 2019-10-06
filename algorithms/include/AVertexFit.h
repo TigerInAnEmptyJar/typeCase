@@ -2,7 +2,6 @@
 using namespace std;
 class AVertexFit : public AFitAlgorithm
 {
-  Q_OBJECT
 private:
   const int maxLines;
   int numLines1, numLines2;     //!
@@ -14,15 +13,13 @@ private:
 
 public:
   AVertexFit(int numberOflines);
-  virtual ~AVertexFit();
-  virtual void* process(void* ptr);
-  virtual void add(Vector& data);
-  virtual void clear();
-  virtual Vector getResult();
+  ~AVertexFit() override;
+  void process() override;
+  void add(Vector& data) override;
+  void clear() override;
+  Vector getResult() override;
   //  virtual float fit();
-public slots:
-  virtual void getAddPoint(Vector& data);
-  virtual float fit();
-signals:
-  void fitted(float chi, Vector& result);
+  void getAddPoint(Vector& data) override;
+  float fit() override;
+  AFitAlgorithm* getClone() override { return nullptr; }
 };

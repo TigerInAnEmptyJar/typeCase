@@ -4,9 +4,10 @@
 #include <TFile.h>
 #include <TTree.h>
 
+#include <boost/signals2.hpp>
+
 class AReadFromRoot : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TEvent* event; //!
   TSetup& setup; //!
@@ -18,6 +19,7 @@ private:
   bool ownFile;           //!
   int& whichID;
   void* input_mutex;
+  boost::signals2::signal<void()> _eventReadSignal;
 
 public:
   AReadFromRoot(const string& filename, const string& directory, const string& treeName,
@@ -25,11 +27,9 @@ public:
                 void* input_mutexIn);
   AReadFromRoot(TFile* rootFileIn, const string& directory, const string& treeName, TEvent& eventIn,
                 TSetup& setupIn, int& readInIDIN, int numEvents, void* input_mutexIn);
-  virtual ~AReadFromRoot();
-  virtual void* process(void* ptr);
-signals:
-  void eventRead();
-public slots:
+  ~AReadFromRoot() override;
+  void process() override;
+  boost::signals2::connection connectEventRead(std::function<void()> subscriber);
   void newEvent();
   void getNewFile(const string& filename, const string& directory, const string& treeName);
 };

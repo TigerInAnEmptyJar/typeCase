@@ -45,7 +45,7 @@ int AHistoAlgorithm::declare2DHistos(TH2** histos, int start)
   return numTD;
 }
 
-void* AHistoAlgorithm::process(void* ptr) { return ptr; }
+void AHistoAlgorithm::process() {}
 void AHistoAlgorithm::write() {}
 
 /***** Write raw hit properties to histogram: ADC, TDC, detector use */
@@ -163,7 +163,7 @@ int ARawHitHistoAlgorithm::declare2DHistos(TH2** histos, int start)
   return numTD;
 }
 
-void* ARawHitHistoAlgorithm::process(void* ptr)
+void ARawHitHistoAlgorithm::process()
 {
   int offs = 0;
   int elNum;
@@ -179,7 +179,6 @@ void* ARawHitHistoAlgorithm::process(void* ptr)
     offs = offs + maxEl[i] * 2 + 1;
   }
   ODhistos[startO + numOD - 1]->Fill(num);
-  return ptr;
 }
 
 /***** Write raw hit with cuts properties to histogram: ADC, TDC, detector use
@@ -297,7 +296,7 @@ int ARawHitCutHistoAlgorithm::declare2DHistos(TH2** histos, int start)
   return numTD;
 }
 
-void* ARawHitCutHistoAlgorithm::process(void* ptr)
+void ARawHitCutHistoAlgorithm::process()
 {
   int offs = 0;
   int elNum;
@@ -315,7 +314,6 @@ void* ARawHitCutHistoAlgorithm::process(void* ptr)
     offs = offs + 2 * maxEl[i] + 1;
   }
   ODhistos[startO + numOD - 1]->Fill(num);
-  return ptr;
 }
 
 /***** Write raw hit with cuts properties to histogram: ADC, TDC, detector use
@@ -431,7 +429,7 @@ int ACalibHitHistoAlgorithm::declare2DHistos(TH2** histos, int start)
   return numTD;
 }
 
-void* ACalibHitHistoAlgorithm::process(void* ptr)
+void ACalibHitHistoAlgorithm::process()
 {
   int offs = 0;
   int elNum;
@@ -449,7 +447,6 @@ void* ACalibHitHistoAlgorithm::process(void* ptr)
     offs = offs + maxEl[i] * 2 + 1;
   }
   ODhistos[startO + numOD - 1]->Fill(num);
-  return ptr;
 }
 
 APixelHistoAlgorithm::APixelHistoAlgorithm(TPixel*** Pixel, int** numPix, int maxDet,
@@ -579,7 +576,7 @@ int APixelHistoAlgorithm::declare2DHistos(TH2** histos, int start)
   return numTD;
 }
 
-void* APixelHistoAlgorithm::process(void* ptr)
+void APixelHistoAlgorithm::process()
 {
   int num = 0;
   point3D center;
@@ -643,7 +640,6 @@ void* APixelHistoAlgorithm::process(void* ptr)
       }
     }
   }
-  return ptr;
 }
 ATrackHistoAlgorithm::ATrackHistoAlgorithm(TTrack** Tracks, int& numTracks, TDirectory* parent,
                                            const string& opt, bool jf)
@@ -1029,7 +1025,7 @@ float MissingMass(vector3D dir1, float speed1, vector3D dir2, float speed2, mome
     return mm2;
 }
 
-void* ATrackHistoAlgorithm::process(void* ptr)
+void ATrackHistoAlgorithm::process()
 {
   if (!Eparticles::IsInit())
     Eparticles::init();
@@ -1221,7 +1217,6 @@ void* ATrackHistoAlgorithm::process(void* ptr)
       //	    ODhistos[startO+numOD-1]->Fill(r2.Mass());
     }
   }
-  return ptr;
 }
 #include <fstream>
 ifstream input("fitrun4992.txt");
@@ -1501,11 +1496,11 @@ int AReactionHistoAlgorithm::declare2DHistos(TH2** histos, int start)
   return numTD;
 }
 #include <TLorentzVector.h>
-void* AReactionHistoAlgorithm::process(void* ptr)
+void AReactionHistoAlgorithm::process()
 {
   if (event->getNumberOfReactions() <= 0) {
     ODhistos[startO]->Fill(-1);
-    return ptr;
+    return;
   }
   for (int i = 0; i < numD; i++) {
     switch (reactions[i]) {
@@ -1702,7 +1697,6 @@ void* AReactionHistoAlgorithm::process(void* ptr)
     }
     }
   }
-  return ptr;
 }
 void AReactionHistoAlgorithm::write()
 {

@@ -20,7 +20,7 @@ private:
 public:
   ATofStrawTrackFinder(TTrack** tracksIn, int& numberOfTracksIn, TSetup& setup, TCalibHit*** hitsIn,
                        int** numberOfHitsIn, const algorithm_parameter& descr);
-  virtual ~ATofStrawTrackFinder();
-  virtual void* process(void* ptr);
+  ~ATofStrawTrackFinder() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

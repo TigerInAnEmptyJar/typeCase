@@ -171,11 +171,11 @@ ACalculateTrackProperties::~ACalculateTrackProperties()
 #endif
 }
 #include "container_utilities.h"
-void* ACalculateTrackProperties::process(void* ptr)
+void ACalculateTrackProperties::process()
 {
   point3D hit2, hit3, hittmp;
   if (numberOfTracks >= 100 || numberOfTracks == 0)
-    return 0;
+    return;
   float startTimings[numberOfTracks];
   float stopTimings[numberOfTracks];
   point3D startPoints[numberOfTracks];
@@ -272,7 +272,6 @@ void* ACalculateTrackProperties::process(void* ptr)
     }
   }
 #endif
-  return ptr;
 }
 
 // #include "spiral.h"
@@ -690,3 +689,5 @@ void finalTwotwoTracks()
   twotwoTree = NULL;
 }
 #endif
+
+algorithm_parameter ACalculateTrackProperties::getDescription() { return {}; }

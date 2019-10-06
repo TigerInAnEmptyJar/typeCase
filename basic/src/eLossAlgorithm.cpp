@@ -2,7 +2,7 @@
 #include "Eparticles.h"
 AELossAlgorithm::AELossAlgorithm() : AAlgorithm("energy loss algorithm") {}
 AELossAlgorithm::~AELossAlgorithm() {}
-void* AELossAlgorithm::process(void* ptr) { return ptr; }
+void AELossAlgorithm::process() {}
 float AELossAlgorithm::energyLoss(momentum4D particle, float path)
 {
   return energyLoss(particle, path, 1);
@@ -80,4 +80,3 @@ void AELossAlgorithm::setParameters(const Vector& parameter)
   if (parameter.getDimension() == 0)
     return;
 }
-AELossAlgorithm* AELossAlgorithm::getClone() const { return new AELossAlgorithm(*this); }

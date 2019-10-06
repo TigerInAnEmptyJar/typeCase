@@ -89,7 +89,7 @@ AReactionRecognition::~AReactionRecognition()
   delete[] tracks;
 }
 
-void* AReactionRecognition::process(void* ptr)
+void AReactionRecognition::process()
 {
   RbaseReaction* tmp;
   event.clearReactions();
@@ -149,7 +149,6 @@ void* AReactionRecognition::process(void* ptr)
   }
   //  if(np==2&&nv==1)cout<<"\t "<<event.getEventNumber()<<"
   //  "<<event.getNumberOfReactions()<<endl;
-  return ptr;
 }
 int AReactionRecognition::getReactions(TSetup& setup, string option)
 {

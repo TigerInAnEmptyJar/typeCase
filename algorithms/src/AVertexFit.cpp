@@ -22,7 +22,7 @@ AVertexFit::~AVertexFit()
   delete[] b_1;
   delete[] b_2;
 }
-void* AVertexFit::process(void* ptr) { return ptr; }
+void AVertexFit::process() {}
 void AVertexFit::add(Vector& data)
 {
   if (data.getDimension() < 7)

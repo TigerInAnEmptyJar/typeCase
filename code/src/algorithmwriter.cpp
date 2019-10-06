@@ -681,7 +681,7 @@ ostream& operator<<(ostream& o, const algorithmWriter& wr)
     o << sSource.data() << endl;
   }
   o << "###### category sorting in GUI #########################" << endl;
-  o << 0 << " " << wr.parameter().getCategory() << " " << 0 << endl;
+  o << 0 << " " << to_string(wr.parameter().getCategory()) << " " << 0 << endl;
   o << "###### call frequency and connections ########" << endl;
   o << wr.frequency() << " " << wr.frequencyString() << " " << wr.nunCall() << " "
     << wr.nConnections();

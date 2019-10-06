@@ -1,7 +1,7 @@
 #include "Calibrations.h"
 AtdcFactorCalibration::AtdcFactorCalibration(TEvent& eventIn, TSetup& setup,
                                              algorithm_parameter& descr)
-    : AAlgorithm("Generate tdcFactor calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate tdcFactor calibration"), event(eventIn),
       minEntriesPerHisto(descr.value(0).value<int>())
 {
   vector<int> tmp(descr.value(3).value<vector<int>>());
@@ -30,7 +30,7 @@ AtdcFactorCalibration::AtdcFactorCalibration(TEvent& eventIn, TSetup& setup,
 }
 AtdcFactorCalibration::AtdcFactorCalibration(TEvent& eventIn, TSetup& setup, vector<int>& detectors,
                                              int minEntriesPerHistoIn)
-    : AAlgorithm("Generate tdcFactor calibration"), event(eventIn),
+    : CalibrationAlgorithm("Generate tdcFactor calibration"), event(eventIn),
       minEntriesPerHisto(minEntriesPerHistoIn)
 {
   vector<int> tmp(detectors);
@@ -67,19 +67,18 @@ AtdcFactorCalibration::~AtdcFactorCalibration()
   delete[] detectorIDs;
   delete[] numberOfElements;
 }
-void* AtdcFactorCalibration::process(void* ptr)
+void AtdcFactorCalibration::process()
 {
   for (int i = 0; i < numberOfDetectors; i++) {
     for (int j = 0; j < event.getNumberOfHits(detectorIDs[i]); j++)
       tdcHistograms[i][event.getHit(detectorIDs[i], j).getElement()]->Fill(
           event.getHit(detectorIDs[i], j).getRawTDC());
   }
-  return ptr;
 }
 void AtdcFactorCalibration::toEvaluate()
 {
-  for (int i = 0; i < numberOfDetectors; i++)
-    emit evaluated(evaluate(i));
+  //  for (int i = 0; i < numberOfDetectors; i++)
+  //    emit evaluated(evaluate(i));
   eventStart = event.getEventNumber();
 }
 CommonCalibrationParser* AtdcFactorCalibration::evaluate(int num)

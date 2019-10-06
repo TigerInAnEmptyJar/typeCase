@@ -19,7 +19,7 @@ private:
 public:
   AHitClusterSearch(TSetup& setupIn, THitCluster*** clustersIn, int** numberOfCluster,
                     TCalibHit*** hitsIn, int** numberOfHits, const algorithm_parameter& ap);
-  virtual ~AHitClusterSearch();
-  virtual void* process(void* ptr);
+  ~AHitClusterSearch() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

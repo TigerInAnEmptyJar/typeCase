@@ -119,11 +119,11 @@ AReadFromTade::~AReadFromTade()
   cout << "last event was " << nextEventNumber << endl;
 }
 
-void* AReadFromTade::process(void* ptr)
+void AReadFromTade::process()
 {
   if (input == NULL) {
     validInput = false;
-    return ptr;
+    return;
   }
   //   if(whichID==9)
   {
@@ -180,7 +180,7 @@ void* AReadFromTade::process(void* ptr)
             init = false;
             validInput = false;
             //		      pthread_mutex_unlock((pthread_mutex_t*)input_mutex);
-            return 0;
+            return;
           }
           data[i] = reader.getInt();
         }
@@ -214,7 +214,7 @@ void* AReadFromTade::process(void* ptr)
     // emit eventRead(t,a,0);
     //      pthread_mutex_unlock((pthread_mutex_t*)input_mutex);
   }
-  return ptr;
+  return;
 }
 
 void AReadFromTade::newEvent(int evtNr, int count, int trigger)
@@ -240,7 +240,7 @@ void AReadFromTade::newInput(const string& filename)
     input = new ifstream();
     input->open(filename.data());
     myInput = true;
-    emit newRun(input);
+    //    emit newRun(input);
   }
 }
 #include <QtCore/QDir>
@@ -406,7 +406,7 @@ void AReadFromTade::newInput(run_parameter& r)
   // 	}
   //       cout<<endl;
   myInput = true;
-  emit newRun(input);
+  //  emit newRun(input);
 }
 void AReadFromTade::newInput(ifstream* in)
 {

@@ -5,9 +5,10 @@
 #include <TFile.h>
 #include <TTree.h>
 
+#include <boost/signals2.hpp>
+
 class AReadFromSimpleTree : public AAlgorithm
 {
-  Q_OBJECT
 private:
   bool localDirectory;
   string localDir;
@@ -78,6 +79,11 @@ private:
   bool& validInput;         //!
   vector<string> filenames; //!
   void* inputmutex;         //!
+  boost::signals2::signal<void(int)> _hitsReadSignal;
+  boost::signals2::signal<void(int)> _pixelsReadSignal;
+  boost::signals2::signal<void(int)> _tracksReadSignal;
+  boost::signals2::signal<void(int)> _clustersReadSignal;
+
   int searchDelayedEvent(TTree** thetree, int numTree, int eventNumber, int* theCounter,
                          int acounter);
   int getCommonEvent(int& iT, bool& ht, int& iC, bool& hc, int& iP, bool& hp, int& iH, bool& hh);
@@ -106,17 +112,15 @@ public:
                       string ClusterFile, string PixelFile, string HitFile, bool resetUnreadIn,
                       bool startWithDelayedEventIn, int StartWithEventIn, bool& validInputIn,
                       void* inputmutexIn);
-  virtual ~AReadFromSimpleTree();
-  virtual void* process(void*);
-public slots:
+  virtual ~AReadFromSimpleTree() override;
+  void process() override;
+
   void getNewInput(string* files, int* type, int numFiles, bool grap);
   void getNewRun(run_parameter& rp);
-signals:
-  void hitRead(int numberOfHits);
-  void pixelRead(int numberOfPixels);
-  void clusterRead(int numberOfClusters);
-  void trackRead(int numberOfTracks);
-public slots:
+  boost::signals2::connection connectHitRead(std::function<void(int)> subscriber);
+  boost::signals2::connection connectPixelRead(std::function<void(int)> subscriber);
+  boost::signals2::connection connectClusterRead(std::function<void(int)> subscriber);
+  boost::signals2::connection connectTrackRead(std::function<void(int)> subscriber);
   void OnHitRead(int numberOfHits);
   void OnPixelRead(int numberOfPixels);
   void OnClusterRead(int numberOfClusters);

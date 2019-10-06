@@ -22,10 +22,9 @@ private:
 
 public:
   ABetheBloch();
-  ABetheBloch(const ABetheBloch& algo);
   ~ABetheBloch();
   virtual void setParameters(const Vector& parameter);
-  virtual void* process(void* ptr);
+  void process() override;
   virtual float energyLoss(momentum4D particle, float path);
   virtual float energyLoss(momentum4D particle, float path, float charge);
   virtual float energyLossM(int geantId, float momentum, float path);

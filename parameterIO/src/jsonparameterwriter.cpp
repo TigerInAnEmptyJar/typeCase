@@ -245,7 +245,7 @@ QJsonObject JsonParameterWriter::fromAlgorithm(std::shared_ptr<base_parameter> c
   ::addBaseParameter(input, result);
   result.insert(Keys::use, algorithm->IsUsed());
   result.insert(Keys::level, algorithm->getLevel());
-  result.insert(Keys::category, algorithm->getCategory());
+  result.insert(Keys::category, static_cast<int>(algorithm->getCategory()));
   result.insert(Keys::id_number, algorithm->getID());
   QJsonArray parameter;
   for (size_t i = 0; i < algorithm->numberOfValues(); i++) {

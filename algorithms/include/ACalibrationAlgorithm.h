@@ -1,6 +1,5 @@
 #include "algorithm.h"
 
-using namespace std;
 class ACalibrationAlgorithm : public AAlgorithm
 {
 protected:
@@ -11,13 +10,13 @@ protected:
   int* Nel;
   int minRun;
   int maxRun;
-  string BeamTime;
-  string Author;
+  std::string BeamTime;
+  std::string Author;
 
 public:
-  ACalibrationAlgorithm(string name, int NCalibs);
-  ~ACalibrationAlgorithm();
-  virtual void fill(void) = 0;
-  virtual void calculateCalibration(void) = 0;
-  virtual void writeToFile(string filename) = 0;
+  ACalibrationAlgorithm(std::string name, int NCalibs);
+  ~ACalibrationAlgorithm() override;
+  virtual void fill() = 0;
+  virtual void calculateCalibration() = 0;
+  virtual void writeToFile(std::string filename) = 0;
 };

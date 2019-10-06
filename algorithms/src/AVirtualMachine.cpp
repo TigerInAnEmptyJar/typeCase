@@ -181,7 +181,7 @@ int AVirtualMachine::searchADetector(int detNum, int detID, vector3D& distance, 
   return -1;
 }
 
-void* AVirtualMachine::process(void* ptr)
+void AVirtualMachine::process()
 {
   // cout<<"*AVirtualMachine::process()"<<endl;
   //  cout<<"AVirtualMachine::process(void *ptr)"<<endl;
@@ -295,12 +295,11 @@ void* AVirtualMachine::process(void* ptr)
   // cout<<endl;
   //}
   // cout<<"*AVirtualMachine::process():done"<<endl;
-  return ptr;
 }
 //#include "algorithmparameter.h"
 algorithm_parameter AVirtualMachine::getDescription()
 {
-  algorithm_parameter ret("Virtual detector tracking", 0, 0);
+  algorithm_parameter ret("Virtual detector tracking", algorithm_parameter::Category::INPUT, 0);
   std::string des = "This algorithm uses the definition of the setup to create"
                     "a virtual detector and track the particles, generated"
                     "elsewhere, generating their signal in the detector."
@@ -317,7 +316,7 @@ algorithm_parameter AVirtualMachine::getDescription()
                     "be distributed according to the path to the read-out."
                     "Noise and smearing of the signals will be implemented.";
   ret.setDescription(des);
-  ret.setCategory(1);
+  ret.setCategory(algorithm_parameter::Category::INPUT);
   ret.addValue("Use common Start", false);
   ret.addValue("TDC at trigger", static_cast<int>(200));
   ret.addValue("minimum theta of detector", 0.f);

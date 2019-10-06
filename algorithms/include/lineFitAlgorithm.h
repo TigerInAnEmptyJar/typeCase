@@ -4,7 +4,6 @@
 using namespace std;
 class ALineFitAlgorithm : public AFitAlgorithm
 {
-  Q_OBJECT
 private:
   const int maxLines;
   int numLines; //!
@@ -14,13 +13,11 @@ private:
 public:
   ALineFitAlgorithm(int maxLines);
   virtual ~ALineFitAlgorithm();
-  virtual void* process(void* ptr);
+  void process() override;
   virtual void clear();
   virtual void add(Vector& data);
   virtual Vector getResult();
-public slots:
   virtual void getAddPoint(Vector& data);
   virtual float fit();
-signals:
-  void fitted(float chi, Vector& result);
+  AFitAlgorithm* getClone() override { return nullptr; }
 };

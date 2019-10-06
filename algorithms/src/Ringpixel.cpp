@@ -145,7 +145,7 @@ ARingpixel::~ARingpixel()
 #endif
 }
 
-void* ARingpixel::process(void* ptr)
+void ARingpixel::process()
 {
   //  anaLog<<"ring pixel: ";
   int phi, delphi;
@@ -236,7 +236,7 @@ void* ARingpixel::process(void* ptr)
 #endif
                 if (*NumberOfPixels == maxOfPixels - 1) {
                   anaLog << "max number of pixels found in Quirl/Ring" << endli;
-                  return 0;
+                  return;
                 }
                 (*NumberOfPixels)++;
               }
@@ -246,7 +246,6 @@ void* ARingpixel::process(void* ptr)
       }
     }
   }
-  return ptr;
 }
 planeShape* ARingpixel::calculateCenter(int re, int le, int ge, int dPhi, int rp)
 {

@@ -28,6 +28,7 @@ public:
                             const algorithm_parameter& descr);
   ACalculateTrackProperties(TTrack** t, int& numberOfTracksIn, int max, const TDetector& st,
                             vector<int> stopDetectors, vector<int> startDetectors);
-  virtual ~ACalculateTrackProperties();
-  virtual void* process(void* ptr);
+  ~ACalculateTrackProperties() override;
+  virtual void process() override;
+  static algorithm_parameter getDescription();
 };

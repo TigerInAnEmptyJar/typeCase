@@ -16,7 +16,7 @@ AMicroCluster::AMicroCluster(int IDIn, int& numberOfPixelsIn, TPixel** pixelIn, 
 
 AMicroCluster::~AMicroCluster() {}
 
-void* AMicroCluster::process(void* ptr)
+void AMicroCluster::process()
 {
   bool used[numberOfPixels];
   float energy[numberOfPixels];
@@ -83,7 +83,6 @@ void* AMicroCluster::process(void* ptr)
     }
   }
   // pixelLog<<numberOfClusters<<" clusters found"<<endli;
-  return ptr;
 }
 
 /*searchRing searches in all pixels the ones which are within an element

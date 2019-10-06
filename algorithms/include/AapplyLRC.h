@@ -7,7 +7,6 @@ using namespace std;
 
 class AapplyLRC : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TTrack** tracks;     //!
   int& numberOfTracks; //!
@@ -27,9 +26,8 @@ public:
   AapplyLRC(TSetup& setup, TTrack** trackIn, int& numTracksIn, int& evtNr, int& rnr,
             const algorithm_parameter& descr);
   virtual ~AapplyLRC();
-  virtual void* process(void* ptr);
+  void process() override;
   static algorithm_parameter getDescription();
-public slots:
   void onNewRun(run_parameter& rp);
 
 public:

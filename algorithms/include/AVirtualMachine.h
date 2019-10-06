@@ -25,7 +25,7 @@ private:
 public:
   AVirtualMachine(TTrack** tracksIn, TCalibHit*** hitsIn, TSetup& setupIn, int& numberOfTracksIn,
                   int** numberOfHitsIn, const algorithm_parameter& descr);
-  virtual ~AVirtualMachine();
-  virtual void* process(void* ptr);
+  ~AVirtualMachine() override;
+  void process() override;
   static algorithm_parameter getDescription();
 };

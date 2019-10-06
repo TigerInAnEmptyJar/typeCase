@@ -96,7 +96,7 @@ bool AGenerateEventsWithDecay::accept(sLine3D* trajectories)
 
 algorithm_parameter AGenerateEventsWithDecay::getDescription()
 {
-  algorithm_parameter ret("Generate Events with decay", 0, 0);
+  algorithm_parameter ret("Generate Events with decay", algorithm_parameter::Category::INPUT, 0);
   string des = "This algorithm generates events with the ROOT "
                "Phase-Space-Generator. You specify the generated "
                "particles by their GEANT-ID and which of these "
@@ -396,11 +396,11 @@ AGenerateEventsWithDecay::~AGenerateEventsWithDecay()
     delete[] SumDetHits;
   }
 }
-void* AGenerateEventsWithDecay::process(void* ptr)
+void AGenerateEventsWithDecay::process()
 {
   validInput = valid;
   if (!validInput)
-    return ptr;
+    return;
   eventNumber++;
   // cout<<"event: "<<eventNumber<<endl;
   //   for(int i=0;i<numberOfDecays;i++)
@@ -428,7 +428,7 @@ void* AGenerateEventsWithDecay::process(void* ptr)
     for (int i = 0; i < numberOfDecays + 1; i++) {
       if (generator[i] == NULL) {
         validInput = false;
-        return ptr;
+        return;
       }
       weight = 0;
       number = 1;
@@ -506,5 +506,4 @@ void* AGenerateEventsWithDecay::process(void* ptr)
       tracks[decayParticle[i]]->addSecondary(tracks[decayIDs[i][j]]);
     }
   }
-  return ptr;
 }

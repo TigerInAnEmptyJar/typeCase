@@ -186,14 +186,13 @@ void AWriteHistogramsToRootFile::declareHistos(TSetup& setup, const string& opti
   return;
 }
 
-void* AWriteHistogramsToRootFile::process(void* ptr)
+void AWriteHistogramsToRootFile::process()
 {
   //  pthread_mutex_lock((pthread_mutex_t*)histo_mutex);
   for (int i = 0; i < numF; i++) {
-    f[i]->process(0);
+    f[i]->process();
   }
   //  pthread_mutex_unlock((pthread_mutex_t*)histo_mutex);
-  return ptr;
 }
 
 void AWriteHistogramsToRootFile::defineData(TEvent& ev)

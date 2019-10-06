@@ -134,7 +134,7 @@ bool definePixel(TPixel* pix, TCalibHit* h1, TCalibHit* h2, TCalibHit* h3, plane
 #endif
   return true;
 }
-void* AHodo3Pixel::process(void* ptr)
+void AHodo3Pixel::process()
 {
   numberOfPixels = 0;
   lLine3D poca, p1, p2, p3, p4;
@@ -194,7 +194,7 @@ void* AHodo3Pixel::process(void* ptr)
               numberOfPixels++;
             if (numberOfPixels >= maxOfPixels) {
               anaLog << "Too many Pixel in three layered hodoscope" << endli;
-              return ptr;
+              return;
               ;
             }
           }
@@ -215,7 +215,7 @@ void* AHodo3Pixel::process(void* ptr)
           numberOfPixels++;
         if (numberOfPixels >= maxOfPixels) {
           anaLog << "Too many Pixel in three layered hodoscope" << endli;
-          return ptr;
+          return;
         }
       }
     }
@@ -245,10 +245,9 @@ void* AHodo3Pixel::process(void* ptr)
           numberOfPixels++;
         if (numberOfPixels >= maxOfPixels) {
           anaLog << "Too many Pixel in three layered hodoscope" << endli;
-          return ptr;
+          return;
         }
       }
     }
   }
-  return ptr;
 }

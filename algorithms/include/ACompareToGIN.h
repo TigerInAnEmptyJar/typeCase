@@ -43,9 +43,9 @@ private:
 public:
   ACompareToGIN(TTrack** tracksIn, int& numberOfTracksIn, int& eventNumberIn, int maxTracksIn,
                 const algorithm_parameter& descr);
-  virtual ~ACompareToGIN();
-  virtual void* process(void* ptr);
+  ~ACompareToGIN() override;
+  void process() override;
   static algorithm_parameter getDescription();
-  virtual vector<string> histogramNames();
-  virtual TH1* histogram(string histoName);
+  vector<string> histogramNames();
+  TH1* histogram(string histoName);
 };

@@ -182,8 +182,6 @@ AWriteDataToRootFile::~AWriteDataToRootFile()
     //   tmp.Write("Event Constants");
     tree->Write();
     //      setup.Write("setup");
-  } else {
-    emit destroyer(tree);
   }
   delete tree;
   for (int i = 0; i < maxDet; i++) {
@@ -214,7 +212,7 @@ AWriteDataToRootFile::~AWriteDataToRootFile()
   //   cout<<17<<flush;
 }
 
-void* AWriteDataToRootFile::process(void* ptr)
+void AWriteDataToRootFile::process()
 {
   for (int i = 0; i < maxDet; i++) {
     //      cout<<i<<flush;
@@ -238,7 +236,6 @@ void* AWriteDataToRootFile::process(void* ptr)
   //   for(int j=0;j<(*numTr);j++)
   //     tracks->Add(saveTracks[j]);
   tree->Fill();
-  return ptr;
 }
 
 TFile* AWriteDataToRootFile::getFile() { return *rootFile; }

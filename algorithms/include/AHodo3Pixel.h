@@ -27,6 +27,6 @@ public:
   AHodo3Pixel(TPixel** pixelIn, int& numberOfPixelsIn, int maxOfPixelsIn, int** numberOfHitsIn,
               int** numberOfHitClustersIn, TCalibHit*** hitsIn, THitCluster*** hitClusters,
               TSetup& setup, const algorithm_parameter& ap);
-  virtual ~AHodo3Pixel();
-  virtual void* process(void* ptr);
+  ~AHodo3Pixel() override;
+  void process() override;
 };

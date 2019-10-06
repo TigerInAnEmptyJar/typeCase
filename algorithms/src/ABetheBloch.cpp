@@ -6,13 +6,13 @@ ABetheBloch::ABetheBloch()
     Eparticles::init();
   m_electron = Eparticles::getMassG(3); // GeV
   float c_electron = 1.602176487e-19;   // Coulomb
-  c_light = 299792458;                  // m/s²
+  c_light = 299792458;                  // m/s/s
   float epsilon = 8.854187e-12;         // Coulomb/V/m
-  N_a = 6.02214179e23;                  // mol-¹
-  N_a = 1.78266e-24 * 1e6 * N_a * N_a;  // N_a*1e-10*1e6/(1.78266*6.02214179);//mol-¹*g/GeV
+  N_a = 6.02214179e23;                  // 1/mol
+  N_a = 1.78266e-24 * 1e6 * N_a * N_a;  // N_a*1e-10*1e6/(1.78266*6.02214179);//g/GeV/mol
   c1 = /*c_electron*/ (c_electron / epsilon / 4 / M_PI) * 1e-9;
-  c1 = 4. * M_PI / m_electron * (c1 * c1); // GeV*cm²
-  //   c2=N_a*Z*density/MolarMass;//1/cm³
+  c1 = 4. * M_PI / m_electron * (c1 * c1); // GeV*cm*cm
+  //   c2=N_a*Z*density/MolarMass;//1/cm/cm/cm
   //   c3=10.*Z;//eV
   //   c3=c3*1e-9;//GeV
   //   c3=2.*m_electron/c3/c3;//1/GeV
@@ -23,29 +23,6 @@ ABetheBloch::ABetheBloch()
   A = new double[nComponents];
   weight = new double[nComponents];
   stepwidth = 0.1;
-}
-ABetheBloch::ABetheBloch(const ABetheBloch& algo) : AELossAlgorithm(algo)
-{
-  if (!Eparticles::IsInit())
-    Eparticles::init();
-  m_electron = Eparticles::getMassG(3); // GeV
-  float c_electron = 1.602176487e-19;   // Coulomb
-  c_light = 299792458;                  // m/s²
-  epsilon = 8.854187e-12;               // Coulomb/V/m
-  //	1.78266e-24//g/GeV
-  N_a = 6.02214179e23;                 // mol-¹
-  N_a = 1.78266e-24 * 1e6 * N_a * N_a; // N_a*1e-10*1e6/(1.78266*6.02214179);//mol-¹*g/GeV
-  c1 = /*c_electron*/ (c_electron / epsilon / 4 / M_PI) * 1e-9;
-  c1 = 4. * M_PI / m_electron * (c1 * c1); // *1e6;//GeV*cm²
-  //  cout<<c1<<" "<<
-  nComponents = 1;
-  c2 = new double[nComponents];
-  c3 = new double[nComponents];
-  Z = new double[nComponents];
-  A = new double[nComponents];
-  weight = new double[nComponents];
-  setParameters(algo.parameters());
-  stepwidth = algo.stepSize();
 }
 ABetheBloch::~ABetheBloch()
 {
@@ -118,7 +95,7 @@ void ABetheBloch::setParameters(const Vector& parameter)
 }
 double ABetheBloch::stepSize() const { return stepwidth; }
 void ABetheBloch::setStepsize(double value) { stepwidth = abs(value); }
-void* ABetheBloch::process(void* ptr) { return ptr; }
+void ABetheBloch::process() {}
 
 float ABetheBloch::energyLoss(momentum4D particle, float path)
 {
@@ -298,6 +275,6 @@ float ABetheBloch::betaAfter(float path, int geantId, float betaIn)
 }
 AELossAlgorithm* ABetheBloch::getClone() const
 {
-  AELossAlgorithm* ret = new ABetheBloch(*this);
-  return ret;
+  //  AELossAlgorithm* ret = new ABetheBloch(*this);
+  return nullptr; // ret;
 }

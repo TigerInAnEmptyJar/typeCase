@@ -5,11 +5,12 @@
 #include <TFile.h>
 #include <TLeaf.h>
 #include <TTree.h>
+#include <boost/signals2.hpp>
+
 using namespace std;
 class run_parameter;
 class AHitTreeInput : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TCalibHit*** hits;       //!
   int** numberOfHits;      //!
@@ -41,17 +42,16 @@ private:
   void getHeader();
   void getMain();
   bool useChain;
+  boost::signals2::signal<void(int)> _eventReadSignal;
 
 public:
   AHitTreeInput(TSetup& setupIn, TCalibHit*** hitsIn, int** nH, int& evtNr, int& rnNr, int& trggr,
                 int maxH, int MaxD, bool& readInValid, const algorithm_parameter& param);
-  virtual ~AHitTreeInput();
-  virtual void* process(void* ptr);
+  ~AHitTreeInput() override;
+  void process() override;
   static algorithm_parameter getDescription();
-public slots:
   void readEvent(int EvtNr);
   void readEntry(int entry);
   void newRun(run_parameter& r);
-signals:
-  void eventRead(int EvtNr);
+  boost::signals2::connection connectEventRead(std::function<void(int)> subscriber);
 };

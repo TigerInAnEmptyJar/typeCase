@@ -13,15 +13,21 @@ AConversion::AConversion(const string& filename, TEvent& ev, void* input_mutexIn
 
 AConversion::~AConversion() {} // delete convertedData; }
 
-void* AConversion::Process(void* ptr)
+void AConversion::process()
 {
   //  if (actualEvent + 1 >= convertedData->GetEntries())
   validInput = false;
   //  convertedData->GetEntry(actualEvent);
   actualEvent++;
-  emit eventRead();
-  return ptr;
+  _eventReadSignal();
+  return;
 }
+
+boost::signals2::connection AConversion::connectEventReadSignal(std::function<void()> subscriber)
+{
+  return _eventReadSignal.connect(subscriber);
+}
+
 void AConversion::newEvent() { actualEvent++; }
 //#include "your_header_files.h"
 void AConversion::getNewRun(const string& filename)

@@ -121,12 +121,12 @@ bool formAPixel(TTrack* track)
   }
   return false;
 }
-void* ATofPixCorrection::process(void* ptr)
+void ATofPixCorrection::process()
 {
   if (calib)
     if (!checkRanges()) {
       cout << "Range not found!!! run: " << RunNumber << " event: " << EventNumber << endl;
-      return ptr;
+      return;
     }
   int pt;
   int pixpos;
@@ -185,7 +185,6 @@ void* ATofPixCorrection::process(void* ptr)
       }
     }
   }
-  return ptr;
 }
 bool ATofPixCorrection::checkRanges()
 {

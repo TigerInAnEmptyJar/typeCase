@@ -1,5 +1,4 @@
-#ifndef PIXEL
-#define PIXEL
+#pragma once
 #include "TBase.h"
 #include "calibHit.h"
 #include "planeShape.h"
@@ -155,4 +154,3 @@ public:
    */
   void setValid(bool v = true);
 };
-#endif

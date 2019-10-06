@@ -17,7 +17,7 @@ AMomentumFromGeometry::AMomentumFromGeometry(TSetup& setup, TTrack** tracksIn,
 
 AMomentumFromGeometry::~AMomentumFromGeometry() {}
 
-void* AMomentumFromGeometry::process(void* ptr)
+void AMomentumFromGeometry::process()
 {
   vector3D v[numberOfTracks];
   for (int i = 0; i < numberOfTracks; i++)
@@ -37,7 +37,7 @@ void* AMomentumFromGeometry::process(void* ptr)
       tracks[1]->setKineticEnergy(tracks[1]->getParticle().Energy());
       tracks[0]->setSpeed(tracks[0]->getParticle().Velocity().length());
       tracks[0]->setKineticEnergy(tracks[0]->getParticle().Energy());
-      return 0;
+      return;
     }
     float th1 = v1.Theta(), th2 = v2.Theta(), ph1 = v1.Phi(), ph2 = v2.Phi();
     float p1, p2;
@@ -120,5 +120,4 @@ void* AMomentumFromGeometry::process(void* ptr)
   case 4:
     break;
   }
-  return ptr;
 }

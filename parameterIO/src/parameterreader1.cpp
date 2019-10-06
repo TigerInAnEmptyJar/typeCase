@@ -180,7 +180,7 @@ std::shared_ptr<base_parameter> ParameterReader1::readSingleAlgorithm(std::istre
   a.setName(_tmp);
   input.get(c);
   input >> zahl;
-  a.setCategory(zahl);
+  a.setCategory(static_cast<algorithm_parameter::Category>(zahl));
   input >> zahl;
   a.setLevel(zahl);
   input.getline(_tmp, 100);

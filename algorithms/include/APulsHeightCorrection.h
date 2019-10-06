@@ -4,7 +4,6 @@
 
 class APulsHeightCorrectionWedge : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TF1*** correctionFunction; //!
   TTrack** tracks;           //!
@@ -19,15 +18,13 @@ private:
 public:
   APulsHeightCorrectionWedge(TTrack** tracksIn, int& numberOfTracksIn, TDetector& det,
                              int& runNumber, int& eventNumber, vector<string>& calibrationFiles);
-  virtual ~APulsHeightCorrectionWedge();
-  virtual void* process(void* ptr);
-public slots:
+  ~APulsHeightCorrectionWedge() override;
+  void process() override;
   void getNewCalibration(vector<string>& calibrationFiles);
 };
 
 class APulsHeightCorrectionSpiral : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TF1*** correctionFunction; //!
   TTrack** tracks;           //!
@@ -42,14 +39,13 @@ private:
 public:
   APulsHeightCorrectionSpiral(TTrack** tracksIn, int& numberOfTracksIn, TDetector& det,
                               int& runNumber, int& eventNumber, vector<string>& calibrationFiles);
-  virtual ~APulsHeightCorrectionSpiral();
-  virtual void* process(void* ptr);
-public slots:
+  ~APulsHeightCorrectionSpiral() override;
+  void process() override;
   void getNewCalibration(vector<string>& calibrationFiles);
 };
+
 class APulsHeightCorrectionTube : public AAlgorithm
 {
-  Q_OBJECT
 private:
   TF1*** correctionFunction; //!
   TTrack** tracks;           //!
@@ -64,8 +60,7 @@ private:
 public:
   APulsHeightCorrectionTube(TTrack** tracksIn, int& numberOfTracksIn, TDetector& det,
                             int& runNumber, int& eventNumber, vector<string>& calibrationFiles);
-  virtual ~APulsHeightCorrectionTube();
-  virtual void* process(void* ptr);
-public slots:
+  ~APulsHeightCorrectionTube() override;
+  void process() override;
   void getNewCalibration(vector<string>& calibrationFiles);
 };

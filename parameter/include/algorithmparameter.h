@@ -8,6 +8,20 @@
 class algorithm_parameter : public values_parameter
 {
 public:
+  enum class Category
+  {
+    INPUT,
+    OUTPUT,
+    CALIBRATION,
+    PIXEL,
+    TRACKING,
+    POST_TRACKING,
+    HISTOGRAMMING,
+    FITTING,
+    ELSE,
+  };
+
+public:
   algorithm_parameter() = default;
   algorithm_parameter(const algorithm_parameter& ap) = default;
   algorithm_parameter(algorithm_parameter&& ap) = default;
@@ -26,7 +40,7 @@ public:
    *  Constructor. Sets the algorithms name, level and category and its ID.
    * \param id
    */
-  algorithm_parameter(std::string, int, int, int id = -1);
+  algorithm_parameter(std::string, Category, int, int id = -1);
 
   /*!
    * \brief algorithm_parameter
@@ -34,7 +48,7 @@ public:
    * (-1 by default).
    * \param id
    */
-  algorithm_parameter(std::string, bool, int, int, int id = -1);
+  algorithm_parameter(std::string, bool, Category, int, int id = -1);
 
   /*!
    * \brief operator ==
@@ -50,14 +64,14 @@ public:
    *  Sets the category of the parameter in display with the analysis program typeCase.
    * \param cat
    */
-  virtual void setCategory(int cat);
+  virtual void setCategory(Category cat);
 
   /*!
    * \brief getCategory
    *  Returns the category of the parameter in display with the analysis program typeCase.
    * \return
    */
-  virtual int getCategory() const;
+  virtual Category getCategory() const;
 
   /*!
    * \brief setLevel
@@ -116,11 +130,18 @@ In all modes the parameters are shown.
   string toString(int pattern = 1) const;
 
 private:
-  int category{-1};
+  Category category{Category::ELSE};
   int level{-1};
   int ID{-1};
   bool inUse{false};
 };
+
+/*!
+ * \brief to_string
+ * \param category the category to convert.
+ * \return a string representation of the named category.
+ */
+std::string to_string(algorithm_parameter::Category category);
 
 /*!
  * \brief operator <<
