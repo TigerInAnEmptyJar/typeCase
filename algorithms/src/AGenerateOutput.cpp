@@ -64,7 +64,7 @@ AGenerateOutput::AGenerateOutput(TEvent& evIn, const string& mcFileName,
         }
         tmpPath += "/";
         for (unsigned int i = 1; i < components.size(); i++) {
-          tmp = (tmpPath + components[i]).data();
+          tmp.setPath((tmpPath + components[i]).data());
           if (!tmp.exists()) {
             QDir tmp2(tmpPath.data());
             tmp2.mkdir(components[i].data());
@@ -254,8 +254,7 @@ AGenerateOutput::~AGenerateOutput()
           }
 #else
           QProcess copy;
-          copy.start(
-              QString((string("cp ") + f->GetName() + " " + filepattern.data() + "T.root").data()));
+          copy.start("cp", QStringList{} << f->GetName() << (filepattern + "T.root").data(), {});
           while (copy.waitForFinished()) {
           }
 #endif
@@ -284,7 +283,7 @@ AGenerateOutput::~AGenerateOutput()
             fil[i]->Close();
             delete fil[i];
           }
-        delete fil;
+        delete[] fil;
         if (reactionFile->IsOpen())
           reactionFile->Close();
         if (useLocal) {
@@ -298,8 +297,7 @@ AGenerateOutput::~AGenerateOutput()
           }
 #else
           QProcess copy;
-          copy.start(
-              QString((string("cp ") + f->GetName() + " " + filepattern.data() + "R.root").data()));
+          copy.start("cp", QStringList{} << f->GetName() << (filepattern + "R.root").data(), {});
           while (copy.waitForFinished()) {
           }
 #endif
@@ -336,7 +334,7 @@ AGenerateOutput::~AGenerateOutput()
         }
 #else
         QProcess copy;
-        copy.start(QString((string("cp ") + f->GetName() + " " + filepattern + "P.root").data()));
+        copy.start("cp", QStringList{} << f->GetName() << (filepattern + "P.root").data(), {});
         while (copy.waitForFinished()) {
         }
 #endif
@@ -372,7 +370,7 @@ AGenerateOutput::~AGenerateOutput()
         }
 #else
         QProcess copy;
-        copy.start(QString((string("cp ") + f->GetName() + " " + filepattern + "H.root").data()));
+        copy.start("cp", QStringList{} << f->GetName() << (filepattern + "H.root").data(), {});
         while (copy.waitForFinished()) {
         }
 #endif
@@ -406,7 +404,7 @@ AGenerateOutput::~AGenerateOutput()
         }
 #else
         QProcess copy;
-        copy.start(QString((string("cp ") + f->GetName() + " " + filepattern + "C.root").data()));
+        copy.start("cp", QStringList{} << f->GetName() << (filepattern + "C.root").data(), {});
         while (copy.waitForFinished()) {
         }
 #endif

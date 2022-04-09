@@ -61,14 +61,16 @@ TEST_F(ParameterIoTest, detector_write_read_0)
     // them from the reaction before comparing the rest.
     auto sh1 = a.getShape();
     auto sh2 = b.getShape();
-    EXPECT_THAT(sh1, IsShapeEqual(sh2));
+    EXPECT_THAT(*sh1, IsShapeEqual(*sh2));
     a.setShape(shape_parameter());
     b.setShape(shape_parameter());
-    // in this version the circular property is not preserved, as well as the description.
+    // in this version the circular property is not preserved, as well as the description or the
+    // material ID.
     a.setCircular(b.isCircular());
     a.setDescription(b.getDescription());
+    a.setMaterialId(b.getMaterialId());
 
-    EXPECT_EQ(a, b);
+    EXPECT_THAT(a, IsDetectorEqual(b));
   }
 }
 
@@ -94,7 +96,7 @@ TEST_F(ParameterIoTest, detector_read_0)
   ASSERT_EQ(1, a->getMaterial());
   ASSERT_EQ(100, a->getNumberOfElements());
   auto ash = a->getShape();
-  EXPECT_THAT(ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
+  EXPECT_THAT(*ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
 
   auto b = std::dynamic_pointer_cast<detector_parameter>(result[2]);
   ASSERT_NE(nullptr, b);
@@ -105,7 +107,7 @@ TEST_F(ParameterIoTest, detector_read_0)
   ASSERT_EQ(0, b->getMaterial());
   ASSERT_EQ(150, b->getNumberOfElements());
   auto bsh = b->getShape();
-  EXPECT_THAT(bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
+  EXPECT_THAT(*bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
 
   auto c = std::dynamic_pointer_cast<reaction_parameter>(result[0]);
   ASSERT_NE(nullptr, c);
@@ -169,14 +171,16 @@ TEST_F(ParameterIoTest, detector_write_read_1)
     // them from the reaction before comparing the rest.
     auto sh1 = a.getShape();
     auto sh2 = b.getShape();
-    EXPECT_THAT(sh1, IsShapeEqual(sh2));
+    EXPECT_THAT(*sh1, IsShapeEqual(*sh2));
     a.setShape(shape_parameter());
     b.setShape(shape_parameter());
-    // in this version the circular property is not preserved, as well as the description.
+    // in this version the circular property is not preserved, as well as the description, or the
+    // material ID.
     a.setCircular(b.isCircular());
     a.setDescription(b.getDescription());
+    a.setMaterialId(b.getMaterialId());
 
-    EXPECT_EQ(a, b);
+    EXPECT_THAT(a, IsDetectorEqual(b));
   }
 }
 
@@ -202,7 +206,7 @@ TEST_F(ParameterIoTest, detector_read_1)
   ASSERT_EQ(1, a->getMaterial());
   ASSERT_EQ(100, a->getNumberOfElements());
   auto ash = a->getShape();
-  EXPECT_THAT(ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
+  EXPECT_THAT(*ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
 
   auto b = std::dynamic_pointer_cast<detector_parameter>(result[2]);
   ASSERT_NE(nullptr, b);
@@ -213,7 +217,7 @@ TEST_F(ParameterIoTest, detector_read_1)
   ASSERT_EQ(0, b->getMaterial());
   ASSERT_EQ(150, b->getNumberOfElements());
   auto bsh = b->getShape();
-  EXPECT_THAT(bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
+  EXPECT_THAT(*bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
 
   auto c = std::dynamic_pointer_cast<reaction_parameter>(result[0]);
   ASSERT_NE(nullptr, c);
@@ -277,14 +281,16 @@ TEST_F(ParameterIoTest, detector_write_read_2)
     // them from the reaction before comparing the rest.
     auto sh1 = a.getShape();
     auto sh2 = b.getShape();
-    EXPECT_THAT(sh1, IsShapeEqual(sh2));
+    EXPECT_THAT(*sh1, IsShapeEqual(*sh2));
     a.setShape(shape_parameter());
     b.setShape(shape_parameter());
-    // in this version the circular property is not preserved, as well as the description.
+    // in this version the circular property is not preserved, as well as the description or the
+    // material ID.
     a.setCircular(b.isCircular());
     a.setDescription(b.getDescription());
+    a.setMaterialId(b.getMaterialId());
 
-    EXPECT_EQ(a, b);
+    EXPECT_THAT(a, IsDetectorEqual(b));
   }
 }
 
@@ -309,7 +315,7 @@ TEST_F(ParameterIoTest, detector_read_2)
   ASSERT_EQ(1, a->getMaterial());
   ASSERT_EQ(100, a->getNumberOfElements());
   auto ash = a->getShape();
-  EXPECT_THAT(ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
+  EXPECT_THAT(*ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
 
   auto b = std::dynamic_pointer_cast<detector_parameter>(result[2]);
   ASSERT_NE(nullptr, b);
@@ -320,7 +326,7 @@ TEST_F(ParameterIoTest, detector_read_2)
   ASSERT_EQ(0, b->getMaterial());
   ASSERT_EQ(150, b->getNumberOfElements());
   auto bsh = b->getShape();
-  EXPECT_THAT(bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
+  EXPECT_THAT(*bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
 
   auto c = std::dynamic_pointer_cast<reaction_parameter>(result[0]);
   ASSERT_NE(nullptr, c);
@@ -352,13 +358,13 @@ TEST_F(ParameterIoTest, detector_id_recovery_0)
 
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(result[1]));
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(parameters[3]));
-  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[3])->getShape().id(),
-            std::dynamic_pointer_cast<detector_parameter>(result[1])->getShape().id());
+  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[3])->getShape()->id(),
+            std::dynamic_pointer_cast<detector_parameter>(result[1])->getShape()->id());
 
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(result[2]));
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(parameters[4]));
-  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[4])->getShape().id(),
-            std::dynamic_pointer_cast<detector_parameter>(result[2])->getShape().id());
+  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[4])->getShape()->id(),
+            std::dynamic_pointer_cast<detector_parameter>(result[2])->getShape()->id());
 }
 
 TEST_F(ParameterIoTest, detector_id_recovery_1)
@@ -381,13 +387,13 @@ TEST_F(ParameterIoTest, detector_id_recovery_1)
 
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(result[1]));
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(parameters[3]));
-  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[3])->getShape().id(),
-            std::dynamic_pointer_cast<detector_parameter>(result[1])->getShape().id());
+  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[3])->getShape()->id(),
+            std::dynamic_pointer_cast<detector_parameter>(result[1])->getShape()->id());
 
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(result[2]));
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(parameters[4]));
-  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[4])->getShape().id(),
-            std::dynamic_pointer_cast<detector_parameter>(result[2])->getShape().id());
+  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[4])->getShape()->id(),
+            std::dynamic_pointer_cast<detector_parameter>(result[2])->getShape()->id());
 }
 
 TEST_F(ParameterIoTest, detector_id_recovery_2)
@@ -410,11 +416,11 @@ TEST_F(ParameterIoTest, detector_id_recovery_2)
 
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(result[1]));
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(parameters[3]));
-  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[3])->getShape().id(),
-            std::dynamic_pointer_cast<detector_parameter>(result[1])->getShape().id());
+  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[3])->getShape()->id(),
+            std::dynamic_pointer_cast<detector_parameter>(result[1])->getShape()->id());
 
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(result[2]));
   ASSERT_NE(nullptr, std::dynamic_pointer_cast<detector_parameter>(parameters[4]));
-  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[4])->getShape().id(),
-            std::dynamic_pointer_cast<detector_parameter>(result[2])->getShape().id());
+  EXPECT_EQ(std::dynamic_pointer_cast<detector_parameter>(parameters[4])->getShape()->id(),
+            std::dynamic_pointer_cast<detector_parameter>(result[2])->getShape()->id());
 }

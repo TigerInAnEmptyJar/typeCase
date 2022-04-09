@@ -1,5 +1,4 @@
-#ifndef __MATPARAM
-#define __MATPARAM
+#pragma once
 #include "baseparameter.h"
 
 #include <vector>
@@ -337,5 +336,3 @@ istream& operator>>(istream& i, material_parameter& m);
  * \return
  */
 ostream& operator<<(ostream& o, const material_parameter& m);
-
-#endif

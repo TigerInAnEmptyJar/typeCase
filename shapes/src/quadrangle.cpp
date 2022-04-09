@@ -44,7 +44,7 @@ struct QuadrangleShapeProvider : public FactoryShapeProvider,
              param.value(4).valueType() != ParameterValue::ValueType::POINT3D);
   }
 };
-volatile static std::shared_ptr<QuadrangleShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<QuadrangleShapeProvider>();
   r->install();
   return r;

@@ -23,21 +23,20 @@ int detector_parameter::getStackType() const { return stackType; }
 
 void detector_parameter::setStackType(int s) { stackType = s; }
 
-shape_parameter detector_parameter::getShape() const { return shape; }
+std::shared_ptr<shape_parameter> detector_parameter::getShape() const { return shape; }
 
 void detector_parameter::setShape(const shape_parameter& sh)
 {
-  shape = sh;
-  shape.setCompleteWrite(true);
+  shape = std::make_shared<shape_parameter>(sh);
+  shape->setCompleteWrite(true);
 }
 
 ostream& operator<<(ostream& o, const detector_parameter& d)
 {
   o << d.getNumberOfElements() << " " << d.getStackType() << " " << d.getID() << " "
     << d.getMaterial() << " " << d.getMaxDistance() << d.getName().data() << endl;
-  shape_parameter sh;
-  sh = d.getShape();
-  o << sh;
+  auto sh = d.getShape();
+  o << *sh;
   return o;
 }
 

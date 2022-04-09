@@ -41,7 +41,7 @@ struct TriangleShapeProvider : public FactoryShapeProvider,
              param.value(2).valueType() != ParameterValue::ValueType::POINT3D);
   }
 };
-volatile static std::shared_ptr<TriangleShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<TriangleShapeProvider>();
   r->install();
   return r;

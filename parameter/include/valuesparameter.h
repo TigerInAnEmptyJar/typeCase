@@ -6,6 +6,18 @@
 #include <variant>
 #include <vector>
 
+template <typename...>
+struct is_one_of
+{
+  static constexpr bool value = false;
+};
+
+template <typename T, typename S, typename... Ts>
+struct is_one_of<T, S, Ts...>
+{
+  static constexpr bool value = std::is_same<T, S>::value || is_one_of<T, Ts...>::value;
+};
+
 class algorithm_parameter;
 
 /*!
@@ -71,7 +83,10 @@ public:
    * Assigns type and value.
    * \param value the value this object holds.
    */
-  template <typename T>
+  template <typename T, typename = typename std::enable_if<is_one_of<
+                            T, bool, int, float, double, point3D, vector3D, std::string,
+                            std::vector<int>, std::vector<float>, std::vector<double>,
+                            std::vector<std::string>, std::shared_ptr<algorithm_parameter>>::value>>
   ParameterValue(T value) : _value(value)
   {
   }
@@ -89,7 +104,10 @@ public:
    * \param value the new value of the object.
    * \return this
    */
-  template <typename T>
+  template <typename T, typename = typename std::enable_if<is_one_of<
+                            T, bool, int, float, double, point3D, vector3D, std::string,
+                            std::vector<int>, std::vector<float>, std::vector<double>,
+                            std::vector<std::string>, std::shared_ptr<algorithm_parameter>>::value>>
   ParameterValue& operator=(T value)
   {
     if (std::holds_alternative<T>(_value)) {

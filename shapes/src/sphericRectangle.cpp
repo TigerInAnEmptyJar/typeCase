@@ -43,7 +43,7 @@ struct SphericRectangleShapeProvider
              param.value(4).valueType() != ParameterValue::ValueType::POINT3D);
   }
 };
-volatile static std::shared_ptr<SphericRectangleShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<SphericRectangleShapeProvider>();
   r->install();
   return r;

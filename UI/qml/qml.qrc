@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>HomeForm.ui.qml</file>
+        <file>Algorithms.qml</file>
+        <file>Database.qml</file>
+        <file>AlgorithmDelegate.qml</file>
+        <file>BeamtimeDelegate.qml</file>
+        <file>DetectorDelegate.qml</file>
+        <file>MaterialDelegate.qml</file>
+        <file>RunDelegate.qml</file>
+        <file>ShapeDelegate.qml</file>
+        <file>Material.qml</file>
+        <file>Setup.qml</file>
+        <file>Shapes.qml</file>
+        <file>ShapeDisplay.qml</file>
+        <file>BeamtimeDisplay.qml</file>
+        <file>RunDisplay.qml</file>
+        <file>common/Common.qml</file>
+        <file>common/LoadButton.qml</file>
+        <file>common/TcButton.qml</file>
+        <file>common/qmldir</file>
+        <file>common/TcListView.qml</file>
+        <file>common/TcValuesView.qml</file>
+    </qresource>
+</RCC>

@@ -42,7 +42,7 @@ struct CylinderShapeProvider : public FactoryShapeProvider,
              param.value(2).valueType() != ParameterValue::ValueType::FLOAT);
   }
 };
-volatile static std::shared_ptr<CylinderShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<CylinderShapeProvider>();
   r->install();
   return r;

@@ -176,7 +176,7 @@ struct FiberShapeProvider : public FactoryShapeProvider,
              param.value(6).valueType() != ParameterValue::ValueType::BOOLEAN);
   }
 };
-volatile static std::shared_ptr<FiberShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<FiberShapeProvider>();
   r->install();
   return r;

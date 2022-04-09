@@ -182,14 +182,14 @@ void tofAnalysis::defineDetectors(vector<std::shared_ptr<detector_parameter>>& d
     }
     Detectors[i]->setNumberOfElements(dets[id]->getNumberOfElements());
     Detectors[i]->setStackType(dets[id]->getStackType());
-    anaLog << "define detector shape " << dets[id]->getShape().getName();
-    shape_parameter s = dets[id]->getShape();
-    auto shape = shapeFactory.createVolume(dets[id]->getShape());
+    anaLog << "define detector shape " << dets[id]->getShape()->getName();
+    auto s = dets[id]->getShape();
+    auto shape = shapeFactory.createVolume(*dets[id]->getShape());
     shape->setMaxDistance(dets[id]->getMaxDistance());
     anaLog << "... setShape";
     Detectors[i]->setShapeFirstElement(shape);
     anaLog << "... add detector to Setup" << endli;
-    if (s.getName() == "wedge" || s.getName() == "spiral")
+    if (s->getName() == "wedge" || s->getName() == "spiral")
       Detectors[i]->setCircular();
     // Detectors[i]->setCircular(dets[id].isCircular());
     Setup.addDetector(*Detectors[i]);

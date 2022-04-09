@@ -46,7 +46,7 @@ struct SphericTriangleShapeProvider
              param.value(7).valueType() != ParameterValue::ValueType::INT);
   }
 };
-volatile static std::shared_ptr<SphericTriangleShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<SphericTriangleShapeProvider>();
   r->install();
   return r;

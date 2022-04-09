@@ -1,6 +1,5 @@
-find_package(GTest)
-
-set(PARAMETERIO_TEST_SOURCES
+tc_add_test(parameterIoTest
+  SOURCES
     algorithmIO_test.cpp
     beamtimeIO_test.cpp
     databaseIO_test.cpp
@@ -9,23 +8,11 @@ set(PARAMETERIO_TEST_SOURCES
     runIO_test.cpp
     shapeIO_test.cpp
     jsonIO_test.cpp
-    #setupIO_test.cpp
-)
-add_executable(parameterIoTest
-    ${PARAMETERIO_TEST_SOURCES}
-    fixture.h
     fixture.cpp
-)
-
-target_link_libraries(parameterIoTest
-    PRIVATE libparameterIO
-    PRIVATE ${GTEST_BOTH_LIBRARIES}
-    PRIVATE gmock
-    PRIVATE pthread
-)
-
-gtest_add_tests(parameterIoTest
-    SOURCES ${PARAMETERIO_TEST_SOURCES}
+#    testingUtilities.cpp
+    #setupIO_test.cpp
+  DEPENDS
+    PRIVATE TypeCase::ParameterIO
 )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/data/algorithms_0.data ${CMAKE_CURRENT_BINARY_DIR}/data/algorithms_0.data COPYONLY)

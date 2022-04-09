@@ -3,6 +3,7 @@
 #include "logger.h"
 #include "shapes.h"
 #include "tofAnalysis_t.h"
+#include <QElapsedTimer>
 #include <QtCore/QDateTime>
 
 pthread_mutex_t initer = PTHREAD_MUTEX_INITIALIZER;
@@ -35,7 +36,7 @@ int tofAnalysis::getAlgorithm(const algorithm_parameter& param, const run_parame
 void tofAnalysis::initAlgorithms(const vector<std::shared_ptr<algorithm_parameter>>& p,
                                  const std::shared_ptr<run_parameter>& runParam)
 {
-  QTime timer;
+  QElapsedTimer timer;
   timer.start();
   if (!isInitD)
     return;
@@ -281,7 +282,7 @@ void tofAnalysis::initAlgorithms(const vector<std::shared_ptr<algorithm_paramete
     cout << numf << " " << j << endl;
   numf = j;
   anaLog << numf << " algorithms for " << nThreads << " threads declared, taking "
-         << timer.elapsed() << "ms" << decD << endli;
+         << static_cast<int>(timer.elapsed()) << "ms" << decD << endli;
   numAlgorithms = numf;
   isInitA = true;
 }

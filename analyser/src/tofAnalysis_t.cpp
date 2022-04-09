@@ -1,6 +1,7 @@
 #include "tofAnalysis_t.h"
 #include "Eparticles.h"
 #include "logger.h"
+#include <QElapsedTimer>
 #include <QtCore/QDateTime>
 #include <fstream>
 #include <stdlib.h>
@@ -140,7 +141,7 @@ bool tofAnalysis::process()
   readInID = 9;
   anaLog << "go..." << endli;
   numberOfEventsToAnalyse = INT_MAX;
-  QTime timer;
+  QElapsedTimer timer;
   timer.start();
   count = 0;
   tCount = 0;
@@ -184,7 +185,7 @@ bool tofAnalysis::process()
   //       for(int i=0;i<nThreads;i++)
   // 	pthread_join(threads[i],NULL);
   emit analysisFinished(count);
-  anaLog << "analysis finished, taking " << timer.elapsed()
+  anaLog << "analysis finished, taking " << static_cast<int>(timer.elapsed())
          << "ms: " << ((float)timer.elapsed()) / (ii + 1) << "ms/event" << endli;
   return true;
 }
@@ -197,7 +198,7 @@ bool tofAnalysis::step(int num)
     return false;
   if (!isInitS)
     return false;
-  QTime timer, tim;
+  QElapsedTimer timer, tim;
   timer.start();
   for (int i = 0; i < numAlgorithms; i++)
     //    int i=0;
@@ -238,7 +239,7 @@ bool tofAnalysis::step(int num)
   //     if(nThreads>1)
   //       for(int i=0;i<nThreads;i++)
   // 	pthread_join(threads[i],NULL);
-  anaLog << "analysis finished, taking " << timer.elapsed()
+  anaLog << "analysis finished, taking " << static_cast<int>(timer.elapsed())
          << "ms: " << ((float)timer.elapsed()) / (num + 1) << "ms/event" << endli;
   emit analysisFinished(count);
   return true;

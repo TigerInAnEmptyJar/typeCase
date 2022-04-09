@@ -18,17 +18,19 @@ if (DOXYGEN_FOUND)
         VERBATIM )
 endif (DOXYGEN_FOUND)
 
-add_library(lib${PROJECT_NAME} STATIC
+tc_add_library(libdocumentation
+  HEADERS
     include/tmyclass.h
+  SOURCES
     src/functionnametypedoc.cpp
     src/nametypedoc.cpp
     src/tmyclass.cpp
     src/utils.cpp
-)
-target_include_directories(lib${PROJECT_NAME}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_link_libraries(lib${PROJECT_NAME}
-    PUBLIC libgeometry
+  PUBLIC_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DEPENDS
+    PUBLIC TypeCase::Geometry
     PUBLIC Qt5::Core
+  ALIAS TypeCase::Documentation
 )
+

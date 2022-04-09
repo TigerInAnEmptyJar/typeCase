@@ -151,7 +151,7 @@ struct WedgeShapeProvider : public FactoryShapeProvider,
              param.value(6).valueType() != ParameterValue::ValueType::FLOAT);
   }
 };
-volatile static std::shared_ptr<WedgeShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<WedgeShapeProvider>();
   r->install();
   return r;

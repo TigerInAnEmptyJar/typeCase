@@ -361,15 +361,10 @@ TEST_F(ParameterIoTest, detector_write_read_json)
   for (size_t i = 1; i < expected.size(); ++i) {
     detector_parameter a(*std::dynamic_pointer_cast<detector_parameter>(result[i]));
     detector_parameter b(*std::dynamic_pointer_cast<detector_parameter>(expected[i]));
-    // comparing shapes is far from trivial, so we extract the shapes, compare them and remove
-    // them from the reaction before comparing the rest.
-    auto sh1 = a.getShape();
-    auto sh2 = b.getShape();
-    EXPECT_THAT(sh1, IsShapeEqual(sh2));
-    a.setShape(shape_parameter());
-    b.setShape(shape_parameter());
+    // in this version, the material number is not preserved.
+    a.setMaterial(b.getMaterial());
 
-    EXPECT_EQ(a, b);
+    EXPECT_THAT(a, IsDetectorEqual(b));
   }
 }
 
@@ -395,7 +390,7 @@ TEST_F(ParameterIoTest, detector_read_json)
   ASSERT_FALSE(a->getMaterialId().is_nil());
   ASSERT_EQ(100, a->getNumberOfElements());
   auto ash = a->getShape();
-  EXPECT_THAT(ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
+  EXPECT_THAT(*ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
 
   auto b = std::dynamic_pointer_cast<detector_parameter>(result[2]);
   ASSERT_NE(nullptr, b);
@@ -406,7 +401,7 @@ TEST_F(ParameterIoTest, detector_read_json)
   ASSERT_FALSE(b->getMaterialId().is_nil());
   ASSERT_EQ(150, b->getNumberOfElements());
   auto bsh = b->getShape();
-  EXPECT_THAT(bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
+  EXPECT_THAT(*bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
 
   auto c = std::dynamic_pointer_cast<reaction_parameter>(result[0]);
   ASSERT_NE(nullptr, c);
@@ -636,15 +631,10 @@ TEST_F(ParameterIoTest, setup_write_read_json)
   for (size_t i = 1; i < 3; ++i) {
     detector_parameter a(*std::dynamic_pointer_cast<detector_parameter>(result[i + 2]));
     detector_parameter b(*std::dynamic_pointer_cast<detector_parameter>(expected[i]));
-    // comparing shapes is far from trivial, so we extract the shapes, compare them and remove
-    // them from the reaction before comparing the rest.
-    auto sh1 = a.getShape();
-    auto sh2 = b.getShape();
-    EXPECT_THAT(sh1, IsShapeEqual(sh2));
-    a.setShape(shape_parameter());
-    b.setShape(shape_parameter());
+    // In this version, the material number is not preserved.
+    a.setMaterial(b.getMaterial());
 
-    EXPECT_EQ(a, b);
+    EXPECT_THAT(a, IsDetectorEqual(b));
   }
   for (size_t i = 3; i < 5; ++i) {
     material_parameter a(*std::dynamic_pointer_cast<material_parameter>(result[i - 2]));
@@ -675,7 +665,7 @@ TEST_F(ParameterIoTest, setup_read_json)
   ASSERT_EQ(result[2]->id(), a->getMaterialId());
   ASSERT_EQ(100, a->getNumberOfElements());
   auto ash = a->getShape();
-  EXPECT_THAT(ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
+  EXPECT_THAT(*ash, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[0])));
 
   auto b = std::dynamic_pointer_cast<detector_parameter>(result[4]);
   ASSERT_NE(nullptr, b);
@@ -686,7 +676,7 @@ TEST_F(ParameterIoTest, setup_read_json)
   ASSERT_EQ(result[1]->id(), b->getMaterialId());
   ASSERT_EQ(150, b->getNumberOfElements());
   auto bsh = b->getShape();
-  EXPECT_THAT(bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
+  EXPECT_THAT(*bsh, IsShapeEqual(*std::dynamic_pointer_cast<shape_parameter>(parameters[1])));
 
   auto c = std::dynamic_pointer_cast<reaction_parameter>(result[0]);
   ASSERT_NE(nullptr, c);

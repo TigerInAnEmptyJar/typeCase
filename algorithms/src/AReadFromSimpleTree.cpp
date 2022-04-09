@@ -79,7 +79,7 @@ AReadFromSimpleTree::AReadFromSimpleTree(
         }
         tmpPath += "/";
         for (unsigned int i = 1; i < components.size(); i++) {
-          tmp = (tmpPath + components[i]).data();
+          tmp.setPath((tmpPath + components[i]).data());
           if (!tmp.exists()) {
             QDir tmp2(tmpPath.data());
             tmp2.mkdir(components[i].data());
@@ -111,7 +111,7 @@ AReadFromSimpleTree::AReadFromSimpleTree(
         }
 #else
         QProcess copy;
-        copy.start(QString((string("cp ") + TrackFile + " " + filenames[3]).data()));
+        copy.start("cp", QStringList{} << TrackFile.data() << filenames[3].data(), {});
         while (copy.waitForFinished()) {
         }
 #endif
@@ -157,7 +157,7 @@ AReadFromSimpleTree::AReadFromSimpleTree(
         }
 #else
         QProcess copy;
-        copy.start(QString((string("cp ") + PixelFile + " " + filenames[1]).data()));
+        copy.start("cp", QStringList{} << PixelFile.data() << filenames[1].data(), {});
         while (copy.waitForFinished()) {
         }
 #endif
@@ -190,7 +190,7 @@ AReadFromSimpleTree::AReadFromSimpleTree(
         }
 #else
         QProcess copy;
-        copy.start(QString((string("cp ") + ClusterFile + " " + filenames[2]).data()));
+        copy.start("cp", QStringList{} << ClusterFile.data() << filenames[2].data(), {});
         while (copy.waitForFinished()) {
         }
 #endif
@@ -227,7 +227,7 @@ AReadFromSimpleTree::AReadFromSimpleTree(
         }
 #else
         QProcess copy;
-        copy.start(QString((string("cp ") + HitFile + " " + filenames[0]).data()));
+        copy.start("cp", QStringList{} << HitFile.data() << filenames[0].data(), {});
         while (copy.waitForFinished()) {
         }
 #endif
@@ -1277,7 +1277,7 @@ void AReadFromSimpleTree::getNewInput(string* files, int* type, int nFiles, bool
             }
 #else
             QProcess copy;
-            copy.start(QString((string("cp ") + files[i] + " " + filenames[0]).data()));
+            copy.start("cp", QStringList{} << files[i].data() << filenames[0].data(), {});
             while (copy.waitForFinished()) {
             }
 #endif
@@ -1321,7 +1321,7 @@ void AReadFromSimpleTree::getNewInput(string* files, int* type, int nFiles, bool
             }
 #else
             QProcess copy;
-            copy.start(QString((string("cp ") + files[i] + " " + filenames[1]).data()));
+            copy.start("cp", QStringList{} << files[i].data() << filenames[1].data(), {});
             while (copy.waitForFinished()) {
             }
 #endif
@@ -1364,7 +1364,7 @@ void AReadFromSimpleTree::getNewInput(string* files, int* type, int nFiles, bool
             }
 #else
             QProcess copy;
-            copy.start(QString((string("cp ") + files[i] + " " + filenames[2]).data()));
+            copy.start("cp", QStringList{} << files[i].data() << filenames[2].data(), {});
             while (copy.waitForFinished()) {
             }
 #endif
@@ -1403,7 +1403,7 @@ void AReadFromSimpleTree::getNewInput(string* files, int* type, int nFiles, bool
             }
 #else
             QProcess copy;
-            copy.start(QString((string("cp ") + files[i] + " " + filenames[3]).data()));
+            copy.start("cp", QStringList{} << files[i].data() << filenames[3].data(), {});
             while (copy.waitForFinished()) {
             }
 #endif

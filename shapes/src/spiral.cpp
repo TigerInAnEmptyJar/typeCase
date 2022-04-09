@@ -79,7 +79,7 @@ struct SpiralShapeProvider : public FactoryShapeProvider,
              param.value(7).valueType() != ParameterValue::ValueType::FLOAT);
   }
 };
-volatile static std::shared_ptr<SpiralShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<SpiralShapeProvider>();
   r->install();
   return r;

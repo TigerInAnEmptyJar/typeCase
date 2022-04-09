@@ -72,7 +72,7 @@ void ParameterWriter2::writeSingleDetector(std::ostream& output,
   output << detector->getNumberOfElements() << " " << detector->getStackType() << " "
          << detector->getID() << " " << detector->getMaterial() << " " << detector->getMaxDistance()
          << detector->getName().data() << endl;
-  writeSingleShape(output, std::make_shared<shape_parameter>(detector->getShape()));
+  writeSingleShape(output, detector->getShape());
 }
 
 string ParameterWriter2::getVersionString(BaseParameterWriter::FileType filetype) const

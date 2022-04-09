@@ -1,8 +1,5 @@
-project(algorithm)
-
-find_package(Qt5 COMPONENTS Core REQUIRED)
-
-add_library(lib${PROJECT_NAME} STATIC
+tc_add_library(libalgorithm
+  HEADERS
     include/AHitClusterSearch.h
     include/GetTheShape.h
     include/APromptHistoTracker.h
@@ -56,6 +53,7 @@ add_library(lib${PROJECT_NAME} STATIC
     include/APixelTreeWriteOut.h
     include/AGenerateEvents.h
     include/AapplyLRC.h
+  SOURCES
     src/AAssignHitsToTracks.cpp
     src/AapplyLRC.cpp
     src/ABetheBloch.cpp
@@ -78,7 +76,7 @@ add_library(lib${PROJECT_NAME} STATIC
     src/AKinFit.cpp
     src/AKinkSearch.cpp
     src/ALineTrackSearch.cpp
-#    src/AMCCompare.cpp
+  #    src/AMCCompare.cpp
     src/AMomentumFromGeometry.cpp
     src/AMultipleTreeInput.cpp
     src/AMultipleTreeOutput.cpp
@@ -92,7 +90,7 @@ add_library(lib${PROJECT_NAME} STATIC
     src/ATDCcalibration.cpp
     src/ATeufelCorrection.cpp
     src/ATofPixCorrection.cpp
-#    src/ATofStrawTrackFinder.cpp
+  #    src/ATofStrawTrackFinder.cpp
     src/ATrackTreeInput.cpp
     src/ATrackTreeOutput.cpp
     src/AVertexFit.cpp
@@ -119,14 +117,12 @@ add_library(lib${PROJECT_NAME} STATIC
     src/MicroPixel.cpp
     src/readFromTade.cpp
     src/Ringpixel.cpp
-)
-target_include_directories(lib${PROJECT_NAME}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_link_libraries(lib${PROJECT_NAME}
-    PUBLIC libparameter
-    PUBLIC libshape
-    PUBLIC libbasic
-    PUBLIC pthread
+  PUBLIC_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DEPENDS
+    PUBLIC TypeCase::Parameter
+    PUBLIC TypeCase::Shape
+    PUBLIC TypeCase::Basic
     PUBLIC ROOT::Core
-)
+    ALIAS TypeCase::Algorithm
+  )

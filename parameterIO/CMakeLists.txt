@@ -1,6 +1,5 @@
-project(parameterIO)
-
-add_library(lib${PROJECT_NAME} STATIC
+tc_add_library(liparameterIO
+  HEADERS
     include/parameterio.h
     include/baseparameterwriter.h
     include/baseparameterreader.h
@@ -13,6 +12,7 @@ add_library(lib${PROJECT_NAME} STATIC
     include/parameterwriter2.h
     include/jsonparameterwriter.h
     include/versions.h
+  SOURCES
     src/parameterio.cpp
     src/parameterio_setup.cpp
     src/parameterreader0.cpp
@@ -23,16 +23,13 @@ add_library(lib${PROJECT_NAME} STATIC
     src/parameterwriter1.cpp
     src/parameterwriter2.cpp
     src/jsonparameterwriter.cpp
-)
-
-target_include_directories(lib${PROJECT_NAME}
-	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-target_link_libraries(lib${PROJECT_NAME}
-    PUBLIC libparameter
+  PUBLIC_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DEPENDS
+    PUBLIC TypeCase::Parameter
     PRIVATE Qt5::Core
     PRIVATE stdc++fs
+  ALIAS TypeCase::ParameterIO
 )
 
 add_subdirectory(tests)

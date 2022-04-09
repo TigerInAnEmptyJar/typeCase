@@ -357,7 +357,7 @@ QJsonObject JsonParameterWriter::fromDetector(std::shared_ptr<base_parameter> co
   result.insert(Keys::detector_number, detector->getID());
   result.insert(Keys::max_distance, static_cast<double>(detector->getMaxDistance()));
   result.insert(Keys::is_circular, detector->isCircular());
-  auto tmp = std::make_shared<shape_parameter>(detector->getShape());
+  auto tmp = detector->getShape();
   result.insert(Keys::detector_shape, fromShape(tmp));
   if (detector->material() != nullptr) {
     result.insert(Keys::material_id,

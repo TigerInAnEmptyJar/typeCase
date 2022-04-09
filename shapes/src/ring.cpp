@@ -86,7 +86,7 @@ struct RingShapeProvider : public FactoryShapeProvider,
              param.value(4).valueType() != ParameterValue::ValueType::FLOAT);
   }
 };
-volatile static std::shared_ptr<RingShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<RingShapeProvider>();
   r->install();
   return r;

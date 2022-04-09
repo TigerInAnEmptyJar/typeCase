@@ -40,8 +40,7 @@ struct CircleShapeProvider : public FactoryShapeProvider,
              param.value(2).valueType() != ParameterValue::ValueType::FLOAT);
   }
 };
-
-volatile static std::shared_ptr<CircleShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<CircleShapeProvider>();
   r->install();
   return r;

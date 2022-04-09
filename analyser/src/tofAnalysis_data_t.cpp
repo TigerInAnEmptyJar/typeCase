@@ -1,10 +1,12 @@
 //#include "algorithms.h"
 #include "logger.h"
 #include "tofAnalysis_t.h"
+#include <QElapsedTimer>
 #include <QtCore/QDateTime>
+
 void tofAnalysis::initData()
 {
-  QTime timer;
+  QElapsedTimer timer;
   timer.start();
   if (!isInitS)
     return;
@@ -91,7 +93,8 @@ void tofAnalysis::initData()
     }
   }
   isInitD = true;
-  anaLog << "init data structures done, taking " << timer.elapsed() << "ms" << decD << endli;
+  anaLog << "init data structures done, taking " << static_cast<int>(timer.elapsed()) << "ms"
+         << decD << endli;
 }
 void tofAnalysis::killData()
 {

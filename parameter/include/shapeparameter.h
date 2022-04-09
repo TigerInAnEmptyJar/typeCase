@@ -12,7 +12,6 @@ using namespace std;
 class shape_parameter : public values_parameter
 {
 public:
-  using values_parameter::values_parameter;
   shape_parameter() = default;
   shape_parameter(shape_parameter const&) = default;
   shape_parameter(shape_parameter&&) = default;

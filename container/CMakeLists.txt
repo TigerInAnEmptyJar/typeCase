@@ -1,6 +1,5 @@
-project(container)
-
-add_library(lib${PROJECT_NAME} STATIC
+tc_add_library(libcontainer
+  HEADERS
     include/detector.h
     include/CommonCalibrationParser.h
     include/rawHit.h
@@ -15,6 +14,7 @@ add_library(lib${PROJECT_NAME} STATIC
     include/container.h
     include/TBase.h
     include/hitCluster.h
+  SOURCES
     src/calibHit.cpp
     src/CommonCalibrationParser.cpp
     src/detector.cpp
@@ -28,12 +28,11 @@ add_library(lib${PROJECT_NAME} STATIC
     src/material.cpp
     src/rawHit.cpp
     src/TBase.cpp
+  PUBLIC_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DEPENDS
+    PUBLIC TypeCase::Shape
+    PUBLIC TypeCase::Basic
+  ALIAS TypeCase::Container
 )
 
-target_include_directories(lib${PROJECT_NAME}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_link_libraries(lib${PROJECT_NAME}
-    PUBLIC libshape
-    PUBLIC libbasic
-)

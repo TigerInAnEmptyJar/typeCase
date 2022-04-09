@@ -6,6 +6,43 @@ using testing::_;
 using testing::Gt;
 using testing::SizeIs;
 
+std::ostream& operator<<(std::ostream& o, ShapeType s)
+{
+  o << static_cast<int>(s);
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, planeShape const& s)
+{
+  o << s.getName();
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, base_shape const& s)
+{
+  o << s.getName();
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, std::shared_ptr<algorithm_parameter> s)
+{
+  o << s.get();
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, std::shared_ptr<planeShape> s)
+{
+  o << s.get();
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, std::shared_ptr<base_shape> s)
+{
+  o << s.get();
+  return o;
+}
+
+template <typename T>
+std::ostream& operator<<(std::ostream& o, std::shared_ptr<T> s)
+{
+  o << s.get();
+  return o;
+}
 /// \todo the signals still need testing
 namespace test {
 /// Test class for testing plane installation

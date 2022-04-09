@@ -6,6 +6,14 @@
 
 using namespace parameter::IO;
 
+std::ostream& operator<<(std::ostream& o, algorithm_parameter::Category c);
+std::ostream& operator<<(std::ostream& o, run_parameter::RunType const& s);
+std::ostream& operator<<(std::ostream& o, ParameterValue::ValueType const& s);
+std::ostream& operator<<(std::ostream& o, base_parameter const& s);
+std::ostream& operator<<(std::ostream& o, std::shared_ptr<base_parameter> const& s);
+std::ostream& operator<<(std::ostream& o, algorithm_parameter const& s);
+std::ostream& operator<<(std::ostream& o, std::shared_ptr<algorithm_parameter> const& s);
+
 class ParameterIoTest : public testing::Test
 {
 public:
@@ -81,4 +89,19 @@ MATCHER_P(IsShapeEqual_0, shape1, "")
     EXPECT_EQ(sh1.value(i).valueType(), sh2.value(i).valueType());
   }
   return shape1.getName() == arg.getName();
+}
+
+MATCHER_P(IsDetectorEqual, detector1, "")
+{
+  auto& d1 = static_cast<detector_parameter const&>(detector1);
+  auto& d2 = static_cast<detector_parameter const&>(arg);
+  EXPECT_THAT(d1.getMaxDistance(), testing::FloatNear(d2.getMaxDistance(), 0.01f));
+  EXPECT_THAT(*d1.getShape(), IsShapeEqual(*d2.getShape()));
+  EXPECT_EQ(d1.getName(), d2.getName());
+  EXPECT_EQ(d1.getDescription(), d2.getDescription());
+  EXPECT_EQ(d1.getNumberOfElements(), d2.getNumberOfElements());
+  EXPECT_EQ(d1.getStackType(), d2.getStackType());
+  EXPECT_EQ(d1.getMaterial(), d2.getMaterial());
+  EXPECT_EQ(d1.getMaterialId(), d2.getMaterialId());
+  return true;
 }

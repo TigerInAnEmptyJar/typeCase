@@ -1,22 +1,21 @@
-project(shape)
-add_library(lib${PROJECT_NAME}basic STATIC
+tc_add_library(libshapebasic
+  HEADERS
     include/volumeShape.h
     include/planeShape.h
     include/baseShape.h
+  SOURCES
     src/baseShape.cpp
     src/planeShape.cpp
     src/volumeShape.cpp
+  PUBLIC_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DEPENDS
+    TypeCase::Geometry
+    TypeCase::Parameter
+  ALIAS TypeCase::ShapeBase
 )
-target_include_directories(lib${PROJECT_NAME}basic
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-target_link_libraries(lib${PROJECT_NAME}basic
-    PUBLIC libgeometry
-    PUBLIC libparameter
-)
-
-add_library(lib${PROJECT_NAME} STATIC
+tc_add_library(libshape
+  HEADERS
     include/shapes.h
     include/ring.h
     include/hexPrism.h
@@ -31,6 +30,7 @@ add_library(lib${PROJECT_NAME} STATIC
     include/quadrangle.h
     include/wedge.h
     include/provideShapes.h
+  SOURCES
     src/provideShapes.cpp
     src/cylinder.cpp
     src/getShape.cpp
@@ -48,13 +48,12 @@ add_library(lib${PROJECT_NAME} STATIC
     src/shape_utilities.cpp
     src/sphericTriangle.cpp
     src/strawTube.cpp
-)
-target_include_directories(lib${PROJECT_NAME}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_link_libraries(lib${PROJECT_NAME}
-    PUBLIC libshapebasic
-    PUBLIC libfactory
+  PUBLIC_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DEPENDS
+    PUBLIC TypeCase::ShapeBase
+    PUBLIC TypeCase::Factory
+  ALIAS TypeCase::Shape
 )
 
 add_subdirectory(tests)

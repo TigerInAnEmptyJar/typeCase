@@ -9,6 +9,21 @@ using testing::_;
 using testing::Gt;
 using testing::SizeIs;
 
+std::ostream& operator<<(std::ostream& o, AlgorithmType a)
+{
+  o << static_cast<int>(a);
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, TSetup const& a)
+{
+  o << "Setup: " << a.name();
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, TEvent const& a)
+{
+  o << "Event: " << a.name();
+  return o;
+}
 /// \todo the signals still need testing
 namespace test {
 /// Test class for testing algorithm installation

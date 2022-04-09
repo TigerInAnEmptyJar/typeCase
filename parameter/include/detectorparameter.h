@@ -106,7 +106,7 @@ public:
    *  Returns the shape-parameter of the first element of the detector.
    * \return
    */
-  shape_parameter getShape() const;
+  std::shared_ptr<shape_parameter> getShape() const;
 
   /*!
    * \brief setShape
@@ -177,7 +177,7 @@ public:
 private:
   int numberOfElements;
   float maxDist;
-  shape_parameter shape;
+  std::shared_ptr<shape_parameter> shape;
   int stackType;
   int fmaterial;
   boost::uuids::uuid _materialId;

@@ -196,7 +196,7 @@ struct HexprismShapeProvider : public FactoryShapeProvider,
              param.value(4).valueType() != ParameterValue::ValueType::INT);
   }
 };
-volatile static std::shared_ptr<HexprismShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<HexprismShapeProvider>();
   r->install();
   return r;

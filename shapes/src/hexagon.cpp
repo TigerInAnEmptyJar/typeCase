@@ -40,7 +40,7 @@ struct HexagonShapeProvider : public FactoryShapeProvider,
              param.value(2).valueType() != ParameterValue::ValueType::VECTOR3D);
   }
 };
-volatile static std::shared_ptr<HexagonShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<HexagonShapeProvider>();
   r->install();
   return r;

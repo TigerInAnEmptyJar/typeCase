@@ -39,7 +39,7 @@ struct RectangleShapeProvider : public FactoryShapeProvider,
              param.value(3).valueType() != ParameterValue::ValueType::POINT3D);
   }
 };
-volatile static std::shared_ptr<RectangleShapeProvider> prov = [] {
+auto prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<RectangleShapeProvider>();
   r->install();
   return r;

@@ -1,21 +1,18 @@
-project(factory)
-
-add_library(lib${PROJECT_NAME} STATIC
+tc_add_library(libfactory
+  HEADERS
     include/shapeFactory.h
     include/algorithmFactory.h
+  SOURCES
     src/shapeFactory.cpp
     src/algorithmFactory.cpp
-)
-
-target_include_directories(lib${PROJECT_NAME}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-target_link_libraries(lib${PROJECT_NAME}
+  PUBLIC_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DEPENDS
     PUBLIC libparameter
     PUBLIC libshapebasic
     PUBLIC libbasic
-    PUBLIC Boost::uuid
+    PUBLIC Boost::headers
+  ALIAS TypeCase::Factory
 )
 
 add_subdirectory(tests)

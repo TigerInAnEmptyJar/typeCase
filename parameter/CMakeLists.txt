@@ -1,6 +1,5 @@
-project(parameter)
-
-add_library(lib${PROJECT_NAME} STATIC
+tc_add_library(libparameter
+  HEADERS
     include/shapeparameter.h
     include/algorithmparameter.h
     include/beamtimeparameter.h
@@ -9,6 +8,7 @@ add_library(lib${PROJECT_NAME} STATIC
     include/materialparameter.h
     include/baseparameter.h
     include/valuesparameter.h
+  SOURCES
     src/algorithmparameter.cpp
     src/beamtimeparameter.cpp
     src/materialparameter.cpp
@@ -17,14 +17,11 @@ add_library(lib${PROJECT_NAME} STATIC
     src/paintparameter.cpp
     src/shapeparameter.cpp
     src/valuesparameter.cpp
-)
-
-target_include_directories(lib${PROJECT_NAME}
-	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
-target_link_libraries(lib${PROJECT_NAME}
+  PUBLIC_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DEPENDS
     PUBLIC libgeometry
     PUBLIC Qt5::Core
-    PUBLIC Boost::uuid
+    PUBLIC Boost::headers
+  ALIAS TypeCase::Parameter
 )

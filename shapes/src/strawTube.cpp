@@ -52,7 +52,7 @@ struct StrawtubeShapeProvider : public FactoryShapeProvider,
              param.value(6).valueType() != ParameterValue::ValueType::FLOAT);
   }
 };
-volatile static std::shared_ptr<StrawtubeShapeProvider> prov = [] {
+std::shared_ptr<StrawtubeShapeProvider> prov __attribute__((__used__)) = [] {
   auto r = std::make_shared<StrawtubeShapeProvider>();
   r->install();
   return r;

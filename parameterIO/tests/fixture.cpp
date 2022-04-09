@@ -266,3 +266,35 @@ void ParameterIoTest::installRecovery()
     }
   });
 }
+
+std::ostream& operator<<(std::ostream& o, algorithm_parameter::Category c)
+{
+  o << static_cast<int>(c);
+  return o;
+}
+
+std::ostream& operator<<(std::ostream& o, base_parameter const& s)
+{
+  o << s.getName();
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, std::shared_ptr<base_parameter> const& s)
+{
+  o << s.get();
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, std::shared_ptr<algorithm_parameter> const& s)
+{
+  o << s.get();
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, run_parameter::RunType const& s)
+{
+  o << static_cast<int>(s);
+  return o;
+}
+std::ostream& operator<<(std::ostream& o, ParameterValue::ValueType const& s)
+{
+  o << static_cast<int>(s);
+  return o;
+}

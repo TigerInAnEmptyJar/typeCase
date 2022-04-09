@@ -1,13 +1,14 @@
-project(fit)
-add_library(lib${PROJECT_NAME} STATIC
+tc_add_library(libfit
+  HEADERS
     include/fittingRoutines.h
+  SOURCES
     src/kinfit.cpp
     src/lineFit.cpp
     src/vertexFit.cpp
+  PUBLIC_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DEPENDS
+    TypeCase::Geometry
+  ALIAS TypeCase::Fit
 )
-target_include_directories(lib${PROJECT_NAME}
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_link_libraries(lib${PROJECT_NAME}
-    PUBLIC libgeometry
-)
+

@@ -986,7 +986,7 @@ ATDCcalibration::~ATDCcalibration()
       anaLog << " done" << endli;
 #else
       QProcess killer;
-      killer.start((string("rm -f ") + s).data());
+      killer.start("rm", QStringList{} << "-f" << s.data(), {});
       anaLog << "deleting file " << s;
       while (killer.waitForFinished()) {
       }

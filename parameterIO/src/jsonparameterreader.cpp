@@ -293,8 +293,6 @@ std::shared_ptr<base_parameter> JsonParameterReader::toAlgorithm(QJsonObject con
         result.insert(std::make_pair(
             ParameterValue::ValueType::INT,
             [](QJsonObject const& o, std::shared_ptr<algorithm_parameter> a, std::string const& n) {
-              std::cout << "found int parameter" << n << " " << o.value(Keys::pValue).toInt()
-                        << std::endl;
               a->addValue(n, o.value(Keys::pValue).toInt(-1));
             }));
         result.insert(std::make_pair(

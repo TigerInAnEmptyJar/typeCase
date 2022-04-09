@@ -390,17 +390,16 @@ void ParameterWriter0::writeSingleDetector(std::ostream& output,
   output << detector->getNumberOfElements() << " " << detector->getStackType() << " "
          << detector->getID() << " " << detector->getMaterial() << " " << detector->getMaxDistance()
          << detector->getName().data() << "\n";
-  shape_parameter sh;
-  sh = detector->getShape();
+  auto sh = detector->getShape();
   std::map<ParameterValue::ValueType, std::vector<std::pair<std::string, ParameterValue>>> paramMap;
-  for (size_t i = 0; i < sh.numberOfValues(); i++) {
-    paramMap[sh.value(i).valueType()].push_back(std::make_pair(sh.valueName(i), sh.value(i)));
+  for (size_t i = 0; i < sh->numberOfValues(); i++) {
+    paramMap[sh->value(i).valueType()].push_back(std::make_pair(sh->valueName(i), sh->value(i)));
   }
   output << paramMap[ParameterValue::ValueType::POINT3D].size() << " ";
   output << paramMap[ParameterValue::ValueType::VECTOR3D].size() << " ";
   output << paramMap[ParameterValue::ValueType::INT].size() << " ";
   output << paramMap[ParameterValue::ValueType::FLOAT].size() << " ";
-  output << paramMap[ParameterValue::ValueType::STRING].size() << sh.getName() << "\n";
+  output << paramMap[ParameterValue::ValueType::STRING].size() << sh->getName() << "\n";
   point3D p;
   vector3D v;
   for (size_t k = 0; k < paramMap[ParameterValue::ValueType::POINT3D].size(); k++) {
