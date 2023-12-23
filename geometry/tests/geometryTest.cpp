@@ -15,7 +15,7 @@ TEST(GeomObject, basic)
 
 TEST(Point, basic)
 {
-  geo::Point<float, 1> p;
+  geo::Point<float, 1> p{0};
   geo::Point<float, 1> q(1.1f);
 
   EXPECT_EQ(geo::GeomState::Undefined, p.state());
@@ -38,7 +38,7 @@ TEST(Point, basic)
 
 TEST(Point, basic2)
 {
-  geo::Point<float, 2> p;
+  geo::Point<float, 2> p ;
   geo::Point<float, 2> q(1.1f, 2.2f);
 
   EXPECT_EQ(geo::GeomState::Undefined, p.state());

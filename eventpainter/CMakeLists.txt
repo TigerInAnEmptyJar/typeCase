@@ -12,3 +12,9 @@ tc_add_library(libeventpainter
   ALIAS TypeCase::EventPainter
 )
 
+set_target_properties(libeventpainter
+  PROPERTIES
+      CXX_STANDARD 17
+      CXX_STANDARD_REQUIRED YES
+      CXX_EXTENSIONS NO
+)

@@ -37,7 +37,7 @@ class TestAlgorithm : public AAlgorithm
 class messenger
 {
 public:
-  MOCK_METHOD3(create, void(algorithm_parameter const&, TEvent&, TSetup const&));
+  MOCK_METHOD(void, create, (algorithm_parameter const&, TEvent&, TSetup const&));
 };
 } // namespace test
 

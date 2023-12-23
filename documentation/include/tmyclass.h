@@ -1,148 +1,148 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #ifndef TMYCLASS
 #define TMYCLASS
 //#define OLDINPUT
-using namespace std;
-string smallerPath(const string& path);
-string expandPath(const string& path);
+std::string smallerPath(const std::string& path);
+std::string expandPath(const std::string& path);
 
 class nameTypeDoc
 {
 private:
-  string name;
-  string type;
+  std::string name;
+  std::string type;
   int typeId;
-  string doc;
-  string typeDoc;
-  vector<string> description;
-  string specifier;
-  string defaultvalue;
+  std::string doc;
+  std::string typeDoc;
+  std::vector<std::string> description;
+  std::string specifier;
+  std::string defaultvalue;
 
 public:
   nameTypeDoc();
-  nameTypeDoc(string nameIn, string typeIn, int typeIdIn = 0, string specifierIn = "",
-              string docIn = "", string typeDocIn = "");
+  nameTypeDoc(std::string nameIn, std::string typeIn, int typeIdIn = 0, std::string specifierIn = "",
+              std::string docIn = "", std::string typeDocIn = "");
   nameTypeDoc(const nameTypeDoc& n);
-  nameTypeDoc(const string& s);
+  nameTypeDoc(const std::string& s);
   virtual ~nameTypeDoc();
-  string Name() const;
-  string Type() const;
-  string Doc() const;
-  string TypeDoc() const;
-  string Description(int i) const;
+  std::string Name() const;
+  std::string Type() const;
+  std::string Doc() const;
+  std::string TypeDoc() const;
+  std::string Description(int i) const;
   int DescriptionLines() const;
-  string Specifier() const;
-  string Default() const;
+  std::string Specifier() const;
+  std::string Default() const;
   int TypeId() const;
-  void setType(const string& s);
-  void setName(const string& s);
-  void setDoc(const string& s);
+  void setType(const std::string& s);
+  void setName(const std::string& s);
+  void setDoc(const std::string& s);
   void setTypeId(int v);
-  void setTypeDoc(const string& s);
-  void setDescription(const vector<string>& input);
-  void setSpecifier(const string& s);
-  void setDefault(const string& s);
+  void setTypeDoc(const std::string& s);
+  void setDescription(const std::vector<std::string>& input);
+  void setSpecifier(const std::string& s);
+  void setDefault(const std::string& s);
   void clearDescription();
-  void addDescriptionLine(const string& s);
-  void parse(const string& expression);
-  virtual string toString(int ptt = 0) const;
-  virtual string htmlHREF() const;
-  virtual vector<string> htmlNAME() const;
+  void addDescriptionLine(const std::string& s);
+  void parse(const std::string& expression);
+  virtual std::string toString(int ptt = 0) const;
+  virtual std::string htmlHREF() const;
+  virtual std::vector<std::string> htmlNAME(const std::string& classname = "") const;
   nameTypeDoc& operator=(const nameTypeDoc& nt);
   bool operator==(const nameTypeDoc& nt);
-  static int typeIDS(const string& s);
-  static nameTypeDoc parseIt(const string& expression);
+  static int typeIDS(const std::string& s);
+  static nameTypeDoc parseIt(const std::string& expression);
 };
-ostream& operator<<(ostream& o, const nameTypeDoc& t);
-istream& operator>>(istream& o, nameTypeDoc& t);
+std::ostream& operator<<(std::ostream& o, const nameTypeDoc& t);
+std::istream& operator>>(std::istream& o, nameTypeDoc& t);
 class functionNameTypeDoc : public nameTypeDoc
 {
 private:
-  vector<nameTypeDoc> parameter;
-  string limiter;
-  string comment;
+  std::vector<nameTypeDoc> parameter;
+  std::string limiter;
+  std::string comment;
 
 public:
   functionNameTypeDoc();
-  functionNameTypeDoc(string nameIn, string typeIn, int typeIdIn = 0, string specifierIn = "",
-                      string docIn = "", string typeDocIn = "");
+  functionNameTypeDoc(std::string nameIn, std::string typeIn, int typeIdIn = 0, std::string specifierIn = "",
+                      std::string docIn = "", std::string typeDocIn = "");
   functionNameTypeDoc(const functionNameTypeDoc& n);
-  functionNameTypeDoc(const string& s);
+  functionNameTypeDoc(const std::string& s);
   virtual ~functionNameTypeDoc();
-  string Limiter() const;
-  void setLimiter(const string& s);
+  std::string Limiter() const;
+  void setLimiter(const std::string& s);
   nameTypeDoc& Parameter(int i);
   nameTypeDoc getParameter(int i) const;
   int nParameters() const;
   void clearParameter();
   void addParameter(const nameTypeDoc& input);
-  void addParameter(string nameIn, string typeIn, int typeIdIn, string specifierIn = "",
-                    string docIn = "", string typeDocIn = "");
-  void parse(const string& s);
-  virtual string toString(int ptt = 0) const;
-  virtual string ParameterList(int ptt = 0) const;
-  virtual string htmlHREF() const;
-  virtual vector<string> htmlNAME(const string& classname = "") const;
+  void addParameter(std::string nameIn, std::string typeIn, int typeIdIn, std::string specifierIn = "",
+                    std::string docIn = "", std::string typeDocIn = "");
+  void parse(const std::string& s);
+  virtual std::string toString(int ptt = 0) const;
+  virtual std::string ParameterList(int ptt = 0) const;
+  virtual std::string htmlHREF() const;
+  virtual std::vector<std::string> htmlNAME(const std::string& classname = "") const;
   functionNameTypeDoc& operator=(const functionNameTypeDoc& fn);
   bool operator==(const functionNameTypeDoc& fn);
-  static functionNameTypeDoc parseIt(const string& expression);
+  static functionNameTypeDoc parseIt(const std::string& expression);
 };
-ostream& operator<<(ostream& o, const functionNameTypeDoc& t);
-istream& operator>>(istream& o, functionNameTypeDoc& t);
+std::ostream& operator<<(std::ostream& o, const functionNameTypeDoc& t);
+std::istream& operator>>(std::istream& o, functionNameTypeDoc& t);
 
 class TMyClass
 {
 private:
-  string className;
-  string classDoc;
-  string headerfile;
-  vector<string> description;
-  vector<string> superClasses;
-  vector<string> superClassDocs;
-  vector<TMyClass*> supers;
-  vector<int> inherritance;
-  vector<nameTypeDoc> variablesPrivate;
-  vector<nameTypeDoc> variablesProtected;
-  vector<nameTypeDoc> variablesPublic;
-  vector<functionNameTypeDoc> functionsPrivate;
-  vector<functionNameTypeDoc> functionsProtected;
-  vector<functionNameTypeDoc> functionsPublic;
-  vector<functionNameTypeDoc> thesignals;
-  vector<functionNameTypeDoc> slotsPublic;
-  vector<functionNameTypeDoc> slotsProtected;
-  vector<functionNameTypeDoc> slotsPrivate;
-  vector<vector<int>> functionType;
-  vector<functionNameTypeDoc> constructors;
+  std::string className;
+  std::string classDoc;
+  std::string headerfile;
+  std::vector<std::string> description;
+  std::vector<std::string> superClasses;
+  std::vector<std::string> superClassDocs;
+  std::vector<TMyClass*> supers;
+  std::vector<int> inherritance;
+  std::vector<nameTypeDoc> variablesPrivate;
+  std::vector<nameTypeDoc> variablesProtected;
+  std::vector<nameTypeDoc> variablesPublic;
+  std::vector<functionNameTypeDoc> functionsPrivate;
+  std::vector<functionNameTypeDoc> functionsProtected;
+  std::vector<functionNameTypeDoc> functionsPublic;
+  std::vector<functionNameTypeDoc> thesignals;
+  std::vector<functionNameTypeDoc> slotsPublic;
+  std::vector<functionNameTypeDoc> slotsProtected;
+  std::vector<functionNameTypeDoc> slotsPrivate;
+  std::vector<std::vector<int>> functionType;
+  std::vector<functionNameTypeDoc> constructors;
   template <class X>
-  void removeFromVector(vector<X>& v, int pos);
+  void removeFromVector(std::vector<X>& v, int pos);
   void checkFunctionType();
 
 public:
-  TMyClass(string name = "", string doc = "");
+  TMyClass(std::string name = "", std::string doc = "");
   TMyClass(const TMyClass& n);
   virtual ~TMyClass();
   TMyClass& operator=(const TMyClass& n);
   //  bool operator==(const TMyClass&n);
   void clear();
-  string Name() const;
-  void setName(const string& s);
-  string Doc() const;
-  void setDoc(const string& s);
-  bool inherritsFrom(const string& clsn);
-  string Description(int i) const;
+  std::string Name() const;
+  void setName(const std::string& s);
+  std::string Doc() const;
+  void setDoc(const std::string& s);
+  bool inherritsFrom(const std::string& clsn);
+  std::string Description(int i) const;
   int DescriptionLines() const;
-  void setDescription(const vector<string>& input);
+  void setDescription(const std::vector<std::string>& input);
   void clearDescription();
-  void addDescriptionLine(const string& s);
-  string HeaderFile() const;
-  void setHeaderFile(const string& s);
+  void addDescriptionLine(const std::string& s);
+  std::string HeaderFile() const;
+  void setHeaderFile(const std::string& s);
   int nSuperClasses() const;
-  string SuperClass(int i) const;
-  string SuperClassDoc(int i) const;
+  std::string SuperClass(int i) const;
+  std::string SuperClassDoc(int i) const;
   TMyClass* Super(int i) const;
   int InherritanceType(int i) const;
-  string Inherritance(int i) const;
+  std::string Inherritance(int i) const;
   int nVariables(int t) const;
   nameTypeDoc& Variable(int i, int t);
   nameTypeDoc getVariable(int i, int t) const;
@@ -160,49 +160,49 @@ public:
   functionNameTypeDoc getConstructor(int i) const;
   functionNameTypeDoc& Constructor(int i);
   void clearSuperClasses();
-  void addSuperClass(const string& superClassName, const string& superClassDoc, int derived = 0,
+  void addSuperClass(const std::string& superClassName, const std::string& superClassDoc, int derived = 0,
                      TMyClass* super = NULL);
   void addSuperClass(TMyClass* super, int derived = 0);
-  void removeSuperClass(const string& n);
+  void removeSuperClass(const std::string& n);
   void removeSuperClass(int num);
   void clearVariable(int t);
   void addVariable(int t, const nameTypeDoc& var);
-  void addVariable(int t, string nameIn, string typeIn, int typeIdIn, string specifier,
-                   string docIn = "", string typeDocIn = "");
+  void addVariable(int t, std::string nameIn, std::string typeIn, int typeIdIn, std::string specifier,
+                   std::string docIn = "", std::string typeDocIn = "");
   void removeVariable(int t, int i);
-  void removeVariable(const string& n);
+  void removeVariable(const std::string& n);
   void clearMethod(int t);
   void addMethod(int t, const functionNameTypeDoc& var);
-  void addMethod(int t, string nameIn, string typeIn, int typeIdIn, string specifier,
-                 string docIn = "", string typeDocIn = "");
+  void addMethod(int t, std::string nameIn, std::string typeIn, int typeIdIn, std::string specifier,
+                 std::string docIn = "", std::string typeDocIn = "");
   void removeMethod(int t, int i);
-  void removeMethod(const string& n);
+  void removeMethod(const std::string& n);
   void clearSlots(int i);
   void addSlot(int t, const functionNameTypeDoc& var);
-  void addSlot(int t, string nameIn, string typeIn, int typeIdIn, string specifier,
-               string docIn = "", string typeDocIn = "");
+  void addSlot(int t, std::string nameIn, std::string typeIn, int typeIdIn, std::string specifier,
+               std::string docIn = "", std::string typeDocIn = "");
   void removeSlot(int t, int i);
-  void removeSlot(const string& n);
+  void removeSlot(const std::string& n);
   void clearSignals();
   void addSignal(const functionNameTypeDoc& var);
-  void addSignal(string nameIn, string typeIn, int typeIdIn, string specifier, string docIn = "",
-                 string typeDocIn = "");
+  void addSignal(std::string nameIn, std::string typeIn, int typeIdIn, std::string specifier, std::string docIn = "",
+                 std::string typeDocIn = "");
   void clearConstructor();
   void addConstructor(const functionNameTypeDoc& var);
-  void addConstructor(string typeIn, int typeIdIn, string specifier, string docIn = "",
-                      string typeDocIn = "");
+  void addConstructor(std::string typeIn, int typeIdIn, std::string specifier, std::string docIn = "",
+                      std::string typeDocIn = "");
   void removeConstructor(int i);
-  void removeConstructor(const string& n);
+  void removeConstructor(const std::string& n);
   void addSuperDescriptions();
-  vector<string> toHTML() const;
-  vector<string> toHTML(const vector<functionNameTypeDoc>& associatedFunctions) const;
-  vector<string> toHeader() const;
-  bool readFromFile(int filetype, const string& filename, const string& nameIn = "");
-  bool readFromData(int datatype, const vector<string>& data, const string& nameIn = "");
-  static int fileContent(int fileType, const string& filename, vector<TMyClass>& content);
-  static int content(int dataType, const vector<string>& data, vector<TMyClass>& content);
+  std::vector<std::string> toHTML() const;
+  std::vector<std::string> toHTML(const std::vector<functionNameTypeDoc>& associatedFunctions) const;
+  std::vector<std::string> toHeader() const;
+  bool readFromFile(int filetype, const std::string& filename, const std::string& nameIn = "");
+  bool readFromData(int datatype, const std::vector<std::string>& data, const std::string& nameIn = "");
+  static int fileContent(int fileType, const std::string& filename, std::vector<TMyClass>& content);
+  static int content(int dataType, const std::vector<std::string>& data, std::vector<TMyClass>& content);
   int update();
 };
-ostream& operator<<(ostream& o, const TMyClass& t);
-istream& operator>>(istream& o, TMyClass& t);
+std::ostream& operator<<(std::ostream& o, const TMyClass& t);
+std::istream& operator>>(std::istream& o, TMyClass& t);
 #endif

@@ -1,21 +1,21 @@
 #include "tmyclass.h"
 #include <fstream>
 #include <vector>
-extern bool existing(string filename);
-vector<TMyClass*> knownClasses;
-vector<string> knownTypes;
-vector<string> knownTypesURL;
-vector<functionNameTypeDoc> knownFunctions;
-TMyClass* getKnownClass(const string& name);
-string knownTypesDoc(const string& type);
-void addToKnownTypes(const string& classIn, const string& url);
+extern bool existing(std::string filename);
+std::vector<TMyClass*> knownClasses;
+std::vector<std::string> knownTypes;
+std::vector<std::string> knownTypesURL;
+std::vector<functionNameTypeDoc> knownFunctions;
+TMyClass* getKnownClass(const std::string& name);
+std::string knownTypesDoc(const std::string& type);
+void addToKnownTypes(const std::string& classIn, const std::string& url);
 void addToKnownClasses(const TMyClass& classIn);
-void initKnownClasses(const string& filename);
-void initKnownTypes(const string& filename);
-void writeKnownTypes(const string& filename);
-ofstream logg("log.txt");
+void initKnownClasses(const std::string& filename);
+void initKnownTypes(const std::string& filename);
+void writeKnownTypes(const std::string& filename);
+std::ofstream logg("log.txt");
 #ifndef JUSTDEFINE
-TMyClass* getKnownClass(const string& name)
+TMyClass* getKnownClass(const std::string& name)
 {
   for (unsigned int i = 0; i < knownClasses.size(); i++) {
     if (name == knownClasses[i]->Name())
@@ -23,7 +23,7 @@ TMyClass* getKnownClass(const string& name)
   }
   return NULL;
 }
-string knownTypesDoc(const string& type)
+std::string knownTypesDoc(const std::string& type)
 {
   for (unsigned int i = 0; i < knownTypes.size(); i++) {
     if (knownTypes[i] == type)
@@ -31,7 +31,7 @@ string knownTypesDoc(const string& type)
   }
   return "";
 }
-void addToKnownTypes(const string& classIn, const string& url)
+void addToKnownTypes(const std::string& classIn, const std::string& url)
 {
   int found = -1;
   for (unsigned int i = 0; i < knownTypes.size(); i++)
@@ -54,13 +54,13 @@ void addToKnownClasses(const TMyClass& classIn)
   else
     (*knownClasses[found]) = classIn, addToKnownTypes(classIn.Name(), classIn.Doc());
 }
-void initKnownClasses(const string& filename)
+void initKnownClasses(const std::string& filename)
 {
   if (!existing(filename))
     return;
-  ifstream input;
+  std::ifstream input;
   input.open(filename.data());
-  vector<string> toread;
+  std::vector<std::string> toread;
   char li[200];
   while (input.good() && !input.eof()) {
     input.getline(li, 200);
@@ -71,10 +71,10 @@ void initKnownClasses(const string& filename)
   input.close();
   for (unsigned int i = 0; i < toread.size(); i++) {
     if (!existing(toread[i])) {
-      cout << "file \"" << toread[i].data() << "\" not found" << endl;
+      std::cout << "file \"" << toread[i].data() << "\" not found" << std::endl;
       continue;
     }
-    ifstream input1;
+    std::ifstream input1;
     input1.open(toread[i].data());
     bool finished = false;
     ;
@@ -91,12 +91,12 @@ void initKnownClasses(const string& filename)
     input1.close();
   }
 }
-void initKnownTypes(const string& filename)
+void initKnownTypes(const std::string& filename)
 {
   if (!existing(filename))
     return;
   char li[1000], li1[1000];
-  ifstream input;
+  std::ifstream input;
   input.open(filename.data());
   while (!input.eof() && input.good()) {
     input.getline(li, 1000);
@@ -112,12 +112,12 @@ void initKnownTypes(const string& filename)
   }
   input.close();
 }
-void writeKnownTypes(const string& filename)
+void writeKnownTypes(const std::string& filename)
 {
-  ofstream out;
+  std::ofstream out;
   out.open(filename.data());
   for (unsigned int i = 0; i < knownTypes.size(); i++)
-    out << knownTypes[i].data() << endl << knownTypesURL[i].data() << endl;
+    out << knownTypes[i].data() << std::endl << knownTypesURL[i].data() << std::endl;
   out.close();
 }
 void addKnownFunction(const functionNameTypeDoc& func)
@@ -126,18 +126,18 @@ void addKnownFunction(const functionNameTypeDoc& func)
   for (unsigned int i = 0; i < knownFunctions.size(); i++)
     if (knownFunctions[i] == func) {
       init = true;
-      cout << knownFunctions[i].toString().data() << endl;
+      std::cout << knownFunctions[i].toString().data() << std::endl;
     }
   if (!init)
     knownFunctions.push_back(func);
   else
-    cout << func.toString().data() << " already defined" << endl;
+    std::cout << func.toString().data() << " already defined" << std::endl;
 }
-void initKnownFunctions(const string& filename)
+void initKnownFunctions(const std::string& filename)
 {
   if (!existing(filename))
     return;
-  ifstream input;
+  std::ifstream input;
   input.open(filename.data());
   while (!input.eof()) {
     functionNameTypeDoc tmp;
@@ -147,9 +147,9 @@ void initKnownFunctions(const string& filename)
   }
   input.close();
 }
-void writeKnownFunctions(const string& filename)
+void writeKnownFunctions(const std::string& filename)
 {
-  ofstream output;
+  std::ofstream output;
   output.open(filename.data());
   for (unsigned int i = 0; i < knownFunctions.size(); i++)
     output << knownFunctions[i];

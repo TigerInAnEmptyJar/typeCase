@@ -1,11 +1,11 @@
 #include "tmyclass.h"
 #include <fstream>
-extern string knownTypesDoc(const string& type);
-extern TMyClass* getKnownClass(const string& name);
-extern void minimizeString(string& s);
+extern std::string knownTypesDoc(const std::string& type);
+extern TMyClass* getKnownClass(const std::string& name);
+extern void minimizeString(std::string& s);
 #include "string_utilities.h"
-nameTypeDoc::nameTypeDoc(string nameIn, string typeIn, int typeIdIn, string specifierIn,
-                         string docIn, string typeDocIn)
+nameTypeDoc::nameTypeDoc(std::string nameIn, std::string typeIn, int typeIdIn, std::string specifierIn,
+                         std::string docIn, std::string typeDocIn)
 {
   name = nameIn;
   type = typeIn;
@@ -32,7 +32,7 @@ nameTypeDoc::nameTypeDoc(const nameTypeDoc& n)
   for (int i = 0; i < n.DescriptionLines(); i++)
     description.push_back(n.Description(i));
 }
-nameTypeDoc::nameTypeDoc(const string& s)
+nameTypeDoc::nameTypeDoc(const std::string& s)
 {
   name = "";
   type = "";
@@ -78,45 +78,45 @@ bool nameTypeDoc::operator==(const nameTypeDoc& nt)
     return true;
   return false;
 }
-string nameTypeDoc::Name() const { return name; }
-string nameTypeDoc::Type() const { return type; }
-string nameTypeDoc::Doc() const { return doc; }
-string nameTypeDoc::TypeDoc() const { return typeDoc; }
-string nameTypeDoc::Description(int i) const
+std::string nameTypeDoc::Name() const { return name; }
+std::string nameTypeDoc::Type() const { return type; }
+std::string nameTypeDoc::Doc() const { return doc; }
+std::string nameTypeDoc::TypeDoc() const { return typeDoc; }
+std::string nameTypeDoc::Description(int i) const
 {
   if (i < 0 || i >= (int)description.size())
     return "";
   return description[i];
 }
 int nameTypeDoc::DescriptionLines() const { return description.size(); }
-string nameTypeDoc::Specifier() const { return specifier; }
-string nameTypeDoc::Default() const { return defaultvalue; }
+std::string nameTypeDoc::Specifier() const { return specifier; }
+std::string nameTypeDoc::Default() const { return defaultvalue; }
 int nameTypeDoc::TypeId() const { return typeId; }
-void nameTypeDoc::setType(const string& s)
+void nameTypeDoc::setType(const std::string& s)
 {
   type = s;
   minimizeString(type);
 }
-void nameTypeDoc::setName(const string& s)
+void nameTypeDoc::setName(const std::string& s)
 {
   name = s;
   minimizeString(name);
 }
-void nameTypeDoc::setDoc(const string& s) { doc = s; }
+void nameTypeDoc::setDoc(const std::string& s) { doc = s; }
 void nameTypeDoc::setTypeId(int v) { typeId = v; }
-void nameTypeDoc::setTypeDoc(const string& s) { typeDoc = s; }
-void nameTypeDoc::setDescription(const vector<string>& input)
+void nameTypeDoc::setTypeDoc(const std::string& s) { typeDoc = s; }
+void nameTypeDoc::setDescription(const std::vector<std::string>& input)
 {
   clearDescription();
   for (unsigned int i = 0; i < input.size(); i++)
     description.push_back(input[i]);
 }
-void nameTypeDoc::setSpecifier(const string& s)
+void nameTypeDoc::setSpecifier(const std::string& s)
 {
   specifier = s;
   minimizeString(specifier);
 }
-void nameTypeDoc::setDefault(const string& s)
+void nameTypeDoc::setDefault(const std::string& s)
 {
   defaultvalue = s;
   minimizeString(defaultvalue);
@@ -126,25 +126,25 @@ void nameTypeDoc::clearDescription()
   while (!description.empty())
     description.pop_back();
 }
-void nameTypeDoc::addDescriptionLine(const string& s) { description.push_back(s); }
-string nameTypeDoc::toString(int ptt) const
+void nameTypeDoc::addDescriptionLine(const std::string& s) { description.push_back(s); }
+std::string nameTypeDoc::toString(int ptt) const
 {
-  string ret = type + " " + name;
+  std::string ret = type + " " + name;
   if ((ptt == 1 && hasA(name, "tmp") && hasA(name, lower(type))) || ptt == 2)
     ret = type;
   if (specifier != "")
     ret = specifier + " " + ret;
   return ret;
 }
-string nameTypeDoc::htmlHREF() const
+std::string nameTypeDoc::htmlHREF() const
 {
-  string ret = "";
+  std::string ret = "";
   if (specifier != "")
     ret = specifier + " ";
-  string t = type;
+  std::string t = type;
   t = replace(t, "<", "&lt;");
   t = replace(t, ">", "&gt;");
-  string td = typeDoc, tp = type;
+  std::string td = typeDoc, tp = type;
   tp = remove(tp, "*");
   tp = remove(tp, "&");
   tp = remove(tp, "[");
@@ -157,21 +157,21 @@ string nameTypeDoc::htmlHREF() const
       td = tmp->Doc();
   }
   if (td != "")
-    ret += string("<A HREF=\"") + td + "\">" + t + "</A> ";
+    ret += std::string("<A HREF=\"") + td + "\">" + t + "</A> ";
   else
-    ret += string("<vtype>") + t + "</vtype> ";
+    ret += std::string("<vtype>") + t + "</vtype> ";
   if (doc != "")
-    ret += string("<A HREF=\"") + doc + "\">" + name + "</A>";
+    ret += std::string("<A HREF=\"") + doc + "\">" + name + "</A>";
   else
     ret += name;
   if (defaultvalue != "")
-    ret += string(" = ") + defaultvalue;
+    ret += std::string(" = ") + defaultvalue;
   return ret;
 }
-vector<string> nameTypeDoc::htmlNAME() const
+std::vector<std::string> nameTypeDoc::htmlNAME(const std::string& /*classname*/) const
 {
-  vector<string> ret;
-  string td = typeDoc;
+  std::vector<std::string> ret;
+  std::string td = typeDoc;
   if (td == "")
     td = knownTypesDoc(type);
   if (td == "") {
@@ -183,30 +183,30 @@ vector<string> nameTypeDoc::htmlNAME() const
     ret.push_back(specifier + "<A HREF=\"" + td + "\">" + type + "</A> <A NAME=\"" + doc + "\">" +
                   name + "</A>");
   else
-    ret.push_back(string("<A NAME=\"") + doc + "\">" + toString() + "</A>");
+    ret.push_back(std::string("<A NAME=\"") + doc + "\">" + toString() + "</A>");
   ret.push_back("<BR/><deff>");
   for (unsigned int i = 0; i < description.size(); i++)
     ret.push_back(description[i]);
   if (defaultvalue != "")
-    ret.push_back(string("Default: ") + defaultvalue);
+    ret.push_back(std::string("Default: ") + defaultvalue);
   ret.push_back("</deff>");
   return ret;
 }
 extern ofstream logg;
-void nameTypeDoc::parse(const string& expression)
+void nameTypeDoc::parse(const std::string& expression)
 {
-  vector<string> parts;
-  string word;
-  string tmps;
+  std::vector<std::string> parts;
+  std::string word;
+  std::string tmps;
   int i = 0;
   bool finished;
-  string s = expression;
-  string comment = "";
+  std::string s = expression;
+  std::string comment = "";
   if (hasA(s, "/*")) {
     if (!hasA(s, "*/"))
       s = s.substr(0, s.find("/*"));
     else {
-      string tmp = s.substr(0, s.find("/*"));
+      std::string tmp = s.substr(0, s.find("/*"));
       s = s.substr(s.find("/*") + 2, s.length() - s.find("/*") - 2);
       s = tmp + s.substr(s.find("*/") + 2, s.length() - s.find("*/") - 2);
     }
@@ -349,7 +349,7 @@ istream& operator>>(istream& o, nameTypeDoc& t)
   o.getline(li, 1000);
   return o;
 }
-nameTypeDoc nameTypeDoc::parseIt(const string& expression)
+nameTypeDoc nameTypeDoc::parseIt(const std::string& expression)
 {
   nameTypeDoc ret(expression);
   return ret;
@@ -358,9 +358,9 @@ nameTypeDoc nameTypeDoc::parseIt(const string& expression)
 //#include "geometry.h"
 //#include "parameter.h"
 //#include "algorithm.h"
-int nameTypeDoc::typeIDS(const string& s1)
+int nameTypeDoc::typeIDS(const std::string& s1)
 {
-  string s = s1;
+  std::string s = s1;
   s = remove(s, "*");
   s = remove(s, "&");
   if (s == "int")

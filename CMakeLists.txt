@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.4)
+cmake_minimum_required (VERSION 3.27)
 
 project (TypeCase)
 # The version number.
@@ -12,7 +12,7 @@ include(findRoot)
 include(utilities)
 
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O -Werror -Wall -fPIC ")
-set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD 23)
 set(CMAKE_AUTOMOC ON)
 
 ######################
@@ -20,7 +20,7 @@ enable_testing()
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/af29db7ec28d6df1c7f0f745186884091e602e07.zip
+  URL https://github.com/google/googletest/archive/96eadf659fb75ecda943bd97413c71d4c17c4f43.zip
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -46,8 +46,8 @@ add_subdirectory(eventpainter)
 
 #add_subdirectory(cl-typeCase)
 
-add_subdirectory(documentation)
-add_subdirectory(code)
+# add_subdirectory(documentation)
+# add_subdirectory(code)
 #add_subdirectory(gui)
 #add_subdirectory(qt-utils)
 

@@ -1,0 +1,106 @@
+{
+    "version": 4,
+    "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 27,
+      "patch": 0
+    },
+    "configurePresets": [
+      {
+        "name": "debug",
+        "hidden": true,
+        "cacheVariables": {
+            "CMAKE_BUILD_TYPE": "Debug"
+        }
+      },
+      {
+        "name": "release",
+        "hidden": true,
+        "cacheVariables": {
+            "CMAKE_BUILD_TYPE": "Release"
+        }
+      },
+      {
+        "name": "ninja",
+        "hidden": true,
+        "generator": "Ninja"
+      },
+      {
+        "name": "myRoot",
+        "hidden": true,
+        "environment": {
+          "Qt5_DIR": "/opt/Qt/5.12.2/gcc_64/lib/cmake/Qt5/"
+        }  
+      },
+      {
+        "name": "gcc",
+        "hidden": true,
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "gcc",
+            "CMAKE_CXX_COMPILER": "g++"
+        }
+      },
+      {
+        "name": "clang",
+        "hidden": true,
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "clang",
+            "CMAKE_CXX_COMPILER": "clang++"
+        },
+        "condition": {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "linux"
+        } 
+      },
+      {
+        "name": "gcc-debug",
+        "inherits":["debug", "ninja", "gcc"],
+        "binaryDir": "${sourceParentDir}/build/${presetName}/"
+      },
+      {
+        "name": "gcc-release",
+        "inherits":["release", "ninja", "gcc"],
+        "binaryDir": "${sourceParentDir}/build/${presetName}/"
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "gcc-debug-build",
+        "configurePreset": "gcc-debug"
+      },
+      {
+        "name": "gcc-release-build",
+        "configurePreset": "gcc-release"
+      }
+    ],
+    "testPresets": [
+      {
+        "name": "gcc-debug-test",
+        "configurePreset": "gcc-debug",
+        "output": {
+          "outputOnFailure": true
+        },
+        "execution": {
+          "noTestsAction": "error", 
+          "stopOnFailure": true
+        }
+      },
+      {
+        "name": "gcc-release-test",
+        "configurePreset": "gcc-release",
+        "output": {
+          "outputOnFailure": true
+        },
+        "execution": {
+          "noTestsAction": "error", 
+          "stopOnFailure": true
+        }
+      }
+    ],
+    "vendor": {
+      "TiegerZahn": {
+        "autoFormat": false
+      }
+    }
+  }

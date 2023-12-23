@@ -1,6 +1,6 @@
 project(documentation)
 
-find_package(Doxygen)
+# find_package(Doxygen)
 
 if (DOXYGEN_FOUND)
     # set input and output files

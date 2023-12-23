@@ -8,6 +8,7 @@
 #include <numeric>
 #include <type_traits>
 
+#include <concepts>
 #include <sstream>
 #include <string>
 
@@ -92,6 +93,10 @@ protected:
   GeomState _state{GeomState::Undefined};
 };
 
+
+template<class T>
+  concept arithmetic = std::integral<T> || std::floating_point<T>;
+
 /*!
  * \brief Class point.
  * This class is the base class for all objects in N-dimensional space with point-like properties.
@@ -100,7 +105,7 @@ protected:
  * T, the type for the values to be stored for the point. This must be of arithmetic type.
  * N, the dimension in which the point is located.
  */
-template <typename T, size_t N>
+template <arithmetic T, size_t N>
 class Point : public GeomObject
 {
 public:
@@ -111,7 +116,7 @@ public:
   using const_iterator = typename std::array<T, N>::const_iterator;
 
 public:
-  Point() = default;
+  Point() {};
 
   /*!
    * \brief Constructor
@@ -243,7 +248,7 @@ private:
   }
 
 private:
-  std::array<T, N> _data;
+  std::array<T, N> _data{T{0}};
 };
 
 /*!

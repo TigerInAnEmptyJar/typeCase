@@ -126,3 +126,9 @@ tc_add_library(libalgorithm
     PUBLIC ROOT::Core
     ALIAS TypeCase::Algorithm
   )
+set_target_properties(libalgorithm
+  PROPERTIES
+      CXX_STANDARD 17
+      CXX_STANDARD_REQUIRED YES
+      CXX_EXTENSIONS NO
+)

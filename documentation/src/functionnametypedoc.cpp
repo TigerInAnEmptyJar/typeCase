@@ -1,12 +1,12 @@
 #include "tmyclass.h"
 #include <fstream>
-extern ofstream logg;
-extern string knownTypesDoc(const string& type);
-extern TMyClass* getKnownClass(const string& name);
-extern void minimizeString(string& s);
+extern std::ofstream logg;
+extern std::string knownTypesDoc(const std::string& type);
+extern TMyClass* getKnownClass(const std::string& name);
+extern void minimizeString(std::string& s);
 #include "string_utilities.h"
-functionNameTypeDoc::functionNameTypeDoc(string nameIn, string typeIn, int typeIdIn,
-                                         string specifierIn, string docIn, string typeDocIn)
+functionNameTypeDoc::functionNameTypeDoc(std::string nameIn, std::string typeIn, int typeIdIn,
+                                         std::string specifierIn, std::string docIn, std::string typeDocIn)
     : nameTypeDoc(nameIn, typeIn, typeIdIn, specifierIn, docIn, typeDocIn)
 {
   limiter = "";
@@ -21,7 +21,7 @@ functionNameTypeDoc::functionNameTypeDoc(const functionNameTypeDoc& n)
   for (int i = 0; i < n.nParameters(); i++)
     parameter.push_back(n.getParameter(i));
 }
-functionNameTypeDoc::functionNameTypeDoc(const string& s)
+functionNameTypeDoc::functionNameTypeDoc(const std::string& s)
 {
   limiter = "";
   parse(s);
@@ -63,8 +63,8 @@ bool functionNameTypeDoc::operator==(const functionNameTypeDoc& fn)
       return false;
   return true;
 }
-string functionNameTypeDoc::Limiter() const { return limiter; }
-void functionNameTypeDoc::setLimiter(const string& s) { limiter = s; }
+std::string functionNameTypeDoc::Limiter() const { return limiter; }
+void functionNameTypeDoc::setLimiter(const std::string& s) { limiter = s; }
 nameTypeDoc& functionNameTypeDoc::Parameter(int i)
 {
   if (i < 0 || i >= (int)parameter.size())
@@ -84,14 +84,14 @@ void functionNameTypeDoc::clearParameter()
     parameter.pop_back();
 }
 void functionNameTypeDoc::addParameter(const nameTypeDoc& input) { parameter.push_back(input); }
-void functionNameTypeDoc::addParameter(string nameIn, string typeIn, int typeIdIn,
-                                       string specifierIn, string docIn, string typeDocIn)
+void functionNameTypeDoc::addParameter(std::string nameIn, std::string typeIn, int typeIdIn,
+                                       std::string specifierIn, std::string docIn, std::string typeDocIn)
 {
   parameter.push_back(nameTypeDoc(nameIn, typeIn, typeIdIn, specifierIn, docIn, typeDocIn));
 }
-string functionNameTypeDoc::toString(int ptt) const
+std::string functionNameTypeDoc::toString(int ptt) const
 {
-  string ret = Type();
+  std::string ret = Type();
   if (Type() != Name())
     ret += " " + Name() + "(";
   else
@@ -101,29 +101,29 @@ string functionNameTypeDoc::toString(int ptt) const
   ret += ParameterList(ptt) + ")" + limiter;
   return ret;
 }
-string functionNameTypeDoc::ParameterList(int ptt) const
+std::string functionNameTypeDoc::ParameterList(int ptt) const
 {
-  string ret = "";
+  std::string ret = "";
   for (int i = 0; i < (int)parameter.size() - 1; i++)
     ret += parameter[i].toString(ptt) + ", ";
   if (parameter.size() > 0)
     ret += parameter[parameter.size() - 1].toString(ptt);
   return ret;
 }
-string functionNameTypeDoc::htmlHREF() const
+std::string functionNameTypeDoc::htmlHREF() const
 {
-  string ret = "";
-  string t = Type();
+  std::string ret = "";
+  std::string t = Type();
   t = remove(t, "*");
   t = remove(t, "&");
   t = remove(t, "[");
   t = remove(t, "]");
   if (Type() == Name()) {
-    ret += string("<A HREF=\"") + Doc() + "\">" + Name() + "</A>(";
+    ret += std::string("<A HREF=\"") + Doc() + "\">" + Name() + "</A>(";
     if (Specifier() != "")
       ret = Specifier() + " " + ret;
   } else {
-    string td = TypeDoc();
+    std::string td = TypeDoc();
     if (td == "")
       td = knownTypesDoc(t);
     if (td == "") {
@@ -135,10 +135,10 @@ string functionNameTypeDoc::htmlHREF() const
     t = replace(t, "<", "&lt;");
     t = replace(t, ">", "&gt;");
     if (td != "")
-      ret += string("<A HREF=\"") + td + "\">" + t + "</A> <A HREF=\"" + Doc() + "\">" + Name() +
+      ret += std::string("<A HREF=\"") + td + "\">" + t + "</A> <A HREF=\"" + Doc() + "\">" + Name() +
              "</A>(";
     else
-      ret += string("<A HREF=\"") + Doc() + "\"><vtype>" + t + "</vtype> " + Name() + "</A>(";
+      ret += std::string("<A HREF=\"") + Doc() + "\"><vtype>" + t + "</vtype> " + Name() + "</A>(";
     if (Specifier() != "")
       ret = Specifier() + " " + ret;
   }
@@ -148,26 +148,26 @@ string functionNameTypeDoc::htmlHREF() const
     ret += parameter[parameter.size() - 1].htmlHREF() + ")";
   else
     ret += ")";
-  ret = string("<LI>") + ret;
+  ret = std::string("<LI>") + ret;
   return ret + " " + limiter;
 }
-vector<string> functionNameTypeDoc::htmlNAME(const string& classname) const
+std::vector<std::string> functionNameTypeDoc::htmlNAME(const std::string& classname) const
 {
-  vector<string> ret;
-  string line, d = Doc();
+  std::vector<std::string> ret;
+  std::string line, d = Doc();
   d = remove(d, "#");
-  string t = Type();
+  std::string t = Type();
   t = remove(t, "*");
   t = remove(t, "&");
   t = remove(t, "[");
   t = remove(t, "]");
   if (Type() == Name()) {
     if (classname != "")
-      line += string("<A NAME=\"") + d + "\">" + classname + "::" + Name() + "</A>(";
+      line += std::string("<A NAME=\"") + d + "\">" + classname + "::" + Name() + "</A>(";
     else
-      line += string("<A NAME=\"") + d + "\">" + Name() + "</A>(";
+      line += std::string("<A NAME=\"") + d + "\">" + Name() + "</A>(";
   } else {
-    string td = TypeDoc();
+    std::string td = TypeDoc();
     if (td == "")
       td = knownTypesDoc(t);
     if (td == "") {
@@ -180,17 +180,17 @@ vector<string> functionNameTypeDoc::htmlNAME(const string& classname) const
     t = replace(t, ">", "&gt;");
     if (td != "") {
       if (classname != "")
-        line += string("<A HREF=\"") + td + "\">" + t + "</A> <A NAME=\"" + d + "\">" + classname +
+        line += std::string("<A HREF=\"") + td + "\">" + t + "</A> <A NAME=\"" + d + "\">" + classname +
                 "::" + Name() + "</A>(";
       else
-        line += string("<A HREF=\"") + td + "\">" + t + "</A> <A NAME=\"" + d + "\">" + Name() +
+        line += std::string("<A HREF=\"") + td + "\">" + t + "</A> <A NAME=\"" + d + "\">" + Name() +
                 "</A>(";
     } else {
       if (classname != "")
-        line += string("<A NAME=\"") + d + "\"><vtype>" + t + "</vtype> " + classname + "::" +
+        line += std::string("<A NAME=\"") + d + "\"><vtype>" + t + "</vtype> " + classname + "::" +
                 Name() + "</A>(";
       else
-        line += string("<A NAME=\"") + d + "\"><vtype>" + t + "</vtype> " + Name() + "</A>(";
+        line += std::string("<A NAME=\"") + d + "\"><vtype>" + t + "</vtype> " + Name() + "</A>(";
     }
   }
   for (int i = 0; i < ((int)parameter.size()) - 1; i++)
@@ -306,22 +306,22 @@ istream& operator>>(istream& o, functionNameTypeDoc& t)
   return o;
 }
 
-functionNameTypeDoc functionNameTypeDoc::parseIt(const string& expression)
+functionNameTypeDoc functionNameTypeDoc::parseIt(const std::string& expression)
 {
   return functionNameTypeDoc(expression);
 }
-void functionNameTypeDoc::parse(const string& s1)
+void functionNameTypeDoc::parse(const std::string& s1)
 {
   logg << s1.data() << endl;
-  string s = s1;
+  std::string s = s1;
   clearParameter();
-  string inlines;
+  std::string inlines;
   if (hasA(s, "//")) {
-    string comment = s.substr(s.find("//"), s.length() - s.find("//"));
+    std::string comment = s.substr(s.find("//"), s.length() - s.find("//"));
     addDescriptionLine(comment);
     s = s.substr(0, s.find("//"));
   }
-  string left, right, inBrackets;
+  std::string left, right, inBrackets;
   if (hasA(s, "operator")) {
     int opPos = s.find("operator");
     while (isSpace(s[opPos + 8]))
@@ -355,7 +355,7 @@ void functionNameTypeDoc::parse(const string& s1)
     limiter = remove(right, ";");
   if (inlines != "") {
     limiter += " inline";
-    addDescriptionLine(string("{") + inlines + "}");
+    addDescriptionLine(std::string("{") + inlines + "}");
   }
   if (hasA(left, " ")) // type" "functionName
   {
@@ -375,8 +375,8 @@ void functionNameTypeDoc::parse(const string& s1)
   }
   if (inBrackets.length() == 0)
     return;
-  vector<string> parts;
-  string word;
+  std::vector<std::string> parts;
+  std::string word;
   int brck = 0, i = 0;
   word = "";
   while (i < (int)inBrackets.length()) {
@@ -397,14 +397,14 @@ void functionNameTypeDoc::parse(const string& s1)
   }
   i++;
   parts.push_back(word);
-  vector<string> tps;
-  vector<int> ntps;
+  std::vector<std::string> tps;
+  std::vector<int> ntps;
   int gtp;
   for (unsigned int j = 0; j < parts.size(); j++) {
     nameTypeDoc tmp1(parts[j]);
     if (tmp1.Name() != "") {
       if (tmp1.Type() == "") {
-        string s = lower(tmp1.Name());
+        std::string s = lower(tmp1.Name());
         s = remove(s, "*");
         s = remove(s, "&");
         s = remove(s, "[");
@@ -420,9 +420,9 @@ void functionNameTypeDoc::parse(const string& s1)
         }
         ntps[gtp]++;
         tmp1.setType(tmp1.Name());
-        tmp1.setName(string("tmp") + s + string_number(ntps[gtp]));
+        tmp1.setName(std::string("tmp") + s + string_number(ntps[gtp]));
       } else if (tmp1.Type() == "const") {
-        string s = lower(tmp1.Name());
+        std::string s = lower(tmp1.Name());
         s = remove(s, "*");
         s = remove(s, "&");
         s = remove(s, "[");
@@ -438,7 +438,7 @@ void functionNameTypeDoc::parse(const string& s1)
         }
         tmp1.setSpecifier(tmp1.Type());
         tmp1.setType(tmp1.Name());
-        tmp1.setName(string("tmp") + s + string_number(ntps[gtp]));
+        tmp1.setName(std::string("tmp") + s + string_number(ntps[gtp]));
       }
       parameter.push_back(tmp1);
     }

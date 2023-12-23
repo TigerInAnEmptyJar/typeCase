@@ -1,12 +1,46 @@
 #include "readFromTade.h"
 #include "logger.h"
-#include <fstream>
-#include <iostream>
-//#include <qprocess.h>
 #include "beamtimeparameter.h"
+#include "algorithmFactory.h"
+
+//#include <qprocess.h>
+
 #include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include <boost/uuid/string_generator.hpp>
+
+#include <fstream>
+#include <iostream>
+
+namespace Algorithm {
+
+boost::uuids::uuid const readFromTade_id = boost::uuids::string_generator{}("c7c70e0f-c398-4b1d-886e-3fc43073b0fb");
+struct ReadFromTadeAlgorithmProvider: public FactoryAlgorithmProvider,
+        public std::enable_shared_from_this<ReadFromTadeAlgorithmProvider>
+{
+    void addToFactory(AlgorithmFactory& factory) const override
+    {
+        factory.addAlgorithmToFactory(AReadFromTade::getDescription(), AlgorithmType::Input, [](algorithm_parameter const&,
+                                      TEvent&event, TSetup const&setup){
+            return std::make_shared<AReadFromTade>(event, setup);
+        });
+    }
+    void removeFromFactory(AlgorithmFactory& factory) const override
+    {
+
+    }
+    void install () {FactoryAlgorithmProvider::_installedProviders.push_back(shared_from_this());}
+    static bool create() {
+        auto r = std::make_shared<ReadFromTadeAlgorithmProvider>();
+        r->install();
+        return true;
+    }
+};
+auto prov __attribute__((__used__)) = ReadFromTadeAlgorithmProvider::create();
+}
+
 char li[200];
 extern bool existing(string filename);
 class asciiReader
@@ -16,7 +50,7 @@ private:
 
 public:
   asciiReader(istream& in);
-  int getInt(int v = -1);
+  uint64_t getInt(uint64_t v = 0xffffffffffffffff);
   string getLine();
   bool eof() const;
   bool good() const;
@@ -45,14 +79,14 @@ void* feederFuction(void* params)
   return NULL;
 }
 asciiReader::asciiReader(istream& in) : input(in) {}
-int asciiReader::getInt(int v)
+uint64_t asciiReader::getInt(uint64_t v)
 {
   if (input.eof())
     return v;
   if (!input.good())
     return v;
   // cout<<input.good()<<" "<<input.eof()<<" "<<input.rdstate()<<endl;
-  int n;
+  uint64_t n;
   input >> n;
   if (!input.good())
     return v;
@@ -82,18 +116,105 @@ void asciiReader::clear()
   delete[] li;
 }
 
-AReadFromTade::AReadFromTade(/*ifstream **inputIn,*/ TRawHit*** hitIn, int& eventNumberIn,
-                             int& triggerIn, int** numHits, int maxdet, int maxhit, int& readID,
-                             void* input_mutexIn, bool& validInputIn)
-    : AAlgorithm("read from tade"), EventNumber(eventNumberIn), trigger(triggerIn), maxHit(maxhit),
-      maxDet(maxdet), whichID(readID), validInput(validInputIn), filetype(0)
+class bad_input_exception : public std::runtime_error {
+    using runtime_error::runtime_error;
+};
+class end_of_file_exception : public std::runtime_error {
+   using runtime_error::runtime_error;
+};
+
+class AReadFromTade::reader{
+public:
+    bool prepareInput(run_parameter const& r)
+    {
+        std::string filename;
+        for (size_t i = 0; i< r.getNumberOfFiles(); i++) {
+            if (r.getFileType(i) == 0) {
+                filename = r.getFile(i);
+                break;
+            }
+        }
+        _input.reset(new std::ifstream);
+        _input->open(filename);
+
+        asciiReader reader(*_input);
+          std::string s = reader.getLine();
+          while (!(s.find("vent") < std::string::npos || s.find("Mcarlo") < std::string::npos
+                   || s.find("onte") < std::string::npos || _input->eof())) {
+              extractEventData(reader);
+              s = reader.getLine();
+         }
+
+        return _input->good();
+    }
+    bool finalizeInput()
+    {
+        if (!_input) {
+            return false;
+        }
+        _input->close();
+        _input.reset();
+        return true;
+    }
+
+    void readEvent(TEvent& event);
+private:
+    void extractEventData(asciiReader & reader) {
+        _eventNumber = reader.getInt(); // number;
+        _eventCount = reader.getInt();  // number;
+        reader.getInt();
+        _eventTrigger = reader.getInt(); // number;
+    }
+    std::mutex _mutex;
+    std::unique_ptr<std::ifstream> _input;
+    uint64_t _eventNumber {0};
+    uint64_t _eventCount {0};
+    uint64_t _eventTrigger {0};
+};
+
+void AReadFromTade::reader::readEvent(TEvent &event)
+{
+    if (!_input || !_input->good()) {
+        throw bad_input_exception{"Could not read file"};
+    }
+    if (_input->eof()) {
+        throw end_of_file_exception("No event in file");
+    }
+    std::lock_guard lock{_mutex};
+    asciiReader reader(*_input);
+
+}
+
+// AReadFromTade::AReadFromTade(/*ifstream **inputIn,*/ TRawHit*** hitIn, int& eventNumberIn,
+//                              int& triggerIn, int** numHits, int maxdet, int maxhit, int& readID,
+//                              void* input_mutexIn, bool& validInputIn)
+//     : AAlgorithm("read from tade"), _event(), EventNumber(eventNumberIn), trigger(triggerIn), maxHit(maxhit),
+//       maxDet(maxdet), whichID(readID), validInput(validInputIn), filetype(0)
+// {
+//   feeder = new pthread_t(); // QProcess(this);
+//   //   pthread_attr_init((pthread_t*)feeder);
+//   input_mutex = input_mutexIn;
+//   input = NULL; // inputIn;
+//   numberOfHits = numHits;
+//   hit = hitIn;
+//   init = false;
+//   cleanupInput = false;
+// }
+
+AReadFromTade::AReadFromTade(TEvent& event, TSetup const&setup)
+    : AAlgorithm("read from tade"), _event(event), EventNumber(event.getEventNumber()), trigger(event.getTrigger()),
+      maxHit(event.getMaxNumber<TCalibHit>()),
+      maxDet(setup.getNumberOfDetectors()), 
+      // whichID(readID),
+      //  validInput(validInputIn), 
+       filetype(0)
 {
   feeder = new pthread_t(); // QProcess(this);
   //   pthread_attr_init((pthread_t*)feeder);
-  input_mutex = input_mutexIn;
+  // input_mutex = input_mutexIn;
   input = NULL; // inputIn;
-  numberOfHits = numHits;
-  hit = hitIn;
+  // numberOfHits = event.getNumberOf<TCalibHit>();
+  // hit = hitIn;
   init = false;
   cleanupInput = false;
 }
@@ -122,7 +243,7 @@ AReadFromTade::~AReadFromTade()
 void AReadFromTade::process()
 {
   if (input == NULL) {
-    validInput = false;
+    // validInput = false;
     return;
   }
   //   if(whichID==9)
@@ -178,7 +299,7 @@ void AReadFromTade::process()
           {
             anaLog << "input not good " << i << endli;
             init = false;
-            validInput = false;
+            // validInput = false;
             //		      pthread_mutex_unlock((pthread_mutex_t*)input_mutex);
             return;
           }
@@ -229,9 +350,9 @@ void AReadFromTade::newEvent(int evtNr, int count, int trigger)
 // }
 void AReadFromTade::newInput(const string& filename)
 {
-  validInput = false;
+  // validInput = false;
   if (filename != "") {
-    validInput = true;
+    // validInput = true;
     if (input != NULL && myInput) {
       input->close();
       delete input;
@@ -273,7 +394,7 @@ void AReadFromTade::newInput(run_parameter& r)
     //       ((QProcess*)feeder)->clearArguments();
     // #endif
   }
-  validInput = false;
+  // validInput = false;
   string file_name, directory_name = "", file_ext = "";
   file_name = filename;
   if (file_name.find("/") < file_name.npos) {
@@ -319,7 +440,7 @@ void AReadFromTade::newInput(run_parameter& r)
     needsdecompression = true;
   if (ft == 6 || ft == 7)
     needsdecompression2 = true;
-  validInput = (ft >= 0);
+  // validInput = (ft >= 0);
   //   cout<<needsdecompression<<" "<<needsdecompression2<<endl;
   actualFileName = filename;
   if (needsFifo) {
@@ -368,7 +489,7 @@ void AReadFromTade::newInput(run_parameter& r)
   }
 
   // cout<<"open file:\""<<actualFileName.data()<<"\""<<endl;
-  validInput = true;
+  // validInput = true;
   anaLog << "open file: " << filename << " for TADE-input";
   if (needsFifo) {
     anaLog << " fifo via ";
@@ -410,10 +531,10 @@ void AReadFromTade::newInput(run_parameter& r)
 }
 void AReadFromTade::newInput(ifstream* in)
 {
-  validInput = false;
+  // validInput = false;
   if (in != NULL) {
     input = in;
-    validInput = true;
+    // validInput = true;
     myInput = false;
   }
 }
