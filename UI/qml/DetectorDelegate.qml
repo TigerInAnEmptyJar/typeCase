@@ -5,7 +5,7 @@ import "common/"
 
 Item {
   id: detectorDelegate
-  height: listView.currentIndex == index ? Common.textHeight + 6 * Common.controlHeight + shapeDisplay.preferedHeight :
+  height: listView.currentIndex === index ? Common.textHeight + 6 * Common.controlHeight + shapeDisplay.preferedHeight :
                                            Common.textHeight
   MouseArea {
     anchors.fill: parent
@@ -22,7 +22,7 @@ Item {
     }
     GridLayout {
       id: grid1
-      visible: listView.currentIndex == index
+      visible: listView.currentIndex === index
       columns: 2
       Layout.fillHeight: true
       Layout.fillWidth: true

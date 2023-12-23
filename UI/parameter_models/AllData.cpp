@@ -1,6 +1,7 @@
 #include "AllData.hpp"
 
 #include "shapeFactory.h"
+#include "algorithmFactory.h"
 
 #include "parameterio.h"
 #include "versions.h"
@@ -26,8 +27,8 @@ namespace UI {
 
 AllData::AllData()
 {
-  auto& factory = ShapeFactory::getInstance();
-  auto subscriber = [this](auto) {
+  auto& shape_factory = ShapeFactory::getInstance();
+  auto subscriber_s = [this](auto) {
     auto& factory = ShapeFactory::getInstance();
     auto shapes = factory.definedShapes();
 
@@ -39,9 +40,26 @@ AllData::AllData()
     });
     _shapePost();
   };
-  factory.subscribeShapeAdded(subscriber);
-  factory.subscribeShapeRemoved(subscriber);
-  subscriber(boost::uuids::uuid{});
+  shape_factory.subscribeShapeAdded(subscriber_s);
+  shape_factory.subscribeShapeRemoved(subscriber_s);
+  subscriber_s(boost::uuids::uuid{});
+
+  auto& algorithm_factory = AlgorithmFactory::getInstance();
+  auto subscriber_a = [this](auto) {
+    auto& factory = AlgorithmFactory::getInstance();
+    auto algorithms = factory.definedAlgorithms();
+
+    _algorithmPre();
+    _definedAlgorithms.clear();
+    std::transform(algorithms.begin(), algorithms.end(), std::back_inserter(_definedAlgorithms), [](auto item) {
+      auto element = std::make_shared<algorithm_parameter>(item);
+      return element;
+    });
+    _algorithmPost();
+  };
+  algorithm_factory.subscribeAlgorithmAdded(subscriber_a);
+  algorithm_factory.subscribeAlgorithmRemoved(subscriber_a);
+  subscriber_a(boost::uuids::uuid{});
 
   QSettings settings;
   if (!settings.value(::lastMaterialFile).toString().isEmpty()) {
@@ -70,13 +88,13 @@ AllData::AllData()
                                        parameter::IO::ParameterIO::FileType::ALGORITHM);
 
     if (!input_list.empty()) {
-      _definedAlgorithms.clear();
+      _selectedAlgorithms.clear();
       std::transform(
-          input_list.begin(), input_list.end(), std::back_inserter(_definedAlgorithms),
+          input_list.begin(), input_list.end(), std::back_inserter(_selectedAlgorithms),
           [](auto item) { return std::dynamic_pointer_cast<algorithm_parameter>(item); });
-      _definedAlgorithms.erase(
-          std::remove(_definedAlgorithms.begin(), _definedAlgorithms.end(), nullptr),
-          _definedAlgorithms.end());
+      _selectedAlgorithms.erase(
+          std::remove(_selectedAlgorithms.begin(), _selectedAlgorithms.end(), nullptr),
+          _selectedAlgorithms.end());
     }
   }
 }

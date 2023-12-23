@@ -11,6 +11,7 @@ tc_add_executable(typeCase-gui
     parameter_models/AlgorithmModel.hpp
     parameter_models/ShapeModel.hpp
     parameter_models/ValuesModel.hpp
+    parameter_models/AvailableAlgorithmModel.hpp
   SOURCES
     main.cpp
     parameter_models/AllData.cpp
@@ -20,6 +21,7 @@ tc_add_executable(typeCase-gui
     parameter_models/AlgorithmModel.cpp
     parameter_models/ShapeModel.cpp
     parameter_models/ValuesModel.cpp
+    parameter_models/AvailableAlgorithmModel.cpp
     qml/qml.qrc
   DEPENDS
     Qt5::Quick
